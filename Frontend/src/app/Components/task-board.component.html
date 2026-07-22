@@ -93,7 +93,11 @@
                     </div>
                     <div class="task-actions">
                         <div class="badge-group">
-                            <span class="priority-badge" [ngClass]="t.priority.toLowerCase()">{{ t.priority }}</span>
+                            <span class="priority-badge" [ngClass]="t.priority.toLowerCase()">
+                                <span *ngIf="t.priority === 'High'">🔴 🔺 High</span>
+                                <span *ngIf="t.priority === 'Medium'">🟡 🔸 Medium</span>
+                                <span *ngIf="t.priority === 'Low'">🔵 🔹 Low</span>
+                            </span>
                             <span class="deadline-badge" *ngIf="t.deadline">
                                 📅 {{ t.deadline | date:"yyyy/MM/dd" }}
                             </span>
@@ -125,7 +129,11 @@
                     </div>
                     <div class="task-actions">
                         <div class="badge-group">
-                            <span class="priority-badge" [ngClass]="t.priority.toLowerCase()">{{ t.priority }}</span>
+                            <span class="priority-badge" [ngClass]="t.priority.toLowerCase()">
+                                <span *ngIf="t.priority === 'High'">🔴 🔺 High</span>
+                                <span *ngIf="t.priority === 'Medium'">🟡 🔸 Medium</span>
+                                <span *ngIf="t.priority === 'Low'">🔵 🔹 Low</span>
+                            </span>
                             <span class="deadline-badge" *ngIf="t.deadline">
                                 📅 {{ t.deadline | date:"yyyy/MM/dd" }}
                             </span>
@@ -160,7 +168,11 @@
                     </div>
                     <div class="task-actions">
                         <div class="badge-group">
-                            <span class="priority-badge" [ngClass]="t.priority.toLowerCase()">{{ t.priority }}</span>
+                            <span class="priority-badge" [ngClass]="t.priority.toLowerCase()">
+                                <span *ngIf="t.priority === 'High'">🔴 🔺 High</span>
+                                <span *ngIf="t.priority === 'Medium'">🟡 🔸 Medium</span>
+                                <span *ngIf="t.priority === 'Low'">🔵 🔹 Low</span>
+                            </span>
                             <span class="deadline-badge" *ngIf="t.deadline">
                                 📅 {{ t.deadline | date:"yyyy/MM/dd" }}
                             </span>
