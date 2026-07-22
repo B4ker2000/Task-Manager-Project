@@ -87,7 +87,7 @@
                         <select [ngModel]="t.assignedUserId" (change)="onAssignUser(t.id, $any($event.target).value)" class="assignee-dropdown-menu" [disabled]="currentUserProjectRole !== 'Owner'">
                             <option [value]="null">Unassigned</option>
                             <option *ngFor="let m of projectMembers" [value]="m.userId">
-                                {{ m.userEmail }}
+                                {{ m.userName }} ({{ m.userEmail }})
                             </option>
                         </select>
                     </div>
@@ -98,7 +98,7 @@
                                 📅 {{ t.deadline | date:"yyyy/MM/dd" }}
                             </span>
                         </div>
-                        <button class="action-btn next" (click)="onUpdateStatus(t.id, 'In Progress')">Start →</button>
+                        <button *ngIf="currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId" class="action-btn next" (click)="onUpdateStatus(t.id, 'In Progress')">Start →</button>
                     </div>
                 </div>
             </div>
@@ -119,7 +119,7 @@
                         <select [ngModel]="t.assignedUserId" (change)="onAssignUser(t.id, $any($event.target).value)" class="assignee-dropdown-menu" [disabled]="currentUserProjectRole !== 'Owner'">
                             <option [value]="null">Unassigned</option>
                             <option *ngFor="let m of projectMembers" [value]="m.userId">
-                                {{ m.userEmail }}
+                                {{ m.userName }} ({{ m.userEmail }})
                             </option>
                         </select>
                     </div>
@@ -131,8 +131,8 @@
                             </span>
                         </div>
                         <div class="btn-group">
-                            <button class="action-btn back" (click)="onUpdateStatus(t.id, 'Pending')">← Revert</button>
-                            <button class="action-btn finish" (click)="onUpdateStatus(t.id, 'Completed')">Done ✓</button>
+                            <button *ngIf="currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId" class="action-btn back" (click)="onUpdateStatus(t.id, 'Pending')">← Revert</button>
+                            <button *ngIf="currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId" class="action-btn finish" (click)="onUpdateStatus(t.id, 'Completed')">Done ✓</button>
                         </div>
                     </div>
                 </div>
@@ -154,7 +154,7 @@
                         <select [ngModel]="t.assignedUserId" (change)="onAssignUser(t.id, $any($event.target).value)" class="assignee-dropdown-menu" [disabled]="currentUserProjectRole !== 'Owner'">
                             <option [value]="null">Unassigned</option>
                             <option *ngFor="let m of projectMembers" [value]="m.userId">
-                                {{ m.userEmail }}
+                                {{ m.userName }} ({{ m.userEmail }})
                             </option>
                         </select>
                     </div>
@@ -165,7 +165,7 @@
                                 📅 {{ t.deadline | date:"yyyy/MM/dd" }}
                             </span>
                         </div>
-                        <button class="action-btn back" (click)="onUpdateStatus(t.id, 'In Progress')">← Reopen</button>
+                        <button *ngIf="currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId" class="action-btn back" (click)="onUpdateStatus(t.id, 'In Progress')">← Reopen</button>
                     </div>
                 </div>
             </div>

@@ -4,6 +4,7 @@ import { NgFor, NgIf, NgClass, DatePipe, isPlatformBrowser } from "@angular/comm
 import { ActivatedRoute, RouterLink, Router } from "@angular/router";
 import { TaskService } from "../Services/task.service";
 import { ProjectService } from "../Services/project.service";
+import { AuthService } from "../Services/auth.service";
 
 @Component({
     selector: 'app-task-board',
@@ -19,6 +20,7 @@ export class TaskBoardComponent implements OnInit {
     private cdr = inject(ChangeDetectorRef);
     private platformId = inject(PLATFORM_ID);
     private router = inject(Router);
+    private authService = inject(AuthService);
 
     projectId!: number; // Here we basically declare "projectId" but don't assign anything to it yet (null) but because TypeScript restricts use of variables that are declared but aren't assigned anything immediately afterwards, we put an "!" after the name to basically tell TypeScript "Trust me, I know what I'm doing by not assigning anything to 'projectId' right now, but I promise it will absolutely have a number inside it before the HTML page tries to read it!"
     isModalOpen = false; // Tracks whether form window is visible
@@ -51,10 +53,12 @@ export class TaskBoardComponent implements OnInit {
     inviteEmail: string = "";
     inviteRole: string = "Member"; // Defaults to regular Member assignment 
 
-    currentUserProjectRole: string = "Member";
+    currentUserId!: number;
 
     // Dynamic title string with a gaming twist! :D
-    projectTitle: string = "Now Loading...";
+    projectTitle: string = "";
+    
+    currentUserProjectRole: string = "";
 
     // Array to hold our teammate info
     projectMembers: any[] = [];
@@ -67,15 +71,35 @@ export class TaskBoardComponent implements OnInit {
             // Ensure we are running inside a browser window environment safely
             if(this.projectId && isPlatformBrowser(this.platformId)) {
                 this.projectTitle = "Now Loading...";
-                this.loadTasks();
-                this.loadUserRole();
-                this.loadProjectDetails(); // Fetches the real project title
-                this.loadProjectMembers(); 
+                this.currentUserProjectRole = "Loading...";
+
+                // Load identity above first and then load the assets
+                this.loadBoardRequirements();
             }
         });
 
         this.projectId = Number(this.route.snapshot.paramMap.get("id"));
         this.loadUserRole();
+    }
+    
+    loadBoardRequirements(): void {
+        this.authService.getUserProfile().subscribe({
+            next: (data: any) => {
+                this.currentUserId = Number(data.id);
+                this.loadTasks();
+                this.loadUserRole();
+                this.loadProjectDetails(); // Fetches the real project title
+                this.loadProjectMembers(); 
+            },
+            error: (err: any) => {
+                console.error("Critical board init failure:", err);
+                // Fallback load so the screen doesn't completely freeze on network hiccups
+                this.loadTasks();
+                this.loadUserRole();
+                this.loadProjectDetails();
+                this.loadProjectMembers(); 
+            }
+        })
     }
 
     loadTasks(): void {
@@ -270,6 +294,18 @@ export class TaskBoardComponent implements OnInit {
             },
             error: (err: any) => {
                 console.error("Failed to update task assignment row:", err);
+            }
+        });
+    }
+
+    loadCurrentUserId(): void {
+        this.authService.getUserProfile().subscribe({
+            next: (data: any) => {
+                this.currentUserId = Number(data.id);
+                this.cdr.detectChanges();
+            },
+            error: (err: any) => {
+                console.error("Could not resolve current user payload identity:", err);
             }
         });
     }

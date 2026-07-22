@@ -96,7 +96,8 @@ namespace Backend.Controllers
                 .Select(pm => new
                 {
                     userId = pm.UserId,
-                    userEmail = pm.User != null ? pm.User.Email : "Unknown User"
+                    userEmail = pm.User != null ? pm.User.Email : "Unknown User",
+                    userName = pm.User != null ? pm.User.Username : "Unknown"
                 })
                 .ToListAsync();
 
