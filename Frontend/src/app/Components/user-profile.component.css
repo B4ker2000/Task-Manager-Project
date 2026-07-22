@@ -1,0 +1,217 @@
+.profile-wrapper { 
+    padding: 40px; 
+    font-family: sans-serif;
+    max-width: 900px; 
+    margin: 0 auto; 
+}
+
+.profile-header { 
+    display: flex; 
+    align-items: center; 
+    gap: 20px; 
+    border-bottom: 2px solid #eaeaea; 
+    padding-bottom: 20px; 
+    margin-bottom: 30px; 
+}
+
+.back-btn { 
+    background-color: #6c757d; 
+    color: white; 
+    border: none; 
+    padding: 8px 14px;
+    border-radius: 4px; 
+    cursor: pointer; 
+    font-weight: bold; 
+    font-size: 13px; 
+}
+
+.profile-card-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 30px; 
+    align-items: start; 
+}
+
+.details-card, .stats-card, .settings-card { 
+    background: white; 
+    border: 1px solid #cbd5e1; 
+    border-radius: 8px; 
+    padding: 25px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02); 
+    text-align: center; 
+}
+
+.avatar-circle { 
+    font-size: 48px; 
+    background-color: #f1f5f9; 
+    width: 80px; 
+    height: 80px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    border-radius: 50%; 
+    margin: 0 auto 15px auto; 
+    border: 2px solid #cbd5e1; 
+}
+
+.role-badge { 
+    display: inline-block; 
+    font-size: 12px; 
+    font-weight: bold; 
+    background-color: #e0f2fe; 
+    color: #0369a1; 
+    padding: 4px 12px; 
+    border-radius: 12px; 
+    margin-bottom: 20px; 
+}
+
+.role-badge.admin { 
+    background-color: #fef3c7; 
+    color: #d97706; 
+}
+
+.info-row { 
+    display: flex; 
+    justify-content: space-between; 
+    border-bottom: 1px dashed #e2e8f0; 
+    padding: 10px 0; 
+    font-size: 14px; 
+    color: #4a5568; 
+}
+
+.stats-card h4, .settings-card h4 { 
+    margin-top: 0; 
+    margin-bottom: 20px; 
+    color: #1a202c; 
+    border-bottom: 2px solid #cbd5e1; 
+    padding-bottom: 8px; 
+    text-align: left; 
+}
+
+.metric-box { 
+    background-color: #f8f9fa; 
+    border: 1px solid #e2e8f0; 
+    padding: 15px; 
+    border-radius: 6px; 
+    margin-bottom: 15px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+}
+
+.metric-num { 
+    font-size: 24px; 
+    font-weight: bold; 
+    color: #007bff; 
+}
+
+.metric-box.status-done .metric-num { color: #28a745; }
+
+.metric-label { 
+    font-size: 13px; 
+    color: #4a5568; 
+    font-weight: 500; 
+}
+
+.loading-state { 
+    text-align: center; 
+    color: #6c757d; 
+    font-style: italic; 
+    padding: 5px; 
+}
+
+.info-adjustment-form { margin-bottom: 25px; }
+
+.info-adjustment-group { 
+    text-align: left; 
+    margin-bottom: 12px; 
+}
+
+.info-adjustment-label { 
+    font-weight: bold; 
+    font-size: 13px; 
+    color: #4a5568; 
+    display: block; 
+    margin-bottom: 4px; 
+}
+
+.info-adjustment-input, .password-input-wrapper input { 
+    width: 100%; 
+    padding: 10px; 
+    border: 1px solid #cbd5e1; 
+    border-radius: 4px; 
+    box-sizing: border-box; 
+    font-size: 14px; 
+}
+
+.save-settings-btn { 
+    width: 100%; 
+    background-color: #28a745; 
+    color: white; 
+    border: none; 
+    padding: 12px; 
+    border-radius: 4px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    margin-top: 10px; 
+}
+
+.settings-card hr { 
+    border: 0; 
+    border-top: 1px solid #e2e8f0; 
+    margin: 20px 0; 
+}
+
+.danger-zone { text-align: left; }
+
+.danger-zone-header { 
+    color: #c62828; 
+    margin: 0 0 8px 0; 
+    font-size: 14px; 
+}
+
+.danger-zone-warning { 
+    font-size: 12px; 
+    color: #718096; 
+    margin: 0 0 12px 0; 
+    line-height: 1.4; 
+}
+
+.danger-zone-btn { 
+    width: 100%; 
+    background-color: #dc3545; 
+    color: white; 
+    border: none; 
+    padding: 12px; 
+    border-radius: 4px; 
+    font-weight: bold; 
+    cursor: pointer; 
+}
+
+.password-input-wrapper { 
+    display: flex; 
+    align-items: center; 
+    position: relative; 
+    width: 100%; 
+}
+
+.password-input-wrapper input { padding-right: 40px; }
+
+.eye-toggle-btn { 
+    position: absolute; 
+    right: 10px; 
+    background: none; 
+    border: none; 
+    cursor: pointer; 
+    font-size: 16px; 
+    padding: 0; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    opacity: 0.5; 
+    transition: opacity 0.2s; 
+    width: auto; 
+    height: auto; 
+}
+
+.eye-toggle-btn:hover { opacity: 1; }

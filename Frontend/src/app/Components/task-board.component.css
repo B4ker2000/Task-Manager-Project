@@ -1,0 +1,464 @@
+.task-card-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: flex-start; 
+    gap: 10px; 
+    margin-bottom: 8px; 
+}
+
+.task-card h4 { 
+    margin: 0; 
+    color: #1a202c; 
+    flex: 1; 
+    text-align: left; 
+}
+
+.delete-card-btn { 
+    background: none; 
+    border: none; 
+    cursor: pointer; 
+    padding: 2px; 
+    font-size: 14px; 
+    opacity: 0.4; 
+    transition: opacity 0.2s; 
+    line-height: 1; 
+}
+
+.delete-card-btn:hover { opacity: 1; }
+
+.board-wrapper { 
+    padding: 40px; 
+    font-family: sans-serif; 
+    max-width: 1400px; 
+    margin: 0 auto; 
+}
+
+.board-header { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    position: relative;
+    width: 100%;
+    border-bottom: 2px solid #eaeaea; 
+    padding-bottom: 20px; 
+    margin-bottom: 30px; 
+}
+
+.board-header h2 {
+    text-align: center;
+    margin: 0 auto;
+}
+.back-btn { 
+    background-color: #6c757d; 
+    color: white; 
+    border: none; 
+    padding: 8px 14px; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    font-weight: bold; 
+}
+
+.add-task-btn { 
+    background-color: #28a745; 
+    color: white; 
+    border: none; 
+    padding: 10px 16px; 
+    border-radius: 4px;
+    cursor: pointer; 
+    font-weight: bold; 
+}
+
+.board-columns-grid { 
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); /* This basically means "Create 3 columns, and give them exactly 1 equal slice of space each!" */
+    gap: 25px; 
+    align-items: start; 
+}
+
+.board-column { 
+    background-color: #f8f9fa; 
+    border: 1px solid #e2e8f0; 
+    border-radius: 8px; 
+    padding: 20px; 
+    min-height: 500px; 
+}
+
+.board-column h3 { 
+    margin-top: 0; 
+    margin-bottom: 20px; 
+    border-bottom: 2px solid #cbd5e1; 
+    padding-bottom: 10px; 
+    color: #333; 
+}
+
+.tasks-container { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 15px; 
+}
+
+.task-card { 
+    background: white; 
+    border: 1px solid #cbd5e1; 
+    border-radius: 6px; 
+    padding: 15px; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02); 
+}
+
+.task-card.done { 
+    background-color: #f1f5f9; 
+    border-color: #e2e8f0; 
+    opacity: 0.8; 
+}
+
+.task-card p { 
+    margin: 0; 
+    color: #4a5568; 
+    font-size: 13px; 
+    line-height: 1.4; 
+    margin-bottom: 15px; 
+    text-align: left; 
+}
+
+.task-actions { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    gap: 12px; 
+    margin-top: 10px; 
+}
+
+.priority-badge { 
+    font-size: 11px; 
+    padding: 3px 8px; 
+    border-radius: 12px; 
+    font-weight: bold; 
+    text-transform: uppercase; 
+}
+
+.priority-badge.high { 
+    background-color: #ffebee; 
+    color: #c62828; 
+}
+
+.priority-badge.medium { 
+    background-color: #fff3e0; 
+    color: #ef6c00; 
+}
+
+.priority-badge.low { 
+    background-color: #e8f5e9; 
+    color: #2e7d32; 
+}
+
+.action-btn { 
+    border: none; 
+    padding: 5px 10px; 
+    border-radius: 4px; 
+    font-size: 12px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    color: white; 
+}
+
+.action-btn.next { background-color: #007bff; }
+
+.action-btn.back { 
+    background-color: #e2e8f0; 
+    color: #4a5568; 
+}
+
+.action-btn.finish { background-color: #28a745; }
+
+.btn-group { 
+    display: flex; 
+    gap: 4px; 
+    flex-shrink: 0; 
+}
+
+.modal-overlay { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100vw; 
+    height: 100vh; 
+    background: rgba(0, 0, 0, 0.5); 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    z-index: 1000; 
+}
+
+.modal-card { 
+    background: white; 
+    padding: 30px; 
+    border-radius: 8px; 
+    width: 100%; 
+    max-width: 500px; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15); 
+}
+
+.modal-actions { 
+    display: flex; 
+    justify-content: flex-end; 
+    gap: 10px; 
+    margin-top: 25px; 
+}
+
+.cancel-btn { 
+    background-color: #e2e8f0; 
+    color: #4a5568; 
+    border: none; 
+    padding: 10px 16px; 
+    border-radius: 4px; 
+    font-weight: bold; 
+    cursor: pointer; 
+}
+
+.submit-btn { 
+    background-color: #28a745; 
+    color: white; 
+    border: none; 
+    padding: 10px 16px; 
+    border-radius: 4px; 
+    font-weight: bold; 
+    cursor: pointer; 
+}
+
+.submit-btn:disabled { 
+    background-color: #cbd5e1; 
+    cursor: not-allowed; 
+}
+
+.form-group { margin-bottom: 15px; }
+
+.form-group label { 
+    display: block; 
+    font-weight: bold; 
+    font-size: 13px; 
+    margin-bottom: 6px; 
+    color: #4a5568; 
+    text-align: left; 
+}
+
+.form-group input, .form-group textarea, .form-group select { 
+    width: 100%; 
+    padding: 10px; 
+    border: 1px solid #cbd5e1; 
+    border-radius: 4px; 
+    box-sizing: border-box; 
+}
+
+.form-group textarea { 
+    height: 80px; 
+    resize: vertical; 
+}
+
+.badge-group { 
+    display: flex; 
+    gap: 6px; 
+    align-items: center; 
+    flex-wrap: wrap; 
+}
+
+.deadline-badge { 
+    font-size: 11px; 
+    background-color: #f1f5f9; 
+    color: #475569; 
+    padding: 3px 8px; 
+    border-radius: 12px; 
+    font-weight: 500; 
+    border: 1px solid #cbd5e1;
+}
+
+.board-controls-panel { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    background-color: #f8f9fa; 
+    border: 1px solid #e2e8f0; 
+    border-radius: 8px; 
+    padding: 15px 20px; 
+    margin-bottom: 25px; 
+    gap: 20px; 
+    flex-wrap: wrap; 
+}
+
+.search-filter-group { 
+    display: flex; 
+    gap: 15px; 
+    flex: 1; 
+    min-width: 300px; 
+}
+
+.search-box, .filter-box { 
+    display: flex; 
+    align-items: center; 
+    background: white; 
+    border: 1px solid #cbd5e1; 
+    border-radius: 6px; 
+    padding: 6px 12px; 
+    gap: 8px; 
+    flex: 1; 
+}
+
+.search-box input, .filter-box select { 
+    border: none; 
+    outline: none; 
+    width: 100%; 
+    font-size: 14px; 
+    background: transparent; 
+}
+
+.progress-analytics { 
+    min-width: 280px; 
+    flex: 1; 
+}
+
+.priority-text-label { 
+    display: flex; 
+    justify-content: space-between; 
+    font-size: 13px; 
+    color: #4a5568; 
+    margin-bottom: 6px; 
+}
+
+.progress-bar-track { 
+    width: 100%; 
+    height: 10px; 
+    background-color: #e2e8f0; 
+    border-radius: 10px; 
+    overflow: hidden; 
+}
+
+.progress-bar-fill { 
+    height: 100%; 
+    background: linear-gradient(90deg, #28a745, #34ce57); 
+    width: 0%; 
+    transition: width 0.4s ease-out; 
+}
+
+.project-member-invite-bar { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    background-color: #f8f9fa; 
+    border: 1px solid #e2e8f0;
+    border-radius: 8px; 
+    padding: 12px 20px; 
+    margin-bottom: 15px; 
+    gap: 20px; 
+    flex-wrap: wrap; 
+}
+
+.invite-header-title { 
+    font-size: 14px; 
+    font-weight: bold; 
+    color: #4a5568; 
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+}
+
+.invite-action-form { 
+    display: flex; 
+    gap: 10px; 
+    flex: 1; 
+    max-width: 650px; 
+    max-height: 300px; 
+}
+
+.invite-input-container { flex: 2; }
+
+.invite-select-container { flex: 1; }
+
+.invite-text-field, .invite-dropdown-select { 
+    width: 100%;
+    height: 38px;
+    padding: 8px 12px; 
+    border: 1px solid #cbd5e1; 
+    border-radius: 4px; 
+    box-sizing: border-box; 
+    font-size: 13px; 
+    background-color: white; 
+    outline: none; 
+}
+
+.invite-text-field:focus, .invite-dropdown-select:focus { border-color: #007bff; }
+
+.send-invite-btn { 
+    background-color: #007bff; 
+    color: white; 
+    border: none; 
+    padding: 8px 16px; 
+    border-radius: 4px; 
+    font-weight: bold; 
+    font-size: 13px; 
+    cursor: pointer; 
+    white-space: nowrap; 
+    transition: background-color 0.2s; 
+}
+
+.send-invite-btn:hover:not(:disabled) { background-color: #0056b3; }
+
+.send-invite-btn:disabled { 
+    background-color: #cbd5e1; 
+    cursor: not-allowed; 
+}
+
+.badge-owner {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+.badge-member {
+    background-color: #e2e3e5;
+    color: #383d41;
+}
+
+.project-member-management-panel {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.roster-sub-title {
+    margin: 15px 0 10px 0;
+    font-size: 14px;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.roster-list-element {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.roster-item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f9fa;
+    padding: 10px 15px;
+    border-radius: 6px;
+    border-left: 4px solid #adb5bd;
+}
+
+.member-display-email {
+    font-size: 14px;
+    color: #212529;
+}
+
+.role-display-badge {
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: bold;
+}

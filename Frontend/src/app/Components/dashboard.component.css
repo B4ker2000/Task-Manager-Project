@@ -1,0 +1,152 @@
+.dashboard-wrapper { 
+    padding: 40px; 
+    font-family: sans-serif; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+}
+.main-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    border-bottom: 2px solid #eaeaea; 
+    padding-bottom: 20px; 
+    margin-bottom: 30px; 
+}
+.main-header h1 {
+    color: #222; 
+    margin: 0; 
+}
+.logout-btn { 
+    background-color: #6c757d; 
+    color: white; 
+    border: none; 
+    padding: 10px 16px; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    font-weight: bold; 
+}
+.dashboard-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 2fr; 
+    gap: 40px; 
+}
+.form-section { 
+    background: #f8f9fa; 
+    padding: 25px; 
+    border-radius: 8px; 
+    border: 1px solid #e2e8f0; 
+    height: fit-content; 
+}
+.form-section h3 { 
+    margin-top: 0; 
+    margin-bottom: 20px; 
+    color: #333; 
+}
+.form-group { margin-bottom: 15px; }
+label { 
+    display: block; 
+    font-weight: bold; 
+    font-size: 13px; 
+    margin-bottom: 6px; 
+    color: #4a5568; 
+}
+input, textarea { 
+    width: 100%; 
+    padding: 10px; 
+    border: 1px solid #cbd5e1; 
+    border-radius: 4px; 
+    box-sizing: border-box; 
+}
+textarea { 
+    height: 100px; 
+    resize: vertical; 
+}
+.create-btn { 
+    width: 100%; 
+    padding: 12px; 
+    background-color: #28a745; 
+    color: white; 
+    border: none; 
+    border-radius: 4px; 
+    font-weight: bold; 
+    cursor: pointer; 
+}
+.create-btn:disabled { 
+    background-color: #cbd5e1; 
+    cursor: not-allowed; 
+}
+.list-section h3 { 
+    margin-top: 0; 
+    margin-bottom: 20px; 
+    color: #333; 
+}
+.empty-msg { 
+    color: #718096; 
+    font-style: italic; 
+}
+.project-cards-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px; 
+}
+.project-card-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: flex-start; 
+    gap: 10px; 
+}
+.project-card { 
+    background: white; 
+    border: 1px solid #e2e8f0; 
+    border-radius: 8px; 
+    padding: 20px; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02); 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between; 
+}
+.project-card h4 { 
+    margin-top: 0; 
+    margin-bottom: 10px; 
+    color: #1a202c; 
+}
+.project-card p { 
+    color: #4a5568; 
+    font-size: 14px; 
+    margin-bottom: 20px; 
+    line-height: 1.5; 
+}
+.delete-proj-btn { 
+    background: none; 
+    border: none; 
+    cursor: pointer; 
+    font-size: 14px; 
+    opacity: 0.4; 
+    padding: 2px; 
+    transition: opacity 0.2s; 
+}
+.view-tasks-btn { 
+    background-color: #007bff; 
+    color: white; 
+    border: none; 
+    padding: 8px 12px; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    font-size: 13px; 
+    font-weight: bold; 
+    width: fit-content; 
+}
+.header-navigation-actions { 
+    display: flex; 
+    gap: 12px; 
+    align-items: center; 
+}
+.profile-btn { 
+    background-color: #007bff; 
+    color: white; 
+    border: none; 
+    padding: 9px 16px; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    font-weight: bold; 
+}

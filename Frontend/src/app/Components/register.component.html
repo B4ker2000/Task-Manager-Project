@@ -1,0 +1,55 @@
+<div class="register-wrapper">
+    <div class="register-card">
+        <h2>Create Workspace Account</h2>
+        <p class="subtitle">Join the project management platform!</p>
+        
+        <form (ngSubmit)="onRegister()" #registerForm="ngForm">
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" name="username" [(ngModel)]="registerData.Username" required placeholder="Pick a unique display name..." />
+            </div>
+
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" name="email" [(ngModel)]="registerData.Email" required email placeholder="e.g. employee@company.com" />
+            </div>
+            
+            <!-- <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" [(ngModel)]="registerData.Password" required placeholder="Create a secure password..." />
+            </div>
+
+            <div class="form-group">
+                <label>Confirm New Password</label>
+                <input type="password" name="confirmPassword" [(ngModel)]="confirmPassword" required placeholder="Retype your password..." />
+            </div> -->
+
+            <div class="form-group">
+                <label>Password</label>
+                <div class="password-input-wrapper">
+                    <input [type]="showPassword ? 'text' : 'password'" name="password" [(ngModel)]="registerData.Password" required placeholder="Create a secure password..." />
+                    <button type="button" class="eye-toggle-btn" (click)="showPassword = !showPassword">
+                        {{ showPassword ? '👁️' : '👁️‍🗨️' }}
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Confirm Password</label>
+                <div class="password-input-wrapper">
+                    <input [type]="showConfirmPassword ? 'text' : 'password'" name="confirmPassword" [(ngModel)]="confirmPassword" required placeholder="Retype your password..." />
+                    <button type="button" class="eye-toggle-btn" (click)="showConfirmPassword = !showConfirmPassword">
+                        {{ showConfirmPassword ? '👁️' : '👁️‍🗨️' }}
+                    </button>
+                </div>
+            </div>
+
+            <button type="submit" class="register-btn" [disabled]="!registerForm.form.valid">Sign Up</button>
+        </form>
+
+        <div class="register-footer">
+            <span>Already have an account? </span>
+            <a [routerLink]="['/login']" class="login-link">Back to Sign In</a>
+        </div>
+    </div>
+</div>

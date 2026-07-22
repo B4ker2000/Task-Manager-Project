@@ -1,0 +1,185 @@
+<div class="board-wrapper">
+    <header class="board-header">
+        <button class="back-btn" [routerLink]="['/dashboard']">← Back to Dashboard</button>
+            <h2>Project Board ({{ projectTitle }})</h2>
+            <!-- Project Board (Project ID: {{ projectId }}) -->
+            <!-- Clicking this opens our form modal overlay -->
+        <button *ngIf="currentUserProjectRole === 'Owner'" class="add-task-btn" (click)="openModal()">➕ Add New Task</button>
+    </header>
+
+    <div class="project-member-management-panel">
+        <div class="invite-header-title">
+            👥 <span>Project Team Management Workspace</span>
+        </div>
+
+        <!-- Active Invitation Submission Row (Visible only to admins/owners) -->
+         <div class="owner-invite-controls"  *ngIf="currentUserProjectRole === 'Owner'">
+            <form (ngSubmit)="onInviteUser()" #inviteForm="ngForm" class="invite-action-form">
+                <div class="invite-input-container">
+                    <input type="email" name="inviteEmail" [(ngModel)]="inviteEmail" required placeholder="Enter teammate's registered email address..." class="invite-text-field" />
+                </div>
+
+                <div class="invite-select-container">
+                    <select name="inviteRole" [(ngModel)]="inviteRole" class="invite-dropdown-select">
+                        <option value="Member">Regular Member</option>
+                        <option value="Owner">Co-Owner / Admin</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="send-invite-btn" [disabled]="!inviteForm.form.valid">Add Member</button>
+            </form>
+         </div>
+        
+        <!-- Dynamic roster display list (Visible to everyone below the dashboard controls) -->
+         <div class="team-roster-display-block">
+            <h4 class="roster-sub-title">Current Project Crew</h4>
+            <ul class="roster-list-element">
+                <li *ngFor="let m of projectMembers" class="roster-item-row">
+                    <span class="memeber-display-email">{{ m.userEmail }}</span>
+                    <span class="role-display-badge" [ngClass]="{'badge-owner': m.projectRole === 'owner', 'badge-member': m.projectRole === 'Member'}">
+                        {{ m.projectRole }}
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="board-controls-panel">
+        <div class="search-filter-group">
+            <div class="search-box">
+                🔍 <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="applyFilters()" placeholder="Search tasks by title..." />
+            </div>
+
+            <div class="filter-box">
+                🎯 <select [(ngModel)]="selectedPriority" (ngModelChange)="applyFilters()">
+                    <option value="All">All Priorities</option>
+                    <option value="High">High Priority</option>
+                    <option value="Medium">Medium Priority</option>
+                    <option value="Low">Low Priority</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Live Project Progress Analytics Tracker -->
+        <div class="progress-analytics">
+            <div class="progress-text-label">
+                <span>Project Completion Progress:</span>
+                <strong>{{ completionPercentage }}%</strong>
+            </div>
+            <div class="progress-bar-track">
+                <div class="progress-bar-fill" [style.width.%]="completionPercentage"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="board-columns-grid">
+        <!-- Column 1: Pending Tasks -->
+		<section class="board-column">
+			<h3>⏳ Pending ({{ pendingTasks.length }})</h3>
+            <div class="tasks-container">
+                <div class="task-card" *ngFor="let t of filteredPendingTasks">
+                    <div class="task-card-header">
+                        <h4>{{ t.title }}</h4>
+                        <button *ngIf="currentUserProjectRole === 'Owner'" class="delete-card-btn" (click)="onDeleteTask(t.id)">🗑️</button>
+                    </div>
+                    <p>{{ t.description || 'No details provided.' }}</p>
+                    <div class="task-actions">
+                        <div class="badge-group">
+                            <span class="priority-badge" [ngClass]="t.priority.toLowerCase()">{{ t.priority }}</span>
+                            <span class="deadline-badge" *ngIf="t.deadline">
+                                📅 {{ t.deadline | date:"yyyy/MM/dd" }}
+                            </span>
+                        </div>
+                        <button class="action-btn next" (click)="onUpdateStatus(t.id, 'In Progress')">Start →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+		<!-- Column 2: In Progress Tasks -->
+        <section class="board-column">
+            <h3>⚡ In Progress ({{ inProgressTasks.length }})</h3>
+            <div class="tasks-container">
+                <div class="task-card" *ngFor="let t of filteredInProgressTasks">
+                    <div class="task-card-header">
+                        <h4>{{ t.title }}</h4>
+                        <button *ngIf="currentUserProjectRole === 'Owner'" class="delete-card-btn" (click)="onDeleteTask(t.id)">🗑️</button>
+                    </div>
+                    <p>{{ t.description || 'No details provided.' }}</p>
+                    <div class="task-actions">
+                        <div class="badge-group">
+                            <span class="priority-badge" [ngClass]="t.priority.toLowerCase()">{{ t.priority }}</span>
+                            <span class="deadline-badge" *ngIf="t.deadline">
+                                📅 {{ t.deadline | date:"yyyy/MM/dd" }}
+                            </span>
+                        </div>
+                        <div class="btn-group">
+                            <button class="action-btn back" (click)="onUpdateStatus(t.id, 'Pending')">← Revert</button>
+                            <button class="action-btn finish" (click)="onUpdateStatus(t.id, 'Completed')">Done ✓</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Column 3: Completed Tasks -->
+        <section class="board-column completed-column">
+            <h3>✅ Completed ({{ completedTasks.length }})</h3>
+			<div class="tasks-container">
+				<div class="task-card done" *ngFor="let t of filteredCompletedTasks">
+					<div class="task-card-header">
+						<h4>{{ t.title }}</h4>
+						<button *ngIf="currentUserProjectRole === 'Owner'" class="delete-card-btn" (click)="onDeleteTask(t.id)">🗑️</button>
+					</div>												
+                    <p>{{ t.description || 'No details provided.' }}</p>
+                    <div class="task-actions">
+                        <div class="badge-group">
+                            <span class="priority-badge" [ngClass]="t.priority.toLowerCase()">{{ t.priority }}</span>
+                            <span class="deadline-badge" *ngIf="t.deadline">
+                                📅 {{ t.deadline | date:"yyyy/MM/dd" }}
+                            </span>
+                        </div>
+                        <button class="action-btn back" (click)="onUpdateStatus(t.id, 'In Progress')">← Reopen</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+        <!-- Create new task form & Modal Overlays -->
+    <div class="modal-overlay" *ngIf="isModalOpen">
+        <div class="modal-card">
+            <h3>Create New Task</h3>
+            <form (ngSubmit)="onCreateTask()" #taskForm="ngForm">
+                <div class="form-group">
+                    <label>Task Title *</label>
+                    <input type="text" name="title" [(ngModel)]="newTask.title" required placeholder="e.g. Design database schema" />
+                </div>
+
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea name="description" [(ngModel)]="newTask.description" placeholder="Provide actionable details..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Priority</label>
+                    <select name="priority" [(ngModel)]="newTask.priority">
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Deadline</label>
+                    <input type="date" name="deadline" [(ngModel)]="newTask.deadline" />
+                </div>
+				
+				<div class="modal-actions">
+                    <button type="button" class="cancel-btn" (click)="closeModal()">Cancel</button>
+                    <button type="submit" class="submit-btn" [disabled]="!taskForm.form.valid">Create Task</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
