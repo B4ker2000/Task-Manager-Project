@@ -2,7 +2,6 @@
     <header class="board-header">
         <button class="back-btn" [routerLink]="['/dashboard']">← Back to Dashboard</button>
             <h2>Project Board ({{ projectTitle }})</h2>
-            <!-- Project Board (Project ID: {{ projectId }}) -->
             <!-- Clicking this opens our form modal overlay -->
         <button *ngIf="currentUserProjectRole === 'Owner'" class="add-task-btn" (click)="openModal()">➕ Add New Task</button>
     </header>
@@ -36,7 +35,7 @@
             <ul class="roster-list-element">
                 <li *ngFor="let m of projectMembers" class="roster-item-row">
                     <span class="memeber-display-email">{{ m.userEmail }}</span>
-                    <span class="role-display-badge" [ngClass]="{'badge-owner': m.projectRole === 'owner', 'badge-member': m.projectRole === 'Member'}">
+                    <span class="role-display-badge" [ngClass]="{'badge-owner': m.projectRole === 'Owner', 'badge-member': m.projectRole === 'Member'}">
                         {{ m.projectRole }}
                     </span>
                 </li>
@@ -83,6 +82,15 @@
                         <button *ngIf="currentUserProjectRole === 'Owner'" class="delete-card-btn" (click)="onDeleteTask(t.id)">🗑️</button>
                     </div>
                     <p>{{ t.description || 'No details provided.' }}</p>
+                    <div class="task-assignment-control">
+                        <label class="assignment-label">👤 Assignee:</label>
+                        <select [ngModel]="t.assignedUserId" (change)="onAssignUser(t.id, $any($event.target).value)" class="assignee-dropdown-menu" [disabled]="currentUserProjectRole !== 'Owner'">
+                            <option [value]="null">Unassigned</option>
+                            <option *ngFor="let m of projectMembers" [value]="m.userId">
+                                {{ m.userEmail }}
+                            </option>
+                        </select>
+                    </div>
                     <div class="task-actions">
                         <div class="badge-group">
                             <span class="priority-badge" [ngClass]="t.priority.toLowerCase()">{{ t.priority }}</span>
@@ -106,6 +114,15 @@
                         <button *ngIf="currentUserProjectRole === 'Owner'" class="delete-card-btn" (click)="onDeleteTask(t.id)">🗑️</button>
                     </div>
                     <p>{{ t.description || 'No details provided.' }}</p>
+                    <div class="task-assignment-control">
+                        <label class="assignment-label">👤 Assignee:</label>
+                        <select [ngModel]="t.assignedUserId" (change)="onAssignUser(t.id, $any($event.target).value)" class="assignee-dropdown-menu" [disabled]="currentUserProjectRole !== 'Owner'">
+                            <option [value]="null">Unassigned</option>
+                            <option *ngFor="let m of projectMembers" [value]="m.userId">
+                                {{ m.userEmail }}
+                            </option>
+                        </select>
+                    </div>
                     <div class="task-actions">
                         <div class="badge-group">
                             <span class="priority-badge" [ngClass]="t.priority.toLowerCase()">{{ t.priority }}</span>
@@ -132,6 +149,15 @@
 						<button *ngIf="currentUserProjectRole === 'Owner'" class="delete-card-btn" (click)="onDeleteTask(t.id)">🗑️</button>
 					</div>												
                     <p>{{ t.description || 'No details provided.' }}</p>
+                    <div class="task-assignment-control">
+                        <label class="assignment-label" >👤 Assignee:</label>
+                        <select [ngModel]="t.assignedUserId" (change)="onAssignUser(t.id, $any($event.target).value)" class="assignee-dropdown-menu" [disabled]="currentUserProjectRole !== 'Owner'">
+                            <option [value]="null">Unassigned</option>
+                            <option *ngFor="let m of projectMembers" [value]="m.userId">
+                                {{ m.userEmail }}
+                            </option>
+                        </select>
+                    </div>
                     <div class="task-actions">
                         <div class="badge-group">
                             <span class="priority-badge" [ngClass]="t.priority.toLowerCase()">{{ t.priority }}</span>

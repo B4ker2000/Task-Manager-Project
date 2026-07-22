@@ -91,15 +91,23 @@ namespace Backend.Controllers
                 return NotFound(new { message = "User account no longer exists!" });
             }
 
-            // Basic statistical preparation (Temporary for now)
-            int totalCreatedTasks = 0;
+            // Initial statistical values
+            int totalAssignedTasks = 0;
             int completedTasksCount = 0;
 
             try
             {
-                // temp
+                totalAssignedTasks = await _context.Tasks
+                    .CountAsync(t => t.AssignedUserId == userId);
+
+                completedTasksCount = await _context.Tasks
+                    .CountAsync(t => t.AssignedUserId == userId && t.Status == "Completed");
             }
-            catch { /* Gracefully falls back to 0 metrics if tasks aren't linked yet */ }
+            catch(Exception ex)
+            {
+                // Log the exception details to the backend terminal if a query hiccups
+                Console.WriteLine($"Metrics loading encounter: {ex.Message}");
+            }
 
             // Safely pack user fields out to the frontend (omits password hash and salt records!)
             return Ok(new
@@ -110,7 +118,7 @@ namespace Backend.Controllers
                 role = "Member", // hardcoded default placeholder until we run DB migrations for Admin features later so also temp!
                 stats = new
                 {
-                    total = totalCreatedTasks,
+                    total = totalAssignedTasks,
                     completed = completedTasksCount
                 }
             });

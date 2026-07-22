@@ -98,6 +98,10 @@ export class TaskBoardComponent implements OnInit {
 
                 // 3. Render filtered items immediately
                 this.applyFilters();
+
+                //4. Save our new team array
+                this.projectMembers = response.team || [];
+
                 this.cdr.detectChanges(); // Force rendering updates instantly!
             },
             error: (err: any) => console.error('Failed to get tasks for this project board!', err)
@@ -253,6 +257,19 @@ export class TaskBoardComponent implements OnInit {
             },
             error: (err) => {
                 console.error("Failed to retrieve project member roster layout:", err);
+            }
+        });
+    }
+
+    onAssignUser(taskId: number, selectedValue: any): void {
+        const userId = selectedValue === "null" || selectedValue === null ? null : Number(selectedValue);
+        this.taskService.assignTask(taskId, userId).subscribe({
+            next: (res: any) => {
+                console.log("Assignment updated successfully:", res.message);
+                this.loadTasks();
+            },
+            error: (err: any) => {
+                console.error("Failed to update task assignment row:", err);
             }
         });
     }

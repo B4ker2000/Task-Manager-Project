@@ -90,11 +90,22 @@ namespace Backend.Controllers
             // Default to "None" if a user somehow sneaked past the board gates entirely!
             string userRoleInProject = membership?.ProjectRole ?? "None";
 
+            // Fetch project members for the assignment dropdown selector
+            var teamRoster = await _context.ProjectMembers
+                .Where(pm => pm.ProjectId == projectId)
+                .Select(pm => new
+                {
+                    userId = pm.UserId,
+                    userEmail = pm.User != null ? pm.User.Email : "Unknown User"
+                })
+                .ToListAsync();
+
             // 4. Return an elegant, dual-property response data package out to the frontend layout
             return Ok(new
             {
                 role = userRoleInProject, // Tells the frontend if they are "Owner" or "Member"
-                tasks = projectTasks    // Sends your task card records array
+                tasks = projectTasks,    // Sends your task card records array
+                team = teamRoster
             });
         }
 
@@ -148,6 +159,33 @@ namespace Backend.Controllers
 
             // 5. Return a success message
             return Ok(new { message = "Task deleted successfully!" });
+        }
+
+        [HttpPut("{taskId}/assign")]
+        [Authorize]
+        public async Task<IActionResult> AssignTask(int taskId, [FromBody] TaskAssignDto request)
+        {
+            // 1. Find the target task in the database
+            var taskItem = await _context.Tasks.FindAsync(taskId);
+            if(taskItem == null) return NotFound("Task not found!");
+
+            // 2. Verify security: Only an Owner of the project should be allowed to assign tasks!
+            var userIdClaim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            int currentUserId = int.Parse(userIdClaim!);
+
+            var membership = await _context.ProjectMembers
+                .FirstOrDefaultAsync(pm => pm.ProjectId == taskItem.ProjectId && pm.UserId == currentUserId);
+
+            if(membership == null || membership.ProjectRole != "Owner")
+            {
+                return Forbid(); // Blocks regular members from changing assignments
+            }
+
+            // 3. Update the assignment (can be null if unassigned)
+            taskItem.AssignedUserId = request.AssignedUserId;
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Task assignment updated successfully!" });
         }
     }
 }

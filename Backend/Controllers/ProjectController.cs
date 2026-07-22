@@ -4,7 +4,6 @@ using Backend.Dtos;
 using Backend.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Controllers
@@ -204,7 +203,8 @@ namespace Backend.Controllers
                 .Select(pm => new
                 {
                     UserId = pm.UserId,
-                    UserEmail = pm.User.Email,
+                    // UserEmail = pm.User != null ? pm.User.Email : "Unkown User", // If Email is somehow ends up being NULL declare it "Unkown User"
+                    UserEmail = pm.User!.Email, // "!" means that user Emails cannot be NULL so if it somehow end up being NULL it'll send an error (To put it more simply it's basically telling C#: "Trust me, I know what I'm doing, this won't be null!)
                     ProjectRole = pm.ProjectRole
                 })
                 .ToListAsync();

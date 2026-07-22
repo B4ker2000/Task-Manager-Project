@@ -1,7 +1,7 @@
 import { Injectable, inject, PLATFORM_ID } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { isPlatformBrowser } from "@angular/common";
-import { Observable } from "rxjs";
+import { observable, Observable } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -42,5 +42,10 @@ export class TaskService {
     // 4. Delete a task completely from the database
     deleteTask(taskId: number): Observable<any> {
         return this.http.delete<any>(`${this.apiUrl}/${taskId}`, { headers: this.getHeaders() });
+    }
+
+    // 5. Assign tasks to users
+    assignTask(taskId: number, assignedUserId: number | null): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${taskId}/assign`, { assignedUserId }, { headers: this.getHeaders() });
     }
 }

@@ -412,13 +412,13 @@
 }
 
 .badge-member {
-    background-color: #e2e3e5;
+    background-color: #ffbb9b;
     color: #383d41;
 }
 
 .project-member-management-panel {
     background-color: #ffffff;
-    border: 1px solid #dee2e6;
+    border: 1px solid #e6e3de;
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 25px;
@@ -461,4 +461,24 @@
     padding: 4px 10px;
     border-radius: 20px;
     font-weight: bold;
+}
+
+.task-assignment-control {
+    margin: 10px 0;
+}
+
+.assignment-label {
+    font-size: 13px;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.assignee-dropdown-menu {
+    width: 100%;
+    height: 30px;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+    font-size: 13px;
+    padding: 0 5px;
+    margin-top: 4px;
 }

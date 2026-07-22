@@ -25,6 +25,9 @@ export class UserProfileComponent implements OnInit {
     showPassword = false;
     showConfirmPassword = false;
 
+    assignedWorkItems: number = 0;
+    completedTasks: number = 0;
+
     ngOnInit(): void {
         // Only run data fetches inside the browser window context shell
         if(isPlatformBrowser(this.platformId)) {
@@ -34,7 +37,7 @@ export class UserProfileComponent implements OnInit {
 
     loadProfile(): void {
         this.authService.getUserProfile().subscribe({
-            next: (data) => {
+            next: (data: any) => {
                 this.userProfile = data;
                 this.isLoading = false;
                 this.cdr.detectChanges();
