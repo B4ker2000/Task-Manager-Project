@@ -3,7 +3,7 @@
         <button class="back-btn" [routerLink]="['/dashboard']">← Back to Dashboard</button>
             <h2>Project Board ({{ projectTitle }})</h2>
             <!-- Clicking this opens our form modal overlay -->
-        <button *ngIf="currentUserProjectRole === 'Owner'" class="add-task-btn" (click)="openModal()">➕ Add New Task</button>
+        <button *ngIf="currentUserProjectRole === 'Owner'" class="add-task-btn" (click)="openModal()">+ Add New Task</button>
     </header>
 
     <div class="project-member-management-panel">
@@ -144,9 +144,10 @@
                         <div class="btn-group">
                             <ng-container *ngIf="t.status === 'In Progress'">
                                 <button *ngIf="currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId" class="action-btn back" (click)="onUpdateStatus(t.id, 'Pending')">← Revert</button>
-                                <button *ngIf="currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId" class="action-btn submit-review" (click)="onUpdateStatus(t.id, 'Review Required')"> Submit Review 🚀</button>
+                                <button *ngIf="currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId" class="action-btn next" (click)="onUpdateStatus(t.id, 'Review Required')">Submit Review →</button>
                             </ng-container>
                             <ng-container *ngIf="t.status === 'Review Required'">
+                                <button *ngIf="currentUserProjectRole !== 'Owner' && t.assignedUserId === currentUserId" class="action-btn back" (click)="onUpdateStatus(t.id, 'In Progress')">← Cancel Review Request</button>
                                 <button *ngIf="currentUserProjectRole === 'Owner'" class="action-btn reject-review" (click)="onUpdateStatus(t.id, 'In Progress')">🗙 Reject</button>
                                 <button *ngIf="currentUserProjectRole === 'Owner'" class="action-btn finish" (click)="onUpdateStatus(t.id, 'Completed')">🗹 Approve Task</button>
                             </ng-container>
@@ -193,7 +194,7 @@
         </section>
     </div>
 
-        <!-- Create new task form & Modal Overlays -->
+    <!-- Create new task form & Modal Overlays -->
     <div class="modal-overlay" *ngIf="isModalOpen">
         <div class="modal-card">
             <h3>Create New Task</h3>

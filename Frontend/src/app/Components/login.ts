@@ -11,26 +11,6 @@ import { NgIf } from "@angular/common";
     templateUrl: "./login.component.html",
     styleUrl: "./login.component.css"
 })
-// export class LoginComponent {
-//     private authService = inject(AuthService);
-//     private router = inject(Router);
-
-//     credentials = { email: '', password: '' };
-//     errorMessage = '';
-
-//     onLogin(): void { 
-//         this.authService.login(this.credentials).subscribe({
-//             next: (response) => {
-//                 console.log('Login successful!', response);
-//                 this.router.navigate(['/dashboard']);
-//             },
-//             error: (err) => {
-//                 console.error('Login failed', err);
-//                     this.errorMessage = 'Invalid email or password. Please try again.';
-//             }
-//         });
-//     }
-// }
 export class LoginComponent {
     private authService = inject(AuthService);
     private router = inject(Router);
@@ -56,8 +36,8 @@ export class LoginComponent {
             },
             error: (err) => {
                 console.error(err);
-                    this.errorMessage = err.error || 'Invalid email or password. Please try again.';
-                    this.cdr.detectChanges();
+                this.errorMessage = err.error || 'Invalid email or password. Please try again.';
+                this.cdr.detectChanges();
             }
         });
     }

@@ -13,5 +13,5 @@ export const routes: Routes = [
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] }, // ```canActivate: [authGuard]``` forces our dashboard to only load if "authGuard" returns true!
     { path: 'projects/:id/board', component: TaskBoardComponent, canActivate: [AuthGuard] }, // ":id" will be changed to the actual id number in the url! We also add the same "authGuard" method to also lock down our Task Board route!
     { path: 'profile', component: UserProfileComponent, canActivate: [AuthGuard] },
-    { path: 'register', component: RegisterComponent }
+    { path: 'register', component: RegisterComponent, canActivate: [AnonGuard] }
 ];

@@ -4,6 +4,7 @@
     max-width: 1200px; 
     margin: 0 auto; 
 }
+
 .main-header { 
     display: flex; 
     justify-content: space-between; 
@@ -12,24 +13,34 @@
     padding-bottom: 20px; 
     margin-bottom: 30px; 
 }
+
 .main-header h1 {
     color: #222; 
     margin: 0; 
 }
+
 .logout-btn { 
-    background-color: #6c757d; 
-    color: white; 
-    border: none; 
+    background-color: #ffffff; 
+    color: #4a5568; 
+    border: 2px solid #cbd5e1;
     padding: 10px 16px; 
     border-radius: 4px; 
     cursor: pointer; 
     font-weight: bold; 
 }
+
+.logout-btn:hover { 
+    background-color: #4a5568; 
+    color: #ffffff; 
+    border: 2px solid #2d3748;
+}
+
 .dashboard-grid { 
     display: grid; 
     grid-template-columns: 1fr 2fr; 
     gap: 40px; 
 }
+
 .form-section { 
     background: #f8f9fa; 
     padding: 25px; 
@@ -37,12 +48,15 @@
     border: 1px solid #e2e8f0; 
     height: fit-content; 
 }
+
 .form-section h3 { 
     margin-top: 0; 
     margin-bottom: 20px; 
     color: #333; 
 }
+
 .form-group { margin-bottom: 15px; }
+
 label { 
     display: block; 
     font-weight: bold; 
@@ -50,6 +64,7 @@ label {
     margin-bottom: 6px; 
     color: #4a5568; 
 }
+
 input, textarea { 
     width: 100%; 
     padding: 10px; 
@@ -57,44 +72,60 @@ input, textarea {
     border-radius: 4px; 
     box-sizing: border-box; 
 }
+
 textarea { 
     height: 100px; 
     resize: vertical; 
 }
+
 .create-btn { 
     width: 100%; 
     padding: 12px; 
-    background-color: #28a745; 
-    color: white; 
-    border: none; 
+    background-color: #ffffff;
+    color: #38a169;
+    border: 2px solid #38a196;
     border-radius: 4px; 
     font-weight: bold; 
     cursor: pointer; 
 }
+
+.create-btn:hover:not(:disabled) {
+    background-color: #2f855a;
+    color: #ffffff;
+    border-color: #22543d;
+}
+
 .create-btn:disabled { 
     background-color: #cbd5e1; 
+    border-color:#797f86;
+    color: #4a5568;
     cursor: not-allowed; 
 }
+
 .list-section h3 { 
     margin-top: 0; 
     margin-bottom: 20px; 
     color: #333; 
 }
+
 .empty-msg { 
     color: #718096; 
     font-style: italic; 
 }
+
 .project-cards-grid { 
     display: grid; 
     grid-template-columns: 1fr 1fr; 
     gap: 20px; 
 }
+
 .project-card-header { 
     display: flex; 
     justify-content: space-between; 
     align-items: flex-start; 
     gap: 10px; 
 }
+
 .project-card { 
     background: white; 
     border: 1px solid #e2e8f0; 
@@ -105,30 +136,42 @@ textarea {
     flex-direction: column; 
     justify-content: space-between; 
 }
+
 .project-card h4 { 
     margin-top: 0; 
     margin-bottom: 10px; 
     color: #1a202c; 
 }
+
 .project-card p { 
     color: #4a5568; 
     font-size: 14px; 
     margin-bottom: 20px; 
     line-height: 1.5; 
 }
+
 .delete-proj-btn { 
     background: none; 
     border: none; 
     cursor: pointer; 
+    padding: 2px; 
     font-size: 14px; 
     opacity: 0.4; 
-    padding: 2px; 
     transition: opacity 0.2s; 
+    line-height: 1; 
 }
+
+.delete-proj-btn:hover { 
+    opacity: 1;
+    background-color: #fff5f5;
+    color: #e53e3e;
+    transform: scale(1.05); /* Adds a tiny, responsive tactile pop! */
+}
+
 .view-tasks-btn { 
-    background-color: #007bff; 
-    color: white; 
-    border: none; 
+    background-color: #ffffff;
+    color: #3182ce;
+    border: 2px solid #3182ce;
     padding: 8px 12px; 
     border-radius: 4px; 
     cursor: pointer; 
@@ -136,17 +179,35 @@ textarea {
     font-weight: bold; 
     width: fit-content; 
 }
+
+.view-tasks-btn:hover {
+    background-color: #3182ce;
+    color: #ffffff;
+    border-color: #2b6cb0;
+}
+
 .header-navigation-actions { 
     display: flex; 
     gap: 12px; 
     align-items: center; 
 }
+
 .profile-btn { 
-    background-color: #007bff; 
-    color: white; 
-    border: none; 
+    background-color: #ffffff;
+    color: #3182ce;
+    border: 2px solid #3182ce;
     padding: 9px 16px; 
     border-radius: 4px; 
     cursor: pointer; 
     font-weight: bold; 
 }
+.profile-btn:hover {
+    background-color: #3182ce;
+    color: #ffffff;
+    border-color: #2b6cb0;
+}
+
+.logout-btn,
+.create-btn,
+.profile-btn,
+.view-tasks-btn { transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; }

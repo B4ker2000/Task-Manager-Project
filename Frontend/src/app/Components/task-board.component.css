@@ -6,11 +6,39 @@
     margin-bottom: 8px; 
 }
 
+.task-card { 
+    background: var(--surface-bg); 
+    border: 1px solid #cbd5e1; 
+    border-radius: 6px; 
+    padding: 15px; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02); 
+}
+
 .task-card h4 { 
     margin: 0; 
-    color: #1a202c; 
+    color: var(--text-primary); 
     flex: 1; 
     text-align: left; 
+}
+
+.task-card p { 
+    margin: 0; 
+    color: var(--text-muted); 
+    font-size: 13px; 
+    line-height: 1.4; 
+    margin-bottom: 15px; 
+    text-align: left; 
+}
+
+.task-card.done { 
+    background-color: #f1f5f9; 
+    border-color: #e2e8f0; 
+    opacity: 0.8; 
+}
+
+.task-card.review-needed-card {
+    border-left: 4px solid #dd6b20 !important;
+    background-color: #fffaf0;
 }
 
 .delete-card-btn { 
@@ -24,7 +52,12 @@
     line-height: 1; 
 }
 
-.delete-card-btn:hover { opacity: 1; }
+.delete-card-btn:hover { 
+    opacity: 1;
+    background-color: #fff5f5;
+    color: #e53e3e;
+    transform: scale(1.05); /* Adds a tiny, responsive tactile pop! */
+}
 
 .board-wrapper { 
     padding: 40px; 
@@ -48,24 +81,37 @@
     text-align: center;
     margin: 0 auto;
 }
+
 .back-btn { 
-    background-color: #6c757d; 
-    color: white; 
-    border: none; 
+    background-color: #ffffff; 
+    color: #4a5568; 
+    border: 2px solid #cbd5e1;
     padding: 8px 14px; 
     border-radius: 4px; 
     cursor: pointer; 
     font-weight: bold; 
 }
 
+.back-btn:hover { 
+    background-color: #4a5568; 
+    color: #ffffff; 
+    border: 2px solid #2d3748;
+}
+
 .add-task-btn { 
-    background-color: #28a745; 
-    color: white; 
-    border: none; 
-    padding: 10px 16px; 
+    background-color: #ffffff; 
+    color: #28a745; 
+    border: 2px solid #28a745; 
+    padding: 8px 14px; 
     border-radius: 4px;
     cursor: pointer; 
     font-weight: bold; 
+}
+
+.add-task-btn:hover { 
+    background-color: #28a745; 
+    color: #ffffff; 
+    border-color:#18772e;
 }
 
 .board-columns-grid { 
@@ -95,29 +141,6 @@
     display: flex; 
     flex-direction: column; 
     gap: 15px; 
-}
-
-.task-card { 
-    background: white; 
-    border: 1px solid #cbd5e1; 
-    border-radius: 6px; 
-    padding: 15px; 
-    box-shadow: 0 2px 4px rgba(0,0,0,0.02); 
-}
-
-.task-card.done { 
-    background-color: #f1f5f9; 
-    border-color: #e2e8f0; 
-    opacity: 0.8; 
-}
-
-.task-card p { 
-    margin: 0; 
-    color: #4a5568; 
-    font-size: 13px; 
-    line-height: 1.4; 
-    margin-bottom: 15px; 
-    text-align: left; 
 }
 
 .task-actions { 
@@ -168,11 +191,17 @@
     color: white; 
 }
 
-.action-btn.next { background-color: #007bff; }
-
 .action-btn.back { 
-    background-color: #e2e8f0; 
+    background-color: #ffffff; 
     color: #4a5568; 
+    border: 2px solid #cbd5e1;
+    font-weight: 700;
+}
+
+.action-btn.back:hover { 
+    background-color: #4a5568; 
+    color: #ffffff; 
+    border: 2px solid #2d3748;
 }
 
 .action-btn.finish { 
@@ -182,36 +211,33 @@
     font-weight: 700;
 }
 
-/* .action-btn.finish:hover {
-    background-color: #f0fff4;
-    color: #276749;
-    border-color: #276749;
-} */
  .action-btn.finish:hover {
-    background-color: #38a196;
+    background-color: #2f855a;
     color: #ffffff;
-    border-color: #276749;
+    border-color: #22543d;
 }
 
+.action-btn.next {
+    background-color: #ffffff;
+    color: #3182ce;
+    border: 2px solid #3182ce;
+    font-weight: 700;
+}
 
-.action-btn.submit-review {
+.action-btn.next:hover {
     background-color: #3182ce;
-    color: white;
+    color: #ffffff;
+    border-color: #2b6cb0;
 }
 
 .action-btn.reject-review {
-    background-color: #ffffff;
+    background-color: white;
     color: #e53e3e;
     border: 2px solid #e53e3e;
     font-weight: 700;
 }
 
-/* .action-btn.reject-review:hover {
-    background-color: #fff5f5;
-    color: #c53030;
-    border-color: #c53030;
-} */
- .action-btn.reject-review:hover {
+.action-btn.reject-review:hover {
     background-color: #e53e3e;
     color: #ffffff;
     border-color: #c53030;
@@ -253,27 +279,41 @@
 }
 
 .cancel-btn { 
-    background-color: #e2e8f0; 
+    background-color: #ffffff; 
     color: #4a5568; 
-    border: none; 
+    border: 2px solid #cbd5e1;
     padding: 10px 16px; 
     border-radius: 4px; 
     font-weight: bold; 
     cursor: pointer; 
 }
 
+.cancel-btn:hover { 
+    background-color: #4a5568; 
+    color: #ffffff; 
+    border: 2px solid #2d3748;
+}
+
 .submit-btn { 
-    background-color: #28a745; 
-    color: white; 
-    border: none; 
-    padding: 10px 16px; 
-    border-radius: 4px; 
-    font-weight: bold; 
+    background-color: #ffffff; 
+    color: #28a745; 
+    border: 2px solid #28a745; 
+    padding: 8px 14px; 
+    border-radius: 4px;
     cursor: pointer; 
+    font-weight: bold; 
+}
+
+.submit-btn:hover { 
+    background-color: #28a745; 
+    color: #ffffff; 
+    border-color:#18772e;
 }
 
 .submit-btn:disabled { 
     background-color: #cbd5e1; 
+    border-color:#797f86;
+    color: #4a5568;
     cursor: not-allowed; 
 }
 
@@ -288,7 +328,9 @@
     text-align: left; 
 }
 
-.form-group input, .form-group textarea, .form-group select { 
+.form-group input, 
+.form-group textarea, 
+.form-group select { 
     width: 100%; 
     padding: 10px; 
     border: 1px solid #cbd5e1; 
@@ -338,7 +380,8 @@
     min-width: 300px; 
 }
 
-.search-box, .filter-box { 
+.search-box, 
+.filter-box { 
     display: flex; 
     align-items: center; 
     background: white; 
@@ -434,22 +477,26 @@
 .invite-text-field:focus, .invite-dropdown-select:focus { border-color: #007bff; }
 
 .send-invite-btn { 
-    background-color: #007bff; 
-    color: white; 
-    border: none; 
+    background-color: #ffffff;
+    color: #3182ce;
+    border: 2px solid #3182ce;
     padding: 8px 16px; 
     border-radius: 4px; 
-    font-weight: bold; 
+    font-weight: 700; 
     font-size: 13px; 
     cursor: pointer; 
-    white-space: nowrap; 
-    transition: background-color 0.2s; 
 }
 
-.send-invite-btn:hover:not(:disabled) { background-color: #0056b3; }
+.send-invite-btn:hover:not(:disabled) { 
+    background-color: #3182ce;
+    color: #ffffff;
+    border-color: #2b6cb0;
+ }
 
 .send-invite-btn:disabled { 
     background-color: #cbd5e1; 
+    border-color:#797f86;
+    color: #4a5568;
     cursor: not-allowed; 
 }
 
@@ -510,9 +557,7 @@
     font-weight: bold;
 }
 
-.task-assignment-control {
-    margin: 10px 0;
-}
+.task-assignment-control { margin: 10px 0; }
 
 .assignment-label {
     font-size: 13px;
@@ -530,11 +575,6 @@
     margin-top: 4px;
 }
 
-.task-card.review-needed-card {
-    border-left: 4px solid #dd6b20 !important;
-    background-color: #fffaf0;
-}
-
 .review-status-banner {
     background-color: #feebc8;
     color: #dd6b20;
@@ -547,3 +587,11 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
+
+.back-btn,
+.action-btn,
+.submit-btn,
+.cancel-btn,
+.add-task-btn,
+.send-invite-btn,
+.btn-group button { transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; }

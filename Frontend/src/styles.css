@@ -26,7 +26,7 @@
 
 /* 💾 NOSTALGIC Y2K RETRO EASTER EGG SYSTEM (GLOSSY WINDOWS XP / 98 ERA VIBES) */
 [data-theme="retro-y2k"] {
-    --surface-bg: #ffffff;      
+    --surface-bg: #ffffff;          /* Simple white background color */
     --container-bg: #d4d0c8;        /* Classic hardware grey chassis fill */
     --text-primary: #000000;        /* Flat stark terminal text ink black */
     --text-muted: #000080;          /* Deep navy text links alignment */

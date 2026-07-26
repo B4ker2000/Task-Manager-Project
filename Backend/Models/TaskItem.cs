@@ -17,5 +17,9 @@ namespace Backend.Models
         // Foregn Key link to the User assigned to this task
         public int? AssignedUserId { get; set; }
         public User? AssigendUser { get; set; }
+
+        // Optional foreign key relation column (nullable because tasks can start without a category tag!)
+        public int? CategoryId { get; set; }
+        public Category? Category { get; set; }
     }
 }

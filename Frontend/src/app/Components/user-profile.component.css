@@ -15,14 +15,20 @@
 }
 
 .back-btn { 
-    background-color: #6c757d; 
-    color: white; 
-    border: none; 
-    padding: 8px 14px;
+    background-color: #ffffff; 
+    color: #4a5568; 
+    border: 2px solid #cbd5e1;
+    padding: 8px 14px; 
     border-radius: 4px; 
     cursor: pointer; 
     font-weight: bold; 
     font-size: 13px; 
+}
+
+.back-btn:hover { 
+    background-color: #4a5568; 
+    color: #ffffff; 
+    border: 2px solid #2d3748;
 }
 
 .profile-card-grid { 
@@ -146,14 +152,20 @@
 
 .save-settings-btn { 
     width: 100%; 
-    background-color: #28a745; 
-    color: white; 
-    border: none; 
+    background-color: #ffffff; 
+    color: #28a745; 
+    border: 2px solid #28a745; 
     padding: 12px; 
     border-radius: 4px; 
-    font-weight: bold; 
     cursor: pointer; 
+    font-weight: bold; 
     margin-top: 10px; 
+}
+
+.save-settings-btn:hover { 
+    background-color: #28a745; 
+    color: #ffffff; 
+    border-color:#18772e;
 }
 
 .settings-card hr { 
@@ -179,13 +191,19 @@
 
 .danger-zone-btn { 
     width: 100%; 
-    background-color: #dc3545; 
-    color: white; 
-    border: none; 
+    background-color: white;
+    color: #e53e3e;
+    border: 2px solid #e53e3e;
     padding: 12px; 
     border-radius: 4px; 
     font-weight: bold; 
     cursor: pointer; 
+}
+
+.danger-zone-btn:hover {
+    background-color: #e53e3e;
+    color: #ffffff;
+    border-color: #c53030;
 }
 
 .password-input-wrapper { 
@@ -215,3 +233,7 @@
 }
 
 .eye-toggle-btn:hover { opacity: 1; }
+
+.back-btn,
+.danger-zone-btn,
+.save-settings-btn { transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
