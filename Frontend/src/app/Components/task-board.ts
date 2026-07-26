@@ -114,7 +114,7 @@ export class TaskBoardComponent implements OnInit {
                 // Parse and map array buckets perfectly filtering on TaskItem.cs status properties
                 // 1. Separate items by status
                 this.pendingTasks = allTasks.filter((t: any) => t.status === "Pending");
-                this.inProgressTasks = allTasks.filter((t: any) => t.status === "In Progress");
+                this.inProgressTasks = allTasks.filter((t: any) => t.status === "In Progress" || t.status === "Review Required");
                 this.completedTasks = allTasks.filter((t: any) => t.status === "Completed");
 
                 // 2. Compute completion metrics right away

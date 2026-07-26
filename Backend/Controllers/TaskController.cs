@@ -111,14 +111,24 @@ namespace Backend.Controllers
         }
 
         [HttpPut("{id}/status")] // PUT api/task/1/status (update the task status)
+        [Authorize]
         public async Task<IActionResult> UpdateTaskStatus(int id, TaskUpdateStatusDto request)
         {
+            // 1. Locate the task item row
             var task = await _context.Tasks.FindAsync(id);
             if(task == null)
             {
                 return NotFound("Task not found.");
             }
 
+            // Safety Guard to protect against unauthorized status injections!
+            var validStatuses = new[] { "Pending", "In Progress", "Review Required", "Completed" };
+            if(!validStatuses.Contains(request.Status))
+            {
+                BadRequest(new { message = $"'{request.Status}' is not a valid task status!" });
+            }
+
+            // 2. Save the validated status
             task.Status = request.Status;
             await _context.SaveChangesAsync();
 

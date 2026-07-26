@@ -489,3 +489,43 @@
     padding: 0 5px;
     margin-top: 4px;
 }
+
+.task-card.review-needed-card {
+    border-left: 4px solid #dd6b20 !important;
+    background-color: #fffaf0;
+}
+
+.review-status-banner {
+    background-color: #feebc8;
+    color: #dd6b20;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin: 10px 0;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.action-btn.submit-review {
+    background-color: #3182ce;
+    color: white;
+}
+
+/* .action-btn.reject-review {
+    background-color: #e53e3e;
+    color: white;
+} */
+.action-btn.reject-review {
+    background-color: #ffffff;
+    color: #e53e3e;
+    border: 2px solid #e53e3e;
+    font-weight: 700;
+}
+
+.action-btn.reject-review:hover {
+    background-color: #fff5f5;
+    color: #c53030;
+    border-color: #c53030;
+}

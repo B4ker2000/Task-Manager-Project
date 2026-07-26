@@ -108,16 +108,19 @@
             </div>
         </section>
 
-		<!-- Column 2: In Progress Tasks -->
+		<!-- Column 2: In Progress & Review Tasks -->
         <section class="board-column">
-            <h3>⚡ In Progress ({{ inProgressTasks.length }})</h3>
+            <h3>⚡ In Progress & Review ({{ inProgressTasks.length }})</h3>
             <div class="tasks-container">
-                <div class="task-card" *ngFor="let t of filteredInProgressTasks">
+                <div class="task-card" *ngFor="let t of filteredInProgressTasks" [ngClass]="{'review-needed-card': t.status === 'Review Required'}">
                     <div class="task-card-header">
                         <h4>{{ t.title }}</h4>
                         <button *ngIf="currentUserProjectRole === 'Owner'" class="delete-card-btn" (click)="onDeleteTask(t.id)">🗑️</button>
                     </div>
                     <p>{{ t.description || 'No details provided.' }}</p>
+                    <div *ngIf="t.status === 'Review Required'" class="review-status-banner">
+                        ⚠️ Pending PM Review
+                    </div>
                     <div class="task-assignment-control">
                         <label class="assignment-label">👤 Assignee:</label>
                         <select [ngModel]="t.assignedUserId" (change)="onAssignUser(t.id, $any($event.target).value)" class="assignee-dropdown-menu" [disabled]="currentUserProjectRole !== 'Owner'">
@@ -139,8 +142,14 @@
                             </span>
                         </div>
                         <div class="btn-group">
-                            <button *ngIf="currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId" class="action-btn back" (click)="onUpdateStatus(t.id, 'Pending')">← Revert</button>
-                            <button *ngIf="currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId" class="action-btn finish" (click)="onUpdateStatus(t.id, 'Completed')">Done ✓</button>
+                            <ng-container *ngIf="t.status === 'In Progress'">
+                                <button *ngIf="currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId" class="action-btn back" (click)="onUpdateStatus(t.id, 'Pending')">← Revert</button>
+                                <button *ngIf="currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId" class="action-btn submit-review" (click)="onUpdateStatus(t.id, 'Review Required')"> Submit Review 🚀</button>
+                            </ng-container>
+                            <ng-container *ngIf="t.status === 'Review Required'">
+                                <button *ngIf="currentUserProjectRole === 'Owner'" class="action-btn reject-review" (click)="onUpdateStatus(t.id, 'In Progress')">🗙 Reject</button>
+                                <button *ngIf="currentUserProjectRole === 'Owner'" class="action-btn finish" (click)="onUpdateStatus(t.id, 'Completed')">Approve ✓</button>
+                            </ng-container>
                         </div>
                     </div>
                 </div>
