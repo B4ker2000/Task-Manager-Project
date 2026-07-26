@@ -1,1 +1,34 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    /* ☀️ DEFAULT CLEAN LIGHT WORKSPACE VARIABLES */
+    --surface-bg: #ffffff;          /* Main cards background canvas */
+    --container-bg: #f8f9fa;        /* App layout shell backdrop tint */
+    --text-primary: #212529;        /* Dominant heavy font header color */
+    --text-muted: #6c757d;          /* Subtitles, labels and helper notes */
+    --brand-accent: #007bff;        /* Core interaction signature button color */
+
+    /* 📊 PRIORITY VALUE HIGH-CONTRAST ACCESSIBILITY MATRICES */
+    --badge-high-bg: #fff5f5;
+    --badge-high-text: #e53e3e;
+    --badge-medium-bg: #fffaf0;
+    --badge-medium-text: #dd6b20;
+    --badge-low-bg: #ebf8ff;
+    --badge-low-text: #3182ce;
+}
+
+/* 🌙 SYSTEM DARK WORKSPACE MODE OVERRIDE */
+[data-theme="dark"] {
+    --surface-bg: #1e1e1e;          /* Deep rich carbon surface color */
+    --container-bg: #121212;        /* Flat midnight background floor canvas */
+    --text-primary: #f8f9fa;        /* Crisp white readable header font block */
+    --text-muted: #a0aec0;          /* Soft grey structural subtext text */
+    --brand-accent: #3182ce;        /* Vibrant electric neon accent action fills */
+}
+
+/* 💾 NOSTALGIC Y2K RETRO EASTER EGG SYSTEM (GLOSSY WINDOWS XP / 98 ERA VIBES) */
+[data-theme="retro-y2k"] {
+    --surface-bg: #ffffff;      
+    --container-bg: #d4d0c8;        /* Classic hardware grey chassis fill */
+    --text-primary: #000000;        /* Flat stark terminal text ink black */
+    --text-muted: #000080;          /* Deep navy text links alignment */
+    --brand-accent: #107c10;        /* Classic software green trigger commands */
+}

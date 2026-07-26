@@ -148,7 +148,7 @@
                             </ng-container>
                             <ng-container *ngIf="t.status === 'Review Required'">
                                 <button *ngIf="currentUserProjectRole === 'Owner'" class="action-btn reject-review" (click)="onUpdateStatus(t.id, 'In Progress')">🗙 Reject</button>
-                                <button *ngIf="currentUserProjectRole === 'Owner'" class="action-btn finish" (click)="onUpdateStatus(t.id, 'Completed')">Approve ✓</button>
+                                <button *ngIf="currentUserProjectRole === 'Owner'" class="action-btn finish" (click)="onUpdateStatus(t.id, 'Completed')">🗹 Approve Task</button>
                             </ng-container>
                         </div>
                     </div>

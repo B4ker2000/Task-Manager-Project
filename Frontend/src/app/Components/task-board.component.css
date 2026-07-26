@@ -175,7 +175,47 @@
     color: #4a5568; 
 }
 
-.action-btn.finish { background-color: #28a745; }
+.action-btn.finish { 
+    background-color: #ffffff;
+    color: #38a169;
+    border: 2px solid #38a196;
+    font-weight: 700;
+}
+
+/* .action-btn.finish:hover {
+    background-color: #f0fff4;
+    color: #276749;
+    border-color: #276749;
+} */
+ .action-btn.finish:hover {
+    background-color: #38a196;
+    color: #ffffff;
+    border-color: #276749;
+}
+
+
+.action-btn.submit-review {
+    background-color: #3182ce;
+    color: white;
+}
+
+.action-btn.reject-review {
+    background-color: #ffffff;
+    color: #e53e3e;
+    border: 2px solid #e53e3e;
+    font-weight: 700;
+}
+
+/* .action-btn.reject-review:hover {
+    background-color: #fff5f5;
+    color: #c53030;
+    border-color: #c53030;
+} */
+ .action-btn.reject-review:hover {
+    background-color: #e53e3e;
+    color: #ffffff;
+    border-color: #c53030;
+}
 
 .btn-group { 
     display: flex; 
@@ -506,26 +546,4 @@
     display: inline-block;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-}
-
-.action-btn.submit-review {
-    background-color: #3182ce;
-    color: white;
-}
-
-/* .action-btn.reject-review {
-    background-color: #e53e3e;
-    color: white;
-} */
-.action-btn.reject-review {
-    background-color: #ffffff;
-    color: #e53e3e;
-    border: 2px solid #e53e3e;
-    font-weight: 700;
-}
-
-.action-btn.reject-review:hover {
-    background-color: #fff5f5;
-    color: #c53030;
-    border-color: #c53030;
 }
