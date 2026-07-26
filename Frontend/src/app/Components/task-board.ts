@@ -5,6 +5,7 @@ import { ActivatedRoute, RouterLink, Router } from "@angular/router";
 import { TaskService } from "../Services/task.service";
 import { ProjectService } from "../Services/project.service";
 import { AuthService } from "../Services/auth.service";
+import { CategoryService } from "../Services/category.service";
 
 @Component({
     selector: 'app-task-board',
@@ -21,6 +22,7 @@ export class TaskBoardComponent implements OnInit {
     private platformId = inject(PLATFORM_ID);
     private router = inject(Router);
     private authService = inject(AuthService);
+    private categoryService = inject(CategoryService);
 
     projectId!: number; // Here we basically declare "projectId" but don't assign anything to it yet (null) but because TypeScript restricts use of variables that are declared but aren't assigned anything immediately afterwards, we put an "!" after the name to basically tell TypeScript "Trust me, I know what I'm doing by not assigning anything to 'projectId' right now, but I promise it will absolutely have a number inside it before the HTML page tries to read it!"
     isModalOpen = false; // Tracks whether form window is visible
@@ -62,6 +64,9 @@ export class TaskBoardComponent implements OnInit {
 
     // Array to hold our teammate info
     projectMembers: any[] = [];
+
+    // Array to store our category tasks
+    projectCategories: any[] = [];
 
     ngOnInit(): void {
         // Read the dynamic route context param parameter safely
