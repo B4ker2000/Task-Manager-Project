@@ -6,7 +6,6 @@ import { TaskService } from "../Services/task.service";
 import { ProjectService } from "../Services/project.service";
 import { AuthService } from "../Services/auth.service";
 import { CategoryService } from "../Services/category.service";
-import { error } from "console";
 
 @Component({
     selector: 'app-task-board',
@@ -73,6 +72,10 @@ export class TaskBoardComponent implements OnInit {
     isCategoryModalOpen: boolean = false;
     newCategoryName: string = "";
     newCategoryColor: string = "#3182ce"; // Default category color is blue!
+
+    // Filter by category related property
+    selectedCategory: string = "All";
+
     ngOnInit(): void {
         // Read the dynamic route context param parameter safely
         this.route.params.subscribe(params => {
@@ -200,12 +203,24 @@ export class TaskBoardComponent implements OnInit {
         const filterFn = (task: any) => {
             const matchesSearch = task.title.toLowerCase().includes(this.searchQuery.toLowerCase());
             const matchesPriority = this.selectedPriority === 'All' || task.priority === this.selectedPriority;
-            return matchesSearch && matchesPriority;
+
+            let matchesCategory = true;
+            if(this.selectedCategory !== "All") {
+                if(this.selectedCategory === "Null") {
+                    matchesCategory = task.categoryId === null;
+                } else {
+                    matchesCategory = task.categoryId === Number(this.selectedCategory);
+                }
+            }
+            
+            return matchesSearch && matchesPriority && matchesCategory;
         };
 
         this.filteredPendingTasks = this.pendingTasks.filter(filterFn);
         this.filteredInProgressTasks = this.inProgressTasks.filter(filterFn);
         this.filteredCompletedTasks = this.completedTasks.filter(filterFn);
+
+        this.cdr.detectChanges();
     }
 
     calculateProgress(allTasks: any[]): void {

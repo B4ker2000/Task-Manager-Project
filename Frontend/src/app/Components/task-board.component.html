@@ -58,6 +58,17 @@
                     <option value="Low">Low Priority</option>
                 </select>
             </div>
+
+            <div class="filter-box">
+                🏷️ <select id="searchCategory" [(ngModel)]="selectedCategory" (change)="applyFilters()" class="board-filter-dropdown-select">
+                    <option value="All">All Tags</option>
+                    <option value="Null">Unassigned Tasks</option>
+
+                    <option *ngFor="let cat of projectCategories" [value]="cat.id">
+                        {{ cat.name }}
+                    </option>
+                </select>
+            </div>
         </div>
 
         <!-- Live Project Progress Analytics Tracker -->

@@ -416,15 +416,16 @@
 
 .search-box, 
 .filter-box { 
-    display: flex; 
-    align-items: center; 
-    background: white; 
+    display: inline-flex; 
+    align-items: center;
     border: 2px solid #cbd5e1; 
-    border-radius: 6px; 
-    padding: 6px 12px; 
+    border-radius: 4px; 
+    padding: 0px 10px; 
+    height: 38px;
     gap: 8px; 
     flex: 1; 
-    height: 24px;
+    height: 38px;
+    background-color: var(--surface-bg);
 }
 
 .search-box:focus-within,
@@ -649,6 +650,16 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.board-filter-dropdown-select {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 13px;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding-right: 15px;
 }
 
 .back-btn,
