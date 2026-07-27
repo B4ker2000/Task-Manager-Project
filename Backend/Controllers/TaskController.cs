@@ -80,6 +80,7 @@ namespace Backend.Controllers
 
             // 2. Fetch all tasks assigned to this project room
             var projectTasks = await _context.Tasks
+            .Include(t => t.Category)
             .Where(t => t.ProjectId == projectId)
             .ToListAsync();
 
@@ -197,6 +198,32 @@ namespace Backend.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(new { message = "Task assignment updated successfully!" });
+        }
+
+        [HttpPut("{taskId}/category")]
+        [Authorize]
+        public async Task<IActionResult> AssignTaskCategory(int taskId, [FromBody] TaskCategoryUpdateDto request)
+        {
+            var taskItem = await _context.Tasks.FindAsync(taskId);
+            if(taskItem == null) return NotFound("Task not found");
+
+            // Security Gate: Verify that the user is an owner or the person assigned to the task!
+            var userIdClaim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            int currentUserId = int.Parse(userIdClaim!);
+
+            var membership = await _context.ProjectMembers
+                .FirstOrDefaultAsync(pm => pm.ProjectId == taskItem.ProjectId && pm.UserId == currentUserId);
+
+            if(membership == null || (membership.ProjectRole != "Owner" && taskItem.AssignedUserId != currentUserId))
+            {
+                return Forbid(); // Blocks unauthorized users
+            }
+
+            // Save the update
+            taskItem.CategoryId = request.CategoryId;
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Category tag linked to task successfully!" });
         }
     }
 }

@@ -54,8 +54,9 @@ export class DashboardComponent implements OnInit {
     onLogout(): void {
         if(isPlatformBrowser(this.platformId)) {
             localStorage.removeItem('token');
+            sessionStorage.removeItem('token');
+            this.router.navigate(['/login']);
         }
-        this.router.navigate(['/login']);
     }
 
     onDeleteProject(projectId: number, event: Event): void {

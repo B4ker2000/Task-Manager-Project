@@ -48,4 +48,9 @@ export class TaskService {
     assignTask(taskId: number, assignedUserId: number | null): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/${taskId}/assign`, { assignedUserId }, { headers: this.getHeaders() });
     }
+
+    // 6. Assign tags/categories to tasks
+    assignTaskCategory(taskId: number, categoryId: number | null): Observable<any> {
+        return this.http.put<any>(`${this.apiUrl}/${taskId}/category`, { categoryId }, { headers: this.getHeaders() });
+    }
 }

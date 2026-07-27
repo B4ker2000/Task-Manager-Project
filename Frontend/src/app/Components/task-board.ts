@@ -6,6 +6,7 @@ import { TaskService } from "../Services/task.service";
 import { ProjectService } from "../Services/project.service";
 import { AuthService } from "../Services/auth.service";
 import { CategoryService } from "../Services/category.service";
+import { error } from "console";
 
 @Component({
     selector: 'app-task-board',
@@ -68,6 +69,10 @@ export class TaskBoardComponent implements OnInit {
     // Array to store our category tasks
     projectCategories: any[] = [];
 
+    // Task category related properties 
+    isCategoryModalOpen: boolean = false;
+    newCategoryName: string = "";
+    newCategoryColor: string = "#3182ce"; // Default category color is blue!
     ngOnInit(): void {
         // Read the dynamic route context param parameter safely
         this.route.params.subscribe(params => {
@@ -95,6 +100,7 @@ export class TaskBoardComponent implements OnInit {
                 this.loadUserRole();
                 this.loadProjectDetails(); // Fetches the real project title
                 this.loadProjectMembers(); 
+                this.loadProjectCategories();
             },
             error: (err: any) => {
                 console.error("Critical board init failure:", err);
@@ -103,6 +109,7 @@ export class TaskBoardComponent implements OnInit {
                 this.loadUserRole();
                 this.loadProjectDetails();
                 this.loadProjectMembers(); 
+                this.loadProjectCategories();
             }
         })
     }
@@ -312,6 +319,45 @@ export class TaskBoardComponent implements OnInit {
             error: (err: any) => {
                 console.error("Could not resolve current user payload identity:", err);
             }
+        });
+    }
+
+    onCreateCategorySubmit(): void {
+        const payload = {
+            name: this.newCategoryName.trim(),
+            colorHex: this.newCategoryColor
+        };
+
+        this.categoryService.createCategory(this.projectId, payload).subscribe({
+            next: (res: any) => {
+                console.log("Category created successfully!", res.message);
+                this.isCategoryModalOpen = false;
+                this.newCategoryName = ""; // Reset form parameter field input
+                this.loadProjectCategories();
+            },
+            error: (err: any) => console.error("Failed to submit category creation:", err)
+        });
+    }
+
+    loadProjectCategories(): void {
+        this.categoryService.getProjectCategories(this.projectId).subscribe({
+            next: (data: any[]) => {
+                this.projectCategories = data;
+                this.cdr.detectChanges();
+            },
+            error: (err: any) => console.error("Could not parse project tags list:", err)
+        });
+    }
+
+    onAssignCategory(taskId: number, selectedValue: any): void {
+        const categoryId = selectedValue === "null" || selectedValue === null ? null: Number(selectedValue);
+
+        this.taskService.assignTaskCategory(taskId, categoryId).subscribe({
+            next: (res: any) => {
+                console.log("Task category updated successfully:", res.message);
+                this.loadTasks(); // Instantly reloads to display our colorful task card tags!
+            },
+            error: (err: any) => console.error("Failed to update task category reference:", err)
         });
     }
 }

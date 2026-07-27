@@ -1,8 +1,9 @@
 <div class="board-wrapper">
     <header class="board-header">
         <button class="back-btn" [routerLink]="['/dashboard']">← Back to Dashboard</button>
-            <h2>Project Board ({{ projectTitle }})</h2>
-            <!-- Clicking this opens our form modal overlay -->
+        <h2>Project Board ({{ projectTitle }})</h2>
+        <!-- Clicking this opens our form modal overlay -->
+        <button *ngIf="currentUserProjectRole === 'Owner'" class="send-invite-btn" (click)="isCategoryModalOpen = true">🎨 Create Workspace Tag</button>
         <button *ngIf="currentUserProjectRole === 'Owner'" class="add-task-btn" (click)="openModal()">+ Add New Task</button>
     </header>
 
@@ -79,6 +80,14 @@
                 <div class="task-card" *ngFor="let t of filteredPendingTasks">
                     <div class="task-card-header">
                         <h4>{{ t.title }}</h4>
+                        <!-- DYNAMIC CATEGORY DISPLAY BADGE -->
+                        <!-- Only renders on your screen if the task row actually has a category linked in the database! -->
+                         <span *ngIf="t.category" class="task-category-tag-wrapper">
+                            <!-- Bind the background color directly to the custom hex color code selected by the task creator! -->
+                             <span class="category-badge-pill" [style.backgroundColor]="t.category.colorHex">
+                                🏷️ {{ t.category.name }}
+                             </span>
+                         </span>
                         <button *ngIf="currentUserProjectRole === 'Owner'" class="delete-card-btn" (click)="onDeleteTask(t.id)">🗑️</button>
                     </div>
                     <p>{{ t.description || 'No details provided.' }}</p>
@@ -88,6 +97,15 @@
                             <option [value]="null">Unassigned</option>
                             <option *ngFor="let m of projectMembers" [value]="m.userId">
                                 {{ m.userName }} ({{ m.userEmail }})
+                            </option>
+                        </select>
+                    </div>
+                    <div class="task-assignment-control">
+                        <label class="assignment-label">🏷️ Category:</label>
+                        <select [ngModel]="t.categoryId" (change)="onAssignCategory(t.id, $any($event.target).value)" [disabled]="currentUserProjectRole !== 'Owner' && t.assignedUserId !== currentUserId" class="assignee-dropdown-menu">
+                            <option [value]="null">No Category</option>
+                            <option *ngFor="let cat of projectCategories" [value]="cat.id">
+                                {{ cat.name }}
                             </option>
                         </select>
                     </div>
@@ -115,6 +133,14 @@
                 <div class="task-card" *ngFor="let t of filteredInProgressTasks" [ngClass]="{'review-needed-card': t.status === 'Review Required'}">
                     <div class="task-card-header">
                         <h4>{{ t.title }}</h4>
+                        <!-- DYNAMIC CATEGORY DISPLAY BADGE -->
+                        <!-- Only renders on your screen if the task row actually has a category linked in the database! -->
+                         <span *ngIf="t.category" class="task-category-tag-wrapper">
+                            <!-- Bind the background color directly to the custom hex color code selected by the task creator! -->
+                             <span class="category-badge-pill" [style.backgroundColor]="t.category.colorHex">
+                                🏷️ {{ t.category.name }}
+                             </span>
+                         </span>
                         <button *ngIf="currentUserProjectRole === 'Owner'" class="delete-card-btn" (click)="onDeleteTask(t.id)">🗑️</button>
                     </div>
                     <p>{{ t.description || 'No details provided.' }}</p>
@@ -127,6 +153,15 @@
                             <option [value]="null">Unassigned</option>
                             <option *ngFor="let m of projectMembers" [value]="m.userId">
                                 {{ m.userName }} ({{ m.userEmail }})
+                            </option>
+                        </select>
+                    </div>
+                    <div class="task-assignment-control">
+                        <label class="assignment-label">🏷️ Category:</label>
+                        <select [ngModel]="t.categoryId" (change)="onAssignCategory(t.id, $any($event.target).value)" [disabled]="currentUserProjectRole !== 'Owner' && t.assignedUserId !== currentUserId" class="assignee-dropdown-menu">
+                            <option [value]="null">No Category</option>
+                            <option *ngFor="let cat of projectCategories" [value]="cat.id">
+                                {{ cat.name }}
                             </option>
                         </select>
                     </div>
@@ -164,15 +199,32 @@
 				<div class="task-card done" *ngFor="let t of filteredCompletedTasks">
 					<div class="task-card-header">
 						<h4>{{ t.title }}</h4>
+                        <!-- DYNAMIC CATEGORY DISPLAY BADGE -->
+                        <!-- Only renders on your screen if the task row actually has a category linked in the database! -->
+                         <span *ngIf="t.category" class="task-category-tag-wrapper">
+                            <!-- Bind the background color directly to the custom hex color code selected by the task creator! -->
+                             <span class="category-badge-pill" [style.backgroundColor]="t.category.colorHex">
+                                🏷️ {{ t.category.name }}
+                             </span>
+                         </span>
 						<button *ngIf="currentUserProjectRole === 'Owner'" class="delete-card-btn" (click)="onDeleteTask(t.id)">🗑️</button>
 					</div>												
                     <p>{{ t.description || 'No details provided.' }}</p>
                     <div class="task-assignment-control">
-                        <label class="assignment-label" >👤 Assignee:</label>
+                        <label class="assignment-label">👤 Assignee:</label>
                         <select [ngModel]="t.assignedUserId" (change)="onAssignUser(t.id, $any($event.target).value)" class="assignee-dropdown-menu" [disabled]="currentUserProjectRole !== 'Owner'">
                             <option [value]="null">Unassigned</option>
                             <option *ngFor="let m of projectMembers" [value]="m.userId">
                                 {{ m.userName }} ({{ m.userEmail }})
+                            </option>
+                        </select>
+                    </div>
+                    <div class="task-assignment-control">
+                        <label class="assignment-label">🏷️ Category:</label>
+                        <select [ngModel]="t.categoryId" (change)="onAssignCategory(t.id, $any($event.target).value)" [disabled]="currentUserProjectRole !== 'Owner' && t.assignedUserId !== currentUserId" class="assignee-dropdown-menu">
+                            <option [value]="null">No Category</option>
+                            <option *ngFor="let cat of projectCategories" [value]="cat.id">
+                                {{ cat.name }}
                             </option>
                         </select>
                     </div>
@@ -195,7 +247,7 @@
     </div>
 
     <!-- Create new task form & Modal Overlays -->
-    <div class="modal-overlay" *ngIf="isModalOpen">
+     <div class="modal-overlay" *ngIf="isModalOpen">
         <div class="modal-card">
             <h3>Create New Task</h3>
             <form (ngSubmit)="onCreateTask()" #taskForm="ngForm">
@@ -229,5 +281,35 @@
                 </div>
             </form>
         </div>
-    </div>
+     </div>
+
+    <!-- CATEGORY CREATION POP-UP MODAL WINDOW -->
+     <div *ngIf="isCategoryModalOpen" class="modal-overlay">
+        <div class="modal-card">
+            <h3>🎨 Create New Workspace Tag</h3>
+
+            <form (ngSubmit)="onCreateCategorySubmit()" #categoryForm="ngForm" class="modal-form">
+                <div class="form-group-row">
+                    <label for="tagName">Tag Name:</label>
+                    <input type="text" id="tagName" name="tagName" [(ngModel)]="newCategoryName" required placeholder="e.g., Frontend, Testing, Bug..." class="modal-input-field" />
+                </div>
+
+                <div class="form-group-row">
+                    <label for="tagColor">Tag Theme Color:</label>
+                    <select id="tagColor" name="tagColor" [(ngModel)]="newCategoryColor" class="modal-dropdown-select">
+                        <option value="#e53e3e">🔴 Crimson Red (High Contrast)</option>
+                        <option value="#3182ce">🔵 Electric Blue (High Contrast)</option>
+                        <option value="#38a169">🟢 Forest Green (High Contrast)</option>
+                        <option value="#dd6b20">🟠 Deep Orange (High Contrast)</option>
+                        <option value="#805ad5">🟣 Royal Purple (High Contrast)</option>
+                    </select>
+                </div>
+
+                <div class="modal-btn-actions-row">
+                    <button type="button" class="action-btn back" (click)="isCategoryModalOpen = false">Cancel</button>
+                    <button type="submit" class="action-btn next" [disabled]="!categoryForm.form.valid">Create Tag</button>
+                </div>
+            </form>
+        </div>   
+     </div>
 </div>

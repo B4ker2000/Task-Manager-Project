@@ -151,20 +151,27 @@ textarea {
 }
 
 .delete-proj-btn { 
-    background: none; 
+    background-color: transparent; 
     border: none; 
     cursor: pointer; 
-    padding: 2px; 
-    font-size: 14px; 
-    opacity: 0.4; 
-    transition: opacity 0.2s; 
+    padding: 4px; 
+    font-size: 14px;
+    border-radius: 4px; 
+    opacity: 0.6; 
+    transition: opacity 0.2s ease, background-color 0.2s ease; 
     line-height: 1; 
 }
 
+.delete-proj-btn:focus { outline: none; }
+
+.project-card:hover .delete-proj-btn,
 .delete-proj-btn:hover { 
-    opacity: 1;
-    background-color: #fff5f5;
-    color: #e53e3e;
+    opacity: 1 !important; 
+}
+
+.delete-proj-btn:hover { 
+    background-color: #fee2e2;
+    color: #ef4444;
     transform: scale(1.05); /* Adds a tiny, responsive tactile pop! */
 }
 

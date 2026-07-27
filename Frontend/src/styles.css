@@ -32,3 +32,15 @@
     --text-muted: #000080;          /* Deep navy text links alignment */
     --brand-accent: #107c10;        /* Classic software green trigger commands */
 }
+
+/* Global textbox accessibility focus deafults! */
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+select:focus, textarea:focus {
+    border: 2px solid #3182ce !important;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.15);
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
