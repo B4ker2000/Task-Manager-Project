@@ -1,6 +1,7 @@
 <div class="board-wrapper">
     <header class="board-header">
         <button class="back-btn" [routerLink]="['/dashboard']">← Back to Dashboard</button>
+        <button *ngIf="currentUserProjectRole === 'Member'" class="back-btn" (click)="onLeaveProjectClick()">🚪 Leave Project</button>
         <h2>Project Board ({{ projectTitle }})</h2>
         <!-- Clicking these opens our form modal overlays -->
          <button *ngIf="currentUserProjectRole === 'Owner'" class="send-invite-btn" (click)="isCategoryModalOpen = true">🎨 Create Workspace Tag</button>
@@ -37,10 +38,15 @@
                     <h4 class="roster-sub-title">Current Project Crew</h4>
                     <ul class="roster-list-element">
                         <li *ngFor="let m of projectMembers" class="roster-item-row">
-                            <span class="memeber-display-email">{{ m.userEmail }}</span>
-                            <span class="role-display-badge" [ngClass]="{'badge-owner': m.projectRole === 'Owner', 'badge-member': m.projectRole === 'Member'}">
-                                {{ m.projectRole }}
-                            </span>
+                            <div class="member-info-block">
+                                <span class="memeber-display-email">{{ m.userEmail }}</span>
+                                <span class="role-display-badge" [ngClass]="{'badge-owner': m.projectRole === 'Owner', 'badge-member': m.projectRole === 'Member'}">
+                                    {{ m.projectRole }}
+                                </span>
+                            </div>
+
+                            <button *ngIf="currentUserProjectRole === 'Owner' && m.userId !== currentUserId" class="delete-card-btn" (click)="onRemoveMemberClick(m.userId, m.userEmail)" title="Remove Member from Project Workspace">🗙</button>
+
                         </li>
                     </ul>
                  </div>

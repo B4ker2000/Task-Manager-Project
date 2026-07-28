@@ -376,4 +376,33 @@ export class TaskBoardComponent implements OnInit {
             error: (err: any) => console.error("Failed to update task category reference:", err)
         });
     }
+
+    onRemoveMemberClick(targetUserId: number, targetEmail: string): void {
+        const confirmSystem = confirm(`Are you sure you want to remove ${targetEmail} from this project workspace room?`);
+        if(!confirmSystem) return;
+
+        this.projectService.removeProjectMember(this.projectId, targetUserId).subscribe({
+            next: (res: any) => {
+                console.log("Roster update executed successfully:", res.message);
+                // Refresh your dashboard panel lists immediately on the fly!
+                this.loadProjectMembers();
+                this.loadTasks();
+            },
+            error: (err: any) => console.error("Failed to execute member removal:", err)
+        });
+    }
+
+    onLeaveProjectClick(): void {
+        const confirmSystem = confirm("Are you absolutely sure you want to resign and leave this project workspace? You will lose all access to this board!");
+        if(!confirmSystem) return;
+
+        this.projectService.removeProjectMember(this.projectId, this.currentUserId).subscribe({
+            next: (res: any) => {
+                console.log("Resignation sequence tracking successful:", res.message);
+                // Redirect the user straight back to their main clean dashboard portal room!
+                this.router.navigate(['/dashboard']);
+            },
+            error: (err: any) => alert(err.error?.message || "Failed to process project resignation request.")
+        });
+    }
 }

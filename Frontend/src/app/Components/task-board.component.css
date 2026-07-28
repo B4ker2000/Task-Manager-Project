@@ -616,7 +616,7 @@
     justify-content: space-between;
     align-items: center;
     background-color: #f8f9fa;
-    padding: 10px 15px;
+    padding: 6px 5px;
     border-radius: 6px;
     border-left: 4px solid #63b0fd;
 }
@@ -631,6 +631,12 @@
     padding: 4px 10px;
     border-radius: 20px;
     font-weight: bold;
+}
+
+.member-info-block {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .task-assignment-control { margin: 10px 0; }
