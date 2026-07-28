@@ -65,4 +65,9 @@ export class ProjectService {
     getProjectMembers(projectId: number): Observable<any[]> {
         return this .http.get<any[]>(`${this.apiUrl}/${projectId}/members`, { headers: this.getHeaders() });
     }
+
+    // 8. Remove members from projects as an Owner/Admin or leave one yourself
+    removeProjectMember(projectId: number, targetUserId: number): Observable<any> {
+        return this.http.delete<any>(`${this.apiUrl}/${projectId}/members/${targetUserId}`, { headers: this.getHeaders() })
+    }
 }

@@ -159,6 +159,70 @@ namespace Backend.Controllers
             return Ok(new { message = $"User '{targetUser.Username}' successfully added to the project room!" });
         }
 
+        [HttpDelete("{projectId}/members/{targetUserId}")]
+        [Authorize]
+        public async Task<IActionResult> RemoveProjectMember(int projectId, int targetUserId)
+        {
+            // 1. Extract the current logged-in user ID safely from token claims
+            var userIdClaim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            if(string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out int currentUserId))
+            {
+                return Unauthorized();
+            }
+
+            // 2. Find the target user's membership row inside this specific project room 
+            var targetMembership = await _context.ProjectMembers
+                .FirstOrDefaultAsync(pm => pm.ProjectId == projectId && pm.UserId == targetUserId);
+
+            if(targetMembership == null)
+            {
+                return NotFound(new { message = "Target member record not found in this project room." });
+            }
+
+            // 3. SECURITY GATE CHECK: Check what role clearance the current user holds
+            var currentUserMembership = await _context.ProjectMembers
+                .FirstOrDefaultAsync(pm => pm.ProjectId == projectId && pm.UserId == currentUserId);
+
+            string currentUserRole = currentUserMembership?.ProjectRole ?? "None";
+
+            // Scenario A: If kicking someone else, you MUST be an Owner/Admin
+            // Scenario B: If leaving yourself, you are allowed (unless you are the last Owner!)
+            bool isKickingSomeoneElse = currentUserId != targetUserId;
+
+            if(isKickingSomeoneElse && currentUserRole != "Owner")
+            {
+                return Forbid(); // Blocks regular members from kicking people!
+            }
+
+            if(!isKickingSomeoneElse && currentUserRole == "Owner")
+            {
+                // Safety check: Prevent the primary owner from leaving accidentally, trapping the project!
+                var ownerCount = await _context.ProjectMembers
+                    .CountAsync(pm => pm.ProjectId == projectId && pm.ProjectRole == "Owner");
+                
+                if(ownerCount <= 1)
+                {
+                    return BadRequest(new { message = "You are the sole Owner of this project! Assign another Owner before leaving." });
+                }
+            }
+
+            // 4. METRICS SAFETY CLEANUP: Nullify any tasks assigned to this user inside this project room!
+            var assignedTasks = await _context.Tasks
+                .Where(t => t.ProjectId == projectId && t.AssignedUserId == targetUserId)
+                .ToListAsync();
+
+            foreach(var task in assignedTasks)
+            {
+                task.AssignedUserId = null; // Clears the assignee so the task board doesn't crash!
+            }
+
+            // 5. Remove the membership record row and save changes
+            _context.ProjectMembers.Remove(targetMembership);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = isKickingSomeoneElse ? "Member successfully removed from project." : "You have left the project room safely." });
+        }
+
         [HttpGet("{id}")]
         [Authorize]
         public async Task<IActionResult> GetProjectById(int id)
