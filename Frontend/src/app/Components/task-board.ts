@@ -117,19 +117,13 @@ export class TaskBoardComponent implements OnInit {
                     },
                     error: (err: any) => console.error("Failed to map board asset matrices:", err)
                 });
-                this.loadTasks();
-                this.loadUserRole();
                 this.loadProjectDetails(); // Fetches the real project title
-                this.loadProjectMembers(); 
                 this.loadProjectCategories();
             },
             error: (err: any) => {
                 console.error("Critical board init failure:", err);
                 // Fallback load so the screen doesn't completely freeze on network hiccups
-                this.loadTasks();
-                this.loadUserRole();
                 this.loadProjectDetails();
-                this.loadProjectMembers(); 
                 this.loadProjectCategories();
             }
         })

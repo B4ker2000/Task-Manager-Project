@@ -101,6 +101,23 @@
     border: 2px solid #2d3748;
 }
 
+.back-btn.resign-project-btn {
+    background-color: #ffffff;
+    color: #e53e3e;
+    border: 2px solid #e53e3e;
+    font-weight: 700;
+    height: 38px;
+    padding: 0 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.back-btn.resign-project-btn:hover {
+    background-color: #e53e3e;
+    color: #ffffff;
+    border-color: #c53030;
+}
+
 .add-task-btn { 
     background-color: #ffffff; 
     color: #28a745; 
