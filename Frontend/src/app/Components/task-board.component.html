@@ -344,7 +344,7 @@
                 </div>
 
                 <div class="modal-btn-actions-row">
-                    <button type="button" class="action-btn back" (click)="isCategoryModalOpen = false">Cancel</button>
+                    <button type="button" class="cancel-btn" (click)="isCategoryModalOpen = false">Cancel</button>
                     <button type="submit" class="submit-btn" [disabled]="!newCategoryName || newCategoryName.trim() === '' || newCategoryName.trim().length === 0">Create Tag</button>
                 </div>
             </form>

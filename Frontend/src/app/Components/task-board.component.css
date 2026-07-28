@@ -316,6 +316,13 @@
     border-color: #2b6cb0;
 }
 
+.modal-btn-actions-row button[type=submit]:disabled { 
+    background-color: #cbd5e1; 
+    border-color:#797f86;
+    color: #4a5568;
+    cursor: not-allowed; 
+}
+
 .cancel-btn { 
     background-color: #ffffff; 
     color: #4a5568; 
