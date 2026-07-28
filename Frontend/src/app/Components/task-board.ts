@@ -99,6 +99,24 @@ export class TaskBoardComponent implements OnInit {
         this.authService.getUserProfile().subscribe({
             next: (data: any) => {
                 this.currentUserId = Number(data.id);
+                this.taskService.getProjectTasks(this.projectId).subscribe({
+                    next: (boardData: any) => {
+                        this.currentUserProjectRole = boardData.role;
+
+                        const allTasks = boardData.tasks || [];
+                        this.pendingTasks = allTasks.filter((t: any) => t.status === "Pending");
+                        this.inProgressTasks = allTasks.filter((t: any) => t.status === "In Progress" || t.status === "Review Required");
+                        this.completedTasks = allTasks.filter((t: any) => t.status === "Completed");
+
+                        this.projectMembers = boardData.team || [];
+
+                        this.calculateProgress(allTasks);
+                        this.applyFilters();
+
+                        this.cdr.detectChanges();
+                    },
+                    error: (err: any) => console.error("Failed to map board asset matrices:", err)
+                });
                 this.loadTasks();
                 this.loadUserRole();
                 this.loadProjectDetails(); // Fetches the real project title
@@ -251,6 +269,7 @@ export class TaskBoardComponent implements OnInit {
                 this.inviteEmail = ""; // Clear out the text input field box on success
                 this.inviteRole = "Member"; // Snap the selector dropdown back to default member status!
                 this.loadProjectMembers();
+                this.loadTasks();
             },
             error: (err: any) => {
                 console.error("Invitation process failure:", err);

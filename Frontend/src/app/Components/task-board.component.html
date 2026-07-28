@@ -1,10 +1,10 @@
 <div class="board-wrapper">
     <header class="board-header">
         <button class="back-btn" [routerLink]="['/dashboard']">← Back to Dashboard</button>
-        <button *ngIf="currentUserProjectRole === 'Member'" class="back-btn" (click)="onLeaveProjectClick()">🚪 Leave Project</button>
         <h2>Project Board ({{ projectTitle }})</h2>
+        <button *ngIf="currentUserProjectRole === 'Member'" class="back-btn" (click)="onLeaveProjectClick()">Leave Project</button>
         <!-- Clicking these opens our form modal overlays -->
-         <button *ngIf="currentUserProjectRole === 'Owner'" class="send-invite-btn" (click)="isCategoryModalOpen = true">🎨 Create Workspace Tag</button>
+         <button *ngIf="currentUserProjectRole === 'Owner'" class="send-invite-btn" (click)="isCategoryModalOpen = true">+ Create Workspace Tag</button>
          <button *ngIf="currentUserProjectRole === 'Owner'" class="add-task-btn" (click)="openModal()">+ Add New Task</button>
     </header>
 
