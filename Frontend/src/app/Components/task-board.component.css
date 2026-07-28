@@ -501,6 +501,7 @@
     display: flex; 
     align-items: center; 
     gap: 8px; 
+    margin-bottom: 20px;
 }
 
 .invite-action-form { 
@@ -661,13 +662,19 @@
     cursor: default;
 }
 
-.master-tags-roster-tray {
-    margin-top: 20px;
-    padding-top: 15px;
-    border-top: 1px dashed #cbd5e1;
+.left-management-column {
+    flex: 3;
+    min-width: 300px;
 }
 
-.master-tags-roster-tray h5 {
+.right-tags-column {
+    flex: 2;
+    min-width: 220px;
+    border-left: 2px dashed #e2e8f0;
+    padding-left: 25px;
+}
+
+.right-tags-column h5 {
     margin: 0 0 10px 0;
     font-size: 13px;
     color: var(--text-muted);
@@ -679,12 +686,22 @@
     font-size: 13px;
     color: var(--text-muted);
     font-style: italic;
+    padding: 10px 0;
 }
 
 .tags-flex-container {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+    margin-top: 12px;
+}
+
+.team-roster-display-block { margin-top: 15px; }
+
+.management-split-row {
+    display: flex;
+    gap: 30x;
+    flex-wrap: wrap;
 }
 
 .back-btn,

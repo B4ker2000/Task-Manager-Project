@@ -12,53 +12,57 @@
             👥 <span>Project Team Management Workspace</span>
         </div>
 
-        <!-- Active Invitation Submission Row (Visible only to admins/owners) -->
-         <div class="owner-invite-controls"  *ngIf="currentUserProjectRole === 'Owner'">
-            <form (ngSubmit)="onInviteUser()" #inviteForm="ngForm" class="invite-action-form">
-                <div class="invite-input-container">
-                    <input type="email" name="inviteEmail" [(ngModel)]="inviteEmail" required placeholder="Enter teammate's registered email address..." class="invite-text-field" />
-                </div>
+        <div class="management-split-row">
+            <div class="left-management-column">
+                <!-- Active Invitation Submission Row (Visible only to admins/owners) -->
+                 <div class="owner-invite-controls"  *ngIf="currentUserProjectRole === 'Owner'">
+                    <form (ngSubmit)="onInviteUser()" #inviteForm="ngForm" class="invite-action-form">
+                        <div class="invite-input-container">
+                            <input type="email" name="inviteEmail" [(ngModel)]="inviteEmail" required placeholder="Enter teammate's registered email address..." class="invite-text-field" />
+                        </div>
 
-                <div class="invite-select-container">
-                    <select name="inviteRole" [(ngModel)]="inviteRole" class="invite-dropdown-select">
-                        <option value="Member">Regular Member</option>
-                        <option value="Owner">Co-Owner / Admin</option>
-                    </select>
-                </div>
+                        <div class="invite-select-container">
+                            <select name="inviteRole" [(ngModel)]="inviteRole" class="invite-dropdown-select">
+                                <option value="Member">Regular Member</option>
+                                <option value="Owner">Co-Owner / Admin</option>
+                            </select>
+                        </div>
 
-                <button type="submit" class="send-invite-btn" [disabled]="!inviteForm.form.valid">Add Member</button>
-            </form>
-         </div>
+                        <button type="submit" class="send-invite-btn" [disabled]="!inviteForm.form.valid">Add Member</button>
+                    </form>
+                 </div>
         
-        <!-- Dynamic roster display list (Visible to everyone below the dashboard controls) -->
-         <div class="team-roster-display-block">
-            <h4 class="roster-sub-title">Current Project Crew</h4>
-            <ul class="roster-list-element">
-                <li *ngFor="let m of projectMembers" class="roster-item-row">
-                    <span class="memeber-display-email">{{ m.userEmail }}</span>
-                    <span class="role-display-badge" [ngClass]="{'badge-owner': m.projectRole === 'Owner', 'badge-member': m.projectRole === 'Member'}">
-                        {{ m.projectRole }}
+                <!-- Dynamic roster display list (Visible to everyone) -->
+                 <div class="team-roster-display-block">
+                    <h4 class="roster-sub-title">Current Project Crew</h4>
+                    <ul class="roster-list-element">
+                        <li *ngFor="let m of projectMembers" class="roster-item-row">
+                            <span class="memeber-display-email">{{ m.userEmail }}</span>
+                            <span class="role-display-badge" [ngClass]="{'badge-owner': m.projectRole === 'Owner', 'badge-member': m.projectRole === 'Member'}">
+                                {{ m.projectRole }}
+                            </span>
+                        </li>
+                    </ul>
+                 </div>
+            </div>
+
+            <!-- DYNAMIC MASTER WORKSPACE TAGS ROSTER -->
+             <div class="right-tags-column">
+                <h5>🏷️ Available Project Tags</h5>
+
+                <!-- Fallback message if the Project Manager hasn't cooked up any tags yet -->
+                 <div *ngIf="projectCategories.length === 0" class="tags-roster-tray-fallback">
+                    No custom tags created for this project yet
+                 </div>
+
+                <!-- The colored tag pills gallery -->
+                 <div class="tags-flex-container">
+                    <span *ngFor="let cat of projectCategories" class="category-badge-pill" [style.backgroundColor]="cat.colorHex">
+                        {{ cat.name }}
                     </span>
-                </li>
-            </ul>
-         </div>
-
-        <!-- DYNAMIC MASTER WORKSPACE TAGS ROSTER -->
-         <div class="master-tags-roster-tray">
-            <h5>🏷️ Available Project Tags</h5>
-
-            <!-- Fallback message if the Project Manager hasn't cooked up any tags yet -->
-             <div *ngIf="projectCategories.length === 0" class="tags-roster-tray-fallback">
-                No custom tags created for this project yet
+                 </div>
              </div>
-
-            <!-- The colored tag pills gallery -->
-             <div class="tags-flex-container">
-                <span *ngFor="let cat of projectCategories" class="category-badge-pill" [style.backgroundColor]="cat.colorHex">
-                    {{ cat.name }}
-                </span>
-             </div>
-         </div>
+        </div>
     </div>
 
     <div class="board-controls-panel">
