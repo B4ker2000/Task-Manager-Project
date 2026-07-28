@@ -2,9 +2,9 @@
     <header class="board-header">
         <button class="back-btn" [routerLink]="['/dashboard']">← Back to Dashboard</button>
         <h2>Project Board ({{ projectTitle }})</h2>
-        <!-- Clicking this opens our form modal overlay -->
-        <button *ngIf="currentUserProjectRole === 'Owner'" class="send-invite-btn" (click)="isCategoryModalOpen = true">🎨 Create Workspace Tag</button>
-        <button *ngIf="currentUserProjectRole === 'Owner'" class="add-task-btn" (click)="openModal()">+ Add New Task</button>
+        <!-- Clicking these opens our form modal overlays -->
+         <button *ngIf="currentUserProjectRole === 'Owner'" class="send-invite-btn" (click)="isCategoryModalOpen = true">🎨 Create Workspace Tag</button>
+         <button *ngIf="currentUserProjectRole === 'Owner'" class="add-task-btn" (click)="openModal()">+ Add New Task</button>
     </header>
 
     <div class="project-member-management-panel">
@@ -41,38 +41,61 @@
                     </span>
                 </li>
             </ul>
-        </div>
+         </div>
+
+        <!-- DYNAMIC MASTER WORKSPACE TAGS ROSTER -->
+         <div class="master-tags-roster-tray">
+            <h5>🏷️ Available Project Tags</h5>
+
+            <!-- Fallback message if the Project Manager hasn't cooked up any tags yet -->
+             <div *ngIf="projectCategories.length === 0" class="tags-roster-tray-fallback">
+                No custom tags created for this project yet
+             </div>
+
+            <!-- The colored tag pills gallery -->
+             <div class="tags-flex-container">
+                <span *ngFor="let cat of projectCategories" class="category-badge-pill" [style.backgroundColor]="cat.colorHex">
+                    {{ cat.name }}
+                </span>
+             </div>
+         </div>
     </div>
 
     <div class="board-controls-panel">
         <div class="search-filter-group">
-            <div class="search-box">
-                🔍 <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="applyFilters()" placeholder="Search tasks by title..." />
-            </div>
 
-            <div class="filter-box">
-                🎯 <select [(ngModel)]="selectedPriority" (ngModelChange)="applyFilters()">
+            <!-- Task Text Search -->
+             <div class="control-input-wrapper">
+                <span class="control-icon-anchor">🔍</span>
+                <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="applyFilters()" placeholder="Search tasks by title..." class="board-interactive-field search" />
+             </div>
+
+            <!-- Search by Selecting Priority -->
+             <div class="control-input-wrapper">
+                <span class="control-icon-anchor">🎯</span>
+                <select [(ngModel)]="selectedPriority" (ngModelChange)="applyFilters()" class="board-interactive-field priority">
                     <option value="All">All Priorities</option>
                     <option value="High">High Priority</option>
                     <option value="Medium">Medium Priority</option>
                     <option value="Low">Low Priority</option>
                 </select>
-            </div>
+             </div>
 
-            <div class="filter-box">
-                🏷️ <select id="searchCategory" [(ngModel)]="selectedCategory" (change)="applyFilters()" class="board-filter-dropdown-select">
+            <!-- Search by Selecting Category Tag -->
+             <div class="control-input-wrapper">
+                <span class="control-icon-anchor">🏷️</span>
+                <select id="searchCategory" [(ngModel)]="selectedCategory" (change)="applyFilters()" class="board-interactive-field category">
                     <option value="All">All Tags</option>
                     <option value="Null">Unassigned Tasks</option>
-
                     <option *ngFor="let cat of projectCategories" [value]="cat.id">
                         {{ cat.name }}
                     </option>
                 </select>
-            </div>
+             </div>
         </div>
 
         <!-- Live Project Progress Analytics Tracker -->
-        <div class="progress-analytics">
+         <div class="progress-analytics">
             <div class="progress-text-label">
                 <span>Project Completion Progress:</span>
                 <strong>{{ completionPercentage }}%</strong>
@@ -80,12 +103,12 @@
             <div class="progress-bar-track">
                 <div class="progress-bar-fill" [style.width.%]="completionPercentage"></div>
             </div>
-        </div>
+         </div>
     </div>
 
     <div class="board-columns-grid">
         <!-- Column 1: Pending Tasks -->
-		<section class="board-column">
+		 <section class="board-column">
 			<h3>⏳ Pending ({{ pendingTasks.length }})</h3>
             <div class="tasks-container">
                 <div class="task-card" *ngFor="let t of filteredPendingTasks">
@@ -135,10 +158,10 @@
                     </div>
                 </div>
             </div>
-        </section>
+         </section>
 
 		<!-- Column 2: In Progress & Review Tasks -->
-        <section class="board-column">
+         <section class="board-column">
             <h3>⚡ In Progress & Review ({{ inProgressTasks.length }})</h3>
             <div class="tasks-container">
                 <div class="task-card" *ngFor="let t of filteredInProgressTasks" [ngClass]="{'review-needed-card': t.status === 'Review Required'}">
@@ -201,10 +224,10 @@
                     </div>
                 </div>
             </div>
-        </section>
+         </section>
 
         <!-- Column 3: Completed Tasks -->
-        <section class="board-column completed-column">
+         <section class="board-column completed-column">
             <h3>✅ Completed ({{ completedTasks.length }})</h3>
 			<div class="tasks-container">
 				<div class="task-card done" *ngFor="let t of filteredCompletedTasks">
@@ -254,7 +277,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+         </section>
     </div>
 
     <!-- Create new task form & Modal Overlays -->

@@ -250,6 +250,7 @@ export class TaskBoardComponent implements OnInit {
                 alert(res.message || "Teammate successfully mapped into this project room!");
                 this.inviteEmail = ""; // Clear out the text input field box on success
                 this.inviteRole = "Member"; // Snap the selector dropdown back to default member status!
+                this.loadProjectMembers();
             },
             error: (err: any) => {
                 console.error("Invitation process failure:", err);
