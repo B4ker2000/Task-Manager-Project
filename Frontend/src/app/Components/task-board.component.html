@@ -9,7 +9,7 @@
 
     <div class="project-member-management-panel">
         <div class="invite-header-title">
-            👥 <span>Project Team Management Workspace</span>
+            👥 <span>Project Team & Tags Management Workspace</span>
         </div>
 
         <div class="management-split-row">
@@ -329,7 +329,7 @@
             <form (ngSubmit)="onCreateCategorySubmit()" #categoryForm="ngForm" class="modal-form">
                 <div class="form-group-row">
                     <label for="tagName">Tag Name:</label>
-                    <input type="text" id="tagName" name="tagName" [(ngModel)]="newCategoryName" required placeholder="e.g., Frontend, Testing, Bug..." class="modal-input-field" />
+                    <input type="text" id="tagName" name="tagName" [(ngModel)]="newCategoryName" (input)="0" required placeholder="e.g., Frontend, Testing, Bug..." class="modal-input-field" />
                 </div>
 
                 <div class="form-group-row">
@@ -345,7 +345,7 @@
 
                 <div class="modal-btn-actions-row">
                     <button type="button" class="action-btn back" (click)="isCategoryModalOpen = false">Cancel</button>
-                    <button type="submit" class="action-btn next" [disabled]="!categoryForm.form.valid">Create Tag</button>
+                    <button type="submit" class="submit-btn" [disabled]="!newCategoryName || newCategoryName.trim() === '' || newCategoryName.trim().length === 0">Create Tag</button>
                 </div>
             </form>
         </div>   

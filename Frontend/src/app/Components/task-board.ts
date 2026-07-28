@@ -71,7 +71,7 @@ export class TaskBoardComponent implements OnInit {
     // Task category related properties 
     isCategoryModalOpen: boolean = false;
     newCategoryName: string = "";
-    newCategoryColor: string = "#3182ce"; // Default category color is blue!
+    newCategoryColor: string = "#3182ce"; // Default category color is Electric Blue!
 
     // Filter by category related property
     selectedCategory: string = "All";
