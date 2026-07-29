@@ -840,6 +840,58 @@
         font-size: 12px !important;
         padding: 0 10px !important;
     }
+
+    .search-filter-group {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 12px;
+        width: 100%;
+    }
+
+    .control-input-wrapper { width: 100%; }
+
+    .management-split-row {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .right-tags-column {
+        border-left: none;
+        border-top: 2px dashed #e2e8f0;
+        padding-left: 0;
+        padding-top: 20px;
+        width: 100%;
+    }
+}
+
+/* Screens between mobile phone and tablet screens */
+@media(max-width: 600px) {
+    .task-card-header {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        position: relative;
+    }
+
+    /* Anchors the delete button neatly to the top-right corner to save title layout space */
+    .task-card-header .delete-card-btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 2px;
+    }
+
+    .task-card h4 {
+        padding-right: 25px; /* Ensures text never bleeds underneath the absolute trashcan position! */
+        font-size: 14px;
+    }
+
+    /* Available Tags sidebar panel inside the crew workspace scale gracefully */
+    .category-badge-pill { 
+        font-size: 10px !important;
+        padding: 3px 6px !important;
+    }
 }
 
 /* MOBILE PHONE BREAKPOINT: Compact utility frames */
