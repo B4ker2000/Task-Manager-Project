@@ -90,9 +90,6 @@ export class TaskBoardComponent implements OnInit {
                 this.loadBoardRequirements();
             }
         });
-
-        this.projectId = Number(this.route.snapshot.paramMap.get("id"));
-        this.loadUserRole();
     }
     
     loadBoardRequirements(): void {
@@ -270,34 +267,6 @@ export class TaskBoardComponent implements OnInit {
                 alert(err.error?.message || "Failed to complete member assignment.");
             }
         });
-    }
-
-    loadUserRole(): void {
-        if(isPlatformBrowser(this.platformId)) {
-            // Token check from both session and local storages!
-            const token = localStorage.getItem("token") || sessionStorage.getItem("token");
-            if(!token) {
-                console.warn("No active authorization token discovered. Redirecting...");
-                this.router.navigate(["/login"]);
-                return;
-            };
-
-            this.projectService.getProjectRole(this.projectId).subscribe({
-                next: (response: any) => { 
-                    if(response && response.role) {
-                        this.currentUserProjectRole = response.role;
-                    } else {
-                        this.currentUserProjectRole = "Member";
-                    }
-                    this.cdr.detectChanges();
-                },
-                error: (err) => {
-                    console.error("Failed to resolve project permissions layout:", err);
-                    this.currentUserProjectRole = "Member";
-                    this.cdr.detectChanges();
-                }
-            });
-        }
     }
 
     loadProjectDetails(): void {
