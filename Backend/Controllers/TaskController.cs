@@ -98,7 +98,8 @@ namespace Backend.Controllers
                 {
                     userId = pm.UserId,
                     userEmail = pm.User != null ? pm.User.Email : "Unknown User",
-                    userName = pm.User != null ? pm.User.Username : "Unknown"
+                    userName = pm.User != null ? pm.User.Username : "Unknown",
+                    projectRole = pm.ProjectRole
                 })
                 .ToListAsync();
 

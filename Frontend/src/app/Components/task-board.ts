@@ -98,18 +98,23 @@ export class TaskBoardComponent implements OnInit {
                 this.currentUserId = Number(data.id);
                 this.taskService.getProjectTasks(this.projectId).subscribe({
                     next: (boardData: any) => {
+                        // Lock the permission status string safely first
                         this.currentUserProjectRole = boardData.role;
 
+                        // Sort task card buckets
                         const allTasks = boardData.tasks || [];
                         this.pendingTasks = allTasks.filter((t: any) => t.status === "Pending");
                         this.inProgressTasks = allTasks.filter((t: any) => t.status === "In Progress" || t.status === "Review Required");
                         this.completedTasks = allTasks.filter((t: any) => t.status === "Completed");
 
+                        // Overwrite crew roster with data straight from our combined response payload packet!
                         this.projectMembers = boardData.team || [];
 
+                        // Compute analytics progress scales and filter views
                         this.calculateProgress(allTasks);
                         this.applyFilters();
 
+                        // Force single, perfect structural rendering paint pass
                         this.cdr.detectChanges();
                     },
                     error: (err: any) => console.error("Failed to map board asset matrices:", err)
@@ -123,7 +128,7 @@ export class TaskBoardComponent implements OnInit {
                 this.loadProjectDetails();
                 this.loadProjectCategories();
             }
-        })
+        });
     }
 
     loadTasks(): void {
@@ -356,6 +361,21 @@ export class TaskBoardComponent implements OnInit {
                 this.loadTasks(); // Instantly reloads to display our colorful task card tags!
             },
             error: (err: any) => console.error("Failed to update task category reference:", err)
+        });
+    }
+
+    onDeleteCategoryClick(taskId: number, categoryName: string): void {
+        const confirmSystem = confirm(`Are you sure you want to permanently delete the '${categoryName}' tag? Ant tasks using this tag will have it removed.`);
+        if(!confirmSystem) return;
+
+        this.categoryService.deleteCategory(this.projectId, categoryId).subscribe({
+            next: (res: any) => {
+                console.log("Category tag expunged successfully:", res.message);
+                // Refresh tags tray and task board arrays immediately on the fly!
+                this.loadProjectCategories();
+                this.loadTasks();
+            },
+            error: (err: any) => console.error("Failed to delete workspace tag row:", err)
         });
     }
 

@@ -59,5 +59,41 @@ namespace Backend.Controllers
 
             return Ok(new { message = "Category tag created successfully!", category = newCategory });
         }
+
+        [HttpDelete("{categoryId}")]
+        [Authorize]
+        public async Task<IActionResult> DeleteCategory(int projectId, int categoryId)
+        {
+            // Extract current authenticated user identity details safely
+            var userIdClaim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            if(string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out int currentUserId))
+            {
+                return Unauthorized();
+            }
+
+            // Verify Authorization: Only space Owners/Project Managers can delete categories!
+            var membership = await _context.ProjectMembers
+                .FirstOrDefaultAsync(pm => pm.ProjectId == projectId && pm.UserId == currentUserId);
+            
+            if(membership == null || membership.ProjectRole != "Owner")
+            {
+                return Forbid(); // Turn away unauthorized regular space members!
+            }
+
+            // Locate target category tag row record
+            var category = await _context.Categories
+                .FirstOrDefaultAsync(cat => cat.ProjectId == projectId && cat.Id == categoryId);
+
+            if(category == null)
+            {
+                return NotFound(new { message = "Category tag record not found inside this workspace." });
+            }
+
+            // Erase the record! Any task cards carrying this tag will safely drop it without getting deleted!
+            _context.Categories.Remove(category);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Category workspace tag successfully expunged." });
+        }
     }
 }

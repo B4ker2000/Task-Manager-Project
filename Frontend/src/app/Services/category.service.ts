@@ -24,4 +24,9 @@ export class CategoryService {
     createCategory(projectId: number, categoryData: { name: string, colorHex: string }): Observable<any> {
         return this.http.post<any>(`${this.apiUrl}/${projectId}/categories`, categoryData, { headers: this.getHeaders() });
     }
+
+    // 3. Delete a selected category tag 
+    deleteCategory(projectId: number, categoryId: number): Observable<any> {
+        return this.http.delete<any>(`${this.apiUrl}/${projectId}/categories/${categoryId}`, { headers: this.getHeaders() });
+    }
 }

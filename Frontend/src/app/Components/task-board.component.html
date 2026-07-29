@@ -64,7 +64,12 @@
                 <!-- The colored tag pills gallery -->
                  <div class="tags-flex-container">
                     <span *ngFor="let cat of projectCategories" class="category-badge-pill" [style.backgroundColor]="cat.colorHex">
-                        {{ cat.name }}
+                        <span>{{ cat.name }}</span>
+
+                        <!-- Delete Tag Trigger (Visible exclusively to space/project owners/managers!) -->
+                         <button *ngIf="currentUserProjectRole === 'Owner'" (click)="onDeleteCategoryClick(cat.id, cat.name)" title="Permanently Delete Workspace Tag" class="category-badge-pill-delete-btn">
+                            ✕
+                         </button>
                     </span>
                  </div>
              </div>
