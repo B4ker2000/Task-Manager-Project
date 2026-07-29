@@ -823,6 +823,23 @@
         padding-left: 0;
         padding-top: 20px;
     }
+
+    .btn-group,
+    .modal-btn-actions-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        width: 100%;
+    }
+
+    .action-btn,
+    .submit-btn,
+    .cancel-btn {
+        flex: 1;
+        min-width: 90px !important;
+        font-size: 12px !important;
+        padding: 0 10px !important;
+    }
 }
 
 /* MOBILE PHONE BREAKPOINT: Compact utility frames */
@@ -837,5 +854,16 @@
     .task-card-header {
         flex-direction: column-reverse;
         align-items: flex-end;
+    }
+
+    .modal-btn-actions-row {
+        flex-direction: column;
+    }
+
+    .action-btn,
+    .submit-btn,
+    .cancel-btn {
+        width: 100%;
+        height: 40px !important;
     }
 }
