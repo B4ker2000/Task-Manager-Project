@@ -10,7 +10,7 @@ namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/project/{projectId}/categories")]
-    [Authorize]
+    [Authorize] // Global [Authorize] rule to cover all the methods within this class!
     public class CategoryController: ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -21,7 +21,6 @@ namespace Backend.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> GetProjectCategories(int projectId)
         {
             var categories = await _context.Categories
@@ -32,7 +31,6 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> CreateCategory(int projectId, CategoryCreateDto dto)
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -63,7 +61,6 @@ namespace Backend.Controllers
         }
 
         [HttpDelete("{categoryId}")]
-        [Authorize]
         public async Task<IActionResult> DeleteCategory(int projectId, int categoryId)
         {
             // Extract current authenticated user identity details safely

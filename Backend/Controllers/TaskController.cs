@@ -24,7 +24,6 @@ namespace Backend.Controllers
         }
 
         [HttpPost] // POST api/tasks
-        [Authorize]
         public async Task<IActionResult> CreateTask(TaskCreateDto request)
         {
             // 1. Extract the current logged-in User ID directly from the token claims
@@ -68,7 +67,6 @@ namespace Backend.Controllers
         }
 
         [HttpGet("project/{projectId}")] // GET api/task/project/1 (Get all tasks for a specific project)
-        [Authorize]
         public async Task<IActionResult> GetProjectTasks(int projectId)
         {
             // 1. Extract the current user's ID safely from the secure token claims payload
@@ -113,7 +111,6 @@ namespace Backend.Controllers
         }
 
         [HttpPut("{id}/status")] // PUT api/task/1/status (update the task status)
-        [Authorize]
         public async Task<IActionResult> UpdateTaskStatus(int id, TaskUpdateStatusDto request)
         {
             // 1. Locate the task item row
@@ -138,7 +135,6 @@ namespace Backend.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize] // To enforce a clid security login token check!
         public async Task<IActionResult> DeleteTask(int id)
         {
             // 1. Extract the unique User ID safely from the encrypted JWT Token claims
@@ -175,7 +171,6 @@ namespace Backend.Controllers
         }
 
         [HttpPut("{taskId}/assign")]
-        [Authorize]
         public async Task<IActionResult> AssignTask(int taskId, [FromBody] TaskAssignDto request)
         {
             // 1. Find the target task in the database
@@ -202,7 +197,6 @@ namespace Backend.Controllers
         }
 
         [HttpPut("{taskId}/category")]
-        [Authorize]
         public async Task<IActionResult> AssignTaskCategory(int taskId, [FromBody] TaskCategoryUpdateDto request)
         {
             var taskItem = await _context.Tasks.FindAsync(taskId);

@@ -9,9 +9,9 @@ using System.Security.Claims;
 
 namespace Backend.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("api/[controller]")] // This makes the URL look like: api/auth
+    [Authorize]
     public class AuthController: ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -25,7 +25,7 @@ namespace Backend.Controllers
         }
 
         [HttpPost("register")] // This makes the URL: api/auth/register
-        [Authorize]
+        [AllowAnonymous]
         public async Task<IActionResult> Register(UserRegisterDto request)
         {
             // 1. Check if the email is already taken
@@ -53,7 +53,7 @@ namespace Backend.Controllers
             return Ok("User successfully registered!");
         }
         [HttpPost("login")] // This makes the URL: api/auth/Login
-        [Authorize]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(UserLoginDto request)
         {
             // 1. Check if the user exists by email
@@ -77,7 +77,6 @@ namespace Backend.Controllers
         }
 
         [HttpGet("profile")] // GET: api/auth/profile
-        [Authorize] // Enforce valid JWT token presence via your interceptor header!
         public async Task<IActionResult> GetUserProfile()
         {
             // Extract the unique User ID embedded inside the secure token claims payload!
@@ -128,7 +127,6 @@ namespace Backend.Controllers
         }
 
         [HttpPut("update-account")]
-        [Authorize]
         public async Task<IActionResult> UpdateAccount([FromBody] UpdateAccountDto request)
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -156,7 +154,6 @@ namespace Backend.Controllers
         }
 
         [HttpDelete("delete-account")]
-        [Authorize]
         public async Task<IActionResult> DeleteAccount()
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;

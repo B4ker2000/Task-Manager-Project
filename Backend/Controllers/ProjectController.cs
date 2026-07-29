@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Controllers
 {
-    [Authorize] // This locks down EVERY endpoint inside this contoller!
+    [Authorize] // This locks down EVERY endpoint inside this contoller & Enforces security validation JWT token checks!
     [ApiController]
     [Route("api/[controller]")]
     public class ProjectController: ControllerBase
@@ -21,7 +21,6 @@ namespace Backend.Controllers
         }
 
         [HttpPost] // POST api/project
-        [Authorize] // Enforces security validation token checks
         public async Task<IActionResult> CreateProject(ProjectCreateDto request)
         {
             // 1. Extract the User ID out of their unique JWT Tokens
@@ -61,7 +60,6 @@ namespace Backend.Controllers
         }
 
         [HttpGet] // GET api/project (Retrieves all projects belonging to the logged-in user)
-        [Authorize]
         public async Task<IActionResult> GetMyProjects()
         {
             // 1. Extract the unique User ID safely from the encrypted JWT Token claims
@@ -86,7 +84,6 @@ namespace Backend.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize]
         public async Task<IActionResult> DeleteProject(int id)
         {
             // 1. Find the project in the database
@@ -110,7 +107,6 @@ namespace Backend.Controllers
         }
 
         [HttpPost("{projectId}/invite")]
-        [Authorize] // Enforces valid JWT token presence via your interceptor header
         public async Task<IActionResult> InviteMember(int projectId, [FromBody] ProjectInviteDto request)
         {
             // 1. Extract the current logged-in User's unique ID directly from their token claims
@@ -160,7 +156,6 @@ namespace Backend.Controllers
         }
 
         [HttpDelete("{projectId}/members/{targetUserId}")]
-        [Authorize]
         public async Task<IActionResult> RemoveProjectMember(int projectId, int targetUserId)
         {
             // 1. Extract the current logged-in user ID safely from token claims
@@ -224,7 +219,6 @@ namespace Backend.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize]
         public async Task<IActionResult> GetProjectById(int id)
         {
             var project = await _context.Projects.FirstOrDefaultAsync(p => p.Id == id);
@@ -236,7 +230,6 @@ namespace Backend.Controllers
         }
 
         [HttpGet("{id}/role")]
-        [Authorize]
         public async Task<IActionResult> GetProjectRole(int id)
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
@@ -256,7 +249,6 @@ namespace Backend.Controllers
         }
 
         [HttpGet("{id}/members")]
-        [Authorize]
         public async Task<IActionResult> GetProjectMembers(int id)
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
