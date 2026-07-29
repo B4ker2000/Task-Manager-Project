@@ -221,9 +221,9 @@ export class TaskBoardComponent implements OnInit {
             let matchesCategory = true;
             if(this.selectedCategory !== "All") {
                 if(this.selectedCategory === "Null") {
-                    matchesCategory = task.categoryId === null;
+                    matchesCategory = task.categoryId === null || task.categoryId === undefined;
                 } else {
-                    matchesCategory = task.categoryId === Number(this.selectedCategory);
+                    matchesCategory = task.categoryId !== null && task.categoryId !== undefined && Number(task.categoryId) === Number(this.selectedCategory);
                 }
             }
             
@@ -364,7 +364,7 @@ export class TaskBoardComponent implements OnInit {
         });
     }
 
-    onDeleteCategoryClick(taskId: number, categoryName: string): void {
+    onDeleteCategoryClick(categoryId: number, categoryName: string): void {
         const confirmSystem = confirm(`Are you sure you want to permanently delete the '${categoryName}' tag? Ant tasks using this tag will have it removed.`);
         if(!confirmSystem) return;
 
