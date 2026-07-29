@@ -2,10 +2,12 @@
     <header class="board-header">
         <button class="back-btn" [routerLink]="['/dashboard']">← Back to Dashboard</button>
         <h2>Project Board ({{ projectTitle }})</h2>
-        <button *ngIf="currentUserProjectRole === 'Member'" class="back-btn resign-project-btn" (click)="onLeaveProjectClick()">Abanddon Space</button>
-        <!-- Clicking these opens our form modal overlays -->
-         <button *ngIf="currentUserProjectRole === 'Owner'" class="send-invite-btn" (click)="isCategoryModalOpen = true">+ Create Workspace Tag</button>
-         <button *ngIf="currentUserProjectRole === 'Owner'" class="add-task-btn" (click)="openModal()">+ Add New Task</button>
+        <div class="board-header-action-triggers">
+            <button *ngIf="currentUserProjectRole === 'Member'" class="back-btn resign-project-btn" (click)="onLeaveProjectClick()">Abanddon Space</button>
+            <!-- Clicking these two opens our form modal overlays -->
+             <button *ngIf="currentUserProjectRole === 'Owner'" class="send-invite-btn" (click)="isCategoryModalOpen = true">+ Create Workspace Tag</button>
+             <button *ngIf="currentUserProjectRole === 'Owner'" class="add-task-btn" (click)="openModal()">+ Add New Task</button>
+        </div>
     </header>
 
     <div class="project-member-management-panel">
@@ -121,9 +123,15 @@
          </div>
     </div>
 
+    <div class="mobile-board-lane-switcher">
+        <button class="lane-tab-trigger" [ngClass]="{'active': activeMobileColumn === 'Pending'}" (click)="activeMobileColumn = 'Pending'">⏳ Pending</button>
+        <button class="lane-tab-trigger" [ngClass]="{'active': activeMobileColumn === 'InProgress'}" (click)="activeMobileColumn = 'InProgress'">⚡ Progress & Review</button>
+        <button class="lane-tab-trigger" [ngClass]="{'active': activeMobileColumn === 'Completed'}" (click)="activeMobileColumn = 'Completed'">✅ Completed</button>
+    </div>
+
     <div class="board-columns-grid">
         <!-- Column 1: Pending Tasks -->
-		 <section class="board-column">
+		 <section class="board-column" [class.mobile-hidden]="activeMobileColumn !== 'Pending'">
 			<h3>⏳ Pending ({{ pendingTasks.length }})</h3>
             <div class="tasks-container">
                 <div class="task-card" *ngFor="let t of filteredPendingTasks">
@@ -176,7 +184,7 @@
          </section>
 
 		<!-- Column 2: In Progress & Review Tasks -->
-         <section class="board-column">
+         <section class="board-column" [class.mobile-hidden]="activeMobileColumn !== 'InProgress'">
             <h3>⚡ In Progress & Review ({{ inProgressTasks.length }})</h3>
             <div class="tasks-container">
                 <div class="task-card" *ngFor="let t of filteredInProgressTasks" [ngClass]="{'review-needed-card': t.status === 'Review Required'}">
@@ -242,7 +250,7 @@
          </section>
 
         <!-- Column 3: Completed Tasks -->
-         <section class="board-column completed-column">
+         <section class="board-column completed-column" [class.mobile-hidden]="activeMobileColumn !== 'Completed'">
             <h3>✅ Completed ({{ completedTasks.length }})</h3>
 			<div class="tasks-container">
 				<div class="task-card done" *ngFor="let t of filteredCompletedTasks">

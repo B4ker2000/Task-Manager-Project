@@ -577,6 +577,7 @@
     font-weight: bold; 
     font-size: 13px; 
     cursor: pointer;
+    margin-right: 10px;
 }
 
 .send-invite-btn:hover:not(:disabled) { 
@@ -776,6 +777,24 @@
     flex-wrap: wrap;
 }
 
+.task-actions,
+.btn-group {
+    flex-wrap: wrap;
+    /* gap: 6px; */
+    width: 100%;
+}
+
+.task-actions button,
+.btn-group button {
+    flex: 1;
+    min-width: 75px;
+    font-size: 11px !important;
+    padding: 4px 6px !important;
+    white-space: nowrap;
+}
+
+.mobile-board-lane-switcher { display: none; }
+
 .back-btn,
 .action-btn,
 .submit-btn,
@@ -789,6 +808,60 @@
     .board-columns-grid { gap: 15px; }
 
     .board-column { min-width: 250px; }
+}
+
+/* Screen resolutions between small monitors & tablets */
+@media(max-width: 800px) {
+    .board-header {
+        display: flex;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .board-header-action-triggers {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .mobile-board-lane-switcher {
+        display: flex;
+        width: 100%;
+        background-color: #edf2f7;
+        padding: 4px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+        gap: 4px;
+    }
+
+    .lane-tab-trigger {
+        flex: 1;
+        background: transparent;
+        border: none;
+        padding: 8px 4px;
+        font-size: 12px;
+        font-weight: 700;
+        color: #4a5568;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background-color 0.2s, color 0.2s;
+    }
+
+    .lane-tab-trigger.active {
+        background-color: #ffffff;
+        color: #2b6cb0;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .board-columns-grid { flex-direction: column !important; }
+
+    .board-column.mobile-hidden { display: none !important; }
+
+    .board-column { width: 100% !important; }
 }
 
 /* TABLETBREAKPOINT: Responsive multi-row wrap mechanics */

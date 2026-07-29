@@ -76,6 +76,9 @@ export class TaskBoardComponent implements OnInit {
     // Filter by category related property
     selectedCategory: string = "All";
 
+    // Vertical screen related properity
+    activeMobileColumn: string = 'Pending'; // Default view lane tracking 
+
     ngOnInit(): void {
         // Read the dynamic route context param parameter safely
         this.route.params.subscribe(params => {
