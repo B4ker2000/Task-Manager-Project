@@ -9,6 +9,7 @@ using System.Security.Claims;
 
 namespace Backend.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")] // This makes the URL look like: api/auth
     public class AuthController: ControllerBase
@@ -24,6 +25,7 @@ namespace Backend.Controllers
         }
 
         [HttpPost("register")] // This makes the URL: api/auth/register
+        [Authorize]
         public async Task<IActionResult> Register(UserRegisterDto request)
         {
             // 1. Check if the email is already taken
@@ -51,6 +53,7 @@ namespace Backend.Controllers
             return Ok("User successfully registered!");
         }
         [HttpPost("login")] // This makes the URL: api/auth/Login
+        [Authorize]
         public async Task<IActionResult> Login(UserLoginDto request)
         {
             // 1. Check if the user exists by email

@@ -364,6 +364,12 @@ export class TaskBoardComponent implements OnInit {
         });
     }
 
+    getTaskCountByCategory(categoryId: number): number {
+        // Merge the active columns into a single flat array to count matching category keys
+        const totalCurrentBoardTasks = [...this.pendingTasks, ...this.inProgressTasks, ...this.completedTasks];
+        return totalCurrentBoardTasks.filter(t => t.categoryId === categoryId).length;
+    }
+
     onDeleteCategoryClick(categoryId: number, categoryName: string): void {
         const confirmSystem = confirm(`Are you sure you want to permanently delete the '${categoryName}' tag? Ant tasks using this tag will have it removed.`);
         if(!confirmSystem) return;

@@ -723,9 +723,10 @@
 .category-badge-pill:hover .category-badge-pill-delete-btn { opacity: 1; }
 
 .category-badge-pill-delete-btn:hover {
-    background-color: #fee2e2;
-    color: #ef4444;
-    transform: scale(1.05); /* Adds a tiny, responsive tactile pop! */
+    background-color: #ffffff !important;   /* Stark white circle bubble background */
+    color: #1a202c !important;              /* Solid charcoal black icon text tint */
+    border-radius: 50%;                       /* Turns the background into a perfect tiny circle */
+    transform: scale(1.1);                    /* Clean tactile interactive scaling pop */
 }
 
 .left-management-column {
