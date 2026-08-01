@@ -51,11 +51,13 @@
 
                 <div class="config-control-row">
                     <label for="themeEngineSelect" class="info-adjustment-label">Visual Application Theme:</label>
-                    <select id="themeEngineSelect" [(ngModel)]="activeTheme" (change)="onThemeChangeEngineTrigger()" class="board-interactive-field select-config">
-                        <option value="light">☀️ Professional Light Mode</option>
-                        <option value="dark">🌙 Dark Workspace Canvas</option>
-                        <option value="retro-y2k">💾 Nostalgic Retro Y2K (XP Era)</option>
-                    </select>
+                    <div class="control-input-wrapper">
+                        <select id="themeEngineSelect" [(ngModel)]="activeTheme" (change)="onThemeChangeEngineTrigger()" class="board-interactive-field select-config">
+                            <option value="light">☀️ Professional Light Mode</option>
+                            <option value="dark">🌙 Dark Workspace Canvas</option>
+                            <option value="retro-y2k">💾 Nostalgic Retro Y2K (XP Era)</option>
+                        </select>
+                    </div>
                 </div>
              </div>
 
@@ -91,7 +93,7 @@
                          </div>
                     </div>
 
-                    <button type="submit" class="save-settings-btn" >Save Profile Changes</button>
+                    <button type="submit" class="save-settings-btn" [disabled]="!updateData.NewUsername || !updateData.NewPassword || !confirmNewPassword">Save Profile Changes</button>
                  </form>
 
                 <hr>
