@@ -1,17 +1,18 @@
 .profile-wrapper { 
-    padding: 40px; 
+    padding: 20px; 
     font-family: sans-serif;
-    max-width: 900px; 
+    max-width: 1000px; 
     margin: 0 auto; 
 }
 
 .profile-header { 
-    display: flex; 
+    display: flex;
+    justify-content: space-between; 
     align-items: center; 
     gap: 20px; 
     border-bottom: 2px solid #eaeaea; 
-    padding-bottom: 20px; 
-    margin-bottom: 30px; 
+    padding-bottom: 10px; 
+    margin-bottom: 25px; 
 }
 
 .back-btn { 
@@ -32,9 +33,10 @@
 }
 
 .profile-card-grid { 
-    display: grid; 
+    display: flex; 
     grid-template-columns: 1fr 1fr; 
-    gap: 30px; 
+    gap: 25px; 
+    width: 100%;
     align-items: start; 
 }
 
@@ -98,21 +100,21 @@
 .metric-box { 
     background-color: #f8f9fa; 
     border: 1px solid #e2e8f0; 
-    padding: 15px; 
+    padding: 12px 15px; 
     border-radius: 6px; 
-    margin-bottom: 15px; 
+    margin-bottom: 12px; 
     display: flex; 
     align-items: center; 
     justify-content: space-between; 
 }
 
 .metric-num { 
-    font-size: 24px; 
-    font-weight: bold; 
-    color: #007bff; 
+    font-size: 20px; 
+    font-weight: 800; 
+    color: #3180ce; 
 }
 
-.metric-box.status-done .metric-num { color: #28a745; }
+.metric-box.status-done .metric-num { color: #38a169; }
 
 .metric-label { 
     font-size: 13px; 
@@ -248,6 +250,13 @@
     cursor: pointer;
 }
 
+.profile-layout-vertical-stack {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
 .back-btn,
 .danger-zone-btn,
 .save-settings-btn { transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
@@ -257,4 +266,19 @@
         margin-top: 15px;
         order: 2;
     }
+
+    .profile-card-grid {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .profile-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .profile-layout-vertical-stack { width: 100% };
+
+    /* .back-btn {  } */
 }

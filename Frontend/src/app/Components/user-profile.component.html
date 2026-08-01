@@ -11,96 +11,99 @@
 
     <!-- Active Profile Layout Card Display -->
      <div class="profile-card-grid" *ngIf="!isLoading && userProfile">
-        <!-- Section 1: Core Account Details Card -->
-         <div class="details-card">
-            <div class="avatar-circle">
-                👤
-            </div>
-            <h3>{{ userProfile.username }}</h3>
-            <span class="role-badge" [ngClass]="userProfile.role.toLowerCase()">
-                💼 Security Level: {{ userProfile.role }}
-            </span>
-
-            <div class="info-row">
-                <strong>Registered Email:</strong>
-                <span>{{ userProfile.email }}</span>
-            </div>
-            <div class="info-row">
-                <strong>Database Record ID:</strong>
-                <span>#{{ userProfile.id }}</span>
-            </div>
-         </div>
-
-        <!-- Section 2: Quick Metrics Statistics Card -->
-         <div class="stats-card">
-            <h4>📋 System Action Metrics</h4>
-            <div class="metric-box">
-                <span class="metric-num">{{ userProfile.stats.total }}</span>
-                <span class="metric-label">Assigned Work Items</span>
-            </div>
-            <div class="metric-box status-done">
-                <span class="metric-num">{{ userProfile.stats.completed }}</span>
-                <span class="metric-label">Completed Tasks</span>
-            </div>
-         </div>
-
-        <!-- Update account info -->
-         <div class="settings-card">
-            <h4>⚙️ Account Management Settings</h4>
-
-            <!-- Account Information Adjustment Form -->
-             <form (ngSubmit)="onUpdateAccount()" #settingsForm="ngForm" class="info-adjustment-form">
-                <div class="info-adjustment-group">
-                    <label class="info-adjustment-label">Update Username</label>
-                    <input type="text" name="newUsername" [(ngModel)]="updateData.NewUsername" placeholder="Enter new username..." class="info-adjustment-input" />
+        <div class="profile-layout-vertical-stack">
+            <!-- Section 1: Core Account Details Card -->
+             <div class="details-card">
+                <div class="avatar-circle">
+                    👤
                 </div>
+                <h3>{{ userProfile.username }}</h3>
+                <span class="role-badge" [ngClass]="userProfile.role.toLowerCase()">
+                    💼 Security Level: {{ userProfile.role }}
+                </span>
 
-                <div class="info-adjustment-group">
-                    <label class="info-adjustment-label">Change Security Password</label>
-                    <div class="password-input-wrapper">
-                        <input [type]="showPassword ? 'text' : 'password'" name="newPassword" [(ngModel)]="updateData.NewPassword" placeholder="Enter new password..." class="info-adjustment-input" />
-                        <button type="button" class="eye-toggle-btn" (click)="showPassword = !showPassword" >
-                            {{ showPassword ? '👁️' : '👁️‍🗨️' }}
-                        </button>
-                    </div>
+                <div class="info-row">
+                    <strong>Registered Email:</strong>
+                    <span>{{ userProfile.email }}</span>
                 </div>
-
-                <div class="info-adjustment-group">
-                    <label class="info-adjustment-label">Confirm New Password</label>
-                    <!-- <input [type]="showPassword ? 'text' : 'password'" name="confirmNewPassword" [(ngModel)]="confirmNewPassword" placeholder="Retype your new password..." class="info-adjustment-input" /> --> <!-- This will make it so that both password textboxes are bound to the same reveal "eye" button -->
-                    <div class="password-input-wrapper">
-                        <input [type]="showConfirmPassword ? 'text' : 'password'" name="confirmNewPassword" [(ngModel)]="confirmNewPassword" placeholder="Retype your new password..." class="info-adjustment-input" />
-                        <button type="button" class="eye-toggle-btn" (click)="showConfirmPassword = !showConfirmPassword" >
-                            {{ showConfirmPassword ? '👁️' : '👁️‍🗨️' }}
-                        </button>
-                    </div>
+                <div class="info-row">
+                    <strong>Database Record ID:</strong>
+                    <span>#{{ userProfile.id }}</span>
                 </div>
-
-                <button type="submit" class="save-settings-btn" >Save Profile Changes</button>
-             </form>
-
-            <hr>
-
-            <!-- High Risk Destruction Action Block -->
-             <div class="danger-zone">
-                <h5 class="danger-zone-header">⚠️ Danger Zone</h5>
-                <p class="danger-zone-warning">Deleting your account clears your workspace access profiles completely! This action cannot be reversed.</p>
-                <button type="button" (click)="onDeleteAccount()" class="danger-zone-btn">Permanently Delete Account</button>
              </div>
-         </div>
 
-        <!-- Accessibility, Themes & Localization options -->
-         <div class="accessibility-config-card">
-            <h4>🎨 Workspace Environment Preferences</h4>
+            <!-- Section 2: Accessibility, Themes & Localization options -->
+             <div class="accessibility-config-card">
+                <h4>🎨 Workspace Environment Preferences</h4>
 
-            <div class="config-control-row">
-                <label for="themeEngineSelect" class="info-adjustment-label">Visual Application Theme:</label>
-                <select id="themeEngineSelect" [(ngModel)]="activeTheme" (change)="onThemeChangeEngineTrigger()" class="board-interactive-field select-config">
-                    <option value="light">☀️ Professional Light Mode</option>
-                    <option value="dark">🌙 Dark Workspace Canvas</option>
-                    <option value="retro-y2k">💾 Nostalgic Retro Y2K (XP Era)</option>
-                </select>
-            </div>
-         </div>
+                <div class="config-control-row">
+                    <label for="themeEngineSelect" class="info-adjustment-label">Visual Application Theme:</label>
+                    <select id="themeEngineSelect" [(ngModel)]="activeTheme" (change)="onThemeChangeEngineTrigger()" class="board-interactive-field select-config">
+                        <option value="light">☀️ Professional Light Mode</option>
+                        <option value="dark">🌙 Dark Workspace Canvas</option>
+                        <option value="retro-y2k">💾 Nostalgic Retro Y2K (XP Era)</option>
+                    </select>
+                </div>
+             </div>
+        </div>
+        <div class="profile-layout-vertical-stack">
+            <!-- Section 3: Quick Metrics Statistics Card -->
+             <div class="stats-card">
+                <h4>📋 System Action Metrics</h4>
+                <div class="metric-box">
+                    <span class="metric-label">Assigned Work Items</span>
+                    <span class="metric-num">{{ userProfile.stats.total }}</span>
+                </div>
+                <div class="metric-box status-done">
+                    <span class="metric-label">Completed Tasks</span>
+                    <span class="metric-num">{{ userProfile.stats.completed }}</span>
+                </div>
+             </div>
+
+            <!-- Section 4: Update account info -->
+             <div class="settings-card">
+                <h4>⚙️ Account Management Settings</h4>
+
+                <!-- Account Information Adjustment Form -->
+                 <form (ngSubmit)="onUpdateAccount()" #settingsForm="ngForm" class="info-adjustment-form">
+                    <div class="info-adjustment-group">
+                        <label class="info-adjustment-label">Update Username</label>
+                        <input type="text" name="newUsername" [(ngModel)]="updateData.NewUsername" placeholder="Enter new username..." class="info-adjustment-input" />
+                    </div>
+
+                    <div class="info-adjustment-group">
+                        <label class="info-adjustment-label">Change Security Password</label>
+                        <div class="password-input-wrapper">
+                            <input [type]="showPassword ? 'text' : 'password'" name="newPassword" [(ngModel)]="updateData.NewPassword" placeholder="Enter new password..." class="info-adjustment-input" />
+                            <button type="button" class="eye-toggle-btn" (click)="showPassword = !showPassword" >
+                                {{ showPassword ? '👁️' : '👁️‍🗨️' }}
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="info-adjustment-group">
+                        <label class="info-adjustment-label">Confirm New Password</label>
+                        <!-- <input [type]="showPassword ? 'text' : 'password'" name="confirmNewPassword" [(ngModel)]="confirmNewPassword" placeholder="Retype your new password..." class="info-adjustment-input" /> --> <!-- This will make it so that both password textboxes are bound to the same reveal "eye" button -->
+                         <div class="password-input-wrapper">
+                            <input [type]="showConfirmPassword ? 'text' : 'password'" name="confirmNewPassword" [(ngModel)]="confirmNewPassword" placeholder="Retype your new password..." class="info-adjustment-input" />
+                            <button type="button" class="eye-toggle-btn" (click)="showConfirmPassword = !showConfirmPassword" >
+                                {{ showConfirmPassword ? '👁️' : '👁️‍🗨️' }}
+                            </button>
+                         </div>
+                    </div>
+
+                    <button type="submit" class="save-settings-btn" >Save Profile Changes</button>
+                 </form>
+
+                <hr>
+
+                <!-- High Risk Destruction Action Block -->
+                 <div class="danger-zone">
+                    <h5 class="danger-zone-header">⚠️ Danger Zone</h5>
+                    <p class="danger-zone-warning">Deleting your account clears your workspace access profiles completely! This action cannot be reversed.</p>
+                    <button type="button" (click)="onDeleteAccount()" class="danger-zone-btn">Permanently Delete Account</button>
+                 </div>
+             </div>
+        </div>
      </div>
 </div>
