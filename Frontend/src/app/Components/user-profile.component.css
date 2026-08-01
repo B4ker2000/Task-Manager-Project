@@ -18,23 +18,6 @@
     margin-bottom: 25px; 
 }
 
-/* .back-btn { 
-    background-color: #ffffff; 
-    color: #4a5568; 
-    border: 2px solid #cbd5e1;
-    padding: 8px 14px; 
-    border-radius: 4px; 
-    cursor: pointer; 
-    font-weight: bold; 
-    font-size: 13px; 
-}
-
-.back-btn:hover { 
-    background-color: #4a5568; 
-    color: #ffffff; 
-    border: 2px solid #2d3748;
-} */
-
 /* =========================================================================
    GRID PANELS AND CARD ALIGNMENTS
    ========================================================================= */
@@ -286,23 +269,31 @@
     border-color: #c53030;
 }
 
-/* .board-interactive-field.select-config {
+/* =========================================================================
+   THEME SELECT DROPDOWN POLISH: Matches your premium input metrics!
+   ========================================================================= */
+.control-input-wrapper {
+    position: relative;
     width: 100%;
-    height: 38px;
-    padding: 8px 12px; 
-    border: 2px solid #cbd5e1; 
-    border-radius: 4px; 
-    box-sizing: border-box; 
-    font-size: 13px; 
-    background-color: #ffffff; 
-    outline: none; 
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
 }
 
-.board-interactive-field.select-config:focus { border: 2px solid #3182ce; }
-
-.back-btn,
-.danger-zone-btn,
-.save-settings-btn { transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; } */
+.board-interactive-field.select-config {
+    width: 100%;
+    height: 38px;
+    padding: 8px 12px 8px 12px !important;
+    border: 2px solid #cbd5e1;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 13px;
+    background-color: var(--surface-bg, #ffffff);
+    color: var(--text-primary);
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
 
 /* =========================================================================
    FLUID CROSS-RESOLUTION DEVICE SCALING INTERCEPTORS
