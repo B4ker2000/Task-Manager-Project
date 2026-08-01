@@ -93,7 +93,7 @@
                          </div>
                     </div>
 
-                    <button type="submit" class="save-settings-btn" [disabled]="!updateData.NewUsername || !updateData.NewPassword || !confirmNewPassword">Save Profile Changes</button>
+                    <button type="submit" class="save-settings-btn" [disabled]="(!updateData.NewUsername?.trim()) && (!updateData.NewPassword?.trim() || updateData.NewPassword !== confirmNewPassword)">Save Profile Changes</button>
                  </form>
 
                 <hr>
