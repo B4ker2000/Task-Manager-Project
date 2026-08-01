@@ -38,8 +38,9 @@
     align-items: start; 
 }
 
-.details-card, .stats-card, .settings-card { 
-    background: white; 
+.details-card, .stats-card, .settings-card, .accessibility-config-card { 
+    background-color: var(--surface-bg, #ffffff);
+    color: var(--text-primary);
     border: 1px solid #cbd5e1; 
     border-radius: 8px; 
     padding: 25px; 
@@ -85,10 +86,10 @@
     color: #4a5568; 
 }
 
-.stats-card h4, .settings-card h4 { 
+.stats-card h4, .settings-card h4, .accessibility-config-card h4 { 
     margin-top: 0; 
     margin-bottom: 20px; 
-    color: #1a202c; 
+    color: var(--text-muted);
     border-bottom: 2px solid #cbd5e1; 
     padding-bottom: 8px; 
     text-align: left; 
@@ -234,6 +235,26 @@
 
 .eye-toggle-btn:hover { opacity: 1; }
 
+.config-control-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: left; 
+    margin-bottom: 12px; 
+}
+
+.board-interactive-field.select-config {
+    padding: 0 10px;
+    cursor: pointer;
+}
+
 .back-btn,
 .danger-zone-btn,
 .save-settings-btn { transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
+
+@media(max-width: 768px) {
+    .accessibility-config-card {
+        margin-top: 15px;
+        order: 2;
+    }
+}

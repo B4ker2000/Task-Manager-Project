@@ -28,10 +28,20 @@ export class UserProfileComponent implements OnInit {
     assignedWorkItems: number = 0;
     completedTasks: number = 0;
 
+    // Theme related variable
+    activeTheme: string = "light";
+
     ngOnInit(): void {
         // Only run data fetches inside the browser window context shell
         if(isPlatformBrowser(this.platformId)) {
             this.loadProfile();
+        }
+
+        // Theme cache reader
+        const savedTheme = localStorage.getItem("user-preferred-theme");
+        if(savedTheme) {
+            this.activeTheme = savedTheme;
+            this.onThemeChangeEngineTrigger();
         }
     }
 
@@ -92,6 +102,18 @@ export class UserProfileComponent implements OnInit {
                     error: (err) => console.error("Account destruction failed:", err)
                 });
             }
+        }
+    }
+
+    // Theme controller method
+    onThemeChangeEngineTrigger(): void {
+        if(typeof document !== "undefined") {
+            // Instantly sets the data-theme attribute on the global <html> tag!
+            document.documentElement.setAttribute("data-theme", this.activeTheme);
+
+            // Cache the user's favorite selection so it stays active when they reload!
+            localStorage.setItem("user-preferred-theme", this.activeTheme);
+            console.log(`Application theme shifted to "${this.activeTheme}" successfully.`);
         }
     }
 }

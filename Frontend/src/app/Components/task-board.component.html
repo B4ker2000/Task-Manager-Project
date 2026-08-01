@@ -157,7 +157,7 @@
                             </option>
                         </select>
                     </div>
-                    <div class="task-assignment-control">
+                    <div *ngIf="currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId" class="task-assignment-control">
                         <label class="assignment-label">🏷️ Category:</label>
                         <select [ngModel]="t.categoryId" (change)="onAssignCategory(t.id, $any($event.target).value)" [disabled]="currentUserProjectRole !== 'Owner' && t.assignedUserId !== currentUserId" class="assignee-dropdown-menu">
                             <option [value]="null">No Category</option>
@@ -213,7 +213,7 @@
                             </option>
                         </select>
                     </div>
-                    <div class="task-assignment-control">
+                    <div *ngIf="currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId" class="task-assignment-control">
                         <label class="assignment-label">🏷️ Category:</label>
                         <select [ngModel]="t.categoryId" (change)="onAssignCategory(t.id, $any($event.target).value)" [disabled]="currentUserProjectRole !== 'Owner' && t.assignedUserId !== currentUserId" class="assignee-dropdown-menu">
                             <option [value]="null">No Category</option>
@@ -276,7 +276,7 @@
                             </option>
                         </select>
                     </div>
-                    <div class="task-assignment-control">
+                    <div *ngIf="currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId" class="task-assignment-control">
                         <label class="assignment-label">🏷️ Category:</label>
                         <select [ngModel]="t.categoryId" (change)="onAssignCategory(t.id, $any($event.target).value)" [disabled]="currentUserProjectRole !== 'Owner' && t.assignedUserId !== currentUserId" class="assignee-dropdown-menu">
                             <option [value]="null">No Category</option>

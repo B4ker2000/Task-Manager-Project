@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './Components/login';
-import { DashboardComponent } from './Components/dashboard';
-import { TaskBoardComponent } from './Components/task-board';
+import { LoginComponent } from './Components/login.component';
+import { DashboardComponent } from './Components/dashboard.component';
+import { TaskBoardComponent } from './Components/task-board.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AnonGuard } from './guards/anon.guard';
-import { UserProfileComponent } from './Components/user-profile';
-import { RegisterComponent } from './Components/register';
+import { UserProfileComponent } from './Components/user-profile.component';
+import { RegisterComponent } from './Components/register.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' }, // Auto-redirect to login screen on startup

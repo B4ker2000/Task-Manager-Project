@@ -416,4 +416,9 @@ export class TaskBoardComponent implements OnInit {
             error: (err: any) => alert(err.error?.message || "Failed to process project resignation request.")
         });
     }
+
+    // Method to hide category select drop down menu from unassigned members since they can already see the tag pills if any tag is assigned!
+    isUserAssignedToThisTask(task: any): boolean {
+        return this.currentUserProjectRole === 'Owner' || task.assignedUserId === this.currentUserId;
+    }
 }
