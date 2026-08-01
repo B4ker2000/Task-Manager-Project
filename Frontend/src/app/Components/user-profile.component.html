@@ -31,8 +31,21 @@
                     <span>#{{ userProfile.id }}</span>
                 </div>
              </div>
-
-            <!-- Section 2: Accessibility, Themes & Localization options -->
+            <!-- Section 2: Quick Metrics Statistics Card -->
+             <div class="stats-card">
+                <h4>📋 System Action Metrics</h4>
+                <div class="metric-box">
+                    <span class="metric-label">Assigned Work Items</span>
+                    <span class="metric-num">{{ userProfile.stats.total }}</span>
+                </div>
+                <div class="metric-box status-done">
+                    <span class="metric-label">Completed Tasks</span>
+                    <span class="metric-num">{{ userProfile.stats.completed }}</span>
+                </div>
+             </div>
+        </div>
+        <div class="profile-layout-vertical-stack">
+            <!-- Section 3: Accessibility, Themes & Localization options -->
              <div class="accessibility-config-card">
                 <h4>🎨 Workspace Environment Preferences</h4>
 
@@ -43,20 +56,6 @@
                         <option value="dark">🌙 Dark Workspace Canvas</option>
                         <option value="retro-y2k">💾 Nostalgic Retro Y2K (XP Era)</option>
                     </select>
-                </div>
-             </div>
-        </div>
-        <div class="profile-layout-vertical-stack">
-            <!-- Section 3: Quick Metrics Statistics Card -->
-             <div class="stats-card">
-                <h4>📋 System Action Metrics</h4>
-                <div class="metric-box">
-                    <span class="metric-label">Assigned Work Items</span>
-                    <span class="metric-num">{{ userProfile.stats.total }}</span>
-                </div>
-                <div class="metric-box status-done">
-                    <span class="metric-label">Completed Tasks</span>
-                    <span class="metric-num">{{ userProfile.stats.completed }}</span>
                 </div>
              </div>
 
