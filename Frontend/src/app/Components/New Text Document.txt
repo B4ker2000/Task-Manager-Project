@@ -1,12 +1,13 @@
 /* =========================================================================
    LOCAL VIEW CONTAINER LAYER (REGISTRATION MODULE)
    ========================================================================= */
+
 .register-wrapper { 
     height: 100vh; 
     display: flex; 
     align-items: center; 
     justify-content: center; 
-    background-color: var(--container-bg, #f8f9fa); 
+    background-color: var(--container-bg, #f8f9fa); /* Fluid layout theme wrapper support! */
     font-family: sans-serif; 
 }
 
@@ -48,6 +49,7 @@
     color: var(--text-muted); 
 }
 
+/* Local input overrides for email field to keep alignment flush */
 .form-group input[type="email"] { 
     width: 100%; 
     padding: 10px; 
@@ -63,8 +65,8 @@
    PRIMARY FORM TRIGGER SIZING
    ========================================================================= */
 .register-btn { 
-    width: 100%;
-    height: 42px; 
+    width: 100%; 
+    height: 42px; /* Prominent tap target tracking */
     margin-top: 10px; 
 }
 
@@ -109,26 +111,28 @@
 /* =========================================================================
    FOOTER NAVIGATION LABELS
    ========================================================================= */
-.register-footer {
-    margin-top: 20px;
-    font-size: 13px;
-    color: var(--text-muted);
+.register-footer { 
+    margin-top: 20px; 
+    font-size: 13px; 
+    color: var(--text-muted); 
 }
 
-.login-link {
-    color: #007bff;
-    font-weight: bold;
-    text-decoration: none;
+.login-link { 
+    color: #007bff; 
+    font-weight: bold; 
+    text-decoration: none; 
 }
 
-.login-link:hover { text-decoration: underline; }
+.login-link:hover {
+    text-decoration: underline;
+}
 
 /* =========================================================================
    OPTICAL ORIENTATION RESPONSIVE MEDIA FILTERS
    ========================================================================= */
 @media(max-width: 480px) {
     .register-wrapper {
-        align-items: flex-start;
+        align-items: flex-start; /* Stacks fluidly from top on small viewports */
         padding-top: 40px;
     }
 
@@ -138,6 +142,6 @@
         max-width: 100%;
         box-shadow: none;
         border: none;
-        background: transparent;
+        background: transparent; /* Seamless blend directly onto core page backdrop tint */
     }
 }
