@@ -93,14 +93,14 @@
     border-bottom: 1px dashed #e2e8f0; 
     padding: 10px 0; 
     font-size: 14px; 
-    color: #4a5568; 
+    color: var(--text-primary, #4a5568);
 }
 
 /* =========================================================================
    METRICS DISPLAY BLOCKS
    ========================================================================= */
 .metric-box { 
-    background-color: #f8f9fa; 
+    background-color: var(--surface-bg, #f8f9fa); 
     border: 1px solid #e2e8f0; 
     padding: 12px 15px; 
     border-radius: 6px; 
@@ -120,13 +120,13 @@
 
 .metric-label { 
     font-size: 13px; 
-    color: #4a5568; 
+    color: var(--text-primary, #4a5568);
     font-weight: 500; 
 }
 
 .loading-state { 
     text-align: center; 
-    color: #6c757d; 
+    color: var(--text-primary, #6c757d); 
     font-style: italic; 
     padding: 5px; 
 }
@@ -144,7 +144,7 @@
 .info-adjustment-label { 
     font-weight: bold; 
     font-size: 13px; 
-    color: #4a5568; 
+    color: var(--text-primary, #4a5568);
     display: block; 
     margin-bottom: 4px; 
 }
@@ -205,7 +205,7 @@
 
 .danger-zone-warning { 
     font-size: 12px; 
-    color: #718096; 
+    color: var(--text-primary, #718096);
     margin: 0 0 12px 0; 
     line-height: 1.4; 
 }
