@@ -29,7 +29,6 @@ export class LoginComponent {
                 console.log("Authentication sequence successful!");
 
                 // 1. Wipe out any old conflicting residual keys first
-                localStorage.removeItem('token');
                 sessionStorage.removeItem('token');
 
                 // 2. THE SECURITY GATEWAY: Branch the storage based on their tick status!

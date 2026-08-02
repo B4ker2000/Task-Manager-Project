@@ -34,8 +34,34 @@
 }
 
 /* =========================================================================
-   GLOBAL TESTBOX ACCESSIBILITY FOCUS DEFAULTS!
+   UNIVERSAL LAYOUT BACKGROUND
    ========================================================================= */
+body,
+html,
+.app-container,
+.main-layout-backdrop {
+    background-color: var(--container-bg, #f8f9fa) !important;
+    color: var(--text-primary) !important;
+    transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+/* =========================================================================
+   GLOBAL TESTBOX THEME ACCESSIBILITY 
+   ========================================================================= */
+input[type="text"],
+input[type="date"],
+input[type="email"],
+input[type="password"],
+textarea {
+    background-color: var(--surface-bg, #ffffff) !important;
+    color: var(--text-primary) !important;
+    border: 2px solid #cbd5e1;
+    transition: all 0.15s ease-in-out;
+}
+
 input[type="text"]:focus,
 input[type="date"]:focus,
 input[type="email"]:focus,
@@ -138,4 +164,6 @@ select:focus,
     box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.15);
 }
 
-.control-input-wrapper select { padding-left: 12px !important; }
+.board-interactive-field.select-config { padding-left: 5px !important;}
+
+.control-input-wrapper select { padding-left: 30px !important; }
