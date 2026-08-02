@@ -5,6 +5,7 @@
     --text-primary: #212529;        /* Dominant heavy font header color */
     --text-muted: #6c757d;          /* Subtitles, labels and helper notes */
     --brand-accent: #007bff;        /* Core interaction signature button color */
+    --brand-accent-border: #3182ce; /* Border color for our buttons */
 
     /* 📊 PRIORITY VALUE HIGH-CONTRAST ACCESSIBILITY MATRICES */
     --badge-high-bg: #fff5f5;
@@ -22,6 +23,7 @@
     --text-primary: #f8f9fa;        /* Crisp white readable header font block */
     --text-muted: #a0aec0;          /* Soft grey structural subtext text */
     --brand-accent: #3182ce;        /* Vibrant electric neon accent action fills */
+    --brand-accent-border: #2b6cb0; /* Border color to compliment our button color above */
 }
 
 /* 💾 NOSTALGIC Y2K RETRO EASTER EGG SYSTEM (GLOSSY WINDOWS XP / 98 ERA VIBES) */
@@ -31,6 +33,7 @@
     --text-primary: #000000;        /* Flat stark terminal text ink black */
     --text-muted: #000080;          /* Deep navy text links alignment */
     --brand-accent: #107c10;        /* Classic software green trigger commands */
+    --brand-accent-border: #0a5c0a; /* Midnight forest green to compliment the classic button color above */
 }
 
 /* =========================================================================
@@ -108,23 +111,23 @@ button:disabled {
 
 .submit-btn,
 .action-btn.next {
-    background-color: #ffffff;
-    color: #3182ce;
-    border: 2px solid #3182ce
+    background-color: var(--surface-bg, #ffffff);
+    color: var(--text-primary);
+    border: 2px solid var(--brand-accent-border, #3182ce);
 }
 
 .submit-btn:hover,
 .action-btn.next:hover {
-    background-color: #3182ce;
-    color: #ffffff;
-    border-color: #2b6cb0;
+    background-color: var(--brand-accent, #3182ce);
+    color: var(--surface-bg, #ffffff);;
+    border-color: var(--brand-accent-border, #2b6cb0);
 }
 
 .cancel-btn,
 .back-btn,
 .action-btn.back {
-    background-color: #ffffff;
-    color: #4a5568;
+    background-color: var(--surface-bg, #ffffff);
+    color: var(--text-primary);
     border: 2px solid #cbd5e1;
 }
 
