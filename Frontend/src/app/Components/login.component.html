@@ -1,40 +1,41 @@
-<div class="login-container">
-    <h2>Welcome Back</h2>
-    <p>Log in to manage your projects and tasks</p>
+<div class="login-wrapper">
+    <div class="login-container">
+        <h2>Welcome Back</h2>
+        <p>Log in to manage your projects and tasks</p>
 
-    <form (ngSubmit)="onLogin()" #loginForm="ngForm">
-        <div class="form-group">
-            <label>Email Address</label>
-            <input type="email" name="email" [(ngModel)]="credentials.email" required placeholder="enter your email here">
-        </div>
+        <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" name="email" [(ngModel)]="credentials.email" required placeholder="enter your email here">
+            </div>
 
-        <div class="form-group">
-            <label>Password</label>
-            <div class="password-input-wrapper">
-                <!-- Binding [type] makes the visibility dynamic -->
-                 <input [type]="showPassword ? 'text' : 'password'" name="password" [(ngModel)]="credentials.password" required placeholder="enter password...">
-                 <button type="button" class="eye-toggle-btn" (click)="showPassword = !showPassword">
-                    {{ showPassword ? '👁️' : '👁️‍🗨️' }}
-                 </button>
+            <div class="form-group">
+                <label>Password</label>
+                <div class="password-input-wrapper">
+                    <!-- Binding [type] makes the visibility dynamic -->
+                     <input [type]="showPassword ? 'text' : 'password'" name="password" [(ngModel)]="credentials.password" required placeholder="enter password...">
+                    <button type="button" class="eye-toggle-btn" (click)="showPassword = !showPassword">
+                        {{ showPassword ? '👁️' : '👁️‍🗨️' }}
+                    </button>
+                </div>
+                <div class="remember-me-container">
+                    <label for="rememberMeBox" class="remember-me-label">
+                        <input type="checkbox" id="rememberMeBox" [(ngModel)]="rememberMe" name="rememberMe" />
+                        <span class="remember-me-text">Remember Me</span>
+                    </label>
+                </div>
             </div>
-            <div class="remember-me-container">
-                <label for="rememberMeBox" class="remember-me-label">
-                    <input type="checkbox" id="rememberMeBox" [(ngModel)]="rememberMe" name="rememberMe" />
-                    <span class="remember-me-text">Remember Me</span>
-                </label>
-            </div>
-        </div>
                         
-        <button type="submit" class="submit-btn login-submit-btn" [disabled]="!loginForm.form.valid">Sign In</button>
-        
-        <div class="login-footer-navigation">
-            <span>New to the workspace? </span>
-            <a [routerLink]="['/register']" class="create-new-account-link">Create a New Account</a>
-        </div>
+            <button type="submit" class="submit-btn login-submit-btn" [disabled]="!loginForm.form.valid">Sign In</button>
 
-        <!-- <p class="error-msg" *ngIf="errorMessage">{{ errorMessage }}</p> -->
-        <div class="error-msg" *ngIf="errorMessage">
-            ❌ {{ errorMessage }}
-        </div>
-    </form>
+            <div class="login-footer-navigation">
+                <span>New to the workspace? </span>
+                <a [routerLink]="['/register']" class="create-new-account-link">Create a New Account</a>
+            </div>
+
+            <div class="error-msg" *ngIf="errorMessage">
+                ❌ {{ errorMessage }}
+            </div>
+        </form>
+    </div>
 </div>

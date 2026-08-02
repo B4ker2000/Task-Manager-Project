@@ -11,13 +11,13 @@
 }
 
 .register-card { 
+    width: 100%;
+    max-width: 400px; 
+    padding: 35px;
     background-color: var(--surface-bg, #ffffff); 
     color: var(--text-primary);
     border: 1px solid #cbd5e1; 
     border-radius: 8px; 
-    padding: 35px; 
-    width: 100%; 
-    max-width: 400px; 
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02); 
     text-align: center; 
     box-sizing: border-box;
@@ -127,8 +127,7 @@
    OPTICAL ORIENTATION RESPONSIVE MEDIA FILTERS
    ========================================================================= */
 @media(max-width: 480px) {
-    body, 
-    html { height: 100%; }
+    body, html { height: 100%; }
     
     .register-card {
         margin: 0 auto;
