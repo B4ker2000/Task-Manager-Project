@@ -3,6 +3,7 @@ import { FormsModule } from "@angular/forms";
 import { NgFor, NgIf, isPlatformBrowser } from "@angular/common";
 import { ProjectService } from "../Services/project.service";
 import { Router, RouterLink } from "@angular/router";
+import { AuthService } from "../Services/auth.service";
 
 @Component({
     selector: 'app-dashboard',
@@ -16,6 +17,7 @@ export class DashboardComponent implements OnInit {
     private router = inject(Router);
     private cdr = inject(ChangeDetectorRef);
     private platformId = inject(PLATFORM_ID);
+    private authService = inject(AuthService);
 
     projects: any[] = [];
     newProject = { name: '', description: '' };
@@ -23,8 +25,15 @@ export class DashboardComponent implements OnInit {
     ngOnInit(): void {
         // Only trigger initial project load if we are fully inside the browser
         if(isPlatformBrowser(this.platformId)) {
-            this.loadProjects();
-            this.cdr.detectChanges();
+            this.authService.getUserProfile().subscribe({
+                next: (user: any) => {
+                    this.loadProjects();
+                },
+                error: (err: any) => {
+                    console.error("Identity check pending on reload, trying fallback...", err);
+                    this.loadProjects();
+                }
+            })
         }
     }
 

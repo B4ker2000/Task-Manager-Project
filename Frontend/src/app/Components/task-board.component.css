@@ -419,6 +419,9 @@
     letter-spacing: 0.5px;
 }
 
+/* =========================================================================
+   TASK CATEGORY PILLS & MASTER LAYOUT PANEL SPLITS
+   ========================================================================= */
 .task-category-tag-wrapper {
     margin-bottom: 10px;
     text-align: left;
@@ -449,13 +452,13 @@
     padding: 0 4px;
     margin-left: 5px;
     opacity: 0.7;
-    border-radius: 50%;                       /* Turns the background into a perfect tiny circle */
+    border-radius: 50%;    /* Turns the background into a perfect tiny circle */
     display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 16px;
     height: 16px;
-    transition: opacity 0.2s ease, background-color 0.2s ease;
+    transition: opacity 0.2s ease, background-color 0.2s ease, color 0.2s ease;
 }
 
 .category-badge-pill:hover .category-badge-pill-delete-btn { opacity: 1; }
@@ -466,6 +469,9 @@
     transform: scale(1.1);                    /* Clean tactile interactive scaling pop */
 }
 
+/* =========================================================================
+   WORKSPACE MANAGEMENT PANEL PROPORTIONS
+   ========================================================================= */
 .left-management-column {
     flex: 3;
     min-width: 300px;
@@ -474,7 +480,7 @@
 .right-tags-column {
     flex: 2;
     min-width: 220px;
-    border-left: 2px dashed #e2e8f0;
+    border-left: 2px dashed var(--text-muted);
     padding-left: 25px;
 }
 
@@ -502,40 +508,17 @@
 
 .team-roster-display-block { margin-top: 15px; }
 
-.task-actions,
-.btn-group {
-    flex-wrap: wrap;
-    /* gap: 6px; */
-    width: 100%;
-}
+/* =========================================================================
+   RESPONSIVE DEVICE VIEWS OVERRIDES & COMPACT INTERCEPTORS
+   ========================================================================= */
 
-.task-actions button,
-.btn-group button {
-    flex: 1;
-    min-width: 75px;
-    font-size: 11px !important;
-    padding: 4px 6px !important;
-    white-space: nowrap;
-}
-
-.mobile-board-lane-switcher { display: none; }
-
-.back-btn,
-.action-btn,
-.submit-btn,
-.cancel-btn,
-.add-task-btn,
-.send-invite-btn,
-.btn-group button { transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
-
-/* MEDIUM DISPLAY BREAKPOINT: Smaller Office Monitors and Laptops */
+/* MEDIUM DISPLAY BREAKPOINT: Smaller Office Monitors & Laptops */
 @media(max-width: 1024px) {
     .board-columns-grid { gap: 15px; }
-
     .board-column { min-width: 250px; }
 }
 
-/* Screen resolutions between small monitors & tablets */
+/* Medium Monitors & Tablets */
 @media(max-width: 800px) {
     .board-header {
         display: flex;
@@ -543,6 +526,7 @@
         align-items: center !important;
         text-align: center;
         gap: 15px;
+        border-bottom: 2px solid var(--text-muted);
     }
 
     .board-header-action-triggers {
@@ -556,7 +540,7 @@
     .mobile-board-lane-switcher {
         display: flex;
         width: 100%;
-        background-color: #edf2f7;
+        background-color: var(--container-bg, #edf2f7);
         padding: 4px;
         border-radius: 6px;
         margin-bottom: 20px;
@@ -570,73 +554,31 @@
         padding: 8px 4px;
         font-size: 12px;
         font-weight: 700;
-        color: #4a5568;
+        color: var(--text-muted);
         cursor: pointer;
         border-radius: 4px;
         transition: background-color 0.2s, color 0.2s;
     }
 
     .lane-tab-trigger.active {
-        background-color: #ffffff;
+        background-color: var(--surface-bg, #ffffff);
         color: #2b6cb0;
         box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
 
     .board-columns-grid { flex-direction: column !important; }
-
     .board-column.mobile-hidden { display: none !important; }
-
     .board-column { width: 100% !important; }
 }
 
-/* TABLETBREAKPOINT: Responsive multi-row wrap mechanics */
+/* Narrow Tablets & Large Phones */
 @media(max-width: 768px) {
-    .board-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-    }
-
-    .board-header .btn-group {
-        width: 100%;
-        display: flex;
-        gap: 10px;
-    }
-
-    .board-columns-grid {
-        flex-direction: column;
-        gap: 25px;
-    }
-
-    .board-column { width: 100%; }
-
-    .management-split-row {
-        flex-direction: column;
-        gap: 20px;
-    }
-
     .right-tags-column {
         border-left: none;
-        border-top: 2px dashed #e2e8f0;
+        border-top: 2px dashed var(--text-muted);
         padding-left: 0;
         padding-top: 20px;
-    }
-
-    .btn-group,
-    .modal-btn-actions-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
         width: 100%;
-    }
-
-    .action-btn,
-    .submit-btn,
-    .cancel-btn {
-        flex: 1;
-        min-width: 90px !important;
-        font-size: 12px !important;
-        padding: 0 10px !important;
     }
 
     .search-filter-group {
@@ -645,24 +587,9 @@
         gap: 12px;
         width: 100%;
     }
-
-    .control-input-wrapper { width: 100%; }
-
-    .management-split-row {
-        flex-direction: column;
-        gap: 25px;
-    }
-
-    .right-tags-column {
-        border-left: none;
-        border-top: 2px dashed #e2e8f0;
-        padding-left: 0;
-        padding-top: 20px;
-        width: 100%;
-    }
 }
 
-/* Screens between mobile phone and tablet screens */
+/* Vertical display monitor aspect formats */
 @media(max-width: 600px) {
     .task-card-header {
         display: flex;
@@ -683,37 +610,5 @@
     .task-card h4 {
         padding-right: 25px; /* Ensures text never bleeds underneath the absolute trashcan position! */
         font-size: 14px;
-    }
-
-    /* Available Tags sidebar panel inside the crew workspace scale gracefully */
-    .category-badge-pill { 
-        font-size: 10px !important;
-        padding: 3px 6px !important;
-    }
-}
-
-/* MOBILE PHONE BREAKPOINT: Compact utility frames */
-@media(max-width: 480px) {
-    .search-filter-group {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .board-interactive-field { height: 42px }
-
-    .task-card-header {
-        flex-direction: column-reverse;
-        align-items: flex-end;
-    }
-
-    .modal-btn-actions-row {
-        flex-direction: column;
-    }
-
-    .action-btn,
-    .submit-btn,
-    .cancel-btn {
-        width: 100%;
-        height: 40px !important;
     }
 }
