@@ -13,7 +13,7 @@
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
-    border-bottom: 2px solid #cbd5e1; 
+    border-bottom: 2px solid var(--text-muted); 
     padding-bottom: 20px; 
     margin-bottom: 30px; 
     color: var(--text-primary);
@@ -72,6 +72,27 @@
     font-size: 13px; 
     margin-bottom: 6px; 
     color: var(--text-muted); 
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 2px solid #cbd5e1;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+    background-color: var(--surface-bg, #ffffff);
+    color: var(--text-primary);
+    font-family: sans-serif;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border: 2px solid #3182ce !important;
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.15);
+    outline: none;
 }
 
 textarea { 

@@ -13,7 +13,7 @@
     justify-content: space-between; 
     align-items: center; 
     gap: 20px; 
-    border-bottom: 2px solid #eaeaea; 
+    border-bottom: 2px solid var(--text-muted);
     padding-bottom: 10px; 
     margin-bottom: 25px; 
 }
