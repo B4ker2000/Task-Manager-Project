@@ -1,0 +1,129 @@
+<div class="board-wrapper">
+    <header class="board-header">
+        <button class="back-btn" [routerLink]="['/dashboard']">← Back to Dashboard</button>
+        <h2>Project Board ({{ projectTitle }})</h2>
+        <div class="board-header-action-triggers">
+            <!-- FIX 1: Corrected the spelling typo text node -->
+            <button *ngIf="currentUserProjectRole === 'Member'" class="action-btn resign-project-btn" (click)="onLeaveProjectClick()">Abandon Space</button>
+            
+            <!-- FIX 2 & 3: Integrated global button classes to inherit unified sizing shapes -->
+            <button *ngIf="currentUserProjectRole === 'Owner'" class="submit-btn workspace-header-trigger" (click)="isCategoryModalOpen = true">🎨 Create Workspace Tag</button>
+            <button *ngIf="currentUserProjectRole === 'Owner'" class="submit-btn workspace-header-trigger" (click)="openModal()">+ Add New Task</button>
+        </div>
+    </header>
+
+    <div class="project-member-management-panel">
+        <div class="invite-header-title">
+            👥 <span>Project Team & Tags Management Workspace</span>
+        </div>
+
+        <div class="management-split-row">
+            <div class="left-management-column">
+                <!-- Active Invitation Submission Row (Visible only to admins/owners) -->
+                 <div class="owner-invite-controls" *ngIf="currentUserProjectRole === 'Owner'">
+                    <form (ngSubmit)="onInviteUser()" #inviteForm="ngForm" class="invite-action-form">
+                        <div class="invite-input-container">
+                            <input type="email" name="inviteEmail" [(ngModel)]="inviteEmail" required placeholder="Enter teammate's registered email address..." class="invite-text-field" />
+                        </div>
+
+                        <div class="invite-select-container">
+                            <select name="inviteRole" [(ngModel)]="inviteRole" class="invite-dropdown-select">
+                                <option value="Member">Regular Member</option>
+                                <option value="Owner">Co-Owner / Admin</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="submit-btn" [disabled]="!inviteForm.form.valid">Add Member</button>
+                    </form>
+                 </div>
+        
+                <!-- Dynamic roster display list (Visible to everyone) -->
+                 <div class="team-roster-display-block">
+                    <h4 class="roster-sub-title">Current Project Crew</h4>
+                    <ul class="roster-list-element">
+                        <li *ngFor="let m of projectMembers" class="roster-item-row">
+                            <div class="member-info-block">
+                                <span class="member-display-email">{{ m.userEmail }}</span>
+                                <span class="role-display-badge" [ngClass]="{'badge-owner': m.projectRole === 'Owner', 'badge-member': m.projectRole === 'Member'}">
+                                    {{ m.projectRole }}
+                                </span>
+                            </div>
+
+                            <button *ngIf="currentUserProjectRole === 'Owner' && m.userId !== currentUserId" class="delete-card-btn" (click)="onRemoveMemberClick(m.userId, m.userEmail)" title="Remove Member from Project Workspace">🗙</button>
+                        </li>
+                    </ul>
+                 </div>
+            </div>
+
+            <!-- DYNAMIC MASTER WORKSPACE TAGS ROSTER -->
+             <div class="right-tags-column">
+                <h5>🏷️ Available Project Tags</h5>
+
+                 <div *ngIf="projectCategories.length === 0" class="tags-roster-tray-fallback">
+                    No custom tags created for this project yet
+                 </div>
+
+                 <div class="tags-flex-container">
+                    <span *ngFor="let cat of projectCategories" class="category-badge-pill" [style.backgroundColor]="cat.colorHex">
+                        <span>{{ cat.name }} ({{ getTaskCountByCategory(cat.id) }})</span>
+
+                         <button *ngIf="currentUserProjectRole === 'Owner'" (click)="onDeleteCategoryClick(cat.id, cat.name)" title="Permanently Delete Workspace Tag" class="category-badge-pill-delete-btn">
+                            ✕
+                         </button>
+                    </span>
+                 </div>
+             </div>
+        </div>
+    </div>
+
+    <div class="board-controls-panel">
+        <div class="search-filter-group">
+            <!-- Task Text Search -->
+             <div class="control-input-wrapper">
+                <span class="control-icon-anchor">🔍</span>
+                <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="applyFilters()" placeholder="Search tasks by title..." class="board-interactive-field search" />
+             </div>
+
+            <!-- Search by Selecting Priority -->
+             <div class="control-input-wrapper">
+                <span class="control-icon-anchor">🎯</span>
+                <select [(ngModel)]="selectedPriority" (ngModelChange)="applyFilters()" class="board-interactive-field priority">
+                    <option value="All">All Priorities</option>
+                    <option value="High">High Priority</option>
+                    <option value="Medium">Medium Priority</option>
+                    <option value="Low">Low Priority</option>
+                </select>
+             </div>
+
+            <!-- Search by Selecting Category Tag -->
+             <div class="control-input-wrapper">
+                <span class="control-icon-anchor">🏷️</span>
+                <select id="searchCategory" [(ngModel)]="selectedCategory" (change)="applyFilters()" class="board-interactive-field category">
+                    <option value="All">All Tags</option>
+                    <option value="Null">Unassigned Tasks</option>
+                    <option *ngFor="let cat of projectCategories" [value]="cat.id">
+                        {{ cat.name }}
+                    </option>
+                </select>
+             </div>
+        </div>
+
+        <!-- Live Project Progress Analytics Tracker -->
+         <div class="progress-analytics">
+            <div class="priority-text-label"> <!-- Restored matching variable class from your css -->
+                <span>Project Completion Progress:</span>
+                <strong>{{ completionPercentage }}%</strong>
+            </div>
+            <div class="progress-bar-track">
+                <div class="progress-bar-fill" [style.width.%]="completionPercentage"></div>
+            </div>
+         </div>
+    </div>
+
+    <div class="mobile-board-lane-switcher">
+        <button class="lane-tab-trigger" [ngClass]="{'active': activeMobileColumn === 'Pending'}" (click)="activeMobileColumn = 'Pending'">⏳ Pending</button>
+        <button class="lane-tab-trigger" [ngClass]="{'active': activeMobileColumn === 'InProgress'}" (click)="activeMobileColumn = 'InProgress'">⚡ Progress & Review</button>
+        <button class="lane-tab-trigger" [ngClass]="{'active': activeMobileColumn === 'Completed'}" (click)="activeMobileColumn = 'Completed'">✅ Completed</button>
+    </div>
+
+    <div class="board-columns-grid">

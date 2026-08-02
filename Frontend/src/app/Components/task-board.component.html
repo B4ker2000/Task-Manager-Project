@@ -3,10 +3,10 @@
         <button class="back-btn" [routerLink]="['/dashboard']">← Back to Dashboard</button>
         <h2>Project Board ({{ projectTitle }})</h2>
         <div class="board-header-action-triggers">
-            <button *ngIf="currentUserProjectRole === 'Member'" class="back-btn resign-project-btn" (click)="onLeaveProjectClick()">Abanddon Space</button>
+            <button *ngIf="currentUserProjectRole === 'Member'" class="action-btn resign-project-btn" (click)="onLeaveProjectClick()">Abandon Space</button>
             <!-- Clicking these two opens our form modal overlays -->
-             <button *ngIf="currentUserProjectRole === 'Owner'" class="send-invite-btn" (click)="isCategoryModalOpen = true">+ Create Workspace Tag</button>
-             <button *ngIf="currentUserProjectRole === 'Owner'" class="add-task-btn" (click)="openModal()">+ Add New Task</button>
+             <button *ngIf="currentUserProjectRole === 'Owner'" class="submit-btn workspace-header-trigger" (click)="isCategoryModalOpen = true">+ Create Workspace Tag</button>
+             <button *ngIf="currentUserProjectRole === 'Owner'" class="submit-btn workspace-header-trigger" (click)="openModal()">+ Add New Task</button>
         </div>
     </header>
 
@@ -18,7 +18,7 @@
         <div class="management-split-row">
             <div class="left-management-column">
                 <!-- Active Invitation Submission Row (Visible only to admins/owners) -->
-                 <div class="owner-invite-controls"  *ngIf="currentUserProjectRole === 'Owner'">
+                 <div class="owner-invite-controls" *ngIf="currentUserProjectRole === 'Owner'">
                     <form (ngSubmit)="onInviteUser()" #inviteForm="ngForm" class="invite-action-form">
                         <div class="invite-input-container">
                             <input type="email" name="inviteEmail" [(ngModel)]="inviteEmail" required placeholder="Enter teammate's registered email address..." class="invite-text-field" />
@@ -31,7 +31,7 @@
                             </select>
                         </div>
 
-                        <button type="submit" class="send-invite-btn" [disabled]="!inviteForm.form.valid">Add Member</button>
+                        <button type="submit" class="submit-btn" [disabled]="!inviteForm.form.valid">Add Member</button>
                     </form>
                  </div>
         
@@ -41,14 +41,13 @@
                     <ul class="roster-list-element">
                         <li *ngFor="let m of projectMembers" class="roster-item-row">
                             <div class="member-info-block">
-                                <span class="memeber-display-email">{{ m.userEmail }}</span>
+                                <span class="member-display-email">{{ m.userEmail }}</span>
                                 <span class="role-display-badge" [ngClass]="{'badge-owner': m.projectRole === 'Owner', 'badge-member': m.projectRole === 'Member'}">
                                     {{ m.projectRole }}
                                 </span>
                             </div>
 
                             <button *ngIf="currentUserProjectRole === 'Owner' && m.userId !== currentUserId" class="delete-card-btn" (click)="onRemoveMemberClick(m.userId, m.userEmail)" title="Remove Member from Project Workspace">🗙</button>
-
                         </li>
                     </ul>
                  </div>
@@ -113,7 +112,7 @@
 
         <!-- Live Project Progress Analytics Tracker -->
          <div class="progress-analytics">
-            <div class="progress-text-label">
+            <div class="priority-text-label">
                 <span>Project Completion Progress:</span>
                 <strong>{{ completionPercentage }}%</strong>
             </div>
