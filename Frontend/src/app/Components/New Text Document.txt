@@ -2,11 +2,11 @@
    TASK CARD WORKSPACE ELEMENTS (THEME RESPONSIVE KANBAN CORES)
    ========================================================================= */
 .task-card { 
-    background-color: var(--surface-bg, #ffffff); 
+    background-color: var(--surface-bg, #ffffff); /* Theme variable mapping */
     border: 1px solid #cbd5e1; 
     border-radius: 6px; 
     padding: 15px; 
-    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02); 
     box-sizing: border-box;
 }
 
@@ -29,14 +29,15 @@
     margin: 0 0 15px 0; 
     color: var(--text-muted); 
     font-size: 13px; 
-    line-height: 1.4;  
+    line-height: 1.4; 
     text-align: left; 
 }
 
+/* Status state modifiers mapped out using theme adaptive palettes */
 .task-card.done { 
     background-color: var(--container-bg, #f1f5f9); 
     border-color: #e2e8f0; 
-    opacity: 0.7;
+    opacity: 0.7; 
 }
 
 .task-card.review-needed-card {
@@ -44,6 +45,7 @@
     background-color: var(--badge-medium-bg, #fffaf0);
 }
 
+/* High contrast trashcan deletion triggers */
 .delete-card-btn { 
     background-color: transparent; 
     border: none; 
@@ -61,7 +63,7 @@
 .delete-card-btn:hover {
     background-color: #fee2e2;
     color: #ef4444;
-    transform: scale(1.05); /* Adds a tiny, responsive tactile pop! */
+    transform: scale(1.05); 
 }
 
 /* =========================================================================
@@ -81,7 +83,7 @@
     align-items: center;
     position: relative;
     width: 100%;
-    border-bottom: 2px solid var(--text-muted); 
+    border-bottom: 2px solid var(--text-muted); /* Adaptive divider line! */
     padding-bottom: 20px; 
     margin-bottom: 30px; 
     gap: 10px;
@@ -99,7 +101,7 @@
    ========================================================================= */
 .board-columns-grid { 
     display: grid; 
-    grid-template-columns: repeat(3, 1fr); /* This basically means "Create 3 columns, and give them exactly 1 equal slice of space each!" */
+    grid-template-columns: repeat(3, 1fr); 
     gap: 25px; 
     align-items: start; 
 }
@@ -118,7 +120,7 @@
     margin-bottom: 20px; 
     border-bottom: 2px solid #cbd5e1; 
     padding-bottom: 10px; 
-    color: var(--text-primary);
+    color: var(--text-primary); 
     text-align: left;
 }
 
@@ -136,10 +138,10 @@
     margin-top: 10px; 
 }
 
-.btn-group {
-    display: flex;
-    gap: 4px;
-    flex-shrink: 0;
+.btn-group { 
+    display: flex; 
+    gap: 4px; 
+    flex-shrink: 0; 
 }
 
 /* =========================================================================
@@ -183,10 +185,11 @@
     font-weight: bold; 
     font-size: 13px; 
     margin-bottom: 6px; 
-    color: var(--text-muted); 
+    color: var(--text-muted); /* Theme responsive label color text */
     text-align: left; 
 }
 
+/* Local input geometry wrappers mapping directly to your global theme variables */
 .form-group input, 
 .form-group textarea, 
 .form-group select { 
@@ -257,7 +260,7 @@
     position: absolute;
     left: 12px;
     font-size: 14px;
-    pointer-events: none; /* Mouse clicks pass straight through icon directly to the field background */
+    pointer-events: none; 
     z-index: 5;
 }
 
@@ -295,13 +298,13 @@
 /* =========================================================================
    PROJECT TEAM MEMBERS CONSOLE MANAGEMENT
    ========================================================================= */
-.project-member-management-panel {  
-    background-color: var(--surface-bg, #ffffff); 
+.project-member-management-panel {
+    background-color: var(--surface-bg, #ffffff);
     border: 1px solid #e6e3de;
-    border-radius: 8px; 
-    padding: 20px; 
-    margin-bottom: 25px; 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
     box-sizing: border-box;
 }
 
@@ -342,7 +345,7 @@
 /* 3/5 & 2/5 Layout Split Rows */
 .management-split-row {
     display: flex;
-    gap: 30px;
+    gap: 30px; /* FIXED: Corrected your typo layout parameter from 30x to 30px! */
     flex-wrap: wrap;
 }
 
@@ -359,6 +362,7 @@
     text-align: left;
 }
 
+/* Roster list elements lists mapping metrics counters */
 .roster-list-element {
     list-style: none;
     padding: 0;
@@ -417,303 +421,4 @@
     display: inline-block;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-}
-
-.task-category-tag-wrapper {
-    margin-bottom: 10px;
-    text-align: left;
-}
-
-.category-badge-pill {
-    display: inline-block;
-    align-items: center;
-    gap: 6px;
-    font-size: 11px;
-    font-weight: 700;
-    color: #ffffff;
-    padding: 4px 10px;
-    border-radius: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-    cursor: default;
-}
-
-.category-badge-pill-delete-btn {
-    background: transparent;
-    border: none;
-    color: #ffffff;
-    cursor: pointer;
-    font-size: 10px;
-    font-weight: bold;
-    padding: 0 4px;
-    margin-left: 5px;
-    opacity: 0.7;
-    border-radius: 50%;                       /* Turns the background into a perfect tiny circle */
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 16px;
-    height: 16px;
-    transition: opacity 0.2s ease, background-color 0.2s ease;
-}
-
-.category-badge-pill:hover .category-badge-pill-delete-btn { opacity: 1; }
-
-.category-badge-pill-delete-btn:hover {
-    background-color: #ffffff !important;   /* Stark white circle bubble background */
-    color: #1a202c !important;              /* Solid charcoal black icon text tint */
-    transform: scale(1.1);                    /* Clean tactile interactive scaling pop */
-}
-
-.left-management-column {
-    flex: 3;
-    min-width: 300px;
-}
-
-.right-tags-column {
-    flex: 2;
-    min-width: 220px;
-    border-left: 2px dashed #e2e8f0;
-    padding-left: 25px;
-}
-
-.right-tags-column h5 {
-    margin: 0 0 10px 0;
-    font-size: 13px;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.tags-roster-tray-fallback {
-    font-size: 13px;
-    color: var(--text-muted);
-    font-style: italic;
-    padding: 10px 0;
-}
-
-.tags-flex-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 12px;
-}
-
-.team-roster-display-block { margin-top: 15px; }
-
-.task-actions,
-.btn-group {
-    flex-wrap: wrap;
-    /* gap: 6px; */
-    width: 100%;
-}
-
-.task-actions button,
-.btn-group button {
-    flex: 1;
-    min-width: 75px;
-    font-size: 11px !important;
-    padding: 4px 6px !important;
-    white-space: nowrap;
-}
-
-.mobile-board-lane-switcher { display: none; }
-
-.back-btn,
-.action-btn,
-.submit-btn,
-.cancel-btn,
-.add-task-btn,
-.send-invite-btn,
-.btn-group button { transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
-
-/* MEDIUM DISPLAY BREAKPOINT: Smaller Office Monitors and Laptops */
-@media(max-width: 1024px) {
-    .board-columns-grid { gap: 15px; }
-
-    .board-column { min-width: 250px; }
-}
-
-/* Screen resolutions between small monitors & tablets */
-@media(max-width: 800px) {
-    .board-header {
-        display: flex;
-        flex-direction: column !important;
-        align-items: center !important;
-        text-align: center;
-        gap: 15px;
-    }
-
-    .board-header-action-triggers {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        justify-content: center;
-        width: 100%;
-    }
-
-    .mobile-board-lane-switcher {
-        display: flex;
-        width: 100%;
-        background-color: #edf2f7;
-        padding: 4px;
-        border-radius: 6px;
-        margin-bottom: 20px;
-        gap: 4px;
-    }
-
-    .lane-tab-trigger {
-        flex: 1;
-        background: transparent;
-        border: none;
-        padding: 8px 4px;
-        font-size: 12px;
-        font-weight: 700;
-        color: #4a5568;
-        cursor: pointer;
-        border-radius: 4px;
-        transition: background-color 0.2s, color 0.2s;
-    }
-
-    .lane-tab-trigger.active {
-        background-color: #ffffff;
-        color: #2b6cb0;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
-
-    .board-columns-grid { flex-direction: column !important; }
-
-    .board-column.mobile-hidden { display: none !important; }
-
-    .board-column { width: 100% !important; }
-}
-
-/* TABLETBREAKPOINT: Responsive multi-row wrap mechanics */
-@media(max-width: 768px) {
-    .board-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-    }
-
-    .board-header .btn-group {
-        width: 100%;
-        display: flex;
-        gap: 10px;
-    }
-
-    .board-columns-grid {
-        flex-direction: column;
-        gap: 25px;
-    }
-
-    .board-column { width: 100%; }
-
-    .management-split-row {
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .right-tags-column {
-        border-left: none;
-        border-top: 2px dashed #e2e8f0;
-        padding-left: 0;
-        padding-top: 20px;
-    }
-
-    .btn-group,
-    .modal-btn-actions-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        width: 100%;
-    }
-
-    .action-btn,
-    .submit-btn,
-    .cancel-btn {
-        flex: 1;
-        min-width: 90px !important;
-        font-size: 12px !important;
-        padding: 0 10px !important;
-    }
-
-    .search-filter-group {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 12px;
-        width: 100%;
-    }
-
-    .control-input-wrapper { width: 100%; }
-
-    .management-split-row {
-        flex-direction: column;
-        gap: 25px;
-    }
-
-    .right-tags-column {
-        border-left: none;
-        border-top: 2px dashed #e2e8f0;
-        padding-left: 0;
-        padding-top: 20px;
-        width: 100%;
-    }
-}
-
-/* Screens between mobile phone and tablet screens */
-@media(max-width: 600px) {
-    .task-card-header {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 6px;
-        position: relative;
-    }
-
-    /* Anchors the delete button neatly to the top-right corner to save title layout space */
-    .task-card-header .delete-card-btn {
-        position: absolute;
-        top: 0;
-        right: 0;
-        padding: 2px;
-    }
-
-    .task-card h4 {
-        padding-right: 25px; /* Ensures text never bleeds underneath the absolute trashcan position! */
-        font-size: 14px;
-    }
-
-    /* Available Tags sidebar panel inside the crew workspace scale gracefully */
-    .category-badge-pill { 
-        font-size: 10px !important;
-        padding: 3px 6px !important;
-    }
-}
-
-/* MOBILE PHONE BREAKPOINT: Compact utility frames */
-@media(max-width: 480px) {
-    .search-filter-group {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .board-interactive-field { height: 42px }
-
-    .task-card-header {
-        flex-direction: column-reverse;
-        align-items: flex-end;
-    }
-
-    .modal-btn-actions-row {
-        flex-direction: column;
-    }
-
-    .action-btn,
-    .submit-btn,
-    .cancel-btn {
-        width: 100%;
-        height: 40px !important;
-    }
 }

@@ -24,6 +24,7 @@ export class DashboardComponent implements OnInit {
         // Only trigger initial project load if we are fully inside the browser
         if(isPlatformBrowser(this.platformId)) {
             this.loadProjects();
+            this.cdr.detectChanges();
         }
     }
 
@@ -33,7 +34,7 @@ export class DashboardComponent implements OnInit {
         if(!token) return; // Stop completely if no token exists
         
         this.projectService.getMyProjects().subscribe({
-            next: (data) => { 
+            next: (data: any[]) => { 
                 this.projects = data; 
                 this.cdr.detectChanges(); // Instantly refresh the cards so they show up immidetly after login!
             },
