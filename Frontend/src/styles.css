@@ -33,7 +33,9 @@
     --brand-accent: #107c10;        /* Classic software green trigger commands */
 }
 
-/* Global textbox accessibility focus deafults! */
+/* =========================================================================
+   GLOBAL TESTBOX ACCESSIBILITY FOCUS DEFAULTS!
+   ========================================================================= */
 input[type="text"]:focus,
 input[type="date"]:focus,
 input[type="email"]:focus,
@@ -45,6 +47,9 @@ select:focus, textarea:focus {
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
+/* =========================================================================
+   GLOBAL BUTTON STYLES
+   ========================================================================= */
 .action-btn,
 .submit-btn,
 .cancel-btn,
@@ -91,7 +96,7 @@ button:disabled {
 
 .cancel-btn,
 .back-btn,
-.action-btn.next {
+.action-btn.back {
     background-color: #ffffff;
     color: #4a5568;
     border: 2px solid #cbd5e1;
@@ -104,3 +109,33 @@ button:disabled {
     color: #ffffff;
     border-color: #2d3748;
 }
+
+/* =========================================================================
+   GLOBAL SELECT DROPDOWN REFACTORING (SPRING CLEANING RUN)
+   ========================================================================= */
+select,
+.invite-dropdown-select,
+.modal-dropdown-select,
+.assignee-dropdown-menu,
+.board-filter-dropdown-select {
+    width: 100%;
+    height: 38px;
+    padding: 8px 30px 8px 12px !important;
+    border: 2px solid #cbd5e1;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 13px;
+    background-color: var(--surface-bg, #ffffff);
+    color: var(--text-primary);
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+select:focus,
+.board-interactive-field:focus {
+    border: 2px solid #3182ce !important;
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.15);
+}
+
+.control-input-wrapper select { padding-left: 12px !important; }

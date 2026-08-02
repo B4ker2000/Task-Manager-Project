@@ -26,9 +26,18 @@ export class LoginComponent {
 
         this.authService.login(this.credentials).subscribe({
             next: (res: any) => {
+                console.log("Authentication sequence successful!");
+
+                // 1. Wipe out any old conflicting residual keys first
+                localStorage.removeItem('token');
+                sessionStorage.removeItem('token');
+
+                // 2. THE SECURITY GATEWAY: Branch the storage based on their tick status!
                 if(this.rememberMe) {
+                    // Persistent save: Survives browser crashes and computer restarts
                     localStorage.setItem('token', res.token);
                 } else {
+                    // Volatile save: Strictly bounded to the life of this active tab window context
                     sessionStorage.setItem('token', res.token);
                 }
                 

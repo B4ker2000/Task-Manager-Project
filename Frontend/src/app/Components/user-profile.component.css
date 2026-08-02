@@ -211,7 +211,7 @@
 }
 
 /* =========================================================================
-   WORKSPACE COINFIGURATION PREFERENCES (THEMES)
+   WORKSPACE CONFIGURATION PREFERENCES (THEMES)
    ========================================================================= */
 .config-control-row {
     display: flex;
@@ -222,7 +222,7 @@
 }
 
 /* =========================================================================
-   LOCAL PROFILE BUTTON OVERRIDES: Restores core structure shapes
+   LOCAL PROFILE BUTTON OVERRIDES: Core geometry properties
    ========================================================================= */
 .save-settings-btn { 
     width: 100%; 
@@ -241,14 +241,6 @@
     background-color: #28a745; 
     color: #ffffff; 
     border-color: #18772e;
-}
-
-.save-settings-btn:hover:disabled { 
-    background-color: #cbd5e1 !important; 
-    border-color:#797f86 !important;
-    color: #4a5568 !important;
-    cursor: not-allowed !important;
-    opacity: 0.6 !important; 
 }
 
 .danger-zone-btn { 
@@ -270,7 +262,7 @@
 }
 
 /* =========================================================================
-   THEME SELECT DROPDOWN POLISH: Matches your premium input metrics!
+   THEME SELECT DROPDOWN RECONFIGURATIONS
    ========================================================================= */
 .control-input-wrapper {
     position: relative;
@@ -278,21 +270,6 @@
     display: flex;
     align-items: center;
     margin-top: 5px;
-}
-
-.board-interactive-field.select-config {
-    width: 100%;
-    height: 38px;
-    padding: 8px 12px 8px 12px !important;
-    border: 2px solid #cbd5e1;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 13px;
-    background-color: var(--surface-bg, #ffffff);
-    color: var(--text-primary);
-    outline: none;
-    cursor: pointer;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 /* =========================================================================

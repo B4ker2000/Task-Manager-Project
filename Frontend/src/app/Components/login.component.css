@@ -1,20 +1,27 @@
+/* =========================================================================
+   LOCAL AUTHENTICATION VIEW CONTAINER (LOGIN SYSTEM)
+   ========================================================================= */
 .login-container { 
     max-width: 400px; 
     margin: 60px auto; 
     padding: 30px;
-    border: 1px solid #ddd; 
+    background-color: var(--surface-bg, #ffffff);
+    color: var(--text-primary);
+    border: 1px solid #cbd5e1; 
     border-radius: 8px; 
     font-family: sans-serif; 
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    box-sizing: border-box; 
 }
 
 h2 { 
+    margin-top: 0;
     margin-bottom: 5px; 
-    color: #333; 
+    color: var(--text-primary); 
 }
 
 p { 
-    color: #666; 
+    color: var(--text-muted); 
     font-size: 14px; 
     margin-bottom: 20px; 
 }
@@ -26,65 +33,32 @@ label {
     margin-bottom: 5px; 
     font-weight: bold; 
     font-size: 13px; 
-    color: #444; 
+    color: var(--text-muted);
 }
 
-input { 
+input[type="email"] { 
     width: 100%; 
     padding: 10px; 
-    border: 1px solid #ccc; 
+    border: 1px solid #cbd5e1; 
     border-radius: 4px; 
     box-sizing: border-box; 
     font-size: 14px; 
+    background-color: var(--surface-bg);
+    color: var(--text-primary);
 }
 
+/* =========================================================================
+   SUBMIT BUTTON LOCAL WIDTH STRETCHES
+   ========================================================================= */
 .login-submit-btn { 
     width: 100%; 
-    padding: 12px; 
-    background-color: #ffffff;
-    color: #3182ce;
-    border: 2px solid #3182ce;
-    border-radius: 4px; 
-    font-weight: bold; 
-    cursor: pointer; 
+    height: 42px;
     margin-top: 10px; 
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
-.login-submit-btn:hover:not(:disabled) { 
-    background-color: #3182ce;
-    color: #ffffff;
-    border-color: #2b6cb0;
-}
-
-.login-submit-btn:disabled { 
-    background-color: #cbd5e1; 
-    border-color:#797f86;
-    color: #4a5568;
-    cursor: not-allowed; 
-}
-
-.error-msg { 
-    color: #dc3545; 
-    font-weight: bold; 
-    margin-top: 15px; 
-    font-size: 14px; 
-    text-align: center; 
-}
-
-.login-footer-navigation { 
-    text-align: center; 
-    margin-top: 15px; 
-    font-size: 13px; 
-    color: #4a5568; 
-}
-
-.create-new-account-link { 
-    color: #007bff; 
-    font-weight: bold; 
-    text-decoration: none; 
-}
-
+/* =========================================================================
+   PASSWORD LAYOUT INTEGRATION FIELDS
+   ========================================================================= */
 .password-input-wrapper { 
     display: flex; 
     align-items: center; 
@@ -99,6 +73,8 @@ input {
     border-radius: 4px; 
     box-sizing: border-box; 
     font-size: 14px; 
+    background-color: var(--surface-bg);
+    color: var(--text-primary);
 }
 
 .eye-toggle-btn { 
@@ -119,16 +95,19 @@ input {
 
 .eye-toggle-btn:hover { opacity: 1; }
 
+/* =========================================================================
+   REMEMBER ME CHECKBOX ALIGNMENT TRACKERS
+   ========================================================================= */
 .remember-me-container {
     display: flex;
-    justify-content: left;
-    align-items: left;
+    justify-content: flex-start;
+    align-items: center;
     margin: 15px 0;
     width: 100%;
 }
 
 .remember-me-label {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 8px;
     cursor: pointer;
@@ -138,10 +117,49 @@ input {
 #rememberMeBox {
     width: 16px;
     height: 16px;
-    /* accent-color: #007bff; */
+    cursor: pointer;
 }
 
 .remember-me-text {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+/* =========================================================================
+   NAVIGATION FOOTERS AND VALIDATION ERRORS
+   ========================================================================= */
+.error-msg {
+    color: #dc3545;
+    font-weight: bold;
+    margin-top: 15px;
     font-size: 14px;
-    color: #495057;
+    text-align: center;
+}
+
+.login-footer-navigation {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.create-new-account-link {
+    color: #007bff;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.create-new-account-link:hover {
+    text-decoration: underline;
+}
+
+/* =========================================================================
+    FLUID CROSS-RESOLUTION DEVICE SCALING BREAKPOINTS
+   ========================================================================= */
+@media(max-width: 480px) {
+    .login-container {
+        margin: 20px 10px;
+        padding: 20px;
+        max-width: 100%;
+    }
 }
