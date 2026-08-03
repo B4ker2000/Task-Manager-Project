@@ -1,96 +1,76 @@
 :root {
     /* ☀️ DEFAULT CLEAN LIGHT WORKSPACE VARIABLES */
-    --surface-bg: #ffffff;          /* Main cards background canvas */
-    --container-bg: #f8f9fa;        /* App layout shell backdrop tint */
-    --text-primary: #212529;        /* Dominant heavy font header color */
-    --text-muted: #6c757d;          /* Subtitles, labels and helper notes */
-    --brand-accent: #007bff;        /* Core interaction signature button color */
-    --brand-accent-border: #3182ce; /* Border color for our buttons */
-    --border-color: #cbd5e1;           /* Universal border color for the different cards */
+    --surface-bg: #ffffff;                                              /* Main cards background canvas */
+    --container-bg: #f8f9fa;                                            /* App layout shell backdrop tint */
+    --text-primary: #212529;                                            /* Dominant heavy font header color */
+    --text-muted: #6c757d;                                              /* Subtitles, labels and helper notes */
+    --brand-accent: #007bff;                                            /* Core interaction signature button color */
+    --brand-accent-border: #3182ce;                                     /* Border color for our buttons */
+    --border-color: #cbd5e1;                                            /* Universal border color for the different cards */
+    --progress-bar-fill: linear-gradient(90deg, #28a745, #34ce57);    /* Emerald light gradient */
+    --filter-focus-color: #28a745;                                      /* Green focus lines */
+    --filter-focus-shadow: rgba(40, 167, 69, 0.15);
 
     /* 📊 PRIORITY VALUE HIGH-CONTRAST ACCESSIBILITY MATRICES */
-    --badge-high-bg: #fff5f5;
-    --badge-high-text: #e53e3e;
-    --badge-high-border: #fed7d7;
-
-    --badge-medium-bg: #fffaf0;
-    --badge-medium-text: #dd6b20;
-    --badge-medium-border: #feebc8;
-
-    --badge-low-bg: #ebf8ff;
-    --badge-low-text: #3182ce;
-    --badge-low-border: #bee3f8;
-
-    --badge-done-bg: #e6fffa;
-    --badge-done-text: #234e52;
-    --badge-done-border: #319795;
+    --badge-high-bg: #fff5f5;       --badge-high-text: #e53e3e;     --badge-high-border: #fed7d7;
+    --badge-medium-bg: #fffaf0;     --badge-medium-text: #dd6b20;   --badge-medium-border: #feebc8;
+    --badge-low-bg: #ebf8ff;        --badge-low-text: #3182ce;      --badge-low-border: #bee3f8;
+    --badge-done-bg: #e6fffa;       --badge-done-text: #234e52;     --badge-done-border: #319795;
 }
 
 /* 🌙 SYSTEM DARK WORKSPACE MODE OVERRIDE */
 [data-theme="dark"] {
-    --surface-bg: #1e1e1e;          /* Deep rich carbon surface color */
-    --container-bg: #121212;        /* Flat midnight background floor canvas */
-    --text-primary: #f8f9fa;        /* Crisp white readable header font block */
-    --text-muted: #a0aec0;          /* Soft grey structural subtext text */
-    --brand-accent: #3182ce;        /* Vibrant electric neon accent action fills */
-    --brand-accent-border: #2b6cb0; /* Border color to compliment our button color above */
-    --border-color: #3e3e3e;        /* Dark carbon outlines */
+    --surface-bg: #1e1e1e;                                              /* Deep rich carbon surface color */
+    --container-bg: #121212;                                            /* Flat midnight background floor canvas */
+    --text-primary: #f8f9fa;                                            /* Crisp white readable header font block */
+    --text-muted: #a0aec0;                                              /* Soft grey structural subtext text */
+    --brand-accent: #3182ce;                                            /* Vibrant electric neon accent action fills */
+    --brand-accent-border: #2b6cb0;                                     /* Border color to compliment our button color above */
+    --border-color: #3e3e3e;                                            /* Dark carbon outlines */
+    --progress-bar-fill: linear-gradient(90deg, #48bb78, #38a169);    /* Soft glowing green */
+    --filter-focus-color: #48bb78;
+    --filter-focus-shadow: rgba(72, 187, 120, 0.2);
+    
 
     /* 📊 DARK MODE ACCESSIBILITY BADGE MATRICES */
-    --badge-high-bg: #3c1e1e;       /* Deep crimson ruby tint */
-    --badge-high-text: #fc8181;     /* High-vis soft neon red font text */
-    --badge-high-border: #e53e3e;   /* Stark red border line anchor */
-
-    --badge-medium-bg: #3c2a1a;     /* Deep amber carbon fill */
-    --badge-medium-text: #f6ad55;   /* High-vis soft neon orange font text */
-    --badge-medium-border: #dd6b20; /* Stark orange border line anchor */
-
-    --badge-low-bg: #1a2e3b;        /* Deep navy slate sapphire fill */
-    --badge-low-text: #63b3ed;      /* High-vis soft neon blue font text */
-    --badge-low-border: #3182ce;    /* Stark blue border line anchor */
-    
-    --badge-done-bg: #1c3d27;       /* Deep obsidian forest emerald fill */
-    --badge-done-text: #68d391;     /* High-vis soft neon green font text */
-    --badge-done-border: #28a745;   /* Stark green border line anchor */
+    --badge-high-bg: #3c1e1e;       --badge-high-text: #fc8181;     --badge-high-border: #e53e3e;
+    --badge-medium-bg: #3c2a1a;     --badge-medium-text: #f6ad55;   --badge-medium-border: #dd6b20;
+    --badge-low-bg: #1a2e3b;        --badge-low-text: #63b3ed;      --badge-low-border: #3182ce;
+    --badge-done-bg: #1c3d27;       --badge-done-text: #68d391;     --badge-done-border: #28a745;
 }
 
 /* 💾 NOSTALGIC Y2K RETRO EASTER EGG SYSTEM (GLOSSY WINDOWS XP / 98 ERA VIBES) */
 [data-theme="retro-y2k"] {
-    --surface-bg: #ffffff;          /* Simple white background color */
-    --container-bg: #d4d0c8;        /* Classic hardware grey chassis fill */
-    --text-primary: #000000;        /* Flat stark terminal text ink black */
-    --text-muted: #000080;          /* Deep navy text links alignment */
-    --brand-accent: #107c10;        /* Classic software green trigger commands */
-    --brand-accent-border: #0a5c0a; /* Midnight forest green to compliment the classic button color above */
-    --border-color: #808080;        /* Stark classic 90s hardware gray ouline */
+    --surface-bg: #ffffff;                              /* Simple white background color */
+    --container-bg: #d4d0c8;                            /* Classic hardware grey chassis fill */
+    --text-primary: #000000;                            /* Flat stark terminal text ink black */
+    --text-muted: #000080;                              /* Deep navy text links alignment */
+    --brand-accent: #107c10;                            /* Classic software green trigger commands */
+    --brand-accent-border: #0a5c0a;                     /* Midnight forest green to compliment the classic button color above */
+    --border-color: #808080;                            /* Stark classic 90s hardware gray ouline */
+    --progress-bar-fill: #107c10;                       /* Flat harware green */
+    --filter-focus-color: #107c10;                      
+    --filter-focus-shadow: rgba(16, 124, 16, 0.15);
     
     /* 📊 Y2K ACCESSIBILITY BADGE MATRICES: Styled like classic early-2000s desktop alerts! */
-    --badge-high-bg: #ff0000;
-    --badge-high-text: #ffffff;
-    --badge-high-border: #800000;
-
-    --badge-medium-bg: #ffff00;
-    --badge-medium-text: #000000;
-    --badge-medium-border: #808000;
-
-    --badge-low-bg: #0000ff;
-    --badge-low-text: #ffffff;
-    --badge-low-border: #000080;
-    
-    --badge-done-bg: #00ff00;
-    --badge-done-text: #000000;
-    --badge-done-border: #008000;
+    --badge-high-bg: #ff0000;       --badge-high-text: #ffffff;     --badge-high-border: #800000;
+    --badge-medium-bg: #ffff00;     --badge-medium-text: #000000;   --badge-medium-border: #808000;
+    --badge-low-bg: #0000ff;        --badge-low-text: #ffffff;      --badge-low-border: #000080;
+    --badge-done-bg: #00ff00;       --badge-done-text: #000000;     --badge-done-border: #008000;
 }
 
 /* 📟 MONOCHROME RETRO AMBER CRT TERMINAL THEME (FALLOUT/VINTAGE UNIX COMPUTER ERA) */
 [data-theme="amber-crt"] {
-    --surface-bg: #110b00;          /* Deep pitch dark charcoal amber canvas */
-    --container-bg: #050300;        /* Pure obsidian black terminal floor backdrop */
-    --text-primary: #ffb000;        /* Glowing vintage high-vis phosphorus amberink text */
-    --text-muted: #aa7500;          /* Muted copper phosphor amber subtitles notes */
+    --surface-bg: #110b00;                              /* Deep pitch dark charcoal amber canvas */
+    --container-bg: #050300;                            /* Pure obsidian black terminal floor backdrop */
+    --text-primary: #ffb000;                            /* Glowing vintage high-vis phosphorus amberink text */
+    --text-muted: #aa7500;                              /* Muted copper phosphor amber subtitles notes */
     --brand-accent: #ffb000;        
     --brand-accent-border: #ffb000; 
-    --border-color: #ffb000;        /* Everything is framed in uniform amber glowing circuits! */
+    --border-color: #ffb000;                            /* Everything is framed in uniform amber glowing circuits! */
+    --progress-bar-fill: #ffb000;                       /* Everything glows phosphorus */
+    --filter-focus-color: #ffb000;
+    --filter-focus-shadow: rgba(255, 176, 0, 0.2);
     
     /* 📊 Amber-CRT ACCESSIBILITY BADGE MATRICES */
     --badge-high-bg: #ffb000;       --badge-high-text: #050300;     --badge-high-border: #ffb000;
@@ -124,7 +104,7 @@ input[type="password"],
 textarea {
     background-color: var(--surface-bg, #ffffff) !important;
     color: var(--text-primary) !important;
-    border: 2px solid #cbd5e1;
+    border: 2px solid var(--border-color, #cbd5e1);
     transition: all 0.15s ease-in-out;
 }
 
@@ -213,7 +193,7 @@ select,
     width: 100%;
     height: 38px;
     padding: 8px 30px 8px 12px !important;
-    border: 2px solid #cbd5e1;
+    border: 2px solid var(--border-color, #cbd5e1);
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 13px;

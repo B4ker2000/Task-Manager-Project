@@ -36,7 +36,7 @@
                  </div>
         
                 <!-- Dynamic roster display list (Visible to everyone) -->
-                 <div class="team-roster-display-block">
+                 <div>
                     <h4 class="roster-sub-title">Current Project Crew</h4>
                     <ul class="roster-list-element">
                         <li *ngFor="let m of projectMembers" class="roster-item-row">
@@ -122,6 +122,7 @@
          </div>
     </div>
 
+    <!-- Mobile/Vertical screen, column navigation buttons -->
     <div class="mobile-board-lane-switcher">
         <button class="lane-tab-trigger" [ngClass]="{'active': activeMobileColumn === 'Pending'}" (click)="activeMobileColumn = 'Pending'">⏳ Pending</button>
         <button class="lane-tab-trigger" [ngClass]="{'active': activeMobileColumn === 'InProgress'}" (click)="activeMobileColumn = 'InProgress'">⚡ Progress & Review</button>
@@ -263,6 +264,9 @@
 						<button *ngIf="currentUserProjectRole === 'Owner'" class="delete-card-btn" (click)="onDeleteTask(t.id)">🗑️</button>
 					</div>												
                     <p>{{ t.description || 'No details provided.' }}</p>
+                    <div class="badge-group">
+                        <span class="priority-badge done">🟢 🔹Done</span>
+                    </div>
                     <div class="task-assignment-control">
                         <label class="assignment-label">👤 Assignee:</label>
                         <!-- <select [ngModel]="t.assignedUserId" (change)="onAssignUser(t.id, $any($event.target).value)" class="assignee-dropdown-menu" [disabled]="currentUserProjectRole !== 'Owner'"> -->
@@ -284,7 +288,6 @@
                     </div>
                     <div class="task-actions">
                         <div class="badge-group">
-                            <span class="priority-badge done">Done</span>
                             <span class="priority-badge" [ngClass]="t.priority.toLowerCase()">
                                 <span *ngIf="t.priority === 'High'">🔴 🔺 High</span>
                                 <span *ngIf="t.priority === 'Medium'">🟡 🔸 Medium</span>
