@@ -10,6 +10,8 @@
     --progress-bar-fill: linear-gradient(90deg, #28a745, #34ce57);    /* Emerald light gradient */
     --filter-focus-color: #28a745;                                      /* Green focus lines */
     --filter-focus-shadow: rgba(40, 167, 69, 0.15);
+    --focus-halo-color: #3182ce;                                        /* Focus halo color and shadow for buttons, input fields & drop-down menus */
+    --focus-halo-shadow: rgba(40, 130, 206, 0.15);
 
     /* 📊 PRIORITY VALUE HIGH-CONTRAST ACCESSIBILITY MATRICES */
     --badge-high-bg: #fff5f5;       --badge-high-text: #e53e3e;     --badge-high-border: #fed7d7;
@@ -30,6 +32,8 @@
     --progress-bar-fill: linear-gradient(90deg, #48bb78, #38a169);    /* Soft glowing green */
     --filter-focus-color: #48bb78;
     --filter-focus-shadow: rgba(72, 187, 120, 0.2);
+    --focus-halo-color: #63b3ed;
+    --focus-halo-shadow: rgba(99, 179, 237, 0.2);
     
 
     /* 📊 DARK MODE ACCESSIBILITY BADGE MATRICES */
@@ -51,6 +55,8 @@
     --progress-bar-fill: #107c10;                       /* Flat harware green */
     --filter-focus-color: #107c10;                      
     --filter-focus-shadow: rgba(16, 124, 16, 0.15);
+    --focus-halo-color: #107c10;
+    --focus-halo-shadow: rgba(16, 124, 16, 0.2);
     
     /* 📊 Y2K ACCESSIBILITY BADGE MATRICES: Styled like classic early-2000s desktop alerts! */
     --badge-high-bg: #ff0000;       --badge-high-text: #ffffff;     --badge-high-border: #800000;
@@ -71,6 +77,8 @@
     --progress-bar-fill: #ffb000;                       /* Everything glows phosphorus */
     --filter-focus-color: #ffb000;
     --filter-focus-shadow: rgba(255, 176, 0, 0.2);
+    --focus-halo-color: #ffb000;
+    --focus-halo-shadow: rgba(255, 176, 0, 0.3);
     
     /* 📊 Amber-CRT ACCESSIBILITY BADGE MATRICES */
     --badge-high-bg: #ffb000;       --badge-high-text: #050300;     --badge-high-border: #ffb000;
@@ -101,11 +109,12 @@ input[type="text"],
 input[type="date"],
 input[type="email"],
 input[type="password"],
-textarea {
+select, textarea {
     background-color: var(--surface-bg, #ffffff) !important;
     color: var(--text-primary) !important;
-    border: 2px solid var(--border-color, #cbd5e1);
-    transition: all 0.15s ease-in-out;
+    border: 2px solid var(--border-color, #cbd5e1) !important;
+    font-family: sans-serif;
+    transition: border-color 0.15s ease-in-out, border-shadow 0.15s ease-in-out;
 }
 
 input[type="text"]:focus,
@@ -113,10 +122,9 @@ input[type="date"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus,
 select:focus, textarea:focus {
-    border: 2px solid #3182ce !important;
+    border: 2px solid var(--focus-halo-color) !important;
+    box-shadow: 0 0 0 3px var(--focus-halo-shadow);
     outline: none;
-    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.15);
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 /* =========================================================================
