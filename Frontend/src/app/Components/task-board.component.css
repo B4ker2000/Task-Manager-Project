@@ -547,7 +547,7 @@
 }
 
 /* =========================================================================
-   DIALOG MODAL SYSTEM: Restores floating window overlays
+   DIALOG MODAL SYSTEM: Our floating window overlays!
    ========================================================================= */
 .modal-overlay {
     position: fixed;
@@ -601,6 +601,29 @@
     gap: 10px;
     margin-top: 20px;
     width: 100%;
+}
+
+.modal-input-field,
+.modal-dropdown-select,
+input[type="date"].modal-input-field {
+    width: 100%;
+    height: 38px;
+    padding: 8px 12px;
+    border: 2px solid var(--border-color, #cbd5e1) !important;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+    background-color: var(--surface-bg, #ffffff);
+    color: var(--text-primary);
+    font-family: sans-serif;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.modal-input-field:focus,
+.modal-dropdown-select:focus {
+    border: 2px solid var(--focus-halo-color, #3182ce) !important;
+    box-shadow: 0 0 0 3px var(--focus-halo-shadow, rgba(49, 130, 206, 0.15));
+    outline: none;
 }
 
 /* =========================================================================
