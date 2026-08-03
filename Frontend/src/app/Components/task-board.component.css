@@ -547,6 +547,63 @@
 }
 
 /* =========================================================================
+   DIALOG MODAL SYSTEM: Restores floating window overlays
+   ========================================================================= */
+.modal-ovelay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+.modal-card {
+    background-color: var(--surface-bg, #ffffff);
+    color: var(--text-primary);
+    padding: 25px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    box-sizing: border-box;
+}
+
+.modal-card h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+    text-align: left;
+}
+
+.form-group-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group-row label {
+    font-weight: bold;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.modal-btn-actions-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+/* =========================================================================
    RESPONSIVE CANVAS COMPACT MONITOR INTERCEPTORS (MEDIA QUERIES)
    ========================================================================= */
 .mobile-board-lane-switcher { display: none; }
