@@ -184,7 +184,7 @@
 
 		<!-- Column 2: In Progress & Review Tasks -->
          <section class="board-column" [class.mobile-hidden]="activeMobileColumn !== 'InProgress'">
-            <h3>⚡ In Progress & Review ({{ inProgressTasks.length }})</h3>
+            <h3>⚡ In-Progress & Review ({{ inProgressTasks.length }})</h3>
             <div class="tasks-container">
                 <div class="task-card" *ngFor="let t of filteredInProgressTasks" [ngClass]="{'review-needed-card': t.status === 'Review Required'}">
                     <div class="task-card-header">
@@ -233,15 +233,12 @@
                             </span>
                         </div>
                         <div class="btn-group">
-                            <ng-container *ngIf="t.status === 'In Progress'">
-                                <button *ngIf="currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId" class="action-btn back" (click)="onUpdateStatus(t.id, 'Pending')">← Revert</button>
-                                <button *ngIf="currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId" class="action-btn next" (click)="onUpdateStatus(t.id, 'Review Required')">Submit Review →</button>
-                            </ng-container>
-                            <ng-container *ngIf="t.status === 'Review Required'">
-                                <button *ngIf="currentUserProjectRole !== 'Owner' && t.assignedUserId === currentUserId" class="action-btn back" (click)="onUpdateStatus(t.id, 'In Progress')">← Cancel Review Request</button>
-                                <button *ngIf="currentUserProjectRole === 'Owner'" class="action-btn reject-review" (click)="onUpdateStatus(t.id, 'In Progress')">🗙 Reject</button>
-                                <button *ngIf="currentUserProjectRole === 'Owner'" class="action-btn finish" (click)="onUpdateStatus(t.id, 'Completed')">🗹 Approve Task</button>
-                            </ng-container>
+                                <button *ngIf="t.status === 'In Progress' && (currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId)" class="action-btn cancel-btn" (click)="onUpdateStatus(t.id, 'Pending')">← Back</button>
+                                <button *ngIf="t.status === 'In Progress' && (currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId)" class="action-btn next" (click)="onUpdateStatus(t.id, 'Review Required')">Submit Review →</button>
+                            
+                                <button *ngIf="t.status === 'Review Required' && (currentUserProjectRole !== 'Owner' && t.assignedUserId === currentUserId)" class="action-btn cancel-btn" (click)="onUpdateStatus(t.id, 'In Progress')">← Cancel Review Request</button>
+                                <button *ngIf="t.status === 'Review Required' && currentUserProjectRole === 'Owner'" class="action-btn reject-review" (click)="onUpdateStatus(t.id, 'In Progress')">🗙 Reject</button>
+                                <button *ngIf="t.status === 'Review Required' && currentUserProjectRole === 'Owner'" class="submit-btn" (click)="onUpdateStatus(t.id, 'Completed')">🗹 Approve Task</button>
                         </div>
                     </div>
                 </div>
@@ -249,7 +246,7 @@
          </section>
 
         <!-- Column 3: Completed Tasks -->
-         <section class="board-column completed-column" [class.mobile-hidden]="activeMobileColumn !== 'Completed'">
+         <section class="board-column" [class.mobile-hidden]="activeMobileColumn !== 'Completed'">
             <h3>✅ Completed ({{ completedTasks.length }})</h3>
 			<div class="tasks-container">
 				<div class="task-card done" *ngFor="let t of filteredCompletedTasks">
@@ -268,7 +265,8 @@
                     <p>{{ t.description || 'No details provided.' }}</p>
                     <div class="task-assignment-control">
                         <label class="assignment-label">👤 Assignee:</label>
-                        <select [ngModel]="t.assignedUserId" (change)="onAssignUser(t.id, $any($event.target).value)" class="assignee-dropdown-menu" [disabled]="currentUserProjectRole !== 'Owner'">
+                        <!-- <select [ngModel]="t.assignedUserId" (change)="onAssignUser(t.id, $any($event.target).value)" class="assignee-dropdown-menu" [disabled]="currentUserProjectRole !== 'Owner'"> -->
+                        <select [ngModel]="t.assignedUserId" class="assignee-dropdown-menu" disabled>
                             <option [value]="null">Unassigned</option>
                             <option *ngFor="let m of projectMembers" [value]="m.userId">
                                 {{ m.userName }} ({{ m.userEmail }})
@@ -286,6 +284,7 @@
                     </div>
                     <div class="task-actions">
                         <div class="badge-group">
+                            <span class="priority-badge done">Done</span>
                             <span class="priority-badge" [ngClass]="t.priority.toLowerCase()">
                                 <span *ngIf="t.priority === 'High'">🔴 🔺 High</span>
                                 <span *ngIf="t.priority === 'Medium'">🟡 🔸 Medium</span>
@@ -295,7 +294,7 @@
                                 📅 {{ t.deadline | date:"yyyy/MM/dd" }}
                             </span>
                         </div>
-                        <button *ngIf="currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId" class="action-btn back" (click)="onUpdateStatus(t.id, 'In Progress')">← Reopen</button>
+                        <button *ngIf="currentUserProjectRole === 'Owner'" class="action-btn cancel-btn" (click)="onUpdateStatus(t.id, 'In Progress')">← Reopen</button>
                     </div>
                 </div>
             </div>
@@ -305,33 +304,33 @@
     <!-- Create new task form & Modal Overlays -->
      <div class="modal-overlay" *ngIf="isModalOpen">
         <div class="modal-card">
-            <h3>Create New Task</h3>
+            <h3>Create New Task Specification</h3>
             <form (ngSubmit)="onCreateTask()" #taskForm="ngForm">
-                <div class="form-group">
+                <div class="form-group-row">
                     <label>Task Title *</label>
-                    <input type="text" name="title" [(ngModel)]="newTask.title" required placeholder="e.g. Design database schema" />
+                    <input type="text" name="title" [(ngModel)]="newTask.title" required placeholder="e.g. Design database schema" class="invite-text-field" />
                 </div>
 
-                <div class="form-group">
+                <div class="form-group-row">
                     <label>Description</label>
-                    <textarea name="description" [(ngModel)]="newTask.description" placeholder="Provide actionable details..."></textarea>
+                    <textarea name="description" [(ngModel)]="newTask.description" placeholder="Provide actionable details..." class="invite-text-field"></textarea>
                 </div>
 
-                <div class="form-group">
-                    <label>Priority</label>
-                    <select name="priority" [(ngModel)]="newTask.priority">
+                <div class="form-group-row">
+                    <label>Priority Tier</label>
+                    <select name="priority" [(ngModel)]="newTask.priority" class="invite-dropdown-select">
                         <option value="Low">Low</option>
                         <option value="Medium">Medium</option>
                         <option value="High">High</option>
                     </select>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group-row">
                     <label>Deadline</label>
                     <input type="date" name="deadline" [(ngModel)]="newTask.deadline" />
                 </div>
 				
-				<div class="modal-actions">
+				<div class="modal-btn-actions-row">
                     <button type="button" class="cancel-btn" (click)="closeModal()">Cancel</button>
                     <button type="submit" class="submit-btn" [disabled]="!taskForm.form.valid">Create Task</button>
                 </div>
@@ -340,19 +339,19 @@
      </div>
 
     <!-- CATEGORY CREATION POP-UP MODAL WINDOW -->
-     <div *ngIf="isCategoryModalOpen" class="modal-overlay">
+     <div class="modal-overlay" *ngIf="isCategoryModalOpen">
         <div class="modal-card">
             <h3>🎨 Create New Workspace Tag</h3>
 
             <form (ngSubmit)="onCreateCategorySubmit()" #categoryForm="ngForm" class="modal-form">
                 <div class="form-group-row">
                     <label for="tagName">Tag Name:</label>
-                    <input type="text" id="tagName" name="tagName" [(ngModel)]="newCategoryName" (input)="0" required placeholder="e.g., Frontend, Testing, Bug..." class="modal-input-field" />
+                    <input type="text" id="tagName" name="tagName" [(ngModel)]="newCategoryName" (input)="0" required placeholder="e.g., Frontend, Testing, Bug..." class="invite-text-field" />
                 </div>
 
                 <div class="form-group-row">
                     <label for="tagColor">Tag Theme Color:</label>
-                    <select id="tagColor" name="tagColor" [(ngModel)]="newCategoryColor" class="modal-dropdown-select">
+                    <select id="tagColor" name="tagColor" [(ngModel)]="newCategoryColor" class="invite-dropdown-select">
                         <option value="#e53e3e">🔴 Crimson Red (High Contrast)</option>
                         <option value="#3182ce">🔵 Electric Blue (High Contrast)</option>
                         <option value="#38a169">🟢 Forest Green (High Contrast)</option>

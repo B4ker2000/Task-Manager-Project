@@ -51,4 +51,9 @@ export class AuthService {
     deleteAccountPermanently(): Observable<any> {
         return this.http.delete("http://localhost:5283/api/auth/delete-account");
     }
+
+    // 6. Method needed for our "Task board" tab!
+    // getUserTasks(): Observable<any> {
+    //     return this.http.get('http://localhost:5283/api/auth/projects');
+    // }
 }

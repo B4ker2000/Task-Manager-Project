@@ -64,6 +64,14 @@
     transform: scale(1.05); /* Adds a tiny, responsive tactile pop! */
 }
 
+.modal-btn-actions-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-bottom: 20px;
+
+}
+
 /* =========================================================================
    BOARD CANVAS STRUCTURAL HEADER WRAPPERS
    ========================================================================= */
@@ -173,6 +181,12 @@
     background-color: var(--badge-low-bg); 
     color: var(--badge-low-text);
     border: 1px solid #bee3f8;
+}
+
+.priority-badge.done { 
+    background-color: var(--badge-low-bg); 
+    color: var(--badge-low-text);
+    border: 1px solid #28a745;
 }
 
 /* =========================================================================
@@ -507,6 +521,8 @@
 }
 
 .team-roster-display-block { margin-top: 15px; }
+
+.mobile-board-lane-switcher { display: none; }
 
 /* =========================================================================
    RESPONSIVE DEVICE VIEWS OVERRIDES & COMPACT INTERCEPTORS
