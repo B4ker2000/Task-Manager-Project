@@ -549,7 +549,7 @@
 /* =========================================================================
    DIALOG MODAL SYSTEM: Restores floating window overlays
    ========================================================================= */
-.modal-ovelay {
+.modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
