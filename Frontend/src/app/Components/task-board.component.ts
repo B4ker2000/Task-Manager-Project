@@ -91,8 +91,18 @@ export class TaskBoardComponent implements OnInit {
 
                 // Load identity above first and then load the assets
                 this.loadBoardRequirements();
+                this.cdr.detectChanges();
             }
         });
+
+        if(!this.projectId && isPlatformBrowser(this.platformId)) {
+            const snapshotId = this.route.snapshot.paramMap.get('id');
+            if(snapshotId) {
+                this.projectId = Number(snapshotId);
+                this.loadBoardRequirements();
+                this.cdr.detectChanges();
+            }
+        }
     }
     
     loadBoardRequirements(): void {
@@ -126,7 +136,7 @@ export class TaskBoardComponent implements OnInit {
                 this.loadProjectCategories();
             },
             error: (err: any) => {
-                console.error("Critical board init failure:", err);
+                console.error("Critical refresh validation gate failure, firing fallbacks:", err);
                 // Fallback load so the screen doesn't completely freeze on network hiccups
                 this.loadProjectDetails();
                 this.loadProjectCategories();

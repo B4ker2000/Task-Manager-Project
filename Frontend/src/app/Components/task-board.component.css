@@ -168,25 +168,25 @@
 .priority-badge.high { 
     background-color: var(--badge-high-bg); 
     color: var(--badge-high-text);
-    border: 1px solid #fed7d7; 
+    border: 1px solid var(--badge-high-border); 
 }
 
 .priority-badge.medium { 
     background-color: var(--badge-medium-bg); 
     color: var(--badge-medium-text); 
-    border: 1px solid #feebc8;
+    border: 1px solid var(--badge-medium-border);
 }
 
 .priority-badge.low { 
     background-color: var(--badge-low-bg); 
     color: var(--badge-low-text);
-    border: 1px solid #bee3f8;
+    border: 1px solid var(--badge-low-border);
 }
 
 .priority-badge.done { 
-    background-color: var(--badge-low-bg); 
-    color: var(--badge-low-text);
-    border: 1px solid #28a745;
+    background-color: var(--badge-done-bg); 
+    color: var(--badge-done-text);
+    border: 1px solid var(--badge-done-border);
 }
 
 /* =========================================================================

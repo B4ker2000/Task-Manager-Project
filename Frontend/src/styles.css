@@ -6,14 +6,24 @@
     --text-muted: #6c757d;          /* Subtitles, labels and helper notes */
     --brand-accent: #007bff;        /* Core interaction signature button color */
     --brand-accent-border: #3182ce; /* Border color for our buttons */
+    --border-color: #cbd5e1;           /* Universal border color for the different cards */
 
     /* 📊 PRIORITY VALUE HIGH-CONTRAST ACCESSIBILITY MATRICES */
     --badge-high-bg: #fff5f5;
     --badge-high-text: #e53e3e;
+    --badge-high-border: #fed7d7;
+
     --badge-medium-bg: #fffaf0;
     --badge-medium-text: #dd6b20;
+    --badge-medium-border: #feebc8;
+
     --badge-low-bg: #ebf8ff;
     --badge-low-text: #3182ce;
+    --badge-low-border: #bee3f8;
+
+    --badge-done-bg: #e6fffa;
+    --badge-done-text: #234e52;
+    --badge-done-border: #319795;
 }
 
 /* 🌙 SYSTEM DARK WORKSPACE MODE OVERRIDE */
@@ -24,6 +34,24 @@
     --text-muted: #a0aec0;          /* Soft grey structural subtext text */
     --brand-accent: #3182ce;        /* Vibrant electric neon accent action fills */
     --brand-accent-border: #2b6cb0; /* Border color to compliment our button color above */
+    --border-color: #3e3e3e;        /* Dark carbon outlines */
+
+    /* 📊 DARK MODE ACCESSIBILITY BADGE MATRICES */
+    --badge-high-bg: #3c1e1e;       /* Deep crimson ruby tint */
+    --badge-high-text: #fc8181;     /* High-vis soft neon red font text */
+    --badge-high-border: #e53e3e;   /* Stark red border line anchor */
+
+    --badge-medium-bg: #3c2a1a;     /* Deep amber carbon fill */
+    --badge-medium-text: #f6ad55;   /* High-vis soft neon orange font text */
+    --badge-medium-border: #dd6b20; /* Stark orange border line anchor */
+
+    --badge-low-bg: #1a2e3b;        /* Deep navy slate sapphire fill */
+    --badge-low-text: #63b3ed;      /* High-vis soft neon blue font text */
+    --badge-low-border: #3182ce;    /* Stark blue border line anchor */
+    
+    --badge-done-bg: #1c3d27;       /* Deep obsidian forest emerald fill */
+    --badge-done-text: #68d391;     /* High-vis soft neon green font text */
+    --badge-done-border: #28a745;   /* Stark green border line anchor */
 }
 
 /* 💾 NOSTALGIC Y2K RETRO EASTER EGG SYSTEM (GLOSSY WINDOWS XP / 98 ERA VIBES) */
@@ -34,6 +62,41 @@
     --text-muted: #000080;          /* Deep navy text links alignment */
     --brand-accent: #107c10;        /* Classic software green trigger commands */
     --brand-accent-border: #0a5c0a; /* Midnight forest green to compliment the classic button color above */
+    --border-color: #808080;        /* Stark classic 90s hardware gray ouline */
+    
+    /* 📊 Y2K ACCESSIBILITY BADGE MATRICES: Styled like classic early-2000s desktop alerts! */
+    --badge-high-bg: #ff0000;
+    --badge-high-text: #ffffff;
+    --badge-high-border: #800000;
+
+    --badge-medium-bg: #ffff00;
+    --badge-medium-text: #000000;
+    --badge-medium-border: #808000;
+
+    --badge-low-bg: #0000ff;
+    --badge-low-text: #ffffff;
+    --badge-low-border: #000080;
+    
+    --badge-done-bg: #00ff00;
+    --badge-done-text: #000000;
+    --badge-done-border: #008000;
+}
+
+/* 📟 MONOCHROME RETRO AMBER CRT TERMINAL THEME (FALLOUT/VINTAGE UNIX COMPUTER ERA) */
+[data-theme="amber-crt"] {
+    --surface-bg: #110b00;          /* Deep pitch dark charcoal amber canvas */
+    --container-bg: #050300;        /* Pure obsidian black terminal floor backdrop */
+    --text-primary: #ffb000;        /* Glowing vintage high-vis phosphorus amberink text */
+    --text-muted: #aa7500;          /* Muted copper phosphor amber subtitles notes */
+    --brand-accent: #ffb000;        
+    --brand-accent-border: #ffb000; 
+    --border-color: #ffb000;        /* Everything is framed in uniform amber glowing circuits! */
+    
+    /* 📊 Amber-CRT ACCESSIBILITY BADGE MATRICES */
+    --badge-high-bg: #ffb000;       --badge-high-text: #050300;     --badge-high-border: #ffb000;
+    --badge-medium-bg: #110b00;     --badge-medium-text: #ffb000;   --badge-medium-border: #ffb000;
+    --badge-low-bg: #110b00;        --badge-low-text: #ffb000;      --badge-low-border: #aa7500;
+    --badge-done-bg: #ffb000;       --badge-done-text: #050300;     --badge-done-border: #aa7500;
 }
 
 /* =========================================================================
@@ -168,5 +231,4 @@ select:focus,
 }
 
 .board-interactive-field.select-config { padding-left: 5px !important;}
-
 .control-input-wrapper select { padding-left: 30px !important; }
