@@ -89,8 +89,15 @@ export class TaskBoardComponent implements OnInit {
                 this.projectTitle = "Now Loading...";
                 this.currentUserProjectRole = "Loading...";
 
-                // Load identity above first and then load the assets
-                this.loadBoardRequirements();
+                // SECURITY TOKEN CHECK GATEWAY: Prevents unauthorized empty requests on reload!
+                const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+                if(token) {
+                    // Load identity above first and then load the assets
+                    this.loadBoardRequirements();
+                } else {
+                    console.warn("Security token missing on mount, redirecting to login entrance room...");
+                    this.router.navigate(['/login']);
+                }
                 this.cdr.detectChanges();
             }
         });

@@ -34,14 +34,25 @@ export class UserProfileComponent implements OnInit {
     ngOnInit(): void {
         // Only run data fetches inside the browser window context shell
         if(isPlatformBrowser(this.platformId)) {
-            this.loadProfile();
-        }
+            this.isLoading = true;
 
-        // Theme cache reader
-        const savedTheme = localStorage.getItem("user-preferred-theme");
-        if(savedTheme) {
-            this.activeTheme = savedTheme;
-            this.onThemeChangeEngineTrigger();
+            const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+            if(token) {
+                // Only fire our identity request when the storage token layer is active!
+                this.loadProfile();
+            } else {
+                console.warn("Security token missing on mount, redirecting to login entrance room...");
+                this.router.navigate(['/login']);
+            }
+
+            // Theme cache reader
+            const savedTheme = localStorage.getItem("user-preferred-theme");
+            if(savedTheme) {
+                this.activeTheme = savedTheme;
+                this.onThemeChangeEngineTrigger();
+            }
+
+            this.cdr.detectChanges();
         }
     }
 
