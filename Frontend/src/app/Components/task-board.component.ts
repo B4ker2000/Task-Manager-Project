@@ -442,66 +442,84 @@ export class TaskBoardComponent implements OnInit {
 
     // Angular CDK drag-and-drop master event router interceptor
     onTaskCardDropTrigger(event: CdkDragDrop<any[]>): void {
-        // 1. INTRA-COLUMN ARRANGEMENT: Did the user drop the card inside the EXACT same column?
-        if(event.previousContainer === event.container) {
-            const targetTaskItem = event.container.data[event.previousIndex];
+        const targetTaskItem = event.previousContainer.data[event.previousIndex];
+        if(!targetTaskItem) return;
 
-            // If the card lives inside the center Progress column lane...
-            if(event.container.id === "inProgressLaneList" && targetTaskItem) {
-                let nextState = targetTaskItem.status;
+        // Resolve string identifiers for origin and destination columns 
+        const sourceLaneId = event.previousContainer.id;
+        const targetLaneId = event.container.id;
 
-                if(targetTaskItem.status === "In Progress") {
-                    nextState = "Review Required";
-                } else if(targetTaskItem.status === "Review Required" && this.currentUserProjectRole === "Owner") {
-                    nextState = "In Progress";      // PM pushes it back locally to reject!
-                }
+        // Determine the baseline status token string matching the landing column zone
+        let computedDatabaseStatusString = targetTaskItem.status;
+        if(targetLaneId === "pendingLaneList") computedDatabaseStatusString = "Pending";
+        if(targetLaneId === "inProgressLaneList") computedDatabaseStatusString = "In Progress";
+        if(targetLaneId === "completedLaneList") computedDatabaseStatusString = "Completed";
 
-                if(nextState !== targetTaskItem.status) {
-                    targetTaskItem.status = nextState;
-                    this.onUpdateStatus(targetTaskItem.id, nextState);
-                    this.cdr.detectChanges();
-                    return;
-                }
+        // Permission checks for easy reading
+        const isOwner = this.currentUserProjectRole === "Owner";
+        const isAssignee = targetTaskItem.assignedUserId === this.currentUserId;
+        
+        // =========================================================================
+        // PERMISSION GATE 1: THE DYNAMIC SELF-DROP PROGRESS/REVIEW TOGGLE SWITCH
+        // =========================================================================
+        if(sourceLaneId === targetLaneId && targetLaneId === "inProgressLaneList") {
+            // SECURTITY: Block regular users from toggling cards that are NOT assigned to them!
+            if(!isOwner && !isAssignee) {
+                alert("🔒 Access Denied: You are not authorized to modify a task card assigned to another teammate!");
+                return;
             }
 
-            // Standard card index re-ordering fallback if they just swapped position slots
+            let nextState = targetTaskItem.status;
+            if(targetTaskItem.status === "In Progress") {
+                nextState = "Review Required";
+            } else if(targetTaskItem.status === "Review Required" && isOwner) {
+                nextState = "In Progress";      // PM rejects/returns request
+            } else if(targetTaskItem.status === "Review Required" && !isOwner && isAssignee) {
+                nextState = "In Progress";      // Assignee cancels their own pending review request safely!
+            }
+
+            if(nextState !== targetTaskItem.status) {
+                targetTaskItem.status = nextState;
+                this.onUpdateStatus(targetTaskItem.id, nextState);
+                this.cdr.detectChanges();
+            }
+            return;
+        }
+
+        // Standard local row index swapping slot handler fallback if shuffling within same columns (excluding middle lane)
+        if(sourceLaneId === targetLaneId) {
             moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
             this.cdr.detectChanges();
             return;
         }
 
-        // 2. EXTRA-COLUMN CROSSING: The card jumped into a completely different lane/column!
-        const targetTaskItem = event.previousContainer.data[event.previousIndex];
-        if(!targetTaskItem) return;
-
-        // Resolve the string identity name key of the target column container lane drop destination
-        const targetLaneDestinationId = event.container.id;
-        let computedDatabaseStatusString = "";
-
-        // Map the HTML container ID string keys to our explicit backend C# database status values
-        if(targetLaneDestinationId === "pendingLaneList") {
-            computedDatabaseStatusString = "Pending"
-        } else if(targetLaneDestinationId === "inProgressLaneList") {
-            computedDatabaseStatusString = "In Progress";
-        } else if(targetLaneDestinationId === "completedLaneList") {
-            computedDatabaseStatusString = "Completed";
-        }
-
-        // 3. SECURITY GATEWAY OVERRIDES: Enforce our custom project management guard rules!
-
-        // GUARD A: Prevent regular workspace members from dragging arbitrary cards out of "Pending"!
-        if(computedDatabaseStatusString !== "Pending" && this.currentUserProjectRole !== "Owner" && targetTaskItem.assignedUserId !== this.currentUserId) {
-            alert("🔒 Unauthorized Operation: You cannot advance a task card that is not assigned to you!");
+        // =========================================================================
+        // PERMISSION GATE 2: CROSS-COLUMN MOVEMENT BOUNDARY OUTWRITING SECURITY
+        // =========================================================================
+        
+        // RULE A: Absolute lock on the Completed Column lane! Only Project Managers can approve tasks.
+        if(computedDatabaseStatusString === "Completed" && !isOwner) {
+            alert("🔒 Gatekeeper Policy: Only a Project Manager can approve tasks and move them to 'the Completed' column!");
             return;
         }
 
-        // GUARD B: If a card enters the center column , automatically evaluate if it needs PM Review bounds!
-        if(computedDatabaseStatusString === "In Progress" && targetTaskItem.status !== "Review Required" && this.currentUserProjectRole !== "Owner") {
-            // If a regular user moves it, force it into "Review Required" instead of letting it slip through!
-            computedDatabaseStatusString = "Review Required";
+        // RULE B: Prevent regular members from grabbing or picking up unassigned work items entirely.
+        if(!isOwner && !isAssignee) {
+            alert("🔒 Security Lock: You cannot touch or relocate workspace actions not explicitly assigned to you!");
+            return;
         }
 
-        // 4. TRANSACTION FLUSH: Swap the element across local array memory windows fluidly first
+        // RULE C: If a regular member drags their card from 'Pending' into 'In Progress', force it to 'In Progress'
+        // and strip any old historical 'Review Required' flags seamlessly.
+        if(computedDatabaseStatusString === "In Progress" && !isOwner) {
+            computedDatabaseStatusString = "In Progress";
+        }
+
+        // =========================================================================
+        // TRANSACTION EXECUTION FLUSH
+        // =========================================================================
+        
+        // 1. Locally transfer the item across our arrays so the screen stays incredibly snappy!
         transferArrayItem(
             event.previousContainer.data,
             event.container.data,
@@ -509,8 +527,7 @@ export class TaskBoardComponent implements OnInit {
             event.currentIndex
         );
 
-        // 5. BACKEND DATABASE SYNCHRONIZATION
-        // Re-use our existing highly optimized endpoint caller method to update the C# server instantly!
+        // 2. Synchronize line modifications securely over the network to the C# Web API database tables
         this.onUpdateStatus(targetTaskItem.id, computedDatabaseStatusString);
 
         // Force a structural paint pass to snap the counters into perfect alignment

@@ -441,57 +441,97 @@ export class TaskBoardComponent implements OnInit {
     }
 
     // Angular CDK drag-and-drop master event router interceptor
+    // =========================================================================
+    // FORTIFIED SECURITY DRAG-AND-DROP ACCOUNTABILITY ROUTER
+    // =========================================================================
     onTaskCardDropTrigger(event: CdkDragDrop<any[]>): void {
-    // 1. DYNAMIC SELF-DROP TOGGLE DETECTOR (Your awesome UX concept!)
-    if (event.previousContainer === event.container) {
-        const targetTaskItem = event.container.data[event.previousIndex];
-        
-        // If the card lives inside the center Progress column lane...
-        if (event.container.id === 'inProgressLaneList' && targetTaskItem) {
-            let nextState = targetTaskItem.status;
+        const targetTaskItem = event.previousContainer.data[event.previousIndex];
+        if (!targetTaskItem) return;
 
+        // Resolve string identifiers for origin and destination columns
+        const sourceLaneId = event.previousContainer.id;
+        const targetLaneId = event.container.id;
+
+        // Determine the baseline status token string matching the landing column zone
+        let computedDatabaseStatusString = targetTaskItem.status;
+        if (targetLaneId === 'pendingLaneList') computedDatabaseStatusString = 'Pending';
+        if (targetLaneId === 'inProgressLaneList') computedDatabaseStatusString = 'In Progress';
+        if (targetLaneId === 'completedLaneList') computedDatabaseStatusString = 'Completed';
+
+        // Establish permission checks for easy reading
+        const isOwner = this.currentUserProjectRole === 'Owner';
+        const isAssignee = targetTaskItem.assignedUserId === this.currentUserId;
+
+        // =========================================================================
+        // PERMISSION GATE 1: THE DYNAMIC SELF-DROP PROGRESS/REVIEW TOGGLE SWITCH
+        // =========================================================================
+        if (sourceLaneId === targetLaneId && targetLaneId === 'inProgressLaneList') {
+            // SECURITY FIX: Block regular users from toggling cards that are NOT assigned to them!
+            if (!isOwner && !isAssignee) {
+                alert("🔒 Access Denied: You are not authorized to modify a task card assigned to another teammate!");
+                return;
+            }
+
+            let nextState = targetTaskItem.status;
             if (targetTaskItem.status === 'In Progress') {
-                nextState = 'Review Required'; // Worker signals completion!
-            } else if (targetTaskItem.status === 'Review Required' && this.currentUserProjectRole === 'Owner') {
-                nextState = 'In Progress';     // PM pushes it back locally to reject!
+                nextState = 'Review Required'; // Worker submits review
+            } else if (targetTaskItem.status === 'Review Required' && isOwner) {
+                nextState = 'In Progress';     // PM rejects/returns request to worker
+            } else if (targetTaskItem.status === 'Review Required' && !isOwner && isAssignee) {
+                nextState = 'In Progress';     // Worker cancels their own pending review request safely!
             }
 
             if (nextState !== targetTaskItem.status) {
                 targetTaskItem.status = nextState;
                 this.onUpdateStatus(targetTaskItem.id, nextState);
                 this.cdr.detectChanges();
-                return;
             }
+            return;
         }
 
-        // Standard card index re-ordering fallback if they just swapped position slots
-        moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+        // Standard local row index swapping slot handler fallback if shuffling within same columns (excluding middle lane)
+        if (sourceLaneId === targetLaneId) {
+            moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+            this.cdr.detectChanges();
+            return;
+        }
+
+        // =========================================================================
+        // PERMISSION GATE 2: CROSS-COLUMN MOVEMENT BOUNDARY OUTWRITING SECURITY 
+        // =========================================================================
+
+        // RULE A: Absolute lock on the Completed Column lane! Only Project Managers can approve tasks.
+        if (computedDatabaseStatusString === 'Completed' && !isOwner) {
+            alert("🔒 Gatekeeper Policy: Only a Project Manager can approve tasks and move them to Completed!");
+            return;
+        }
+
+        // RULE B: Prevent regular members from grabbing or picking up unassigned work items entirely.
+        if (!isOwner && !isAssignee) {
+            alert("🔒 Security Lock: You cannot touch or relocate workspace actions not explicitly assigned to you!");
+            return;
+        }
+
+        // RULE C: If a regular member drags their card from Pending into Progress, force it to 'In Progress' 
+        // and strip any old historical 'Review Required' flags seamlessly.
+        if (computedDatabaseStatusString === 'In Progress' && !isOwner) {
+            computedDatabaseStatusString = 'In Progress';
+        }
+
+        // =========================================================================
+        // TRANSACTION EXECUTION FLUSH
+        // =========================================================================
+    
+        // 1. Locally transfer the item across our arrays so the screen stays incredibly snappy
+        transferArrayItem(
+            event.previousContainer.data,
+            event.container.data,
+            event.previousIndex,
+            event.currentIndex
+        );
+
+        // 2. Synchronize line modifications securely over the network to the C# Web API database tables
+        this.onUpdateStatus(targetTaskItem.id, computedDatabaseStatusString);
         this.cdr.detectChanges();
-        return;
     }
-
-    // 2. EXTRA-COLUMN CROSSING (Keep the rest of your master functions unchanged!)
-    const targetTaskItem = event.previousContainer.data[event.previousIndex];
-    if (!targetTaskItem) return;
-
-    const targetLaneDestinationId = event.container.id; 
-    let computedDatabaseStatusString = '';
-
-    if (targetLaneDestinationId === 'pendingLaneList') {
-        computedDatabaseStatusString = 'Pending';
-    } else if (targetLaneDestinationId === 'inProgressLaneList') {
-        computedDatabaseStatusString = 'In Progress';
-    } else if (targetLaneDestinationId === 'completedLaneList') {
-        computedDatabaseStatusString = 'Completed';
-    }
-
-    // Enforce role gates boundaries
-    if (computedDatabaseStatusString !== 'Pending' && this.currentUserProjectRole !== 'Owner' && targetTaskItem.assignedUserId !== this.currentUserId) {
-        alert("🔒 Unauthorized Operation: You cannot advance a task card that is not assigned to you!");
-        return;
-    }
-
-    transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
-    this.onUpdateStatus(targetTaskItem.id, computedDatabaseStatusString);
-    this.cdr.detectChanges();
 }
