@@ -223,10 +223,14 @@ select,
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
+/* .board-interactive-field:focus  */
 select:focus,
-.board-interactive-field:focus {
-    border: 2px solid #3182ce !important;
-    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.15);
+.invite-dropdown-select:focus,
+.modal-dropdown-select:focus,
+.assignee-dropdown-menu:focus,
+.board-filter-dropdown-select:focus {
+    border: 2px solid var(--focus-halo-color) !important;
+    box-shadow: 0 0 0 3px var(--focus-halo-shadow) !important;
 }
 
 .board-interactive-field.select-config { padding-left: 5px !important;}

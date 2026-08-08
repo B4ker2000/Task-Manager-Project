@@ -315,7 +315,7 @@
                     <div class="task-assignment-control">
                         <label class="assignment-label">👤 Assignee:</label>
                         <!-- <select [ngModel]="t.assignedUserId" (change)="onAssignUser(t.id, $any($event.target).value)" class="assignee-dropdown-menu" [disabled]="currentUserProjectRole !== 'Owner'"> -->
-                        <select [ngModel]="t.assignedUserId" class="assignee-dropdown-menu" disabled>
+                        <select [ngModel]="t.assignedUserId" class="assignee-dropdown-menu" [disabled]="currentUserProjectRole !== 'Owner'">
                             <option [value]="null">Unassigned</option>
                             <option *ngFor="let m of projectMembers" [value]="m.userId">
                                 {{ m.userName }} ({{ m.userEmail }})
