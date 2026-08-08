@@ -1,537 +1,158 @@
-import { Component, OnInit, inject, ChangeDetectorRef, PLATFORM_ID } from "@angular/core";
-import { FormsModule } from "@angular/forms";
-import { NgFor, NgIf, NgClass, DatePipe, isPlatformBrowser } from "@angular/common";
-import { ActivatedRoute, RouterLink, Router } from "@angular/router";
-import { TaskService } from "../Services/task.service";
-import { ProjectService } from "../Services/project.service";
-import { AuthService } from "../Services/auth.service";
-import { CategoryService } from "../Services/category.service";
-import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
+:root {
+    /* =========================================================================
+       ☀️ DEFAULT LIGHT WORKSPACE THEME PRESETS
+       ========================================================================= */
+    --surface-bg: #ffffff;          
+    --container-bg: #f8f9fa;        
+    --text-primary: #212529;        
+    --text-muted: #6c757d;          
+    --brand-accent: #007bff;        
+    --brand-accent-border: #3182ce; 
+    --border-color: #cbd5e1; 
 
-@Component({
-    selector: 'app-task-board',
-    standalone: true,
-    imports: [FormsModule, NgFor, NgIf, NgClass, RouterLink, DatePipe, DragDropModule],
-    templateUrl: "./task-board.component.html",
-    styleUrl: "./task-board.component.css"
-})
-export class TaskBoardComponent implements OnInit {
-    private route = inject(ActivatedRoute);
-    private taskService = inject(TaskService);
-    private projectService = inject(ProjectService);
-    private cdr = inject(ChangeDetectorRef);
-    private platformId = inject(PLATFORM_ID);
-    private router = inject(Router);
-    private authService = inject(AuthService);
-    private categoryService = inject(CategoryService);
+    /* 📊 PRIORITY VALUE ACCESSIBILITY BADGES */
+    --badge-high-bg: #fff5f5;       --badge-high-text: #e53e3e;     --badge-high-border: #fed7d7;
+    --badge-medium-bg: #fffaf0;     --badge-medium-text: #dd6b20;   --badge-medium-border: #feebc8;
+    --badge-low-bg: #ebf8ff;        --badge-low-text: #3182ce;      --badge-low-border: #bee3f8;
+    --badge-done-bg: #e6fffa;       --badge-done-text: #234e52;     --badge-done-border: #319795;   
 
-    projectId!: number; // Here we basically declare "projectId" but don't assign anything to it yet (null) but because TypeScript restricts use of variables that are declared but aren't assigned anything immediately afterwards, we put an "!" after the name to basically tell TypeScript "Trust me, I know what I'm doing by not assigning anything to 'projectId' right now, but I promise it will absolutely have a number inside it before the HTML page tries to read it!"
-    isModalOpen = false; // Tracks whether form window is visible
+    /* 🎨 PROGRESS AND FILTER TRACKS */
+    --progress-bar-fill: linear-gradient(90deg, #28a745, #34ce57); 
+    --filter-focus-color: #28a745;                                 
+    --filter-focus-shadow: rgba(40, 167, 69, 0.15);
+    --filter-border-color: #28a745; /* FIXED (Note 2): Unique non-focus boundary line */
 
-    // Split our fetched tasks into specific arrays for each column mapping. Also raw records from backend database
-    pendingTasks: any[] = [];
-    inProgressTasks: any[] = [];
-    completedTasks: any[] = [];
+    --focus-halo-color: #3182ce;
+    --focus-halo-shadow: rgba(49, 130, 206, 0.15);
+}
 
-    // Dynamic sub-arrays rendered on screen layout
-    filteredPendingTasks: any[] = [];
-    filteredInProgressTasks: any[] = [];
-    filteredCompletedTasks: any[] = [];
+[data-theme="dark"] {
+    /* =========================================================================
+       🌙 SYSTEM DARK MODE OVERRIDES
+       ========================================================================= */
+    --surface-bg: #1e1e1e;          
+    --container-bg: #121212;        
+    --text-primary: #f8f9fa;        
+    --text-muted: #a0aec0;          
+    --brand-accent: #3182ce;        
+    --brand-accent-border: #2b6cb0; 
+    --border-color: #3e3e3e; 
 
-    // Live input binding tracking values
-    searchQuery: string = '';
-    selectedPriority: string = 'All';
-    completionPercentage: number = 0;
+    --badge-high-bg: #3c1e1e;       --badge-high-text: #fc8181;     --badge-high-border: #e53e3e;   
+    --badge-medium-bg: #3c2a1a;     --badge-medium-text: #f6ad55;   --badge-medium-border: #dd6b20; 
+    --badge-low-bg: #1a2e3b;        --badge-low-text: #63b3ed;      --badge-low-border: #3182ce;    
+    --badge-done-bg: #1c3d27;       --badge-done-text: #68d391;     --badge-done-border: #28a745;   
 
-    // Tracks properties typed into form fields matching TaskCreateDto.cs fields exactly
-    newTask = { 
-        title: '', 
-        description: '', 
-        priority: 'Medium', 
-        deadline: '', 
-        projectId: 0 
-    };
+    --progress-bar-fill: linear-gradient(90deg, #48bb78, #38a169); 
+    --filter-focus-color: #48bb78;                                 
+    --filter-focus-shadow: rgba(72, 187, 120, 0.2);
+    --filter-border-color: #38a169;
 
-    // "Add new member" related values
-    inviteEmail: string = "";
-    inviteRole: string = "Member"; // Defaults to regular Member assignment 
+    --focus-halo-color: #63b3ed;
+    --focus-halo-shadow: rgba(99, 179, 237, 0.2);
+}
 
-    currentUserId!: number;
+[data-theme="retro-y2k"] {
+    /* =========================================================================
+       💾 REBRANDED: WINDOWS 95 / 98 LEGACY CLASSIC HARWARE MOTOR
+       ========================================================================= */
+    --surface-bg: #d4d0c8;          /* True 90s physical computer chassis gray */
+    --container-bg: #808080;        /* Deep battleship gray background floor */
+    --text-primary: #000000;        /* Stark terminal letter ink black */
+    --text-muted: #000080;          /* Classic Titlebar Blue identifiers */
+    --brand-accent: #000080;        /* Buttons inherit the rigid navy blue command tint */
+    --brand-accent-border: #000000; 
+    --border-color: #ffffff;        /* High-contrast hardware edge line highlights */
 
-    // Dynamic title string with a gaming twist! :D
-    projectTitle: string = "";
+    --progress-bar-fill: #000080;   
+    --filter-focus-color: #000080;                      
+    --filter-focus-shadow: rgba(0, 0, 128, 0.15);
+    --filter-border-color: #000080;
+
+    --focus-halo-color: #000080;
+    --focus-halo-shadow: rgba(0, 0, 128, 0.2);
     
-    currentUserProjectRole: string = "";
+    /* 95 Era Flat Alerts layout profiles */
+    --badge-high-bg: #cbd5e1;       --badge-high-text: #c53030;     --badge-high-border: #000000;
+    --badge-medium-bg: #cbd5e1;     --badge-medium-text: #dd6b20;   --badge-medium-border: #000000;
+    --badge-low-bg: #cbd5e1;        --badge-low-text: #3182ce;      --badge-low-border: #000000;
+    --badge-done-bg: #008000;       --badge-done-text: #ffffff;     --badge-done-border: #000000;
+}
 
-    // Array to hold our teammate info
-    projectMembers: any[] = [];
+[data-theme="windows-xp"] {
+    /* =========================================================================
+       💾 CLASSIC WINDOWS XP LUNA BLUE SYSTEM
+       ========================================================================= */
+    --surface-bg: #ffffff;          
+    --container-bg: #4a7af4;        /* Iconic Bliss desktop screen canvas background */
+    --text-primary: #ffffff;        /* FIX (Note 1): Crisp white legible icons text fonts */
+    --text-muted: #0022a6;          
+    --brand-accent: #225b11;        /* Start green */
+    --brand-accent-border: #153a04; 
+    --border-color: #0046d5;        
 
-    // Array to store our category tasks
-    projectCategories: any[] = [];
+    --badge-high-bg: #ff3333;       --badge-high-text: #ffffff;     --badge-high-border: #990000;   
+    --badge-medium-bg: #ffcc00;     --badge-medium-text: #000000;   --badge-medium-border: #cc9900; 
+    --badge-low-bg: #dff0fe;        --badge-low-text: #0046d5;      --badge-low-border: #0046d5;    
+    --badge-done-bg: #225b11;       --badge-done-text: #ffffff;     --badge-done-border: #153a04;   
 
-    // Task category related properties 
-    isCategoryModalOpen: boolean = false;
-    newCategoryName: string = "";
-    newCategoryColor: string = "#3182ce"; // Default category color is Electric Blue!
-
-    // Filter by category related property
-    selectedCategory: string = "All";
-
-    // Vertical screen related properity
-    activeMobileColumn: string = 'Pending'; // Default view lane tracking 
-
-    ngOnInit(): void {
-        // Read the dynamic route context param parameter safely
-        this.route.params.subscribe(params => {
-            this.projectId = +params['id']; // The '+' trick converts the URL string context to a real Number!
-
-            // Ensure we are running inside a browser window environment safely
-            if(this.projectId && isPlatformBrowser(this.platformId)) {
-                this.projectTitle = "Now Loading...";
-                this.currentUserProjectRole = "Loading...";
-
-                // SECURITY TOKEN CHECK GATEWAY: Prevents unauthorized empty requests on reload!
-                const token = localStorage.getItem('token') || sessionStorage.getItem('token');
-                if(token) {
-                    // Load identity above first and then load the assets
-                    this.loadBoardRequirements();
-                } else {
-                    console.warn("Security token missing on mount, redirecting to login entrance room...");
-                    this.router.navigate(['/login']);
-                }
-                this.cdr.detectChanges();
-            }
-        });
-
-        if(!this.projectId && isPlatformBrowser(this.platformId)) {
-            const snapshotId = this.route.snapshot.paramMap.get('id');
-            if(snapshotId) {
-                this.projectId = Number(snapshotId);
-                this.loadBoardRequirements();
-                this.cdr.detectChanges();
-            }
-        }
-    }
+    --progress-bar-fill: linear-gradient(180deg, #3cd53c, #225b11); 
+    --filter-focus-color: #225b11;                                 
+    --filter-focus-shadow: rgba(34, 91, 17, 0.2);
+    --filter-border-color: #225b11;
     
-    loadBoardRequirements(): void {
-        this.authService.getUserProfile().subscribe({
-            next: (data: any) => {
-                this.currentUserId = Number(data.id);
-                this.taskService.getProjectTasks(this.projectId).subscribe({
-                    next: (boardData: any) => {
-                        // Lock the permission status string safely first
-                        this.currentUserProjectRole = boardData.role;
+    --focus-halo-color: #0046d5;                                    
+    --focus-halo-shadow: rgba(0, 70, 213, 0.15);
+}
 
-                        // Sort task card buckets
-                        const allTasks = boardData.tasks || [];
-                        this.pendingTasks = allTasks.filter((t: any) => t.status === "Pending");
-                        this.inProgressTasks = allTasks.filter((t: any) => t.status === "In Progress" || t.status === "Review Required");
-                        this.completedTasks = allTasks.filter((t: any) => t.status === "Completed");
+[data-theme="windows-7"] {
+    /* =========================================================================
+       🔮 DYNAMIC NEW ENTRY: WINDOWS 7 GLASS AERO ENVIRONMENT
+       ========================================================================= */
+    --surface-bg: rgba(255, 255, 255, 0.75); /* Translucent frosted glass refraction fill! */
+    --container-bg: #1e3a5f;                  /* Deep premium slate twilight backdrop */
+    --text-primary: #f8f9fa;                  /* Soft glowing glass text */
+    --text-muted: #a3c2f0;                    
+    --brand-accent: #3182ce;        
+    --brand-accent-border: rgba(255, 255, 255, 0.4); 
+    --border-color: rgba(255, 255, 255, 0.35); /* Translucent thin window framing lines */
 
-                        // Overwrite crew roster with data straight from our combined response payload packet!
-                        this.projectMembers = boardData.team || [];
+    --badge-high-bg: rgba(229, 62, 62, 0.25);   --badge-high-text: #feb2b2;   --badge-high-border: #e53e3e;   
+    --badge-medium-bg: rgba(221, 107, 32, 0.25); --badge-medium-text: #fbd38d; --badge-medium-border: #dd6b20; 
+    --badge-low-bg: rgba(49, 130, 206, 0.25);    --badge-low-text: #90cdf4;    --badge-low-border: #3182ce;    
+    --badge-done-bg: rgba(56, 161, 105, 0.25);   --badge-done-text: #9ae6b4;   --badge-done-border: #38a169;   
 
-                        // Compute analytics progress scales and filter views
-                        this.calculateProgress(allTasks);
-                        this.applyFilters();
-
-                        // Force single, perfect structural rendering paint pass
-                        this.cdr.detectChanges();
-                    },
-                    error: (err: any) => console.error("Failed to map board asset matrices:", err)
-                });
-                this.loadProjectDetails(); // Fetches the real project title
-                this.loadProjectCategories();
-            },
-            error: (err: any) => {
-                console.error("Critical refresh validation gate failure, firing fallbacks:", err);
-                // Fallback load so the screen doesn't completely freeze on network hiccups
-                this.loadProjectDetails();
-                this.loadProjectCategories();
-            }
-        });
-    }
-
-    loadTasks(): void {
-        this.taskService.getProjectTasks(this.projectId).subscribe({
-            next: (response: any) => {                
-                // Intercept and extract the role metadata sent from backend
-                this.currentUserProjectRole = response.role;
-
-                // Extract the actual tasks array safely out of the data envelope wrapper
-                const allTasks = response.tasks || [];
-
-                // Parse and map array buckets perfectly filtering on TaskItem.cs status properties
-                // 1. Separate items by status
-                this.pendingTasks = allTasks.filter((t: any) => t.status === "Pending");
-                this.inProgressTasks = allTasks.filter((t: any) => t.status === "In Progress" || t.status === "Review Required");
-                this.completedTasks = allTasks.filter((t: any) => t.status === "Completed");
-
-                // 2. Compute completion metrics right away
-                this.calculateProgress(allTasks);
-
-                // 3. Render filtered items immediately
-                this.applyFilters();
-
-                //4. Save our new team array
-                this.projectMembers = response.team || [];
-
-                this.cdr.detectChanges(); // Force rendering updates instantly!
-            },
-            error: (err: any) => console.error('Failed to get tasks for this project board!', err)
-        });
-    }
-
-    onUpdateStatus(taskId: number, newStatus: string): void {
-        this.taskService.updateTaskStatus(taskId, newStatus).subscribe({
-            next: () => {
-                this.loadTasks(); // Instantly reload layout lists with new tracking statuses
-            },
-            error: (err) => console.error('Failed to update task status tracking context!', err)
-        });
-    }
-
-    onDeleteTask(taskId: number): void {
-        // A quick browser pop-up confirmation to prevent accidental clicks
-        if(confirm("Are you sure you want to delete this task completely?")) {
-            this.taskService.deleteTask(taskId).subscribe({
-                next: () => {
-                    this.loadTasks(); // Instantly reload columns to remove the deleted card
-                },
-                error: (err) => {
-                    console.error("Failed to delete task item!", err);
-
-                    if(err.status === 403) {
-                        alert("🛑 Access Denied!\nOnly the project Owner has permission to delete workspace items.");
-                    } else {
-                        alert("Failed to complete task deletion. Please try again.")
-                    }
-                }
-            });
-        }
-    }
-
-    // Prepare our form model structure before opening overlay container view
-    openModal(): void {
-        this.newTask = { title: '', description: '', priority: 'Medium', deadline: '', projectId: this.projectId };
-        this.isModalOpen = true;
-    }
-
-    closeModal(): void { this.isModalOpen = false; }
-
-    // If deadline is an empty string, turn it to null so .NET backend dates parse perfectly
-    onCreateTask(): void {
-        if(this.newTask.deadline === '') {
-            (this.newTask as any).deadline = null;
-        }
-
-        this.taskService.createTask(this.newTask).subscribe({
-            next: () => {
-                this.closeModal();
-                this.loadTasks(); // Refreshes columns immediately to reveal new task item!
-            },
-            error: (err) => console.error("Failed to execute task item database storage request", err)
-        });
-    }
-
-    applyFilters(): void {
-        const filterFn = (task: any) => {
-            const matchesSearch = task.title.toLowerCase().includes(this.searchQuery.toLowerCase());
-            const matchesPriority = this.selectedPriority === 'All' || task.priority === this.selectedPriority;
-
-            let matchesCategory = true;
-            if(this.selectedCategory !== "All") {
-                if(this.selectedCategory === "Null") {
-                    matchesCategory = task.categoryId === null || task.categoryId === undefined;
-                } else {
-                    matchesCategory = task.categoryId !== null && task.categoryId !== undefined && Number(task.categoryId) === Number(this.selectedCategory);
-                }
-            }
-            
-            return matchesSearch && matchesPriority && matchesCategory;
-        };
-
-        this.filteredPendingTasks = this.pendingTasks.filter(filterFn);
-        this.filteredInProgressTasks = this.inProgressTasks.filter(filterFn);
-        this.filteredCompletedTasks = this.completedTasks.filter(filterFn);
-
-        this.cdr.detectChanges();
-    }
-
-    calculateProgress(allTasks: any[]): void {
-        if(!allTasks || allTasks.length === 0) {
-            this.completionPercentage = 0;
-            return;
-        }
-
-        const total = allTasks.length;
-        const completedCount = allTasks.filter(t => t.status === "Completed").length;
-        this.completionPercentage = Math.round((completedCount / total) * 100);
-    }
-
-    onInviteUser(): void {
-        if(!this.inviteEmail) {
-            alert("Validation Alert: Please type a valid email address first!");
-            return;
-        }
-
-        const payload = {
-            InvitedEmail: this.inviteEmail,
-            ProjectRole: this.inviteRole
-        };
-
-        this.projectService.inviteMemberToProject(this.projectId, payload).subscribe({
-            next: (res: any) => {
-                alert(res.message || "Teammate successfully mapped into this project room!");
-                this.inviteEmail = ""; // Clear out the text input field box on success
-                this.inviteRole = "Member"; // Snap the selector dropdown back to default member status!
-                this.loadProjectMembers();
-                this.loadTasks();
-            },
-            error: (err: any) => {
-                console.error("Invitation process failure:", err);
-                alert(err.error?.message || "Failed to complete member assignment.");
-            }
-        });
-    }
-
-    loadProjectDetails(): void {
-        this.projectService.getProjectById(this.projectId).subscribe({
-            next: (project: any) => {
-                this.projectTitle = project.name;
-                this.cdr.detectChanges();
-            },
-            error: (err) => {
-                console.error("Could not retrieve project data payload:", err);
-                this.projectTitle = "Project Board";
-                this.cdr.detectChanges();
-            }
-        });
-    }
-
-    loadProjectMembers(): void {
-        this.projectService.getProjectMembers(this.projectId).subscribe({
-            next: (members: any[]) => {
-                this.projectMembers = members;
-                this.cdr.detectChanges();
-            },
-            error: (err) => {
-                console.error("Failed to retrieve project member roster layout:", err);
-            }
-        });
-    }
-
-    onAssignUser(taskId: number, selectedValue: any): void {
-        const userId = selectedValue === "null" || selectedValue === null ? null : Number(selectedValue);
-        this.taskService.assignTask(taskId, userId).subscribe({
-            next: (res: any) => {
-                console.log("Assignment updated successfully:", res.message);
-                this.loadTasks();
-            },
-            error: (err: any) => {
-                console.error("Failed to update task assignment row:", err);
-            }
-        });
-    }
-
-    loadCurrentUserId(): void {
-        this.authService.getUserProfile().subscribe({
-            next: (data: any) => {
-                this.currentUserId = Number(data.id);
-                this.cdr.detectChanges();
-            },
-            error: (err: any) => {
-                console.error("Could not resolve current user payload identity:", err);
-            }
-        });
-    }
-
-    onCreateCategorySubmit(): void {
-        const payload = {
-            name: this.newCategoryName.trim(),
-            colorHex: this.newCategoryColor
-        };
-
-        this.categoryService.createCategory(this.projectId, payload).subscribe({
-            next: (res: any) => {
-                console.log("Category created successfully!", res.message);
-                this.isCategoryModalOpen = false;
-                this.newCategoryName = ""; // Reset form parameter field input
-                this.loadProjectCategories();
-            },
-            error: (err: any) => console.error("Failed to submit category creation:", err)
-        });
-    }
-
-    loadProjectCategories(): void {
-        this.categoryService.getProjectCategories(this.projectId).subscribe({
-            next: (data: any[]) => {
-                this.projectCategories = data;
-                this.cdr.detectChanges();
-            },
-            error: (err: any) => console.error("Could not parse project tags list:", err)
-        });
-    }
-
-    onAssignCategory(taskId: number, selectedValue: any): void {
-        const categoryId = selectedValue === "null" || selectedValue === null ? null: Number(selectedValue);
-
-        this.taskService.assignTaskCategory(taskId, categoryId).subscribe({
-            next: (res: any) => {
-                console.log("Task category updated successfully:", res.message);
-                this.loadTasks(); // Instantly reloads to display our colorful task card tags!
-            },
-            error: (err: any) => console.error("Failed to update task category reference:", err)
-        });
-    }
-
-    getTaskCountByCategory(categoryId: number): number {
-        // Merge the active columns into a single flat array to count matching category keys
-        const totalCurrentBoardTasks = [...this.pendingTasks, ...this.inProgressTasks, ...this.completedTasks];
-        return totalCurrentBoardTasks.filter(t => t.categoryId === categoryId).length;
-    }
-
-    onDeleteCategoryClick(categoryId: number, categoryName: string): void {
-        const confirmSystem = confirm(`Are you sure you want to permanently delete the '${categoryName}' tag? Ant tasks using this tag will have it removed.`);
-        if(!confirmSystem) return;
-
-        this.categoryService.deleteCategory(this.projectId, categoryId).subscribe({
-            next: (res: any) => {
-                console.log("Category tag expunged successfully:", res.message);
-                // Refresh tags tray and task board arrays immediately on the fly!
-                this.loadProjectCategories();
-                this.loadTasks();
-            },
-            error: (err: any) => console.error("Failed to delete workspace tag row:", err)
-        });
-    }
-
-    onRemoveMemberClick(targetUserId: number, targetEmail: string): void {
-        const confirmSystem = confirm(`Are you sure you want to remove ${targetEmail} from this project workspace room?`);
-        if(!confirmSystem) return;
-
-        this.projectService.removeProjectMember(this.projectId, targetUserId).subscribe({
-            next: (res: any) => {
-                console.log("Roster update executed successfully:", res.message);
-                // Refresh your dashboard panel lists immediately on the fly!
-                this.loadProjectMembers();
-                this.loadTasks();
-            },
-            error: (err: any) => console.error("Failed to execute member removal:", err)
-        });
-    }
-
-    onLeaveProjectClick(): void {
-        const confirmSystem = confirm("Are you absolutely sure you want to resign and leave this project workspace? You will lose all access to this board!");
-        if(!confirmSystem) return;
-
-        this.projectService.removeProjectMember(this.projectId, this.currentUserId).subscribe({
-            next: (res: any) => {
-                console.log("Resignation sequence tracking successful:", res.message);
-                // Redirect the user straight back to their main clean dashboard portal room!
-                this.router.navigate(['/dashboard']);
-            },
-            error: (err: any) => alert(err.error?.message || "Failed to process project resignation request.")
-        });
-    }
-
-    // Method to hide category select drop down menu from unassigned members since they can already see the tag pills if any tag is assigned!
-    isUserAssignedToThisTask(task: any): boolean {
-        return this.currentUserProjectRole === 'Owner' || task.assignedUserId === this.currentUserId;
-    }
-
-    // Angular CDK drag-and-drop master event router interceptor
-    // =========================================================================
-    // FORTIFIED SECURITY DRAG-AND-DROP ACCOUNTABILITY ROUTER
-    // =========================================================================
-    onTaskCardDropTrigger(event: CdkDragDrop<any[]>): void {
-        const targetTaskItem = event.previousContainer.data[event.previousIndex];
-        if (!targetTaskItem) return;
-
-        // Resolve string identifiers for origin and destination columns
-        const sourceLaneId = event.previousContainer.id;
-        const targetLaneId = event.container.id;
-
-        // Determine the baseline status token string matching the landing column zone
-        let computedDatabaseStatusString = targetTaskItem.status;
-        if (targetLaneId === 'pendingLaneList') computedDatabaseStatusString = 'Pending';
-        if (targetLaneId === 'inProgressLaneList') computedDatabaseStatusString = 'In Progress';
-        if (targetLaneId === 'completedLaneList') computedDatabaseStatusString = 'Completed';
-
-        // Establish permission checks for easy reading
-        const isOwner = this.currentUserProjectRole === 'Owner';
-        const isAssignee = targetTaskItem.assignedUserId === this.currentUserId;
-
-        // =========================================================================
-        // PERMISSION GATE 1: THE DYNAMIC SELF-DROP PROGRESS/REVIEW TOGGLE SWITCH
-        // =========================================================================
-        if (sourceLaneId === targetLaneId && targetLaneId === 'inProgressLaneList') {
-            // SECURITY FIX: Block regular users from toggling cards that are NOT assigned to them!
-            if (!isOwner && !isAssignee) {
-                alert("🔒 Access Denied: You are not authorized to modify a task card assigned to another teammate!");
-                return;
-            }
-
-            let nextState = targetTaskItem.status;
-            if (targetTaskItem.status === 'In Progress') {
-                nextState = 'Review Required'; // Worker submits review
-            } else if (targetTaskItem.status === 'Review Required' && isOwner) {
-                nextState = 'In Progress';     // PM rejects/returns request to worker
-            } else if (targetTaskItem.status === 'Review Required' && !isOwner && isAssignee) {
-                nextState = 'In Progress';     // Worker cancels their own pending review request safely!
-            }
-
-            if (nextState !== targetTaskItem.status) {
-                targetTaskItem.status = nextState;
-                this.onUpdateStatus(targetTaskItem.id, nextState);
-                this.cdr.detectChanges();
-            }
-            return;
-        }
-
-        // Standard local row index swapping slot handler fallback if shuffling within same columns (excluding middle lane)
-        if (sourceLaneId === targetLaneId) {
-            moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-            this.cdr.detectChanges();
-            return;
-        }
-
-        // =========================================================================
-        // PERMISSION GATE 2: CROSS-COLUMN MOVEMENT BOUNDARY OUTWRITING SECURITY 
-        // =========================================================================
-
-        // RULE A: Absolute lock on the Completed Column lane! Only Project Managers can approve tasks.
-        if (computedDatabaseStatusString === 'Completed' && !isOwner) {
-            alert("🔒 Gatekeeper Policy: Only a Project Manager can approve tasks and move them to Completed!");
-            return;
-        }
-
-        // RULE B: Prevent regular members from grabbing or picking up unassigned work items entirely.
-        if (!isOwner && !isAssignee) {
-            alert("🔒 Security Lock: You cannot touch or relocate workspace actions not explicitly assigned to you!");
-            return;
-        }
-
-        // RULE C: If a regular member drags their card from Pending into Progress, force it to 'In Progress' 
-        // and strip any old historical 'Review Required' flags seamlessly.
-        if (computedDatabaseStatusString === 'In Progress' && !isOwner) {
-            computedDatabaseStatusString = 'In Progress';
-        }
-
-        // =========================================================================
-        // TRANSACTION EXECUTION FLUSH
-        // =========================================================================
+    --progress-bar-fill: linear-gradient(180deg, #63b3ed, #3182ce); 
+    --filter-focus-color: #63b3ed;                                 
+    --filter-focus-shadow: rgba(99, 179, 237, 0.2);
+    --filter-border-color: rgba(255, 255, 255, 0.5);
     
-        // 1. Locally transfer the item across our arrays so the screen stays incredibly snappy
-        transferArrayItem(
-            event.previousContainer.data,
-            event.container.data,
-            event.previousIndex,
-            event.currentIndex
-        );
+    --focus-halo-color: #63b3ed;                                    
+    --focus-halo-shadow: rgba(99, 179, 237, 0.15);
+}
 
-        // 2. Synchronize line modifications securely over the network to the C# Web API database tables
-        this.onUpdateStatus(targetTaskItem.id, computedDatabaseStatusString);
-        this.cdr.detectChanges();
-    }
+[data-theme="amber-crt"] {
+    /* =========================================================================
+       📟 MONOCHROME RETRO AMBER CRT TERMINAL THEME
+       ========================================================================= */
+    --surface-bg: #110b00;          
+    --container-bg: #050300;        
+    --text-primary: #ffb000;        
+    --text-muted: #aa7500;          
+    --brand-accent: #ffb000;        
+    --brand-accent-border: #ffb000; 
+    --border-color: #ffb000;        
+
+    --badge-high-bg: #ffb000;       --badge-high-text: #050300;     --badge-high-border: #ffb000;
+    --badge-medium-bg: #110b00;     --badge-medium-text: #ffb000;   --badge-medium-border: #ffb000;
+    --badge-low-bg: #110b00;        --badge-low-text: #ffb000;      --badge-low-border: #aa7500;
+    --badge-done-bg: #ffb000;       --badge-done-text: #050300;     --badge-done-border: #aa7500;
+
+    --progress-bar-fill: #ffb000;   
+    --filter-focus-color: #ffb000;                                 
+    --filter-focus-shadow: rgba(255, 176, 0, 0.2);
+    --filter-border-color: #ffb000;
+    
+    --focus-halo-color: #ffb000;                                    
+    --focus-halo-shadow: rgba(255, 176, 0, 0.3);
 }

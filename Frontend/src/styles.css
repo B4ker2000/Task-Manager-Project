@@ -1,5 +1,7 @@
 :root {
-    /* ☀️ DEFAULT CLEAN LIGHT WORKSPACE VARIABLES */
+    /* =========================================================================
+       ☀️ DEFAULT LIGHT WORKSPACE THEME PRESETS
+       ========================================================================= */
     --surface-bg: #ffffff;                                              /* Main cards background canvas */
     --container-bg: #f8f9fa;                                            /* App layout shell backdrop tint */
     --text-primary: #212529;                                            /* Dominant heavy font header color */
@@ -8,22 +10,26 @@
     --brand-accent-border: #3182ce;                                     /* Border color for our buttons */
     --border-color: #cbd5e1;                                            /* Universal border color for the different cards */
 
-    --progress-bar-fill: linear-gradient(90deg, #28a745, #34ce57);    /* Emerald light gradient */
-    --filter-focus-color: #28a745;                                      /* Green focus lines */
-    --filter-focus-shadow: rgba(40, 167, 69, 0.15);
-
-    --focus-halo-color: #3182ce;                                        /* Focus halo color and shadow for buttons, input fields & drop-down menus */
-    --focus-halo-shadow: rgba(40, 130, 206, 0.15);
-
-    /* 📊 PRIORITY VALUE HIGH-CONTRAST ACCESSIBILITY MATRICES */
+    /* 📊 PRIORITY VALUE ACCESSIBILITY BADGES */
     --badge-high-bg: #fff5f5;       --badge-high-text: #e53e3e;     --badge-high-border: #fed7d7;
     --badge-medium-bg: #fffaf0;     --badge-medium-text: #dd6b20;   --badge-medium-border: #feebc8;
     --badge-low-bg: #ebf8ff;        --badge-low-text: #3182ce;      --badge-low-border: #bee3f8;
     --badge-done-bg: #e6fffa;       --badge-done-text: #234e52;     --badge-done-border: #319795;
+
+    /* 🎨 PROGRESS AND FILTER TRACKS */
+    --progress-bar-fill: linear-gradient(90deg, #28a745, #34ce57);    /* Emerald light gradient */
+    --filter-focus-color: #28a745;                                      /* Green focus lines */
+    --filter-focus-shadow: rgba(40, 167, 69, 0.15);
+    --filter-border-color: #28a745;
+
+    --focus-halo-color: #3182ce;                                        /* Focus halo color and shadow for buttons, input fields & drop-down menus */
+    --focus-halo-shadow: rgba(49, 130, 206, 0.15);
 }
 
-/* 🌙 SYSTEM DARK WORKSPACE MODE OVERRIDE */
 [data-theme="dark"] {
+    /* =========================================================================
+       🌙 SYSTEM DARK MODE OVERRIDES
+       ========================================================================= */
     --surface-bg: #1e1e1e;                                              /* Deep rich carbon surface color */
     --container-bg: #121212;                                            /* Flat midnight background floor canvas */
     --text-primary: #f8f9fa;                                            /* Crisp white readable header font block */
@@ -31,48 +37,112 @@
     --brand-accent: #3182ce;                                            /* Vibrant electric neon accent action fills */
     --brand-accent-border: #2b6cb0;                                     /* Border color to compliment our button color above */
     --border-color: #3e3e3e;                                            /* Dark carbon outlines */
-
-    --progress-bar-fill: linear-gradient(90deg, #48bb78, #38a169);    /* Soft glowing green */
-    --filter-focus-color: #48bb78;
-    --filter-focus-shadow: rgba(72, 187, 120, 0.2);
-
-    --focus-halo-color: #63b3ed;
-    --focus-halo-shadow: rgba(99, 179, 237, 0.2);
     
-
     /* 📊 DARK MODE ACCESSIBILITY BADGE MATRICES */
     --badge-high-bg: #3c1e1e;       --badge-high-text: #fc8181;     --badge-high-border: #e53e3e;
     --badge-medium-bg: #3c2a1a;     --badge-medium-text: #f6ad55;   --badge-medium-border: #dd6b20;
     --badge-low-bg: #1a2e3b;        --badge-low-text: #63b3ed;      --badge-low-border: #3182ce;
     --badge-done-bg: #1c3d27;       --badge-done-text: #68d391;     --badge-done-border: #28a745;
+
+    /* 🎨 PROGRESS AND FILTER TRACKS */
+    --progress-bar-fill: linear-gradient(90deg, #48bb78, #38a169);    /* Soft glowing green */
+    --filter-focus-color: #48bb78;
+    --filter-focus-shadow: rgba(72, 187, 120, 0.2);
+    --filter-border-color: #38a169;
+
+    --focus-halo-color: #63b3ed;
+    --focus-halo-shadow: rgba(99, 179, 237, 0.2);
 }
 
-/* 💾 NOSTALGIC Y2K RETRO EASTER EGG SYSTEM (GLOSSY WINDOWS XP / 98 ERA VIBES) */
-[data-theme="retro-y2k"] {
-    --surface-bg: #ffffff;                              /* Simple white background color */
-    --container-bg: #d4d0c8;                            /* Classic hardware grey chassis fill */
-    --text-primary: #000000;                            /* Flat stark terminal text ink black */
-    --text-muted: #000080;                              /* Deep navy text links alignment */
-    --brand-accent: #107c10;                            /* Classic software green trigger commands */
-    --brand-accent-border: #0a5c0a;                     /* Midnight forest green to compliment the classic button color above */
-    --border-color: #808080;                            /* Stark classic 90s hardware gray ouline */
-
-    --progress-bar-fill: #107c10;                       /* Flat harware green */
-    --filter-focus-color: #107c10;                      
-    --filter-focus-shadow: rgba(16, 124, 16, 0.15);
-
-    --focus-halo-color: #107c10;
-    --focus-halo-shadow: rgba(16, 124, 16, 0.2);
+[data-theme="95/98"] {
+    /* =========================================================================
+       💾 REBRANDED: WINDOWS 95 / 98 LEGACY CLASSIC HARWARE MOTOR
+       ========================================================================= */
+    --surface-bg: #d4d0c8;          /* True 90s physical computer chassis gray */
+    --container-bg: #808080;        /* Deep battleship gray background floor */
+    --text-primary: #000000;        /* Stark terminal letter ink black */
+    --text-muted: #000080;          /* Classic Titlebar Blue identifiers */
+    --brand-accent: #000080;        /* Buttons inherit the rigid navy blue command tint */
+    --brand-accent-border: #000000; 
+    --border-color: #ffffff;        /* High-contrast hardware edge line highlights */
     
-    /* 📊 Y2K ACCESSIBILITY BADGE MATRICES: Styled like classic early-2000s desktop alerts! */
-    --badge-high-bg: #ff0000;       --badge-high-text: #ffffff;     --badge-high-border: #800000;
-    --badge-medium-bg: #ffff00;     --badge-medium-text: #000000;   --badge-medium-border: #808000;
-    --badge-low-bg: #0000ff;        --badge-low-text: #ffffff;      --badge-low-border: #000080;
-    --badge-done-bg: #00ff00;       --badge-done-text: #000000;     --badge-done-border: #008000;
+    /* 📊 95/98 Era Flat Alerts layout profiles */
+    --badge-high-bg: #cbd5e1;       --badge-high-text: #c53030;     --badge-high-border: #000000;
+    --badge-medium-bg: #cbd5e1;     --badge-medium-text: #dd6b20;   --badge-medium-border: #000000;
+    --badge-low-bg: #cbd5e1;        --badge-low-text: #3182ce;      --badge-low-border: #000000;
+    --badge-done-bg: #008000;       --badge-done-text: #ffffff;     --badge-done-border: #000000;
+
+    /* 🎨 PROGRESS AND FILTER TRACKS */
+    --progress-bar-fill: #000080;
+    --filter-focus-color: #000080;                      
+    --filter-focus-shadow: rgba(0, 0, 128, 0.15);
+    --filter-border-color: #000080;
+
+    --focus-halo-color: #000080;
+    --focus-halo-shadow: rgba(0, 0, 128, 0.2);
 }
 
-/* 📟 MONOCHROME RETRO AMBER CRT TERMINAL THEME (FALLOUT/VINTAGE UNIX COMPUTER ERA) */
+[data-theme="xp"] {
+    /* =========================================================================
+       💿 CLASSIC WINDOWS XP LUNA BLUE SYSTEM
+       ========================================================================= */
+    
+    --surface-bg: #ffffff;              /* Clean white workspace paper sheets */
+    --container-bg: #4a7af4;            /* Legendary bliss sky-blue desktop background tint */
+    --text-primary: #ffffff;            /* Solid crisp window ink font black */
+    --text-muted: #0022a6;              /* Classic Windows XP Titlebar Royal Blue tint */
+    --brand-accent: #225b11;            /* Iconic Olive-Green 'Start Button' action key fill! */
+    --brand-accent-border: #153a04;     /* Darker forest green outline frame contours */
+    --border-color: #0046d5;            /* Everything is framed in clean royal blue desktop borders! */
+    
+    /* 📊 DYNAMIC LUNA ACCESSIBILITY BADGES: Styled like classic early-2000s warning error alerts! */
+    --badge-high-bg: #ff3333;       --badge-high-text: #ffffff;     --badge-high-border: #990000;
+    --badge-medium-bg: #ffcc00;     --badge-medium-text: #000000;   --badge-medium-border: #cc9900;
+    --badge-low-bg: #dff0fe;        --badge-low-text: #0046d5;      --badge-low-border: #0046d5;
+    --badge-done-bg: #225b11;       --badge-done-text: #ffffff;     --badge-done-border: #153a04;
+
+    /* 🎨 PROGRESS AND FILTER TRACKS */
+    --progress-bar-fill: linear-gradient(180deg, #3cd53c, #225b11);       /* Glossy dynamic green bar tracker gradient! */
+    --filter-focus-color: #225b11;                                          /* Olive-green filter borders */
+    --filter-focus-shadow: rgba(34, 91, 17, 0.2);
+    --filter-border-color: #225b11;
+
+    --focus-halo-color: #0046d5;                                            /* Rpyal blue text box selection outline rings */
+    --focus-halo-shadow: rgba(0, 70, 213, 0.15);
+}
+
+[data-theme="7"] {
+    /* =========================================================================
+       📀 WINDOWS 7 GLASS AERO ENVIRONMENT  
+       ========================================================================= */
+    --surface-bg: rgba(255, 255, 255, 0.75);            /* Translucent frosted glass refraction fill! */
+    --container-bg: #1e3a5f;                            /* Deep premium slate twilight backdrop */
+    --text-primary: #f8f9fa;                            /* Soft glowing glass text */
+    --text-muted: #a3c2f0;                    
+    --brand-accent: #3182ce;        
+    --brand-accent-border: rgba(255, 255, 255, 0.4); 
+    --border-color: rgba(255, 255, 255, 0.35);          /* Translucent thin window framing lines */
+
+    /* 📊 DYNAMIC LUNA ACCESSIBILITY BADGES: Styled like classic early-2000s warning error alerts! */
+    --badge-high-bg: rgba(229, 62, 62, 0.25);        --badge-high-text: #feb2b2;     --badge-high-border: #e53e3e;
+    --badge-medium-bg: rgba(221, 107, 32, 0.25);     --badge-medium-text: #fbd38d;   --badge-medium-border: #dd6b20;
+    --badge-low-bg: rgba(49, 130, 206, 0.25);        --badge-low-text: #90cdf4;      --badge-low-border: #3182ce;
+    --badge-done-bg: rgba(56, 161, 105, 0.25);       --badge-done-text: #9ae6b4;     --badge-done-border: #38a169;
+
+    /* 🎨 PROGRESS AND FILTER TRACKS */
+    --progress-bar-fill: linear-gradient(180deg, #63b3ed, #3182ce);
+    --filter-focus-color: #63b3ed;
+    --filter-focus-shadow: rgba(99, 179, 237, 0.2);
+    --filter-border-color: rgba(255, 255, 255, 0.5);
+
+    --focus-halo-color: #63b3ed;
+    --focus-halo-shadow: rgba(99, 179, 237, 0.15);
+}
+
 [data-theme="amber-crt"] {
+    /* =========================================================================
+       📟 MONOCHROME RETRO AMBER CRT TERMINAL THEME
+       ========================================================================= */
     --surface-bg: #110b00;                              /* Deep pitch dark charcoal amber canvas */
     --container-bg: #050300;                            /* Pure obsidian black terminal floor backdrop */
     --text-primary: #ffb000;                            /* Glowing vintage high-vis phosphorus amberink text */
@@ -80,43 +150,21 @@
     --brand-accent: #ffb000;        
     --brand-accent-border: #ffb000; 
     --border-color: #ffb000;                            /* Everything is framed in uniform amber glowing circuits! */
-
-    --progress-bar-fill: #ffb000;                       /* Everything glows phosphorus */
-    --filter-focus-color: #ffb000;
-    --filter-focus-shadow: rgba(255, 176, 0, 0.2);
-
-    --focus-halo-color: #ffb000;
-    --focus-halo-shadow: rgba(255, 176, 0, 0.3);
     
     /* 📊 Amber-CRT ACCESSIBILITY BADGE MATRICES */
     --badge-high-bg: #ffb000;       --badge-high-text: #050300;     --badge-high-border: #ffb000;
     --badge-medium-bg: #110b00;     --badge-medium-text: #ffb000;   --badge-medium-border: #ffb000;
     --badge-low-bg: #110b00;        --badge-low-text: #ffb000;      --badge-low-border: #aa7500;
     --badge-done-bg: #ffb000;       --badge-done-text: #050300;     --badge-done-border: #aa7500;
-}
 
-/* 💾 NOSTALGIC WINDOWS XP LUNA THEME (CLASSIC EARLY 2000s DESKTOP VIBES */
-[data-theme="xp"] {
-    --surface-bg: #ffffff;                                                  /* Clean white workspace paper sheets */
-    --container-bg: #5a8de7;                                                /* Legendary bliss sky-blue desktop background tint */
-    --text-primary: #000000;                                                /* Solid crisp window ink font black */
-    --text-muted: #0046d5;                                                  /* Classic Windows XP Titlebar Royal Blue tint */
-    --brand-accent: #225b11;                                                /* Iconic Olive-Green 'Start Button' action key fill! */
-    --brand-accent-border: #153a04;                                         /* Darker forest green outline frame contours */
-    --border-color: #0046d5;                                                /* Everything is framed in clean royal blue desktop borders! */
+    /* 🎨 PROGRESS AND FILTER TRACKS */
+    --progress-bar-fill: #ffb000;                       /* Everything glows phosphorus */
+    --filter-focus-color: #ffb000;
+    --filter-focus-shadow: rgba(255, 176, 0, 0.2);
+    --filter-border-color: #ffb000;
 
-    --progress-bar-fill: linear-gradient(180deg, #3cd53c, #225b11);       /* Glossy dynamic green bar tracker gradient! */
-    --filter-focus-color: #225b11;                                          /* Olive-green filter borders */
-    --filter-focus-shadow: rgba(34, 91, 17, 0.2);
-
-    --focus-halo-color: #0046d5;                                            /* Rpyal blue text box selection outline rings */
-    --focus-halo-shadow: rgba(0, 70, 213, 0.15);
-    
-    /* 📊 DYNAMIC LUNA ACCESSIBILITY BADGES: Styled like classic early-2000s warning error alerts! */
-    --badge-high-bg: #ff3333;       --badge-high-text: #ffffff;     --badge-high-border: #990000;
-    --badge-medium-bg: #ffcc00;     --badge-medium-text: #000000;   --badge-medium-border: #cc9900;
-    --badge-low-bg: #dff0fe;        --badge-low-text: #0046d5;      --badge-low-border: #0046d5;
-    --badge-done-bg: #225b11;       --badge-done-text: #ffffff;     --badge-done-border: #153a04;
+    --focus-halo-color: #ffb000;
+    --focus-halo-shadow: rgba(255, 176, 0, 0.3);
 }
 
 /* =========================================================================
