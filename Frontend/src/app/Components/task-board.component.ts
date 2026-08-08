@@ -6,11 +6,12 @@ import { TaskService } from "../Services/task.service";
 import { ProjectService } from "../Services/project.service";
 import { AuthService } from "../Services/auth.service";
 import { CategoryService } from "../Services/category.service";
+import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
 
 @Component({
     selector: 'app-task-board',
     standalone: true,
-    imports: [FormsModule, NgFor, NgIf, NgClass, RouterLink, DatePipe],
+    imports: [FormsModule, NgFor, NgIf, NgClass, RouterLink, DatePipe, DragDropModule],
     templateUrl: "./task-board.component.html",
     styleUrl: "./task-board.component.css"
 })
@@ -437,5 +438,62 @@ export class TaskBoardComponent implements OnInit {
     // Method to hide category select drop down menu from unassigned members since they can already see the tag pills if any tag is assigned!
     isUserAssignedToThisTask(task: any): boolean {
         return this.currentUserProjectRole === 'Owner' || task.assignedUserId === this.currentUserId;
+    }
+
+    // Angular CDK drag-and-drop master event router interceptor
+    onTaskCardDropTrigger(event: CdkDragDrop<any[]>): void {
+        // 1. INTRA-COLUMN ARRANGEMENT: Did the user drop the card inside the EXACT same column?
+        if(event.previousContainer === event.container) {
+            // Rearranges the array elements instantly so the frontend stays fluid!
+            moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+            this.cdr.detectChanges();
+            return;
+        }
+
+        // 2. EXTRA-COLUMN CROSSING: The card jumped into a completely different lane/column!
+        const targetTaskItem = event.previousContainer.data[event.previousIndex];
+        if(!targetTaskItem) return;
+
+        // Resolve the string identity name key of the target column container lane drop destination
+        const targetLaneDestinationId = event.container.id;
+        let computedDatabaseStatusString = "";
+
+        // Map the HTML container ID string keys to our explicit backend C# database status values
+        if(targetLaneDestinationId === "pendingLaneList") {
+            computedDatabaseStatusString = "Pending"
+        } else if(targetLaneDestinationId === "inProgressLaneList") {
+            computedDatabaseStatusString = "In Progress";
+        } else if(targetLaneDestinationId === "completedLaneList") {
+            computedDatabaseStatusString = "Completed";
+        }
+
+        // 3. SECURITY GATEWAY OVERRIDES: Enforce our custom project management guard rules!
+
+        // GUARD A: Prevent regular workspace members from dragging arbitrary cards out of "Pending"!
+        if(computedDatabaseStatusString !== "Pending" && this.currentUserProjectRole !== "Owner" && targetTaskItem.assignedUserId !== this.currentUserId) {
+            alert("🔒 Unauthorized Operation: You cannot advance a task card that is not assigned to you!");
+            return;
+        }
+
+        // GUARD B: If a card enters the center column , automatically evaluate if it needs PM Review bounds!
+        if(computedDatabaseStatusString === "In Progress" && targetTaskItem.status !== "Review Required" && this.currentUserProjectRole !== "Owner") {
+            // If a regular user moves it, force it into "Review Required" instead of letting it slip through!
+            computedDatabaseStatusString = "Review Required";
+        }
+
+        // 4. TRANSACTION FLUSH: Swap the element across local array memory windows fluidly first
+        transferArrayItem(
+            event.previousContainer.data,
+            event.container.data,
+            event.previousIndex,
+            event.currentIndex
+        );
+
+        // 5. BACKEND DATABASE SYNCHRONIZATION
+        // Re-use our existing highly optimized endpoint caller method to update the C# server instantly!
+        this.onUpdateStatus(targetTaskItem.id, computedDatabaseStatusString);
+
+        // Force a structural paint pass to snap the counters into perfect alignment
+        this.cdr.detectChanges();
     }
 }
