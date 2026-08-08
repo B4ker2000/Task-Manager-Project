@@ -268,6 +268,14 @@
     cursor: text;
 }
 
+.board-interactive-field.search:focus,
+.board-interactive-field.priority:focus,
+.board-interactive-field.category:focus {
+    border: 2px solid var(--filter-focus-color, #28a745) !important;
+    box-shadow: 0 0 0 3px var(--filter-focus-shadow, rgba(40, 167, 69, 0.15)) !important;
+    outline: none;
+}
+
 /* =========================================================================
    LIVE ANALYTICS TRACKER BAR
    ========================================================================= */

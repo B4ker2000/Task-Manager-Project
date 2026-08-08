@@ -409,6 +409,13 @@ export class TaskBoardComponent implements OnInit {
         });
     }
 
+    closeCategoryModal(): void {
+        this.newCategoryName = "";
+        this.newCategoryColor = "#3182ce";
+        this.isCategoryModalOpen = false;
+        this.cdr.detectChanges();
+    }
+
     onRemoveMemberClick(targetUserId: number, targetEmail: string): void {
         const confirmSystem = confirm(`Are you sure you want to remove ${targetEmail} from this project workspace room?`);
         if(!confirmSystem) return;
