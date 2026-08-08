@@ -750,3 +750,46 @@ input[type="date"].modal-input-field {
 
     .modal-btn-actions-row { flex-direction: column; }
 }
+
+/* =========================================================================
+   ANGULAR CDK DRAG-AND-DROP PRESET CUSTOM INTERACTION HOOKS
+   ========================================================================= */
+/* Expands the landing zone to fill the entire column height even when there are 0 tasks present! */
+.tasks-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    min-height: 450px;
+    height: 100%;
+}
+
+/* Styles the ghost placeholder card left behind in the original lane while the actual card is being actively dragged around */
+.cdk-drag-placeholder {
+    opacity: 0.25;
+    background: transparent !important;
+    border: 2px dashed var(--text-muted) !important;
+    box-shadow: none !important;
+    border-radius: 6px;
+    height: 120px;
+}
+
+
+/* Styles the actual floating card attached to your mouse cursor while dragging */
+.cdk-drag-preview {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+    border: 2px solid var(--focus-halo-color) !important;
+    border-radius: 6px;
+    box-sizing: border-box;
+    cursor: grabbing !important;
+}
+
+/* Adds smooth CSS physics transitions when a card automatically snaps into place upon drop */
+.cdk-drop-list-receiving .task-card,
+.cdk-drop-list-dragging .task-card {
+    transition: transform 0.2s cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* Animates the list elements rearranging themselves fluidly while we hover over a column slot */
+.cdk-drag-animating {
+    transition: transform 0.25s cubic-bezier(0, 0, 0.2, 1);
+}
