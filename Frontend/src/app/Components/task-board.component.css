@@ -770,7 +770,8 @@ input[type="date"].modal-input-field {
     border: 2px dashed var(--text-muted) !important;
     box-shadow: none !important;
     border-radius: 6px;
-    height: 120px;
+    min-height: 120px;
+    width: 100%;
 }
 
 
