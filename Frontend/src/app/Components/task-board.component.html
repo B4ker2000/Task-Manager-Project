@@ -129,12 +129,24 @@
         <button class="lane-tab-trigger" [ngClass]="{'active': activeMobileColumn === 'Completed'}" (click)="activeMobileColumn = 'Completed'">✅ Completed</button>
     </div>
 
-    <div class="board-columns-grid">
+    <div class="board-columns-grid" cdkDropListGroup>
         <!-- Column 1: Pending Tasks -->
-		 <section class="board-column" [class.mobile-hidden]="activeMobileColumn !== 'Pending'">
+		 <section class="board-column" 
+                  [class.mobile-hidden]="activeMobileColumn !== 'Pending'">
 			<h3>⏳ Pending ({{ pendingTasks.length }})</h3>
-            <div class="tasks-container">
-                <div class="task-card" *ngFor="let t of filteredPendingTasks">
+
+            <!-- CDK Target Drop Window Container Lane -->
+             <div id="pendingLaneList"
+                 cdkDropList
+                 [cdkDropListData]="pendingTasks"
+                 (cdkDropListDropped)="onTaskCardDropTrigger($event)" 
+                 class="tasks-container">
+
+                <!-- Draggable Task Card Template Block -->
+                 <div class="task-card" 
+                     *ngFor="let t of filteredPendingTasks"
+                     cdkDrag>
+
                     <div class="task-card-header">
                         <h4>{{ t.title }}</h4>
                         <!-- DYNAMIC CATEGORY DISPLAY BADGE -->
@@ -147,7 +159,9 @@
                          </span>
                         <button *ngIf="currentUserProjectRole === 'Owner'" class="delete-card-btn" (click)="onDeleteTask(t.id)">🗑️</button>
                     </div>
+
                     <p>{{ t.description || 'No details provided.' }}</p>
+
                     <div class="task-assignment-control">
                         <label class="assignment-label">👤 Assignee:</label>
                         <select [ngModel]="t.assignedUserId" (change)="onAssignUser(t.id, $any($event.target).value)" class="assignee-dropdown-menu" [disabled]="currentUserProjectRole !== 'Owner'">
@@ -157,6 +171,7 @@
                             </option>
                         </select>
                     </div>
+
                     <div *ngIf="currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId" class="task-assignment-control">
                         <label class="assignment-label">🏷️ Category:</label>
                         <select [ngModel]="t.categoryId" (change)="onAssignCategory(t.id, $any($event.target).value)" [disabled]="currentUserProjectRole !== 'Owner' && t.assignedUserId !== currentUserId" class="assignee-dropdown-menu">
@@ -166,6 +181,7 @@
                             </option>
                         </select>
                     </div>
+
                     <div class="task-actions">
                         <div class="badge-group">
                             <span class="priority-badge" [ngClass]="t.priority.toLowerCase()">
@@ -179,15 +195,26 @@
                         </div>
                         <button *ngIf="currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId" class="action-btn next" (click)="onUpdateStatus(t.id, 'In Progress')">Start →</button>
                     </div>
-                </div>
-            </div>
+                 </div>
+             </div>
          </section>
 
 		<!-- Column 2: In Progress & Review Tasks -->
-         <section class="board-column" [class.mobile-hidden]="activeMobileColumn !== 'InProgress'">
+         <section class="board-column" 
+                  [class.mobile-hidden]="activeMobileColumn !== 'InProgress'">
             <h3>⚡ In-Progress & Review ({{ inProgressTasks.length }})</h3>
-            <div class="tasks-container">
-                <div class="task-card" *ngFor="let t of filteredInProgressTasks" [ngClass]="{'review-needed-card': t.status === 'Review Required'}">
+            
+            <div id="inProgressLaneList"
+                 cdkDropList
+                 [cdkDropListData]="inProgressTasks"
+                 (cdkDropListDropped)="onTaskCardDropTrigger($event)"
+                 class="tasks-container">
+                
+                <div class="task-card" 
+                     *ngFor="let t of filteredInProgressTasks" 
+                     [ngClass]="{'review-needed-card': t.status === 'Review Required'}"
+                     cdkDrag>
+                    
                     <div class="task-card-header">
                         <h4>{{ t.title }}</h4>
                         <!-- DYNAMIC CATEGORY DISPLAY BADGE -->
@@ -200,10 +227,13 @@
                          </span>
                         <button *ngIf="currentUserProjectRole === 'Owner'" class="delete-card-btn" (click)="onDeleteTask(t.id)">🗑️</button>
                     </div>
+
                     <p>{{ t.description || 'No details provided.' }}</p>
+                    
                     <div *ngIf="t.status === 'Review Required'" class="review-status-banner">
                         ⚠️ Pending PM Review
                     </div>
+                    
                     <div class="task-assignment-control">
                         <label class="assignment-label">👤 Assignee:</label>
                         <select [ngModel]="t.assignedUserId" (change)="onAssignUser(t.id, $any($event.target).value)" class="assignee-dropdown-menu" [disabled]="currentUserProjectRole !== 'Owner'">
@@ -213,6 +243,7 @@
                             </option>
                         </select>
                     </div>
+                    
                     <div *ngIf="currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId" class="task-assignment-control">
                         <label class="assignment-label">🏷️ Category:</label>
                         <select [ngModel]="t.categoryId" (change)="onAssignCategory(t.id, $any($event.target).value)" [disabled]="currentUserProjectRole !== 'Owner' && t.assignedUserId !== currentUserId" class="assignee-dropdown-menu">
@@ -222,6 +253,7 @@
                             </option>
                         </select>
                     </div>
+                    
                     <div class="task-actions">
                         <div class="badge-group">
                             <span class="priority-badge" [ngClass]="t.priority.toLowerCase()">
@@ -247,11 +279,21 @@
          </section>
 
         <!-- Column 3: Completed Tasks -->
-         <section class="board-column" [class.mobile-hidden]="activeMobileColumn !== 'Completed'">
+         <section class="board-column" 
+                  [class.mobile-hidden]="activeMobileColumn !== 'Completed'">
             <h3>✅ Completed ({{ completedTasks.length }})</h3>
-			<div class="tasks-container">
-				<div class="task-card done" *ngFor="let t of filteredCompletedTasks">
-					<div class="task-card-header">
+			
+            <div id="completedLaneList"
+                 cdkDropList
+                 [cdkDropListData]="completedTasks"
+                 (cdkDropListDropped)="onTaskCardDropTrigger($event)"
+                 class="tasks-container">
+                
+				<div class="task-card done" 
+                     *ngFor="let t of filteredCompletedTasks"
+                     cdkDrag>
+					
+                    <div class="task-card-header">
 						<h4>{{ t.title }}</h4>
                         <!-- DYNAMIC CATEGORY DISPLAY BADGE -->
                         <!-- Only renders on your screen if the task row actually has a category linked in the database! -->
@@ -262,11 +304,14 @@
                              </span>
                          </span>
 						<button *ngIf="currentUserProjectRole === 'Owner'" class="delete-card-btn" (click)="onDeleteTask(t.id)">🗑️</button>
-					</div>												
+					</div>
+
                     <p>{{ t.description || 'No details provided.' }}</p>
+                    
                     <div class="badge-group">
                         <span class="priority-badge done">🟢 🔹Done</span>
                     </div>
+                    
                     <div class="task-assignment-control">
                         <label class="assignment-label">👤 Assignee:</label>
                         <!-- <select [ngModel]="t.assignedUserId" (change)="onAssignUser(t.id, $any($event.target).value)" class="assignee-dropdown-menu" [disabled]="currentUserProjectRole !== 'Owner'"> -->
@@ -277,6 +322,7 @@
                             </option>
                         </select>
                     </div>
+                    
                     <div *ngIf="currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId" class="task-assignment-control">
                         <label class="assignment-label">🏷️ Category:</label>
                         <select [ngModel]="t.categoryId" (change)="onAssignCategory(t.id, $any($event.target).value)" [disabled]="currentUserProjectRole !== 'Owner' && t.assignedUserId !== currentUserId" class="assignee-dropdown-menu">
@@ -286,6 +332,7 @@
                             </option>
                         </select>
                     </div>
+                    
                     <div class="task-actions">
                         <div class="badge-group">
                             <span class="priority-badge" [ngClass]="t.priority.toLowerCase()">
