@@ -117,16 +117,11 @@ select, textarea {
     transition: border-color 0.15s ease-in-out, border-shadow 0.15s ease-in-out;
 }
 
-/* Forces the native browser calendar popup icons and text fields to natively 
-   adapt their colors to match light or deep dark themes automatically! */
-input[type="date"] {
-    color-scheme: light dark;
-}
-
 input[type="text"]:focus,
 input[type="date"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus,
+.board-interactive-field:focus,
 select:focus, textarea:focus {
     border: 2px solid var(--focus-halo-color) !important;
     box-shadow: 0 0 0 3px var(--focus-halo-shadow);
@@ -236,3 +231,12 @@ select:focus,
 
 .board-interactive-field.select-config { padding-left: 5px !important;}
 .control-input-wrapper select { padding-left: 30px !important; }
+
+/* =========================================================================
+   NATIVE CALENDAR PICKER ACCESSIBILITY MODIFIER
+   ========================================================================= */
+[data-theme="dark"] input[type="date"]::-webkit-calendar-picker-indicator,
+[data-theme="amber-crt"] input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1); /* Inverts the native black icon to match our themes! */
+    cursor: pointer;
+}

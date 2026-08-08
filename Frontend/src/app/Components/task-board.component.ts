@@ -521,7 +521,8 @@ export class TaskBoardComponent implements OnInit {
         // =========================================================================
         // TRANSACTION EXECUTION FLUSH
         // =========================================================================
-        
+        targetTaskItem.status = computedDatabaseStatusString;
+
         // 1. Locally transfer the item across our arrays so the screen stays incredibly snappy!
         transferArrayItem(
             event.previousContainer.data,
@@ -532,6 +533,11 @@ export class TaskBoardComponent implements OnInit {
 
         // 2. Synchronize line modifications securely over the network to the C# Web API database tables
         this.onUpdateStatus(targetTaskItem.id, computedDatabaseStatusString, true);
+
+        // Recalculate our progress analytics metrics bar graph on the fly
+        const totalCurrentBoardTasks = [...this.pendingTasks, ...this.inProgressTasks, ...this.completedTasks];
+        this.calculateProgress(totalCurrentBoardTasks);
+        this.applyFilters();
 
         // Force a structural paint pass to snap the counters into perfect alignment
         this.cdr.detectChanges();
