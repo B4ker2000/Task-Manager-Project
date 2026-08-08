@@ -567,6 +567,7 @@
     background-color: var(--surface-bg, #ffffff);
     color: var(--text-primary);
     padding: 25px;
+    border: 2px solid var(--border-color, #cbd5e1);
     border-radius: 8px;
     width: 100%;
     max-width: 400px;

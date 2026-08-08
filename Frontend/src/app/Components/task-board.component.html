@@ -352,8 +352,10 @@
     </div>
 
     <!-- Create new task form & Modal Overlays -->
-     <div class="modal-overlay" *ngIf="isModalOpen">
-        <div class="modal-card">
+     <!-- ```(click)="closeModal()"``` means clicking anywhere will close our modal! -->
+      <div class="modal-overlay" *ngIf="isModalOpen" (click)="closeModal()">
+        <!-- ```(click)="$event.stopPropagation()"``` basically prevents the browser from closing the modal IF the user clicks inside this div! -->
+         <div class="modal-card" (click)="$event.stopPropagation()">
             <h3>Create New Task Specification</h3>
             <form (ngSubmit)="onCreateTask()" #taskForm="ngForm">
                 <div class="form-group-row">
@@ -385,13 +387,13 @@
                     <button type="submit" class="submit-btn" [disabled]="!taskForm.form.valid">Create Task</button>
                 </div>
             </form>
-        </div>
-     </div>
+         </div>
+      </div>
 
     <!-- CATEGORY CREATION POP-UP MODAL WINDOW -->
-     <div class="modal-overlay" *ngIf="isCategoryModalOpen">
-        <div class="modal-card">
-            <h3>🎨 Create New Workspace Tag</h3>
+     <div class="modal-overlay" *ngIf="isCategoryModalOpen" (click)="isCategoryModalOpen = false">
+        <div class="modal-card" (click)="$event.stopPropagation()">
+            <h3>Create New Workspace Tag</h3>
 
             <form (ngSubmit)="onCreateCategorySubmit()" #categoryForm="ngForm" class="modal-form">
                 <div class="form-group-row">

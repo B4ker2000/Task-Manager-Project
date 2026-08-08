@@ -117,6 +117,12 @@ select, textarea {
     transition: border-color 0.15s ease-in-out, border-shadow 0.15s ease-in-out;
 }
 
+/* Forces the native browser calendar popup icons and text fields to natively 
+   adapt their colors to match light or deep dark themes automatically! */
+input[type="date"] {
+    color-scheme: light dark;
+}
+
 input[type="text"]:focus,
 input[type="date"]:focus,
 input[type="email"]:focus,
@@ -179,15 +185,25 @@ button:disabled {
 .action-btn.back {
     background-color: var(--surface-bg, #ffffff);
     color: var(--text-primary);
-    border: 2px solid #cbd5e1;
+    border: 2px solid var(--border-color, #cbd5e1);
 }
 
 .cancel-btn:hover,
 .back-btn:hover,
 .action-btn.back:hover {
-    background-color: #4a5568;
-    color: #ffffff;
-    border-color: #2d3748;
+    background-color: var(--text-muted);
+    color: var(--surface-bg, #ffffff);
+    border-color: var(--text-muted);
+}
+
+button:disabled {
+    background-color: var(--container-bg, #cbd5e1) !important;
+    border-color: var(--border-color, #797f86) !important;
+    color: var(--text-muted) !important;
+    cursor: not-allowed !important;
+    opacity: 0.5 !important;
+    transform: none !important;
+    box-shadow: none !important;
 }
 
 /* =========================================================================

@@ -7,6 +7,7 @@ import { ProjectService } from "../Services/project.service";
 import { AuthService } from "../Services/auth.service";
 import { CategoryService } from "../Services/category.service";
 import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
+import { skip } from "node:test";
 
 @Component({
     selector: 'app-task-board',
@@ -182,10 +183,12 @@ export class TaskBoardComponent implements OnInit {
         });
     }
 
-    onUpdateStatus(taskId: number, newStatus: string): void {
+    onUpdateStatus(taskId: number, newStatus: string, skipNetworkReload: boolean = false): void {
         this.taskService.updateTaskStatus(taskId, newStatus).subscribe({
             next: () => {
-                this.loadTasks(); // Instantly reload layout lists with new tracking statuses
+                if(!skipNetworkReload) {
+                    this.loadTasks(); // Instantly reload layout lists with new tracking statuses
+                }
             },
             error: (err) => console.error('Failed to update task status tracking context!', err)
         });
@@ -528,7 +531,7 @@ export class TaskBoardComponent implements OnInit {
         );
 
         // 2. Synchronize line modifications securely over the network to the C# Web API database tables
-        this.onUpdateStatus(targetTaskItem.id, computedDatabaseStatusString);
+        this.onUpdateStatus(targetTaskItem.id, computedDatabaseStatusString, true);
 
         // Force a structural paint pass to snap the counters into perfect alignment
         this.cdr.detectChanges();
