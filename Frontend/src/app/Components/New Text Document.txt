@@ -4,13 +4,16 @@
        ========================================================================= */
     --surface-bg: #ffffff;          
     --container-bg: #f8f9fa;        
+    --wallpaper: #f8f9fa;           /* Default wallpaper matches container backdrop */
     --text-primary: #212529;        
     --text-muted: #6c757d;          
+    --text-on-card: #212529;        
     --brand-accent: #007bff;        
     --brand-accent-border: #3182ce; 
     --border-color: #cbd5e1; 
+    --input-bg: #ffffff;            /* Crisp white text box fields default */
 
-    /* 📊 PRIORITY VALUE ACCESSIBILITY BADGES */
+    /* 📊 ACCESSIBILITY BADGES TIERS */
     --badge-high-bg: #fff5f5;       --badge-high-text: #e53e3e;     --badge-high-border: #fed7d7;
     --badge-medium-bg: #fffaf0;     --badge-medium-text: #dd6b20;   --badge-medium-border: #feebc8;
     --badge-low-bg: #ebf8ff;        --badge-low-text: #3182ce;      --badge-low-border: #bee3f8;
@@ -20,7 +23,7 @@
     --progress-bar-fill: linear-gradient(90deg, #28a745, #34ce57); 
     --filter-focus-color: #28a745;                                 
     --filter-focus-shadow: rgba(40, 167, 69, 0.15);
-    --filter-border-color: #28a745; /* FIXED (Note 2): Unique non-focus boundary line */
+    --filter-border-color: #28a745; 
 
     --focus-halo-color: #3182ce;
     --focus-halo-shadow: rgba(49, 130, 206, 0.15);
@@ -32,11 +35,14 @@
        ========================================================================= */
     --surface-bg: #1e1e1e;          
     --container-bg: #121212;        
+    --wallpaper: #121212;
     --text-primary: #f8f9fa;        
     --text-muted: #a0aec0;          
+    --text-on-card: #f8f9fa;
     --brand-accent: #3182ce;        
     --brand-accent-border: #2b6cb0; 
     --border-color: #3e3e3e; 
+    --input-bg: #1e1e1e;
 
     --badge-high-bg: #3c1e1e;       --badge-high-text: #fc8181;     --badge-high-border: #e53e3e;   
     --badge-medium-bg: #3c2a1a;     --badge-medium-text: #f6ad55;   --badge-medium-border: #dd6b20; 
@@ -54,15 +60,25 @@
 
 [data-theme="retro-y2k"] {
     /* =========================================================================
-       💾 REBRANDED: WINDOWS 95 / 98 LEGACY CLASSIC HARWARE MOTOR
+       💾 THE WINDOWS 95 / 98 LEGACY ARCHITECTURE
        ========================================================================= */
-    --surface-bg: #d4d0c8;          /* True 90s physical computer chassis gray */
-    --container-bg: #808080;        /* Deep battleship gray background floor */
-    --text-primary: #000000;        /* Stark terminal letter ink black */
-    --text-muted: #000080;          /* Classic Titlebar Blue identifiers */
-    --brand-accent: #000080;        /* Buttons inherit the rigid navy blue command tint */
+    --surface-bg: #d4d0c8;          /* Keep your beautiful battleship gray frames! */
+    --container-bg: #d4d0c8;        
+    --wallpaper: #008080;           /* FIX: The legendary outer Teal Green Desktop Wallpaper! */
+    --text-primary: #000000;        
+    --text-muted: #000080;          
+    --text-on-card: #000000;        
+    --brand-accent: #000080;        
     --brand-accent-border: #000000; 
-    --border-color: #ffffff;        /* High-contrast hardware edge line highlights */
+    --border-color: #ffffff;        
+    --input-bg: #ffffff;            /* FIX: Classic 95/98 text boxes remain stark white! */
+
+    /**/
+    --badge-high-bg: #d4d0c8;       --badge-high-text: #c53030;     --badge-high-border: #000000;
+    --badge-medium-bg: #d4d0c8;     --badge-medium-text: #dd6b20;   --badge-medium-border: #000000;
+    --badge-low-bg: #d4d0c8;        --badge-low-text: #3182ce;      --badge-low-border: #000000;
+    --badge-done-bg: #008000;       --badge-done-text: #ffffff;     --badge-done-border: #000000;
+
 
     --progress-bar-fill: #000080;   
     --filter-focus-color: #000080;                      
@@ -71,25 +87,22 @@
 
     --focus-halo-color: #000080;
     --focus-halo-shadow: rgba(0, 0, 128, 0.2);
-    
-    /* 95 Era Flat Alerts layout profiles */
-    --badge-high-bg: #cbd5e1;       --badge-high-text: #c53030;     --badge-high-border: #000000;
-    --badge-medium-bg: #cbd5e1;     --badge-medium-text: #dd6b20;   --badge-medium-border: #000000;
-    --badge-low-bg: #cbd5e1;        --badge-low-text: #3182ce;      --badge-low-border: #000000;
-    --badge-done-bg: #008000;       --badge-done-text: #ffffff;     --badge-done-border: #000000;
 }
 
 [data-theme="windows-xp"] {
     /* =========================================================================
-       💾 CLASSIC WINDOWS XP LUNA BLUE SYSTEM
+       💾 THE WINDOWS XP LUNA BLUE PLATFORM
        ========================================================================= */
     --surface-bg: #ffffff;          
-    --container-bg: #4a7af4;        /* Iconic Bliss desktop screen canvas background */
-    --text-primary: #ffffff;        /* FIX (Note 1): Crisp white legible icons text fonts */
+    --container-bg: #efebde;        /* Classic sand-gray explorer window background tint */
+    --wallpaper: #4a7af4;           /* Legendary Bliss Sky-Blue Desktop wallpaper background! */
+    --text-primary: #ffffff;        /* Main page headers match white icon strings */
     --text-muted: #0022a6;          
-    --brand-accent: #225b11;        /* Start green */
+    --text-on-card: #000000;        /* White text cards maintain crisp black font visibility! */
+    --brand-accent: #225b11;        
     --brand-accent-border: #153a04; 
     --border-color: #0046d5;        
+    --input-bg: #ffffff;
 
     --badge-high-bg: #ff3333;       --badge-high-text: #ffffff;     --badge-high-border: #990000;   
     --badge-medium-bg: #ffcc00;     --badge-medium-text: #000000;   --badge-medium-border: #cc9900; 
@@ -107,28 +120,31 @@
 
 [data-theme="windows-7"] {
     /* =========================================================================
-       🔮 DYNAMIC NEW ENTRY: WINDOWS 7 GLASS AERO ENVIRONMENT
+       🔮 THE WINDOWS 7 BRIGHT GLOSSY AERO SYSTEM
        ========================================================================= */
-    --surface-bg: rgba(255, 255, 255, 0.75); /* Translucent frosted glass refraction fill! */
-    --container-bg: #1e3a5f;                  /* Deep premium slate twilight backdrop */
-    --text-primary: #f8f9fa;                  /* Soft glowing glass text */
-    --text-muted: #a3c2f0;                    
+    --surface-bg: rgba(255, 255, 255, 0.65); /* Translucent frosted glass panel sheet */
+    --container-bg: rgba(235, 244, 255, 0.4); /* Translucent window backdrop backing layers */
+    --wallpaper: linear-gradient(135deg, #1d5299, #3182ce, #72b3ed); /* FIX: Rich, glowing Aurora background wallpaper! */
+    --text-primary: #ffffff;                  /* White window title headers */
+    --text-muted: #d0e1fd;                    
+    --text-on-card: #1a202c;                  /* High-visibility charcoal card text layout ink */
     --brand-accent: #3182ce;        
-    --brand-accent-border: rgba(255, 255, 255, 0.4); 
-    --border-color: rgba(255, 255, 255, 0.35); /* Translucent thin window framing lines */
+    --brand-accent-border: #1a4975; 
+    --border-color: rgba(255, 255, 255, 0.6); /* Translucent frame reflection borders */
+    --input-bg: #ffffff;
 
-    --badge-high-bg: rgba(229, 62, 62, 0.25);   --badge-high-text: #feb2b2;   --badge-high-border: #e53e3e;   
-    --badge-medium-bg: rgba(221, 107, 32, 0.25); --badge-medium-text: #fbd38d; --badge-medium-border: #dd6b20; 
-    --badge-low-bg: rgba(49, 130, 206, 0.25);    --badge-low-text: #90cdf4;    --badge-low-border: #3182ce;    
-    --badge-done-bg: rgba(56, 161, 105, 0.25);   --badge-done-text: #9ae6b4;   --badge-done-border: #38a169;   
+    --badge-high-bg: rgba(254, 215, 217, 0.9);   --badge-high-text: #9b2c2c;   --badge-high-border: #e53e3e;   
+    --badge-medium-bg: rgba(254, 235, 200, 0.9); --badge-medium-text: #c05621; --badge-medium-border: #dd6b20; 
+    --badge-low-bg: rgba(190, 227, 248, 0.9);    --badge-low-text: #2b6cb0;    --badge-low-border: #3182ce;    
+    --badge-done-bg: rgba(198, 246, 213, 0.9);   --badge-done-text: #22543d;   --badge-done-border: #38a169;   
 
-    --progress-bar-fill: linear-gradient(180deg, #63b3ed, #3182ce); 
-    --filter-focus-color: #63b3ed;                                 
-    --filter-focus-shadow: rgba(99, 179, 237, 0.2);
-    --filter-border-color: rgba(255, 255, 255, 0.5);
+    --progress-bar-fill: linear-gradient(180deg, #52c2ff, #1574d5); 
+    --filter-focus-color: #3182ce;                                 
+    --filter-focus-shadow: rgba(49, 130, 206, 0.3);
+    --filter-border-color: rgba(255, 255, 255, 0.8);
     
-    --focus-halo-color: #63b3ed;                                    
-    --focus-halo-shadow: rgba(99, 179, 237, 0.15);
+    --focus-halo-color: #3182ce;                                    
+    --focus-halo-shadow: rgba(49, 130, 206, 0.25);
 }
 
 [data-theme="amber-crt"] {
@@ -137,11 +153,14 @@
        ========================================================================= */
     --surface-bg: #110b00;          
     --container-bg: #050300;        
+    --wallpaper: #050300;
     --text-primary: #ffb000;        
     --text-muted: #aa7500;          
+    --text-on-card: #ffb000;        
     --brand-accent: #ffb000;        
     --brand-accent-border: #ffb000; 
     --border-color: #ffb000;        
+    --input-bg: #110b00;
 
     --badge-high-bg: #ffb000;       --badge-high-text: #050300;     --badge-high-border: #ffb000;
     --badge-medium-bg: #110b00;     --badge-medium-text: #ffb000;   --badge-medium-border: #ffb000;
@@ -155,4 +174,27 @@
     
     --focus-halo-color: #ffb000;                                    
     --focus-halo-shadow: rgba(255, 176, 0, 0.3);
+}
+
+/* =========================================================================
+   UNIVERSAL LAYOUT SELECTORS BOUNDARIES: Solves white-on-white text bleeding!
+   ========================================================================= */
+body, 
+html, 
+.app-container, 
+.main-layout-backdrop {
+    /* Main frame wrapper reads directly from your new wallpaper variable track! */
+    background: var(--wallpaper) !important; 
+    color: var(--text-primary) !important;
+    transition: background 0.25s ease-in-out, color 0.25s ease-in-out;
+    margin: 0; padding: 0;
+}
+
+/* Link input backgrounds to your dedicated box track */
+input[type="text"], 
+input[type="date"], 
+input[type="email"], 
+input[type="password"], 
+textarea {
+    background-color: var(--input-bg) !important;
 }

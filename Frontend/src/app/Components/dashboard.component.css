@@ -42,11 +42,11 @@
 
 /* --- Left Side: Create New Project Panel --- */
 .form-section { 
-    background-color: var(--surface-bg, #ffffff); 
+    background-color: var(--container-bg) !important; 
     color: var(--text-primary);
     padding: 25px; 
     border-radius: 8px; 
-    border: 1px solid #cbd5e1; 
+    border: 1px solid var(--border-color); 
     flex: 1;
     min-width: 280px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);

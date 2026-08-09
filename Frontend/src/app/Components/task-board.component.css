@@ -44,7 +44,7 @@
 }
 
 .board-column { 
-    background-color: var(--surface-bg, #f8f9fa); 
+    background-color: var(--container-bg, #ffffff) !important; 
     border: 1px solid var(--border-color, #e2e8f0); 
     border-radius: 8px; 
     padding: 20px; 
@@ -72,7 +72,7 @@
    ========================================================================= */
 .task-card { 
     background-color: var(--container-bg, #ffffff); 
-    border: 2px solid var(--border-color, #cbd5e1); 
+    border: 1px solid var(--border-color, #cbd5e1); 
     border-radius: 8px; 
     padding: 20px; 
     box-shadow: 0 4px 6px rgba(0,0,0,0.02);
@@ -321,7 +321,7 @@
    PROJECT ROSTER & TEAMS WORKSPACE SECTIONS
    ========================================================================= */
 .project-member-management-panel {  
-    background-color: var(--surface-bg, #ffffff); 
+    background-color: var(--container-bg, #ffffff) !important; 
     border: 1px solid var(--border-color, #e6e3de);
     border-radius: 8px; 
     padding: 20px; 

@@ -4,12 +4,14 @@
        ========================================================================= */
     --surface-bg: #ffffff;                                              /* Main cards background canvas */
     --container-bg: #f8f9fa;                                            /* App layout shell backdrop tint */
+    --wallpaper: #f8f9fa;
     --text-primary: #212529;                                            /* Dominant heavy font header color */
     --text-muted: #6c757d;                                              /* Subtitles, labels and helper notes */
     --text-on-card: #212529;
     --brand-accent: #007bff;                                            /* Core interaction signature button color */
     --brand-accent-border: #3182ce;                                     /* Border color for our buttons */
     --border-color: #cbd5e1;                                            /* Universal border color for the different cards */
+    --input-bg: #ffffff;
 
     /* 📊 PRIORITY VALUE ACCESSIBILITY BADGES */
     --badge-high-bg: #fff5f5;       --badge-high-text: #e53e3e;     --badge-high-border: #fed7d7;
@@ -33,13 +35,14 @@
        ========================================================================= */
     --surface-bg: #1e1e1e;                                              /* Deep rich carbon surface color */
     --container-bg: #121212;                                            /* Flat midnight background floor canvas */
-    --wallpaper: #008080;
+    --wallpaper: #121212;
     --text-primary: #f8f9fa;                                            /* Crisp white readable header font block */
     --text-muted: #a0aec0;                                              /* Soft grey structural subtext text */
     --text-on-card: #f8f9fa;
     --brand-accent: #3182ce;                                            /* Vibrant electric neon accent action fills */
     --brand-accent-border: #2b6cb0;                                     /* Border color to compliment our button color above */
     --border-color: #3e3e3e;                                            /* Dark carbon outlines */
+    --input-bg: #1e1e1e;
     
     /* 📊 DARK MODE ACCESSIBILITY BADGE MATRICES */
     --badge-high-bg: #3c1e1e;       --badge-high-text: #fc8181;     --badge-high-border: #e53e3e;
@@ -62,18 +65,20 @@
        💾 REBRANDED: WINDOWS 95 / 98 LEGACY CLASSIC HARWARE MOTOR
        ========================================================================= */
     --surface-bg: #d4d0c8;          /* True 90s physical computer chassis gray */
-    --container-bg: #808080;        /* Deep battleship gray background floor */
-    --text-primary: #ffffff;        /* Full white primary text color */
+    --container-bg: #d4d0c8;        /* Deep battleship gray background floor #808080*/
+    --wallpaper: #008080;
+    --text-primary: #000000;        /* Full white primary text color */
     --text-muted: #000080;          /* Classic Titlebar Blue identifiers */
     --text-on-card: #000000;        /* Stark terminal letter ink black */
     --brand-accent: #000080;        /* Buttons inherit the rigid navy blue command tint */
     --brand-accent-border: #000000; 
     --border-color: #ffffff;        /* High-contrast hardware edge line highlights */
+    --input-bg: #ffffff;
     
     /* 📊 95/98 Era Flat Alerts layout profiles */
-    --badge-high-bg: #cbd5e1;       --badge-high-text: #c53030;     --badge-high-border: #000000;
-    --badge-medium-bg: #cbd5e1;     --badge-medium-text: #dd6b20;   --badge-medium-border: #000000;
-    --badge-low-bg: #cbd5e1;        --badge-low-text: #3182ce;      --badge-low-border: #000000;
+    --badge-high-bg: #d4d0c8;       --badge-high-text: #c53030;     --badge-high-border: #000000;
+    --badge-medium-bg: #d4d0c8;     --badge-medium-text: #dd6b20;   --badge-medium-border: #000000;
+    --badge-low-bg: #d4d0c8;        --badge-low-text: #3182ce;      --badge-low-border: #000000;
     --badge-done-bg: #008000;       --badge-done-text: #ffffff;     --badge-done-border: #000000;
 
     /* 🎨 PROGRESS AND FILTER TRACKS */
@@ -92,13 +97,15 @@
        ========================================================================= */
     
     --surface-bg: #ffffff;              /* Clean white workspace paper sheets */
-    --container-bg: #4a7af4;            /* Legendary bliss sky-blue desktop background tint */
+    --container-bg: #efebde;            /* Classic sand-gray explorer window background tint */
+    --wallpaper: #4a7af4;               /* Legendary Bliss Sky-Blue Desktop wallpaper background! */
     --text-primary: #ffffff;            /* Solid crisp window ink font black */
     --text-muted: #0022a6;              /* Classic Windows XP Titlebar Royal Blue tint */
     --text-on-card: #000000;
     --brand-accent: #225b11;            /* Iconic Olive-Green 'Start Button' action key fill! */
     --brand-accent-border: #153a04;     /* Darker forest green outline frame contours */
     --border-color: #0046d5;            /* Everything is framed in clean royal blue desktop borders! */
+    --input-bg: #ffffff;
     
     /* 📊 DYNAMIC LUNA ACCESSIBILITY BADGES: Styled like classic early-2000s warning error alerts! */
     --badge-high-bg: #ff3333;       --badge-high-text: #ffffff;     --badge-high-border: #990000;
@@ -120,20 +127,22 @@
     /* =========================================================================
        📀 WINDOWS 7 GLASS AERO ENVIRONMENT  
        ========================================================================= */
-    --surface-bg: rgba(255, 255, 255, 0.65);                                    /* Translucent frosted glass refraction fill! */
-    --container-bg: linear-gradient(135deg, #1d5299, #3182ce, #72b3ed);     /* Deep premium slate twilight backdrop */
+    --surface-bg: rgba(255, 255, 255, 0.65);                                    /* Translucent frosted glass panel sheet */
+    --container-bg: rgba(235, 244, 255, 0.4);                                   /* Translucent window backdrop backing layers */
+    --wallpaper: linear-gradient(135deg, #1d5299, #3182ce, #72b3ed);
     --text-primary: #f8f9fa;                                                    /* Soft glowing glass text */
     --text-muted: #a3c2f0; 
-    --text-on-card: #212529;
+    --text-on-card: #1a202c;
     --brand-accent: #3182ce;
     --brand-accent-border: #1a4975; 
-    --border-color: rgba(255, 255, 255, 0.6);                                  /* Translucent thin window framing lines */
+    --border-color: rgba(255, 255, 255, 0.6);                                  /* Translucent frame reflection borders */
+    --input-bg: #ffffff;
 
     /* 📊 DYNAMIC LUNA ACCESSIBILITY BADGES: Styled like classic early-2000s warning error alerts! */
-    --badge-high-bg: rgba(254, 215, 217, 0.85);        --badge-high-text: #9b2c2c;     --badge-high-border: #e53e3e;
-    --badge-medium-bg: rgba(254, 235, 200, 0.85);     --badge-medium-text: #c05621;   --badge-medium-border: #dd6b20;
-    --badge-low-bg: rgba(190, 227, 248, 0.85);        --badge-low-text: #2b6cb0;      --badge-low-border: #3182ce;
-    --badge-done-bg: rgba(198, 246, 213, 0.85);       --badge-done-text: #22543d;     --badge-done-border: #38a169;
+    --badge-high-bg: rgba(254, 215, 217, 0.9);       --badge-high-text: #9b2c2c;     --badge-high-border: #e53e3e;
+    --badge-medium-bg: rgba(254, 235, 200, 0.9);     --badge-medium-text: #c05621;   --badge-medium-border: #dd6b20;
+    --badge-low-bg: rgba(190, 227, 248, 0.9);        --badge-low-text: #2b6cb0;      --badge-low-border: #3182ce;
+    --badge-done-bg: rgba(198, 246, 213, 0.9);       --badge-done-text: #22543d;     --badge-done-border: #38a169;
 
     /* 🎨 PROGRESS AND FILTER TRACKS */
     --progress-bar-fill: linear-gradient(180deg, #52c2ff, #1574d5);
@@ -151,12 +160,14 @@
        ========================================================================= */
     --surface-bg: #110b00;                              /* Deep pitch dark charcoal amber canvas */
     --container-bg: #050300;                            /* Pure obsidian black terminal floor backdrop */
+    --wallpaper: #050300;
     --text-primary: #ffb000;                            /* Glowing vintage high-vis phosphorus amberink text */
     --text-muted: #aa7500;                              /* Muted copper phosphor amber subtitles notes */
     --text-on-card: #ffb000;
     --brand-accent: #ffb000;        
     --brand-accent-border: #ffb000; 
     --border-color: #ffb000;                            /* Everything is framed in uniform amber glowing circuits! */
+    --input-bg: #110b00;
     
     /* 📊 Amber-CRT ACCESSIBILITY BADGE MATRICES */
     --badge-high-bg: #ffb000;       --badge-high-text: #050300;     --badge-high-border: #ffb000;
@@ -181,9 +192,9 @@ body,
 html,
 .app-container,
 .main-layout-backdrop {
-    background-color: var(--container-bg, #f8f9fa) !important;
+    background: var(--wallpaper) !important;
     color: var(--text-primary) !important;
-    transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out;
+    transition: background 0.25s ease-in-out, color 0.25s ease-in-out;
     margin: 0;
     padding: 0;
     font-family: sans-serif;
@@ -197,7 +208,7 @@ input[type="date"],
 input[type="email"],
 input[type="password"],
 select, textarea {
-    background-color: var(--surface-bg, #ffffff) !important;
+    background-color: var(--input-bg) !important;
     color: var(--text-primary) !important;
     border: 2px solid var(--border-color, #cbd5e1) !important;
     font-family: sans-serif;
