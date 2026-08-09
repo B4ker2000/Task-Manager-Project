@@ -33,6 +33,7 @@
        ========================================================================= */
     --surface-bg: #1e1e1e;                                              /* Deep rich carbon surface color */
     --container-bg: #121212;                                            /* Flat midnight background floor canvas */
+    --wallpaper: #008080;
     --text-primary: #f8f9fa;                                            /* Crisp white readable header font block */
     --text-muted: #a0aec0;                                              /* Soft grey structural subtext text */
     --text-on-card: #f8f9fa;
@@ -119,29 +120,29 @@
     /* =========================================================================
        📀 WINDOWS 7 GLASS AERO ENVIRONMENT  
        ========================================================================= */
-    --surface-bg: rgba(255, 255, 255, 0.75);            /* Translucent frosted glass refraction fill! */
-    --container-bg: #1e3a5f;                            /* Deep premium slate twilight backdrop */
-    --text-primary: #f8f9fa;                            /* Soft glowing glass text */
-    --text-muted: #a3c2f0;
+    --surface-bg: rgba(255, 255, 255, 0.65);                                    /* Translucent frosted glass refraction fill! */
+    --container-bg: linear-gradient(135deg, #1d5299, #3182ce, #72b3ed);     /* Deep premium slate twilight backdrop */
+    --text-primary: #f8f9fa;                                                    /* Soft glowing glass text */
+    --text-muted: #a3c2f0; 
     --text-on-card: #212529;
     --brand-accent: #3182ce;
-    --brand-accent-border: rgba(255, 255, 255, 0.4); 
-    --border-color: rgba(255, 255, 255, 0.35);          /* Translucent thin window framing lines */
+    --brand-accent-border: #1a4975; 
+    --border-color: rgba(255, 255, 255, 0.6);                                  /* Translucent thin window framing lines */
 
     /* 📊 DYNAMIC LUNA ACCESSIBILITY BADGES: Styled like classic early-2000s warning error alerts! */
-    --badge-high-bg: rgba(229, 62, 62, 0.25);        --badge-high-text: #feb2b2;     --badge-high-border: #e53e3e;
-    --badge-medium-bg: rgba(221, 107, 32, 0.25);     --badge-medium-text: #fbd38d;   --badge-medium-border: #dd6b20;
-    --badge-low-bg: rgba(49, 130, 206, 0.25);        --badge-low-text: #90cdf4;      --badge-low-border: #3182ce;
-    --badge-done-bg: rgba(56, 161, 105, 0.25);       --badge-done-text: #9ae6b4;     --badge-done-border: #38a169;
+    --badge-high-bg: rgba(254, 215, 217, 0.85);        --badge-high-text: #9b2c2c;     --badge-high-border: #e53e3e;
+    --badge-medium-bg: rgba(254, 235, 200, 0.85);     --badge-medium-text: #c05621;   --badge-medium-border: #dd6b20;
+    --badge-low-bg: rgba(190, 227, 248, 0.85);        --badge-low-text: #2b6cb0;      --badge-low-border: #3182ce;
+    --badge-done-bg: rgba(198, 246, 213, 0.85);       --badge-done-text: #22543d;     --badge-done-border: #38a169;
 
     /* 🎨 PROGRESS AND FILTER TRACKS */
-    --progress-bar-fill: linear-gradient(180deg, #63b3ed, #3182ce);
-    --filter-focus-color: #63b3ed;
-    --filter-focus-shadow: rgba(99, 179, 237, 0.2);
-    --filter-border-color: rgba(255, 255, 255, 0.5);
+    --progress-bar-fill: linear-gradient(180deg, #52c2ff, #1574d5);
+    --filter-focus-color: #3182ce;
+    --filter-focus-shadow: rgba(49, 130, 206, 0.3);
+    --filter-border-color: rgba(255, 255, 255, 0.8);
 
-    --focus-halo-color: #63b3ed;
-    --focus-halo-shadow: rgba(99, 179, 237, 0.15);
+    --focus-halo-color: #3182ce;
+    --focus-halo-shadow: rgba(49, 130, 206, 0.25);
 }
 
 [data-theme="amber-crt"] {
@@ -250,14 +251,14 @@ button:disabled {
 .submit-btn,
 .action-btn.next {
     background-color: var(--surface-bg, #ffffff);
-    color: var(--text-primary);
+    color: var(--text-on-card);
     border: 2px solid var(--brand-accent-border, #3182ce);
 }
 
 .submit-btn:hover,
 .action-btn.next:hover {
     background-color: var(--brand-accent, #3182ce);
-    color: var(--surface-bg, #ffffff);;
+    color: var(--text-primary, #ffffff);;
     border-color: var(--brand-accent-border, #2b6cb0);
 }
 
@@ -265,7 +266,7 @@ button:disabled {
 .back-btn,
 .action-btn.back {
     background-color: var(--surface-bg, #ffffff);
-    color: var(--text-primary);
+    color: var(--text-on-card);
     border: 2px solid var(--border-color, #cbd5e1);
 }
 
@@ -273,7 +274,7 @@ button:disabled {
 .back-btn:hover,
 .action-btn.back:hover {
     background-color: var(--text-muted);
-    color: var(--surface-bg, #ffffff);
+    color: var(--text-primary, #ffffff);
     border-color: var(--text-muted);
 }
 

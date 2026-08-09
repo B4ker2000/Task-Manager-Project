@@ -72,11 +72,14 @@
    ========================================================================= */
 .task-card { 
     background-color: var(--container-bg, #ffffff); 
-    border: 1px solid var(--border-color, #cbd5e1); 
-    border-radius: 6px; 
-    padding: 15px; 
-    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    border: 2px solid var(--border-color, #cbd5e1); 
+    border-radius: 8px; 
+    padding: 20px; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
     box-sizing: border-box;
+    backdrop-filter: blur(12px) saturate(120%);
+    -webkit-backdrop-filter: blur(12px) saturate(120%);
+    transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
 
 .task-card-header { 
@@ -330,7 +333,7 @@
 .invite-header-title { 
     font-size: 14px; 
     font-weight: bold; 
-    color: var(--text-primary); 
+    color: var(--text-on-card); 
     display: flex; 
     align-items: center; 
     gap: 8px; 
@@ -583,7 +586,7 @@
 .modal-card h3 {
     margin-top: 0;
     margin-bottom: 20px;
-    color: var(--text-primary);
+    color: var(--text-on-card);
     text-align: left;
 }
 
@@ -664,7 +667,7 @@ input[type="date"].modal-input-field {
 }
 
 /* =========================================================================
-   THEME ADAPTIVE REJECT REVIEW TRIGGER BUTTON
+   THEME ADAPTIVE REJECT REVIEW & ABANDON SPACE TRIGGER BUTTON
    ========================================================================= */
 .action-btn.reject-review {
     background-color: var(--badge-high-bg, #ffffff);
@@ -675,6 +678,20 @@ input[type="date"].modal-input-field {
 }
 
 .action-btn.reject-review:hover {
+    background-color: var(--badge-high-text, #e53e3e);
+    color: var(--badge-high-bg, #ffffff);
+    border-color: var(--badge-high-border, #e53e3e);
+}
+
+.action-btn.resign-project-btn {
+    background-color: var(--badge-high-bg, #ffffff);
+    color: var(--badge-high-text, #e53e3e);
+    border: 2px solid var(--badge-high-border, #e53e3e);
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+
+.action-btn.resign-project-btn:hover {
     background-color: var(--badge-high-text, #e53e3e);
     color: var(--badge-high-bg, #ffffff);
     border-color: var(--badge-high-border, #e53e3e);
