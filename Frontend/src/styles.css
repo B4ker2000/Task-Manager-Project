@@ -1,7 +1,7 @@
+/* =========================================================================
+    ☀️ DEFAULT LIGHT WORKSPACE THEME PRESETS
+   ========================================================================= */
 :root {
-    /* =========================================================================
-       ☀️ DEFAULT LIGHT WORKSPACE THEME PRESETS
-       ========================================================================= */
     --surface-bg: #ffffff;                                              /* Main cards background canvas */
     --container-bg: #f8f9fa;                                            /* App layout shell backdrop tint */
     --wallpaper: #f8f9fa;
@@ -29,10 +29,10 @@
     --focus-halo-shadow: rgba(49, 130, 206, 0.15);
 }
 
+/* =========================================================================
+    🌙 SYSTEM DARK MODE OVERRIDES
+   ========================================================================= */
 [data-theme="dark"] {
-    /* =========================================================================
-       🌙 SYSTEM DARK MODE OVERRIDES
-       ========================================================================= */
     --surface-bg: #1e1e1e;                                              /* Deep rich carbon surface color */
     --container-bg: #121212;                                            /* Flat midnight background floor canvas */
     --wallpaper: #121212;
@@ -60,10 +60,10 @@
     --focus-halo-shadow: rgba(99, 179, 237, 0.2);
 }
 
+/* =========================================================================
+    💾 REBRANDED: WINDOWS 95 / 98 LEGACY CLASSIC HARWARE MOTOR
+   ========================================================================= */
 [data-theme="95/98"] {
-    /* =========================================================================
-       💾 REBRANDED: WINDOWS 95 / 98 LEGACY CLASSIC HARWARE MOTOR
-       ========================================================================= */
     --surface-bg: #d4d0c8;          /* True 90s physical computer chassis gray */
     --container-bg: #d4d0c8;        /* Deep battleship gray background floor*/
     --wallpaper: #008080;
@@ -91,11 +91,10 @@
     --focus-halo-shadow: rgba(0, 0, 128, 0.2);
 }
 
+/* =========================================================================
+    💿 CLASSIC WINDOWS XP LUNA BLUE SYSTEM
+   ========================================================================= */
 [data-theme="xp"] {
-    /* =========================================================================
-       💿 CLASSIC WINDOWS XP LUNA BLUE SYSTEM
-       ========================================================================= */
-    
     --surface-bg: #ffffff;              /* Clean white workspace paper sheets */
     --container-bg: #efebde;            /* Classic sand-gray explorer window background tint */
     --wallpaper: #4a7af4;               /* Legendary Bliss Sky-Blue Desktop wallpaper background! */
@@ -123,10 +122,10 @@
     --focus-halo-shadow: rgba(0, 70, 213, 0.15);
 }
 
+/* =========================================================================
+   📀 WINDOWS 7 GLASS AERO ENVIRONMENT  
+   ========================================================================= */
 [data-theme="7"] {
-    /* =========================================================================
-       📀 WINDOWS 7 GLASS AERO ENVIRONMENT  
-       ========================================================================= */
     --surface-bg: rgba(255, 255, 255, 0.65);                                    /* Translucent frosted glass panel sheet */
     --container-bg: rgba(235, 244, 255, 0.4);                                   /* Translucent window backdrop backing layers */
     --wallpaper: linear-gradient(135deg, #1d5299, #3182ce, #72b3ed);
@@ -154,10 +153,11 @@
     --focus-halo-shadow: rgba(49, 130, 206, 0.25);
 }
 
+/* =========================================================================
+    💽 MONOCHROME RETRO AMBER CRT TERMINAL THEME 🟠🖥️
+   ========================================================================= */
+    
 [data-theme="amber-crt"] {
-    /* =========================================================================
-       💽 MONOCHROME RETRO AMBER CRT TERMINAL THEME 🟠🖥️
-       ========================================================================= */
     --surface-bg: #110b00;                              /* Deep pitch dark charcoal amber canvas */
     --container-bg: #050300;                            /* Pure obsidian black terminal floor backdrop */
     --wallpaper: #050300;
@@ -185,10 +185,10 @@
     --focus-halo-shadow: rgba(255, 176, 0, 0.3);
 }
 
+/* =========================================================================
+    📟 GREEN MATRIX TERMINAL MONITOR ENVIRONMENT 🟢📟
+   ========================================================================= */
 [data-theme="matrix-crt"] {
-    /* =========================================================================
-       📟 GREEN MATRIX TERMINAL MONITOR ENVIRONMENT 🟢📟
-       ========================================================================= */
     --surface-bg: #001100;                              /* Deep pitch dark charcoal matrix green base canvas */
     --container-bg: #000500;                            /* Pure monochrome green digital fall matrix floor */
     --wallpaper: #000500;
@@ -214,6 +214,41 @@
 
     --focus-halo-color: #33ff33;
     --focus-halo-shadow: rgba(51, 255, 51, 0.3);
+}
+
+/* =========================================================================
+   🔮 BLUE ARCHIVE SCHALE WORKSPACE ENVIRONMENT (BRIGHT CYBER MINIMALIST)
+   ========================================================================= */
+[data-theme="BA"] {
+    --surface-bg: rgba(255, 255, 255, 0.9);         /* Pristine semi-translucent Schale terminal white sheets */
+    --container-bg: #e1f0ff;
+    
+    /* THE LUNA SKY GRADIENT: Simulates a gorgeous pre-rendered morning aurora skyline artwork! */
+    --wallpaper: radial-gradient(circle at top right, #fff0f5 0%, #e1f5fe 40%, #bbdefb 100%);
+    
+    --text-primary: #1a365d;                        /* Deep Schale Federal Navy blue text */
+    --text-muted: #4a90e2;                          /* Bright clean sky blue subtitles strings */
+    --text-on-card: #2d3748;                        /* Highly legible charcoal layout body text font */
+    --brand-accent: #4a90e2;                        /* Signature Blue Archive bright cyan action color fill */
+    --brand-accent-border: #ff69b4;                 /* Iconic soft neon pink border highlights! */
+    --border-color: #bbdefb;
+    --input-bg: #ffffff;                        /* temp! */
+    
+    /* 📊 /* Accessibility badge maps colored to match standard item tier colors */ */
+    --badge-high-bg: #fff0f3;       --badge-high-text: #e53e3e;     --badge-high-border: #ffa7b6;
+    --badge-medium-bg: #fffdf0;     --badge-medium-text: #b7791f;   --badge-medium-border: #f6e05e;
+    --badge-low-bg: #e1f5fe;        --badge-low-text: #3182ce;      --badge-low-border: #90cdf4;
+    --badge-done-bg: #e6fffa;       --badge-done-text: #234e52;     --badge-done-border: #4fd1c5;
+
+    /* 🎨 PROGRESS AND FILTER TRACKS */
+    --progress-bar-fill: linear-gradient(90deg, #4a90e2, #ff69b4);  /* Gorgeous pink/blue custom mixed tracker fill line! */
+    --filter-focus-color: #4a90e2;
+    --filter-focus-color: rgba(74, 144, 226, 0.2);
+    --filter-focus-shadow: rgba(255, 176, 0, 0.2);
+    --filter-border-color: #4a90e2;
+
+    --focus-halo-color: #4a90e2;
+    --focus-halo-shadow: rgba(74, 144, 226, 0.15);
 }
 
 /* =========================================================================
@@ -261,6 +296,11 @@ select:focus, textarea:focus {
     border: 2px solid var(--focus-halo-color) !important;
     box-shadow: 0 0 0 3px var(--focus-halo-shadow);
     outline: none;
+}
+
+#rememberMeBox {
+    cursor: pointer;
+    accent-color: var(--brand-accent, #3182ce) !important;
 }
 
 /* =========================================================================
@@ -441,10 +481,29 @@ select:focus,
 
 .create-new-account-link,
 .login-link {
-    color: var(--brand-accent-border, #007bff);
+    color: var(--brand-accent-border, #007bff) !important;
     font-weight: bold;
     text-decoration: none;
 }
 
 .create-new-account-link:hover,
 .login-link:hover { text-decoration: underline; }
+
+/* ================================================================================
+   Set the header colors only for our windows themes without altering the others!
+   ================================================================================ */
+[data-theme="95/98"] .profile-header h2,
+[data-theme="95/98"] .board-header h2,
+[data-theme="95/98"] .list-section h3,
+[data-theme="95/98"] .main-header h1,
+[data-theme="xp"] .profile-header h2,
+[data-theme="xp"] .board-header h2,
+[data-theme="xp"] .list-section h3,
+[data-theme="xp"] .main-header h1,
+[data-theme="7"] .profile-header h2,
+[data-theme="7"] .board-header h2,
+[data-theme="7"] .list-section h3,
+[data-theme="7"] .main-header h1 {
+    color: var(--text-on-card) !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); 
+}

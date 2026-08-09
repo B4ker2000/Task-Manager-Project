@@ -16,7 +16,7 @@
     padding: 35px;
     background-color: var(--surface-bg, #ffffff); 
     color: var(--text-primary);
-    border: 1px solid #cbd5e1; 
+    border: 2px solid var(--border-color, #cbd5e1); 
     border-radius: 8px; 
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02); 
     text-align: center; 

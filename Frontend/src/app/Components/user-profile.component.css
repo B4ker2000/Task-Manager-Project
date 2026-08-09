@@ -25,7 +25,7 @@
     display: flex; 
     gap: 25px; 
     width: 100%;
-    align-items: start; 
+    align-items: start;
 }
 
 .profile-layout-vertical-stack {
@@ -38,7 +38,7 @@
 .details-card, .stats-card, .settings-card, .accessibility-config-card { 
     background-color: var(--surface-bg, #ffffff);
     color: var(--text-primary);
-    border: 1px solid #cbd5e1; 
+    border: 2px solid var(--border-color, #cbd5e1);
     border-radius: 8px; 
     padding: 25px; 
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02); 
@@ -50,7 +50,7 @@
     margin-top: 0; 
     margin-bottom: 20px; 
     color: var(--text-muted);
-    border-bottom: 2px solid #cbd5e1; 
+    border-bottom: 2px solid var(--text-muted);
     padding-bottom: 8px; 
     text-align: left; 
 }
@@ -68,7 +68,7 @@
     justify-content: center; 
     border-radius: 50%; 
     margin: 0 auto 15px auto; 
-    border: 2px solid #cbd5e1; 
+    border: 2px solid var(--border-color, #cbd5e1); 
 }
 
 .role-badge { 
@@ -90,7 +90,7 @@
 .info-row { 
     display: flex; 
     justify-content: space-between; 
-    border-bottom: 1px dashed #e2e8f0; 
+    border-bottom: 1px dashed var(--text-muted);
     padding: 10px 0; 
     font-size: 14px; 
     color: var(--text-primary, #4a5568);

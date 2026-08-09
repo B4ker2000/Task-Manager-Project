@@ -316,7 +316,7 @@
 .invite-header-title { 
     font-size: 14px; 
     font-weight: bold; 
-    color: var(--text-on-card); 
+    color: var(--text-primary); 
     display: flex; 
     align-items: center; 
     gap: 8px; 
