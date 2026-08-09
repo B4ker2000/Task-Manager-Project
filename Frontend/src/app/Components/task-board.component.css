@@ -404,13 +404,15 @@
 }
 
 .badge-owner {
-    background-color: #d1ecf1;
-    color: #0c5460;
+    background-color: var(--badge-done-bg);
+    color: var(--badge-done-text);
+    border: 1px solid var(--badge-done-border);
 }
 
 .badge-member {
-    background-color: #ffbb9b;
-    color: #383d41;
+    background-color: var(--badge-medium-bg);
+    color: var(--badge-medium-text);
+    border: 1px solid var(--badge-medium-border);
 }
 
 .roster-sub-title {

@@ -65,7 +65,7 @@
        💾 REBRANDED: WINDOWS 95 / 98 LEGACY CLASSIC HARWARE MOTOR
        ========================================================================= */
     --surface-bg: #d4d0c8;          /* True 90s physical computer chassis gray */
-    --container-bg: #d4d0c8;        /* Deep battleship gray background floor #808080*/
+    --container-bg: #d4d0c8;        /* Deep battleship gray background floor*/
     --wallpaper: #008080;
     --text-primary: #000000;        /* Full white primary text color */
     --text-muted: #000080;          /* Classic Titlebar Blue identifiers */
@@ -76,9 +76,9 @@
     --input-bg: #ffffff;
     
     /* 📊 95/98 Era Flat Alerts layout profiles */
-    --badge-high-bg: #d4d0c8;       --badge-high-text: #c53030;     --badge-high-border: #000000;
-    --badge-medium-bg: #d4d0c8;     --badge-medium-text: #dd6b20;   --badge-medium-border: #000000;
-    --badge-low-bg: #d4d0c8;        --badge-low-text: #3182ce;      --badge-low-border: #000000;
+    --badge-high-bg: #cbd5e1;       --badge-high-text: #c53030;     --badge-high-border: #000000;
+    --badge-medium-bg: #cbd5e1;     --badge-medium-text: #dd6b20;   --badge-medium-border: #000000;
+    --badge-low-bg: #cbd5e1;        --badge-low-text: #3182ce;      --badge-low-border: #000000;
     --badge-done-bg: #008000;       --badge-done-text: #ffffff;     --badge-done-border: #000000;
 
     /* 🎨 PROGRESS AND FILTER TRACKS */
@@ -139,10 +139,10 @@
     --input-bg: #ffffff;
 
     /* 📊 DYNAMIC LUNA ACCESSIBILITY BADGES: Styled like classic early-2000s warning error alerts! */
-    --badge-high-bg: rgba(254, 215, 217, 0.9);       --badge-high-text: #9b2c2c;     --badge-high-border: #e53e3e;
-    --badge-medium-bg: rgba(254, 235, 200, 0.9);     --badge-medium-text: #c05621;   --badge-medium-border: #dd6b20;
-    --badge-low-bg: rgba(190, 227, 248, 0.9);        --badge-low-text: #2b6cb0;      --badge-low-border: #3182ce;
-    --badge-done-bg: rgba(198, 246, 213, 0.9);       --badge-done-text: #22543d;     --badge-done-border: #38a169;
+    --badge-high-bg: rgba(254, 215, 217, 0.85);       --badge-high-text: #9b2c2c;     --badge-high-border: #e53e3e;
+    --badge-medium-bg: rgba(254, 235, 200, 0.85);     --badge-medium-text: #c05621;   --badge-medium-border: #dd6b20;
+    --badge-low-bg: rgba(190, 227, 248, 0.85);        --badge-low-text: #2b6cb0;      --badge-low-border: #3182ce;
+    --badge-done-bg: rgba(198, 246, 213, 0.85);       --badge-done-text: #22543d;     --badge-done-border: #38a169;
 
     /* 🎨 PROGRESS AND FILTER TRACKS */
     --progress-bar-fill: linear-gradient(180deg, #52c2ff, #1574d5);
@@ -156,7 +156,7 @@
 
 [data-theme="amber-crt"] {
     /* =========================================================================
-       📟 MONOCHROME RETRO AMBER CRT TERMINAL THEME
+       💽 MONOCHROME RETRO AMBER CRT TERMINAL THEME 🟠🖥️
        ========================================================================= */
     --surface-bg: #110b00;                              /* Deep pitch dark charcoal amber canvas */
     --container-bg: #050300;                            /* Pure obsidian black terminal floor backdrop */
@@ -185,15 +185,52 @@
     --focus-halo-shadow: rgba(255, 176, 0, 0.3);
 }
 
+[data-theme="matrix-crt"] {
+    /* =========================================================================
+       📟 GREEN MATRIX TERMINAL MONITOR ENVIRONMENT 🟢📟
+       ========================================================================= */
+    --surface-bg: #001100;                              /* Deep pitch dark charcoal matrix green base canvas */
+    --container-bg: #000500;                            /* Pure monochrome green digital fall matrix floor */
+    --wallpaper: #000500;
+    --text-primary: #33ff33;                            /* Glowing vintage high-vis green ink text */
+    --text-muted: #00aa00;
+    --text-on-card: #33ff33;
+    --brand-accent: #33ff33;        
+    --brand-accent-border: #33ff33; 
+    --border-color: #33ff33;                            /* Everything is framed in uniform green glowing circuits! */
+    --input-bg: #001100;
+    
+    /* 📊 Amber-CRT ACCESSIBILITY BADGE MATRICES */
+    --badge-high-bg: #33ff33;       --badge-high-text: #000500;     --badge-high-border: #33ff33;
+    --badge-medium-bg: #001100;     --badge-medium-text: #33ff33;   --badge-medium-border: #33ff33;
+    --badge-low-bg: #001100;        --badge-low-text: #33ff33;      --badge-low-border: #00aa00;
+    --badge-done-bg: #33ff33;       --badge-done-text: #000500;     --badge-done-border: #00aa00;
+
+    /* 🎨 PROGRESS AND FILTER TRACKS */
+    --progress-bar-fill: #33ff33;                       /* Everything glows phosphorus */
+    --filter-focus-color: #33ff33;
+    --filter-focus-shadow: rgba(51, 255, 51, 0.2);
+    --filter-border-color: #33ff33;
+
+    --focus-halo-color: #33ff33;
+    --focus-halo-shadow: rgba(51, 255, 51, 0.3);
+}
+
 /* =========================================================================
    UNIVERSAL LAYOUT BACKGROUND
    ========================================================================= */
 body,
 html,
 .app-container,
+.board-wrapper,
+.profile-wrapper,
+.dashboard-wrapper,
 .main-layout-backdrop {
     background: var(--wallpaper) !important;
+    background-attachment: fixed !important; /* Freezes backgrounds so long column scrolls won't tile clip! */
+    background-size: cover !important;
     color: var(--text-primary) !important;
+    min-height: 100vh;
     transition: background 0.25s ease-in-out, color 0.25s ease-in-out;
     margin: 0;
     padding: 0;
