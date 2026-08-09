@@ -1,9 +1,8 @@
 /* =========================================================================
-   LOCAL PROJECT DASHBOARD GRID (PORTAL GATEWAY CORE)
+   LOCAL PROJECT DASHBOARD GRID (STRUCTURAL LAYOUT CORE)
    ========================================================================= */
 .dashboard-wrapper { 
     padding: 40px; 
-    font-family: sans-serif; 
     max-width: 1200px; 
     margin: 0 auto; 
     box-sizing: border-box;
@@ -14,9 +13,8 @@
     justify-content: space-between; 
     align-items: center; 
     border-bottom: 2px solid var(--text-muted); 
-    padding-bottom: 20px; 
-    margin-bottom: 30px; 
-    color: var(--text-primary);
+    padding-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .main-header h1 {
@@ -32,7 +30,7 @@
 }
 
 /* =========================================================================
-   MAIN TWO-COLUMN DASHBOARD FLEX LAYOUT
+   MAIN TWO-COLUMN DASHBOARD FLEX ROW TRACKS
    ========================================================================= */
 .dashboard-grid { 
     display: flex; 
@@ -40,17 +38,19 @@
     align-items: flex-start;
 }
 
-/* --- Left Side: Create New Project Panel --- */
+/* --- Left Side: Create New Project Paper Box --- */
 .form-section { 
-    background-color: var(--container-bg) !important; 
-    color: var(--text-primary);
+    background-color: var(--surface-bg);
+    color: var(--text-on-card);
     padding: 25px; 
     border-radius: 8px; 
-    border: 1px solid var(--border-color); 
+    border: 2px solid var(--border-color); 
     flex: 1;
     min-width: 280px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
     box-sizing: border-box;
+    backdrop-filter: blur(12px) saturate(120%);
+    -webkit-backdrop-filter: blur(12px) saturate(120%);
 }
 
 .form-section h3,
@@ -74,38 +74,42 @@
     color: var(--text-muted); 
 }
 
+/*================================================================*/
 .form-group input,
 .form-group textarea {
     width: 100%;
     padding: 10px 12px;
-    border: 2px solid #cbd5e1;
+    border: 2px solid var(--border-color);
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 14px;
     background-color: var(--surface-bg, #ffffff);
-    color: var(--text-primary);
     font-family: sans-serif;
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
-    border: 2px solid #3182ce !important;
-    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.15);
+    border: 2px solid var(--filter-focus-color) !important;
+    box-shadow: 0 0 0 3px var(--filter-focus-shadow);
     outline: none;
 }
+/*================================================================*/
 
 textarea { 
     height: 100px; 
     resize: vertical; 
 }
 
+/* Dedicated custom brand color configurations for project creation triggers */
 .create-btn { 
     width: 100%; 
     height: 42px; 
     background-color: var(--surface-bg, #ffffff);
-    color: #38a169;
-    border: 2px solid #38a169;
+    box-shadow: 0 0 0 3px var(--filter-focus-shadow, rgba(40, 167, 69, 0.15)) !important;
+    outline: none;
+    border: 2px solid var(--filter-border-color, #38a169) !important;
+    color: var(--filter-focus-color);
     border-radius: 4px; 
     font-weight: bold; 
     cursor: pointer; 
@@ -113,12 +117,14 @@ textarea {
 }
 
 .create-btn:hover:not(:disabled) {
-    background-color: #38a169;
-    color: #ffffff;
-    border-color: #22543d;
+    background-color: var(--filter-focus-color);
+    color: var(--text-on-card);
+    border-color: var(--filter-border-color);
 }
 
-/* --- Right Side: Existing Project Cards List Grid --- */
+.create-btn:disabled { color: var(--filter-focus-color) !important; }
+
+/* --- Right Side: Existing Project Cards List Feed --- */
 .list-section {
     flex: 2;
     min-width: 320px;
@@ -141,8 +147,8 @@ textarea {
    ========================================================================= */
 .project-card { 
     background-color: var(--surface-bg, #ffffff);
-    color: var(--text-primary);
-    border: 1px solid #cbd5e1; 
+    color: var(--text-on-card);
+    border: 2px solid var(--border-color); 
     border-radius: 8px; 
     padding: 20px; 
     box-shadow: 0 4px 6px rgba(0,0,0,0.02); 
@@ -151,13 +157,8 @@ textarea {
     justify-content: space-between; 
     text-align: left;
     box-sizing: border-box;
-}
-
-.project-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 10px;
+    backdrop-filter: blur(12px) saturate(120%);
+    -webkit-backdrop-filter: blur(12px) saturate(120%);
 }
 
 .project-card h4 { 
@@ -173,6 +174,13 @@ textarea {
     line-height: 1.5; 
 }
 
+.project-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+}
+
 /* High-Contrast Resilient Trashcan Mechanics */
 .delete-proj-btn { 
     background-color: transparent; 
@@ -185,8 +193,6 @@ textarea {
     transition: opacity 0.2s ease, background-color 0.2s ease; 
     line-height: 1; 
 }
-
-.delete-proj-btn:focus { outline: none; }
 
 .project-card:hover .delete-proj-btn,
 .delete-proj-btn:hover { 
@@ -202,10 +208,13 @@ textarea {
 .view-tasks-btn { 
     width: 100%;
     height: 38px;
+    color: var(--text-primary);
 }
 
+.view-tasks-btn:hover { color: var(--text-on-card); }
+
 /* =========================================================================
-   FLUID CROSS-RESOLUTION DEVICE SCALING BREAKPOINTS
+   DEVICE SCREEN SCALING RESPONSIVE QUERY TRACKS
    ========================================================================= */
 @media(max-width: 900px) {
     .dashboard-grid {
@@ -226,6 +235,5 @@ textarea {
     }
 
     .header-navigation-actions { width: 100%; }
-
     .header-navigation-actions button { flex: 1; }
 }

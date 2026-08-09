@@ -1,9 +1,8 @@
 /* =========================================================================
-   TASK BOARD WORKSPACE CORE CANVAS (FLUID KANBAN LAYOUT)
+   BOARD CANVAS HEADER SHELLS AND NAVIGATION ROW PANELS
    ========================================================================= */
 .board-wrapper { 
     padding: 40px; 
-    font-family: sans-serif; 
     max-width: 1400px; 
     margin: 0 auto; 
     box-sizing: border-box;
@@ -19,7 +18,6 @@
     padding-bottom: 20px; 
     margin-bottom: 30px; 
     gap: 10px;
-    color: var(--text-primary);
 }
 
 .board-header h2 {
@@ -34,7 +32,7 @@
 }
 
 /* =========================================================================
-   3-COLUMN SYSTEM WORKFLOW BLOCKS
+   3-COLUMN SYSTEM WORKFLOW BLOCKS & GRID SHUFFLING FIELDS
    ========================================================================= */
 .board-columns-grid { 
     display: grid; 
@@ -44,8 +42,8 @@
 }
 
 .board-column { 
-    background-color: var(--container-bg, #ffffff) !important; 
-    border: 1px solid var(--border-color, #e2e8f0); 
+    background-color: var(--container-bg, #f8f9fa);
+    border: 2px solid var(--border-color, #e2e8f0); 
     border-radius: 8px; 
     padding: 20px; 
     min-height: 500px; 
@@ -61,25 +59,18 @@
     text-align: left;
 }
 
-.tasks-container { 
-    display: flex; 
-    flex-direction: column; 
-    gap: 15px; 
-}
-
 /* =========================================================================
-   INDIVIDUAL WORKSPACE TASK CARDS
+   INDIVIDUAL WORKSPACE KANBAN TASK CARDS
    ========================================================================= */
 .task-card { 
-    background-color: var(--container-bg, #ffffff); 
-    border: 1px solid var(--border-color, #cbd5e1); 
-    border-radius: 8px; 
-    padding: 20px; 
-    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    background-color: var(--surface-bg, #ffffff); 
+    border: 2px solid var(--border-color, #cbd5e1); 
+    border-radius: 6px; 
+    padding: 15px; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
     box-sizing: border-box;
     backdrop-filter: blur(12px) saturate(120%);
     -webkit-backdrop-filter: blur(12px) saturate(120%);
-    transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
 
 .task-card-header { 
@@ -92,7 +83,7 @@
 
 .task-card h4 { 
     margin: 0; 
-    color: var(--text-on-card); 
+    color: var(--text-primary); 
     flex: 1; 
     text-align: left; 
 }
@@ -113,7 +104,7 @@
 .task-card.review-needed-card {
     border-left: 4px solid var(--badge-medium-text, #dd6b20) !important;
     background-color: var(--badge-medium-bg, #fffaf0) !important;
-    border-color: var(--border-color, #feebc8);
+    border-color: var(--badge-medium-border, #feebc8);
 }
 
 .review-status-banner {
@@ -151,7 +142,7 @@
 }
 
 /* =========================================================================
-   TASK CARD CONTROLS & ASSIGNEE DROPDOWNS
+   TASK CARD CONTROLS & SELECT LABELS
    ========================================================================= */
 .task-assignment-control {
     margin-bottom: 12px;
@@ -167,28 +158,20 @@
     opacity: 0.8;
 }
 
-.task-actions { 
-    display: flex; 
-    flex-direction: column;
-    gap: 10px; 
-    margin-top: 15px; 
-}
-
 /* =========================================================================
-   WORKSPACE BADGES (ACCESSIBILITY TIERS)
+   ACCESSIBILITY PRIORITY BADGES
    ========================================================================= */
 .priority-badge { 
     display: inline-flex;
     align-items: center;
     font-size: 11px; 
     font-weight: 700; 
-    padding: 4px 10px; 
-    margin-right: 3px;
-    margin-bottom: 8px;
+    padding: 3px 10px;
     border-radius: 12px; 
     text-transform: uppercase; 
     letter-spacing: 0.5px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+    margin-right: 5px;
 }
 
 .priority-badge.high { 
@@ -217,23 +200,23 @@
 
 .deadline-badge { 
     font-size: 11px; 
-    background-color: var(--surface-bg, #f1f5f9); 
+    background-color: var(--container-bg, #f1f5f9); 
     color: var(--text-muted); 
-    padding: 6px 8px; 
+    padding: 4px 8px; 
     border-radius: 12px; 
     font-weight: 500; 
-    border: 1px solid var(--border-color, #cbd5e1);
+    border: 2px solid var(--border-color, #cbd5e1);
 }
 
 /* =========================================================================
-   BOARD FILTER CONTROLS PANEL HUB
+   BOARD FILTER CONTROLS HUB (PROGRESS BALANCING MARGINS)
    ========================================================================= */
 .board-controls-panel {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: var(--surface-bg, #f8f9fa);
-    border: 1px solid var(--border-color, #e2e8f0);
+    border: 2px solid var(--border-color, #e2e8f0);
     border-radius: 8px;
     padding: 15px 20px;
     margin-bottom: 25px;
@@ -282,7 +265,7 @@
 .board-interactive-field.priority:focus,
 .board-interactive-field.category:focus {
     border: 2px solid var(--filter-focus-color, #28a745) !important;
-    box-shadow: 0 0 0 3px var(--filter-focus-shadow, rgba(40, 167, 69, 0.15)) !important;
+    box-shadow: 0 0 0 3px var(--filter-focus-shadow) !important;
     outline: none;
 }
 
@@ -318,11 +301,11 @@
 }
 
 /* =========================================================================
-   PROJECT ROSTER & TEAMS WORKSPACE SECTIONS
+   PROJECT TEAM MEMBERS CONSOLE MANAGEMENT
    ========================================================================= */
 .project-member-management-panel {  
-    background-color: var(--container-bg, #ffffff) !important; 
-    border: 1px solid var(--border-color, #e6e3de);
+    background-color: var(--surface-bg, #ffffff); 
+    border: 2px solid var(--border-color, #e6e3de);
     border-radius: 8px; 
     padding: 20px; 
     margin-bottom: 25px; 
@@ -426,7 +409,7 @@
 
 .member-display-email {
     font-size: 14px;
-    color: var(--text-on-card);
+    color: var(--text-primary);
 }
 
 .role-display-badge {
@@ -440,7 +423,21 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    margin: 3px 0px;
+}
+
+.tags-roster-tray-fallback {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 10px 0;
+    text-align: left;
+}
+
+.tags-flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
 }
 
 /* =========================================================================
@@ -516,32 +513,28 @@
     letter-spacing: 0.5px;
 }
 
-.tags-roster-tray-fallback {
-    font-size: 13px;
-    color: var(--text-muted);
-    font-style: italic;
-    padding: 10px 0;
-    text-align: left;
-}
-
-.tags-flex-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 12px;
-}
-
 /* =========================================================================
    FLEX COMPACT ACCESSIBLE FLUID BUTTON GROUPS
    ========================================================================= */
 /* MEDIUM DISPLAY BREAKPOINT: Smaller Office Monitors & Laptops */
-.task-actions,
+.task-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 15px;
+    width: 100%;
+}
+
 .btn-group {
     display: flex;
-    flex-wrap: wrap;
     gap: 6px;
     width: 100%;
     justify-content: flex-end;
+}
+
+/* This ensures that our standalone buttons (like the Column 1 Star button) align right too! */
+.task-actions > button {
+    align-self: flex-end;
 }
 
 .task-actions button,
@@ -549,15 +542,33 @@
     flex: initial;
     width: auto;
     min-width: 90px;
-    height: 32px;
-    flex: 1;
+    height: 38px;
     font-size: 11px !important;
-    padding: 8px 12px !important;
+    padding: 0 12px !important;
     white-space: nowrap;
 }
 
 /* =========================================================================
-   DIALOG MODAL SYSTEM: Our floating window overlays!
+   THEME ADAPTIVE REJECT REVIEW & ABANDON SPACE TRIGGER BUTTON
+   ========================================================================= */
+.action-btn.reject-review,
+.action-btn.resign-project-btn {
+    background-color: var(--badge-high-bg, #ffffff);
+    color: var(--badge-high-text, #e53e3e);
+    border: 2px solid var(--badge-high-border, #e53e3e);
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+
+.action-btn.reject-review:hover,
+.action-btn.resign-project-btn:hover {
+    background-color: var(--badge-high-text, #e53e3e);
+    color: var(--badge-high-bg, #ffffff);
+    border-color: var(--badge-high-border, #e53e3e);
+}
+
+/* =========================================================================
+   DIALOG POPUP MODAL COMPONENT FORM PANELS
    ========================================================================= */
 .modal-overlay {
     position: fixed;
@@ -588,7 +599,7 @@
 .modal-card h3 {
     margin-top: 0;
     margin-bottom: 20px;
-    color: var(--text-on-card);
+    color: var(--text-primary);
     text-align: left;
 }
 
@@ -651,7 +662,7 @@ input[type="date"].modal-input-field {
     border-radius: 4px;
     box-sizing: border-box;
     background-color: var(--surface-bg, #ffffff);
-    color: var(--text-primary);
+    color: var(--text-on-card);
     font-family: sans-serif;
 }
 
@@ -664,164 +675,9 @@ input[type="date"].modal-input-field {
 }
 
 .roster-item-row .delete-card-btn:hover {
+    background-color: #fee2e2 !important;
     color: #ef4444 !important;
     opacity: 1;
-}
-
-/* =========================================================================
-   THEME ADAPTIVE REJECT REVIEW & ABANDON SPACE TRIGGER BUTTON
-   ========================================================================= */
-.action-btn.reject-review {
-    background-color: var(--badge-high-bg, #ffffff);
-    color: var(--badge-high-text, #e53e3e);
-    border: 2px solid var(--badge-high-border, #e53e3e);
-    font-weight: 700;
-    transition: all 0.2s ease;
-}
-
-.action-btn.reject-review:hover {
-    background-color: var(--badge-high-text, #e53e3e);
-    color: var(--badge-high-bg, #ffffff);
-    border-color: var(--badge-high-border, #e53e3e);
-}
-
-.action-btn.resign-project-btn {
-    background-color: var(--badge-high-bg, #ffffff);
-    color: var(--badge-high-text, #e53e3e);
-    border: 2px solid var(--badge-high-border, #e53e3e);
-    font-weight: 700;
-    transition: all 0.2s ease;
-}
-
-.action-btn.resign-project-btn:hover {
-    background-color: var(--badge-high-text, #e53e3e);
-    color: var(--badge-high-bg, #ffffff);
-    border-color: var(--badge-high-border, #e53e3e);
-}
-
-/* =========================================================================
-   RESPONSIVE CANVAS COMPACT MONITOR INTERCEPTORS (MEDIA QUERIES)
-   ========================================================================= */
-.mobile-board-lane-switcher { display: none; }
-
-@media(max-width: 1024px) {
-    .board-columns-grid { gap: 15px; }
-    .board-column { min-width: 250px; }
-}
-
-/* Medium Monitors & Tablets */
-@media(max-width: 800px) {
-    .board-header {
-        flex-direction: column !important;
-        align-items: center !important;
-        text-align: center;
-        gap: 15px;
-        border-bottom: 2px solid var(--text-muted);
-    }
-
-    .board-header-action-triggers {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        justify-content: center;
-        width: 100%;
-    }
-
-    .mobile-board-lane-switcher {
-        border: 1px solid var(--border-color, #e6e3de);
-        display: flex;
-        width: 100%;
-        background-color: var(--surface-bg, #edf2f7);
-        padding: 4px;
-        border-radius: 6px;
-        margin-bottom: 10px;
-    }
-
-    .lane-tab-trigger {
-        flex: 1;
-        background: transparent;
-        border: none;
-        padding: 8px 4px;
-        font-size: 12px;
-        font-weight: 700;
-        color: var(--text-muted);
-        cursor: pointer;
-        border-radius: 4px;
-        transition: background-color 0.2s, color 0.2s;
-    }
-
-    .lane-tab-trigger.active {
-        background-color: var(--container-bg, #ffffff);
-        border: 1px solid var(--brand-accent-border, #cbd5e1);
-        color: var(--brand-accent, #2b6cb0);
-        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
-
-    .board-columns-grid { flex-direction: column !important; }
-    .board-column.mobile-hidden { display: none !important; }
-    .board-column { width: 100% !important; }
-}
-
-/* Narrow Tablets & Large Phones */
-@media(max-width: 768px) {
-    .right-tags-column {
-        border-left: none;
-        border-top: 2px dashed var(--border-color);
-        padding-left: 0;
-        padding-top: 20px;
-        width: 100%;
-    }
-
-    .search-filter-group {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 12px;
-        width: 100%;
-    }
-}
-
-/* Vertical display monitor aspect formats */
-@media(max-width: 600px) {
-    .task-card-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 6px;
-        position: relative;
-    }
-
-    /* Anchors the delete button neatly to the top-right corner to save title layout space */
-    .task-card-header .delete-card-btn {
-        position: absolute;
-        top: 0;
-        right: 0;
-        padding: 2px;
-    }
-
-    .task-card h4 {
-        padding-right: 25px; /* Ensures text never bleeds underneath the absolute trashcan position! */
-        font-size: 14px;
-    }
-    
-    .category-badge-pill {
-        font-size: 10px !important;
-        padding: 4px 10px !important;
-    }
-}
-
-@media(max-width: 480px) {
-    .search-filter-group {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .board-interactive-field { height: 42px }
-
-    .task-card-header {
-        flex-direction: column-reverse;
-        align-items: flex-end;
-    }
-
-    .modal-btn-actions-row { flex-direction: column; }
 }
 
 /* =========================================================================
@@ -859,11 +715,138 @@ input[type="date"].modal-input-field {
 
 /* Adds smooth CSS physics transitions when a card automatically snaps into place upon drop */
 .cdk-drop-list-receiving .task-card,
-.cdk-drop-list-dragging .task-card {
-    transition: transform 0.2s cubic-bezier(0, 0, 0.2, 1);
-}
+.cdk-drop-list-dragging .task-card { transition: transform 0.2s cubic-bezier(0, 0, 0.2, 1); }
 
 /* Animates the list elements rearranging themselves fluidly while we hover over a column slot */
-.cdk-drag-animating {
-    transition: transform 0.25s cubic-bezier(0, 0, 0.2, 1);
+.cdk-drag-animating { transition: transform 0.25s cubic-bezier(0, 0, 0.2, 1); }
+
+/* =========================================================================
+   RESPONSIVE CANVAS COMPACT MONITOR INTERCEPTORS (MEDIA QUERIES)
+   ========================================================================= */
+.mobile-board-lane-switcher { display: none; }
+
+@media(max-width: 1024px) {
+    .board-columns-grid { gap: 15px; }
+    .board-column { min-width: 250px; }
+}
+
+/* Medium Monitors & Tablets */
+@media(max-width: 800px) {
+    .board-header {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center;
+        gap: 15px;
+        border-bottom: 2px solid var(--text-muted);
+    }
+
+    .board-header-action-triggers {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .mobile-board-lane-switcher {
+        border: 2px solid var(--border-color, #e6e3de);
+        display: flex;
+        width: 100%;
+        background-color: var(--container-bg, #edf2f7);
+        padding: 4px;
+        border-radius: 6px;
+        margin-bottom: 10px;
+        gap: 4px;
+    }
+
+    .lane-tab-trigger {
+        flex: 1;
+        background: transparent;
+        border: none;
+        padding: 8px 4px;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--text-muted);
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background-color 0.2s, color 0.2s;
+    }
+
+    .lane-tab-trigger.active {
+        background-color: var(--surface-bg, #ffffff);
+        border: 2px solid var(--brand-accent-border, #cbd5e1);
+        color: var(--brand-accent, #2b6cb0);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .board-columns-grid { flex-direction: column !important; }
+    .board-column.mobile-hidden { display: none !important; }
+    .board-column { width: 100% !important; }
+}
+
+/* Narrow Tablets & Large Phones */
+@media(max-width: 768px) {
+    .right-tags-column {
+        border-left: none;
+        border-top: 2px dashed var(--border-color);
+        padding-left: 0;
+        padding-top: 20px;
+        width: 100%;
+    }
+
+    .search-filter-group {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 12px;
+        width: 100%;
+    }
+
+    .management-split-row {
+        flex-direction: column;
+        gap: 25px;
+    }
+}
+
+/* Vertical display monitor aspect formats */
+@media(max-width: 600px) {
+    .task-card-header {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        position: relative;
+    }
+
+    /* Anchors the delete button neatly to the top-right corner to save title layout space */
+    .task-card-header .delete-card-btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 2px;
+    }
+
+    .task-card h4 {
+        padding-right: 25px; /* Ensures text never bleeds underneath the absolute trashcan position! */
+        font-size: 14px;
+    }
+    
+    .category-badge-pill {
+        font-size: 10px !important;
+        padding: 3px 6px !important;
+    }
+}
+
+@media(max-width: 480px) {
+    .search-filter-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .task-card-header {
+        flex-direction: column-reverse;
+        align-items: flex-end;
+    }
+
+    .board-interactive-field { height: 42px }
+    .modal-btn-actions-row { flex-direction: column; }
 }

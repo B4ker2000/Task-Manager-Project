@@ -96,6 +96,8 @@
     color: var(--text-primary, #4a5568);
 }
 
+.info-row span { color: var(--text-muted); }
+
 /* =========================================================================
    METRICS DISPLAY BLOCKS
    ========================================================================= */
@@ -226,22 +228,25 @@
    ========================================================================= */
 .save-settings-btn { 
     width: 100%; 
-    height: 42px;
-    background-color: #ffffff; 
-    color: #28a745; 
-    border: 2px solid #28a745; 
+    height: 42px; 
+    background-color: var(--surface-bg, #ffffff);
+    box-shadow: 0 0 0 3px var(--filter-focus-shadow, rgba(40, 167, 69, 0.15)) !important;
+    outline: none;
+    border: 2px solid var(--filter-border-color, #38a169) !important;
+    color: var(--filter-focus-color);
     border-radius: 4px; 
     font-weight: bold; 
     cursor: pointer; 
-    margin-top: 10px; 
     transition: all 0.2s ease;
 }
 
 .save-settings-btn:hover:not(:disabled) { 
-    background-color: #28a745; 
-    color: #ffffff; 
-    border-color: #18772e;
+    background-color: var(--filter-focus-color);
+    color: var(--text-on-card);
+    border-color: var(--filter-border-color);
 }
+
+.save-settings-btn:disabled { color: var(--filter-focus-color) !important; }
 
 .danger-zone-btn { 
     width: 100%; 

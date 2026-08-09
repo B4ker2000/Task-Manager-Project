@@ -7,7 +7,7 @@
     --wallpaper: #f8f9fa;
     --text-primary: #212529;                                            /* Dominant heavy font header color */
     --text-muted: #6c757d;                                              /* Subtitles, labels and helper notes */
-    --text-on-card: #212529;
+    --text-on-card: #f8f9fa;
     --brand-accent: #007bff;                                            /* Core interaction signature button color */
     --brand-accent-border: #3182ce;                                     /* Border color for our buttons */
     --border-color: #cbd5e1;                                            /* Universal border color for the different cards */
@@ -38,7 +38,7 @@
     --wallpaper: #121212;
     --text-primary: #f8f9fa;                                            /* Crisp white readable header font block */
     --text-muted: #a0aec0;                                              /* Soft grey structural subtext text */
-    --text-on-card: #f8f9fa;
+    --text-on-card: #121212;
     --brand-accent: #3182ce;                                            /* Vibrant electric neon accent action fills */
     --brand-accent-border: #2b6cb0;                                     /* Border color to compliment our button color above */
     --border-color: #3e3e3e;                                            /* Dark carbon outlines */
@@ -69,7 +69,7 @@
     --wallpaper: #008080;
     --text-primary: #000000;        /* Full white primary text color */
     --text-muted: #000080;          /* Classic Titlebar Blue identifiers */
-    --text-on-card: #000000;        /* Stark terminal letter ink black */
+    --text-on-card: #ffffff;        /* Stark terminal letter ink black */
     --brand-accent: #000080;        /* Buttons inherit the rigid navy blue command tint */
     --brand-accent-border: #000000; 
     --border-color: #ffffff;        /* High-contrast hardware edge line highlights */
@@ -99,9 +99,9 @@
     --surface-bg: #ffffff;              /* Clean white workspace paper sheets */
     --container-bg: #efebde;            /* Classic sand-gray explorer window background tint */
     --wallpaper: #4a7af4;               /* Legendary Bliss Sky-Blue Desktop wallpaper background! */
-    --text-primary: #ffffff;            /* Solid crisp window ink font black */
+    --text-primary: #000000;            /* Solid crisp window ink font black */
     --text-muted: #0022a6;              /* Classic Windows XP Titlebar Royal Blue tint */
-    --text-on-card: #000000;
+    --text-on-card: #ffffff;
     --brand-accent: #225b11;            /* Iconic Olive-Green 'Start Button' action key fill! */
     --brand-accent-border: #153a04;     /* Darker forest green outline frame contours */
     --border-color: #0046d5;            /* Everything is framed in clean royal blue desktop borders! */
@@ -130,9 +130,9 @@
     --surface-bg: rgba(255, 255, 255, 0.65);                                    /* Translucent frosted glass panel sheet */
     --container-bg: rgba(235, 244, 255, 0.4);                                   /* Translucent window backdrop backing layers */
     --wallpaper: linear-gradient(135deg, #1d5299, #3182ce, #72b3ed);
-    --text-primary: #f8f9fa;                                                    /* Soft glowing glass text */
-    --text-muted: #a3c2f0; 
-    --text-on-card: #1a202c;
+    --text-primary: #1a202c;                                                    /* Soft glowing glass text */
+    --text-muted: #505f75; 
+    --text-on-card: #f8f9fa;
     --brand-accent: #3182ce;
     --brand-accent-border: #1a4975; 
     --border-color: rgba(255, 255, 255, 0.6);                                  /* Translucent frame reflection borders */
@@ -163,7 +163,7 @@
     --wallpaper: #050300;
     --text-primary: #ffb000;                            /* Glowing vintage high-vis phosphorus amberink text */
     --text-muted: #aa7500;                              /* Muted copper phosphor amber subtitles notes */
-    --text-on-card: #ffb000;
+    --text-on-card: #050300;
     --brand-accent: #ffb000;        
     --brand-accent-border: #ffb000; 
     --border-color: #ffb000;                            /* Everything is framed in uniform amber glowing circuits! */
@@ -194,7 +194,7 @@
     --wallpaper: #000500;
     --text-primary: #33ff33;                            /* Glowing vintage high-vis green ink text */
     --text-muted: #00aa00;
-    --text-on-card: #33ff33;
+    --text-on-card: #000500;
     --brand-accent: #33ff33;        
     --brand-accent-border: #33ff33; 
     --border-color: #33ff33;                            /* Everything is framed in uniform green glowing circuits! */
@@ -299,14 +299,14 @@ button:disabled {
 .submit-btn,
 .action-btn.next {
     background-color: var(--surface-bg, #ffffff);
-    color: var(--text-on-card);
+    color: var(--text-primary);
     border: 2px solid var(--brand-accent-border, #3182ce);
 }
 
 .submit-btn:hover,
 .action-btn.next:hover {
     background-color: var(--brand-accent, #3182ce);
-    color: var(--text-primary, #ffffff);;
+    color: var(--text-on-card, #ffffff);;
     border-color: var(--brand-accent-border, #2b6cb0);
 }
 
@@ -314,7 +314,7 @@ button:disabled {
 .back-btn,
 .action-btn.back {
     background-color: var(--surface-bg, #ffffff);
-    color: var(--text-on-card);
+    color: var(--text-primary);
     border: 2px solid var(--border-color, #cbd5e1);
 }
 
@@ -322,7 +322,7 @@ button:disabled {
 .back-btn:hover,
 .action-btn.back:hover {
     background-color: var(--text-muted);
-    color: var(--text-primary, #ffffff);
+    color: var(--text-on-card, #ffffff);
     border-color: var(--text-muted);
 }
 
@@ -379,3 +379,72 @@ select:focus,
     filter: invert(1); /* Inverts the native black icon to match our themes! */
     cursor: pointer;
 }
+
+/* =========================================================================
+   UNIVERSAL AUTHENTICATION GATE STYLES (LOGIN & SIGNUP CONSOLES)
+   ========================================================================= */
+.login-wrapper,
+.register-wrapper {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--wallpaper) !important;
+    font-family: sans-serif;
+}
+
+.login-container,
+.register-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 35px;
+    background-color: var(--surface-bg, #ffffff);
+    color: var(--text-on-card);
+    border: 2px solid var(--border-color, #cbd5e1);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+    text-align: center;
+    box-sizing: border-box;
+    backdrop-filter: blur(12px) saturate(120%);
+    -webkit-backdrop-filter: blur(12px) saturate(120%);
+}
+
+.login-container h2,
+.register-card h2 {
+    margin: 0 0 6px 0;
+    color: var(--text-primary);
+    font-size: 24px;
+}
+
+.login-container p,
+.register-card p.subtitle {
+    margin: 0 0 25px 0;
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 5px;
+    color: var(--text-muted);
+    text-align: left;
+}
+
+.login-footer-navigation,
+.register-footer {
+    margin-top: 20px;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.create-new-account-link,
+.login-link {
+    color: var(--brand-accent-border, #007bff);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.create-new-account-link:hover,
+.login-link:hover { text-decoration: underline; }
