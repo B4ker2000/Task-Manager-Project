@@ -1,11 +1,11 @@
 /* =========================================================================
-   LOCAL PROFILE CANVAS AREA
+   LOCAL PROFILE CANVAS AREA (STRUCTURAL PADDINGS)
    ========================================================================= */
 .profile-wrapper { 
     padding: 20px; 
-    font-family: sans-serif;
     max-width: 1000px; 
-    margin: 0 auto; 
+    margin: 0 auto;
+    box-sizing: border-box; 
 }
 
 .profile-header { 
@@ -29,28 +29,34 @@
 }
 
 .profile-layout-vertical-stack {
-    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 25px;
+    flex: 1;
 }
 
-.details-card, .stats-card, .settings-card, .accessibility-config-card { 
-    background-color: var(--surface-bg, #ffffff);
-    color: var(--text-primary);
-    border: 2px solid var(--border-color, #cbd5e1);
+/* Local components retain dimensions and frosted glass blur properties */
+.details-card, 
+.stats-card, 
+.settings-card, 
+.accessibility-config-card { 
+    border: 2px solid var(--border-color);
     border-radius: 8px; 
     padding: 25px; 
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02); 
     text-align: center; 
     box-sizing: border-box;
+    backdrop-filter: blur(12px) saturate(120%);
+    -webkit-backdrop-filter: blur(12px) saturate(120%);
 }
 
-.stats-card h4, .settings-card h4, .accessibility-config-card h4 { 
+.stats-card h4, 
+.settings-card h4, 
+.accessibility-config-card h4 { 
     margin-top: 0; 
     margin-bottom: 20px; 
     color: var(--text-muted);
-    border-bottom: 2px solid var(--text-muted);
+    border-bottom: 2px solid var(--border-color);
     padding-bottom: 8px; 
     text-align: left; 
 }
@@ -60,7 +66,7 @@
    ========================================================================= */
 .avatar-circle { 
     font-size: 48px; 
-    background-color: #f1f5f9; 
+    background-color: var(--container-bg); 
     width: 80px; 
     height: 80px; 
     display: flex; 
@@ -68,42 +74,44 @@
     justify-content: center; 
     border-radius: 50%; 
     margin: 0 auto 15px auto; 
-    border: 2px solid var(--border-color, #cbd5e1); 
+    border: 2px solid var(--border-color); 
 }
 
 .role-badge { 
     display: inline-block; 
     font-size: 12px; 
     font-weight: bold; 
-    background-color: #e0f2fe; 
-    color: #0369a1; 
+    background-color: var(--badge-low-bg); 
+    color: var(--badge-low-text); 
     padding: 4px 12px; 
     border-radius: 12px; 
     margin-bottom: 20px; 
 }
 
 .role-badge.admin { 
-    background-color: #fef3c7; 
-    color: #d97706; 
+    background-color: var(--badge-medium-bg); 
+    color: var(--badge-medium-text); 
 }
 
 .info-row { 
     display: flex; 
     justify-content: space-between; 
-    border-bottom: 1px dashed var(--text-muted);
+    border-bottom: 1px dashed var(--border-color);
     padding: 10px 0; 
     font-size: 14px; 
-    color: var(--text-primary, #4a5568);
+    color: var(--text-secondary);
 }
 
-.info-row span { color: var(--text-muted); }
+.info-row span { 
+    color: var(--text-muted); 
+}
 
 /* =========================================================================
-   METRICS DISPLAY BLOCKS
+   METRICS DISPLAY BLOCKS (SYSTEM ACTION DATA BOXES)
    ========================================================================= */
 .metric-box { 
-    background-color: var(--surface-bg, #f8f9fa); 
-    border: 1px solid #e2e8f0; 
+    background-color: var(--container-bg, #f8f9fa); 
+    border: 2px solid var(--border-color, #e2e8f0);
     padding: 12px 15px; 
     border-radius: 6px; 
     margin-bottom: 12px; 
@@ -115,20 +123,23 @@
 .metric-num { 
     font-size: 20px; 
     font-weight: 800; 
-    color: #3180ce; 
+    color: var(--focus-halo-color, #3180ce); 
 }
 
-.metric-box.status-done .metric-num { color: #38a169; }
+/* Tied straight to our custom progress bar green variables! */
+.metric-box.status-done .metric-num { 
+    color: var(--filter-focus-color, #38a169); 
+}
 
 .metric-label { 
     font-size: 13px; 
-    color: var(--text-primary, #4a5568);
+    color: var(--text-secondary);
     font-weight: 500; 
 }
 
 .loading-state { 
     text-align: center; 
-    color: var(--text-primary, #6c757d); 
+    color: var(--text-muted); 
     font-style: italic; 
     padding: 5px; 
 }
@@ -136,7 +147,9 @@
 /* =========================================================================
    ACCOUNT INFO CONFIGURATION FORMS
    ========================================================================= */
-.info-adjustment-form { margin-bottom: 25px; }
+.info-adjustment-form { 
+    margin-bottom: 25px; 
+}
 
 .info-adjustment-group { 
     text-align: left; 
@@ -146,18 +159,9 @@
 .info-adjustment-label { 
     font-weight: bold; 
     font-size: 13px; 
-    color: var(--text-primary, #4a5568);
+    color: var(--text-muted);
     display: block; 
     margin-bottom: 4px; 
-}
-
-.info-adjustment-input, .password-input-wrapper input { 
-    width: 100%; 
-    padding: 10px; 
-    border: 1px solid #cbd5e1; 
-    border-radius: 4px; 
-    box-sizing: border-box; 
-    font-size: 14px; 
 }
 
 .password-input-wrapper { 
@@ -167,7 +171,9 @@
     width: 100%; 
 }
 
-.password-input-wrapper input { padding-right: 40px; }
+.password-input-wrapper input { 
+    padding-right: 40px; 
+}
 
 .eye-toggle-btn { 
     position: absolute; 
@@ -181,39 +187,42 @@
     align-items: center; 
     justify-content: center; 
     opacity: 0.5; 
-    transition: opacity 0.2s; 
-    width: auto; 
-    height: auto; 
+    transition: opacity 0.2s;
 }
 
-.eye-toggle-btn:hover { opacity: 1; }
+.eye-toggle-btn:hover { 
+    opacity: 1; 
+}
 
 .settings-card hr { 
     border: 0; 
-    border-top: 1px solid #e2e8f0; 
+    border-top: 2px solid var(--border-color, #e2e8f0); 
     margin: 20px 0; 
 }
 
 /* =========================================================================
    HIGH RISK DESTRUCTION ACTION REGION (DANGER ZONE)
    ========================================================================= */
-.danger-zone { text-align: left; }
+.danger-zone { 
+    text-align: left; 
+}
 
 .danger-zone-header { 
-    color: #c62828; 
+    color: var(--badge-high-text, #c62828);
     margin: 0 0 8px 0; 
     font-size: 14px; 
+    font-weight: bold;
 }
 
 .danger-zone-warning { 
     font-size: 12px; 
-    color: var(--text-primary, #718096);
+    color: var(--text-muted);
     margin: 0 0 12px 0; 
     line-height: 1.4; 
 }
 
 /* =========================================================================
-   WORKSPACE CONFIGURATION PREFERENCES (THEMES)
+   WORKSPACE CONFIGURATION PREFERENCES (THEMES STACKING)
    ========================================================================= */
 .config-control-row {
     display: flex;
@@ -224,7 +233,7 @@
 }
 
 /* =========================================================================
-   LOCAL PROFILE BUTTON OVERRIDES: Core geometry properties
+   LOCAL BUTTON DIMENSION ACTIONS
    ========================================================================= */
 .save-settings-btn { 
     width: 100%; 
@@ -242,32 +251,22 @@
 
 .save-settings-btn:hover:not(:disabled) { 
     background-color: var(--filter-focus-color);
-    color: var(--text-on-card);
+    color: var(--surface-bg, #ffffff);
     border-color: var(--filter-border-color);
 }
 
-.save-settings-btn:disabled { color: var(--filter-focus-color) !important; }
+.save-settings-btn:disabled { 
+    color: var(--filter-focus-color) !important; 
+}
 
+/* Base dimensions stretch for local danger action buttons */
 .danger-zone-btn { 
     width: 100%; 
     height: 42px;
-    background-color: var(--badge-high-bg, #ffffff);
-    color: var(--badge-high-text, #e53e3e);
-    border: 2px solid var(--badge-high-border, #e53e3e);
-    border-radius: 4px; 
-    font-weight: 700;
-    cursor: pointer; 
-    transition: all 0.2s ease;
-}
-
-.danger-zone-btn:hover {
-    background-color: var(--badge-high-text, #e53e3e);
-    color: var(--badge-high-bg, #ffffff);
-    border-color: var(--badge-high-border, #e53e3e);
 }
 
 /* =========================================================================
-   THEME SELECT DROPDOWN RECONFIGURATIONS
+   THEME SELECT DROPDOWN WRAPPERS
    ========================================================================= */
 .control-input-wrapper {
     position: relative;
@@ -278,7 +277,7 @@
 }
 
 /* =========================================================================
-   FLUID CROSS-RESOLUTION DEVICE SCALING INTERCEPTORS
+   FLUID RESPONSIVE MEDIA BREAKPOINTS
    ========================================================================= */
 @media(max-width: 768px) {
     .profile-card-grid {
@@ -303,10 +302,6 @@
     }
 
     .control-input-wrapper {
-        position: relative;
-        width: 100%;
-        display: flex;
-        align-items: center;
         margin-top: 5px;
     }
 }
