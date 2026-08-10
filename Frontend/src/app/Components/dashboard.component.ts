@@ -76,6 +76,7 @@ export class DashboardComponent implements OnInit {
             this.projectService.deleteProject(projectId).subscribe({
                 next: () => {
                     this.loadProjects(); // Reloads the project grid layout automatically
+                    this.cdr.detectChanges();
                 },
                 error: (err) => console.error("Failed to delete project:", err)
             });

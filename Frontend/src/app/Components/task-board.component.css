@@ -713,6 +713,10 @@ input[type="date"].modal-input-field {
     cursor: grabbing !important;
 }
 
+.cdk-drag-preview *,
+body.cdk-programmatic-drag-override,
+body.cdk-drag-dragging { cursor: grabbing !important; }
+
 /* Adds smooth CSS physics transitions when a card automatically snaps into place upon drop */
 .cdk-drop-list-receiving .task-card,
 .cdk-drop-list-dragging .task-card { transition: transform 0.2s cubic-bezier(0, 0, 0.2, 1); }
