@@ -40,6 +40,7 @@
 .stats-card, 
 .settings-card, 
 .accessibility-config-card { 
+    background-color: var(--container-bg);
     border: 2px solid var(--border-color);
     border-radius: 8px; 
     padding: 25px; 
@@ -208,7 +209,7 @@
 }
 
 .danger-zone-header { 
-    color: var(--badge-high-text, #c62828);
+    color: var(--btn-delete-text, #c62828);
     margin: 0 0 8px 0; 
     font-size: 14px; 
     font-weight: bold;
@@ -238,11 +239,10 @@
 .save-settings-btn { 
     width: 100%; 
     height: 42px; 
-    background-color: var(--surface-bg, #ffffff);
-    box-shadow: 0 0 0 3px var(--filter-focus-shadow, rgba(40, 167, 69, 0.15)) !important;
+    background-color: var(--btn-filter-bg, #ffffff);
     outline: none;
-    border: 2px solid var(--filter-border-color, #38a169) !important;
-    color: var(--filter-focus-color);
+    border-color: var(--btn-filter-border);
+    color: var(--btn-filter-text);
     border-radius: 4px; 
     font-weight: bold; 
     cursor: pointer; 
@@ -250,13 +250,9 @@
 }
 
 .save-settings-btn:hover:not(:disabled) { 
-    background-color: var(--filter-focus-color);
-    color: var(--surface-bg, #ffffff);
-    border-color: var(--filter-border-color);
-}
-
-.save-settings-btn:disabled { 
-    color: var(--filter-focus-color) !important; 
+    background-color: var(--btn-filter-hover-bg);
+    color: var(--btn-filter-hover-text);
+    border-color: var(--btn-filter-hover-border);
 }
 
 /* Base dimensions stretch for local danger action buttons */

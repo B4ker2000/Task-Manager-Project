@@ -579,7 +579,7 @@ input[type="date"] {
 button:disabled {
     background-color: var(--border-color, #cbd5e1) !important;
     border-color: var(--border-color, #797f86) !important;
-    color: var(--text-muted) !important;
+    color: var(--input-bg) !important;
     cursor: not-allowed !important;
     opacity: 0.5 !important;
     transform: none !important;
@@ -690,23 +690,4 @@ select:focus,
 .create-new-account-link:hover,
 .login-link:hover { 
     text-decoration: underline; 
-}
-
-/* ================================================================================
-   CONTEXTUAL SCREEN OVERRIDES
-   ================================================================================ */
-[data-theme="95/98"] .profile-header h2,
-[data-theme="95/98"] .board-header h2,
-[data-theme="95/98"] .list-section h3,
-[data-theme="95/98"] .main-header h1,
-[data-theme="xp"] .profile-header h2,
-[data-theme="xp"] .board-header h2,
-[data-theme="xp"] .list-section h3,
-[data-theme="xp"] .main-header h1,
-[data-theme="7"] .profile-header h2,
-[data-theme="7"] .board-header h2,
-[data-theme="7"] .list-section h3,
-[data-theme="7"] .main-header h1 {
-    color: var(--text-on-card) !important;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); 
 }
