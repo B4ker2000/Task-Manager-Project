@@ -506,9 +506,9 @@ input[type="date"] {
     color: var(--btn-submit-text) !important;
     border: 2px solid var(--btn-submit-border) !important;
 }
-.submit-btn:hover,
-.create-btn:hover,
-.action-btn.next:hover {
+.submit-btn:hover:not(:disabled),
+.create-btn:hover:not(:disabled),
+.action-btn.next:hover:not(:disabled) {
     background-color: var(--btn-submit-hover-bg) !important;
     color: var(--btn-submit-hover-text) !important;
     border-color: var(--btn-submit-hover-border) !important;
@@ -523,10 +523,10 @@ input[type="date"] {
     color: var(--btn-cancel-text) !important;
     border: 2px solid var(--btn-cancel-border) !important;
 }
-.cancel-btn:hover,
-.back-btn:hover,
-.action-btn.back:hover,
-.profile-btn:hover {
+.cancel-btn:hover:not(:disabled),
+.back-btn:hover:not(:disabled),
+.action-btn.back:hover:not(:disabled),
+.profile-btn:hover:not(:disabled) {
     background-color: var(--btn-cancel-hover-bg) !important;
     color: var(--btn-cancel-hover-text) !important;
     border-color: var(--btn-cancel-hover-border) !important;
@@ -539,8 +539,8 @@ input[type="date"] {
     color: var(--btn-filter-text) !important;
     border: 2px solid var(--btn-filter-border) !important;
 }
-.send-invite-btn:hover,
-.view-tasks-btn:hover {
+.send-invite-btn:hover:not(:disabled),
+.view-tasks-btn:hover:not(:disabled) {
     background-color: var(--btn-filter-hover-bg) !important;
     color: var(--btn-filter-hover-text) !important;
     border-color: var(--btn-filter-hover-border) !important;
@@ -556,11 +556,11 @@ input[type="date"] {
     color: var(--btn-delete-text) !important;
     border: 2px solid var(--btn-delete-border) !important;
 }
-.delete-proj-btn:hover,
-.delete-card-btn:hover,
-.danger-zone-btn:hover,
-.action-btn.reject-review:hover,
-.action-btn.resign-project-btn:hover {
+.delete-proj-btn:hover:not(:disabled),
+.delete-card-btn:hover:not(:disabled),
+.danger-zone-btn:hover:not(:disabled),
+.action-btn.reject-review:hover:not(:disabled),
+.action-btn.resign-project-btn:hover:not(:disabled) {
     background-color: var(--btn-delete-hover-bg) !important;
     color: var(--btn-delete-hover-text) !important;
     border-color: var(--btn-delete-hover-border) !important;
