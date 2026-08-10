@@ -504,7 +504,7 @@ input[type="date"] {
 .action-btn.next {
     background-color: var(--btn-submit-bg) !important;
     color: var(--btn-submit-text) !important;
-    border: 2px solid var(--btn-submit-border) !important;
+    border-color: var(--btn-submit-border) !important;
 }
 .submit-btn:hover:not(:disabled),
 .create-btn:hover:not(:disabled),
@@ -521,7 +521,7 @@ input[type="date"] {
 .profile-btn {
     background-color: var(--btn-cancel-bg) !important;
     color: var(--btn-cancel-text) !important;
-    border: 2px solid var(--btn-cancel-border) !important;
+    border-color: var(--btn-cancel-border);
 }
 .cancel-btn:hover:not(:disabled),
 .back-btn:hover:not(:disabled),
@@ -537,7 +537,7 @@ input[type="date"] {
 .view-tasks-btn {
     background-color: var(--btn-filter-bg) !important;
     color: var(--btn-filter-text) !important;
-    border: 2px solid var(--btn-filter-border) !important;
+    border-color: var(--btn-filter-border) !important;
 }
 .send-invite-btn:hover:not(:disabled),
 .view-tasks-btn:hover:not(:disabled) {
@@ -553,7 +553,8 @@ input[type="date"] {
 .action-btn.resign-project-btn {
     background-color: var(--btn-delete-bg) !important;
     color: var(--btn-delete-text) !important;
-    border: 2px solid var(--btn-delete-border) !important;
+    border: 2px solid transparent !important;
+    border-color: var(--btn-delete-border);
 }
 .delete-proj-btn:hover:not(:disabled),
 .delete-card-btn:hover:not(:disabled),
