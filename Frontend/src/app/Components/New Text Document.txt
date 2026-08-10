@@ -47,3 +47,20 @@
 .eye-toggle-btn:hover { 
     opacity: 1; 
 }
+
+/* =========================================================================
+   OPTICAL ORIENTATION RESPONSIVE MEDIA FILTERS (MOBILE MATRIX DEVIATIONS)
+   ========================================================================= */
+@media(max-width: 480px) {
+    .register-card {
+        margin: 0 auto;
+        padding: 25px;
+        max-width: 92%;
+        width: 100%;
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -55%);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    }
+}

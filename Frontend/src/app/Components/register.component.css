@@ -49,28 +49,9 @@
 }
 
 /* =========================================================================
-   FOOTER NAVIGATION LABELS
-   ========================================================================= */
-.register-footer {
-    margin-top: 20px;
-    font-size: 13px;
-    color: var(--text-muted);
-}
-
-.login-link {
-    color: #007bff;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.login-link:hover { text-decoration: underline; }
-
-/* =========================================================================
-   OPTICAL ORIENTATION RESPONSIVE MEDIA FILTERS
+   OPTICAL ORIENTATION RESPONSIVE MEDIA FILTERS (MOBILE MATRIX DEVIATIONS)
    ========================================================================= */
 @media(max-width: 480px) {
-    body, html { height: 100%; }
-    
     .register-card {
         margin: 0 auto;
         padding: 25px;
