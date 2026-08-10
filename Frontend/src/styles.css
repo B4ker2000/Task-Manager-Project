@@ -549,7 +549,6 @@ input[type="date"] {
 /* --- FUNCTIONAL BUTTON CATEGORY 4: DESTRUCTIVE OR SERIOUS DISMISSAL TIERS --- */
 .delete-proj-btn,
 .delete-card-btn,
-.danger-zone-btn,
 .action-btn.reject-review,
 .action-btn.resign-project-btn {
     background-color: var(--btn-delete-bg) !important;
@@ -558,12 +557,22 @@ input[type="date"] {
 }
 .delete-proj-btn:hover:not(:disabled),
 .delete-card-btn:hover:not(:disabled),
-.danger-zone-btn:hover:not(:disabled),
 .action-btn.reject-review:hover:not(:disabled),
 .action-btn.resign-project-btn:hover:not(:disabled) {
     background-color: var(--btn-delete-hover-bg) !important;
     color: var(--btn-delete-hover-text) !important;
     border-color: var(--btn-delete-hover-border) !important;
+}
+
+.danger-zone-btn {
+    background-color: var(--btn-delete-hover-bg, #e53e3e) !important;
+    color: var(--btn-delete-hover-text, #ffffff) !important;
+    border-color: var(--btn-delete-hover-border, #e53e3e) !important;
+}
+.danger-zone-btn:hover:not(:disabled) {
+    background-color: var(--btn-delete-bg, #ffffff) !important;
+    color: var(--btn-delete-text, #e53e3e) !important;
+    border-color: var(--btn-delete-border) !important;
 }
 
 /* MASTER DISABLING GATES SHIELD */
