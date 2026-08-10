@@ -31,7 +31,7 @@ input[type="email"] {
 
 .password-input-wrapper input { 
     width: 100%; 
-    padding: 10px 40px 10px 10px; /* Leaves extra room on the right for your toggle btn! */
+    padding: 10px 40px 10px 10px;
     box-sizing: border-box; 
 }
 
@@ -52,4 +52,48 @@ input[type="email"] {
 
 .eye-toggle-btn:hover { 
     opacity: 1; 
+}
+
+/* =========================================================================
+   REMEMBER ME CHECKBOX STRUCTURAL CONTAINERS
+   ========================================================================= */
+.remember-me-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 15px 0;
+    width: 100%;
+}
+
+.remember-me-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    user-select: none;
+}
+
+/* =========================================================================
+   NAVIGATION FOOTERS AND STRUCTURAL RESPONSIVE CONTROLS
+   ========================================================================= */
+.error-msg {
+    color: #dc3545;
+    font-weight: bold;
+    margin-top: 15px;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* Fluid Absolute centering matrix overrides strictly for mobile dimensions */
+@media(max-width: 480px) {
+    .login-container {
+        margin: 0 auto;
+        padding: 25px;
+        max-width: 92%;
+        width: 100%;
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -55%);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    }
 }

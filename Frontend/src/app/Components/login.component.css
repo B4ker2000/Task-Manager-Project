@@ -53,51 +53,9 @@ input[type="email"] {
 .eye-toggle-btn:hover { 
     opacity: 1; 
 }
-//////////////////////////////////////////////////////
-.login-wrapper {
-    height: 100vh; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    background-color: var(--container-bg, #f8f9fa); 
-    font-family: sans-serif;
-}
-
-.login-container { 
-    width: 100%;
-    max-width: 400px; 
-    padding: 35px;
-    background-color: var(--surface-bg, #ffffff); 
-    color: var(--text-primary);
-    border: 2px solid var(--border-color, #cbd5e1); 
-    border-radius: 8px; 
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02); 
-    text-align: center; 
-    box-sizing: border-box;
-}
-
-h2 { 
-    margin: 0 0 6px 0;
-    color: var(--text-primary); 
-    font-size: 24px;
-}
-
-p { 
-    margin: 0 0 25px 0; 
-    color: var(--text-muted); 
-    font-size: 14px; 
-}
-
-label { 
-    display: block; 
-    margin-bottom: 5px; 
-    font-weight: bold; 
-    font-size: 13px; 
-    color: var(--text-muted);
-}
 
 /* =========================================================================
-   REMEMBER ME CHECKBOX ALIGNMENT TRACKERS
+   REMEMBER ME CHECKBOX STRUCTURAL CONTAINERS
    ========================================================================= */
 .remember-me-container {
     display: flex;
@@ -111,23 +69,11 @@ label {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    cursor: pointer;
     user-select: none;
 }
 
-#rememberMeBox {
-    width: 16px;
-    height: 16px;
-    cursor: pointer;
-}
-
-.remember-me-text {
-    font-size: 13px;
-    color: var(--text-muted);
-}
-
 /* =========================================================================
-   NAVIGATION FOOTERS AND VALIDATION ERRORS
+   NAVIGATION FOOTERS AND STRUCTURAL RESPONSIVE CONTROLS
    ========================================================================= */
 .error-msg {
     color: #dc3545;
@@ -137,27 +83,8 @@ label {
     text-align: center;
 }
 
-.login-footer-navigation {
-    text-align: center;
-    margin-top: 15px;
-    font-size: 13px;
-    color: var(--text-muted);
-}
-
-.create-new-account-link {
-    color: #007bff;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.create-new-account-link:hover { text-decoration: underline; }
-
-/* =========================================================================
-    FLUID CROSS-RESOLUTION DEVICE SCALING BREAKPOINTS
-   ========================================================================= */
+/* Fluid Absolute centering matrix overrides strictly for mobile dimensions */
 @media(max-width: 480px) {
-    body, html { height: 100%; }
-
     .login-container {
         margin: 0 auto;
         padding: 25px;
