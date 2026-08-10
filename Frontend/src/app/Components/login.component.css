@@ -1,6 +1,59 @@
 /* =========================================================================
-   LOCAL AUTHENTICATION VIEW CONTAINER (LOGIN SYSTEM)
+   LOCAL POSITIONING LAYOUT MATRIX (LOGIN ENTRANCE ROOM)
    ========================================================================= */
+.form-group { 
+    margin-bottom: 16px;
+    text-align: left; 
+}
+
+/* Local input geometry adjustments */
+input[type="email"] { 
+    width: 100%;
+    box-sizing: border-box; 
+}
+
+/* Local dimension stretch for the main gateway submission button */
+.login-submit-btn { 
+    width: 100%; 
+    height: 42px;
+    margin-top: 10px; 
+}
+
+/* =========================================================================
+   PASSWORD LAYOUT STRUCTURAL WRAPPERS
+   ========================================================================= */
+.password-input-wrapper { 
+    display: flex; 
+    align-items: center; 
+    position: relative; 
+    width: 100%; 
+}
+
+.password-input-wrapper input { 
+    width: 100%; 
+    padding: 10px 40px 10px 10px;
+    box-sizing: border-box; 
+}
+
+.eye-toggle-btn { 
+    position: absolute; 
+    right: 10px; 
+    background: none; 
+    border: none; 
+    cursor: pointer; 
+    font-size: 16px; 
+    padding: 0; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    opacity: 0.5; 
+    transition: opacity 0.2s; 
+}
+
+.eye-toggle-btn:hover { 
+    opacity: 1; 
+}
+//////////////////////////////////////////////////////
 .login-wrapper {
     height: 100vh; 
     display: flex; 
@@ -35,11 +88,6 @@ p {
     font-size: 14px; 
 }
 
-.form-group { 
-    margin-bottom: 16px;
-    text-align: left; 
-}
-
 label { 
     display: block; 
     margin-bottom: 5px; 
@@ -47,65 +95,6 @@ label {
     font-size: 13px; 
     color: var(--text-muted);
 }
-
-input[type="email"] { 
-    width: 100%; 
-    padding: 10px; 
-    border: 1px solid #cbd5e1; 
-    border-radius: 4px; 
-    box-sizing: border-box; 
-    font-size: 14px; 
-    background-color: var(--surface-bg);
-    color: var(--text-primary);
-}
-
-/* =========================================================================
-   SUBMIT BUTTON LOCAL WIDTH STRETCHES
-   ========================================================================= */
-.login-submit-btn { 
-    width: 100%; 
-    height: 42px;
-    margin-top: 10px; 
-}
-
-/* =========================================================================
-   PASSWORD LAYOUT INTEGRATION FIELDS
-   ========================================================================= */
-.password-input-wrapper { 
-    display: flex; 
-    align-items: center; 
-    position: relative; 
-    width: 100%; 
-}
-
-.password-input-wrapper input { 
-    width: 100%; 
-    padding: 10px 40px 10px 10px; 
-    border: 1px solid #cbd5e1; 
-    border-radius: 4px; 
-    box-sizing: border-box; 
-    font-size: 14px; 
-    background-color: var(--surface-bg);
-    color: var(--text-primary);
-}
-
-.eye-toggle-btn { 
-    position: absolute; 
-    right: 10px; 
-    background: none; 
-    border: none; 
-    cursor: pointer; 
-    font-size: 16px; 
-    padding: 0; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    opacity: 0.5; 
-    transition: opacity 0.2s; 
-    /* width: auto;  */
-}
-
-.eye-toggle-btn:hover { opacity: 1; }
 
 /* =========================================================================
    REMEMBER ME CHECKBOX ALIGNMENT TRACKERS
