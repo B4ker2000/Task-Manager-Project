@@ -1,17 +1,18 @@
 /* =========================================================================
-    ☀️ DEFAULT LIGHT WORKSPACE THEME PRESETS
+    CORE GLOBAL PALETTE VARIANT INVENTORY
    ========================================================================= */
 :root {
+    /* ☀️ DEFAULT LIGHT THEME */
     --surface-bg: #ffffff;                                              /* Main cards background canvas */
     --container-bg: #f8f9fa;                                            /* App layout shell backdrop tint */
     --wallpaper: #f8f9fa;
-    --text-primary: #212529;                                            /* Dominant heavy font header color */
-    --text-muted: #6c757d;                                              /* Subtitles, labels and helper notes */
-    --text-on-card: #f8f9fa;
-    --brand-accent: #007bff;                                            /* Core interaction signature button color */
-    --brand-accent-border: #3182ce;                                     /* Border color for our buttons */
     --border-color: #cbd5e1;                                            /* Universal border color for the different cards */
     --input-bg: #ffffff;
+    --font-override: sans-serif;
+
+    --text-primary: #212529;                                            /* Dominant heavy font header color */
+    --text-secondary: #212529;
+    --text-muted: #6c757d;                                              /* Subtitles, labels and helper notes */
 
     /* 📊 PRIORITY VALUE ACCESSIBILITY BADGES */
     --badge-high-bg: #fff5f5;       --badge-high-text: #e53e3e;     --badge-high-border: #fed7d7;
@@ -21,38 +22,47 @@
 
     /* 🎨 PROGRESS AND FILTER TRACKS */
     --progress-bar-fill: linear-gradient(90deg, #28a745, #34ce57);    /* Emerald light gradient */
+
+    --filter-border-color: #cbd5e1;
     --filter-focus-color: #28a745;                                      /* Green focus lines */
     --filter-focus-shadow: rgba(40, 167, 69, 0.15);
-    --filter-border-color: #28a745;
 
     --focus-halo-color: #3182ce;                                        /* Focus halo color and shadow for buttons, input fields & drop-down menus */
     --focus-halo-shadow: rgba(49, 130, 206, 0.15);
 
+    /* SEMANTIC BUTTON FOUR-TIER STRUCTURAL INVENTORY */
+    --btn-submit-bg: #ffffff;         --btn-submit-text: #3182ce;         --btn-submit-border: #3182ce;
+    --btn-submit-hover-bg: #3182ce;   --btn-submit-hover-text: #ffffff;   --btn-submit-hover-border: #2b6cb0;
+
+    --btn-cancel-bg: #ffffff;         --btn-cancel-text: #4a5568;         --btn-cancel-border: #cbd5e1;
+    --btn-cancel-hover-bg: #4a5568;   --btn-cancel-hover-text: #ffffff;   --btn-cancel-hover-border: #2d3748;
+
+    --btn-filter-bg: #ffffff;         --btn-filter-text: #28a745;         --btn-filter-border: #28a745;
+    --btn-filter-hover-bg: #28a745;   --btn-filter-hover-text: #ffffff;   --btn-filter-hover-border: #218838;
+
+    --btn-delete-bg: #ffffff;         --btn-delete-text: #e53e3e;         --btn-delete-border: #e53e3e;
+    --btn-delete-hover-bg: #e53e3e;   --btn-delete-hover-text: #ffffff;   --btn-delete-hover-border: #c53030;
+
     /* THEMATIC TYPE MODIFIERS */
     --btn-text-transform: none;
     --btn-font-style: normal;
-    --link-color-override: #007bff;
 
-    /* Button Hover variables */
-    --button-hover-bg: var(--brand-accent, #3182ce);
-    --button-hover-text: var(--surface-bg, #ffffff);
+    --link-color-override: #007bff;
 }
 
-/* =========================================================================
-    🌙 SYSTEM DARK MODE OVERRIDES
-   ========================================================================= */
 [data-theme="dark"] {
+    /* 🌙 SYSTEM DARK MODE OVERRIDES */
     --surface-bg: #1e1e1e;                                              /* Deep rich carbon surface color */
     --container-bg: #121212;                                            /* Flat midnight background floor canvas */
     --wallpaper: #121212;
-    --text-primary: #f8f9fa;                                            /* Crisp white readable header font block */
-    --text-muted: #a0aec0;                                              /* Soft grey structural subtext text */
-    --text-on-card: #121212;
-    --brand-accent: #3182ce;                                            /* Vibrant electric neon accent action fills */
-    --brand-accent-border: #2b6cb0;                                     /* Border color to compliment our button color above */
     --border-color: #3e3e3e;                                            /* Dark carbon outlines */
     --input-bg: #1e1e1e;
-    
+    --font-override: sans-serif;
+
+    --text-primary: #f8f9fa;                                            /* Crisp white readable header font block */
+    --text-secondary: #f8f9fa;
+    --text-muted: #a0aec0;                                              /* Soft grey structural subtext text */
+
     /* 📊 DARK MODE ACCESSIBILITY BADGE MATRICES */
     --badge-high-bg: #3c1e1e;       --badge-high-text: #fc8181;     --badge-high-border: #e53e3e;
     --badge-medium-bg: #3c2a1a;     --badge-medium-text: #f6ad55;   --badge-medium-border: #dd6b20;
@@ -61,29 +71,47 @@
 
     /* 🎨 PROGRESS AND FILTER TRACKS */
     --progress-bar-fill: linear-gradient(90deg, #48bb78, #38a169);    /* Soft glowing green */
+    
+    --filter-border-color: #3e3e3e;
     --filter-focus-color: #48bb78;
     --filter-focus-shadow: rgba(72, 187, 120, 0.2);
-    --filter-border-color: #38a169;
 
     --focus-halo-color: #63b3ed;
     --focus-halo-shadow: rgba(99, 179, 237, 0.2);
+
+    /* SEMANTIC BUTTON FOUR-TIER STRUCTURAL INVENTORY */
+    --btn-submit-bg: #1e1e1e;         --btn-submit-text: #63b3ed;         --btn-submit-border: #3182ce;
+    --btn-submit-hover-bg: #3182ce;   --btn-submit-hover-text: #ffffff;   --btn-submit-hover-border: #63b3ed;
+
+    --btn-cancel-bg: #1e1e1e;         --btn-cancel-text: #a0aec0;         --btn-cancel-border: #3e3e3e;
+    --btn-cancel-hover-bg: #4a5568;   --btn-cancel-hover-text: #ffffff;   --btn-cancel-hover-border: #cdb5e1;
+
+    --btn-filter-bg: #1e1e1e;         --btn-filter-text: #48bb78;         --btn-filter-border: #38a169;
+    --btn-filter-hover-bg: #38a169;   --btn-filter-hover-text: #ffffff;   --btn-filter-hover-border: #48bb78;
+
+    --btn-delete-bg: #1e1e1e;         --btn-delete-text: #fc8181;         --btn-delete-border: #e53e3e;
+    --btn-delete-hover-bg: #e53e3e;   --btn-delete-hover-text: #ffffff;   --btn-delete-hover-border: #fc8181;
+
+    /* THEMATIC TYPE MODIFIERS */
+    --btn-text-transform: none;
+    --btn-font-style: normal;
+
+    --link-color-override: #63b3ed;
 }
 
-/* =========================================================================
-    💾 REBRANDED: WINDOWS 95 / 98 LEGACY CLASSIC HARWARE MOTOR
-   ========================================================================= */
 [data-theme="95/98"] {
-    --surface-bg: #d4d0c8;          /* True 90s physical computer chassis gray */
-    --container-bg: #d4d0c8;        /* Deep battleship gray background floor*/
-    --wallpaper: #008080;
-    --text-primary: #000000;        /* Full white primary text color */
-    --text-muted: #000080;          /* Classic Titlebar Blue identifiers */
-    --text-on-card: #ffffff;        /* Stark terminal letter ink black */
-    --brand-accent: #000080;        /* Buttons inherit the rigid navy blue command tint */
-    --brand-accent-border: #000000; 
-    --border-color: #ffffff;        /* High-contrast hardware edge line highlights */
+    /* 💾 CLASSIC WINDOWS 95 / 98 LEGACY HARDWARE PRESETS */
+    --surface-bg: #d4d0c8;                                              /* True 90s physical computer chassis gray */
+    --container-bg: #d4d0c8;
+    --wallpaper: #008080;                                               /* Iconic solid desktop Teal Green Wallpaper! */
+    --border-color: #808080;                                            /* High-contrast hardware edge line highlights */
     --input-bg: #ffffff;
-    
+    --font-override: sans-serif;
+
+    --text-primary: #ffffff;                                            /* Full white primary text color over wallpaper */
+    --text-secondary: #000000;                                          /* Stark terminal letter ink black inside cards */
+    --text-muted: #000080;                                              /* Classic Titlebar Blue identifiers */
+
     /* 📊 95/98 Era Flat Alerts layout profiles */
     --badge-high-bg: #cbd5e1;       --badge-high-text: #c53030;     --badge-high-border: #000000;
     --badge-medium-bg: #cbd5e1;     --badge-medium-text: #dd6b20;   --badge-medium-border: #000000;
@@ -92,29 +120,47 @@
 
     /* 🎨 PROGRESS AND FILTER TRACKS */
     --progress-bar-fill: #000080;
+    
+    --filter-border-color: #808080;
     --filter-focus-color: #000080;                      
     --filter-focus-shadow: rgba(0, 0, 128, 0.15);
-    --filter-border-color: #000080;
 
     --focus-halo-color: #000080;
     --focus-halo-shadow: rgba(0, 0, 128, 0.2);
+
+    /* 🏛️ AUTHENTIC 95 ERA 4-COLOR HIGH-CONTRAST CHASSIS INTERACTION BEVELS */
+    --btn-submit-bg: #d4d0c8;         --btn-submit-text: #000000;         --btn-submit-border: #ffffff #808080 #808080 #ffffff;
+    --btn-submit-hover-bg: #000080;   --btn-submit-hover-text: #ffffff;   --btn-submit-hover-border: #000000;
+
+    --btn-cancel-bg: #d4d0c8;         --btn-cancel-text: #000000;         --btn-cancel-border: #ffffff #808080 #808080 #ffffff;
+    --btn-cancel-hover-bg: #808080;   --btn-cancel-hover-text: #ffffff;   --btn-cancel-hover-border: #000000;
+
+    --btn-filter-bg: #d4d0c8;         --btn-filter-text: #000000;         --btn-filter-border: #ffffff #808080 #808080 #ffffff;
+    --btn-filter-hover-bg: #008000;   --btn-filter-hover-text: #ffffff;   --btn-filter-hover-border: #000000;
+
+    --btn-delete-bg: #d4d0c8;         --btn-delete-text: #c53030;         --btn-delete-border: #ffffff #808080 #808080 #ffffff;
+    --btn-delete-hover-bg: #c53030;   --btn-delete-hover-text: #ffffff;   --btn-delete-hover-border: #000000;
+
+    /* THEMATIC TYPE MODIFIERS */
+    --btn-text-transform: none;
+    --btn-font-style: normal;
+
+    --link-color-override: #000080;
 }
 
-/* =========================================================================
-    💿 CLASSIC WINDOWS XP LUNA BLUE SYSTEM
-   ========================================================================= */
 [data-theme="xp"] {
+    /* 💿 CLASSIC WINDOWS XP LUNA BLUE SYSTEM */
     --surface-bg: #ffffff;              /* Clean white workspace paper sheets */
     --container-bg: #efebde;            /* Classic sand-gray explorer window background tint */
     --wallpaper: #4a7af4;               /* Legendary Bliss Sky-Blue Desktop wallpaper background! */
-    --text-primary: #000000;            /* Solid crisp window ink font black */
-    --text-muted: #0022a6;              /* Classic Windows XP Titlebar Royal Blue tint */
-    --text-on-card: #ffffff;
-    --brand-accent: #225b11;            /* Iconic Olive-Green 'Start Button' action key fill! */
-    --brand-accent-border: #153a04;     /* Darker forest green outline frame contours */
     --border-color: #0046d5;            /* Everything is framed in clean royal blue desktop borders! */
     --input-bg: #ffffff;
-    
+    --font-override: sans-serif;
+
+    --text-primary: #ffffff;            /* Sharp white headers over Bliss wallpaper background */
+    --text-secondary: #000000;          /* Sharp dark black ink inside card canvases */
+    --text-muted: #0022a6;              /* Classic Windows XP Titlebar Royal Blue tint */
+
     /* 📊 DYNAMIC LUNA ACCESSIBILITY BADGES: Styled like classic early-2000s warning error alerts! */
     --badge-high-bg: #ff3333;       --badge-high-text: #ffffff;     --badge-high-border: #990000;
     --badge-medium-bg: #ffcc00;     --badge-medium-text: #000000;   --badge-medium-border: #cc9900;
@@ -123,60 +169,95 @@
 
     /* 🎨 PROGRESS AND FILTER TRACKS */
     --progress-bar-fill: linear-gradient(180deg, #3cd53c, #225b11);       /* Glossy dynamic green bar tracker gradient! */
+    
+    --filter-border-color: #0046d5;
     --filter-focus-color: #225b11;                                          /* Olive-green filter borders */
     --filter-focus-shadow: rgba(34, 91, 17, 0.2);
-    --filter-border-color: #225b11;
 
-    --focus-halo-color: #0046d5;                                            /* Rpyal blue text box selection outline rings */
+    --focus-halo-color: #0046d5;                                            /* Royal blue text box selection outline rings */
     --focus-halo-shadow: rgba(0, 70, 213, 0.15);
+
+    /* 💿 AUTHENTIC XP ROUNDED PLASTIC LUNA BEVELS: Adds the premium crescent bottom shading offsets! */
+    --btn-submit-bg: #ffffff;         --btn-submit-text: #225b11;         --btn-submit-border: #acd89d #153a04 #153a04 #acd89d;
+    --btn-submit-hover-bg: #225b11;   --btn-submit-hover-text: #ffffff;   --btn-submit-hover-border: #153a04;
+
+    --btn-cancel-bg: #ffffff;         --btn-cancel-text: #0022a6;         --btn-cancel-border: #b1cbf9 #0022a6 #0022a6 #b1cbf9;
+    --btn-cancel-hover-bg: #0046d5;   --btn-cancel-hover-text: #ffffff;   --btn-cancel-hover-border: #0022a6;
+
+    --btn-filter-bg: #ffffff;         --btn-filter-text: #225b11;         --btn-filter-border: #acd89d #153a04 #153a04 #acd89d;
+    --btn-filter-hover-bg: #225b11;   --btn-filter-hover-text: #ffffff;   --btn-filter-hover-border: #153a04;
+
+    --btn-delete-bg: #ffffff;         --btn-delete-text: #ff3333;         --btn-delete-border: #ffb1b1 #990000 #990000 #ffb1b1;
+    --btn-delete-hover-bg: #ff3333;   --btn-delete-hover-text: #ffffff;   --btn-delete-hover-border: #990000;
+
+    /* THEMATIC TYPE MODIFIERS */
+    --btn-text-transform: none;
+    --btn-font-style: normal;
+
+    --link-color-override: #0022a6;
 }
 
-/* =========================================================================
-   📀 WINDOWS 7 GLASS AERO ENVIRONMENT  
-   ========================================================================= */
 [data-theme="7"] {
+    /* 📀 WINDOWS 7 GLOSSY AERO ARCHITECTURE PRESETS */
     --surface-bg: rgba(255, 255, 255, 0.65);                                    /* Translucent frosted glass panel sheet */
-    --container-bg: rgba(235, 244, 255, 0.4);                                   /* Translucent window backdrop backing layers */
+    --container-bg: rgba(235, 244, 255, 0.2);                                   /* Translucent window backdrop backing layers */
     --wallpaper: linear-gradient(135deg, #1d5299, #3182ce, #72b3ed);
-    --text-primary: #1a202c;                                                    /* Soft glowing glass text */
-    --text-muted: #505f75; 
-    --text-on-card: #f8f9fa;
-    --brand-accent: #3182ce;
-    --brand-accent-border: #1a4975; 
     --border-color: rgba(255, 255, 255, 0.6);                                  /* Translucent frame reflection borders */
     --input-bg: #ffffff;
+    --font-override: sans-serif;
 
-    /* 📊 DYNAMIC LUNA ACCESSIBILITY BADGES: Styled like classic early-2000s warning error alerts! */
-    --badge-high-bg: rgba(254, 215, 217, 0.85);       --badge-high-text: #9b2c2c;     --badge-high-border: #e53e3e;
-    --badge-medium-bg: rgba(254, 235, 200, 0.85);     --badge-medium-text: #c05621;   --badge-medium-border: #dd6b20;
-    --badge-low-bg: rgba(190, 227, 248, 0.85);        --badge-low-text: #2b6cb0;      --badge-low-border: #3182ce;
-    --badge-done-bg: rgba(198, 246, 213, 0.85);       --badge-done-text: #22543d;     --badge-done-border: #38a169;
+    --text-primary: #f8f9fa;                                                    /* Soft glowing glass text */
+    --text-secondary: #1a202c;                                                  /* Deep dark contrast text inside glass sheets */
+    --text-muted: #d0e1fd; 
+
+    /* 📊 DYNAMIC AERO GLASS ACCESSIBILITY BADGES */
+    --badge-high-bg: rgba(254, 215, 217, 0.85);   --badge-high-text: #9b2c2c;   --badge-high-border: #e53e3e;
+    --badge-medium-bg: rgba(254, 235, 200, 0.85); --badge-medium-text: #c05621; --badge-medium-border: #dd6b20;
+    --badge-low-bg: rgba(190, 227, 248, 0.85);    --badge-low-text: #2b6cb0;    --badge-low-border: #3182ce;
+    --badge-done-bg: rgba(198, 246, 213, 0.85);   --badge-done-text: #22543d;   --badge-done-border: #38a169;
 
     /* 🎨 PROGRESS AND FILTER TRACKS */
     --progress-bar-fill: linear-gradient(180deg, #52c2ff, #1574d5);
+    
+    --filter-border-color: rgba(255, 255, 255, 0.8);
     --filter-focus-color: #3182ce;
     --filter-focus-shadow: rgba(49, 130, 206, 0.3);
-    --filter-border-color: rgba(255, 255, 255, 0.8);
 
     --focus-halo-color: #3182ce;
     --focus-halo-shadow: rgba(49, 130, 206, 0.25);
+
+    /* 🔮 WINDOWS 7 GLOSSY HOVER AND FILL VARIATION MATRICES */
+    --btn-submit-bg: rgba(255, 255, 255, 0.85);  --btn-submit-text: #1a74d5;         --btn-submit-border: rgba(255, 255, 255, 0.6);
+    --btn-submit-hover-bg: #1574d5;              --btn-submit-hover-text: #ffffff;   --btn-submit-hover-border: #52c2ff;
+
+    --btn-cancel-bg: rgba(255, 255, 255, 0.85);  --btn-cancel-text: #505f75;         --btn-cancel-border: rgba(255, 255, 255, 0.4);
+    --btn-cancel-hover-bg: #505f75;              --btn-cancel-hover-text: #ffffff;   --btn-cancel-hover-border: #1a202c;
+
+    --btn-filter-bg: rgba(255, 255, 255, 0.85);  --btn-filter-text: #38a169;         --btn-filter-border: rgba(255, 255, 255, 0.4);
+    --btn-filter-hover-bg: #38a169;              --btn-filter-hover-text: #ffffff;   --btn-filter-hover-border: #22543d;
+
+    --btn-delete-bg: rgba(255, 255, 255, 0.85);  --btn-delete-text: #e53e3e;         --btn-delete-border: rgba(255, 255, 255, 0.4);
+    --btn-delete-hover-bg: #e53e3e;              --btn-delete-hover-text: #ffffff;   --btn-delete-hover-border: #9b2c2c;
+
+    /* THEMATIC TYPE MODIFIERS */
+    --btn-text-transform: none;
+    --btn-font-style: normal;
+
+    --link-color-override: #52c2ff;
 }
 
-/* =========================================================================
-    💽 MONOCHROME RETRO AMBER CRT TERMINAL THEME 🟠🖥️
-   ========================================================================= */
-    
 [data-theme="amber-crt"] {
+    /* 💽 RETRO AMBER CRT TERMINAL THEME 🟠🖥️ */
     --surface-bg: #110b00;                              /* Deep pitch dark charcoal amber canvas */
     --container-bg: #050300;                            /* Pure obsidian black terminal floor backdrop */
     --wallpaper: #050300;
-    --text-primary: #ffb000;                            /* Glowing vintage high-vis phosphorus amberink text */
-    --text-muted: #aa7500;                              /* Muted copper phosphor amber subtitles notes */
-    --text-on-card: #050300;
-    --brand-accent: #ffb000;        
-    --brand-accent-border: #ffb000; 
     --border-color: #ffb000;                            /* Everything is framed in uniform amber glowing circuits! */
     --input-bg: #110b00;
+    --font-override: monospace;                           /* Enforces perfect retro matrix font tracking lines! */
+
+    --text-primary: #ffb000;                            /* Glowing vintage high-vis phosphorus amber ink text */
+    --text-secondary: #ffb000;
+    --text-muted: #aa7500;                              /* Muted copper phosphor amber subtitles notes */
     
     /* 📊 Amber-CRT ACCESSIBILITY BADGE MATRICES */
     --badge-high-bg: #ffb000;       --badge-high-text: #050300;     --badge-high-border: #ffb000;
@@ -185,91 +266,137 @@
     --badge-done-bg: #ffb000;       --badge-done-text: #050300;     --badge-done-border: #aa7500;
 
     /* 🎨 PROGRESS AND FILTER TRACKS */
-    --progress-bar-fill: #ffb000;                       /* Everything glows phosphorus */
+    --progress-bar-fill: #ffb000;
+
+    --filter-border-color: #ffb000;
     --filter-focus-color: #ffb000;
     --filter-focus-shadow: rgba(255, 176, 0, 0.2);
-    --filter-border-color: #ffb000;
 
     --focus-halo-color: #ffb000;
     --focus-halo-shadow: rgba(255, 176, 0, 0.3);
+
+    /* SEMANTIC BUTTON FOUR-TIER STRUCTURAL INVENTORY */
+    --btn-submit-bg: #110b00;         --btn-submit-text: #ffb000;         --btn-submit-border: #ffb000;
+    --btn-submit-hover-bg: #ffb000;   --btn-submit-hover-text: #050300;   --btn-submit-hover-border: #ffb000;
+
+    --btn-cancel-bg: #110b00;         --btn-cancel-text: #aa7500;         --btn-cancel-border: #aa7500;
+    --btn-cancel-hover-bg: #aa7500;   --btn-cancel-hover-text: #050300;   --btn-cancel-hover-border: #ffb000;
+
+    --btn-filter-bg: #110b00;         --btn-filter-text: #ffb000;         --btn-filter-border: #ffb000;
+    --btn-filter-hover-bg: #ffb000;   --btn-filter-hover-text: #050300;   --btn-filter-hover-border: #ffb000;
+
+    --btn-delete-bg: #110b00;         --btn-delete-text: #ffb000;         --btn-delete-border: #ffb000;
+    --btn-delete-hover-bg: #ffb000;   --btn-delete-hover-text: #050300;   --btn-delete-hover-border: #ffb000;
+
+    /* THEMATIC TYPE MODIFIERS */
+    --btn-text-transform: none;
+    --btn-font-style: normal;
+
+    --link-color-override: #ffb000;
 }
 
-/* =========================================================================
-    📟 GREEN MATRIX TERMINAL MONITOR ENVIRONMENT 🟢📟
-   ========================================================================= */
 [data-theme="matrix-crt"] {
+    /* 📟 MATRIX GREEN CRT TERMINAL MONITOR ENVIRONMENT 🟢📟 */
     --surface-bg: #001100;                              /* Deep pitch dark charcoal matrix green base canvas */
     --container-bg: #000500;                            /* Pure monochrome green digital fall matrix floor */
     --wallpaper: #000500;
-    --text-primary: #33ff33;                            /* Glowing vintage high-vis green ink text */
-    --text-muted: #00aa00;
-    --text-on-card: #000500;
-    --brand-accent: #33ff33;        
-    --brand-accent-border: #33ff33; 
     --border-color: #33ff33;                            /* Everything is framed in uniform green glowing circuits! */
     --input-bg: #001100;
+    --font-override: monospace;                           /* Enforces vintage layout terminal line mappings */
+
+    --text-primary: #33ff33;                            /* Glowing vintage high-vis green ink text */
+    --text-secondary: #33ff33;                          /* High contrast green tracking text inside cards */
+    --text-muted: #00aa00;
     
-    /* 📊 Amber-CRT ACCESSIBILITY BADGE MATRICES */
+    /* 📊 GREEN-CRT ACCESSIBILITY BADGE MATRICES */
     --badge-high-bg: #33ff33;       --badge-high-text: #000500;     --badge-high-border: #33ff33;
     --badge-medium-bg: #001100;     --badge-medium-text: #33ff33;   --badge-medium-border: #33ff33;
     --badge-low-bg: #001100;        --badge-low-text: #33ff33;      --badge-low-border: #00aa00;
     --badge-done-bg: #33ff33;       --badge-done-text: #000500;     --badge-done-border: #00aa00;
 
     /* 🎨 PROGRESS AND FILTER TRACKS */
-    --progress-bar-fill: #33ff33;                       /* Everything glows phosphorus */
+    --progress-bar-fill: #33ff33;
+
+    --filter-border-color: #33ff33;
     --filter-focus-color: #33ff33;
     --filter-focus-shadow: rgba(51, 255, 51, 0.2);
-    --filter-border-color: #33ff33;
 
     --focus-halo-color: #33ff33;
     --focus-halo-shadow: rgba(51, 255, 51, 0.3);
+
+    /* SEMANTIC BUTTON FOUR-TIER STRUCTURAL INVENTORY */
+    --btn-submit-bg: #001100;         --btn-submit-text: #33ff33;         --btn-submit-border: #33ff33;
+    --btn-submit-hover-bg: #33ff33;   --btn-submit-hover-text: #000500;   --btn-submit-hover-border: #33ff33;
+
+    --btn-cancel-bg: #001100;         --btn-cancel-text: #00aa00;         --btn-cancel-border: #00aa00;
+    --btn-cancel-hover-bg: #00aa00;   --btn-cancel-hover-text: #000500;   --btn-cancel-hover-border: #33ff33;
+
+    --btn-filter-bg: #001100;         --btn-filter-text: #33ff33;         --btn-filter-border: #33ff33;
+    --btn-filter-hover-bg: #33ff33;   --btn-filter-hover-text: #000500;   --btn-filter-hover-border: #33ff33;
+
+    --btn-delete-bg: #001100;         --btn-delete-text: #33ff33;         --btn-delete-border: #33ff33;
+    --btn-delete-hover-bg: #33ff33;   --btn-delete-hover-text: #000500;   --btn-delete-hover-border: #33ff33;
+
+    /* THEMATIC TYPE MODIFIERS */
+    --btn-text-transform: none;
+    --btn-font-style: normal;
+
+    --link-color-override: #33ff33;
 }
 
-/* =========================================================================
-   🔮 BLUE ARCHIVE SCHALE WORKSPACE ENVIRONMENT (BRIGHT CYBER MINIMALIST)
-   ========================================================================= */
 [data-theme="BA"] {
+    /* 🔮 BLUE ARCHIVE SCHALE WORKSPACE ENVIRONMENT (BRIGHT CYBER MINIMALIST) */
     --surface-bg: rgba(255, 255, 255, 0.9);         /* Pristine semi-translucent Schale terminal white sheets */
     --container-bg: #e1f0ff;
-    
     /* THE LUNA SKY GRADIENT: Simulates a gorgeous pre-rendered morning aurora skyline artwork! */
     --wallpaper: radial-gradient(circle at top right, #fff0f5 0%, #e1f5fe 40%, #bbdefb 100%);
+    --border-color: #bbdefb;
+    --input-bg: #ffffff;
+    --font-override: sans-serif;
     
     --text-primary: #1a365d;                        /* Deep Schale Federal Navy blue text */
+    --text-secondary: #2d3748;                      /* Highly legible charcoal layout secondary text color */
     --text-muted: #4a90e2;                          /* Bright clean sky blue subtitles strings */
-    --text-on-card: #2d3748;                        /* Highly legible charcoal layout body text font */
-    --brand-accent: #ffcc00;                        /*  */
-    --brand-accent-border: #d4a000;                 /* Clean dark gold border anchor */
-    --border-color: #bbdefb;
-    --input-bg: #ffffff;                        /* temp! */
     
-    /* 📊 Accessibility badge maps colored to match standard item tier colors */
+    /* 📊 ACCESSIBILITY BADGES */
     --badge-high-bg: #fff0f3;       --badge-high-text: #e53e3e;     --badge-high-border: #ffa7b6;
     --badge-medium-bg: #fffdf0;     --badge-medium-text: #b7791f;   --badge-medium-border: #f6e05e;
     --badge-low-bg: #e1f5fe;        --badge-low-text: #3182ce;      --badge-low-border: #90cdf4;
     --badge-done-bg: #e6fffa;       --badge-done-text: #234e52;     --badge-done-border: #4fd1c5;
 
     /* 🎨 PROGRESS AND FILTER TRACKS */
-    --progress-bar-fill: linear-gradient(90deg, #4a90e2, #ff69b4);  /* Gorgeous pink/blue custom mixed tracker fill line! */
-    --filter-focus-color: #ff69b4;                   /* Iconic soft neon pink border highlights! */
+    /* Gorgeous pink/blue custom mixed tracker fill line! */
+    --progress-bar-fill: linear-gradient(90deg, #4a90e2, #ff69b4);
+
+    --filter-border-color: #ff69b4;                 /* Iconic soft neon pink border highlights! */
+    --filter-focus-color: #ff69b4;
     --filter-focus-shadow: rgba(255, 105, 180, 0.25);
-    --filter-border-color: #ff69b4;
 
     --focus-halo-color: #4a90e2;
     --focus-halo-shadow: rgba(74, 144, 226, 0.15);
 
+    /* SCHALE MASTER BUTTON COLOR REDIRECTIONS */
+    --btn-submit-bg: #ffcc00;         --btn-submit-text: #1a365d;         --btn-submit-border: #d4a000;
+    --btn-submit-hover-bg: #64b5f6;   --btn-submit-hover-text: #ffffff;   --btn-submit-hover-border: #ffffff;
+
+    --btn-cancel-bg: #ffffff;         --btn-cancel-text: #4a90e2;         --btn-cancel-border: #bbdefb;
+    --btn-cancel-hover-bg: #64b5f6;   --btn-cancel-hover-text: #ffffff;   --btn-cancel-hover-border: #ffffff;
+
+    --btn-filter-bg: #ffffff;         --btn-filter-text: #ff69b4;         --btn-filter-border: #ff69b4;
+    --btn-filter-hover-bg: #ff69b4;   --btn-filter-hover-text: #ffffff;   --btn-filter-hover-border: #ffffff;
+
+    --btn-delete-bg: #ffffff;         --btn-delete-text: #e53e3e;         --btn-delete-border: #ffa7b6;
+    --btn-delete-hover-bg: #e53e3e;   --btn-delete-hover-text: #ffffff;   --btn-delete-hover-border: #e53e3e;
+
     /* THEMATIC SCHALE TYPE MODIFIERS */
     --btn-text-transform: uppercase;
     --btn-font-style: italic;
-    --link-color-override: #ff69b4;
 
-    /* Button Hover variables */
-    --button-hover-bg: #64b5f6;
-    --button-hover-text: #ffffff;
+    --link-color-override: #ff69b4;
 }
 
 /* =========================================================================
-   UNIVERSAL LAYOUT BACKGROUND
+   UNIVERSAL CANVAS BACKGROUNDS (VIEWPORT FULL-HEIGHT COVER ENGINE)
    ========================================================================= */
 body,
 html,
@@ -283,36 +410,58 @@ html,
     background-size: cover !important;
     color: var(--text-primary) !important;
     min-height: 100vh;
-    transition: background 0.25s ease-in-out, color 0.25s ease-in-out;
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
+    font-family: var(--font-override, sans-serif) !important;
+    transition: background 0.25s ease-in-out, color 0.25s ease-in-out;
 }
 
 /* =========================================================================
-   GLOBAL TESTBOX THEME ACCESSIBILITY 
+   GLOBAL INTERACTIVE FORM TEXTBOXES (THEME ADAPTIVE MATRIX CONTOURS)
    ========================================================================= */
 input[type="text"],
 input[type="date"],
 input[type="email"],
 input[type="password"],
-select, textarea {
-    background-color: var(--input-bg) !important;
-    color: var(--text-primary) !important;
+select, 
+textarea {
+    width: 100%;
+    height: 38px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+    outline: none;
+    background-color: var(--input-bg, #ffffff) !important;
+    color: var(--text-secondary) !important;
     border: 2px solid var(--border-color, #cbd5e1) !important;
-    font-family: sans-serif;
-    transition: border-color 0.15s ease-in-out, border-shadow 0.15s ease-in-out;
+    font-family: var(--font-override, sans-serif) !important;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
+/* Master responsive focus halos across all custom inputs and select menus */
 input[type="text"]:focus,
 input[type="date"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus,
 .board-interactive-field:focus,
-select:focus, textarea:focus {
+select:focus, 
+textarea:focus {
     border: 2px solid var(--focus-halo-color) !important;
-    box-shadow: 0 0 0 3px var(--focus-halo-shadow);
+    box-shadow: 0 0 0 3px var(--focus-halo-shadow) !important;
     outline: none;
+}
+
+/* Native OS element date indicators overrides */
+input[type="date"] {
+    color-scheme: light dark;
+}
+
+[data-theme="dark"] input[type="date"]::-webkit-calendar-picker-indicator,
+[data-theme="amber-crt"] input[type="date"]::-webkit-calendar-picker-indicator,
+[data-theme="matrix-crt"] input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
 }
 
 #rememberMeBox {
@@ -323,10 +472,14 @@ select:focus, textarea:focus {
 /* =========================================================================
    GLOBAL BUTTON STYLES
    ========================================================================= */
-.action-btn,
 .submit-btn,
+.create-btn,
+.action-btn,
 .cancel-btn,
-.back-btn {
+.back-btn,
+.profile-btn,
+.send-invite-btn,
+.view-tasks-btn {
     height: 38px;
     padding: 0 16px;
     font-size: 13px;
@@ -339,54 +492,83 @@ select:focus, textarea:focus {
     justify-content: center;
     gap: 6px;
     white-space: nowrap;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     outline: none;
     text-transform: var(--btn-text-transform) !important;
     font-style: var(--btn-font-style) !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-button:disabled {
-    background-color: #cbd5e1 !important;
-    border-color: #797f86 !important;
-    color: #4a5568 !important;
-    cursor: not-allowed !important;
-    opacity: 0.6 !important;
-    transform: none !important;
-    box-shadow: none !important;
-}
-
+/* --- FUNCTIONAL BUTTON CATEGORY 1: FORWARD SUBMIT ACTIONS --- */
 .submit-btn,
+.create-btn,
 .action-btn.next {
-    background-color: var(--surface-bg, #ffffff);
-    color: var(--text-primary);
-    border: 2px solid var(--brand-accent-border, #3182ce);
+    background-color: var(--btn-submit-bg) !important;
+    color: var(--btn-submit-text) !important;
+    border: 2px solid var(--btn-submit-border) !important;
 }
-
 .submit-btn:hover,
+.create-btn:hover,
 .action-btn.next:hover {
-    background-color: var(--button-hover-bg, #3182ce);
-    color: var(--button-hover-text, #ffffff);;
-    border-color: var(--button-hover-border, #2b6cb0);
+    background-color: var(--btn-submit-hover-bg) !important;
+    color: var(--btn-submit-hover-text) !important;
+    border-color: var(--btn-submit-hover-border) !important;
 }
 
+/* --- FUNCTIONAL BUTTON CATEGORY 2: SECONDARY REVERSALS & CANCEL LINKS --- */
 .cancel-btn,
 .back-btn,
-.action-btn.back {
-    background-color: var(--surface-bg, #ffffff);
-    color: var(--text-primary);
-    border: 2px solid var(--border-color, #cbd5e1);
+.action-btn.back,
+.profile-btn {
+    background-color: var(--btn-cancel-bg) !important;
+    color: var(--btn-cancel-text) !important;
+    border: 2px solid var(--btn-cancel-border) !important;
 }
-
 .cancel-btn:hover,
 .back-btn:hover,
-.action-btn.back:hover {
-    background-color: var(--text-muted);
-    color: var(--text-on-card, #ffffff);
-    border-color: var(--text-muted);
+.action-btn.back:hover,
+.profile-btn:hover {
+    background-color: var(--btn-cancel-hover-bg) !important;
+    color: var(--btn-cancel-hover-text) !important;
+    border-color: var(--btn-cancel-hover-border) !important;
 }
 
+/* --- FUNCTIONAL BUTTON CATEGORY 3: FILTER CONTROLS & SIDEBAR INVITATIONS --- */
+.send-invite-btn,
+.view-tasks-btn {
+    background-color: var(--btn-filter-bg) !important;
+    color: var(--btn-filter-text) !important;
+    border: 2px solid var(--btn-filter-border) !important;
+}
+.send-invite-btn:hover,
+.view-tasks-btn:hover {
+    background-color: var(--btn-filter-hover-bg) !important;
+    color: var(--btn-filter-hover-text) !important;
+    border-color: var(--btn-filter-hover-border) !important;
+}
+
+/* --- FUNCTIONAL BUTTON CATEGORY 4: DESTRUCTIVE OR SERIOUS DISMISSAL TIERS --- */
+.delete-proj-btn,
+.delete-card-btn,
+.danger-zone-btn,
+.action-btn.reject-review,
+.action-btn.resign-project-btn {
+    background-color: var(--btn-delete-bg) !important;
+    color: var(--btn-delete-text) !important;
+    border: 2px solid var(--btn-delete-border) !important;
+}
+.delete-proj-btn:hover,
+.delete-card-btn:hover,
+.danger-zone-btn:hover,
+.action-btn.reject-review:hover,
+.action-btn.resign-project-btn:hover {
+    background-color: var(--btn-delete-hover-bg) !important;
+    color: var(--btn-delete-hover-text) !important;
+    border-color: var(--btn-delete-hover-border) !important;
+}
+
+/* MASTER DISABLING GATES SHIELD */
 button:disabled {
-    background-color: var(--container-bg, #cbd5e1) !important;
+    background-color: var(--border-color, #cbd5e1) !important;
     border-color: var(--border-color, #797f86) !important;
     color: var(--text-muted) !important;
     cursor: not-allowed !important;
@@ -396,7 +578,7 @@ button:disabled {
 }
 
 /* =========================================================================
-   GLOBAL SELECT DROPDOWN REFACTORING (SPRING CLEANING RUN)
+   CENTRALIZED SELECT DROPDOWNS ENGINE REFACTORING
    ========================================================================= */
 select,
 .invite-dropdown-select,
@@ -406,18 +588,19 @@ select,
     width: 100%;
     height: 38px;
     padding: 8px 30px 8px 12px !important;
-    border: 2px solid var(--border-color, #cbd5e1);
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 13px;
-    background-color: var(--surface-bg, #ffffff);
-    color: var(--text-primary);
     outline: none;
     cursor: pointer;
+    background-color: var(--input-bg, #ffffff) !important;
+    color: var(--text-secondary) !important;
+    border: 2px solid var(--border-color, #cbd5e1) !important;
+    font-family: var(--font-override, sans-serif) !important;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-/* .board-interactive-field:focus  */
+/* Master focus highlight loop for selection inputs across all pages */
 select:focus,
 .invite-dropdown-select:focus,
 .modal-dropdown-select:focus,
@@ -431,15 +614,6 @@ select:focus,
 .control-input-wrapper select { padding-left: 30px !important; }
 
 /* =========================================================================
-   NATIVE CALENDAR PICKER ACCESSIBILITY MODIFIER
-   ========================================================================= */
-[data-theme="dark"] input[type="date"]::-webkit-calendar-picker-indicator,
-[data-theme="amber-crt"] input[type="date"]::-webkit-calendar-picker-indicator {
-    filter: invert(1); /* Inverts the native black icon to match our themes! */
-    cursor: pointer;
-}
-
-/* =========================================================================
    UNIVERSAL AUTHENTICATION GATE STYLES (LOGIN & SIGNUP CONSOLES)
    ========================================================================= */
 .login-wrapper,
@@ -449,7 +623,7 @@ select:focus,
     align-items: center;
     justify-content: center;
     background: var(--wallpaper) !important;
-    font-family: sans-serif;
+    font-family: var(--font-override, sans-serif) !important;
 }
 
 .login-container,
@@ -458,7 +632,7 @@ select:focus,
     max-width: 400px;
     padding: 35px;
     background-color: var(--surface-bg, #ffffff);
-    color: var(--text-on-card);
+    color: var(--text-secondary);
     border: 2px solid var(--border-color, #cbd5e1);
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
@@ -504,12 +678,13 @@ select:focus,
     font-weight: bold;
     text-decoration: none;
 }
-
 .create-new-account-link:hover,
-.login-link:hover { text-decoration: underline; }
+.login-link:hover { 
+    text-decoration: underline; 
+}
 
 /* ================================================================================
-   Set the header colors only for our windows themes without altering the others!
+   CONTEXTUAL SCREEN OVERRIDES
    ================================================================================ */
 [data-theme="95/98"] .profile-header h2,
 [data-theme="95/98"] .board-header h2,
