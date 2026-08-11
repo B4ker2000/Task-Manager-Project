@@ -303,19 +303,6 @@
 .invite-input-container { flex: 2; }
 .invite-select-container { flex: 1; }
 
-.invite-text-field { 
-    width: 100%;
-    height: 38px;
-    padding: 8px 12px; 
-    border: 2px solid var(--border-color, #cbd5e1); 
-    border-radius: 4px; 
-    box-sizing: border-box; 
-    font-size: 13px; 
-    background-color: var(--surface-bg); 
-    color: var(--text-primary);
-    outline: none; 
-}
-
 /* 3/5 & 2/5 Layout Split Rows */
 .management-split-row {
     display: flex;
@@ -379,7 +366,7 @@
 
 .member-display-email {
     font-size: 14px;
-    color: var(--text-primary);
+    color: var(--text-secondary);
 }
 
 .role-display-badge {
@@ -452,11 +439,13 @@
     transition: opacity 0.2s ease, background-color 0.2s ease, color 0.2s ease;
 }
 
-.category-badge-pill:hover .category-badge-pill-delete-btn { opacity: 1; }
+.category-badge-pill:hover .category-badge-pill-delete-btn { 
+    opacity: 1; 
+}
 
 .category-badge-pill-delete-btn:hover {
     background-color: #ffffff !important;   /* Stark white circle bubble background */
-    color: #1a202c !important;                /* Solid charcoal black icon text tint */
+    color: #1a202c !important;              /* Solid charcoal black icon text tint */
     transform: scale(1.1);                    /* Clean tactile interactive scaling pop */
 }
 
@@ -471,7 +460,7 @@
 .right-tags-column {
     flex: 2;
     min-width: 220px;
-    border-left: 2px dashed var(--text-muted);
+    border-left: 2px dashed var(--border-color);
     padding-left: 25px;
 }
 
