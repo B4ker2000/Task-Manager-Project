@@ -556,29 +556,6 @@
     width: 100%;
 }
 
-.modal-input-field,
-.modal-dropdown-select,
-input[type="date"].modal-input-field {
-    width: 100%;
-    height: 38px;
-    padding: 8px 12px;
-    border: 2px solid var(--border-color, #cbd5e1) !important;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 14px;
-    background-color: var(--surface-bg, #ffffff);
-    color: var(--text-primary);
-    font-family: sans-serif;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-.modal-input-field:focus,
-.modal-dropdown-select:focus {
-    border: 2px solid var(--focus-halo-color, #3182ce) !important;
-    box-shadow: 0 0 0 3px var(--focus-halo-shadow, rgba(49, 130, 206, 0.15));
-    outline: none;
-}
-
 /* =========================================================================
    MODAL WINDOW FIELD METRICS ADJUSTMENTS
    ========================================================================= */
@@ -589,76 +566,18 @@ input[type="date"].modal-input-field {
     width: 100%;
     height: 38px;
     padding: 8px 12px;
-    border: 2px solid var(--border-color, #cbd5e1);
-    border-radius: 4px;
     box-sizing: border-box;
-    background-color: var(--surface-bg, #ffffff);
-    color: var(--text-on-card);
+    background-color: var(--input-bg, #ffffff) !important;
+    color: var(--text-secondary) !important;
     font-family: sans-serif;
 }
 
 /* =========================================================================
-   ROSTER DELETION BUTTON CONTRAST ADAPTABILITY
+   FLUID RESPONSIVE MEDIA BREAKPOINTS (STRUCTURAL GRID MANAGEMENT)
    ========================================================================= */
-.roster-item-row .delete-card-btn {
-    color: var(--text-primary) !important;
-    opacity: 0.5;
+.mobile-board-lane-switcher { 
+    display: none; 
 }
-
-.roster-item-row .delete-card-btn:hover {
-    background-color: #fee2e2 !important;
-    color: #ef4444 !important;
-    opacity: 1;
-}
-
-/* =========================================================================
-   ANGULAR CDK DRAG-AND-DROP PRESET CUSTOM INTERACTION HOOKS
-   ========================================================================= */
-/* Expands the landing zone to fill the entire column height even when there are 0 tasks present! */
-.tasks-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    min-height: 450px;
-    height: 100%;
-}
-
-/* Styles the ghost placeholder card left behind in the original lane while the actual card is being actively dragged around */
-.cdk-drag-placeholder {
-    opacity: 0.25;
-    background: transparent !important;
-    border: 2px dashed var(--text-muted) !important;
-    box-shadow: none !important;
-    border-radius: 6px;
-    min-height: 120px;
-    width: 100%;
-}
-
-
-/* Styles the actual floating card attached to your mouse cursor while dragging */
-.cdk-drag-preview {
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
-    border: 2px solid var(--focus-halo-color) !important;
-    border-radius: 6px;
-    box-sizing: border-box;
-    cursor: grabbing !important;
-}
-
-.cdk-drag-preview *,
-body.cdk-programmatic-drag-override,
-body.cdk-drag-dragging { cursor: grabbing !important; }
-
-/* Adds smooth CSS physics transitions when a card automatically snaps into place upon drop */
-.cdk-drop-list-receiving .task-card,
-.cdk-drop-list-dragging .task-card { transition: transform 0.2s cubic-bezier(0, 0, 0.2, 1); }
-
-/* Animates the list elements rearranging themselves fluidly while we hover over a column slot */
-.cdk-drag-animating { transition: transform 0.25s cubic-bezier(0, 0, 0.2, 1); }
-
-/* =========================================================================
-   RESPONSIVE CANVAS COMPACT MONITOR INTERCEPTORS (MEDIA QUERIES)
-   ========================================================================= */
-.mobile-board-lane-switcher { display: none; }
 
 @media(max-width: 1024px) {
     .board-columns-grid { gap: 15px; }

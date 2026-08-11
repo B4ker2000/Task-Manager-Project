@@ -553,3 +553,54 @@
     margin-top: 20px;
     width: 100%;
 }
+
+/* =========================================================================
+   MODAL WINDOW FIELD METRICS ADJUSTMENTS
+   ========================================================================= */
+.modal-card input[type="text"],
+.modal-card input[type="date"],
+.modal-card select,
+.modal-card textarea {
+    width: 100%;
+    height: 38px;
+    padding: 8px 12px;
+    box-sizing: border-box;
+    background-color: var(--input-bg, #ffffff) !important;
+    color: var(--text-secondary) !important; /* FIXED: Prevents font masking on custom canvases */
+    font-family: sans-serif;
+}
+
+/* =========================================================================
+   FLUID RESPONSIVE MEDIA BREAKPOINTS (STRUCTURAL GRID MANAGEMENT)
+   ========================================================================= */
+.mobile-board-lane-switcher { 
+    display: none; 
+}
+
+@media(max-width: 1024px) {
+    .board-columns-grid { 
+        gap: 15px; 
+    }
+    .board-column { 
+        min-width: 250px; 
+    }
+}
+
+/* Medium Monitors & Mobile Viewports Centering Overrides */
+@media(max-width: 800px) {
+    .board-header {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center;
+        gap: 15px;
+        border-bottom: 2px solid var(--text-muted);
+    }
+
+    .board-header-action-triggers {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        width: 100%;
+    }
+}
