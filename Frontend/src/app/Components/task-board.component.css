@@ -60,7 +60,7 @@
 }
 
 /* =========================================================================
-   INDIVIDUAL WORKSPACE KANBAN TASK CARDS
+   INDIVIDUAL WORKSPACE KANBAN TASK CARDS (THEME ADAPTIVE HOOKS)
    ========================================================================= */
 .task-card { 
     background-color: var(--surface-bg, #ffffff); 
@@ -83,7 +83,7 @@
 
 .task-card h4 { 
     margin: 0; 
-    color: var(--text-primary); 
+    color: var(--text-secondary); 
     flex: 1; 
     text-align: left; 
 }
