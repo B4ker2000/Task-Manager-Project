@@ -133,7 +133,9 @@
     line-height: 1; 
 }
 
-.task-card:hover .delete-card-btn { opacity: 1; }
+.task-card:hover .delete-card-btn { 
+    opacity: 1; 
+}
 
 .delete-card-btn:hover {
     background-color: #fee2e2;
@@ -151,7 +153,7 @@
 
 .assignment-label {
     font-size: 12px;
-    color: var(--text-on-card);
+    color: var(--text-secondary);
     font-weight: 600;
     display: block;
     margin-bottom: 4px;
@@ -159,7 +161,7 @@
 }
 
 /* =========================================================================
-   ACCESSIBILITY PRIORITY BADGES
+   ACCESSIBILITY PRIORITY BADGES (MINIMAL STRUCTURAL FOOTPRINT)
    ========================================================================= */
 .priority-badge { 
     display: inline-flex;
@@ -172,30 +174,6 @@
     letter-spacing: 0.5px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.02);
     margin-right: 5px;
-}
-
-.priority-badge.high { 
-    background-color: var(--badge-high-bg); 
-    color: var(--badge-high-text);
-    border: 1px solid var(--badge-high-border); 
-}
-
-.priority-badge.medium { 
-    background-color: var(--badge-medium-bg); 
-    color: var(--badge-medium-text); 
-    border: 1px solid var(--badge-medium-border);
-}
-
-.priority-badge.low { 
-    background-color: var(--badge-low-bg); 
-    color: var(--badge-low-text);
-    border: 1px solid var(--badge-low-border);
-}
-
-.priority-badge.done { 
-    background-color: var(--badge-done-bg); 
-    color: var(--badge-done-text);
-    border: 1px solid var(--badge-done-border);
 }
 
 .deadline-badge { 
@@ -261,14 +239,6 @@
     border: 2px solid var(--filter-border-color, #cbd5e1) !important;
 }
 
-.board-interactive-field.search:focus,
-.board-interactive-field.priority:focus,
-.board-interactive-field.category:focus {
-    border: 2px solid var(--filter-focus-color, #28a745) !important;
-    box-shadow: 0 0 0 3px var(--filter-focus-shadow) !important;
-    outline: none;
-}
-
 /* =========================================================================
    LIVE ANALYTICS TRACKER BAR
    ========================================================================= */
@@ -316,7 +286,7 @@
 .invite-header-title { 
     font-size: 14px; 
     font-weight: bold; 
-    color: var(--text-primary); 
+    color: var(--text-secondary); 
     display: flex; 
     align-items: center; 
     gap: 8px; 
