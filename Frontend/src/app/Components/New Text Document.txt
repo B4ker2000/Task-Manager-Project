@@ -495,98 +495,15 @@
 }
 
 /* =========================================================================
-   DIALOG POPUP MODAL COMPONENT FORM PANELS (STRUCTURAL BOUNDARIES)
+   FLUID CROSS-RESOLUTION DEVICE SCALING ENGINE (MOBILE MATRIX CONTROLS)
    ========================================================================= */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    box-sizing: border-box;
-}
-
-.modal-card {
-    background-color: var(--surface-bg, #ffffff);
-    color: var(--text-secondary); /* FIXED: Linked to secondary for high-contrast cross-theme visibility */
-    padding: 25px;
-    border: 2px solid var(--border-color);
-    border-radius: 8px;
-    width: 100%;
-    max-width: 400px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    box-sizing: border-box;
-    backdrop-filter: blur(12px) saturate(120%);
-    -webkit-backdrop-filter: blur(12px) saturate(120%);
-}
-
-.modal-card h3 {
-    margin-top: 0;
-    margin-bottom: 20px;
-    color: var(--text-secondary); /* FIXED: Swapped to text-secondary for uniform visibility */
-    text-align: left;
-}
-
-.form-group-row {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin-bottom: 15px;
-    text-align: left;
-}
-
-.form-group-row label {
-    font-weight: bold;
-    font-size: 13px;
-    color: var(--text-muted);
-}
-
-.modal-btn-actions-row {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 20px;
-    width: 100%;
-}
-
-/* =========================================================================
-   MODAL WINDOW FIELD METRICS ADJUSTMENTS
-   ========================================================================= */
-.modal-card input[type="text"],
-.modal-card input[type="date"],
-.modal-card select,
-.modal-card textarea {
-    width: 100%;
-    height: 38px;
-    padding: 8px 12px;
-    box-sizing: border-box;
-    background-color: var(--input-bg, #ffffff) !important;
-    color: var(--text-secondary) !important; /* FIXED: Prevents font masking on custom canvases */
-    font-family: sans-serif;
-}
-
-/* =========================================================================
-   FLUID RESPONSIVE MEDIA BREAKPOINTS (STRUCTURAL GRID MANAGEMENT)
-   ========================================================================= */
-.mobile-board-lane-switcher { 
-    display: none; 
-}
+.mobile-board-lane-switcher { display: none; }
 
 @media(max-width: 1024px) {
-    .board-columns-grid { 
-        gap: 15px; 
-    }
-    .board-column { 
-        min-width: 250px; 
-    }
+    .board-columns-grid { gap: 15px; }
+    .board-column { min-width: 250px; }
 }
 
-/* Medium Monitors & Mobile Viewports Centering Overrides */
 @media(max-width: 800px) {
     .board-header {
         flex-direction: column !important;
@@ -603,4 +520,106 @@
         justify-content: center;
         width: 100%;
     }
+
+    .mobile-board-lane-switcher {
+        border: 2px solid var(--border-color);
+        display: flex;
+        width: 100%;
+        background-color: var(--container-bg);
+        padding: 4px;
+        border-radius: 6px;
+        margin-bottom: 10px;
+        gap: 4px;
+    }
+
+    .lane-tab-trigger {
+        flex: 1;
+        background: transparent;
+        border: none;
+        padding: 8px 4px;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--text-muted);
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background-color 0.2s, color 0.2s;
+    }
+
+    .lane-tab-trigger.active {
+        background-color: var(--surface-bg);
+        border: 2px solid var(--btn-submit-border); /* FIXED: Linked to your theme-adaptive border properties */
+        color: var(--btn-submit-text);              /* FIXED: Reads directly from your dynamic primary action text */
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .board-columns-grid { flex-direction: column !important; }
+    .board-column.mobile-hidden { display: none !important; }
+    .board-column { width: 100% !important; }
+}
+
+/* Narrow Tablets & Large Phones Layout Spacings */
+@media(max-width: 768px) {
+    .right-tags-column {
+        border-left: none;
+        border-top: 2px dashed var(--border-color);
+        padding-left: 0;
+        padding-top: 20px;
+        width: 100%;
+    }
+
+    .search-filter-group {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 12px;
+        width: 100%;
+    }
+
+    .management-split-row {
+        flex-direction: column;
+        gap: 25px;
+    }
+}
+
+/* Vertical Display Monitor & Standard Smartphone Profiles */
+@media(max-width: 600px) {
+    .task-card-header {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        position: relative;
+    }
+
+    /* Anchors the delete button neatly to the top-right corner to save title layout space */
+    .task-card-header .delete-card-btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 2px;
+    }
+
+    .task-card h4 {
+        padding-right: 25px; /* Ensures text never bleeds underneath the absolute trashcan position! */
+        font-size: 14px;
+    }
+    
+    .category-badge-pill {
+        font-size: 10px !important;
+        padding: 3px 6px !important;
+    }
+}
+
+@media(max-width: 480px) {
+    .search-filter-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .task-card-header {
+        flex-direction: column-reverse;
+        align-items: flex-end;
+    }
+
+    .board-interactive-field { height: 42px; }
+    .modal-btn-actions-row { flex-direction: column; }
 }
