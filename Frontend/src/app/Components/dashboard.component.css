@@ -41,7 +41,7 @@
 /* --- Left Side: Create New Project Paper Box --- */
 .form-section { 
     background-color: var(--surface-bg);
-    color: var(--text-on-card);
+    color: var(--text-secondary);
     padding: 25px; 
     border-radius: 8px; 
     border: 2px solid var(--border-color); 
@@ -73,28 +73,6 @@
     margin-bottom: 6px; 
     color: var(--text-muted); 
 }
-
-/*================================================================*/
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 10px 12px;
-    border: 2px solid var(--border-color);
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 14px;
-    background-color: var(--surface-bg, #ffffff);
-    font-family: sans-serif;
-    transition: border-color 0.15s ease, box-shadow 0.15s ease;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-    border: 2px solid var(--filter-focus-color) !important;
-    box-shadow: 0 0 0 3px var(--filter-focus-shadow);
-    outline: none;
-}
-/*================================================================*/
 
 textarea { 
     height: 100px; 

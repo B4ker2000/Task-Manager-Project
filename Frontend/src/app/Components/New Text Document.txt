@@ -1,241 +1,86 @@
 /* =========================================================================
-   LOCAL PROFILE CANVAS AREA (STRUCTURAL PADDINGS)
+   LOCAL PROJECT DASHBOARD GRID (STRUCTURAL LAYOUT CORE)
    ========================================================================= */
-.profile-wrapper { 
-    padding: 20px; 
-    max-width: 1000px; 
+.dashboard-wrapper { 
+    padding: 40px; 
+    max-width: 1200px; 
     margin: 0 auto; 
     box-sizing: border-box;
 }
 
-.profile-header { 
-    display: flex;
+.main-header { 
+    display: flex; 
     justify-content: space-between; 
     align-items: center; 
-    gap: 20px; 
-    border-bottom: 2px solid var(--text-muted);
-    padding-bottom: 10px; 
-    margin-bottom: 25px; 
+    border-bottom: 2px solid var(--text-muted); 
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.main-header h1 {
+    color: var(--text-primary); 
+    margin: 0; 
+    font-size: 28px;
+}
+
+.header-navigation-actions { 
+    display: flex; 
+    gap: 12px; 
+    align-items: center; 
 }
 
 /* =========================================================================
-   GRID PANELS AND CARD ALIGNMENTS
+   MAIN TWO-COLUMN DASHBOARD FLEX ROW TRACKS
    ========================================================================= */
-.profile-card-grid { 
+.dashboard-grid { 
     display: flex; 
-    gap: 25px; 
-    width: 100%;
-    align-items: start;
+    gap: 40px; 
+    align-items: flex-start;
 }
 
-.profile-layout-vertical-stack {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    flex: 1;
-}
-
-/* Local components retain dimensions and frosted glass blur properties */
-.details-card, 
-.stats-card, 
-.settings-card, 
-.accessibility-config-card { 
-    border: 2px solid var(--border-color);
-    border-radius: 8px; 
+/* --- Left Side: Create New Project Paper Box --- */
+.form-section { 
+    background-color: var(--surface-bg);
+    color: var(--text-secondary); /* FIXED: Linked to secondary to protect font legibility */
     padding: 25px; 
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02); 
-    text-align: center; 
+    border-radius: 8px; 
+    border: 2px solid var(--border-color); 
+    flex: 1;
+    min-width: 280px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
     box-sizing: border-box;
-    backdrop-filter: blur(12px) saturate(120%); 
+    backdrop-filter: blur(12px) saturate(120%);
     -webkit-backdrop-filter: blur(12px) saturate(120%);
 }
 
-.stats-card h4, 
-.settings-card h4, 
-.accessibility-config-card h4 { 
+.form-section h3,
+.list-section h3 { 
     margin-top: 0; 
     margin-bottom: 20px; 
-    color: var(--text-muted);
-    border-bottom: 2px solid var(--border-color);
-    padding-bottom: 8px; 
+    color: var(--text-primary);
     text-align: left; 
 }
 
-/* =========================================================================
-   IDENTITY PROFILE DECORATORS
-   ========================================================================= */
-.avatar-circle { 
-    font-size: 48px; 
-    background-color: var(--container-bg); 
-    width: 80px; 
-    height: 80px; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    border-radius: 50%; 
-    margin: 0 auto 15px auto; 
-    border: 2px solid var(--border-color); 
+.form-group { 
+    margin-bottom: 15px;
+    text-align: left;
 }
 
-.role-badge { 
-    display: inline-block; 
-    font-size: 12px; 
-    font-weight: bold; 
-    background-color: var(--badge-low-bg); 
-    color: var(--badge-low-text); 
-    padding: 4px 12px; 
-    border-radius: 12px; 
-    margin-bottom: 20px; 
-}
-
-.role-badge.admin { 
-    background-color: var(--badge-medium-bg); 
-    color: var(--badge-medium-text); 
-}
-
-.info-row { 
-    display: flex; 
-    justify-content: space-between; 
-    border-bottom: 1px dashed var(--border-color);
-    padding: 10px 0; 
-    font-size: 14px; 
-    color: var(--text-secondary);
-}
-
-.info-row span { 
-    color: var(--text-muted); 
-}
-
-/* =========================================================================
-   METRICS DISPLAY BLOCKS (SYSTEM ACTION DATA BOXES)
-   ========================================================================= */
-.metric-box { 
-    background-color: var(--container-bg, #f8f9fa); 
-    border: 2px solid var(--border-color, #e2e8f0); 
-    padding: 12px 15px; 
-    border-radius: 6px; 
-    margin-bottom: 12px; 
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between; 
-}
-
-.metric-num { 
-    font-size: 20px; 
-    font-weight: 800; 
-    color: var(--focus-halo-color, #3180ce); 
-}
-
-/* Tied straight into your custom progress bar green variables! */
-.metric-box.status-done .metric-num { 
-    color: var(--filter-focus-color, #38a169); 
-}
-
-.metric-label { 
-    font-size: 13px; 
-    color: var(--text-secondary);
-    font-weight: 500; 
-}
-
-.loading-state { 
-    text-align: center; 
-    color: var(--text-muted); 
-    font-style: italic; 
-    padding: 5px; 
-}
-
-/* =========================================================================
-   ACCOUNT INFO CONFIGURATION FORMS
-   ========================================================================= */
-.info-adjustment-form { 
-    margin-bottom: 25px; 
-}
-
-.info-adjustment-group { 
-    text-align: left; 
-    margin-bottom: 12px; 
-}
-
-.info-adjustment-label { 
-    font-weight: bold; 
-    font-size: 13px; 
-    color: var(--text-muted);
+.form-group label { 
     display: block; 
-    margin-bottom: 4px; 
+    font-weight: bold; 
+    font-size: 13px; 
+    margin-bottom: 6px; 
+    color: var(--text-muted); 
 }
 
-.password-input-wrapper { 
-    display: flex; 
-    align-items: center; 
-    position: relative; 
-    width: 100%; 
+textarea { 
+    height: 100px; 
+    resize: vertical; 
 }
 
-.password-input-wrapper input { 
-    padding-right: 40px; 
-}
-
-.eye-toggle-btn { 
-    position: absolute; 
-    right: 10px; 
-    background: none; 
-    border: none; 
-    cursor: pointer; 
-    font-size: 16px; 
-    padding: 0; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    opacity: 0.5; 
-    transition: opacity 0.2s; 
-}
-
-.eye-toggle-btn:hover { 
-    opacity: 1; 
-}
-
-.settings-card hr { 
-    border: 0; 
-    border-top: 2px solid var(--border-color, #e2e8f0); 
-    margin: 20px 0; 
-}
-
-/* =========================================================================
-   HIGH RISK DESTRUCTION ACTION REGION (DANGER ZONE)
-   ========================================================================= */
-.danger-zone { 
-    text-align: left; 
-}
-
-.danger-zone-header { 
-    color: var(--badge-high-text, #c62828); 
-    margin: 0 0 8px 0; 
-    font-size: 14px; 
-    font-weight: bold;
-}
-
-.danger-zone-warning { 
-    font-size: 12px; 
-    color: var(--text-muted); /* FIXED: Swapped to text-muted to ensure visibility on all backdrops */
-    margin: 0 0 12px 0; 
-    line-height: 1.4; 
-}
-
-/* =========================================================================
-   WORKSPACE CONFIGURATION PREFERENCES (THEMES STACKING)
-   ========================================================================= */
-.config-control-row {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    text-align: left; 
-    margin-bottom: 12px; 
-}
-
-/* =========================================================================
-   LOCAL BUTTON DIMENSION ACTIONS
-   ========================================================================= */
-.save-settings-btn { 
+/* Dedicated custom brand color configurations for project creation triggers */
+.create-btn { 
     width: 100%; 
     height: 42px; 
     background-color: var(--surface-bg, #ffffff);
@@ -247,61 +92,4 @@
     font-weight: bold; 
     cursor: pointer; 
     transition: all 0.2s ease;
-}
-
-.save-settings-btn:hover:not(:disabled) { 
-    background-color: var(--filter-focus-color);
-    color: var(--surface-bg, #ffffff); /* Smooth high contrast inversion */
-    border-color: var(--filter-border-color);
-}
-
-.save-settings-btn:disabled { 
-    color: var(--filter-focus-color) !important; 
-}
-
-/* Base dimensions stretch for local danger action buttons */
-.danger-zone-btn { 
-    width: 100%; 
-    height: 42px;
-}
-
-/* =========================================================================
-   THEME SELECT DROPDOWN WRAPPERS
-   ========================================================================= */
-.control-input-wrapper {
-    position: relative;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    margin-top: 5px;
-}
-
-/* =========================================================================
-   FLUID RESPONSIVE MEDIA BREAKPOINTS
-   ========================================================================= */
-@media(max-width: 768px) {
-    .profile-card-grid {
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .profile-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-        width: 100%;
-    }
-
-    .profile-header h2 {
-        width: 100%;
-        text-align: center;
-    }
-    
-    .profile-layout-vertical-stack { 
-        width: 100%;
-    }
-
-    .control-input-wrapper {
-        margin-top: 5px;
-    }
 }
