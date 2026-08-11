@@ -67,7 +67,6 @@
     border: 2px solid var(--border-color, #cbd5e1); 
     border-radius: 6px; 
     padding: 15px; 
-    margin: 15px 0;
     box-shadow: 0 2px 4px rgba(0,0,0,0.02);
     box-sizing: border-box;
     backdrop-filter: blur(12px) saturate(120%);
@@ -165,27 +164,29 @@
 /* =========================================================================
    ACCESSIBILITY PRIORITY BADGES (MINIMAL STRUCTURAL FOOTPRINT)
    ========================================================================= */
-.priority-badge { 
+.priority-badge {
     display: inline-flex;
     align-items: center;
-    font-size: 11px; 
-    font-weight: 700; 
+    font-size: 11px;
+    font-weight: 700;
     padding: 3px 10px;
-    border-radius: 12px; 
-    text-transform: uppercase; 
+    border-radius: 12px;
+    text-transform: uppercase;
     letter-spacing: 0.5px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.02);
-    margin-right: 5px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+    margin: 0 5px 5px 0;
 }
 
 .deadline-badge { 
-    font-size: 11px; 
+    display: inline-flex;
+    align-items: center;
+    font-size: 11px;
     background-color: var(--container-bg, #f1f5f9); 
     color: var(--text-muted); 
-    padding: 4px 8px; 
-    border-radius: 12px; 
-    font-weight: 500; 
     border: 2px solid var(--border-color, #cbd5e1);
+    font-weight: 700; 
+    padding: 3px 10px; 
+    border-radius: 12px; 
 }
 
 /* =========================================================================
@@ -341,8 +342,9 @@
     align-items: center;
     background-color: var(--container-bg, #f8f9fa);
     padding: 6px 10px;
+    border: 1px solid var(--border-color);
     border-radius: 6px;
-    border-left: 4px solid var(--brand-accent, #3182ce);
+    border-left: 4px solid var(--filter-focus-color);
 }
 
 .badge-owner {

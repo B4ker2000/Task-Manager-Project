@@ -553,7 +553,6 @@ input[type="date"] {
 .action-btn.resign-project-btn {
     background-color: var(--btn-delete-bg) !important;
     color: var(--btn-delete-text) !important;
-    border: 2px solid transparent !important;
     border-color: var(--btn-delete-border);
 }
 .delete-proj-btn:hover:not(:disabled),
@@ -691,4 +690,141 @@ select:focus,
 .create-new-account-link:hover,
 .login-link:hover { 
     text-decoration: underline; 
+}
+
+/* =========================================================================
+   GLOBAL ACCESSIBILITY PRIORITY BADGES (UNIFIED MATRIX)
+   ========================================================================= */
+.priority-badge.high {
+    background-color: var(--badge-high-bg) !important;
+    color: var(--badge-high-text) !important;
+    border: 2px solid var(--badge-high-border) !important;
+}
+
+.priority-badge.medium {
+    background-color: var(--badge-medium-bg) !important;
+    color: var(--badge-medium-text) !important;
+    border: 2px solid var(--badge-medium-border) !important;
+}
+
+.priority-badge.low {
+    background-color: var(--badge-low-bg) !important;
+    color: var(--badge-low-text) !important;
+    border: 2px solid var(--badge-low-border) !important;
+}
+
+.priority-badge.done {
+    background-color: var(--badge-done-bg) !important;
+    color: var(--badge-done-text) !important;
+    border: 2px solid var(--badge-done-border) !important;
+}
+
+/* =========================================================================
+   GLOBAL ACCESSIBILITY PRIORITY BADGES (UNIFIED MATRIX)
+   ========================================================================= */
+.task-card,
+.project-card {
+    cursor: grab !important;
+}
+
+/* Expands the landing zone to fill the entire column height even when there are 0 tasks present! */
+.tasks-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    min-height: 450px;
+    height: 100%;
+}
+
+/* Styles the ghost placeholder card left behind in the original lane while the actual card is being actively dragged around */
+.cdk-drag-placeholder {
+    opacity: 0.25;
+    background: transparent !important;
+    border: 2px dashed var(--text-muted) !important;
+    box-shadow: none !important;
+    border-radius: 6px;
+    min-height: 120px;
+    width: 100%;
+}
+
+/* Styles the actual floating card attached to our mouse cursor while dragging */
+.cdk-drag-preview {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+    border: 2px solid var(--focus-halo-color) !important;
+    border-radius: 6px;
+    box-sizing: border-box;
+    cursor: grabbing !important;
+}
+
+.cdk-drag-preview *,
+body.cdk-programmatic-drag-override,
+body.cdk-drag-dragging,
+body.cdk-drag-dragging * {
+    cursor: grabbing !important;
+}
+
+/* Adds smooth CSS physics transitions when a card automatically snaps into place upon drop */
+.cdk-drop-list-receiving .task-card,
+.cdk-drop-list-dragging .task-card {
+    transition: transform 0.2s cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* Animates the list elements rearranging themselves fluidly while we hover over a column slot */
+.cdk-drag-animating {
+    transition: transform 0.25s cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* =========================================================================
+   MASTER DIALOG POPUP MODAL ARCHITECTURE 
+   ========================================================================= */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000; /* Floats safely over the top of Kanban layout lanes and headers */
+    box-sizing: border-box;
+}
+
+.modal-card {
+    background-color: var(--surface-bg, #ffffff);
+    color: var(--text-secondary);
+    padding: 25px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    width: 100%; max-width: 400px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    box-sizing: border-box;
+    backdrop-filter: blur(12px) saturate(120%);
+    -webkit-backdrop-filter: blur(12px) saturate(120%);
+}
+
+.modal-card h3 {
+    margin-top: 0 0 20px 0;
+    color: var(--text-secondary);
+    text-align: left;
+}
+
+.form-group-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 15px; 
+    text-align: left;
+}
+
+.form-group-row label {
+    font-weight: bold; font-size: 13px;
+    color: var(--text-muted);
+}
+
+.modal-btn-actions-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+    width: 100%;
 }
