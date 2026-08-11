@@ -93,3 +93,125 @@ textarea {
     cursor: pointer; 
     transition: all 0.2s ease;
 }
+
+/* =========================================================================
+   DEDICATED BRAND COLOR INTERACTION HOVER OVERRIDES
+   ========================================================================= */
+.create-btn:hover:not(:disabled) {
+    background-color: var(--filter-focus-color);
+    color: var(--surface-bg, #ffffff); /* Smooth high-contrast text color inversion */
+    border-color: var(--filter-border-color);
+}
+
+.create-btn:disabled { 
+    color: var(--filter-focus-color) !important; 
+}
+
+/* --- Right Side: Existing Project Cards List Feed Grid --- */
+.list-section {
+    flex: 2;
+    min-width: 320px;
+}
+
+.empty-msg { 
+    color: var(--text-muted); 
+    font-style: italic; 
+    text-align: left;
+}
+
+.project-cards-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    gap: 20px; 
+}
+
+/* =========================================================================
+   INDIVIDUAL WORKSPACE PROJECT CARDS (THEME ADAPTIVE ANCHORS)
+   ========================================================================= */
+.project-card { 
+    background-color: var(--surface-bg, #ffffff);
+    color: var(--text-secondary); /* FIXED: Swapped to text-secondary for high-contrast multi-theme compatibility */
+    border: 2px solid var(--border-color); 
+    border-radius: 8px; 
+    padding: 20px; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02); 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between; 
+    text-align: left;
+    box-sizing: border-box;
+    backdrop-filter: blur(12px) saturate(120%);
+    -webkit-backdrop-filter: blur(12px) saturate(120%);
+}
+
+.project-card h4 { 
+    margin-top: 0; 
+    margin-bottom: 10px; 
+    color: var(--text-secondary); 
+}
+
+.project-card p { 
+    color: var(--text-muted); 
+    font-size: 14px; 
+    margin-bottom: 25px; 
+    line-height: 1.5; 
+}
+
+.project-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+/* Tactile Trashcan Deletion Button Properties */
+.delete-proj-btn { 
+    background-color: transparent; 
+    border: none; 
+    cursor: pointer; 
+    padding: 4px; 
+    font-size: 14px;
+    border-radius: 4px; 
+    opacity: 0.4; 
+    transition: opacity 0.2s ease, background-color 0.2s ease; 
+    line-height: 1; 
+}
+
+.project-card:hover .delete-proj-btn,
+.delete-proj-btn:hover { 
+    opacity: 1 !important; 
+}
+
+.delete-proj-btn:hover { 
+    background-color: #fee2e2;
+    color: #ef4444;
+    transform: scale(1.05); 
+}
+
+.view-tasks-btn { 
+    width: 100%;
+    height: 38px;
+}
+
+/* =========================================================================
+   FLUID CROSS-RESOLUTION DEVICE SCALING ENGINE RESPONSIVE CORES
+   ========================================================================= */
+@media(max-width: 900px) {
+    .dashboard-grid {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .form-section, .list-section { width: 100%; }
+}
+
+@media(max-width: 600px) {
+    .dashboard-wrapper { padding: 20px 15px; }
+    .main-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    .header-navigation-actions { width: 100%; }
+    .header-navigation-actions button { flex: 1; }
+}

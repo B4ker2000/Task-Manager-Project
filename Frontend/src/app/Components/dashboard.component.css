@@ -94,15 +94,20 @@ textarea {
     transition: all 0.2s ease;
 }
 
+/* =========================================================================
+    DEDICATED BRAND COLOR INTERACTION HOVER OVERRIDES
+   ========================================================================= */
 .create-btn:hover:not(:disabled) {
     background-color: var(--filter-focus-color);
-    color: var(--text-on-card);
+    color: var(--surface-bg, #ffffff);
     border-color: var(--filter-border-color);
 }
 
-.create-btn:disabled { color: var(--filter-focus-color) !important; }
+.create-btn:disabled { 
+    color: var(--filter-focus-color) !important; 
+}
 
-/* --- Right Side: Existing Project Cards List Feed --- */
+/* --- Right Side: Existing Project Cards List Feed Grid --- */
 .list-section {
     flex: 2;
     min-width: 320px;
@@ -121,11 +126,11 @@ textarea {
 }
 
 /* =========================================================================
-   INDIVIDUAL WORKSPACE PROJECT CARDS
+   INDIVIDUAL WORKSPACE PROJECT CARDS (THEME ADAPTIVE ANCHORS)
    ========================================================================= */
 .project-card { 
     background-color: var(--surface-bg, #ffffff);
-    color: var(--text-on-card);
+    color: var(--text-secondary);
     border: 2px solid var(--border-color); 
     border-radius: 8px; 
     padding: 20px; 
@@ -142,7 +147,7 @@ textarea {
 .project-card h4 { 
     margin-top: 0; 
     margin-bottom: 10px; 
-    color: var(--text-primary); 
+    color: var(--text-secondary); 
 }
 
 .project-card p { 
@@ -159,7 +164,7 @@ textarea {
     gap: 10px;
 }
 
-/* High-Contrast Resilient Trashcan Mechanics */
+/* Tactile Trashcan Deletion Button Properties */
 .delete-proj-btn { 
     background-color: transparent; 
     border: none; 
@@ -186,13 +191,10 @@ textarea {
 .view-tasks-btn { 
     width: 100%;
     height: 38px;
-    color: var(--text-primary);
 }
 
-.view-tasks-btn:hover { color: var(--text-on-card); }
-
 /* =========================================================================
-   DEVICE SCREEN SCALING RESPONSIVE QUERY TRACKS
+   FLUID CROSS-RESOLUTION DEVICE SCALING ENGINE RESPONSIVE CORES
    ========================================================================= */
 @media(max-width: 900px) {
     .dashboard-grid {
