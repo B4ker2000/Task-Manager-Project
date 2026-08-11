@@ -155,6 +155,7 @@
 .info-adjustment-group { 
     text-align: left; 
     margin-bottom: 12px; 
+    border-color: var(--filter-border-color) !important;
 }
 
 .info-adjustment-label { 

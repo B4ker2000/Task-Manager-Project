@@ -121,29 +121,6 @@
     text-align: left;
 }
 
-.delete-card-btn { 
-    background-color: transparent; 
-    border: none; 
-    cursor: pointer; 
-    padding: 4px; 
-    font-size: 14px;
-    border-radius: 4px; 
-    opacity: 0.4; 
-    transition: opacity 0.2s ease, background-color 0.2s ease; 
-    line-height: 1; 
-}
-
-.task-card:hover .delete-card-btn { 
-    opacity: 1; 
-}
-
-.delete-card-btn:hover {
-    background-color: #fee2e2;
-    color: #ef4444;
-    opacity: 1;
-    transform: scale(1.05); /* Adds a tiny, responsive tactile pop! */
-}
-
 /* =========================================================================
    TASK CARD CONTROLS & SELECT LABELS
    ========================================================================= */

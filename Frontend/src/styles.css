@@ -197,53 +197,151 @@
     --link-color-override: #0022a6;
 }
 
-[data-theme="7"] {
-    /* 📀 WINDOWS 7 GLOSSY AERO ARCHITECTURE PRESETS */
-    --surface-bg: rgba(255, 255, 255, 0.65);                                    /* Translucent frosted glass panel sheet */
-    --container-bg: rgba(235, 244, 255, 0.2);                                   /* Translucent window backdrop backing layers */
-    --wallpaper: linear-gradient(135deg, #1d5299, #3182ce, #72b3ed);
-    --border-color: rgba(255, 255, 255, 0.6);                                  /* Translucent frame reflection borders */
-    --input-bg: #ffffff;
+[data-theme="vista"] {
+    /* 📀 WINDOWS VISTA GLOSSY AERO ARCHITECTURE PRESETS */
+    --surface-bg: rgba(18, 18, 18, 0.75);                                               /* Translucent obsidian charcoal glass sheets */
+    --container-bg: rgba(0, 0, 0, 0.5);
+    --wallpaper: linear-gradient(145deg, #020813 0%, #0c2340 50%, #1e3a5f 100%);    /* Aurora dark canvas background */
+    --border-color: rgba(255, 255, 255, 0.3);
+    --input-bg: #1e1e1e;
     --font-override: sans-serif;
 
-    --text-primary: #f8f9fa;                                                    /* Soft glowing glass text */
-    --text-secondary: #1a202c;                                                  /* Deep dark contrast text inside glass sheets */
-    --text-muted: #d0e1fd; 
+    --text-primary: #ffffff;
+    --text-secondary: #f8f9fa;
+    --text-muted: #94a3b8; 
 
     /* 📊 DYNAMIC AERO GLASS ACCESSIBILITY BADGES */
-    --badge-high-bg: rgba(254, 215, 217, 0.85);   --badge-high-text: #9b2c2c;   --badge-high-border: #e53e3e;
-    --badge-medium-bg: rgba(254, 235, 200, 0.85); --badge-medium-text: #c05621; --badge-medium-border: #dd6b20;
-    --badge-low-bg: rgba(190, 227, 248, 0.85);    --badge-low-text: #2b6cb0;    --badge-low-border: #3182ce;
-    --badge-done-bg: rgba(198, 246, 213, 0.85);   --badge-done-text: #22543d;   --badge-done-border: #38a169;
+    --badge-high-bg: #3c1e1e;   --badge-high-text: #fc8181;   --badge-high-border: #e53e3e;
+    --badge-medium-bg: #3c2a1a; --badge-medium-text: #f6ad55; --badge-medium-border: #dd6b20;
+    --badge-low-bg: #1a2e3b;    --badge-low-text: #63b3ed;    --badge-low-border: #3182ce;
+    --badge-done-bg: #1c3d27;   --badge-done-text: #68d391;   --badge-done-border: #38a745;
+
+    /* 🎨 PROGRESS AND FILTER TRACKS */
+    --progress-bar-fill: linear-gradient(180deg, #48bb78, #22543d);                     /* Glowing emrald vista tracker bars */
+    
+    --filter-border-color: rgba(255, 255, 255, 0.4);
+    --filter-focus-color: #48bb78;
+    --filter-focus-shadow: rgba(72, 187, 120, 0.3);
+
+    --focus-halo-color: #63b3ed;
+    --focus-halo-shadow: rgba(99, 179, 237, 0.2);
+
+    /* 🔮 WINDOWS VISTA GLOSSY HOVER AND FILL VARIATION MATRICES */
+    --btn-submit-bg: rgba(255, 255, 255, 0.1);   --btn-submit-text: #48bb78;         --btn-submit-border: rgba(255, 255, 255, 0.2);
+    --btn-submit-hover-bg: #28a745;              --btn-submit-hover-text: #ffffff;   --btn-submit-hover-border: #48bb78;
+
+    --btn-cancel-bg: rgba(255, 255, 255, 0.05);  --btn-cancel-text: #94a3b8;         --btn-cancel-border: rgba(255, 255, 255, 0.1);
+    --btn-cancel-hover-bg: #4a5568;              --btn-cancel-hover-text: #ffffff;   --btn-cancel-hover-border: #cbd5e1;
+
+    --btn-filter-bg: rgba(255, 255, 255, 0.05);  --btn-filter-text: #63b3ed;         --btn-filter-border: rgba(255, 255, 255, 0.1);
+    --btn-filter-hover-bg: #3182ce;              --btn-filter-hover-text: #ffffff;   --btn-filter-hover-border: #63b3ed;
+
+    --btn-delete-bg: rgba(255, 255, 255, 0.05);  --btn-delete-text: #fc8181;         --btn-delete-border: rgba(255, 255, 255, 0.1);
+    --btn-delete-hover-bg: #e53e3e;              --btn-delete-hover-text: #ffffff;   --btn-delete-hover-border: #fc8181;
+
+    /* THEMATIC TYPE MODIFIERS */
+    --btn-text-transform: none;
+    --btn-font-style: normal;
+
+    --link-color-override: #63b3ed;
+}
+
+[data-theme="7"] {
+    /* 🫧 WINDOWS 7 GLOSSY AERO ARCHITECTURE PRESETS */
+    --surface-bg: rgba(26, 54, 93, 0.55);                                    /* Translucent frosted glass panel sheet */
+    --container-bg: rgba(30, 41, 59, 0.4);                                   /* Translucent window backdrop backing layers */
+    --wallpaper: linear-gradient(135deg, #0f2b48 0%, #1d5299 45%, #72b3ed 100%);
+    --border-color: rgba(255, 255, 255, 0.45);                               /* Translucent frame reflection borders */
+    --input-bg: rgba(255, 255, 255, 0.9);
+    --font-override: sans-serif;
+
+    --text-primary: #ffffff;                                                  /* Soft glowing glass text */
+    --text-secondary: #000000;                                                /* Deep dark contrast text inside glass sheets */
+    --text-muted: #cbd5e1; 
+
+    /* 📊 DYNAMIC AERO GLASS ACCESSIBILITY BADGES */
+    --badge-high-bg: rgba(254, 215, 217, 0.9);   --badge-high-text: #9b2c2c;   --badge-high-border: #e53e3e;
+    --badge-medium-bg: rgba(254, 235, 200, 0.9); --badge-medium-text: #c05621; --badge-medium-border: #dd6b20;
+    --badge-low-bg: rgba(190, 227, 248, 0.9);    --badge-low-text: #2b6cb0;    --badge-low-border: #3182ce;
+    --badge-done-bg: rgba(198, 246, 213, 0.9);   --badge-done-text: #22543d;   --badge-done-border: #38a169;
 
     /* 🎨 PROGRESS AND FILTER TRACKS */
     --progress-bar-fill: linear-gradient(180deg, #52c2ff, #1574d5);
     
-    --filter-border-color: rgba(255, 255, 255, 0.8);
-    --filter-focus-color: #3182ce;
-    --filter-focus-shadow: rgba(49, 130, 206, 0.3);
+    --filter-border-color: rgba(255, 255, 255, 0.6);
+    --filter-focus-color: #52c2ff;
+    --filter-focus-shadow: rgba(82, 194, 255, 0.3);
 
-    --focus-halo-color: #3182ce;
-    --focus-halo-shadow: rgba(49, 130, 206, 0.25);
+    --focus-halo-color: #52c2ff;
+    --focus-halo-shadow: rgba(82, 194, 255, 0.25);
 
     /* 🔮 WINDOWS 7 GLOSSY HOVER AND FILL VARIATION MATRICES */
-    --btn-submit-bg: rgba(255, 255, 255, 0.85);  --btn-submit-text: #1a74d5;         --btn-submit-border: rgba(255, 255, 255, 0.6);
-    --btn-submit-hover-bg: #1574d5;              --btn-submit-hover-text: #ffffff;   --btn-submit-hover-border: #52c2ff;
+    --btn-submit-bg: rgba(255, 255, 255, 0.2);  --btn-submit-text: #ffffff;         --btn-submit-border: rgba(255, 255, 255, 0.4);
+    --btn-submit-hover-bg: #1574d5;             --btn-submit-hover-text: #ffffff;   --btn-submit-hover-border: #52c2ff;
 
-    --btn-cancel-bg: rgba(255, 255, 255, 0.85);  --btn-cancel-text: #505f75;         --btn-cancel-border: rgba(255, 255, 255, 0.4);
-    --btn-cancel-hover-bg: #505f75;              --btn-cancel-hover-text: #ffffff;   --btn-cancel-hover-border: #1a202c;
+    --btn-cancel-bg: rgba(255, 255, 255, 0.1);  --btn-cancel-text: #cbd5e1;         --btn-cancel-border: rgba(255, 255, 255, 0.2);
+    --btn-cancel-hover-bg: #4a5568;             --btn-cancel-hover-text: #ffffff;   --btn-cancel-hover-border: #cbd5e1;
 
-    --btn-filter-bg: rgba(255, 255, 255, 0.85);  --btn-filter-text: #38a169;         --btn-filter-border: rgba(255, 255, 255, 0.4);
-    --btn-filter-hover-bg: #38a169;              --btn-filter-hover-text: #ffffff;   --btn-filter-hover-border: #22543d;
+    --btn-filter-bg: rgba(255, 255, 255, 0.1);  --btn-filter-text: #68d391;         --btn-filter-border: rgba(255, 255, 255, 0.2);
+    --btn-filter-hover-bg: #38a169;             --btn-filter-hover-text: #ffffff;   --btn-filter-hover-border: #48bb78;
 
-    --btn-delete-bg: rgba(255, 255, 255, 0.85);  --btn-delete-text: #e53e3e;         --btn-delete-border: rgba(255, 255, 255, 0.4);
-    --btn-delete-hover-bg: #e53e3e;              --btn-delete-hover-text: #ffffff;   --btn-delete-hover-border: #9b2c2c;
+    --btn-delete-bg: rgba(255, 255, 255, 0.1);  --btn-delete-text: #fc8181;         --btn-delete-border: rgba(255, 255, 255, 0.2);
+    --btn-delete-hover-bg: #e53e3e;             --btn-delete-hover-text: #ffffff;   --btn-delete-hover-border: #fc8181;
 
     /* THEMATIC TYPE MODIFIERS */
     --btn-text-transform: none;
     --btn-font-style: normal;
 
     --link-color-override: #52c2ff;
+}
+
+[data-theme="frutiger-aero"] {
+    /* 💧🍃 FRUTIGER AERO (GLOSSY VIBRANT ECO-CYBER ENGINE) */
+    --surface-bg: rgba(255, 255, 255, 0.85);
+    --container-bg: rgba(224, 242, 254, 0.4);
+    --wallpaper: linear-gradient(135deg, #0284c7 0%, #06b6d4 35%, #4ade80 75%, #facc15 100%);
+    --border-color: #bae6fd;
+    --input-bg: #ffffff;
+    --font-override: sans-serif;
+
+    --text-primary: #ffffff;
+    --text-secondary: #0f172a;
+    --text-muted: #0369a1; 
+
+    /* 📊 FRUTIGER AERO ACCESSIBILITY BADGES */
+    --badge-high-bg: #fff1f2;   --badge-high-text: #e11d48;   --badge-high-border: #fecdd3;
+    --badge-medium-bg: #fefce8; --badge-medium-text: #ca8a04; --badge-medium-border: #fef08a;
+    --badge-low-bg: #f0fdfa;    --badge-low-text: #0d9488;    --badge-low-border: #ccfbf1;
+    --badge-done-bg: #f0fdf4;   --badge-done-text: #16a34a;   --badge-done-border: #bbf7d0;
+
+    /* 🎨 PROGRESS AND FILTER TRACKS */
+    --progress-bar-fill: linear-gradient(90deg, #38bdf8, #4ade80);
+    
+    --filter-border-color: #06b6d4;
+    --filter-focus-color: #06b6d4;
+    --filter-focus-shadow: rgba(6, 182, 212, 0.25);
+
+    --focus-halo-color: #38bdf8;
+    --focus-halo-shadow: rgba(56, 189, 248, 0.2);
+
+    /* 🔮 VIBRANT DYNAMIC FRUTIGER AERO BUTTON ACCENTS */
+    --btn-submit-bg: #ea580c;           --btn-submit-text: #ffffff;         --btn-submit-border: #c2410c;
+    --btn-submit-hover-bg: #4ade80;     --btn-submit-hover-text: #ffffff;   --btn-submit-hover-border: #16a34a;
+
+    --btn-cancel-bg: #ffffff;           --btn-cancel-text: #0369a1;         --btn-cancel-border: #bae6fd;
+    --btn-cancel-hover-bg: #38bdf8;     --btn-cancel-hover-text: #ffffff;   --btn-cancel-hover-border: #0284d7;
+
+    --btn-filter-bg: #ffffff;           --btn-filter-text: #06b6d4;         --btn-filter-border: #cbd5e1;
+    --btn-filter-hover-bg: #06b6d4;     --btn-filter-hover-text: #ffffff;   --btn-filter-hover-border: #0369a1;
+
+    --btn-delete-bg: #ffffff;           --btn-delete-text: #e11d48;         --btn-delete-border: #fecdd3;
+    --btn-delete-hover-bg: #e11d48;     --btn-delete-hover-text: #ffffff;   --btn-delete-hover-border: #b91c1c;
+
+    /* THEMATIC TYPE MODIFIERS */
+    --btn-text-transform: none;
+    --btn-font-style: normal;
+
+    --link-color-override: #06b6d4;
 }
 
 [data-theme="amber-crt"] {
@@ -500,14 +598,14 @@ input[type="date"] {
 
 /* --- FUNCTIONAL BUTTON CATEGORY 1: FORWARD SUBMIT ACTIONS --- */
 .submit-btn,
-.create-btn,
+.view-tasks-btn,
 .action-btn.next {
     background-color: var(--btn-submit-bg) !important;
     color: var(--btn-submit-text) !important;
     border-color: var(--btn-submit-border) !important;
 }
 .submit-btn:hover:not(:disabled),
-.create-btn:hover:not(:disabled),
+.view-tasks-btn:hover:not(:disabled),
 .action-btn.next:hover:not(:disabled) {
     background-color: var(--btn-submit-hover-bg) !important;
     color: var(--btn-submit-hover-text) !important;
@@ -517,16 +615,14 @@ input[type="date"] {
 /* --- FUNCTIONAL BUTTON CATEGORY 2: SECONDARY REVERSALS & CANCEL LINKS --- */
 .cancel-btn,
 .back-btn,
-.action-btn.back,
-.profile-btn {
+.action-btn.back {
     background-color: var(--btn-cancel-bg) !important;
     color: var(--btn-cancel-text) !important;
     border-color: var(--btn-cancel-border);
 }
 .cancel-btn:hover:not(:disabled),
 .back-btn:hover:not(:disabled),
-.action-btn.back:hover:not(:disabled),
-.profile-btn:hover:not(:disabled) {
+.action-btn.back:hover:not(:disabled) {
     background-color: var(--btn-cancel-hover-bg) !important;
     color: var(--btn-cancel-hover-text) !important;
     border-color: var(--btn-cancel-hover-border) !important;
@@ -534,13 +630,15 @@ input[type="date"] {
 
 /* --- FUNCTIONAL BUTTON CATEGORY 3: FILTER CONTROLS & SIDEBAR INVITATIONS --- */
 .send-invite-btn,
-.view-tasks-btn {
+.profile-btn,
+.create-btn {
     background-color: var(--btn-filter-bg) !important;
     color: var(--btn-filter-text) !important;
     border-color: var(--btn-filter-border) !important;
 }
 .send-invite-btn:hover:not(:disabled),
-.view-tasks-btn:hover:not(:disabled) {
+.profile-btn:hover:not(:disabled),
+.create-btn:hover:not(:disabled) {
     background-color: var(--btn-filter-hover-bg) !important;
     color: var(--btn-filter-hover-text) !important;
     border-color: var(--btn-filter-hover-border) !important;
@@ -753,11 +851,18 @@ select:focus,
     border: 2px solid var(--focus-halo-color) !important;
     border-radius: 6px;
     box-sizing: border-box;
-    cursor: grabbing !important;
 }
 
+.cdk-drag-preview,
 .cdk-drag-preview *,
+.cdk-drag-preview div,
+.cdk-drag-preview h4,
+.cdk-drag-preview p,
+.cdk-drag-preview span,
+html.cdk-global-scroll-block,
+html.cdk-global-scroll-block *,
 body.cdk-programmatic-drag-override,
+body.cdk-programmatic-drag-override *,
 body.cdk-drag-dragging,
 body.cdk-drag-dragging * {
     cursor: grabbing !important;
@@ -827,4 +932,31 @@ body.cdk-drag-dragging * {
     gap: 10px;
     margin-top: 20px;
     width: 100%;
+}
+
+/* =========================================================================
+   Tactile Trashcan Deletion Button Properties
+   ========================================================================= */
+.delete-proj-btn,
+.delete-card-btn { 
+    background-color: transparent; 
+    border: none; 
+    cursor: pointer; 
+    padding: 4px; 
+    font-size: 14px;
+    border-radius: 4px; 
+    opacity: 0.4; 
+    transition: opacity 0.2s ease, background-color 0.2s ease; 
+    line-height: 1; 
+}
+
+.project-card:hover .delete-proj-btn,
+.task-card:hover .delete-card-btn { 
+    opacity: 1 !important; 
+}
+
+.delete-proj-btn:hover,
+.delete-card-btn:hover { 
+    background-color: var(--btn-delete-hover-bg) !important;
+    transform: scale(1.05); /* Adds a tiny, responsive tactile pop! */
 }
