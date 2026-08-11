@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Backend.Models;
-using Microsoft.AspNetCore.Mvc;
-using SQLitePCL;
+using System.Reflection;
 
 namespace Backend.Data
 {
@@ -18,44 +17,25 @@ namespace Backend.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            
+            // Global reflection discovery
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
-            // Enforces custom User table configurations using fluent API method chains!
-            modelBuilder.Entity<User>(entity =>
+            // Global property configuration loop
+            foreach(var entityType in modelBuilder.Model.GetEntityTypes())
             {
-                entity.ToTable("Users"); // Maps model explicitly to the SQL table name string
-                entity.HasKey(u => u.Id); // Sets primary key indexing parameters safely
+                // Find all string properties on the current entity table model
+                var stringProperties = entityType.GetProperties()
+                    .Where(p => p.ClrType == typeof(string));
 
-                entity.Property(u => u.Username)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(u => u.Email)
-                    .IsRequired()
-                    .HasMaxLength(100);
-
-                // Tells our database that no two accounts can share the exact same email!
-                entity.HasIndex(u => u.Email)
-                    .IsUnique();
-            });
-
-            modelBuilder.Entity<Project>()
-                .HasOne(p => p.ProjectManager)
-                .WithMany()
-                .HasForeignKey(p => p.ProjectManagerId);
-
-            // Connects Projects to Categories
-            modelBuilder.Entity<Category>()
-                .HasOne(c => c.Project)
-                .WithMany()
-                .HasForeignKey(c => c.ProjectId)
-                .OnDelete(DeleteBehavior.Cascade); // If project is wiped, its categories vanish too!
-
-            // Connects Categories to TaskItems 
-            modelBuilder.Entity<TaskItem>()
-                .HasOne(t => t.Category)
-                .WithMany(c => c.Tasks)
-                .HasForeignKey(t => t.CategoryId)
-                .OnDelete(DeleteBehavior.SetNull); // If category tag is deleted, keep the task but set tag to null!
+                foreach(var property in stringProperties)
+                {
+                    if(property.GetMaxLength() == null)
+                    {
+                        property.SetMaxLength(255);
+                    }
+                }
+            }
         }
     }
 }
