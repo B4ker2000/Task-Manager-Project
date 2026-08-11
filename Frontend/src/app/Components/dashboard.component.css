@@ -57,14 +57,21 @@
 .list-section h3 { 
     margin-top: 0; 
     margin-bottom: 20px; 
-    color: var(--text-primary);
     text-align: left; 
 }
+
+.form-section h3 { color: var(--text-secondary); }
+.list-section h3 { color: var(--text-primary); }
 
 .form-group { 
     margin-bottom: 15px;
     text-align: left;
 }
+
+.form-group input,
+.form-group textarea {
+    border: 2px solid var(--filter-border-color, #cbd5e1) !important;
+}  
 
 .form-group label { 
     display: block; 

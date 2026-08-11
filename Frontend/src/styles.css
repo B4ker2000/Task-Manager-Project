@@ -199,100 +199,100 @@
 
 [data-theme="vista"] {
     /* 📀 WINDOWS VISTA GLOSSY AERO ARCHITECTURE PRESETS */
-    --surface-bg: rgba(18, 18, 18, 0.75);                                               /* Translucent obsidian charcoal glass sheets */
-    --container-bg: rgba(0, 0, 0, 0.5);
-    --wallpaper: linear-gradient(145deg, #020813 0%, #0c2340 50%, #1e3a5f 100%);    /* Aurora dark canvas background */
-    --border-color: rgba(255, 255, 255, 0.3);
-    --input-bg: #1e1e1e;
+    --surface-bg: rgba(255, 255, 255, 0.8);                                               /* Semi-translucent light glass card backing */
+    --container-bg: rgba(15, 58, 26, 0.2);
+    --wallpaper: linear-gradient(135deg, #021a0a 0%, #114224 45%, #22c55e 100%);      /* Gorgeous Glossy Emrald Vista Aurora! */
+    --border-color: rgba(255, 255, 255, 0.5);
+    --input-bg: #ffffff;
     --font-override: sans-serif;
 
     --text-primary: #ffffff;
-    --text-secondary: #f8f9fa;
-    --text-muted: #94a3b8; 
+    --text-secondary: #0f172a;      /* Clear dar charcoal ard content text font */
+    --text-muted: #15803d; 
 
     /* 📊 DYNAMIC AERO GLASS ACCESSIBILITY BADGES */
-    --badge-high-bg: #3c1e1e;   --badge-high-text: #fc8181;   --badge-high-border: #e53e3e;
-    --badge-medium-bg: #3c2a1a; --badge-medium-text: #f6ad55; --badge-medium-border: #dd6b20;
-    --badge-low-bg: #1a2e3b;    --badge-low-text: #63b3ed;    --badge-low-border: #3182ce;
-    --badge-done-bg: #1c3d27;   --badge-done-text: #68d391;   --badge-done-border: #38a745;
+    --badge-high-bg: #fee2e2;   --badge-high-text: #991b1b;   --badge-high-border: #fca5a5;
+    --badge-medium-bg: #fef9c3; --badge-medium-text: #854d0e; --badge-medium-border: #fde047;
+    --badge-low-bg: #dbeafe;    --badge-low-text: #1e40af;    --badge-low-border: #93c5fd;
+    --badge-done-bg: #dcfce7;   --badge-done-text: #166534;   --badge-done-border: #86efac;
 
     /* 🎨 PROGRESS AND FILTER TRACKS */
-    --progress-bar-fill: linear-gradient(180deg, #48bb78, #22543d);                     /* Glowing emrald vista tracker bars */
+    --progress-bar-fill: linear-gradient(180deg, #4ade80, #16a34a);                     /* Glowing emrald vista tracker bars */
     
-    --filter-border-color: rgba(255, 255, 255, 0.4);
-    --filter-focus-color: #48bb78;
-    --filter-focus-shadow: rgba(72, 187, 120, 0.3);
+    --filter-border-color: #16a34a;
+    --filter-focus-color: #16a34a;
+    --filter-focus-shadow: rgba(22, 163, 74, 0.3);
 
-    --focus-halo-color: #63b3ed;
-    --focus-halo-shadow: rgba(99, 179, 237, 0.2);
+    --focus-halo-color: #22c55e;
+    --focus-halo-shadow: rgba(34, 197, 94, 0.25);
 
     /* 🔮 WINDOWS VISTA GLOSSY HOVER AND FILL VARIATION MATRICES */
-    --btn-submit-bg: rgba(255, 255, 255, 0.1);   --btn-submit-text: #48bb78;         --btn-submit-border: rgba(255, 255, 255, 0.2);
-    --btn-submit-hover-bg: #28a745;              --btn-submit-hover-text: #ffffff;   --btn-submit-hover-border: #48bb78;
+    --btn-submit-bg: #16a34a;           --btn-submit-text: #ffffff;         --btn-submit-border: #14532d;
+    --btn-submit-hover-bg: #22c55e;     --btn-submit-hover-text: #ffffff;   --btn-submit-hover-border: #4ade80;
 
-    --btn-cancel-bg: rgba(255, 255, 255, 0.05);  --btn-cancel-text: #94a3b8;         --btn-cancel-border: rgba(255, 255, 255, 0.1);
-    --btn-cancel-hover-bg: #4a5568;              --btn-cancel-hover-text: #ffffff;   --btn-cancel-hover-border: #cbd5e1;
+    --btn-cancel-bg: #ffffff;           --btn-cancel-text: #475569;         --btn-cancel-border: #cbd5e1;
+    --btn-cancel-hover-bg: #64748b;     --btn-cancel-hover-text: #ffffff;   --btn-cancel-hover-border: #cbd5e1;
 
-    --btn-filter-bg: rgba(255, 255, 255, 0.05);  --btn-filter-text: #63b3ed;         --btn-filter-border: rgba(255, 255, 255, 0.1);
-    --btn-filter-hover-bg: #3182ce;              --btn-filter-hover-text: #ffffff;   --btn-filter-hover-border: #63b3ed;
+    --btn-filter-bg: #ffffff;           --btn-filter-text: #16a34a;         --btn-filter-border: #86efac;
+    --btn-filter-hover-bg: #16a34a;     --btn-filter-hover-text: #ffffff;   --btn-filter-hover-border: #1565c0;
 
-    --btn-delete-bg: rgba(255, 255, 255, 0.05);  --btn-delete-text: #fc8181;         --btn-delete-border: rgba(255, 255, 255, 0.1);
-    --btn-delete-hover-bg: #e53e3e;              --btn-delete-hover-text: #ffffff;   --btn-delete-hover-border: #fc8181;
+    --btn-delete-bg: #ffffff;           --btn-delete-text: #b91c1c;         --btn-delete-border: #fca5a5;
+    --btn-delete-hover-bg: #b91c1c;     --btn-delete-hover-text: #ffffff;   --btn-delete-hover-border: #991b1b;
 
     /* THEMATIC TYPE MODIFIERS */
     --btn-text-transform: none;
     --btn-font-style: normal;
 
-    --link-color-override: #63b3ed;
+    --link-color-override: #22c55e;
 }
 
 [data-theme="7"] {
     /* 🫧 WINDOWS 7 GLOSSY AERO ARCHITECTURE PRESETS */
-    --surface-bg: rgba(26, 54, 93, 0.55);                                    /* Translucent frosted glass panel sheet */
-    --container-bg: rgba(30, 41, 59, 0.4);                                   /* Translucent window backdrop backing layers */
-    --wallpaper: linear-gradient(135deg, #0f2b48 0%, #1d5299 45%, #72b3ed 100%);
-    --border-color: rgba(255, 255, 255, 0.45);                               /* Translucent frame reflection borders */
-    --input-bg: rgba(255, 255, 255, 0.9);
+    --surface-bg: rgba(255, 255, 255, 0.85);                                    /* Translucent frosted glass panel sheet */
+    --container-bg: rgba(255, 255, 255, 0.3);                                   /* Translucent window backdrop backing layers */
+    --wallpaper: linear-gradient(135deg, #1e4d8c 0%, #3182ce 50%, #90cdf4 100%);
+    --border-color: rgba(255, 255, 255, 0.7);                               /* Translucent frame reflection borders */
+    --input-bg: #ffffff;
     --font-override: sans-serif;
 
     --text-primary: #ffffff;                                                  /* Soft glowing glass text */
-    --text-secondary: #000000;                                                /* Deep dark contrast text inside glass sheets */
-    --text-muted: #cbd5e1; 
+    --text-secondary: #1a202c;                                                /* Deep dark contrast text inside glass sheets */
+    --text-muted: #1e3a8a; 
 
     /* 📊 DYNAMIC AERO GLASS ACCESSIBILITY BADGES */
-    --badge-high-bg: rgba(254, 215, 217, 0.9);   --badge-high-text: #9b2c2c;   --badge-high-border: #e53e3e;
-    --badge-medium-bg: rgba(254, 235, 200, 0.9); --badge-medium-text: #c05621; --badge-medium-border: #dd6b20;
-    --badge-low-bg: rgba(190, 227, 248, 0.9);    --badge-low-text: #2b6cb0;    --badge-low-border: #3182ce;
-    --badge-done-bg: rgba(198, 246, 213, 0.9);   --badge-done-text: #22543d;   --badge-done-border: #38a169;
+    --badge-high-bg: rgba(254, 215, 217, 0.95);   --badge-high-text: #9b2c2c;   --badge-high-border: #e53e3e;
+    --badge-medium-bg: rgba(254, 235, 200, 0.95); --badge-medium-text: #c05621; --badge-medium-border: #dd6b20;
+    --badge-low-bg: rgba(190, 227, 248, 0.95);    --badge-low-text: #2b6cb0;    --badge-low-border: #3182ce;
+    --badge-done-bg: rgba(198, 246, 213, 0.95);   --badge-done-text: #22543d;   --badge-done-border: #38a169;
 
     /* 🎨 PROGRESS AND FILTER TRACKS */
     --progress-bar-fill: linear-gradient(180deg, #52c2ff, #1574d5);
     
-    --filter-border-color: rgba(255, 255, 255, 0.6);
-    --filter-focus-color: #52c2ff;
-    --filter-focus-shadow: rgba(82, 194, 255, 0.3);
+    --filter-border-color: rgba(255, 255, 255, 0.8);
+    --filter-focus-color: #3182ce;
+    --filter-focus-shadow: rgba(49, 130, 206, 0.3);
 
-    --focus-halo-color: #52c2ff;
-    --focus-halo-shadow: rgba(82, 194, 255, 0.25);
+    --focus-halo-color: #3182ce;
+    --focus-halo-shadow: rgba(49, 130, 206, 0.25);
 
     /* 🔮 WINDOWS 7 GLOSSY HOVER AND FILL VARIATION MATRICES */
-    --btn-submit-bg: rgba(255, 255, 255, 0.2);  --btn-submit-text: #ffffff;         --btn-submit-border: rgba(255, 255, 255, 0.4);
+    --btn-submit-bg: #3182ce;                   --btn-submit-text: #ffffff;         --btn-submit-border: #1a4975;
     --btn-submit-hover-bg: #1574d5;             --btn-submit-hover-text: #ffffff;   --btn-submit-hover-border: #52c2ff;
 
-    --btn-cancel-bg: rgba(255, 255, 255, 0.1);  --btn-cancel-text: #cbd5e1;         --btn-cancel-border: rgba(255, 255, 255, 0.2);
-    --btn-cancel-hover-bg: #4a5568;             --btn-cancel-hover-text: #ffffff;   --btn-cancel-hover-border: #cbd5e1;
+    --btn-cancel-bg: rgba(255, 255, 255, 0.9);  --btn-cancel-text: #505f75;         --btn-cancel-border: rgba(255, 255, 255, 0.4);
+    --btn-cancel-hover-bg: #505f75;             --btn-cancel-hover-text: #ffffff;   --btn-cancel-hover-border: #1a202c;
 
-    --btn-filter-bg: rgba(255, 255, 255, 0.1);  --btn-filter-text: #68d391;         --btn-filter-border: rgba(255, 255, 255, 0.2);
-    --btn-filter-hover-bg: #38a169;             --btn-filter-hover-text: #ffffff;   --btn-filter-hover-border: #48bb78;
+    --btn-filter-bg: rgba(255, 255, 255, 0.9);  --btn-filter-text: #38a169;         --btn-filter-border: rgba(255, 255, 255, 0.4);
+    --btn-filter-hover-bg: #38a169;             --btn-filter-hover-text: #ffffff;   --btn-filter-hover-border: #22543d;
 
-    --btn-delete-bg: rgba(255, 255, 255, 0.1);  --btn-delete-text: #fc8181;         --btn-delete-border: rgba(255, 255, 255, 0.2);
-    --btn-delete-hover-bg: #e53e3e;             --btn-delete-hover-text: #ffffff;   --btn-delete-hover-border: #fc8181;
+    --btn-delete-bg: rgba(255, 255, 255, 0.9);  --btn-delete-text: #e53e3e;         --btn-delete-border: rgba(255, 255, 255, 0.4);
+    --btn-delete-hover-bg: #e53e3e;             --btn-delete-hover-text: #ffffff;   --btn-delete-hover-border: #9b2c2c;
 
     /* THEMATIC TYPE MODIFIERS */
     --btn-text-transform: none;
     --btn-font-style: normal;
 
-    --link-color-override: #52c2ff;
+    --link-color-override: #3182ce;
 }
 
 [data-theme="frutiger-aero"] {
@@ -853,12 +853,12 @@ select:focus,
     box-sizing: border-box;
 }
 
+.task-card:active,
+.project-card:active,
+.task-card *:active,
+.project-card *:active,
 .cdk-drag-preview,
 .cdk-drag-preview *,
-.cdk-drag-preview div,
-.cdk-drag-preview h4,
-.cdk-drag-preview p,
-.cdk-drag-preview span,
 html.cdk-global-scroll-block,
 html.cdk-global-scroll-block *,
 body.cdk-programmatic-drag-override,

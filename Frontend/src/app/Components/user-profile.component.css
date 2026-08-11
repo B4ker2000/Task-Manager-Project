@@ -51,6 +51,8 @@
     -webkit-backdrop-filter: blur(12px) saturate(120%);
 }
 
+.details-card { color: var(--text-secondary); }
+
 .stats-card h4, 
 .settings-card h4, 
 .accessibility-config-card h4 { 
