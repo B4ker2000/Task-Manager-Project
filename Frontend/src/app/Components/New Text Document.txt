@@ -1,217 +1,102 @@
 /* =========================================================================
-   LOCAL PROJECT DASHBOARD GRID (STRUCTURAL LAYOUT CORE)
+   BOARD CANVAS HEADER SHELLS AND NAVIGATION ROW PANELS
    ========================================================================= */
-.dashboard-wrapper { 
+.board-wrapper { 
     padding: 40px; 
-    max-width: 1200px; 
+    max-width: 1400px; 
     margin: 0 auto; 
     box-sizing: border-box;
 }
 
-.main-header { 
+.board-header { 
     display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
+    justify-content: center; 
+    align-items: center;
+    position: relative;
+    width: 100%;
     border-bottom: 2px solid var(--text-muted); 
-    padding-bottom: 20px;
-    margin-bottom: 30px;
-}
-
-.main-header h1 {
-    color: var(--text-primary); 
-    margin: 0; 
-    font-size: 28px;
-}
-
-.header-navigation-actions { 
-    display: flex; 
-    gap: 12px; 
-    align-items: center; 
-}
-
-/* =========================================================================
-   MAIN TWO-COLUMN DASHBOARD FLEX ROW TRACKS
-   ========================================================================= */
-.dashboard-grid { 
-    display: flex; 
-    gap: 40px; 
-    align-items: flex-start;
-}
-
-/* --- Left Side: Create New Project Paper Box --- */
-.form-section { 
-    background-color: var(--surface-bg);
-    color: var(--text-secondary); /* FIXED: Linked to secondary to protect font legibility */
-    padding: 25px; 
-    border-radius: 8px; 
-    border: 2px solid var(--border-color); 
-    flex: 1;
-    min-width: 280px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
-    box-sizing: border-box;
-    backdrop-filter: blur(12px) saturate(120%);
-    -webkit-backdrop-filter: blur(12px) saturate(120%);
-}
-
-.form-section h3,
-.list-section h3 { 
-    margin-top: 0; 
-    margin-bottom: 20px; 
-    color: var(--text-primary);
-    text-align: left; 
-}
-
-.form-group { 
-    margin-bottom: 15px;
-    text-align: left;
-}
-
-.form-group label { 
-    display: block; 
-    font-weight: bold; 
-    font-size: 13px; 
-    margin-bottom: 6px; 
-    color: var(--text-muted); 
-}
-
-textarea { 
-    height: 100px; 
-    resize: vertical; 
-}
-
-/* Dedicated custom brand color configurations for project creation triggers */
-.create-btn { 
-    width: 100%; 
-    height: 42px; 
-    background-color: var(--surface-bg, #ffffff);
-    box-shadow: 0 0 0 3px var(--filter-focus-shadow, rgba(40, 167, 69, 0.15)) !important;
-    outline: none;
-    border: 2px solid var(--filter-border-color, #38a169) !important;
-    color: var(--filter-focus-color);
-    border-radius: 4px; 
-    font-weight: bold; 
-    cursor: pointer; 
-    transition: all 0.2s ease;
-}
-
-/* =========================================================================
-   DEDICATED BRAND COLOR INTERACTION HOVER OVERRIDES
-   ========================================================================= */
-.create-btn:hover:not(:disabled) {
-    background-color: var(--filter-focus-color);
-    color: var(--surface-bg, #ffffff); /* Smooth high-contrast text color inversion */
-    border-color: var(--filter-border-color);
-}
-
-.create-btn:disabled { 
-    color: var(--filter-focus-color) !important; 
-}
-
-/* --- Right Side: Existing Project Cards List Feed Grid --- */
-.list-section {
-    flex: 2;
-    min-width: 320px;
-}
-
-.empty-msg { 
-    color: var(--text-muted); 
-    font-style: italic; 
-    text-align: left;
-}
-
-.project-cards-grid { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
-    gap: 20px; 
-}
-
-/* =========================================================================
-   INDIVIDUAL WORKSPACE PROJECT CARDS (THEME ADAPTIVE ANCHORS)
-   ========================================================================= */
-.project-card { 
-    background-color: var(--surface-bg, #ffffff);
-    color: var(--text-secondary); /* FIXED: Swapped to text-secondary for high-contrast multi-theme compatibility */
-    border: 2px solid var(--border-color); 
-    border-radius: 8px; 
-    padding: 20px; 
-    box-shadow: 0 4px 6px rgba(0,0,0,0.02); 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: space-between; 
-    text-align: left;
-    box-sizing: border-box;
-    backdrop-filter: blur(12px) saturate(120%);
-    -webkit-backdrop-filter: blur(12px) saturate(120%);
-}
-
-.project-card h4 { 
-    margin-top: 0; 
-    margin-bottom: 10px; 
-    color: var(--text-secondary); 
-}
-
-.project-card p { 
-    color: var(--text-muted); 
-    font-size: 14px; 
-    margin-bottom: 25px; 
-    line-height: 1.5; 
-}
-
-.project-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    padding-bottom: 20px; 
+    margin-bottom: 30px; 
     gap: 10px;
 }
 
-/* Tactile Trashcan Deletion Button Properties */
-.delete-proj-btn { 
-    background-color: transparent; 
-    border: none; 
-    cursor: pointer; 
-    padding: 4px; 
-    font-size: 14px;
-    border-radius: 4px; 
-    opacity: 0.4; 
-    transition: opacity 0.2s ease, background-color 0.2s ease; 
-    line-height: 1; 
+.board-header h2 {
+    text-align: center;
+    margin: 0 auto;
+    color: var(--text-primary);
 }
 
-.project-card:hover .delete-proj-btn,
-.delete-proj-btn:hover { 
-    opacity: 1 !important; 
-}
-
-.delete-proj-btn:hover { 
-    background-color: #fee2e2;
-    color: #ef4444;
-    transform: scale(1.05); 
-}
-
-.view-tasks-btn { 
-    width: 100%;
-    height: 38px;
+.board-header-action-triggers {
+    display: flex;
+    gap: 10px;
 }
 
 /* =========================================================================
-   FLUID CROSS-RESOLUTION DEVICE SCALING ENGINE RESPONSIVE CORES
+   3-COLUMN SYSTEM WORKFLOW BLOCKS & GRID SHUFFLING FIELDS
    ========================================================================= */
-@media(max-width: 900px) {
-    .dashboard-grid {
-        flex-direction: column;
-        width: 100%;
-    }
-    
-    .form-section, .list-section { width: 100%; }
+.board-columns-grid { 
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); /* 3 columns, equal slices of space each */
+    gap: 25px; 
+    align-items: start; 
 }
 
-@media(max-width: 600px) {
-    .dashboard-wrapper { padding: 20px 15px; }
-    .main-header {
-        flex-direction: column;
-        gap: 15px;
-        text-align: center;
-    }
-    .header-navigation-actions { width: 100%; }
-    .header-navigation-actions button { flex: 1; }
+.board-column { 
+    background-color: var(--container-bg, #f8f9fa);
+    border: 2px solid var(--border-color, #e2e8f0); 
+    border-radius: 8px; 
+    padding: 20px; 
+    min-height: 500px; 
+    box-sizing: border-box;
+}
+
+.board-column h3 { 
+    margin-top: 0; 
+    margin-bottom: 20px; 
+    border-bottom: 2px solid var(--border-color, #cbd5e1); 
+    padding-bottom: 10px; 
+    color: var(--text-primary);
+    text-align: left;
+}
+
+/* =========================================================================
+   INDIVIDUAL WORKSPACE KANBAN TASK CARDS (THEME ADAPTIVE HOOKS)
+   ========================================================================= */
+.task-card { 
+    background-color: var(--surface-bg, #ffffff); 
+    border: 2px solid var(--border-color, #cbd5e1); 
+    border-radius: 6px; 
+    padding: 15px; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    box-sizing: border-box;
+    backdrop-filter: blur(12px) saturate(120%);
+    -webkit-backdrop-filter: blur(12px) saturate(120%);
+}
+
+.task-card-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: flex-start; 
+    gap: 10px; 
+    margin-bottom: 8px; 
+}
+
+.task-card h4 { 
+    margin: 0; 
+    color: var(--text-secondary); /* FIXED: Linked to secondary for high-contrast multi-theme visibility */
+    flex: 1; 
+    text-align: left; 
+}
+
+.task-card p { 
+    margin: 0 0 15px 0; 
+    color: var(--text-muted); 
+    font-size: 13px; 
+    line-height: 1.4;  
+    text-align: left; 
+}
+
+.task-card.done {
+    border-color: var(--badge-done-border); 
+    opacity: 0.8;
 }
