@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Backend.Models;
 using System.Reflection;
+using Backend.Data.Configurations;
 
 namespace Backend.Data
 {
@@ -18,8 +19,15 @@ namespace Backend.Data
         {
             base.OnModelCreating(modelBuilder);
             
-            // Global reflection discovery
+            // Global reflection discovery (Scans and includes every configuration it finds)
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            // More or lese the as above but we have more control over what gets included and what doesn't this way!
+            // modelBuilder.ApplyConfiguration(new UserConfiguration());
+            // modelBuilder.ApplyConfiguration(new ProjectConfiguration());
+            // modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+            // modelBuilder.ApplyConfiguration(new TaskItemConfiguration());
+
 
             // Global property configuration loop
             foreach(var entityType in modelBuilder.Model.GetEntityTypes())

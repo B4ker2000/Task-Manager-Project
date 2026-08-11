@@ -199,51 +199,51 @@
 
 [data-theme="vista"] {
     /* 📀 WINDOWS VISTA GLOSSY AERO ARCHITECTURE PRESETS */
-    --surface-bg: rgba(255, 255, 255, 0.8);                                               /* Semi-translucent light glass card backing */
-    --container-bg: rgba(15, 58, 26, 0.2);
-    --wallpaper: linear-gradient(135deg, #021a0a 0%, #114224 45%, #22c55e 100%);      /* Gorgeous Glossy Emrald Vista Aurora! */
-    --border-color: rgba(255, 255, 255, 0.5);
-    --input-bg: #ffffff;
+    --surface-bg: rgba(30, 41, 59, 0.7);                                                               /* Deep charcoal translucent glass card backing */
+    --container-bg: rgba(15, 23, 42, 0.4);
+    --wallpaper: linear-gradient(135deg, #050b14 0%, #0c2540 40%, #143d28 75%, #2e5c1e 100%);   /* Gorgeous blend of deep midnight obsidian blues with soft emrald glow */
+    --border-color: rgba(255, 255, 255, 0.4);
+    --input-bg: #1e1e1e;
     --font-override: sans-serif;
 
     --text-primary: #ffffff;
-    --text-secondary: #0f172a;      /* Clear dar charcoal ard content text font */
-    --text-muted: #15803d; 
+    --text-secondary: #ffffff;      /* Clear dar charcoal ard content text font */
+    --text-muted: #94a3b8; 
 
     /* 📊 DYNAMIC AERO GLASS ACCESSIBILITY BADGES */
-    --badge-high-bg: #fee2e2;   --badge-high-text: #991b1b;   --badge-high-border: #fca5a5;
-    --badge-medium-bg: #fef9c3; --badge-medium-text: #854d0e; --badge-medium-border: #fde047;
-    --badge-low-bg: #dbeafe;    --badge-low-text: #1e40af;    --badge-low-border: #93c5fd;
-    --badge-done-bg: #dcfce7;   --badge-done-text: #166534;   --badge-done-border: #86efac;
+    --badge-high-bg: #3c1e1e;   --badge-high-text: #fc8181;   --badge-high-border: #e53e3e;
+    --badge-medium-bg: #3c2a1a; --badge-medium-text: #f6ad55; --badge-medium-border: #dd6b20;
+    --badge-low-bg: #1a2e3b;    --badge-low-text: #63b3ed;    --badge-low-border: #3182ce;
+    --badge-done-bg: #1c3d27;   --badge-done-text: #68d391;   --badge-done-border: #28a745;
 
     /* 🎨 PROGRESS AND FILTER TRACKS */
-    --progress-bar-fill: linear-gradient(180deg, #4ade80, #16a34a);                     /* Glowing emrald vista tracker bars */
+    --progress-bar-fill: linear-gradient(180deg, #4ade80, #16a34a);                                 /* Classic glossy green progress loading tracker */
     
-    --filter-border-color: #16a34a;
-    --filter-focus-color: #16a34a;
-    --filter-focus-shadow: rgba(22, 163, 74, 0.3);
+    --filter-border-color: rgba(255, 255, 255, 0.3);
+    --filter-focus-color: #4ade80;
+    --filter-focus-shadow: rgba(74, 222, 128, 0.25);
 
-    --focus-halo-color: #22c55e;
-    --focus-halo-shadow: rgba(34, 197, 94, 0.25);
+    --focus-halo-color: #63b3ed;
+    --focus-halo-shadow: rgba(99, 179, 237, 0.2);
 
     /* 🔮 WINDOWS VISTA GLOSSY HOVER AND FILL VARIATION MATRICES */
-    --btn-submit-bg: #16a34a;           --btn-submit-text: #ffffff;         --btn-submit-border: #14532d;
-    --btn-submit-hover-bg: #22c55e;     --btn-submit-hover-text: #ffffff;   --btn-submit-hover-border: #4ade80;
+    --btn-submit-bg: rgba(255, 255, 255, 0.15);  --btn-submit-text: #4ade80;         --btn-submit-border: rgba(255, 255, 255, 0.3);
+    --btn-submit-hover-bg: #16a34a;             --btn-submit-hover-text: #ffffff;   --btn-submit-hover-border: #4ade80;
 
-    --btn-cancel-bg: #ffffff;           --btn-cancel-text: #475569;         --btn-cancel-border: #cbd5e1;
-    --btn-cancel-hover-bg: #64748b;     --btn-cancel-hover-text: #ffffff;   --btn-cancel-hover-border: #cbd5e1;
+    --btn-cancel-bg: rgba(255, 255, 255, 0.05);  --btn-cancel-text: #94a3b8;         --btn-cancel-border: rgba(255, 255, 255, 0.1);
+    --btn-cancel-hover-bg: #4a5568;             --btn-cancel-hover-text: #ffffff;   --btn-cancel-hover-border: #cbd5e1;
 
-    --btn-filter-bg: #ffffff;           --btn-filter-text: #16a34a;         --btn-filter-border: #86efac;
-    --btn-filter-hover-bg: #16a34a;     --btn-filter-hover-text: #ffffff;   --btn-filter-hover-border: #1565c0;
+    --btn-filter-bg: rgba(255, 255, 255, 0.05);  --btn-filter-text: #63b3ed;         --btn-filter-border: rgba(255, 255, 255, 0.1);
+    --btn-filter-hover-bg: #3182ce;             --btn-filter-hover-text: #ffffff;   --btn-filter-hover-border: #63b3ed;
 
-    --btn-delete-bg: #ffffff;           --btn-delete-text: #b91c1c;         --btn-delete-border: #fca5a5;
-    --btn-delete-hover-bg: #b91c1c;     --btn-delete-hover-text: #ffffff;   --btn-delete-hover-border: #991b1b;
+    --btn-delete-bg: rgba(255, 255, 255, 0.05);  --btn-delete-text: #fc8181;         --btn-delete-border: rgba(255, 255, 255, 0.1);
+    --btn-delete-hover-bg: #e53e3e;             --btn-delete-hover-text: #ffffff;   --btn-delete-hover-border: #fc8181;
 
     /* THEMATIC TYPE MODIFIERS */
     --btn-text-transform: none;
     --btn-font-style: normal;
 
-    --link-color-override: #22c55e;
+    --link-color-override: #63b3ed;
 }
 
 [data-theme="7"] {
