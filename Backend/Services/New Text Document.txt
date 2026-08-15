@@ -6,43 +6,37 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers
 {
-    [Authorize] // This locks down EVERY endpoint inside this contoller & Enforces security validation JWT token checks!
+    [Authorize] 
     [ApiController]
     [Route("api/[controller]")]
     public class ProjectController: ControllerBase
     {
-        private readonly IProjectService _projectService;
+        private readonly IProjectService _projectService; 
 
         public ProjectController(IProjectService projectService)
         {
             _projectService = projectService;
         }
 
-        [HttpPost] // POST api/project
+        [HttpPost] 
         public async Task<IActionResult> CreateProject(ProjectCreateDto request)
         {
-            // Extract the User ID out of their unique JWT Tokens
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
             if(userIdClaim == null) return Unauthorized("User identity could not be verified from token!");
 
             int userId = int.Parse(userIdClaim.Value);
-            
-            // Call service to instantiate the project and map creator permissions
             int projectId = await _projectService.CreateProjectAsync(userId, request);
 
             return Ok(new { message = "Project created successfully!", projectId = projectId });
         }
 
-        [HttpGet] // GET api/project (Retrieves all projects belonging to the logged-in user)
+        [HttpGet] 
         public async Task<IActionResult> GetMyProjects()
         {
-            // Extract the unique User ID safely from the encrypted JWT Token claims
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
             if(userIdClaim == null) return Unauthorized();
 
             int userId = int.Parse(userIdClaim.Value);
-
-            // Call service to execute our LINQ layout join queries cleanly
             var projectWithRoles = await _projectService.GetMyProjectsAsync(userId);
 
             return Ok(projectWithRoles);
@@ -51,9 +45,8 @@ namespace Backend.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProject(int id)
         {
-            // Call service to wipe the project room alongside its tasks safely
             var success = await _projectService.DeleteProjectAsync(id);
-            if(!success) return NotFound(new { message = "Project not found!" });
+            if (!success) return NotFound(new { message = "Project not found!" });
 
             return Ok(new { message = "Project and all its tasks were deleted successfully!" });
         }
@@ -61,19 +54,17 @@ namespace Backend.Controllers
         [HttpPost("{projectId}/invite")]
         public async Task<IActionResult> InviteMember(int projectId, [FromBody] ProjectInviteDto request)
         {
-            // Extract the current logged-in User's unique ID directly from their token claims
             var userIdClaim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
             if(string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out int currentUserId))
             {
                 return Unauthorized(new { message = "Invalid or expired session token!" });
             }
 
-            // Offload workspace invite verification logic to service engine
             var outcome = await _projectService.InviteMemberAsync(projectId, currentUserId, request);
 
-            if(outcome == "Forbidden") return Forbid();
-            if(outcome == "UserNotFound") return NotFound(new { message = "No user found with that email address!" });
-            if(outcome == "AlreadyMember") return BadRequest(new { message = "This user is already a member of this project workspace!" });
+            if (outcome == "Forbidden") return Forbid();
+            if (outcome == "UserNotFound") return NotFound(new { message = "No user found with that email address!" });
+            if (outcome == "AlreadyMember") return BadRequest(new { message = "This user is already a member of this project workspace!" });
 
             return Ok(new { message = $"User '{outcome}' successfully added to the project room!" });
         }
@@ -81,19 +72,17 @@ namespace Backend.Controllers
         [HttpDelete("{projectId}/members/{targetUserId}")]
         public async Task<IActionResult> RemoveProjectMember(int projectId, int targetUserId)
         {
-            // Extract the current logged-in user ID safely from token claims
             var userIdClaim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
             if(string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out int currentUserId))
             {
                 return Unauthorized();
             }
 
-            // Execute removal rules safely down inside the service
             var outcome = await _projectService.RemoveProjectMemberAsync(projectId, currentUserId, targetUserId);
 
-            if(outcome == "NotFound") return NotFound(new { message = "Target member record not found in this project room." });
-            if(outcome == "Forbidden") return Forbid();
-            if(outcome == "SoleOwnerTrap") return BadRequest(new { message = "You are the sole Owner of this project! Assign another Owner before leaving or delete the project from dashboard." });
+            if (outcome == "NotFound") return NotFound(new { message = "Target member record not found in this project room." });
+            if (outcome == "Forbidden") return Forbid();
+            if (outcome == "SoleOwnerTrap") return BadRequest(new { message = "You are the sole Owner of this project! Assign another Owner before leaving." });
 
             var messageString = outcome == "KickedSuccess" ? "Member successfully removed from project." : "You have left the project room safely.";
             return Ok(new { message = messageString });

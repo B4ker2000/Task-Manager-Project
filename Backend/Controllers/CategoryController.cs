@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Backend.Data;
 using Backend.Models;
 using Backend.Dtos;
+using Backend.Services;
 using System.Security.Claims;
 
 namespace Backend.Controllers
@@ -14,10 +15,12 @@ namespace Backend.Controllers
     public class CategoryController: ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly ICategoryService _categoryService;
 
-        public CategoryController(ApplicationDbContext context)
+        public CategoryController(ApplicationDbContext context, ICategoryService categoryService)
         {
             _context = context;
+            _categoryService = categoryService;
         }
 
         [HttpGet]
@@ -33,31 +36,22 @@ namespace Backend.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateCategory(int projectId, CategoryCreateDto dto)
         {
+            // Extract current authenticated user identity details safely
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if(string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out int currentUserId))
             {
                 return Unauthorized();
             }
 
-            var membership = await _context.ProjectMembers
-                .FirstOrDefaultAsync(pm => pm.ProjectId == projectId && pm.UserId == currentUserId);
+            // Call our service to handle the heavy lifting!
+            var createdCategory = await _categoryService.CreateCategoryAsync(projectId, currentUserId, dto);
 
-            if(membership == null || membership.ProjectRole != "Owner")
+            if(createdCategory == null)
             {
-                return Forbid();
+                return Forbid(); // The service returned null because the user isn't an Owner 
             }
 
-            var newCategory = new Category
-            {
-                Name = dto.Name.Trim(),
-                ColorHex = dto.ColorHex.Trim(),
-                ProjectId = projectId
-            };
-
-            _context.Categories.Add(newCategory);
-            await _context.SaveChangesAsync();
-
-            return Ok(new { message = "Category tag created successfully!", category = newCategory });
+            return Ok(new { message = "Category tag created successfully!", category = createdCategory });
         }
 
         [HttpDelete("{categoryId}")]
@@ -70,27 +64,14 @@ namespace Backend.Controllers
                 return Unauthorized();
             }
 
-            // Verify Authorization: Only space Owners/Project Managers can delete categories!
-            var membership = await _context.ProjectMembers
-                .FirstOrDefaultAsync(pm => pm.ProjectId == projectId && pm.UserId == currentUserId);
-            
-            if(membership == null || membership.ProjectRole != "Owner")
+            // Call our service to delete the category
+            var success = await _categoryService.DeleteCategoryAsync(projectId, categoryId, currentUserId);
+
+            if(!success)
             {
-                return Forbid(); // Turn away unauthorized regular space members!
+                // If it fails, it means the user isn't an Owner or the Category doesn't exist
+                return BadRequest(new { message = "Category deletion failed. Verify permissions or category existence." });
             }
-
-            // Locate target category tag row record
-            var category = await _context.Categories
-                .FirstOrDefaultAsync(cat => cat.ProjectId == projectId && cat.Id == categoryId);
-
-            if(category == null)
-            {
-                return NotFound(new { message = "Category tag record not found inside this workspace." });
-            }
-
-            // Erase the record! Any task cards carrying this tag will safely drop it without getting deleted!
-            _context.Categories.Remove(category);
-            await _context.SaveChangesAsync();
 
             return Ok(new { message = "Category workspace tag successfully expunged." });
         }

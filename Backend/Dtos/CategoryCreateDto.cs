@@ -6,10 +6,10 @@ namespace Backend.Dtos
     {
         [Required]
         [StringLength(50)]
-        public string Name { get; set; }
+        public required string Name { get; set; }
 
         [Required]
         [StringLength(7)]
-        public string ColorHex { get; set; }
+        public required string ColorHex { get; set; }
     }
 }

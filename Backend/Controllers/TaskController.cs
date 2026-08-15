@@ -1,13 +1,10 @@
 using Backend.Data;
 using Backend.Dtos;
 using Backend.Models;
+using Backend.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using SQLitePCL;
-using System.Security.Claims;
-using System.Security.Cryptography;
 
 namespace Backend.Controllers
 {
@@ -16,207 +13,101 @@ namespace Backend.Controllers
     [Route("api/[controller]")]
     public class TaskController: ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ITaskService _taskService;
         
-        public TaskController(ApplicationDbContext context)
+        public TaskController(ITaskService taskService)
         {
-            _context = context;
+            _taskService = taskService;
         }
 
         [HttpPost] // POST api/tasks
         public async Task<IActionResult> CreateTask(TaskCreateDto request)
         {
-            // 1. Extract the current logged-in User ID directly from the token claims
+            // Extract the current logged-in User ID directly from the token claims
             var userIdClaim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
             if(string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out int currentUserId))
             {
                 return Unauthorized(new { message = "Invalid or expired session token!" });
             }
 
-            // 2. Check membership and role in one single database trip
-            var memberRecord = await _context.ProjectMembers
-                .FirstOrDefaultAsync(pm => pm.ProjectId == request.ProjectId && pm.UserId == currentUserId);
+            // Let the service handle checking permission records and saving files
+            var result = await _taskService.CreateTaskAsync(currentUserId, request);
 
-            // If no record is found, it means the project doesn't exist OR the user isn't assigned to it!
-            if(memberRecord == null)
-            {
-                return BadRequest("The specified project does not exist, or you are not a member of it!");
-            }
+            if(result.IsForbidden) return Forbid();
+            if(result.ErrorMessage != null) return BadRequest(result.ErrorMessage);
 
-            // If the users are a member but not the manager/owner, block them 
-            if(memberRecord.ProjectRole != "Owner")
-            {
-                return Forbid();
-            }
-
-            // 3. If all security gates pass, safely map and save the task
-            var taskItem = new TaskItem
-            {
-                Title = request.Title,
-                Description = request.Description,
-                Priority = request.Priority,
-                Deadline = request.Deadline,
-                Status = "Pending", // Tasks always start out as Pending
-                ProjectId = request.ProjectId
-            };
-
-            _context.Tasks.Add(taskItem);
-            await _context.SaveChangesAsync();
-
-            return Ok(new { message = "Task created successfully!", taskId = taskItem.Id });
+            return Ok(new { message = "Task created successfully!", taskId = result.Task?.Id });
         }
 
         [HttpGet("project/{projectId}")] // GET api/task/project/1 (Get all tasks for a specific project)
         public async Task<IActionResult> GetProjectTasks(int projectId)
         {
-            // 1. Extract the current user's ID safely from the secure token claims payload
+            // Extract the current user's ID safely from the secure token claims payload
             var userIdClaim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
             if(string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out int currentUserId))
             {
                 return Unauthorized(new { message = "Session expired or invalid token structure." });
             }
 
-            // 2. Fetch all tasks assigned to this project room
-            var projectTasks = await _context.Tasks
-            .Include(t => t.Category)
-            .Where(t => t.ProjectId == projectId)
-            .ToListAsync();
+            // Call service to bundle up roles, task lists, and dropdown teams together
+            var workspaceData = await _taskService.GetProjectTasksAsync(projectId, currentUserId);
 
-            // 3. Check what role clearance this user holds in this specific room
-            var membership = await _context.ProjectMembers
-                .FirstOrDefaultAsync(pm => pm.ProjectId == projectId && pm.UserId == currentUserId);
-
-            // Default to "None" if a user somehow sneaked past the board gates entirely!
-            string userRoleInProject = membership?.ProjectRole ?? "None";
-
-            // Fetch project members for the assignment dropdown selector
-            var teamRoster = await _context.ProjectMembers
-                .Where(pm => pm.ProjectId == projectId)
-                .Select(pm => new
-                {
-                    userId = pm.UserId,
-                    userEmail = pm.User != null ? pm.User.Email : "Unknown User",
-                    userName = pm.User != null ? pm.User.Username : "Unknown",
-                    projectRole = pm.ProjectRole
-                })
-                .ToListAsync();
-
-            // 4. Return an elegant, dual-property response data package out to the frontend layout
-            return Ok(new
-            {
-                role = userRoleInProject, // Tells the frontend if they are "Owner" or "Member"
-                tasks = projectTasks,    // Sends your task card records array
-                team = teamRoster
-            });
+            return Ok(workspaceData);
         }
 
         [HttpPut("{id}/status")] // PUT api/task/1/status (update the task status)
         public async Task<IActionResult> UpdateTaskStatus(int id, TaskUpdateStatusDto request)
         {
-            // 1. Locate the task item row
-            var task = await _context.Tasks.FindAsync(id);
-            if(task == null)
-            {
-                return NotFound("Task not found.");
-            }
+            var outcome = await _taskService.UpdateTaskStatusAsync(id, request.Status);
 
-            // Safety Guard to protect against unauthorized status injections!
-            var validStatuses = new[] { "Pending", "In Progress", "Review Required", "Completed" };
-            if(!validStatuses.Contains(request.Status))
-            {
-                BadRequest(new { message = $"'{request.Status}' is not a valid task status!" });
-            }
+            if(outcome == "NotFound") return NotFound("Task not found.");
+            if(outcome == "InvalidStatus") return BadRequest(new { message = $"'{request.Status}' is not a valid task status!" });
 
-            // 2. Save the validated status
-            task.Status = request.Status;
-            await _context.SaveChangesAsync();
-
-            return Ok(new { message = "Task status updated successfully!"});
+            return Ok(new { message = "Task status updated successfully!" });
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTask(int id)
         {
-            // 1. Extract the unique User ID safely from the encrypted JWT Token claims
+            // Extract the unique User ID safely from the encrypted JWT Token claims
             var userIdClaim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
             if(string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out int currentUserId))
             {
                 return Unauthorized(new { message = "Invalid user session token!" });
             }
 
-            // 2. Find the task in the database by its ID
-            var task = await _context.Tasks.FindAsync(id);
-            // 3. If the task doesn't exist, return a 404 error
-            if(task == null)
-            {
-                return NotFound("Task not found.");
-            }
+            var outcome = await _taskService.DeleteTaskAsync(id, currentUserId);
+            
+            if(outcome == "NotFound") return NotFound("Task not found.");
+            if(outcome == "Forbidden") return Forbid();
 
-            // Look up the current user's membership clearance for this task's specific project
-            var membership = await _context.ProjectMembers
-                .FirstOrDefaultAsync(pm => pm.ProjectId == task.ProjectId && pm.UserId == currentUserId);
-
-            // If the users aren't registered to this project, or if their roles aren't set to "Owner", deny access to delete tasks!
-            if(membership == null || membership.ProjectRole != "Owner")
-            {
-                return Forbid(); // Returns a clean 403 Forbidden status code response package!
-            }
-
-            // 4. Remove it from the Entity Framework context and save changes
-            _context.Tasks.Remove(task);
-            await _context.SaveChangesAsync();
-
-            // 5. Return a success message
             return Ok(new { message = "Task deleted successfully!" });
         }
 
         [HttpPut("{taskId}/assign")]
         public async Task<IActionResult> AssignTask(int taskId, [FromBody] TaskAssignDto request)
         {
-            // 1. Find the target task in the database
-            var taskItem = await _context.Tasks.FindAsync(taskId);
-            if(taskItem == null) return NotFound("Task not found!");
-
-            // 2. Verify security: Only an Owner of the project should be allowed to assign tasks!
             var userIdClaim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
-            int currentUserId = int.Parse(userIdClaim!);
+            if(string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out int currentUserId)) return Unauthorized();
 
-            var membership = await _context.ProjectMembers
-                .FirstOrDefaultAsync(pm => pm.ProjectId == taskItem.ProjectId && pm.UserId == currentUserId);
+            var outcome = await _taskService.AssignTaskAsync(taskId, currentUserId, request.AssignedUserId);
 
-            if(membership == null || membership.ProjectRole != "Owner")
-            {
-                return Forbid(); // Blocks regular members from changing assignments
-            }
-
-            // 3. Update the assignment (can be null if unassigned)
-            taskItem.AssignedUserId = request.AssignedUserId;
-            await _context.SaveChangesAsync();
-
+            if(outcome == "NotFound") return NotFound("Task not found!");
+            if(outcome == "Forbidden") return Forbid();
+            
             return Ok(new { message = "Task assignment updated successfully!" });
         }
 
         [HttpPut("{taskId}/category")]
         public async Task<IActionResult> AssignTaskCategory(int taskId, [FromBody] TaskCategoryUpdateDto request)
         {
-            var taskItem = await _context.Tasks.FindAsync(taskId);
-            if(taskItem == null) return NotFound("Task not found");
-
-            // Security Gate: Verify that the user is an owner or the person assigned to the task!
             var userIdClaim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
-            int currentUserId = int.Parse(userIdClaim!);
-
-            var membership = await _context.ProjectMembers
-                .FirstOrDefaultAsync(pm => pm.ProjectId == taskItem.ProjectId && pm.UserId == currentUserId);
-
-            if(membership == null || (membership.ProjectRole != "Owner" && taskItem.AssignedUserId != currentUserId))
-            {
-                return Forbid(); // Blocks unauthorized users
-            }
-
-            // Save the update
-            taskItem.CategoryId = request.CategoryId;
-            await _context.SaveChangesAsync();
+            if(string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out int currentUserId)) return Unauthorized();
+            
+            var outcome = await _taskService.AssignTaskCategoryAsync(taskId, currentUserId, request.CategoryId);
+            
+            if(outcome == "NotFound") return NotFound("Task not found");
+            if(outcome == "Forbidden") return Forbid();
 
             return Ok(new { message = "Category tag linked to task successfully!" });
         }

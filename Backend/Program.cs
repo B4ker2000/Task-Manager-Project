@@ -2,24 +2,26 @@ using Backend.Data;
 using Backend.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// 1. Add services to the container.
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
 });
 
-// Configure EF Core with SQLite
+// 2. Configure EF Core with SQLite
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // 3. Register our Password/Token Helper Service
-builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ITaskService, TaskService>();
+builder.Services.AddScoped<IProjectService, ProjectService>();
 
 // 4. Configure JWT Security Guard 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -46,7 +48,7 @@ var app = builder.Build();
 
 app.UseCors("AllowAngular"); // Related to 5. but should be between "var app = builder.build();" and "app.UseAuthentication();"
 
-// 5. Middleware Pipeline Routing (Order matters here!)
+// 6. Middleware Pipeline Routing (Order matters here!)
 app.UseAuthentication(); // Checks who you are via JWT
 app.UseAuthorization();  // Checks what you are allowed to do
 

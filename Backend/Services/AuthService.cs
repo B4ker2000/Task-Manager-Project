@@ -1,17 +1,96 @@
 using System.Security.Cryptography;
 using System.Text;
-using System.IdentityModel;
 using System.Security.Claims;
-using Microsoft.IdentityModel.Tokens;
-using Backend.Models;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.EntityFrameworkCore;
+using Backend.Models;
+using Backend.Data;
+using Backend.Dtos;
 
 namespace Backend.Services
 {
-    public class AuthService
+    public class AuthService : IAuthService
     {
+        private readonly ApplicationDbContext _context;
+
+        // Inject our Database Context directly into our service
+        public AuthService(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        // 1. Handles User Registration Logic
+        public async Task<bool> RegisterAsync(UserRegisterDto request)
+        {
+            if(await _context.Users.AnyAsync(u => u.Email == request.Email))
+            {
+                return false; // Email already taken
+            }
+
+            CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
+
+            var user = new User
+            {
+                Username = request.Username,
+                Email = request.Email,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt
+            };
+
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+        // 2. Handle User Login Token Generation
+        public async Task<string?> LoginAsync(UserLoginDto request)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
+            if(user == null || !VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
+            {
+                return null; // Invalid credentials
+            }
+
+            return CreateToken(user);
+        }
+
+        // 3. Process Profile Statistics Generation
+        public async Task<object?> GetProfileAsync(int userId)
+        {
+            var user = await _context.Users.FindAsync(userId);
+            if(user == null) return null;
+
+            int totalAssignedTasks = 0;
+            int completedTasksCount = 0;
+
+            try
+            {
+                totalAssignedTasks = await _context.Tasks.CountAsync(t => t.AssignedUserId == userId);
+                completedTasksCount = await _context.Tasks.CountAsync(t => t.AssignedUserId == userId && t.Status == "Completed");
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Metrics loading encounter: {ex.Message}");
+            }
+
+            return new
+            {
+                id = user.Id,
+                username = user.Username,
+                email = user.Email,
+                role = "Member",
+                stats = new
+                {
+                    total = totalAssignedTasks,
+                    completed = completedTasksCount
+                }
+            };
+        }
+
+        // --- Core Internal Crypto Helper Utilities ---
         // 1. Turns a plain password into a secure Hash and Salt
-        public void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             using (var hmac = new HMACSHA512())
             {
@@ -21,7 +100,7 @@ namespace Backend.Services
         }
 
         // 2. Verifies if an entered password matches what we saved (we will use this for login later)
-        public bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
+        private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
             using (var hmac = new HMACSHA512(passwordSalt))
             {
@@ -31,7 +110,7 @@ namespace Backend.Services
         }
 
         // 3. JSON Web Tokens method
-        public string CreateToken(User user)
+        private string CreateToken(User user)
         {
             // 3.1. Create the claims (the information stored inside the token about the user)
             var claims = new List<Claim>
@@ -60,6 +139,45 @@ namespace Backend.Services
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
             return tokenHandler.WriteToken(token);
+        }
+
+        // 4. Handle Account Details Modification
+        public async Task<bool> UpdateAccountAsync(int userId, UpdateAccountDto request)
+        {
+            var user = await _context.Users.FindAsync(userId);
+            if(user == null) return false;
+
+            // 4.1 Optional Username Update
+            if(!string.IsNullOrWhiteSpace(request.NewUsername))
+            {
+                user.Username = request.NewUsername;
+            }
+
+            // 4.2 Optional Password Update (Re-hashes using internal helper)
+            if(!string.IsNullOrWhiteSpace(request.NewPassword))
+            {
+                CreatePasswordHash(request.NewPassword, out byte[] hash, out byte[] salt);
+                user.PasswordHash = hash;
+                user.PasswordSalt = salt;
+            }
+
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+        // 5. Handle Permanent Account Removal
+        public async Task<bool> DeleteAccountAsync(int userId)
+        {
+            var user = await _context.Users.FindAsync(userId);
+            if(user == null) return false;
+
+            // Clean out all personal projects and orphan tasks first to avoid database locking constraints
+            var userProjects = _context.Projects.Where(p => p.Id == userId);
+            var userTasks = _context.Tasks.Where(t => t.ProjectId == userId);
+
+            _context.Users.Remove(user);
+            await _context.SaveChangesAsync();
+            return true;
         }
     }
 }

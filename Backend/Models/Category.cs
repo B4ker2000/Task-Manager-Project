@@ -9,13 +9,13 @@ namespace Backend.Models
 
         [Required]
         [StringLength(50)]
-        public string Name { get; set; }
+        public required string Name { get; set; }
 
         [StringLength(7)]
-        public string ColorHex { get; set; }
+        public required string ColorHex { get; set; }
 
         public int ProjectId { get; set; }
-        public Project Project { get; set; }
+        public Project? Project { get; set; }
 
         public ICollection<TaskItem> Tasks { get; set; } = new List<TaskItem>();
     }
