@@ -1,7 +1,6 @@
 import { Injectable, inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, tap } from "rxjs";
-import { observableToBeFn } from "rxjs/internal/testing/TestScheduler";
 
 @Injectable({
     providedIn: 'root'
@@ -15,26 +14,32 @@ export class AuthService {
         return this.http.post(`${this.apiUrl}/register`, user, { responseType: 'text' });
     }
 
-    // 2. Send login credentials and save the token if successful
-    login(credentials: any): Observable<any> {
+    // 2. Send login credentials and save token dynamically based on Remember Me option
+    login(credentials: { email: string; password?: string; rememberMe?: boolean }): Observable<any> {
         return this.http.post<any>(`${this.apiUrl}/login`, credentials).pipe(
             tap(response => {
-                if(response && response.token) {
-                    // Save the digital wristband token securely in the browser!
-                    localStorage.setItem('token', response.token);
+                if (response && response.token) {
+                    // Save the digital wristband token securely based on the user's preference!
+                    if (credentials.rememberMe) {
+                        localStorage.setItem('token', response.token);
+                    } else {
+                        sessionStorage.setItem('token', response.token);
+                    }
                 }
             })
         );
     }
 
-    // 3. Clear token to log out
+    // 3. Clear token from BOTH storage locations to log out
     logout(): void {
         localStorage.removeItem('token');
+        sessionStorage.removeItem('token');
     }
 
-    // 4. Check if the user is currently logged in
+    // 4. Check if the user is currently logged in across either active storage module
     isLoggedIn(): boolean {
-        return !!localStorage.getItem('token'); // The first "!" basically trasnforms our 'token' which is eaither a long JWT string when logged-in and "null" when logged-out into a simple "true" for when logged-out and "false" for when logged-in. The second "!" basically inverts that so that it's "true" when logged-in & "false" when logged-out!
+        // Read from both repositories so unremembered sessions still pass validation
+        return !!localStorage.getItem('token') || !!sessionStorage.getItem('token');
     }
 
     // 5. Method needed for our "Profile" tab!

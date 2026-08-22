@@ -199,51 +199,51 @@
 
 [data-theme="vista"] {
     /* 📀 WINDOWS VISTA GLOSSY AERO ARCHITECTURE PRESETS */
-    --surface-bg: rgba(30, 41, 59, 0.7);                                                               /* Deep charcoal translucent glass card backing */
-    --container-bg: rgba(15, 23, 42, 0.4);
-    --wallpaper: linear-gradient(135deg, #050b14 0%, #0c2540 40%, #143d28 75%, #2e5c1e 100%);   /* Gorgeous blend of deep midnight obsidian blues with soft emrald glow */
-    --border-color: rgba(255, 255, 255, 0.4);
-    --input-bg: #1e1e1e;
-    --font-override: sans-serif;
+    --surface-bg: rgba(255, 255, 255, 0.75);                                                          /* Solid crisp frosted glass backing */
+    --container-bg: rgba(220, 230, 242, 0.55);                                                        /* Rich misty sky-blue panel base */
+    --wallpaper: linear-gradient(135deg, #0052d4 0%, #4364f7 35%, #6fb1fc 65%, #2af598 100%);  /* Vivid Vista Aurora: High-saturation Royal Blue, Deep Sapphire, Teal, and Neon Emerald Green */
+    --border-color: rgba(255, 255, 255, 0.85);                                                        /* Bright gleaming bevel border edge line */
+    --input-bg: #ffffff;                                                                              /* Absolute solid white input boxes */
+    --font-override: 'Segoe UI', sans-serif;                                                            /* True default corporate system typeface */
 
-    --text-primary: #ffffff;
-    --text-secondary: #ffffff;      /* Clear dar charcoal ard content text font */
-    --text-muted: #94a3b8; 
+    --text-primary: #0a1424;                                                                          /* Ultra-dark deep sapphire body title text */
+    --text-secondary: #1a2a40;                                                                        /* Deep high-contrast text layout body font */
+    --text-muted: #415268;                                                                            /* Darker slate font tone */
 
     /* 📊 DYNAMIC AERO GLASS ACCESSIBILITY BADGES */
-    --badge-high-bg: #3c1e1e;   --badge-high-text: #fc8181;   --badge-high-border: #e53e3e;
-    --badge-medium-bg: #3c2a1a; --badge-medium-text: #f6ad55; --badge-medium-border: #dd6b20;
-    --badge-low-bg: #1a2e3b;    --badge-low-text: #63b3ed;    --badge-low-border: #3182ce;
-    --badge-done-bg: #1c3d27;   --badge-done-text: #68d391;   --badge-done-border: #28a745;
+    --badge-high-bg: #ffeef0;   --badge-high-text: #9b1c1c;   --badge-high-border: #f8b4b4;
+    --badge-medium-bg: #fff8eb; --badge-medium-text: #975a16; --badge-medium-border: #fbd38d;
+    --badge-low-bg: #ebf8ff;    --badge-low-text: #2c5282;    --badge-low-border: #bee3f8;
+    --badge-done-bg: #f0fff4;   --badge-done-text: #22543d;   --badge-done-border: #c6f6d5;
 
     /* 🎨 PROGRESS AND FILTER TRACKS */
-    --progress-bar-fill: linear-gradient(180deg, #4ade80, #16a34a);                                 /* Classic glossy green progress loading tracker */
+    --progress-bar-fill: linear-gradient(180deg, #34d399 0%, #059669 50%, #047857 100%);         /* Pure classic 3D gelatinous glossy green capsule loader */
     
-    --filter-border-color: rgba(255, 255, 255, 0.3);
-    --filter-focus-color: #4ade80;
-    --filter-focus-shadow: rgba(74, 222, 128, 0.25);
+    --filter-border-color: rgba(0, 0, 0, 0.25);
+    --filter-focus-color: #059669;
+    --filter-focus-shadow: rgba(5, 150, 105, 0.4);
 
-    --focus-halo-color: #63b3ed;
-    --focus-halo-shadow: rgba(99, 179, 237, 0.2);
+    --focus-halo-color: #4364f7;
+    --focus-halo-shadow: rgba(67, 100, 247, 0.35);
 
     /* 🔮 WINDOWS VISTA GLOSSY HOVER AND FILL VARIATION MATRICES */
-    --btn-submit-bg: rgba(255, 255, 255, 0.15);  --btn-submit-text: #4ade80;         --btn-submit-border: rgba(255, 255, 255, 0.3);
-    --btn-submit-hover-bg: #16a34a;             --btn-submit-hover-text: #ffffff;   --btn-submit-hover-border: #4ade80;
+    --btn-submit-bg: rgba(5, 150, 105, 0.12);   --btn-submit-text: #047857;         --btn-submit-border: #059669;
+    --btn-submit-hover-bg: #059669;             --btn-submit-hover-text: #ffffff;   --btn-submit-hover-border: #34d399;
 
-    --btn-cancel-bg: rgba(255, 255, 255, 0.05);  --btn-cancel-text: #94a3b8;         --btn-cancel-border: rgba(255, 255, 255, 0.1);
-    --btn-cancel-hover-bg: #4a5568;             --btn-cancel-hover-text: #ffffff;   --btn-cancel-hover-border: #cbd5e1;
+    --btn-cancel-bg: rgba(0, 0, 0, 0.08);       --btn-cancel-text: #2d3748;         --btn-cancel-border: rgba(0, 0, 0, 0.2);
+    --btn-cancel-hover-bg: #4a5568;             --btn-cancel-hover-text: #ffffff;   --btn-cancel-hover-border: #718096;
 
-    --btn-filter-bg: rgba(255, 255, 255, 0.05);  --btn-filter-text: #63b3ed;         --btn-filter-border: rgba(255, 255, 255, 0.1);
-    --btn-filter-hover-bg: #3182ce;             --btn-filter-hover-text: #ffffff;   --btn-filter-hover-border: #63b3ed;
+    --btn-filter-bg: rgba(67, 100, 247, 0.1);   --btn-filter-text: #1a365d;         --btn-filter-border: #4364f7;
+    --btn-filter-hover-bg: #4364f7;             --btn-filter-hover-text: #ffffff;   --btn-filter-hover-border: #6fb1fc;
 
-    --btn-delete-bg: rgba(255, 255, 255, 0.05);  --btn-delete-text: #fc8181;         --btn-delete-border: rgba(255, 255, 255, 0.1);
-    --btn-delete-hover-bg: #e53e3e;             --btn-delete-hover-text: #ffffff;   --btn-delete-hover-border: #fc8181;
+    --btn-delete-bg: rgba(229, 62, 62, 0.12);    --btn-delete-text: #9b1c1c;         --btn-delete-border: #e53e3e;
+    --btn-delete-hover-bg: #e53e3e;             --btn-delete-hover-text: #ffffff;   --btn-delete-hover-border: #f8b4b4;
 
     /* THEMATIC TYPE MODIFIERS */
     --btn-text-transform: none;
     --btn-font-style: normal;
 
-    --link-color-override: #63b3ed;
+    --link-color-override: #2b6cb0;
 }
 
 [data-theme="7"] {
@@ -857,6 +857,8 @@ select:focus,
 .project-card:active,
 .task-card *:active,
 .project-card *:active,
+.cdk-drag-dragging,
+.cdk-drag-dragging *,
 .cdk-drag-preview,
 .cdk-drag-preview *,
 html.cdk-global-scroll-block,
@@ -872,6 +874,7 @@ body.cdk-drag-dragging * {
 .cdk-drop-list-receiving .task-card,
 .cdk-drop-list-dragging .task-card {
     transition: transform 0.2s cubic-bezier(0, 0, 0.2, 1);
+    cursor: grabbing;
 }
 
 /* Animates the list elements rearranging themselves fluidly while we hover over a column slot */
