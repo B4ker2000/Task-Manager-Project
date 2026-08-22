@@ -11,7 +11,7 @@ export const authInterceptor: HttpInterceptorFn = (
 
     // Only look for the token if we are running safely in the browser window
     if(isPlatformBrowser(platformId)) {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('token') || sessionStorage.getItem('token');
 
         if(token) {
             // Clone the request and insert the Authorization header

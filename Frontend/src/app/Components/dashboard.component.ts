@@ -39,7 +39,7 @@ export class DashboardComponent implements OnInit {
 
     loadProjects(): void {
         // Defensive check: If there is no token in the browser, stop immediately and don't call the the API!
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('token') || sessionStorage.getItem('token');
         if(!token) return; // Stop completely if no token exists
         
         this.projectService.getMyProjects().subscribe({

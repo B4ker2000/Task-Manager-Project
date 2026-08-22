@@ -68,11 +68,6 @@
     text-align: left;
 }
 
-.form-group input,
-.form-group textarea {
-    border: 2px solid var(--filter-border-color, #cbd5e1) !important;
-}  
-
 .form-group label { 
     display: block; 
     font-weight: bold; 
@@ -100,16 +95,6 @@ textarea {
 /* =========================================================================
     DEDICATED BRAND COLOR INTERACTION HOVER OVERRIDES
    ========================================================================= */
-.create-btn:hover:not(:disabled) {
-    background-color: var(--filter-focus-color);
-    color: var(--surface-bg, #ffffff);
-    border-color: var(--filter-border-color);
-}
-
-.create-btn:disabled { 
-    color: var(--text-muted) !important; 
-}
-
 /* --- Right Side: Existing Project Cards List Feed Grid --- */
 .list-section {
     flex: 2;
