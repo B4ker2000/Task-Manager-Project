@@ -31,6 +31,10 @@
     gap: 10px;
 }
 
+.form-group-row label {
+    cursor: pointer;
+}
+
 /* =========================================================================
    3-COLUMN SYSTEM WORKFLOW BLOCKS & GRID SHUFFLING FIELDS
    ========================================================================= */
@@ -110,7 +114,7 @@
 .review-status-banner {
     background-color: var(--badge-medium-bg, #feebc8);
     color: var(--badge-medium-text, #dd6b20);
-    font-size: calc(48px * var(--font-scale));
+    font-size: calc(14px * var(--font-scale));
     font-weight: 700;
     padding: 4px 8px;
     border-radius: 4px;

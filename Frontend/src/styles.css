@@ -1,5 +1,3 @@
-@import url('https://googleapis.com');
-
 /* =========================================================================
     CORE GLOBAL PALETTE VARIANT INVENTORY
    ========================================================================= */
@@ -524,15 +522,19 @@
    ACCESSIBILITY OPTIONS
    ========================================================================= */
 /* OpenDyslexic Option */
-[data-accessible-font="dyslexic"] {
-   --font-override: 'OpenDyslexic', sans-serif !important;
-   --font-monospace: 'OpenDyslexicMono', monospace !important;
+[data-accessible-font="dyslexic"] *,
+[data-accessible-font="dyslexic"] *:before,
+[data-accessible-font="dyslexic"] *:after {
+   --font-override: "OpenDyslexic", "Comic Sans MS", "Comic Sans", cursive !important;
+   --font-monospace: "OpenDyslexicMono", monospace !important;
 }
 
 /* DejaVu Sans Option */
-[data-accessible-font="dejavu"] {
-   --font-override: 'DejaVu Sans', sans-serif !important;
-   --font-monospace: 'DejaVu Sans Mono', monospace !important;
+[data-accessible-font="dejavu"] *,
+[data-accessible-font="dejavu"] *:before,
+[data-accessible-font="dejavu"] *:after {
+   --font-override: "DejaVu Sans", "Trebuchet MS", Arial, sans-serif !important;
+   --font-monospace: "DejaVu Sans Mono", monospace !important;
 }
 
 /* High Contrast Options */
@@ -542,14 +544,31 @@
 }
 
 /* Ensure all text blocks, containers, cards, and text inputs comply */
-[data-high-contrast="true"] *,
-[data-high-contrast="true"] *:before,
-[data-high-contrast="true"] *:after {
+[data-high-contrast="true"] p,
+[data-high-contrast="true"] span,
+[data-high-contrast="true"] h1, [data-high-contrast="true"] h2,
+[data-high-contrast="true"] h3, [data-high-contrast="true"] h4,
+[data-high-contrast="true"] h5, [data-high-contrast="true"] h6,
+[data-high-contrast="true"] button,
+[data-high-contrast="true"] select,
+[data-high-contrast="true"] input,
+[data-high-contrast="true"] textarea,
+[data-high-contrast="true"] label,
+[data-high-contrast="true"] a,
+[data-high-contrast="true"] table,  [data-high-contrast="true"] td, [data-high-contrast="true"] th,
+[data-high-contrast="true"] .review-status-banner,
+[data-high-contrast="true"] input[type="checkbox"]:checked::after {
     background-color: #000000 !important;
     color: #ffffff !important;
     border-color: #ffffff !important;
     text-shadow: none !important;
     box-shadow: none !important;
+    background-image: none !important;
+}
+
+/* Ensures placeholder texts inside inputs are visible in high contrast */
+[data-high-contrast="true"] ::placeholder {
+    color: #aaaaaa !important;
 }
 
 /* Colorblind Filters */
@@ -630,6 +649,43 @@ textarea:focus {
     border: 2px solid var(--focus-halo-color) !important;
     box-shadow: 0 0 0 3px var(--focus-halo-shadow) !important;
     outline: none;
+}
+
+/* Changes the placeholder text color */
+input[type="text"]::placeholder,
+input[type="date"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder,
+.board-interactive-field::placeholder,
+select::placeholder, 
+textarea::placeholder {
+    color: var(--text-muted);
+}
+
+input[type="checkbox"] {
+    appearance: none; /* Strips native browser styling */
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--focus-halo-shadow, #7f9db9);
+    background-color: var(--container-bg);
+    cursor: pointer;
+    position: relative;
+    display: inline-flex;
+}
+
+input[type="checkbox"]:hover {
+    border-color: var(--focus-halo-color);
+}
+
+input[type="checkbox"]:checked::after {
+    content: "✓";
+    position: absolute;
+    top: -3px;
+    left: 1px;
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--focus-halo-color);
 }
 
 /* Native OS element date indicators overrides */
@@ -1047,3 +1103,16 @@ body.cdk-drag-dragging * {
     background-color: var(--btn-delete-hover-bg) !important;
     transform: scale(1.05); /* Adds a tiny, responsive tactile pop! */
 }
+
+/* =========================================================================
+   Universal Text Sizes
+   ========================================================================= */
+/* h1, h5,
+label {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    max-width: 100%;
+    text-align: left;
+    white-space: normal;
+} */

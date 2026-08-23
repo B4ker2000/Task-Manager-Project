@@ -74,9 +74,15 @@
     font-size: calc(13px * var(--font-scale)); 
     margin-bottom: 6px; 
     color: var(--text-muted); 
+    cursor: pointer;
 }
 
-textarea { 
+.new-project.input,
+.new-project.textarea {
+    border: 2px solid var(--filter-border-color, #cbd5e1) !important;
+}
+
+.new-project.textarea  { 
     height: 100px; 
     resize: vertical; 
 }

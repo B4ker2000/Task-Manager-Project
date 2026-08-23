@@ -1,9 +1,17 @@
 /* =========================================================================
-   LOCAL POSITIONING LAYOUT MATRIX (REGISTRATION WORKSPACE ROOM)
+   LOCAL POSITIONING LAYOUT MATRIX (REGISTRATION WORKSPACE ROOM) & HEADER COLOR
    ========================================================================= */
+.register-card h2 {
+    color: var(--text-secondary);
+}
+
 .form-group { 
     margin-bottom: 16px; 
     text-align: left; 
+}
+
+.form-group label { 
+    cursor: pointer;
 }
 
 /* Local structural sizing overrides for the primary submission key */

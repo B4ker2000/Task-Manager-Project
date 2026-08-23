@@ -1,10 +1,18 @@
 /* =========================================================================
-   LOCAL POSITIONING LAYOUT MATRIX (LOGIN ENTRANCE ROOM)
+   LOCAL POSITIONING LAYOUT MATRIX (LOGIN ENTRANCE ROOM) & HEADER COLORS
    ========================================================================= */
+.login-container h2 {
+    color: var(--text-secondary);
+}
+
 .form-group { 
     margin-bottom: 16px;
     text-align: left; 
 }
+
+.form-group label {
+    cursor: pointer;
+} 
 
 /* Local input geometry adjustments */
 input[type="email"] { 
@@ -70,6 +78,7 @@ input[type="email"] {
     align-items: center;
     gap: 8px;
     user-select: none;
+    cursor: pointer;
 }
 
 /* =========================================================================

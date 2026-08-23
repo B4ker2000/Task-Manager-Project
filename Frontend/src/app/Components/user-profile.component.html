@@ -50,45 +50,54 @@
                 <h4>🎨 Workspace Environment Preferences</h4>
 
                 <div class="config-control-row">
-                    <label for="themeEngineSelect" class="info-adjustment-label">Visual Application Theme:</label>
-                    <div class="control-input-wrapper">
-                        <select id="themeEngineSelect" [(ngModel)]="activeTheme" (change)="onThemeChangeEngineTrigger()" class="board-interactive-field select-config">
-                            <option value="light">☀️ Professional Light Mode</option>
-                            <option value="dark">🌙 Dark Workspace Canvas</option>
-                            <option value="BA">🔮 Schale Workspace (Blue Archive)</option>
-                            <option value="amber-crt">💽 Vintage Amber CRT Terminal</option>
-                            <option value="matrix-crt">📟 Vintage Green Matrix CRT Terminal</option>
-                            <option value="95/98">💾 Nostalgic Retro Windows 95/98</option>
-                            <option value="xp">💿 Classic Windows XP (Luna Blue)</option>
-                            <option value="vista">📀 Classic Windows Vista</option>
-                            <option value="7">🫧 Classic Windows 7</option>
-                            <option value="frutiger-aero">🌿 Frutiger Aero (Vibrant Eco-Cyber)</option>
-                        </select>
-                    </div>
+                    <!-- Theme Selector -->
+                     <div class="info-adjustment-group">
+                        <label for="themeEngineSelect" class="info-adjustment-label">Visual Application Theme:</label>
+                        <div class="control-input-wrapper">
+                            <select id="themeEngineSelect" [(ngModel)]="activeTheme" (change)="onThemeChangeEngineTrigger()" class="board-interactive-field select-config">
+                                <option value="light">☀️ Professional Light Mode</option>
+                                <option value="dark">🌙 Dark Workspace Canvas</option>
+                                <option value="BA">🔮 Schale Workspace (Blue Archive)</option>
+                                <option value="amber-crt">💽 Vintage Amber CRT Terminal</option>
+                                <option value="matrix-crt">📟 Vintage Green Matrix CRT Terminal</option>
+                                <option value="95/98">💾 Nostalgic Retro Windows 95/98</option>
+                                <option value="xp">💿 Classic Windows XP (Luna Blue)</option>
+                                <option value="vista">📀 Classic Windows Vista</option>
+                                <option value="7">🫧 Classic Windows 7</option>
+                                <option value="frutiger-aero">🌿 Frutiger Aero (Vibrant Eco-Cyber)</option>
+                            </select>
+                        </div>
+                     </div>
 
                     <!-- Font Selector -->
-                     <label for="fontSelect" class="info-adjustment-label">Font Style:</label>
-                     <select id="fontSelect" [(ngModel)]="activeFont" (change)="onFontChangeEngineTrigger()">
-                        <option value="">Theme Default</option>
-                        <option value="dejavu">DejaVu Sans</option>
-                        <option value="dyslexic">OpenDyslexic</option>
-                     </select>
-
-                    <!-- High Contrast Toggle -->
-                     <label class="info-adjustment-label">
-                     <input type="checkbox" [(ngModel)]="isHighContrast" (change)="onHighContrastEngineTrigger()">
-                        High Contrast Mode
-                     </label>
+                     <div class="info-adjustment-group">
+                        <label for="fontSelect" class="info-adjustment-label">Font Style:</label>
+                        <select id="fontSelect" [(ngModel)]="activeFont" (change)="onFontChangeEngineTrigger()">
+                            <option value="">Theme Default</option>
+                            <option value="dejavu">High-Legibility</option>
+                            <option value="dyslexic">Easy-to-Read (Dyslexia Friendly)</option>
+                        </select>
+                     </div>
 
                     <!-- Colorblind Filter Selector -->
-                     <label for="colorblindSelect" class="info-adjustment-label">Colorblind Filter:</label>
-                     <select id="colorblindSelect" [(ngModel)]="activeColorblind" (change)="onColorblindChangeEngineTrigger()">
-                        <option value="">None</option>
-                        <option value="deuteranopia">Deuteranopia (Green Weakness)</option>
-                        <option value="protanopia">Protanopia (Red Weakness)</option>
-                        <option value="tritanopia">Tritanopia (Blue Weakness)</option>
-                        <option value="grayscale">Grayscale (Monochrome)</option>
-                     </select>
+                     <div class="info-adjustment-group">
+                        <label for="colorblindSelect" class="info-adjustment-label">Colorblind Filter:</label>
+                        <select id="colorblindSelect" [(ngModel)]="activeColorblind" (change)="onColorblindChangeEngineTrigger()">
+                            <option value="">None</option>
+                            <option value="deuteranopia">Deuteranopia (Green Weakness)</option>
+                            <option value="protanopia">Protanopia (Red Weakness)</option>
+                            <option value="tritanopia">Tritanopia (Blue Weakness)</option>
+                            <option value="grayscale">Grayscale (Monochrome)</option>
+                        </select>
+                     </div>
+
+                    <!-- High Contrast Toggle -->
+                     <div class="info-adjustment-group">
+                        <label for="highContrast" class="info-adjustment-label">
+                            <input id="highContrast" type="checkbox" [(ngModel)]="isHighContrast" (change)="onHighContrastEngineTrigger()">
+                            <span>High Contrast Mode</span>
+                        </label>
+                     </div>
                 </div>
              </div>
 
@@ -99,14 +108,14 @@
                 <!-- Account Information Adjustment Form -->
                  <form (ngSubmit)="onUpdateAccount()" #settingsForm="ngForm" class="info-adjustment-form">
                     <div class="info-adjustment-group">
-                        <label class="info-adjustment-label">Update Username</label>
-                        <input type="text" name="newUsername" [(ngModel)]="updateData.NewUsername" placeholder="Enter new username..." class="info-adjustment-input" />
+                        <label for="newUsername" class="info-adjustment-label">Update Username</label>
+                        <input id="newUsername" type="text" name="newUsername" [(ngModel)]="updateData.NewUsername" placeholder="Enter new username..." class="info-adjustment-input newUsername" />
                     </div>
 
                     <div class="info-adjustment-group">
-                        <label class="info-adjustment-label">Change Security Password</label>
+                        <label for="newPassword" class="info-adjustment-label">Change Security Password</label>
                         <div class="password-input-wrapper">
-                            <input [type]="showPassword ? 'text' : 'password'" name="newPassword" [(ngModel)]="updateData.NewPassword" placeholder="Enter new password..." class="info-adjustment-input" />
+                            <input id="newPassword" [type]="showPassword ? 'text' : 'password'" name="newPassword" [(ngModel)]="updateData.NewPassword" placeholder="Enter new password..." class="info-adjustment-input newPassword" />
                             <button type="button" class="eye-toggle-btn" (click)="showPassword = !showPassword" >
                                 {{ showPassword ? '👁️' : '👁️‍🗨️' }}
                             </button>
@@ -114,10 +123,10 @@
                     </div>
 
                     <div class="info-adjustment-group">
-                        <label class="info-adjustment-label">Confirm New Password</label>
+                        <label for="confirmNewPassword" class="info-adjustment-label">Confirm New Password</label>
                         <!-- <input [type]="showPassword ? 'text' : 'password'" name="confirmNewPassword" [(ngModel)]="confirmNewPassword" placeholder="Retype your new password..." class="info-adjustment-input" /> --> <!-- This will make it so that both password textboxes are bound to the same reveal "eye" button -->
                          <div class="password-input-wrapper">
-                            <input [type]="showConfirmPassword ? 'text' : 'password'" name="confirmNewPassword" [(ngModel)]="confirmNewPassword" placeholder="Retype your new password..." class="info-adjustment-input" />
+                            <input id="confirmNewPassword" [type]="showConfirmPassword ? 'text' : 'password'" name="confirmNewPassword" [(ngModel)]="confirmNewPassword" placeholder="Retype your new password..." class="info-adjustment-input newPasswordConfirm" />
                             <button type="button" class="eye-toggle-btn" (click)="showConfirmPassword = !showConfirmPassword" >
                                 {{ showConfirmPassword ? '👁️' : '👁️‍🗨️' }}
                             </button>
@@ -132,7 +141,7 @@
                 <!-- High Risk Destruction Action Block -->
                  <div class="danger-zone">
                     <h5 class="danger-zone-header">⚠️ Danger Zone</h5>
-                    <p class="danger-zone-warning">Deleting your account clears your workspace access profiles completely! This action cannot be reversed.</p>
+                    <p class="danger-zone-warning">Deleting your account clears your workspace access profiles completely!<br>This action cannot be reversed.</p>
                     <button type="button" (click)="onDeleteAccount()" class="danger-zone-btn">Permanently Delete Account</button>
                  </div>
              </div>

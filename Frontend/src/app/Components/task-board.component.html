@@ -37,7 +37,7 @@
         
                 <!-- Dynamic roster display list (Visible to everyone) -->
                  <div aria-live="polite">
-                    <h4 class="roster-sub-title">Current Project Crew</h4>
+                    <h2 class="roster-sub-title">Current Project Crew</h2>
                     <ul class="roster-list-element">
                         <li *ngFor="let m of projectMembers" class="roster-item-row">
                             <div class="member-info-block">
@@ -362,18 +362,18 @@
             <h3>Create New Task Specification</h3>
             <form (ngSubmit)="onCreateTask()" #taskForm="ngForm">
                 <div class="form-group-row">
-                    <label>Task Title *</label>
-                    <input type="text" name="title" [(ngModel)]="newTask.title" required placeholder="e.g. Design database schema" class="invite-text-field" />
+                    <label for="title">Task Title *</label>
+                    <input id="title" type="text" name="title" [(ngModel)]="newTask.title" required placeholder="e.g. Design database schema" class="invite-text-field" />
                 </div>
 
                 <div class="form-group-row">
-                    <label>Description</label>
-                    <textarea name="description" [(ngModel)]="newTask.description" placeholder="Provide actionable details..." class="invite-text-field"></textarea>
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" [(ngModel)]="newTask.description" placeholder="Provide actionable details..." class="invite-text-field"></textarea>
                 </div>
 
                 <div class="form-group-row">
-                    <label>Priority Tier</label>
-                    <select name="priority" [(ngModel)]="newTask.priority" class="invite-dropdown-select">
+                    <label for="priority">Priority Tier</label>
+                    <select id="priority" name="priority" [(ngModel)]="newTask.priority" class="invite-dropdown-select">
                         <option value="Low">Low</option>
                         <option value="Medium">Medium</option>
                         <option value="High">High</option>
@@ -381,8 +381,8 @@
                 </div>
 
                 <div class="form-group-row">
-                    <label>Deadline</label>
-                    <input type="date" name="deadline" [(ngModel)]="newTask.deadline" />
+                    <label for="deadline">Deadline</label>
+                    <input id="deadline" type="date" name="deadline" [(ngModel)]="newTask.deadline" />
                 </div>
 				
 				<div class="modal-btn-actions-row">

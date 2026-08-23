@@ -5,15 +5,15 @@
 
         <form (ngSubmit)="onLogin()" #loginForm="ngForm">
             <div class="form-group">
-                <label>Email Address</label>
-                <input type="email" name="email" [(ngModel)]="credentials.email" required placeholder="enter your email here">
+                <label for="email">Email Address</label>
+                <input id="email" type="email" name="email" [(ngModel)]="credentials.email" required placeholder="enter your email here">
             </div>
 
             <div class="form-group">
-                <label>Password</label>
+                <label for="password">Password</label>
                 <div class="password-input-wrapper">
                     <!-- Binding [type] makes the visibility dynamic -->
-                     <input [type]="showPassword ? 'text' : 'password'" name="password" [(ngModel)]="credentials.password" required placeholder="enter password...">
+                     <input id="password" [type]="showPassword ? 'text' : 'password'" name="password" [(ngModel)]="credentials.password" required placeholder="enter password...">
                     <button type="button" class="eye-toggle-btn" (click)="showPassword = !showPassword">
                         {{ showPassword ? '👁️' : '👁️‍🗨️' }}
                     </button>

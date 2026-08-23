@@ -156,16 +156,25 @@
 
 .info-adjustment-group { 
     text-align: left; 
-    margin-bottom: 12px; 
-    border-color: var(--filter-border-color) !important;
+    margin-bottom: 12px;
+}
+
+.info-adjustment-input.newUsername,
+.info-adjustment-input.newPassword,
+.info-adjustment-input.newPasswordConfirm { 
+    border: 2px solid var(--filter-border-color, #cbd5e1) !important;
 }
 
 .info-adjustment-label { 
     font-weight: bold; 
     font-size: calc(13px * var(--font-scale));
     color: var(--text-muted);
-    display: block; 
+    display: inline-flex; 
+    align-items: center;
+    gap: 8px;
     margin-bottom: 4px; 
+    cursor: pointer;
+    user-select: none;
 }
 
 .password-input-wrapper { 
