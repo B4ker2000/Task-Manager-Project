@@ -27,7 +27,7 @@
         </section>
 
         <!-- Right Side: Existing Project Cards List -->
-        <section class="list-section">
+        <section class="list-section" aria-live="polite">
             <h3>Your Projects</h3>
             <p class="empty-msg" *ngIf="projects.length === 0">No projects found. Create one to get started!</p>
 
@@ -35,7 +35,7 @@
                 <div class="project-card" *ngFor="let p of projects">
                     <div class="project-card-header">
                         <h4>🎯 {{ p.title }}</h4>
-                        <button *ngIf="p.userRole === 'Owner'" class="delete-proj-btn" (click)="onDeleteProject(p.id, $event)" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.4">🗑️</button>
+                        <button *ngIf="p.userRole === 'Owner'" class="delete-proj-btn" (click)="onDeleteProject(p.id, $event)" aria-label="Delete Project Card">🗑️</button>
                     </div>
                     <p>{{ p.description || 'No description provided.' }}</p>
                     <button class="submit-btn view-tasks-btn" [routerLink]="['/projects', p.id, 'board']">Open Project Board</button>

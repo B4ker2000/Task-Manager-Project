@@ -1,3 +1,5 @@
+@import url('https://googleapis.com');
+
 /* =========================================================================
     CORE GLOBAL PALETTE VARIANT INVENTORY
    ========================================================================= */
@@ -9,6 +11,8 @@
     --border-color: #cbd5e1;                                            /* Universal border color for the different cards */
     --input-bg: #ffffff;
     --font-override: sans-serif;
+    --font-scale: 1;
+    --line-height-scale: 1.5;
 
     --text-primary: #212529;                                            /* Dominant heavy font header color */
     --text-secondary: #212529;
@@ -58,6 +62,8 @@
     --border-color: #3e3e3e;                                            /* Dark carbon outlines */
     --input-bg: #1e1e1e;
     --font-override: sans-serif;
+    --font-scale: 1;
+    --line-height-scale: 1.5;
 
     --text-primary: #f8f9fa;                                            /* Crisp white readable header font block */
     --text-secondary: #f8f9fa;
@@ -106,11 +112,18 @@
     --wallpaper: #008080;                                               /* Iconic solid desktop Teal Green Wallpaper! */
     --border-color: #808080;                                            /* High-contrast hardware edge line highlights */
     --input-bg: #ffffff;
-    --font-override: sans-serif;
+    --font-override: "MS Sans Serif", Tahoma, Arial, sans-serif;
+    --font-scale: 1;
+    --line-height-scale: 1.5;
 
     --text-primary: #ffffff;                                            /* Full white primary text color over wallpaper */
     --text-secondary: #000000;                                          /* Stark terminal letter ink black inside cards */
     --text-muted: #000080;                                              /* Classic Titlebar Blue identifiers */
+
+    /* Specific styles for this theme! */
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: none;
+    text-shadow: none !important;                                          /* Windows 95 & 98 did not do text shadows! */
 
     /* 📊 95/98 Era Flat Alerts layout profiles */
     --badge-high-bg: #cbd5e1;       --badge-high-text: #c53030;     --badge-high-border: #000000;
@@ -155,7 +168,9 @@
     --wallpaper: #4a7af4;               /* Legendary Bliss Sky-Blue Desktop wallpaper background! */
     --border-color: #0046d5;            /* Everything is framed in clean royal blue desktop borders! */
     --input-bg: #ffffff;
-    --font-override: sans-serif;
+    --font-override: Tahoma, "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+    --font-scale: 1;
+    --line-height-scale: 1.5;
 
     --text-primary: #ffffff;            /* Sharp white headers over Bliss wallpaper background */
     --text-secondary: #000000;          /* Sharp dark black ink inside card canvases */
@@ -199,15 +214,17 @@
 
 [data-theme="vista"] {
     /* 📀 WINDOWS VISTA GLOSSY AERO ARCHITECTURE PRESETS */
-    --surface-bg: rgba(255, 255, 255, 0.60);                                                          /* Solid crisp frosted glass backing */
-    --container-bg: rgba(194, 211, 185, 0.45);                                                        /* Rich misty green panel base */
-    --wallpaper: linear-gradient(15deg, #d0f52a 0%, #69da0c 12%, #2af5b8 55%, #2ab5f5 100%);   /* Vivid Vista Aurora */
-    --border-color: rgba(75, 75, 75, 0.85);                                                           /* Vista/7 start menu background color */
-    --input-bg: #ffffff;                                                                              /* Absolute solid white input boxes */
-    --font-override: 'Segoe UI', sans-serif;                                                            /* True default corporate system typeface */
+    --surface-bg: rgba(255, 255, 255, 0.60);                                                              /* Solid crisp frosted glass backing */
+    --container-bg: rgba(194, 211, 185, 0.45);                                                            /* Rich misty green panel base */
+    --wallpaper: linear-gradient(15deg, #d0f52a 0%, #69da0c 12%, #2af5b8 55%, #2ab5f5 100%);       /* Vivid Vista Aurora */
+    --border-color: rgba(75, 75, 75, 0.85);                                                               /* Vista/7 start menu background color */
+    --input-bg: #ffffff;                                                                                  /* Absolute solid white input boxes */
+    --font-override: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;   /* True default corporate system typeface */
+    --font-scale: 1;
+    --line-height-scale: 1.5;
 
     --text-primary: #1a202c;
-    --text-secondary: #1a202c;                                                                        /* Deep dark contrast text inside glass sheets */
+    --text-secondary: #1a202c;                                                                            /* Deep dark contrast text inside glass sheets */
     --text-muted: #415268;
 
     /* 📊 DYNAMIC AERO GLASS ACCESSIBILITY BADGES */
@@ -217,7 +234,7 @@
     --badge-done-bg: rgba(198, 246, 213, 0.95);   --badge-done-text: #22543d;   --badge-done-border: #38a169;
 
     /* 🎨 PROGRESS AND FILTER TRACKS */
-    --progress-bar-fill: linear-gradient(180deg, #34d399 0%, #059669 50%, #047857 100%);         /* Pure classic 3D gelatinous glossy green capsule loader */
+    --progress-bar-fill: linear-gradient(180deg, #34d399 0%, #059669 50%, #047857 100%);              /* Pure classic 3D gelatinous glossy green capsule loader */
     
     --filter-border-color: rgba(255, 255, 255, 0.8);
     --filter-focus-color: #059669;
@@ -248,15 +265,17 @@
 
 [data-theme="7"] {
     /* 🫧 WINDOWS 7 GLOSSY AERO ARCHITECTURE PRESETS */
-    --surface-bg: rgba(255, 255, 255, 0.85);                                    /* Translucent frosted glass panel sheet */
-    --container-bg: rgba(185, 201, 211, 0.45);                                  /* Translucent window backdrop backing layers */
+    --surface-bg: rgba(255, 255, 255, 0.85);                                                              /* Translucent frosted glass panel sheet */
+    --container-bg: rgba(185, 201, 211, 0.45);                                                            /* Translucent window backdrop backing layers */
     --wallpaper: linear-gradient(135deg, #1e4d8c 0%, #3182ce 50%, #90cdf4 100%);
-    --border-color: rgba(75, 75, 75, 0.85);                                     /* Vista/7 start menu background color */
+    --border-color: rgba(75, 75, 75, 0.85);                                                               /* Vista/7 start menu background color */
     --input-bg: #ffffff;
-    --font-override: sans-serif;
+    --font-override: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;   /* True default corporate system typeface */
+    --font-scale: 1;
+    --line-height-scale: 1.5;
 
-    --text-primary: #ffffff;                                                    /* Soft glowing glass text */
-    --text-secondary: #1a202c;                                                  /* Deep dark contrast text inside glass sheets */
+    --text-primary: #ffffff;                                                                              /* Soft glowing glass text */
+    --text-secondary: #1a202c;                                                                            /* Deep dark contrast text inside glass sheets */
     --text-muted: #1e3a8a; 
 
     /* 📊 DYNAMIC AERO GLASS ACCESSIBILITY BADGES */
@@ -302,7 +321,9 @@
     --wallpaper: linear-gradient(135deg, #0284c7 0%, #06b6d4 35%, #4ade80 75%, #facc15 100%);
     --border-color: #90b3c5;
     --input-bg: #ffffff;
-    --font-override: sans-serif;
+    --font-override: 'Ubuntu', 'Segoe UI', sans-serif;
+    --font-scale: 1;
+    --line-height-scale: 1.5;
 
     --text-primary: #ffffff;
     --text-secondary: #0f172a;
@@ -351,7 +372,9 @@
     --wallpaper: #050300;
     --border-color: #ffb000;                            /* Everything is framed in uniform amber glowing circuits! */
     --input-bg: #110b00;
-    --font-override: monospace;                           /* Enforces perfect retro matrix font tracking lines! */
+    --font-override: monospace, sans-serif;               /* Enforces perfect retro matrix font tracking lines! */
+    --font-scale: 1;
+    --line-height-scale: 1.5;
 
     --text-primary: #ffb000;                            /* Glowing vintage high-vis phosphorus amber ink text */
     --text-secondary: #ffb000;
@@ -400,7 +423,9 @@
     --wallpaper: #000500;
     --border-color: #33ff33;                            /* Everything is framed in uniform green glowing circuits! */
     --input-bg: #001100;
-    --font-override: monospace;                           /* Enforces vintage layout terminal line mappings */
+    --font-override: monospace, sans-serif;               /* Enforces vintage layout terminal line mappings */
+    --font-scale: 1;
+    --line-height-scale: 1.5;
 
     --text-primary: #33ff33;                            /* Glowing vintage high-vis green ink text */
     --text-secondary: #33ff33;                          /* High contrast green tracking text inside cards */
@@ -450,7 +475,9 @@
     --wallpaper: radial-gradient(circle at top right, #fff0f5 0%, #e1f5fe 40%, #bbdefb 100%);
     --border-color: #bbdefb;
     --input-bg: #ffffff;
-    --font-override: sans-serif;
+    --font-override: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-scale: 1;
+    --line-height-scale: 1.5;
     
     --text-primary: #1a365d;                        /* Deep Schale Federal Navy blue text */
     --text-secondary: #2d3748;                      /* Highly legible charcoal layout secondary text color */
@@ -494,6 +521,59 @@
 }
 
 /* =========================================================================
+   ACCESSIBILITY OPTIONS
+   ========================================================================= */
+/* OpenDyslexic Option */
+[data-accessible-font="dyslexic"] {
+   --font-override: 'OpenDyslexic', sans-serif !important;
+   --font-monospace: 'OpenDyslexicMono', monospace !important;
+}
+
+/* DejaVu Sans Option */
+[data-accessible-font="dejavu"] {
+   --font-override: 'DejaVu Sans', sans-serif !important;
+   --font-monospace: 'DejaVu Sans Mono', monospace !important;
+}
+
+/* High Contrast Options */
+[data-high-contrast="true"] {
+    background: #000000 !important;
+    color: #ffffff !important;
+}
+
+/* Ensure all text blocks, containers, cards, and text inputs comply */
+[data-high-contrast="true"] *,
+[data-high-contrast="true"] *:before,
+[data-high-contrast="true"] *:after {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border-color: #ffffff !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+}
+
+/* Colorblind Filters */
+/* Deuteranopia (Green-Weak) */
+[data-colorblind="deuteranopia"] {
+    filter: url('#deuteranopia-filter') !important;
+}
+
+/* Protanopia (Red-Weak) */
+[data-colorblind="protanopia"] {
+    filter: url('#protanopia-filter') !important;
+}
+
+/* Tritanopia (Blue-Week) */
+[data-colorblind="tritanopia"] {
+    filter: url('#tritanopia-filter') !important;
+}
+
+/* High Contrast Grayscale (Fallback monochrome) */
+[data-colorblind="grayscale"] {
+    filter: grayscale(100%) contrast(110%) !important;
+}
+
+/* =========================================================================
    UNIVERSAL CANVAS BACKGROUNDS (VIEWPORT FULL-HEIGHT COVER ENGINE)
    ========================================================================= */
 body,
@@ -510,6 +590,8 @@ html,
     min-height: 100vh;
     margin: 0;
     padding: 0;
+    font-size: calc(16px * var(--font-scale));
+    line-height: var(--line-height-scale);
     font-family: var(--font-override, sans-serif) !important;
     transition: background 0.25s ease-in-out, color 0.25s ease-in-out;
 }
@@ -528,7 +610,7 @@ textarea {
     padding: 8px 12px;
     border-radius: 4px;
     box-sizing: border-box;
-    font-size: 14px;
+    font-size: calc(14px * var(--font-scale));
     outline: none;
     background-color: var(--input-bg, #ffffff) !important;
     color: var(--text-secondary) !important;
@@ -580,7 +662,7 @@ input[type="date"] {
 .view-tasks-btn {
     height: 38px;
     padding: 0 16px;
-    font-size: 13px;
+    font-size: calc(13px * var(--font-scale));
     font-weight: 700;
     border-radius: 4px;
     cursor: pointer;
@@ -697,7 +779,7 @@ select,
     padding: 8px 30px 8px 12px !important;
     border-radius: 4px;
     box-sizing: border-box;
-    font-size: 13px;
+    font-size: calc(13px * var(--font-scale));
     outline: none;
     cursor: pointer;
     background-color: var(--input-bg, #ffffff) !important;
@@ -753,20 +835,20 @@ select:focus,
 .register-card h2 {
     margin: 0 0 6px 0;
     color: var(--text-primary);
-    font-size: 24px;
+    font-size: calc(24px * var(--font-scale));
 }
 
 .login-container p,
 .register-card p.subtitle {
     margin: 0 0 25px 0;
     color: var(--text-muted);
-    font-size: 14px;
+    font-size: calc(14px * var(--font-scale));
 }
 
 .form-group label {
     display: block;
     font-weight: bold;
-    font-size: 13px;
+    font-size: calc(13px * var(--font-scale));
     margin-bottom: 5px;
     color: var(--text-muted);
     text-align: left;
@@ -775,7 +857,7 @@ select:focus,
 .login-footer-navigation,
 .register-footer {
     margin-top: 20px;
-    font-size: 13px;
+    font-size: calc(13px * var(--font-scale));
     color: var(--text-muted);
 }
 
@@ -926,7 +1008,8 @@ body.cdk-drag-dragging * {
 }
 
 .form-group-row label {
-    font-weight: bold; font-size: 13px;
+    font-weight: bold;
+    font-size: calc(13px * var(--font-scale));
     color: var(--text-muted);
 }
 
@@ -947,7 +1030,7 @@ body.cdk-drag-dragging * {
     border: none; 
     cursor: pointer; 
     padding: 4px; 
-    font-size: 14px;
+    font-size: calc(14px * var(--font-scale));
     border-radius: 4px; 
     opacity: 0.4; 
     transition: opacity 0.2s ease, background-color 0.2s ease; 

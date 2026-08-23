@@ -36,7 +36,7 @@
                  </div>
         
                 <!-- Dynamic roster display list (Visible to everyone) -->
-                 <div>
+                 <div aria-live="polite">
                     <h4 class="roster-sub-title">Current Project Crew</h4>
                     <ul class="roster-list-element">
                         <li *ngFor="let m of projectMembers" class="roster-item-row">
@@ -47,7 +47,7 @@
                                 </span>
                             </div>
 
-                            <button *ngIf="currentUserProjectRole === 'Owner' && m.userId !== currentUserId" class="delete-card-btn" (click)="onRemoveMemberClick(m.userId, m.userEmail)" title="Remove Member from Project Workspace">🗙</button>
+                            <button *ngIf="currentUserProjectRole === 'Owner' && m.userId !== currentUserId" class="delete-card-btn" (click)="onRemoveMemberClick(m.userId, m.userEmail)" title="Remove Member from Project Workspace" aria-label="Remove Member From Project Crew">🗙</button>
                         </li>
                     </ul>
                  </div>
@@ -63,12 +63,12 @@
                  </div>
 
                 <!-- The colored tag pills gallery -->
-                 <div class="tags-flex-container">
+                 <div class="tags-flex-container" aria-live="polite">
                     <span *ngFor="let cat of projectCategories" class="category-badge-pill" [style.backgroundColor]="cat.colorHex">
                         <span>{{ cat.name }} ({{ getTaskCountByCategory(cat.id) }})</span>
 
                         <!-- Delete Tag Trigger (Visible exclusively to space/project owners/managers!) -->
-                         <button *ngIf="currentUserProjectRole === 'Owner'" (click)="onDeleteCategoryClick(cat.id, cat.name)" title="Permanently Delete Workspace Tag" class="category-badge-pill-delete-btn">
+                         <button *ngIf="currentUserProjectRole === 'Owner'" (click)="onDeleteCategoryClick(cat.id, cat.name)" title="Permanently Delete Workspace Tag" class="category-badge-pill-delete-btn" aria-label="Delete Tag">
                             ✕
                          </button>
                     </span>
@@ -132,7 +132,8 @@
     <div class="board-columns-grid" cdkDropListGroup>
         <!-- Column 1: Pending Tasks -->
 		 <section class="board-column" 
-                  [class.mobile-hidden]="activeMobileColumn !== 'Pending'">
+                  [class.mobile-hidden]="activeMobileColumn !== 'Pending'"
+                  aria-live="polite">
 			<h3>⏳ Pending ({{ pendingTasks.length }})</h3>
 
             <!-- CDK Target Drop Window Container Lane -->
@@ -157,7 +158,7 @@
                                 🏷️ {{ t.category.name }}
                              </span>
                          </span>
-                        <button *ngIf="currentUserProjectRole === 'Owner'" class="delete-card-btn" (click)="onDeleteTask(t.id)">🗑️</button>
+                        <button *ngIf="currentUserProjectRole === 'Owner'" class="delete-card-btn" (click)="onDeleteTask(t.id)" aria-label="Delte Task Card">🗑️</button>
                     </div>
 
                     <p>{{ t.description || 'No details provided.' }}</p>
@@ -201,7 +202,8 @@
 
 		<!-- Column 2: In Progress & Review Tasks -->
          <section class="board-column" 
-                  [class.mobile-hidden]="activeMobileColumn !== 'InProgress'">
+                  [class.mobile-hidden]="activeMobileColumn !== 'InProgress'"
+                  aria-live="polite">
             <h3>⚡ In-Progress & Review ({{ inProgressTasks.length }})</h3>
             
             <div id="inProgressLaneList"
@@ -225,7 +227,7 @@
                                 🏷️ {{ t.category.name }}
                              </span>
                          </span>
-                        <button *ngIf="currentUserProjectRole === 'Owner'" class="delete-card-btn" (click)="onDeleteTask(t.id)">🗑️</button>
+                        <button *ngIf="currentUserProjectRole === 'Owner'" class="delete-card-btn" (click)="onDeleteTask(t.id)" aria-label="Delete Project Card">🗑️</button>
                     </div>
 
                     <p>{{ t.description || 'No details provided.' }}</p>
@@ -280,7 +282,8 @@
 
         <!-- Column 3: Completed Tasks -->
          <section class="board-column" 
-                  [class.mobile-hidden]="activeMobileColumn !== 'Completed'">
+                  [class.mobile-hidden]="activeMobileColumn !== 'Completed'"
+                  aria-live="polite">
             <h3>✅ Completed ({{ completedTasks.length }})</h3>
 			
             <div id="completedLaneList"
@@ -303,7 +306,7 @@
                                 🏷️ {{ t.category.name }}
                              </span>
                          </span>
-						<button *ngIf="currentUserProjectRole === 'Owner'" class="delete-card-btn" (click)="onDeleteTask(t.id)">🗑️</button>
+						<button *ngIf="currentUserProjectRole === 'Owner'" class="delete-card-btn" (click)="onDeleteTask(t.id)" aria-label="Delete Project Card">🗑️</button>
 					</div>
 
                     <p>{{ t.description || 'No details provided.' }}</p>

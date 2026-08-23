@@ -91,7 +91,7 @@
 .task-card p { 
     margin: 0 0 15px 0; 
     color: var(--text-muted); 
-    font-size: 13px; 
+    font-size: calc(13px * var(--font-scale)); 
     line-height: 1.4;  
     text-align: left; 
 }
@@ -110,7 +110,7 @@
 .review-status-banner {
     background-color: var(--badge-medium-bg, #feebc8);
     color: var(--badge-medium-text, #dd6b20);
-    font-size: 11px;
+    font-size: calc(48px * var(--font-scale));
     font-weight: 700;
     padding: 4px 8px;
     border-radius: 4px;
@@ -130,7 +130,7 @@
 }
 
 .assignment-label {
-    font-size: 12px;
+    font-size: calc(12px * var(--font-scale));
     color: var(--text-secondary);
     font-weight: 600;
     display: block;
@@ -144,7 +144,7 @@
 .priority-badge {
     display: inline-flex;
     align-items: center;
-    font-size: 11px;
+    font-size: calc(11px * var(--font-scale));
     font-weight: 700;
     padding: 3px 10px;
     border-radius: 12px;
@@ -157,7 +157,7 @@
 .deadline-badge { 
     display: inline-flex;
     align-items: center;
-    font-size: 11px;
+    font-size: calc(11px * var(--font-scale));
     background-color: var(--container-bg, #f1f5f9); 
     color: var(--text-muted); 
     border: 2px solid var(--border-color, #cbd5e1);
@@ -200,7 +200,7 @@
 .control-icon-anchor {
     position: absolute;
     left: 12px;
-    font-size: 14px;
+    font-size: calc(14px * var(--font-scale));
     pointer-events: none; /* Mouse clicks pass straight through icon directly to the field background */
     z-index: 5;
 }
@@ -230,7 +230,7 @@
 .priority-text-label { 
     display: flex; 
     justify-content: space-between; 
-    font-size: 13px; 
+    font-size: calc(13px * var(--font-scale)); 
     color: var(--text-muted); 
     margin-bottom: 6px; 
 }
@@ -264,7 +264,7 @@
 }
 
 .invite-header-title { 
-    font-size: 14px; 
+    font-size: calc(14px * var(--font-scale)); 
     font-weight: bold; 
     color: var(--text-secondary); 
     display: flex; 
@@ -338,7 +338,7 @@
 
 .roster-sub-title {
     margin: 15px 0 10px 0;
-    font-size: 14px;
+    font-size: calc(14px * var(--font-scale));
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -346,12 +346,12 @@
 }
 
 .member-display-email {
-    font-size: 14px;
+    font-size: calc(14px * var(--font-scale));
     color: var(--text-secondary);
 }
 
 .role-display-badge {
-    font-size: 11px;
+    font-size: calc(11px * var(--font-scale));
     padding: 4px 10px;
     border-radius: 20px;
     font-weight: bold;
@@ -364,7 +364,7 @@
 }
 
 .tags-roster-tray-fallback {
-    font-size: 13px;
+    font-size: calc(13px * var(--font-scale));
     color: var(--text-muted);
     font-style: italic;
     padding: 10px 0;
@@ -390,7 +390,7 @@
     display: inline-block;
     align-items: center;
     gap: 6px;
-    font-size: 11px;
+    font-size: calc(11px * var(--font-scale));
     font-weight: 700;
     color: #ffffff;
     padding: 4px 10px;
@@ -406,7 +406,7 @@
     border: none;
     color: #ffffff;
     cursor: pointer;
-    font-size: 10px;
+    font-size: calc(10px * var(--font-scale));
     font-weight: bold;
     padding: 0 4px;
     margin-left: 5px;
@@ -447,7 +447,7 @@
 
 .right-tags-column h5 {
     margin: 0 0 10px 0;
-    font-size: 13px;
+    font-size: calc(13px * var(--font-scale));
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -521,7 +521,7 @@
         background: transparent;
         border: none;
         padding: 8px 4px;
-        font-size: 12px;
+        font-size: calc(12px * var(--font-scale));
         font-weight: 700;
         color: var(--text-muted);
         cursor: pointer;
@@ -584,11 +584,11 @@
 
     .task-card h4 {
         padding-right: 25px; /* Ensures text never bleeds underneath the absolute trashcan position! */
-        font-size: 14px;
+        font-size: calc(14px * var(--font-scale));
     }
     
     .category-badge-pill {
-        font-size: 10px !important;
+        font-size: calc(10px * var(--font-scale)) !important;
         padding: 3px 6px !important;
     }
 }

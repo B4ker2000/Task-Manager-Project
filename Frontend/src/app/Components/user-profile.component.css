@@ -68,7 +68,7 @@
    IDENTITY PROFILE DECORATORS
    ========================================================================= */
 .avatar-circle { 
-    font-size: 48px; 
+    font-size: calc(48px * var(--font-scale)); 
     background-color: var(--container-bg); 
     width: 80px; 
     height: 80px; 
@@ -82,7 +82,7 @@
 
 .role-badge { 
     display: inline-block; 
-    font-size: 12px; 
+    font-size: calc(12px * var(--font-scale));
     font-weight: bold; 
     background-color: var(--badge-low-bg); 
     color: var(--badge-low-text); 
@@ -101,7 +101,7 @@
     justify-content: space-between; 
     border-bottom: 1px dashed var(--border-color);
     padding: 10px 0; 
-    font-size: 14px; 
+    font-size: calc(14px * var(--font-scale));
     color: var(--text-secondary);
 }
 
@@ -124,7 +124,7 @@
 }
 
 .metric-num { 
-    font-size: 20px; 
+    font-size: calc(20px * var(--font-scale));
     font-weight: 800; 
     color: var(--focus-halo-color, #3180ce); 
 }
@@ -135,7 +135,7 @@
 }
 
 .metric-label { 
-    font-size: 13px; 
+    font-size: calc(13px * var(--font-scale));
     color: var(--text-secondary);
     font-weight: 500; 
 }
@@ -162,7 +162,7 @@
 
 .info-adjustment-label { 
     font-weight: bold; 
-    font-size: 13px; 
+    font-size: calc(13px * var(--font-scale));
     color: var(--text-muted);
     display: block; 
     margin-bottom: 4px; 
@@ -185,7 +185,7 @@
     background: none; 
     border: none; 
     cursor: pointer; 
-    font-size: 16px; 
+    font-size: calc(16px * var(--font-scale));
     padding: 0; 
     display: flex; 
     align-items: center; 
@@ -214,12 +214,12 @@
 .danger-zone-header { 
     color: var(--btn-delete-text, #c62828);
     margin: 0 0 8px 0; 
-    font-size: 14px; 
+    font-size: calc(14px * var(--font-scale));
     font-weight: bold;
 }
 
 .danger-zone-warning { 
-    font-size: 12px; 
+    font-size: calc(12px * var(--font-scale));
     color: var(--text-muted);
     margin: 0 0 12px 0; 
     line-height: 1.4; 

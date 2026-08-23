@@ -31,6 +31,11 @@ export class UserProfileComponent implements OnInit {
     // Theme related variable
     activeTheme: string = "light";
 
+    // Accessibility related variables
+    activeFont: string = "";
+    isHighContrast: boolean = false;
+    activeColorblind: string = "";
+
     ngOnInit(): void {
         // Only run data fetches inside the browser window context shell
         if(isPlatformBrowser(this.platformId)) {
@@ -50,6 +55,23 @@ export class UserProfileComponent implements OnInit {
             if(savedTheme) {
                 this.activeTheme = savedTheme;
                 this.onThemeChangeEngineTrigger();
+            }
+
+            // Accessibility cache reader
+            const savedFont = localStorage.getItem("user-preferred-font");
+            const savedContrastOption = localStorage.getItem("user-preferred-high-contrast");
+            const savedColorblindOption = localStorage.getItem("user-preferred-colorblind");
+            if(savedFont) {
+                this.activeFont = savedFont;
+                this.onFontChangeEngineTrigger();
+            }
+            if(savedContrastOption) {
+                this.isHighContrast = savedContrastOption === "true";
+                this.onHighContrastEngineTrigger();
+            }
+            if(savedColorblindOption) {
+                this.activeColorblind = savedColorblindOption;
+                this.onColorblindChangeEngineTrigger()
             }
 
             this.cdr.detectChanges();
@@ -125,6 +147,48 @@ export class UserProfileComponent implements OnInit {
             // Cache the user's favorite selection so it stays active when they reload!
             localStorage.setItem("user-preferred-theme", this.activeTheme);
             console.log(`Application theme shifted to "${this.activeTheme}" successfully.`);
+        }
+    }
+
+    /////////////////////////////////////
+    // Accessibility controller method //
+    /////////////////////////////////////
+    // Font Controller Method
+    onFontChangeEngineTrigger(): void {
+        if (typeof document !== "undefined") {
+            if (this.activeFont) {
+                document.documentElement.setAttribute("data-accessible-font", this.activeFont);
+            } else {
+                document.documentElement.removeAttribute("data-accessible-font");
+            }
+            localStorage.setItem("user-preferred-font", this.activeFont);
+            console.log(`Typography layout shifted to "${this.activeFont || 'Default'}" successfully.`);
+        }
+    }
+
+    // High Contrast Controller Method
+    onHighContrastEngineTrigger(): void {
+        if (typeof document !== "undefined") {
+            if (this.isHighContrast) {
+                document.documentElement.setAttribute("data-high-contrast", this.isHighContrast.toString());
+            } else {
+                document.documentElement.removeAttribute("data-high-contrast");
+            }
+            localStorage.setItem("user-preferred-high-contrast", this.isHighContrast.toString());
+            console.log(`High Contrast state toggled to: ${this.isHighContrast}`);
+        }
+    }
+
+    // Colorblind Controller Method
+    onColorblindChangeEngineTrigger(): void {
+        if (typeof document !== "undefined") {
+            if (this.activeColorblind) {
+                document.documentElement.setAttribute("data-colorblind", this.activeColorblind);
+            } else {
+                document.documentElement.removeAttribute("data-colorblind");
+            }
+            localStorage.setItem("user-preferred-colorblind", this.activeColorblind);
+            console.log(`Colorblind matrix shifted to "${this.activeColorblind || 'None'}" successfully.`);
         }
     }
 }

@@ -62,9 +62,33 @@
                             <option value="xp">💿 Classic Windows XP (Luna Blue)</option>
                             <option value="vista">📀 Classic Windows Vista</option>
                             <option value="7">🫧 Classic Windows 7</option>
-                            <option value="frutiger-aero">🌿Frutiger Aero (Vibrant Eco-Cyber)</option>
+                            <option value="frutiger-aero">🌿 Frutiger Aero (Vibrant Eco-Cyber)</option>
                         </select>
                     </div>
+
+                    <!-- Font Selector -->
+                     <label for="fontSelect" class="info-adjustment-label">Font Style:</label>
+                     <select id="fontSelect" [(ngModel)]="activeFont" (change)="onFontChangeEngineTrigger()">
+                        <option value="">Theme Default</option>
+                        <option value="dejavu">DejaVu Sans</option>
+                        <option value="dyslexic">OpenDyslexic</option>
+                     </select>
+
+                    <!-- High Contrast Toggle -->
+                     <label class="info-adjustment-label">
+                     <input type="checkbox" [(ngModel)]="isHighContrast" (change)="onHighContrastEngineTrigger()">
+                        High Contrast Mode
+                     </label>
+
+                    <!-- Colorblind Filter Selector -->
+                     <label for="colorblindSelect" class="info-adjustment-label">Colorblind Filter:</label>
+                     <select id="colorblindSelect" [(ngModel)]="activeColorblind" (change)="onColorblindChangeEngineTrigger()">
+                        <option value="">None</option>
+                        <option value="deuteranopia">Deuteranopia (Green Weakness)</option>
+                        <option value="protanopia">Protanopia (Red Weakness)</option>
+                        <option value="tritanopia">Tritanopia (Blue Weakness)</option>
+                        <option value="grayscale">Grayscale (Monochrome)</option>
+                     </select>
                 </div>
              </div>
 

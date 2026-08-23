@@ -20,7 +20,7 @@
 .main-header h1 {
     color: var(--text-primary); 
     margin: 0; 
-    font-size: 28px;
+    font-size: calc(28px * var(--font-scale));
 }
 
 .header-navigation-actions { 
@@ -71,7 +71,7 @@
 .form-group label { 
     display: block; 
     font-weight: bold; 
-    font-size: 13px; 
+    font-size: calc(13px * var(--font-scale)); 
     margin-bottom: 6px; 
     color: var(--text-muted); 
 }
@@ -140,7 +140,7 @@ textarea {
 
 .project-card p { 
     color: var(--text-muted); 
-    font-size: 14px; 
+    font-size: calc(14px * var(--font-scale)); 
     margin-bottom: 25px; 
     line-height: 1.5; 
 }
