@@ -37,7 +37,7 @@
                      <button type="button" 
                             class="eye-toggle-btn" 
                             (click)="showPassword = !showPassword"
-                            [attr.aria-label]="showPassword ? 'Hide plain text password' : 'Show plain text password'"
+                            [attr.aria-label]="showPassword ? 'Show plain text password' : 'Hide plain text password'"
                             [attr.aria-pressed]="showPassword">
                     
                         <span aria-hidden="true">{{ showPassword ? '👁️' : '👁️‍🗨️' }}</span>

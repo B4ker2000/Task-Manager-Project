@@ -1,46 +1,77 @@
-<div class="dashboard-wrapper">
+<div class="dashboard-wrapper" role="main" aria-label="Main Projects Dashboard Canvas">
     <header class="main-header">
-        <h1>Task Manager Workspace</h1>
-        <div class="header-navigation-actions">
-            <button class="submit-btn profile-btn" [routerLink]="['/profile']">👤 User Profile</button>
-            <button class="cancel-btn logout-btn" (click)="onLogout()">Sign Out</button>
+        <h1 id="dashboardMainHeader">Task Manager Workspace</h1>
+        <div class="header-navigation-actions" role="navigation" aria-label="Account navigation shortcuts">
+            <button class="submit-btn profile-btn" [routerLink]="['/profile']">
+                <span aria-hidden="true">👤</span> User Profile
+            </button>
+            <button class="cancel-btn logout-btn" (click)="onLogout()" aria-label="Sign out of your workspace session securely">Sign Out</button>
         </div>
     </header>
 
     <div class="dashboard-grid">
         <!-- Left Side: Create New Project Form -->
-        <section class="form-section">
-            <h3>Create New Project</h3>
-            <form (ngSubmit)="onCreateProject()" #projectForm="ngForm">
+         <section class="form-section" role="region" aria-labelledby="createProjectHeader">
+            <h3 id="createProjectHeader">Create New Project</h3>
+            <form (ngSubmit)="onCreateProject()" #projectForm="ngForm" aria-labelledby="createProjectHeader">
                 <div class="form-group">
                     <label for="projectTitle">Project Title</label>
-                    <input id="projectTitle" type="text" name="name" [(ngModel)]="newProject.name" required placeholder="e.g. Website Overhaul" class="new-project input" />
+                    <input id="projectTitle" 
+                           type="text" 
+                           name="name" 
+                           [(ngModel)]="newProject.name" 
+                           required 
+                           placeholder="e.g. Website Overhaul" 
+                           class="new-project input"
+                           aria-required="true" />
                 </div>
 
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea id="description" name="description" [(ngModel)]="newProject.description" placeholder="Describe the project goal..." class="new-project textarea"></textarea>
+                    <textarea id="description" 
+                              name="description" 
+                              [(ngModel)]="newProject.description" 
+                              placeholder="Describe the project goal..." 
+                              class="new-project textarea"></textarea>
                 </div>
 
-                <button type="submit" class="create-btn" [disabled]="!projectForm.form.valid">Create Project</button>
+                <button type="submit" 
+                        class="create-btn" 
+                        [disabled]="!projectForm.form.valid"
+                        aria-label="Submit form to create new project space">Create Project</button>
             </form>
-        </section>
+         </section>
 
         <!-- Right Side: Existing Project Cards List -->
-        <section class="list-section" aria-live="polite">
-            <h3>Your Projects</h3>
-            <p class="empty-msg" *ngIf="projects.length === 0">No projects found. Create one to get started!</p>
+        <!-- 📡 Enriched the live region to announce dynamic item card injections and deletions cleanly -->
+         <section class="list-section" role="region" aria-labelledby="projectsListHeader" aria-live="polite" aria-relevant="additions removals">
+            <h3 id="projectsListHeader">Your Projects</h3>
+            <p class="empty-msg" *ngIf="projects.length === 0" role="status">No projects found. Create one to get started!</p>
 
             <div class="project-cards-grid">
-                <div class="project-card" *ngFor="let p of projects">
+                <div class="project-card" *ngFor="let p of projects" role="article" [attr.aria-label]="'Project space: ' + p.title">
                     <div class="project-card-header">
-                        <h4>🎯 {{ p.title }}</h4>
-                        <button *ngIf="p.userRole === 'Owner'" class="delete-proj-btn" (click)="onDeleteProject(p.id, $event)" aria-label="Delete Project Card">🗑️</button>
+                        <h4 [attr.id]="'proj-title-' + p.id">
+                            <span aria-hidden="true">🎯</span> {{ p.title }}
+                        </h4>
+
+                        <!-- 🗑️ Smart Dynamic Label: Explicitly states WHICH project this button will delete -->
+                         <button *ngIf="p.userRole === 'Owner'" 
+                                 class="delete-proj-btn" 
+                                 (click)="onDeleteProject(p.id, $event)" 
+                                 [attr.aria-label]="'Permanently delete project: ' + p.title"
+                                 [attr.aria-describedby]="'proj-title-' + p.id">
+                                 
+                            <span aria-hidden="true">🗑️</span>
+                         </button>
                     </div>
                     <p>{{ p.description || 'No description provided.' }}</p>
-                    <button class="submit-btn view-tasks-btn" [routerLink]="['/projects', p.id, 'board']">Open Project Board</button>
+                    
+                    <button class="submit-btn view-tasks-btn" 
+                            [routerLink]="['/projects', p.id, 'board']"
+                            [attr.aria-label]="'Open task board for project: ' + p.title">Open Project Board</button>
                 </div>
             </div>
-        </section>
+         </section>
     </div>
 </div>
