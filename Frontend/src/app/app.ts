@@ -28,13 +28,6 @@ export class App implements OnInit {
         console.log(`Global Core Engine securely initialized typography layout to: ${savedFont}`);
       }
 
-      // High Contrast Cache Reader
-      const savedContrastOption = localStorage.getItem('user-preferred-high-contrast');
-      if (savedContrastOption === 'true') {
-        document.documentElement.setAttribute('data-high-contrast', 'true');
-        console.log(`Global Core Engine securely activated High Contrast layout.`);
-      }
-
       // Colorblind Filter Cache Reader
       const savedColorblindOption = localStorage.getItem('user-preferred-colorblind');
       if (savedColorblindOption) {

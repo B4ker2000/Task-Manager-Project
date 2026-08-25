@@ -1,42 +1,43 @@
-<div class="register-wrapper"
-     role="main"
+<div class="register-wrapper" 
+     role="main" 
      aria-label="Account Creation Portal">
-    
+
     <div class="register-card">
         <h2 id="registerHeader">Create Workspace Account</h2>
         <p class="subtitle">Join the project management platform!</p>
         
         <!-- aria-labelledby provides instant spatial context to the screen reader user -->
-         <form (ngSubmit)="onRegister()" #registerForm="ngForm" aria-labelledby="registerHeader">
-
+        <form (ngSubmit)="onRegister()" #registerForm="ngForm" aria-labelledby="registerHeader">
+            
             <!-- 👤 Username Input Group -->
-             <div class="form-group">
+            <div class="form-group">
                 <label for="username">Username</label>
+                <!-- added autofocus here to instantly anchor focus on page mount -->
                 <input id="username" 
                        type="text" 
                        name="username" 
                        [(ngModel)]="registerData.Username" 
                        required 
-                       placeholder="Pick a unique display name..."
+                       placeholder="Pick a unique display name..." 
                        aria-required="true"
                        autofocus />
-             </div>
+            </div>
 
             <!-- 📧 Email Input Group -->
-             <div class="form-group">
+            <div class="form-group">
                 <label for="email">Email Address</label>
                 <input id="email" 
                        type="email" 
-                       name="email"
+                       name="email" 
                        [(ngModel)]="registerData.Email" 
                        required 
                        email 
-                       placeholder="e.g. employee@company.com"
+                       placeholder="e.g. employee@company.com" 
                        aria-required="true" />
-             </div>
+            </div>
 
             <!-- 🔒 Password Selection Input Group -->
-             <div class="form-group">
+            <div class="form-group">
                 <label for="password">Password</label>
                 <div class="password-input-wrapper">
                     <input id="password" 
@@ -47,21 +48,21 @@
                            placeholder="Create a secure password..." 
                            aria-required="true"
                            aria-describedby="registerPasswordRequirements" />
-                        
+                    
                     <!-- 👁️ Primary Visibility Button -->
-                     <button type="button" 
+                    <button type="button" 
                             class="eye-toggle-btn" 
                             (click)="showPassword = !showPassword"
                             [attr.aria-label]="showPassword ? 'Hide plain text password' : 'Show plain text password'"
                             [attr.aria-pressed]="showPassword">
 
                         <span aria-hidden="true">{{ showPassword ? '👁️' : '👁️‍🗨️' }}</span>
-                     </button>
+                    </button>
                 </div>
-             </div>
+            </div>
 
             <!-- 🔒 Password Confirmation Input Group -->
-             <div class="form-group">
+            <div class="form-group">
                 <label for="confirmPassword">Confirm Password</label>
                 <div class="password-input-wrapper">
                     <input id="confirmPassword" 
@@ -69,38 +70,38 @@
                            name="confirmPassword" 
                            [(ngModel)]="confirmPassword" 
                            required 
-                           placeholder="Retype your password..."
+                           placeholder="Retype your password..." 
                            aria-required="true"
                            [attr.aria-invalid]="registerData.Password !== confirmPassword" />
                     
                     <!-- 👁️ Confirmation Visibility Button -->
-                     <button type="button" 
+                    <button type="button" 
                             class="eye-toggle-btn" 
                             (click)="showConfirmPassword = !showConfirmPassword"
                             [attr.aria-label]="showConfirmPassword ? 'Hide plain text confirmation password' : 'Show plain text confirmation password'"
                             [attr.aria-pressed]="showConfirmPassword">
-
+                        
                         <span aria-hidden="true">{{ showConfirmPassword ? '👁️' : '👁️‍🗨️' }}</span>
-                     </button>
+                    </button>
                 </div>
-             </div>
+            </div>
 
             <!-- 💡 Hidden layout helper text linked to inputs -->
-             <span id="registerPasswordRequirements" style="display: none;">Both password fields must match exactly before registration requests can submit.</span>
+            <span id="registerPasswordRequirements" style="display: none;">Both password fields must match exactly before registration requests can submit.</span>
 
             <!-- 🏁 Submission Hub -->
-             <button type="submit" 
+            <button type="submit" 
                     class="submit-btn register-btn" 
                     [disabled]="!registerForm.form.valid"
                     aria-label="Submit credentials to register your new account">Sign Up</button>
-         </form>
+        </form>
 
         <!-- 🗺️ Footnote Navigation Links -->
-         <div class="register-footer" role="navigation" aria-label="Alternative entry link">
+        <div class="register-footer" role="navigation" aria-label="Alternative entry links">
             <p>
                 Already have an account? 
                 <a [routerLink]="['/login']" class="login-link">Back to Sign In</a>
             </p>
-         </div>
+        </div>
     </div>
 </div>

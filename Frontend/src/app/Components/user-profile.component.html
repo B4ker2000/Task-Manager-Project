@@ -1,78 +1,96 @@
-<div class="profile-wrapper">
+<div class="profile-wrapper" role="main" aria-label="User Profile Settings">
     <header class="profile-header">
-        <button class="back-btn" [routerLink]="['/dashboard']">← Back to Workspace</button>
+        <!-- 🔙 Back Button: Added explicit label and instruction for non-sighted users -->
+        <button class="back-btn" [routerLink]="['/dashboard']" aria-label="Back to primary task dashboard canvas">← Back to Workspace</button>
         <h2>Your Workspace Identity Profile</h2>
     </header>
 
     <!-- Loading Placeholder Spinner Card Layout -->
-     <div class="loading-state" *ngIf="isLoading">
+     <!-- 🚨 aria-live="assertive" forces the screen reader to instantly read the loading status on load -->
+      <div class="loading-state" *ngIf="isLoading" role="status" aria-live="assertive">
         <p>Syncing secure cloud identity credentials...</p>
-     </div>
+      </div>
 
     <!-- Active Profile Layout Card Display -->
      <div class="profile-card-grid" *ngIf="!isLoading && userProfile">
         <div class="profile-layout-vertical-stack">
             <!-- Section 1: Core Account Details Card -->
-             <div class="details-card">
-                <div class="avatar-circle">
+             <div class="details-card" role="region" aria-label="Core Account Details">
+                <!-- 👤 EMOJI PROTECTION: aria-hidden="true" stops screen reader from saying "Silhouette" aloud -->
+                 <div class="avatar-circle" aria-hidden="true">
                     👤
-                </div>
-                <h3>{{ userProfile.username }}</h3>
-                <span class="role-badge" [ngClass]="userProfile.role.toLowerCase()">
-                    💼 Security Level: {{ userProfile.role }}
-                </span>
+                 </div>
+                <!-- aria-level explicitly clarifies structural typographic depth -->
+                 <h3 aria-level="3">{{ userProfile.username }}</h3>
+                 <span class="role-badge" [ngClass]="userProfile.role.toLowerCase()" role="text" [attr.aria-label]="'Security Level: ' + userProfile.role">
+                    <span aria-hidden="true">💼</span> Security Level: {{ userProfile.role }}
+                 </span>
 
                 <div class="info-row">
-                    <strong>Registered Email:</strong>
-                    <span>{{ userProfile.email }}</span>
+                    <strong id="emailLabel">Registered Email:</strong>
+                    <span [attr.aria-labelledby]="'emailLabel'">{{ userProfile.email }}</span>
                 </div>
                 <div class="info-row">
-                    <strong>Database Record ID:</strong>
-                    <span>#{{ userProfile.id }}</span>
+                    <strong id="recordLabel">Database Record ID:</strong>
+                    <span [attr.aria-labelledby]="'recordLabel'">#{{ userProfile.id }}</span>
                 </div>
              </div>
             <!-- Section 2: Quick Metrics Statistics Card -->
-             <div class="stats-card">
-                <h4>📋 System Action Metrics</h4>
-                <div class="metric-box">
-                    <span class="metric-label">Assigned Work Items</span>
-                    <span class="metric-num">{{ userProfile.stats.total }}</span>
+             <div class="stats-card" role="region" aria-label="System Action Metrics">
+                <h4 aria-level="4"><span aria-hidden="true">📋</span> System Action Metrics</h4>
+                <div class="metric-box" [attr.aria-label]="userProfile.stats.total + ' Assigned Work Items'">
+                    <span class="metric-label" aria-hidden="true">Assigned Work Items</span>
+                    <span class="metric-num" aria-hidden="true">{{ userProfile.stats.total }}</span>
                 </div>
-                <div class="metric-box status-done">
-                    <span class="metric-label">Completed Tasks</span>
-                    <span class="metric-num">{{ userProfile.stats.completed }}</span>
+                <div class="metric-box status-done" [attr.aria-label]="userProfile.stats.completed + ' Completed Tasks'">
+                    <span class="metric-label" aria-hidden="true">Completed Tasks</span>
+                    <span class="metric-num" aria-hidden="true">{{ userProfile.stats.completed }}</span>
                 </div>
              </div>
         </div>
         <div class="profile-layout-vertical-stack">
             <!-- Section 3: Accessibility, Themes & Localization options -->
-             <div class="accessibility-config-card">
-                <h4>🎨 Workspace Environment Preferences</h4>
+             <div class="accessibility-config-card" role="region" aria-label="Workspace Environment Preferences">
+                <h4 aria-level="4"><span aria-hidden="true">🎨</span> Workspace Environment Preferences</h4>
 
                 <div class="config-control-row">
                     <!-- Theme Selector -->
                      <div class="info-adjustment-group">
                         <label for="themeEngineSelect" class="info-adjustment-label">Visual Application Theme:</label>
                         <div class="control-input-wrapper">
-                            <select id="themeEngineSelect" [(ngModel)]="activeTheme" (change)="onThemeChangeEngineTrigger()" class="board-interactive-field select-config">
-                                <option value="light">☀️ Professional Light Mode</option>
-                                <option value="dark">🌙 Dark Workspace Canvas</option>
-                                <option value="BA">🔮 Schale Workspace (Blue Archive)</option>
-                                <option value="amber-crt">💽 Vintage Amber CRT Terminal</option>
-                                <option value="matrix-crt">📟 Vintage Green Matrix CRT Terminal</option>
-                                <option value="95/98">💾 Nostalgic Retro Windows 95/98</option>
-                                <option value="xp">💿 Classic Windows XP (Luna Blue)</option>
-                                <option value="vista">📀 Classic Windows Vista</option>
-                                <option value="7">🫧 Classic Windows 7</option>
-                                <option value="frutiger-aero">🌿 Frutiger Aero (Vibrant Eco-Cyber)</option>
-                            </select>
+                            <!-- aria-haspopup notifies screen reader users that a selection overlay menu is active -->
+                             <select id="themeEngineSelect" 
+                                    [(ngModel)]="activeTheme" 
+                                    (change)="onThemeChangeEngineTrigger()" 
+                                    class="board-interactive-field select-config"
+                                    aria-haspopup="listbox"
+                                    aria-label="Visual Application Theme selection toggle dropdown">
+
+                                <!-- The aria-label forces the voice engine to read clean text, ignoring the emojis! -->
+                                 <option value="light" aria-label="Professional Light Mode">☀️ Professional Light Mode</option>
+                                 <option value="dark" aria-label="Dark Workspace Canvas">🌙 Dark Workspace Canvas</option>
+                                 <option value="amber-crt" aria-label="Vintage Amber CRT Terminal">💽 Vintage Amber CRT Terminal</option>
+                                 <option value="matrix-crt" aria-label="Vintage Green Matrix CRT Terminal">📟 Vintage Green Matrix CRT Terminal</option>
+                                 <option value="high-contrast-black" aria-label="High Contrast Black Theme">🌓 High Contrast (Black)</option>
+                                 <option value="95/98" aria-label="Retro Windows 95/98 Theme">💾 Retro Windows 95/98</option>
+                                 <option value="xp" aria-label="Nostalgic Windows XP Luna Blue Theme">💿 Nostalgic Windows XP (Luna Blue)</option>
+                                 <option value="vista" aria-label="Classic Windows Vista Theme">📀 Classic Windows Vista</option>
+                                 <option value="7" aria-label="Classic Windows 7 Theme">🫧 Classic Windows 7</option>
+                                 <option value="frutiger-aero" aria-label="Frutiger Aero Vibrant Eco-Cyber Theme">🌿 Frutiger Aero (Vibrant Eco-Cyber)</option>
+                                 <option value="BA" aria-label="Schale Workspace Blue Archive Theme">🔮 Schale Workspace (Blue Archive)</option>
+                             </select>
                         </div>
                      </div>
 
                     <!-- Font Selector -->
                      <div class="info-adjustment-group">
                         <label for="fontSelect" class="info-adjustment-label">Font Style:</label>
-                        <select id="fontSelect" [(ngModel)]="activeFont" (change)="onFontChangeEngineTrigger()">
+                        <select id="fontSelect" 
+                                [(ngModel)]="activeFont" 
+                                (change)="onFontChangeEngineTrigger()"
+                                aria-haspopup="listbox"
+                                aria-label="Typography interface font layout switch dropdown"
+                                aria-description="Changes the default display typeface for the application workspace">
                             <option value="">Theme Default</option>
                             <option value="dejavu">High-Legibility</option>
                             <option value="dyslexic">Easy-to-Read (Dyslexia Friendly)</option>
@@ -82,7 +100,11 @@
                     <!-- Colorblind Filter Selector -->
                      <div class="info-adjustment-group">
                         <label for="colorblindSelect" class="info-adjustment-label">Colorblind Filter:</label>
-                        <select id="colorblindSelect" [(ngModel)]="activeColorblind" (change)="onColorblindChangeEngineTrigger()">
+                        <select id="colorblindSelect" 
+                                [(ngModel)]="activeColorblind" 
+                                (change)="onColorblindChangeEngineTrigger()"
+                                aria-haspopup="listbox"
+                                aria-label="Colorblind filter correction simulation matrix selector dropdown">
                             <option value="">None</option>
                             <option value="deuteranopia">Deuteranopia (Green Weakness)</option>
                             <option value="protanopia">Protanopia (Red Weakness)</option>
@@ -90,34 +112,44 @@
                             <option value="grayscale">Grayscale (Monochrome)</option>
                         </select>
                      </div>
-
-                    <!-- High Contrast Toggle -->
-                     <div class="info-adjustment-group">
-                        <label for="highContrast" class="info-adjustment-label">
-                            <input id="highContrast" type="checkbox" [(ngModel)]="isHighContrast" (change)="onHighContrastEngineTrigger()">
-                            <span>High Contrast Mode</span>
-                        </label>
-                     </div>
                 </div>
              </div>
 
             <!-- Section 4: Update account info -->
-             <div class="settings-card">
-                <h4>⚙️ Account Management Settings</h4>
+             <div class="settings-card" role="region" aria-label="Account Management Settings">
+                <h4 aria-level="4"><span aria-hidden="true">⚙️</span> Account Management Settings</h4>
 
                 <!-- Account Information Adjustment Form -->
                  <form (ngSubmit)="onUpdateAccount()" #settingsForm="ngForm" class="info-adjustment-form">
                     <div class="info-adjustment-group">
                         <label for="newUsername" class="info-adjustment-label">Update Username</label>
-                        <input id="newUsername" type="text" name="newUsername" [(ngModel)]="updateData.NewUsername" placeholder="Enter new username..." class="info-adjustment-input newUsername" />
+                        <input id="newUsername" 
+                               type="text" 
+                               name="newUsername" 
+                               [(ngModel)]="updateData.NewUsername" 
+                               placeholder="Enter new username..." 
+                               class="info-adjustment-input newUsername" />
                     </div>
 
                     <div class="info-adjustment-group">
                         <label for="newPassword" class="info-adjustment-label">Change Security Password</label>
                         <div class="password-input-wrapper">
-                            <input id="newPassword" [type]="showPassword ? 'text' : 'password'" name="newPassword" [(ngModel)]="updateData.NewPassword" placeholder="Enter new password..." class="info-adjustment-input newPassword" />
-                            <button type="button" class="eye-toggle-btn" (click)="showPassword = !showPassword" >
-                                {{ showPassword ? '👁️' : '👁️‍🗨️' }}
+                            <input id="newPassword" 
+                                   [type]="showPassword ? 'text' : 'password'" 
+                                   name="newPassword" 
+                                   [(ngModel)]="updateData.NewPassword" 
+                                   placeholder="Enter new password..." 
+                                   class="info-adjustment-input newPassword"
+                                   aria-describedby="passwordRequirements" />
+
+                            <!-- 👁️ PASSWORD REVEAL TOGGLE: Custom aria tags communicate if text is masked or visible -->
+                            <button type="button" 
+                                    class="eye-toggle-btn" 
+                                    (click)="showPassword = !showPassword"
+                                    [attr.aria-label]="showPassword ? 'Hide plain text password' : 'Show plain text password'"
+                                    [attr.aria-pressed]="showPassword">
+                                
+                                <span aria-hidden="true">{{ showPassword ? '👁️' : '👁️‍🗨️' }}</span>
                             </button>
                         </div>
                     </div>
@@ -126,23 +158,46 @@
                         <label for="confirmNewPassword" class="info-adjustment-label">Confirm New Password</label>
                         <!-- <input [type]="showPassword ? 'text' : 'password'" name="confirmNewPassword" [(ngModel)]="confirmNewPassword" placeholder="Retype your new password..." class="info-adjustment-input" /> --> <!-- This will make it so that both password textboxes are bound to the same reveal "eye" button -->
                          <div class="password-input-wrapper">
-                            <input id="confirmNewPassword" [type]="showConfirmPassword ? 'text' : 'password'" name="confirmNewPassword" [(ngModel)]="confirmNewPassword" placeholder="Retype your new password..." class="info-adjustment-input newPasswordConfirm" />
-                            <button type="button" class="eye-toggle-btn" (click)="showConfirmPassword = !showConfirmPassword" >
-                                {{ showConfirmPassword ? '👁️' : '👁️‍🗨️' }}
+                            <input id="confirmNewPassword" 
+                                   [type]="showConfirmPassword ? 'text' : 'password'" 
+                                   name="confirmNewPassword" 
+                                   [(ngModel)]="confirmNewPassword" 
+                                   placeholder="Retype your new password..." 
+                                   class="info-adjustment-input newPasswordConfirm"
+                                   [attr.aria-invalid]="updateData.NewPassword !== confirmNewPassword" />
+
+                            <button type="button" 
+                                    class="eye-toggle-btn" 
+                                    (click)="showConfirmPassword = !showConfirmPassword" 
+                                    [attr.aria-label]="showConfirmPassword ? 'Hide plain text confirmation password' : 'Show plain text confirmation password'"
+                                    [attr.aria-pressed]="showConfirmPassword">
+
+                                <span aria-hidden="true">{{ showConfirmPassword ? '👁️' : '👁️‍🗨️' }}</span>
                             </button>
                          </div>
                     </div>
 
-                    <button type="submit" class="save-settings-btn" [disabled]="(!updateData.NewUsername?.trim()) && (!updateData.NewPassword?.trim() || updateData.NewPassword !== confirmNewPassword)">Save Profile Changes</button>
+                    <!-- Hidden helper utility read automatically by modern audio navigation suites -->
+                     <span id="passwordRequirements" style="display: none;">Passwords must match before modifications can commit securely.</span>
+
+                    <button type="submit" 
+                            class="save-settings-btn" 
+                            [disabled]="(!updateData.NewUsername?.trim()) && (!updateData.NewPassword?.trim() || updateData.NewPassword !== confirmNewPassword)">
+                    
+                    Save Profile Changes</button>
                  </form>
 
-                <hr>
+                <hr aria-hidden="true">
 
                 <!-- High Risk Destruction Action Block -->
-                 <div class="danger-zone">
-                    <h5 class="danger-zone-header">⚠️ Danger Zone</h5>
-                    <p class="danger-zone-warning">Deleting your account clears your workspace access profiles completely!<br>This action cannot be reversed.</p>
-                    <button type="button" (click)="onDeleteAccount()" class="danger-zone-btn">Permanently Delete Account</button>
+                 <!-- role="alertdialog" alerts the user immediately to prioritize their focus onto this block -->
+                 <div class="danger-zone" role="alertdialog" aria-labelledby="dangerZoneHeader" aria-describedby="dangerZoneWarnMsg">
+                    <h5 id="dangerZoneHeader" class="danger-zone-header"><span aria-hidden="true">⚠️</span> Danger Zone</h5>
+                    <p id="dangerZoneWarnMsg" class="danger-zone-warning">Deleting your account clears your workspace access profiles completely!<br>This action cannot be reversed.</p>
+                    <button type="button" 
+                            (click)="onDeleteAccount()" 
+                            class="danger-zone-btn"
+                            aria-label="Permanently delete account workspace and credentials forever">Permanently Delete Account</button>
                  </div>
              </div>
         </div>

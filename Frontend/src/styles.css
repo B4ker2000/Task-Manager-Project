@@ -12,6 +12,7 @@
     --font-scale: 1;
     --line-height-scale: 1.5;
 
+    /* 🔤 Text Elements */
     --text-primary: #212529;                                            /* Dominant heavy font header color */
     --text-secondary: #212529;
     --text-muted: #6c757d;                                              /* Subtitles, labels and helper notes */
@@ -63,6 +64,7 @@
     --font-scale: 1;
     --line-height-scale: 1.5;
 
+    /* 🔤 Text Elements */
     --text-primary: #f8f9fa;                                            /* Crisp white readable header font block */
     --text-secondary: #f8f9fa;
     --text-muted: #a0aec0;                                              /* Soft grey structural subtext text */
@@ -88,7 +90,7 @@
     --btn-submit-hover-bg: #3182ce;   --btn-submit-hover-text: #ffffff;   --btn-submit-hover-border: #63b3ed;
 
     --btn-cancel-bg: #1e1e1e;         --btn-cancel-text: #a0aec0;         --btn-cancel-border: #3e3e3e;
-    --btn-cancel-hover-bg: #4a5568;   --btn-cancel-hover-text: #ffffff;   --btn-cancel-hover-border: #cdb5e1;
+    --btn-cancel-hover-bg: #4a5568;   --btn-cancel-hover-text: #ffffff;   --btn-cancel-hover-border: #a0aec0;
 
     --btn-filter-bg: #1e1e1e;         --btn-filter-text: #48bb78;         --btn-filter-border: #38a169;
     --btn-filter-hover-bg: #38a169;   --btn-filter-hover-text: #ffffff;   --btn-filter-hover-border: #48bb78;
@@ -114,6 +116,7 @@
     --font-scale: 1;
     --line-height-scale: 1.5;
 
+    /* 🔤 Text Elements */
     --text-primary: #ffffff;                                            /* Full white primary text color over wallpaper */
     --text-secondary: #000000;                                          /* Stark terminal letter ink black inside cards */
     --text-muted: #000080;                                              /* Classic Titlebar Blue identifiers */
@@ -170,6 +173,7 @@
     --font-scale: 1;
     --line-height-scale: 1.5;
 
+    /* 🔤 Text Elements */
     --text-primary: #ffffff;            /* Sharp white headers over Bliss wallpaper background */
     --text-secondary: #000000;          /* Sharp dark black ink inside card canvases */
     --text-muted: #0022a6;              /* Classic Windows XP Titlebar Royal Blue tint */
@@ -221,6 +225,7 @@
     --font-scale: 1;
     --line-height-scale: 1.5;
 
+    /* 🔤 Text Elements */
     --text-primary: #1a202c;
     --text-secondary: #1a202c;                                                                            /* Deep dark contrast text inside glass sheets */
     --text-muted: #415268;
@@ -272,6 +277,7 @@
     --font-scale: 1;
     --line-height-scale: 1.5;
 
+    /* 🔤 Text Elements */
     --text-primary: #ffffff;                                                                              /* Soft glowing glass text */
     --text-secondary: #1a202c;                                                                            /* Deep dark contrast text inside glass sheets */
     --text-muted: #1e3a8a; 
@@ -323,6 +329,7 @@
     --font-scale: 1;
     --line-height-scale: 1.5;
 
+    /* 🔤 Text Elements */
     --text-primary: #ffffff;
     --text-secondary: #0f172a;
     --text-muted: #0369a1; 
@@ -374,6 +381,7 @@
     --font-scale: 1;
     --line-height-scale: 1.5;
 
+    /* 🔤 Text Elements */
     --text-primary: #ffb000;                            /* Glowing vintage high-vis phosphorus amber ink text */
     --text-secondary: #ffb000;
     --text-muted: #aa7500;                              /* Muted copper phosphor amber subtitles notes */
@@ -425,6 +433,7 @@
     --font-scale: 1;
     --line-height-scale: 1.5;
 
+    /* 🔤 Text Elements */
     --text-primary: #33ff33;                            /* Glowing vintage high-vis green ink text */
     --text-secondary: #33ff33;                          /* High contrast green tracking text inside cards */
     --text-muted: #00aa00;
@@ -477,6 +486,7 @@
     --font-scale: 1;
     --line-height-scale: 1.5;
     
+    /* 🔤 Text Elements */
     --text-primary: #1a365d;                        /* Deep Schale Federal Navy blue text */
     --text-secondary: #2d3748;                      /* Highly legible charcoal layout secondary text color */
     --text-muted: #4a90e2;                          /* Bright clean sky blue subtitles strings */
@@ -518,6 +528,58 @@
     --link-color-override: #ff69b4;
 }
 
+[data-theme="high-contrast-black"] {
+    /* 🌓 CLASSIC HIGH CONTRAST STARK BLACK THEME */
+    --surface-bg: #000000;
+    --container-bg: #000000;
+    --wallpaper: #000000;
+    --border-color: #ffffff;
+    --input-bg: #000000;
+    --font-override: monospace, sans-serif;
+    --font-scale: 1;
+    --line-height-scale: 1.5;
+
+    /* 🔤 Text Elements */
+    --text-primary: #ffffff;
+    --text-secondary: #ffffff;
+    --text-muted: #aaaaaa;
+    
+    /* 📊 Accessibility Badge Matrices */
+    --badge-high-bg: #ffffff;       --badge-high-text: #000000;     --badge-high-border: #ffffff;
+    --badge-medium-bg: #000000;     --badge-medium-text: #ffffff;   --badge-medium-border: #ffffff;
+    --badge-low-bg: #000000;        --badge-low-text: #ffffff;      --badge-low-border: #aaaaaa;
+    --badge-done-bg: #ffffff;       --badge-done-text: #000000;     --badge-done-border: #aaaaaa;
+
+    /* 🎨 Progress & Focus Halos */
+    --progress-bar-fill: #ffffff;
+
+    --filter-border-color: #ffffff;
+    --filter-focus-color: #ffffff;
+    --filter-focus-shadow: rgba(255, 255, 255, 0.25);
+
+    --focus-halo-color: #ffffff;
+    --focus-halo-shadow: rgba(255, 255, 255, 0.4);
+
+    /* Semantic Button Four-Tier Structural Inventory */
+    --btn-submit-bg: #000000;         --btn-submit-text: #ffffff;         --btn-submit-border: #ffffff;
+    --btn-submit-hover-bg: #ffffff;   --btn-submit-hover-text: #000000;   --btn-submit-hover-border: #ffffff;
+
+    --btn-cancel-bg: #000000;         --btn-cancel-text: #ffffff;         --btn-cancel-border: #ffffff;
+    --btn-cancel-hover-bg: #ffffff;   --btn-cancel-hover-text: #000000;   --btn-cancel-hover-border: #ffffff;
+
+    --btn-filter-bg: #000000;         --btn-filter-text: #ffffff;         --btn-filter-border: #ffffff;
+    --btn-filter-hover-bg: #ffffff;   --btn-filter-hover-text: #000000;   --btn-filter-hover-border: #ffffff;
+
+    --btn-delete-bg: #000000;         --btn-delete-text: #ffffff;         --btn-delete-border: #ffffff;
+    --btn-delete-hover-bg: #ffffff;   --btn-delete-hover-text: #000000;   --btn-delete-hover-border: #ffffff;
+
+    /* THEMATIC SCHALE TYPE MODIFIERS */
+    --btn-text-transform: none;
+    --btn-font-style: normal;
+
+    --link-color-override: #ffffff;
+}
+
 /* =========================================================================
    ACCESSIBILITY OPTIONS
    ========================================================================= */
@@ -526,7 +588,7 @@
 [data-accessible-font="dyslexic"] *:before,
 [data-accessible-font="dyslexic"] *:after {
    --font-override: "OpenDyslexic", "Comic Sans MS", "Comic Sans", cursive !important;
-   --font-monospace: "OpenDyslexicMono", monospace !important;
+   --font-monospace: "OpenDyslexicMono", monospace !important; /* Temporary for now */
 }
 
 /* DejaVu Sans Option */
@@ -534,41 +596,7 @@
 [data-accessible-font="dejavu"] *:before,
 [data-accessible-font="dejavu"] *:after {
    --font-override: "DejaVu Sans", "Trebuchet MS", Arial, sans-serif !important;
-   --font-monospace: "DejaVu Sans Mono", monospace !important;
-}
-
-/* High Contrast Options */
-[data-high-contrast="true"] {
-    background: #000000 !important;
-    color: #ffffff !important;
-}
-
-/* Ensure all text blocks, containers, cards, and text inputs comply */
-[data-high-contrast="true"] p,
-[data-high-contrast="true"] span,
-[data-high-contrast="true"] h1, [data-high-contrast="true"] h2,
-[data-high-contrast="true"] h3, [data-high-contrast="true"] h4,
-[data-high-contrast="true"] h5, [data-high-contrast="true"] h6,
-[data-high-contrast="true"] button,
-[data-high-contrast="true"] select,
-[data-high-contrast="true"] input,
-[data-high-contrast="true"] textarea,
-[data-high-contrast="true"] label,
-[data-high-contrast="true"] a,
-[data-high-contrast="true"] table,  [data-high-contrast="true"] td, [data-high-contrast="true"] th,
-[data-high-contrast="true"] .review-status-banner,
-[data-high-contrast="true"] input[type="checkbox"]:checked::after {
-    background-color: #000000 !important;
-    color: #ffffff !important;
-    border-color: #ffffff !important;
-    text-shadow: none !important;
-    box-shadow: none !important;
-    background-image: none !important;
-}
-
-/* Ensures placeholder texts inside inputs are visible in high contrast */
-[data-high-contrast="true"] ::placeholder {
-    color: #aaaaaa !important;
+   --font-monospace: "DejaVu Sans Mono", monospace !important; /* Temporary for now */
 }
 
 /* Colorblind Filters */
@@ -603,6 +631,7 @@ html,
 .dashboard-wrapper,
 .main-layout-backdrop {
     background: var(--wallpaper) !important;
+    background-color: var(--container-bg);
     background-attachment: fixed !important; /* Freezes backgrounds so long column scrolls won't tile clip! */
     background-size: cover !important;
     color: var(--text-primary) !important;
@@ -612,7 +641,13 @@ html,
     font-size: calc(16px * var(--font-scale));
     line-height: var(--line-height-scale);
     font-family: var(--font-override, sans-serif) !important;
-    transition: background 0.25s ease-in-out, color 0.25s ease-in-out;
+
+    /* 📈 HARDWARE ACCELERATED TRANSITIONS: Interpolates visual states cleanly */
+    transition: background-color 0.5s ease-in-out,
+                color 0.4s ease-in-out,
+                border-color 0.4s ease-in-out,
+                filter 0.6s cubic-bezier(0.25, 1, 0.5, 1), /* Smooths out colorblind SVG matrix transitions! */
+                box-shadow 0.4s ease-in-out;
 }
 
 /* =========================================================================
@@ -1103,16 +1138,3 @@ body.cdk-drag-dragging * {
     background-color: var(--btn-delete-hover-bg) !important;
     transform: scale(1.05); /* Adds a tiny, responsive tactile pop! */
 }
-
-/* =========================================================================
-   Universal Text Sizes
-   ========================================================================= */
-/* h1, h5,
-label {
-    display: flex;
-    align-items: center;
-    width: max-content;
-    max-width: 100%;
-    text-align: left;
-    white-space: normal;
-} */

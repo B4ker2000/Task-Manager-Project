@@ -1,3 +1,7 @@
+// This file was created during the initial stages of creating this application to
+// make a test account before there was a GUI way of registering a new account! :p
+// I decided to keep it in the original files but will be removed from GitHub!
+
 @hostname = http://localhost:5283
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwidW5pcXVlX25hbWUiOiJ0ZXN0dXNlciIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsIm5iZiI6MTc4MzQzMDA1MCwiZXhwIjoxNzgzNTE2NDUwLCJpYXQiOjE3ODM0MzAwNTB9.OUgKOhutwj7ta0n-xT8Z5PqpBStBy_YzMYhlhjRQye4
 

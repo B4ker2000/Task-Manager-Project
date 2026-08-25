@@ -33,7 +33,6 @@ export class UserProfileComponent implements OnInit {
 
     // Accessibility related variables
     activeFont: string = "";
-    isHighContrast: boolean = false;
     activeColorblind: string = "";
 
     ngOnInit(): void {
@@ -59,15 +58,10 @@ export class UserProfileComponent implements OnInit {
 
             // Accessibility cache reader
             const savedFont = localStorage.getItem("user-preferred-font");
-            const savedContrastOption = localStorage.getItem("user-preferred-high-contrast");
             const savedColorblindOption = localStorage.getItem("user-preferred-colorblind");
             if(savedFont) {
                 this.activeFont = savedFont;
                 this.onFontChangeEngineTrigger();
-            }
-            if(savedContrastOption) {
-                this.isHighContrast = savedContrastOption === "true";
-                this.onHighContrastEngineTrigger();
             }
             if(savedColorblindOption) {
                 this.activeColorblind = savedColorblindOption;
@@ -163,19 +157,6 @@ export class UserProfileComponent implements OnInit {
             }
             localStorage.setItem("user-preferred-font", this.activeFont);
             console.log(`Typography layout shifted to "${this.activeFont || 'Default'}" successfully.`);
-        }
-    }
-
-    // High Contrast Controller Method
-    onHighContrastEngineTrigger(): void {
-        if (typeof document !== "undefined") {
-            if (this.isHighContrast) {
-                document.documentElement.setAttribute("data-high-contrast", this.isHighContrast.toString());
-            } else {
-                document.documentElement.removeAttribute("data-high-contrast");
-            }
-            localStorage.setItem("user-preferred-high-contrast", this.isHighContrast.toString());
-            console.log(`High Contrast state toggled to: ${this.isHighContrast}`);
         }
     }
 

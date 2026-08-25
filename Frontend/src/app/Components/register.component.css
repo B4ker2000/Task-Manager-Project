@@ -21,6 +21,11 @@
     margin-top: 10px; 
 }
 
+.register-footer {
+    margin: 0;
+    display: inline;
+}
+
 /* =========================================================================
    PASSWORD LAYOUT STRUCTURAL ENHANCEMENTS
    ========================================================================= */

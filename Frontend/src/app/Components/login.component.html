@@ -1,41 +1,88 @@
-<div class="login-wrapper">
+<div class="login-wrapper" role="main" aria-label="Account Authentication Portal">
     <div class="login-container">
-        <h2>Welcome Back</h2>
+        <h2 id="loginHeader">Welcome Back</h2>
         <p>Log in to manage your projects and tasks</p>
 
-        <form (ngSubmit)="onLogin()" #loginForm="ngForm">
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input id="email" type="email" name="email" [(ngModel)]="credentials.email" required placeholder="enter your email here">
-            </div>
+        <!-- aria-describedby links the main structural headers directly to the input scope -->
+         <form (ngSubmit)="onLogin()" #loginForm="ngForm" aria-labelledby="loginHeader">
 
-            <div class="form-group">
+            <!-- 📧 Email Input Area -->
+             <div class="form-group">
+                <label for="email">Email Address</label>
+                <!-- added aria-required dynamically corresponding to form compliance -->
+                 <input id="email" 
+                       type="email" 
+                       name="email" 
+                       [(ngModel)]="credentials.email" 
+                       required 
+                       placeholder="enter your email here"
+                       aria-required="true"
+                       autofocus>
+             </div>
+
+            <!-- 🔒 Password Input Area -->
+             <div class="form-group">
                 <label for="password">Password</label>
                 <div class="password-input-wrapper">
                     <!-- Binding [type] makes the visibility dynamic -->
-                     <input id="password" [type]="showPassword ? 'text' : 'password'" name="password" [(ngModel)]="credentials.password" required placeholder="enter password...">
-                    <button type="button" class="eye-toggle-btn" (click)="showPassword = !showPassword">
-                        {{ showPassword ? '👁️' : '👁️‍🗨️' }}
-                    </button>
+                     <input id="password" 
+                            [type]="showPassword ? 'text' : 'password'" 
+                            name="password" 
+                            [(ngModel)]="credentials.password" 
+                            required 
+                            placeholder="enter password..."
+                            aria-required="true">
+
+                    <!-- 👁️ Password Visibility Switch -->
+                     <button type="button" 
+                            class="eye-toggle-btn" 
+                            (click)="showPassword = !showPassword"
+                            [attr.aria-label]="showPassword ? 'Hide plain text password' : 'Show plain text password'"
+                            [attr.aria-pressed]="showPassword">
+                    
+                        <span aria-hidden="true">{{ showPassword ? '👁️' : '👁️‍🗨️' }}</span>
+                     </button>
                 </div>
                 <div class="remember-me-container">
                     <label for="rememberMeBox" class="remember-me-label">
-                        <input type="checkbox" id="rememberMeBox" [(ngModel)]="rememberMe" name="rememberMe" />
+                        <input type="checkbox" 
+                               id="rememberMeBox" 
+                               [(ngModel)]="rememberMe" 
+                               name="rememberMe"
+                               [attr.aria-checked]="rememberMe" />
+                        
                         <span class="remember-me-text">Remember Me</span>
                     </label>
                 </div>
-            </div>
-                        
-            <button type="submit" class="submit-btn login-submit-btn" [disabled]="!loginForm.form.valid">Sign In</button>
+             </div>
 
-            <div class="login-footer-navigation">
-                <span>New to the workspace? </span>
-                <a [routerLink]="['/register']" class="create-new-account-link">Create a New Account</a>
-            </div>
+            <!-- 🏁 Core Submit Action Interface -->
+             <button type="submit" 
+                    class="submit-btn login-submit-btn" 
+                    [disabled]="!loginForm.form.valid"
+                    aria-label="Sign in securely to your workspace canvas">Sign In</button>
 
-            <div class="error-msg" *ngIf="errorMessage">
-                ❌ {{ errorMessage }}
-            </div>
-        </form>
+            <!-- 🗺️ Footnote Navigation Section Links -->
+             <div class="login-footer-navigation"
+                  role="navigation"
+                  aria-label="Alternative entry links">
+
+                <p>
+                    New to the workspace? 
+                    <a [routerLink]="['/register']" class="create-new-account-link">Create a New Account</a>
+                </p>
+             </div>
+
+            <!-- 🚨 DYNAMIC LIVE ERROR ANNOUNCER: aria-live="assertive" commands the screen reader
+                 to break its silence and instantly announce the specific backend error message text
+                 the split second it pops into existence! -->
+             <div class="error-msg" 
+                  *ngIf="errorMessage"
+                  role="alert"
+                  aria-live="assertive">
+                
+                    <span aria-hidden="true">❌</span> {{ errorMessage }}
+             </div>
+         </form>
     </div>
 </div>

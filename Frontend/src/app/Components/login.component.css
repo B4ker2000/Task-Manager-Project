@@ -84,6 +84,11 @@ input[type="email"] {
 /* =========================================================================
    NAVIGATION FOOTERS AND STRUCTURAL RESPONSIVE CONTROLS
    ========================================================================= */
+.login-footer-navigation p {
+    margin: 0;
+    display: inline;
+}
+
 .error-msg {
     color: #dc3545;
     font-weight: bold;
