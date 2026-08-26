@@ -3,6 +3,7 @@ import { isPlatformBrowser, NgIf, NgClass } from "@angular/common";
 import { RouterLink, Router } from "@angular/router";
 import { AuthService } from "../Services/auth.service";
 import { FormsModule } from "@angular/forms";
+import { LanguageService } from "../language.sevice";
 
 @Component({
     selector: 'app-user-profile',
@@ -34,6 +35,8 @@ export class UserProfileComponent implements OnInit {
     // Accessibility related variables
     activeFont: string = "";
     activeColorblind: string = "";
+
+    constructor(public langService: LanguageService) {}
 
     ngOnInit(): void {
         // Only run data fetches inside the browser window context shell
@@ -171,5 +174,10 @@ export class UserProfileComponent implements OnInit {
             localStorage.setItem("user-preferred-colorblind", this.activeColorblind);
             console.log(`Colorblind matrix shifted to "${this.activeColorblind || 'None'}" successfully.`);
         }
+    }
+
+    // Trigger method foe when changing languages
+    onLanguageChangeEngineTrigger(newLang: string): void {
+        this.langService.setLanguage(newLang);
     }
 }

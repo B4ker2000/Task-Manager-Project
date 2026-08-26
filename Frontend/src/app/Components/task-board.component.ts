@@ -83,6 +83,8 @@ export class TaskBoardComponent implements OnInit {
     // Modal focus related
     @ViewChild('taskModalHeader') taskModalHeader!: ElementRef<HTMLHeadingElement>;
     @ViewChild('tagModalHeader') tagModalHeader!: ElementRef<HTMLHeadingElement>;
+    @ViewChild('createTaskBtn') createTaskBtn!: ElementRef<HTMLButtonElement>
+    @ViewChild('createTagBtn') createTagBtn!: ElementRef<HTMLButtonElement>
     
     ngOnInit(): void {
         // Read the dynamic route context param parameter safely
@@ -222,18 +224,23 @@ export class TaskBoardComponent implements OnInit {
         this.newTask = { title: '', description: '', priority: 'Medium', deadline: '', projectId: this.projectId };
         this.isModalOpen = true;
 
-        // Wait exactly one microsecond for Angular to draw the HTML element, then force focus!
+        // Wait exactly one microsecond for Angular to draw the HTML element, then force focus on ```taskModalHeader```!
         setTimeout(() => {
             if (this.taskModalHeader) {
                 this.taskModalHeader.nativeElement.focus();
-                console.log("Accessibility Core successfully locked voice focus onto Task Modal.");
             }
         }, 50);
     }
 
     closeModal(): void { 
         this.isModalOpen = false; 
-        this.cdr.detectChanges();
+
+        setTimeout(() => {
+            if (this.createTaskBtn) {
+                this.createTaskBtn.nativeElement.focus();
+                console.log("Accessibility Core successfully restored focus to Create Task trigger.");
+            }
+        }, 50);
     }
 
     // If deadline is an empty string, turn it to null so .NET backend dates parse perfectly
@@ -411,17 +418,23 @@ export class TaskBoardComponent implements OnInit {
         this.newCategoryColor = "#3182ce";
         this.isCategoryModalOpen = true;
 
+        // This will switch the screen reader focus to ```tagModalHeader```
         setTimeout(() => {
             if (this.tagModalHeader) {
                 this.tagModalHeader.nativeElement.focus();
-                console.log("Accessibility Core successfully locked voice focus onto Tag Modal.")
             }
         }, 50);
     }
 
     closeCategoryModal(): void {
         this.isCategoryModalOpen = false;
-        this.cdr.detectChanges();
+
+        setTimeout(() => {
+            if (this.createTagBtn) {
+                this.createTagBtn.nativeElement.focus();
+                console.log("Accessibility Core successfully restored focus to Create Tag trigger.")
+            }
+        }, 50);
     }
 
     onCreateCategorySubmit(): void {

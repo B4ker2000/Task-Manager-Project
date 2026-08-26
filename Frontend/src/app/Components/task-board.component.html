@@ -7,8 +7,22 @@
         <div class="board-header-action-triggers" role="navigation" aria-label="Project space configuration controls">
             <button *ngIf="currentUserProjectRole === 'Member'" class="action-btn resign-project-btn" (click)="onLeaveProjectClick()" aria-label="Abandon this project workspace completely">Abandon Space</button>
             <!-- Clicking these two opens our form modal overlays -->
-             <button *ngIf="currentUserProjectRole === 'Owner'" class="submit-btn workspace-header-trigger" (click)="openCategoryModal()" aria-label="Open overlay window to create a new workspace tag">+ Create Workspace Tag</button>
-             <button *ngIf="currentUserProjectRole === 'Owner'" class="submit-btn workspace-header-trigger" (click)="openModal()" aria-label="Open overlay window to add a new task item">+ Add New Task</button>
+             <button *ngIf="currentUserProjectRole === 'Owner'" 
+                     #createTagBtn
+                     class="submit-btn workspace-header-trigger" 
+                     (click)="openCategoryModal()" 
+                     aria-label="Open overlay window to create a new workspace tag">
+                
+                <span aria-hidden="true">+</span> Create Workspace Tag
+             </button>
+             <button *ngIf="currentUserProjectRole === 'Owner'" 
+                     #createTaskBtn
+                     class="submit-btn workspace-header-trigger" 
+                     (click)="openModal()" 
+                     aria-label="Open overlay window to add a new task item">
+                
+                <span aria-hidden="true">+</span> Add New Task
+             </button>
         </div>
     </header>
 

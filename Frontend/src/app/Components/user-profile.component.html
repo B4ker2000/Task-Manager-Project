@@ -1,62 +1,77 @@
-<div class="profile-wrapper" role="main" aria-label="User Profile Settings">
+<div class="profile-wrapper" role="main" [attr.aria-label]="langService.words().PROFILE_ARIA_MAIN">
     <header class="profile-header">
-        <!-- 🔙 Back Button: Added explicit label and instruction for non-sighted users -->
-        <button class="back-btn" [routerLink]="['/dashboard']" aria-label="Back to primary task dashboard canvas">← Back to Workspace</button>
-        <h2>Your Workspace Identity Profile</h2>
+        <!-- 🔙 Back Button: Added explicit label and instruction for non-sighted users & Bound to localized descriptive strings -->
+        <button class="back-btn" [routerLink]="['/dashboard']" [attr.aria-label]="langService.words().BACK_BTN_ARIA">{{ langService.words().BACK_BTN_TEXT }}</button>
+        <h2 [innerHTML]="langService.words().IDENTITY_PROFILE_TITLE"></h2>
     </header>
 
     <!-- Loading Placeholder Spinner Card Layout -->
      <!-- 🚨 aria-live="assertive" forces the screen reader to instantly read the loading status on load -->
       <div class="loading-state" *ngIf="isLoading" role="status" aria-live="assertive">
-        <p>Syncing secure cloud identity credentials...</p>
+        <p>{{ langService.words().SYNCING_CREDENTIALS }}</p>
       </div>
 
     <!-- Active Profile Layout Card Display -->
      <div class="profile-card-grid" *ngIf="!isLoading && userProfile">
         <div class="profile-layout-vertical-stack">
             <!-- Section 1: Core Account Details Card -->
-             <div class="details-card" role="region" aria-label="Core Account Details">
+             <div class="details-card" role="region" [attr.aria-label]="langService.words().CORE_ACCOUNT_ARIA">
                 <!-- 👤 EMOJI PROTECTION: aria-hidden="true" stops screen reader from saying "Silhouette" aloud -->
-                 <div class="avatar-circle" aria-hidden="true">
-                    👤
-                 </div>
+                 <div class="avatar-circle" aria-hidden="true">👤</div>
                 <!-- aria-level explicitly clarifies structural typographic depth -->
                  <h3 aria-level="3">{{ userProfile.username }}</h3>
-                 <span class="role-badge" [ngClass]="userProfile.role.toLowerCase()" role="text" [attr.aria-label]="'Security Level: ' + userProfile.role">
-                    <span aria-hidden="true">💼</span> Security Level: {{ userProfile.role }}
+                 <span class="role-badge" [ngClass]="userProfile.role.toLowerCase()" role="text" [attr.aria-label]="langService.words().SECURITY_LEVEL_LABEL + ' ' + userProfile.role">
+                    <span aria-hidden="true">💼</span> {{ langService.words().SECURITY_LEVEL_LABEL }} {{ userProfile.role }}
                  </span>
 
                 <div class="info-row">
-                    <strong id="emailLabel">Registered Email:</strong>
+                    <strong id="emailLabel">{{ langService.words().REGISTERED_EMAIL_LABEL }}</strong>
                     <span [attr.aria-labelledby]="'emailLabel'">{{ userProfile.email }}</span>
                 </div>
                 <div class="info-row">
-                    <strong id="recordLabel">Database Record ID:</strong>
+                    <strong id="recordLabel">{{ langService.words().DATABASE_RECORD_LABEL }}</strong>
                     <span [attr.aria-labelledby]="'recordLabel'">#{{ userProfile.id }}</span>
                 </div>
              </div>
+
             <!-- Section 2: Quick Metrics Statistics Card -->
-             <div class="stats-card" role="region" aria-label="System Action Metrics">
-                <h4 aria-level="4"><span aria-hidden="true">📋</span> System Action Metrics</h4>
-                <div class="metric-box" [attr.aria-label]="userProfile.stats.total + ' Assigned Work Items'">
-                    <span class="metric-label" aria-hidden="true">Assigned Work Items</span>
+             <div class="stats-card" role="region" [attr.aria-label]="langService.words().SYSTEM_METRICS_TITLE">
+                <h4 aria-level="4"><span aria-hidden="true">📋</span> {{ langService.words().SYSTEM_METRICS_TITLE }}</h4>
+                <div class="metric-box" [attr.aria-label]="userProfile.stats.total + ' ' + langService.words().ASSIGNED_ITEMS_ARIA">
+                    <span class="metric-label" aria-hidden="true">{{ langService.words().ASSIGNED_ITEMS_LABEL }}</span>
                     <span class="metric-num" aria-hidden="true">{{ userProfile.stats.total }}</span>
                 </div>
-                <div class="metric-box status-done" [attr.aria-label]="userProfile.stats.completed + ' Completed Tasks'">
-                    <span class="metric-label" aria-hidden="true">Completed Tasks</span>
+                <div class="metric-box status-done" [attr.aria-label]="userProfile.stats.completed + ' ' + langService.words().COMPLETED_TASKS_ARIA">
+                    <span class="metric-label" aria-hidden="true">{{ langService.words().COMPLETED_TASKS_LABEL }}</span>
                     <span class="metric-num" aria-hidden="true">{{ userProfile.stats.completed }}</span>
                 </div>
              </div>
         </div>
+
         <div class="profile-layout-vertical-stack">
             <!-- Section 3: Accessibility, Themes & Localization options -->
-             <div class="accessibility-config-card" role="region" aria-label="Workspace Environment Preferences">
-                <h4 aria-level="4"><span aria-hidden="true">🎨</span> Workspace Environment Preferences</h4>
+             <div class="accessibility-config-card" role="region" [attr.aria-label]="langService.words().WORKSPACE_TITLE">
+                <h4 aria-level="4"><span aria-hidden="true">🎨</span> {{ langService.words().WORKSPACE_TITLE }}</h4>
 
                 <div class="config-control-row">
+                    <!-- 🌐 Language Selection Dropdown -->
+                     <div class="info-adjustment-group">
+                        <label for="languageSelect" class="info-adjustment-label">🌐 Application Language / 言語 / Язык:</label>
+                        <select id="languageSelect"
+                                [ngModel]="langService.currentLang()"
+                                (ngModelChange)="onLanguageChangeEngineTrigger($event)"
+                                class="board-interactive-field select-config"
+                                aria-label="Application display language selector dropdown">
+
+                            <option value="en">English (US)</option>
+                            <option value="ja">日本語 (Japanese)</option>
+                            <option value="ru">Русский (Russian)</option>
+                        </select>
+                     </div>
+
                     <!-- Theme Selector -->
                      <div class="info-adjustment-group">
-                        <label for="themeEngineSelect" class="info-adjustment-label">Visual Application Theme:</label>
+                        <label for="themeEngineSelect" class="info-adjustment-label">{{ langService.words().THEME_LABEL }}</label>
                         <div class="control-input-wrapper">
                             <!-- aria-haspopup notifies screen reader users that a selection overlay menu is active -->
                              <select id="themeEngineSelect" 
@@ -64,22 +79,22 @@
                                     (change)="onThemeChangeEngineTrigger()" 
                                     class="board-interactive-field select-config"
                                     aria-haspopup="listbox"
-                                    aria-label="Visual Application Theme selection toggle dropdown">
+                                    [attr.aria-label]="langService.words().THEME_LABEL">
 
                                 <!-- The aria-label forces the voice engine to read clean text, ignoring the emojis! -->
-                                 <option value="light" aria-label="Professional Light Mode">☀️ Professional Light Mode</option>
-                                 <option value="dark" aria-label="Dark Workspace Canvas">🌙 Dark Workspace Canvas</option>
-                                 <option value="amber-crt" aria-label="Vintage Amber CRT Terminal">💽 Vintage Amber CRT Terminal</option>
-                                 <option value="matrix-crt" aria-label="Vintage Green Matrix CRT Terminal">📟 Vintage Green Matrix CRT Terminal</option>
-                                 <option value="high-contrast-black" aria-label="High Contrast Black Theme">🌓 High Contrast (Black)</option>
-                                 <option value="high-contrast-white" aria-label="High Contrast White Theme">⬜️ High Contrast (White)</option>
-                                 <option value="high-contrast-beige" aria-label="High Contrast Beige Theme">⏳ High Contrast (Beige)</option>
-                                 <option value="95/98" aria-label="Retro Windows 95/98 Theme">💾 Retro Windows 95/98</option>
-                                 <option value="xp" aria-label="Nostalgic Windows XP Luna Blue Theme">💿 Nostalgic Windows XP (Luna Blue)</option>
-                                 <option value="vista" aria-label="Classic Windows Vista Theme">📀 Classic Windows Vista</option>
-                                 <option value="7" aria-label="Classic Windows 7 Theme">🫧 Classic Windows 7</option>
-                                 <option value="frutiger-aero" aria-label="Frutiger Aero Vibrant Eco-Cyber Theme">🌿 Frutiger Aero (Vibrant Eco-Cyber)</option>
-                                 <option value="BA" aria-label="Schale Workspace Blue Archive Theme">🔮 Schale Workspace (Blue Archive)</option>
+                                 <option value="light" [attr.aria-label]="langService.words().THEME_LIGHT">☀️ {{ langService.words().THEME_LIGHT }}</option>
+                                 <option value="dark" [attr.aria-label]="langService.words().THEME_DARK">🌙 {{ langService.words().THEME_DARK }}</option>
+                                 <option value="amber-crt" [attr.aria-label]="langService.words().THEME_AMBER">💽 {{ langService.words().THEME_AMBER }}</option>
+                                 <option value="matrix-crt" [attr.aria-label]="langService.words().THEME_MATRIX">📟 {{ langService.words().THEME_MATRIX }}</option>
+                                 <option value="high-contrast-black" [attr.aria-label]="langService.words().HIGH_CONTRAST_BLACK">🌓 {{ langService.words().HIGH_CONTRAST_BLACK }}</option>
+                                 <option value="high-contrast-white" [attr.aria-label]="langService.words().HIGH_CONTRAST_WHITE">⬜️ {{ langService.words().HIGH_CONTRAST_WHITE }}</option>
+                                 <option value="high-contrast-beige" [attr.aria-label]="langService.words().HIGH_CONTRAST_BEIGE">⏳ {{ langService.words().HIGH_CONTRAST_BEIGE }}</option>
+                                 <option value="95/98" [attr.aria-label]="langService.words().THEME_WIN98">💾 {{ langService.words().THEME_WIN98 }}</option>
+                                 <option value="xp" [attr.aria-label]="langService.words().THEME_WINXP">💿 {{ langService.words().THEME_WINXP }}</option>
+                                 <option value="vista" [attr.aria-label]="langService.words().THEME_VISTA">📀 {{ langService.words().THEME_VISTA }}</option>
+                                 <option value="7" [attr.aria-label]="langService.words().THEME_WIN7">🫧 {{ langService.words().THEME_WIN7 }}</option>
+                                 <option value="frutiger-aero" [attr.aria-label]="langService.words().THEME_AERO">🌿 {{ langService.words().THEME_AERO }}</option>
+                                 <option value="BA" [attr.aria-label]="langService.words().THEME_BA">🔮 {{ langService.words().THEME_BA }}</option>
                              </select>
                         </div>
                      </div>
