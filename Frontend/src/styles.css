@@ -528,6 +528,9 @@
     --link-color-override: #ff69b4;
 }
 
+/* ///////////////////////////////////////
+/// HIGH CONTRAST ACCESSIBILITY THEMES ///
+/////////////////////////////////////// */
 [data-theme="high-contrast-black"] {
     /* 🌓 CLASSIC HIGH CONTRAST STARK BLACK THEME */
     --surface-bg: #000000;
@@ -580,6 +583,110 @@
     --link-color-override: #ffffff;
 }
 
+[data-theme="high-contrast-white"] {
+    /* ⬜️ CLASSIC HIGH CONTRAST STARK WHITE THEME */
+    --surface-bg: #ffffff;
+    --container-bg: #ffffff;
+    --wallpaper: #ffffff;
+    --border-color: #000000;
+    --input-bg: #ffffff;
+    --font-override: monospace, sans-serif;
+    --font-scale: 1;
+    --line-height-scale: 1.5;
+
+    /* 🔤 Text Elements */
+    --text-primary: #000000;
+    --text-secondary: #000000;
+    --text-muted: #444444;
+    
+    /* 📊 Accessibility Badge Matrices */
+    --badge-high-bg: #000000;       --badge-high-text: #ffffff;     --badge-high-border: #000000;
+    --badge-medium-bg: #ffffff;     --badge-medium-text: #000000;   --badge-medium-border: #000000;
+    --badge-low-bg: #ffffff;        --badge-low-text: #000000;      --badge-low-border: #444444;
+    --badge-done-bg: #000000;       --badge-done-text: #ffffff;     --badge-done-border: #444444;
+
+    /* 🎨 Progress & Focus Halos */
+    --progress-bar-fill: #000000;
+
+    --filter-border-color: #000000;
+    --filter-focus-color: #000000;
+    --filter-focus-shadow: rgba(0, 0, 0, 0.25);
+
+    --focus-halo-color: #000000;
+    --focus-halo-shadow: rgba(0, 0, 0, 0.4);
+
+    /* Semantic Button Four-Tier Structural Inventory */
+    --btn-submit-bg: #ffffff;         --btn-submit-text: #000000;         --btn-submit-border: #000000;
+    --btn-submit-hover-bg: #000000;   --btn-submit-hover-text: #ffffff;   --btn-submit-hover-border: #000000;
+
+    --btn-cancel-bg: #ffffff;         --btn-cancel-text: #000000;         --btn-cancel-border: #000000;
+    --btn-cancel-hover-bg: #000000;   --btn-cancel-hover-text: #ffffff;   --btn-cancel-hover-border: #000000;
+
+    --btn-filter-bg: #ffffff;         --btn-filter-text: #000000;         --btn-filter-border: #000000;
+    --btn-filter-hover-bg: #000000;   --btn-filter-hover-text: #ffffff;   --btn-filter-hover-border: #000000;
+
+    --btn-delete-bg: #ffffff;         --btn-delete-text: #000000;         --btn-delete-border: #000000;
+    --btn-delete-hover-bg: #000000;   --btn-delete-hover-text: #ffffff;   --btn-delete-hover-border: #000000;
+
+    /* THEMATIC SCHALE TYPE MODIFIERS */
+    --btn-text-transform: none;
+    --btn-font-style: normal;
+
+    --link-color-override: #000000;
+}
+
+[data-theme="high-contrast-beige"] {
+    /* 🏜️ RETRO HIGH CONTRAST BEIGE THEME */
+    --surface-bg: #fdf6e3;                              /* Rich, creamy soft ivory paper background */
+    --container-bg: #f5edd5;                            /* Slightly deeper sand layout shell tint */
+    --wallpaper: #f5edd5;
+    --border-color: #000000;                            /* Stark pitch-black borders for crystal-clear outlines */
+    --input-bg: #fdf6e3;
+    --font-override: monospace, sans-serif;
+    --font-scale: 1;
+    --line-height-scale: 1.5;
+
+    /* 🔤 Text Elements */
+    --text-primary: #000000;                            /* Crisp black ink typography headers */
+    --text-secondary: #000000;
+    --text-muted: #586e75;                              /* Readable slate-charcoal helper notes */
+    
+    /* 📊 Accessibility Badge Matrices */
+    --badge-high-bg: #000000;       --badge-high-text: #fdf6e3;     --badge-high-border: #000000;
+    --badge-medium-bg: #fdf6e3;     --badge-medium-text: #000000;   --badge-medium-border: #000000;
+    --badge-low-bg: #fdf6e3;        --badge-low-text: #000000;      --badge-low-border: #586e75;
+    --badge-done-bg: #000000;       --badge-done-text: #fdf6e3;     --badge-done-border: #586e75;
+
+    /* 🎨 Progress & Focus Halos */
+    --progress-bar-fill: #000000;
+
+    --filter-border-color: #000000;
+    --filter-focus-color: #000000;
+    --filter-focus-shadow: rgba(0, 0, 0, 0.2);
+
+    --focus-halo-color: #000000;
+    --focus-halo-shadow: rgba(0, 0, 0, 0.35);
+
+    /* Semantic Button Four-Tier Structural Inventory */
+    --btn-submit-bg: #fdf6e3;         --btn-submit-text: #000000;         --btn-submit-border: #000000;
+    --btn-submit-hover-bg: #000000;   --btn-submit-hover-text: #fdf6e3;   --btn-submit-hover-border: #000000;
+
+    --btn-cancel-bg: #fdf6e3;         --btn-cancel-text: #000000;         --btn-cancel-border: #000000;
+    --btn-cancel-hover-bg: #000000;   --btn-cancel-hover-text: #fdf6e3;   --btn-cancel-hover-border: #000000;
+
+    --btn-filter-bg: #fdf6e3;         --btn-filter-text: #000000;         --btn-filter-border: #000000;
+    --btn-filter-hover-bg: #000000;   --btn-filter-hover-text: #fdf6e3;   --btn-filter-hover-border: #000000;
+
+    --btn-delete-bg: #fdf6e3;         --btn-delete-text: #000000;         --btn-delete-border: #000000;
+    --btn-delete-hover-bg: #000000;   --btn-delete-hover-text: #fdf6e3;   --btn-delete-hover-border: #000000;
+
+    /* THEMATIC SCHALE TYPE MODIFIERS */
+    --btn-text-transform: none;
+    --btn-font-style: normal;
+
+    --link-color-override: #000000;
+}
+
 /* =========================================================================
    ACCESSIBILITY OPTIONS
    ========================================================================= */
@@ -588,7 +695,7 @@
 [data-accessible-font="dyslexic"] *:before,
 [data-accessible-font="dyslexic"] *:after {
    --font-override: "OpenDyslexic", "Comic Sans MS", "Comic Sans", cursive !important;
-   --font-monospace: "OpenDyslexicMono", monospace !important; /* Temporary for now */
+   --font-monospace: "OpenDyslexicMono", monospace !important;                          /* Temporary for now */
 }
 
 /* DejaVu Sans Option */
@@ -596,7 +703,7 @@
 [data-accessible-font="dejavu"] *:before,
 [data-accessible-font="dejavu"] *:after {
    --font-override: "DejaVu Sans", "Trebuchet MS", Arial, sans-serif !important;
-   --font-monospace: "DejaVu Sans Mono", monospace !important; /* Temporary for now */
+   --font-monospace: "DejaVu Sans Mono", monospace !important;                          /* Temporary for now */
 }
 
 /* Colorblind Filters */

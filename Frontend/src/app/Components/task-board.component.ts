@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, ChangeDetectorRef, PLATFORM_ID } from "@angular/core";
+import { Component, OnInit, inject, ChangeDetectorRef, PLATFORM_ID, ElementRef, ViewChild } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { NgFor, NgIf, NgClass, DatePipe, isPlatformBrowser } from "@angular/common";
 import { ActivatedRoute, RouterLink, Router } from "@angular/router";
@@ -7,7 +7,6 @@ import { ProjectService } from "../Services/project.service";
 import { AuthService } from "../Services/auth.service";
 import { CategoryService } from "../Services/category.service";
 import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
-import { skip } from "node:test";
 
 @Component({
     selector: 'app-task-board',
@@ -81,6 +80,10 @@ export class TaskBoardComponent implements OnInit {
     // Vertical screen related properity
     activeMobileColumn: string = 'Pending'; // Default view lane tracking 
 
+    // Modal focus related
+    @ViewChild('taskModalHeader') taskModalHeader!: ElementRef<HTMLHeadingElement>;
+    @ViewChild('tagModalHeader') tagModalHeader!: ElementRef<HTMLHeadingElement>;
+    
     ngOnInit(): void {
         // Read the dynamic route context param parameter safely
         this.route.params.subscribe(params => {
@@ -218,9 +221,20 @@ export class TaskBoardComponent implements OnInit {
     openModal(): void {
         this.newTask = { title: '', description: '', priority: 'Medium', deadline: '', projectId: this.projectId };
         this.isModalOpen = true;
+
+        // Wait exactly one microsecond for Angular to draw the HTML element, then force focus!
+        setTimeout(() => {
+            if (this.taskModalHeader) {
+                this.taskModalHeader.nativeElement.focus();
+                console.log("Accessibility Core successfully locked voice focus onto Task Modal.");
+            }
+        }, 50);
     }
 
-    closeModal(): void { this.isModalOpen = false; }
+    closeModal(): void { 
+        this.isModalOpen = false; 
+        this.cdr.detectChanges();
+    }
 
     // If deadline is an empty string, turn it to null so .NET backend dates parse perfectly
     onCreateTask(): void {
@@ -349,23 +363,6 @@ export class TaskBoardComponent implements OnInit {
         });
     }
 
-    onCreateCategorySubmit(): void {
-        const payload = {
-            name: this.newCategoryName.trim(),
-            colorHex: this.newCategoryColor
-        };
-
-        this.categoryService.createCategory(this.projectId, payload).subscribe({
-            next: (res: any) => {
-                console.log("Category created successfully!", res.message);
-                this.isCategoryModalOpen = false;
-                this.newCategoryName = ""; // Reset form parameter field input
-                this.loadProjectCategories();
-            },
-            error: (err: any) => console.error("Failed to submit category creation:", err)
-        });
-    }
-
     loadProjectCategories(): void {
         this.categoryService.getProjectCategories(this.projectId).subscribe({
             next: (data: any[]) => {
@@ -409,11 +406,39 @@ export class TaskBoardComponent implements OnInit {
         });
     }
 
-    closeCategoryModal(): void {
+    openCategoryModal(): void {
         this.newCategoryName = "";
         this.newCategoryColor = "#3182ce";
+        this.isCategoryModalOpen = true;
+
+        setTimeout(() => {
+            if (this.tagModalHeader) {
+                this.tagModalHeader.nativeElement.focus();
+                console.log("Accessibility Core successfully locked voice focus onto Tag Modal.")
+            }
+        }, 50);
+    }
+
+    closeCategoryModal(): void {
         this.isCategoryModalOpen = false;
         this.cdr.detectChanges();
+    }
+
+    onCreateCategorySubmit(): void {
+        const payload = {
+            name: this.newCategoryName.trim(),
+            colorHex: this.newCategoryColor
+        };
+
+        this.categoryService.createCategory(this.projectId, payload).subscribe({
+            next: (res: any) => {
+                console.log("Category created successfully!", res.message);
+                this.isCategoryModalOpen = false;
+                this.newCategoryName = ""; // Reset form parameter field input
+                this.loadProjectCategories();
+            },
+            error: (err: any) => console.error("Failed to submit category creation:", err)
+        });
     }
 
     onRemoveMemberClick(targetUserId: number, targetEmail: string): void {
