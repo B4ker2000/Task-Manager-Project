@@ -3,6 +3,7 @@ import { FormsModule } from "@angular/forms";
 import { Router, RouterLink } from "@angular/router";
 import { AuthService } from "../Services/auth.service";
 import { NgIf } from "@angular/common";
+import { LanguageService } from "../language.sevice";
 
 @Component({
     selector: 'app-login',
@@ -20,6 +21,8 @@ export class LoginComponent {
     errorMessage: string = '';
     showPassword = false; 
     rememberMe: boolean = false;
+
+    constructor(public langService: LanguageService) {}
 
     onLogin(): void { 
         this.errorMessage = ''; // Clears out past error notices before trying again
@@ -48,5 +51,12 @@ export class LoginComponent {
                 this.cdr.detectChanges();
             }
         });
+    }
+
+    // Trigger method foe when changing languages
+    onLanguageChangeEngineTrigger(newLang: string): void {
+        if (this.langService) {
+            this.langService.setLanguage(newLang);
+        }
     }
 }

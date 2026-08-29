@@ -6,7 +6,7 @@
 }
 
 .form-group { 
-    margin-bottom: 16px; 
+    margin: 8px 0; 
     text-align: left; 
 }
 
@@ -59,6 +59,19 @@
 
 .eye-toggle-btn:hover { 
     opacity: 1; 
+}
+
+/* =========================================================================
+   LANGUAGE SELECOR STYLES
+   ========================================================================= */
+.login-language-switcher-label {
+    font-size: calc(12px * var(--font-scale));
+    color: var(--text-muted);
+}
+
+.login-language-switcher-selector {
+    padding: 2px 6px;
+    font-size: calc(12px * var(--font-scale));
 }
 
 /* =========================================================================

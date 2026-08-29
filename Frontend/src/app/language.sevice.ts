@@ -5,6 +5,14 @@ import { DICTIONARY, LocalePack } from "./languages";
     providedIn: 'root'
 })
 export class LanguageService {
+    // 💾 Core Cache Fetch Engine: Reads localStorage immediately during script parsing!
+    private static getSavedLang(): string {
+        if (typeof window !== 'undefined' && window.localStorage) {
+            return localStorage.getItem('user-preferred-lang') || 'en';
+        }
+        return 'en';
+    }
+
     // Uses Angular Signals for ultra-fast, reactive real-time template updates!
     public currentLang = signal<string>('en');
     public words: WritableSignal<LocalePack> = signal(DICTIONARY['en']);

@@ -118,6 +118,7 @@
                                 aria-haspopup="listbox"
                                 [attr.aria-label]="langService.words().FONT_ARIA"
                                 [attr.aria-description]="langService.words().FONT_DESCRIPTION">
+                            
                             <option value="" [innerHTML]="langService.words().FONT_OPTION_DEFAULT"></option>
                             <option value="dejavu" [innerHTML]="langService.words().FONT_OPTION_LEGI"></option>
                             <option value="dyslexic" [innerHTML]="langService.words().FONT_OPTION_DYS"></option>
@@ -132,6 +133,7 @@
                                 (change)="onColorblindChangeEngineTrigger()"
                                 aria-haspopup="listbox"
                                 [attr.aria-label]="langService.words().COLORBLIND_ARIA">
+                            
                             <option value="" [innerHTML]="langService.words().COLORBLIND_OPTION_NONE"></option>
                             <option value="deuteranopia" [innerHTML]="langService.words().COLORBLIND_OPTION_DEU"></option>
                             <option value="protanopia" [innerHTML]="langService.words().COLORBLIND_OPTION_PRO"></option>

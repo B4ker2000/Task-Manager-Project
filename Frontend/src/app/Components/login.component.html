@@ -1,28 +1,28 @@
-<div class="login-wrapper" role="main" aria-label="Account Authentication Portal">
+<div class="login-wrapper" role="main" [attr.aria-label]="langService.words().LOGIN_PORTAL_ARIA">
     <div class="login-container">
-        <h2 id="loginHeader">Welcome Back</h2>
-        <p>Log in to manage your projects and tasks</p>
+        <h2 id="loginHeader" [innerHTML]="langService.words().LOGIN_HEADER_WELCOME_BACK"></h2>
+        <p [innerHTML]="langService.words().LOGIN_SUBTITLE_MANAGE"></p>
 
         <!-- aria-describedby links the main structural headers directly to the input scope -->
          <form (ngSubmit)="onLogin()" #loginForm="ngForm" aria-labelledby="loginHeader">
 
             <!-- 📧 Email Input Area -->
              <div class="form-group">
-                <label for="email">Email Address</label>
+                <label for="email" [innerHTML]="langService.words().LOGIN_FIELD_EMAIL"></label>
                 <!-- added aria-required dynamically corresponding to form compliance -->
                  <input id="email" 
                        type="email" 
                        name="email" 
                        [(ngModel)]="credentials.email" 
                        required 
-                       placeholder="enter your email here"
+                       [placeholder]="langService.words().LOGIN_PLACEHOLDER_EMAIL"
                        aria-required="true"
                        autofocus>
              </div>
 
             <!-- 🔒 Password Input Area -->
              <div class="form-group">
-                <label for="password">Password</label>
+                <label for="password" [innerHTML]="langService.words().LOGIN_FIELD_PASSWORD"></label>
                 <div class="password-input-wrapper">
                     <!-- Binding [type] makes the visibility dynamic -->
                      <input id="password" 
@@ -30,19 +30,21 @@
                             name="password" 
                             [(ngModel)]="credentials.password" 
                             required 
-                            placeholder="enter password..."
+                            [placeholder]="langService.words().LOGIN_PLACEHOLDER_PASSWORD"
                             aria-required="true">
 
-                    <!-- 👁️ Password Visibility Switch -->
+                    <!-- 👁️ Password Visibility Switch: Fully localized toggle aria label parameters -->
                      <button type="button" 
                             class="eye-toggle-btn" 
                             (click)="showPassword = !showPassword"
-                            [attr.aria-label]="showPassword ? 'Show plain text password' : 'Hide plain text password'"
+                            [attr.aria-label]="showPassword ? langService.words().SHOW_PASS_ARIA : langService.words().HIDE_PASS_ARIA"
                             [attr.aria-pressed]="showPassword">
                     
                         <span aria-hidden="true">{{ showPassword ? '👁️' : '👁️‍🗨️' }}</span>
                      </button>
                 </div>
+
+                <!-- 🗃️ Remember Me Checkbox Group -->
                 <div class="remember-me-container">
                     <label for="rememberMeBox" class="remember-me-label">
                         <input type="checkbox" 
@@ -51,7 +53,7 @@
                                name="rememberMe"
                                [attr.aria-checked]="rememberMe" />
                         
-                        <span class="remember-me-text">Remember Me</span>
+                        <span class="remember-me-text" [innerHTML]="langService.words().LOGIN_CHECKBOX_REMEMBER"></span>
                     </label>
                 </div>
              </div>
@@ -60,28 +62,48 @@
              <button type="submit" 
                     class="submit-btn login-submit-btn" 
                     [disabled]="!loginForm.form.valid"
-                    aria-label="Sign in securely to your workspace canvas">Sign In</button>
+                    [attr.aria-label]="langService.words().LOGIN_BTN_SIGNIN_ARIA"
+                    [innerHTML]="langService.words().LOGIN_BTN_SIGNIN_TEXT"></button>
+
+            <!-- 🌐 Login Entry Portal Language Control Row -->
+             <div class="form-group">
+                <label for="loginLangSelect" class="login-language-switcher-label">
+                    <span aria-hidden="true">🌐 </span>
+                    <span [innerHTML]="langService.words().LANGUAGE_SELECTION_TITLE"></span>
+                </label>
+                <select id="loginLangSelect"
+                        name="loginLangSelect"
+                        [ngModel]="langService.currentLang()"
+                        (ngModelChange)="onLanguageChangeEngineTrigger($event)"
+                        [ngModelOptions]="{standalone: true}"
+                        class="login-language-switcher-selector"
+                        [attr.aria-label]="langService.words().LANGUAGE_SELECTION_ARIA">
+                    
+                    <option value="en" [innerHTML]="langService.words().LANGUAGE_OPTION_ENG_US"></option>
+                    <option value="ja" [innerHTML]="langService.words().LANGUAGE_OPTION_JAP"></option>
+                    <option value="ru" [innerHTML]="langService.words().LANGUAGE_OPTION_RUS"></option>
+                </select>
+             </div>
 
             <!-- 🗺️ Footnote Navigation Section Links -->
              <div class="login-footer-navigation"
                   role="navigation"
-                  aria-label="Alternative entry links">
+                  [attr.aria-label]="langService.words().LOGIN_FOOTER_NAV_ARIA">
 
                 <p>
-                    New to the workspace? 
-                    <a [routerLink]="['/register']" class="create-new-account-link">Create a New Account</a>
+                    <span [innerHTML]="langService.words().LOGIN_FOOTER_TEXT"></span>
+                    <a [routerLink]="['/register']" class="create-new-account-link" [innerHTML]="langService.words().LOGIN_FOOTER_LINK"></a>
                 </p>
              </div>
 
-            <!-- 🚨 DYNAMIC LIVE ERROR ANNOUNCER: aria-live="assertive" commands the screen reader
-                 to break its silence and instantly announce the specific backend error message text
-                 the split second it pops into existence! -->
+            <!-- 🚨 Dynamic Live Error Announcer -->
              <div class="error-msg" 
                   *ngIf="errorMessage"
                   role="alert"
                   aria-live="assertive">
                 
-                    <span aria-hidden="true">❌</span> {{ errorMessage }}
+                    <span aria-hidden="true">❌ </span> 
+                    <span>{{ errorMessage }}</span>
              </div>
          </form>
     </div>

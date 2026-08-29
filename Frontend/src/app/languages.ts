@@ -100,6 +100,23 @@ export interface LocalePack {
     DANGER_ZONE_TITLE: string;
     DANGER_ZONE_WARN: string;
     DANGER_ZONE_BTN: string;
+
+    //////////////////
+    //  Login Page  //
+    //////////////////
+    LOGIN_PORTAL_ARIA: string;
+    LOGIN_HEADER_WELCOME_BACK: string;
+    LOGIN_SUBTITLE_MANAGE: string;
+    LOGIN_FIELD_EMAIL: string;
+    LOGIN_PLACEHOLDER_EMAIL: string;
+    LOGIN_FIELD_PASSWORD: string;
+    LOGIN_PLACEHOLDER_PASSWORD: string;
+    LOGIN_CHECKBOX_REMEMBER: string;
+    LOGIN_BTN_SIGNIN_ARIA: string;
+    LOGIN_BTN_SIGNIN_TEXT: string;
+    LOGIN_FOOTER_NAV_ARIA: string;
+    LOGIN_FOOTER_TEXT: string;
+    LOGIN_FOOTER_LINK: string;
 }
 
 export const DICTIONARY: Record<string, LocalePack> = {
@@ -167,6 +184,20 @@ export const DICTIONARY: Record<string, LocalePack> = {
         DANGER_ZONE_TITLE: "Danger Zone",
         DANGER_ZONE_WARN: "Deleting your account clears your workspace access profiles completely!<br>This action cannot be reversed.",
         DANGER_ZONE_BTN: "Permanently Delete Account",
+        //////////////////////////////////////////////////////
+        LOGIN_PORTAL_ARIA: "Account Authentication Portal",
+        LOGIN_HEADER_WELCOME_BACK: "Welcome Back",
+        LOGIN_SUBTITLE_MANAGE: "Log in to manage your projects and tasks",
+        LOGIN_FIELD_EMAIL: "Email Address",
+        LOGIN_PLACEHOLDER_EMAIL: "enter your email here",
+        LOGIN_FIELD_PASSWORD: "Password",
+        LOGIN_PLACEHOLDER_PASSWORD: "enter password...",
+        LOGIN_CHECKBOX_REMEMBER: "Remember Me",
+        LOGIN_BTN_SIGNIN_ARIA: "Sign in securely to your workspace canvas",
+        LOGIN_BTN_SIGNIN_TEXT: "Sign in",
+        LOGIN_FOOTER_NAV_ARIA: "Alternative entry links",
+        LOGIN_FOOTER_TEXT: "New to the workspace?",
+        LOGIN_FOOTER_LINK: "Create a New Account",
     },
 
     ja: {
@@ -233,6 +264,20 @@ export const DICTIONARY: Record<string, LocalePack> = {
         DANGER_ZONE_TITLE: "<ruby>危<rt>き</rt>険<rt>けん</rt>地<rt>ち</rt>帯<rt>たい</rt></ruby>",
         DANGER_ZONE_WARN: "アカウントを削除すると、ワークスペースのデータが完全に消去されます！<br>この操作は取り消せません。",
         DANGER_ZONE_BTN: "アカウントを<ruby>永<rt>えい</rt>久<rt>きゅう</rt></ruby>に<ruby>削<rt>さく</rt>除<rt>じょ</rt></ruby>する",
+        //////////////////////////////////////////////////////
+        LOGIN_PORTAL_ARIA: "Account Authentication Portal",
+        LOGIN_HEADER_WELCOME_BACK: "Welcome Back",
+        LOGIN_SUBTITLE_MANAGE: "Log in to manage your projects and tasks",
+        LOGIN_FIELD_EMAIL: "Email Address",
+        LOGIN_PLACEHOLDER_EMAIL: "enter your email here",
+        LOGIN_FIELD_PASSWORD: "Password",
+        LOGIN_PLACEHOLDER_PASSWORD: "enter password...",
+        LOGIN_CHECKBOX_REMEMBER: "Remember Me",
+        LOGIN_BTN_SIGNIN_ARIA: "Sign in securely to your workspace canvas",
+        LOGIN_BTN_SIGNIN_TEXT: "Sign in",
+        LOGIN_FOOTER_NAV_ARIA: "Alternative entry links",
+        LOGIN_FOOTER_TEXT: "New to the workspace?",
+        LOGIN_FOOTER_LINK: "Create a New Account",
     },
 
     ru: {
@@ -299,5 +344,19 @@ export const DICTIONARY: Record<string, LocalePack> = {
         DANGER_ZONE_TITLE: "Опасная зона",
         DANGER_ZONE_WARN: "Удаление учетной записи полностью очистит ваш рабочий профиль!<br>Это действие необратимо.",
         DANGER_ZONE_BTN: "Безвозвратно удалить аккаунт",
+        //////////////////////////////////////////////////////
+        LOGIN_PORTAL_ARIA: "Account Authentication Portal",
+        LOGIN_HEADER_WELCOME_BACK: "Welcome Back",
+        LOGIN_SUBTITLE_MANAGE: "Log in to manage your projects and tasks",
+        LOGIN_FIELD_EMAIL: "Email Address",
+        LOGIN_PLACEHOLDER_EMAIL: "enter your email here",
+        LOGIN_FIELD_PASSWORD: "Password",
+        LOGIN_PLACEHOLDER_PASSWORD: "enter password...",
+        LOGIN_CHECKBOX_REMEMBER: "Remember Me",
+        LOGIN_BTN_SIGNIN_ARIA: "Sign in securely to your workspace canvas",
+        LOGIN_BTN_SIGNIN_TEXT: "Sign in",
+        LOGIN_FOOTER_NAV_ARIA: "Alternative entry links",
+        LOGIN_FOOTER_TEXT: "New to the workspace?",
+        LOGIN_FOOTER_LINK: "Create a New Account",
     }
 };
