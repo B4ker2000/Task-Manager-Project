@@ -1,6 +1,7 @@
 <div class="login-wrapper" role="main" [attr.aria-label]="langService.words().LOGIN_PORTAL_ARIA">
     <div class="login-container">
-        <h2 id="loginHeader" [innerHTML]="langService.words().LOGIN_HEADER_WELCOME_BACK"></h2>
+        <h2 id="loginHeader" 
+            [innerHTML]="isFirstTimeUser ? langService.words().LOGIN_HEADER_FIRST_TIME : langService.words().LOGIN_HEADER_WELCOME_BACK"></h2>
         <p [innerHTML]="langService.words().LOGIN_SUBTITLE_MANAGE"></p>
 
         <!-- aria-describedby links the main structural headers directly to the input scope -->
@@ -84,27 +85,27 @@
                     <option value="ru" [innerHTML]="langService.words().LANGUAGE_OPTION_RUS"></option>
                 </select>
              </div>
-
-            <!-- 🗺️ Footnote Navigation Section Links -->
-             <div class="login-footer-navigation"
-                  role="navigation"
-                  [attr.aria-label]="langService.words().LOGIN_FOOTER_NAV_ARIA">
-
-                <p>
-                    <span [innerHTML]="langService.words().LOGIN_FOOTER_TEXT"></span>
-                    <a [routerLink]="['/register']" class="create-new-account-link" [innerHTML]="langService.words().LOGIN_FOOTER_LINK"></a>
-                </p>
-             </div>
-
-            <!-- 🚨 Dynamic Live Error Announcer -->
-             <div class="error-msg" 
-                  *ngIf="errorMessage"
-                  role="alert"
-                  aria-live="assertive">
-                
-                    <span aria-hidden="true">❌ </span> 
-                    <span>{{ errorMessage }}</span>
-             </div>
          </form>
+
+        <!-- 🗺️ Footnote Navigation Section Links -->
+         <div class="login-footer-navigation"
+              role="navigation"
+              [attr.aria-label]="langService.words().LOGIN_FOOTER_NAV_ARIA">
+
+            <p>
+                <span [innerHTML]="langService.words().LOGIN_FOOTER_TEXT"></span>
+                <a [routerLink]="['/register']" class="create-new-account-link" [innerHTML]="langService.words().LOGIN_FOOTER_LINK"></a>
+            </p>
+         </div>
+
+        <!-- 🚨 Dynamic Live Error Announcer -->
+         <div class="error-msg" 
+              *ngIf="errorMessage"
+              role="alert"
+              aria-live="assertive">
+                
+            <span aria-hidden="true">❌ </span> 
+            <span>{{ errorMessage }}</span>
+         </div>
     </div>
 </div>

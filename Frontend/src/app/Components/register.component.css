@@ -18,11 +18,11 @@
 .register-btn { 
     width: 100%;
     height: 42px; 
-    margin-top: 10px; 
+    margin: 10px 0; 
 }
 
-.register-footer {
-    margin: 0;
+.register-footer p {
+    margin: 0; 
     display: inline;
 }
 

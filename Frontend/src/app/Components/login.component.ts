@@ -1,4 +1,4 @@
-import { Component, inject, ChangeDetectorRef } from "@angular/core";
+import { Component, inject, ChangeDetectorRef, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { Router, RouterLink } from "@angular/router";
 import { AuthService } from "../Services/auth.service";
@@ -12,7 +12,7 @@ import { LanguageService } from "../language.sevice";
     templateUrl: "./login.component.html",
     styleUrl: "./login.component.css"
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
     private authService = inject(AuthService);
     private router = inject(Router);
     private cdr = inject(ChangeDetectorRef);
@@ -21,8 +21,17 @@ export class LoginComponent {
     errorMessage: string = '';
     showPassword = false; 
     rememberMe: boolean = false;
+    isFirstTimeUser: boolean = true;
 
     constructor(public langService: LanguageService) {}
+
+    ngOnInit(): void {
+        if (typeof window !== 'undefined' && window.localStorage) {
+            // Check if our unique workspace tracking flag exists
+            const hasVisited = localStorage.getItem('has-visited-before');
+            this.isFirstTimeUser = hasVisited !== 'true';
+        }
+    }
 
     onLogin(): void { 
         this.errorMessage = ''; // Clears out past error notices before trying again
@@ -41,6 +50,11 @@ export class LoginComponent {
                 } else {
                     // Volatile save: Strictly bounded to the life of this active tab window context
                     sessionStorage.setItem('token', res.token);
+                }
+
+                // SUCCESS GATE: Lock down the browser footprint token right here so next time they see "Welcome Back"
+                if (typeof window !== 'undefined' && window.localStorage) {
+                    localStorage.setItem('has-visited-before', 'true');
                 }
                 
                 this.router.navigate(['/dashboard']);

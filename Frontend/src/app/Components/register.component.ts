@@ -3,6 +3,7 @@ import { FormsModule } from "@angular/forms";
 import { NgIf } from "@angular/common";
 import { Router, RouterLink } from "@angular/router";
 import { AuthService } from "../Services/auth.service";
+import { LanguageService } from "../language.sevice";
 
 @Component({
     selector: "app-register",
@@ -20,6 +21,8 @@ export class RegisterComponent {
     showPassword = false;
     showConfirmPassword = false;
 
+    constructor(public langService: LanguageService) {}
+
     onRegister(): void {
         if(this.registerData.Password !== this.confirmPassword) {
             alert("Security match mismatch: Your entered passwords do not match!");
@@ -36,5 +39,12 @@ export class RegisterComponent {
                 alert(err.error || "Failed to complete account registration.");
             }
         });
+    }
+
+    // Trigger method foe when changing languages
+    onLanguageChangeEngineTrigger(newLang: string): void {
+        if (this.langService) {
+            this.langService.setLanguage(newLang);
+        }
     }
 }

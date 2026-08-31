@@ -106,6 +106,7 @@ export interface LocalePack {
     //////////////////
     LOGIN_PORTAL_ARIA: string;
     LOGIN_HEADER_WELCOME_BACK: string;
+    LOGIN_HEADER_FIRST_TIME: string;
     LOGIN_SUBTITLE_MANAGE: string;
     LOGIN_FIELD_EMAIL: string;
     LOGIN_PLACEHOLDER_EMAIL: string;
@@ -117,6 +118,47 @@ export interface LocalePack {
     LOGIN_FOOTER_NAV_ARIA: string;
     LOGIN_FOOTER_TEXT: string;
     LOGIN_FOOTER_LINK: string;
+
+    ///////////////////
+    // Register Page //
+    ///////////////////
+    REG_PORTAL_ARIA: string;
+    REG_HEADER_TITLE: string;
+    REG_SUBTITLE_JOIN: string;
+    REG_LABEL_USERNAME: string;
+    REG_PLACEHOLDER_USERNAME: string;
+    REG_PLACEHOLDER_PASSWORD: string;
+    REG_LABEL_CONFIRM_PASSWORD: string;
+    REG_PLACEHOLDER_CONFIRM_PASSWORD: string;
+    REG_REQUIREMENTS_ARIA: string;
+    REG_BTN_SUBMIT_ARIA: string;
+    REG_BTN_SUBMIT_TEXT: string;
+    REG_FOOTER_TEXT: string;
+    REG_FOOTER_LINK: string;
+
+    ///////////////////
+    //   Dashbaord   //
+    ///////////////////
+    DASHBOARD_MAIN_CANVAS_LABEL: string;
+    DASHBOARD_MAIN_HEADER: string;
+    DASHBOARD_NAV_ARIA: string;
+    DASHBOARD_PROFILE_BTN: string;
+    DASHBOARD_LOGOUT_ARIA: string;
+    DASHBOARD_LOGOUT_BTN: string;
+    DASHBOARD_CREATE_PROJECT_HEADER: string;
+    DASHBOARD_PROJECT_TITLE_LABEL: string;
+    DASHBOARD_PROJECT_TITLE_PLACEHOLDER: string;
+    DASHBOARD_DESCRIPTION_LABEL: string;
+    DASHBOARD_DESCRIPTION_PLACEHOLDER: string;
+    DASHBOARD_CREATE_BTN_ARIA: string;
+    DASHBOARD_CREATE_BTN_TEXT: string;
+    DASHBOARD_YOUR_PROJECTS_HEADER: string;
+    DASHBOARD_EMPTY_MESSAGE: string;
+    DASHBOARD_PROJECT_CARD_ARIA: string;
+    DASHBOARD_DELETE_PROJECT_ARIA: string;
+    DASHBOARD_NO_DESCRIPTION_FALLBACK: string;
+    DASHBOARD_OPEN_BOARD_ARIA: string;
+    DASHBOARD_OPEN_BOARD_TEXT: string;
 }
 
 export const DICTIONARY: Record<string, LocalePack> = {
@@ -187,6 +229,7 @@ export const DICTIONARY: Record<string, LocalePack> = {
         //////////////////////////////////////////////////////
         LOGIN_PORTAL_ARIA: "Account Authentication Portal",
         LOGIN_HEADER_WELCOME_BACK: "Welcome Back",
+        LOGIN_HEADER_FIRST_TIME: "Welcome to Task Manager",
         LOGIN_SUBTITLE_MANAGE: "Log in to manage your projects and tasks",
         LOGIN_FIELD_EMAIL: "Email Address",
         LOGIN_PLACEHOLDER_EMAIL: "enter your email here",
@@ -195,9 +238,46 @@ export const DICTIONARY: Record<string, LocalePack> = {
         LOGIN_CHECKBOX_REMEMBER: "Remember Me",
         LOGIN_BTN_SIGNIN_ARIA: "Sign in securely to your workspace canvas",
         LOGIN_BTN_SIGNIN_TEXT: "Sign in",
-        LOGIN_FOOTER_NAV_ARIA: "Alternative entry links",
-        LOGIN_FOOTER_TEXT: "New to the workspace?",
+        LOGIN_FOOTER_NAV_ARIA: "Alternative entry link",
+        LOGIN_FOOTER_TEXT: "New to the workspace? ",
         LOGIN_FOOTER_LINK: "Create a New Account",
+
+        REG_PORTAL_ARIA: "Account Creation Portal",
+        REG_HEADER_TITLE: "Create Workspace Account",
+        REG_SUBTITLE_JOIN: "Join the project management platform!",
+        REG_LABEL_USERNAME: "Username",
+        REG_PLACEHOLDER_USERNAME: "Pick a unique display name...",
+        REG_PLACEHOLDER_PASSWORD: "Create a secure password...",
+        REG_LABEL_CONFIRM_PASSWORD: "Confirm Password",
+        REG_PLACEHOLDER_CONFIRM_PASSWORD: "Retype your password...",
+        REG_REQUIREMENTS_ARIA: "Both password fields must match exactly before registration requests can submit.",
+        REG_BTN_SUBMIT_ARIA: "Submit credentials to register your new account",
+        REG_BTN_SUBMIT_TEXT: "Sign Up",
+        REG_FOOTER_TEXT: "Already have an account? ",
+        REG_FOOTER_LINK: "Back to Sign In",
+
+        DASHBOARD_MAIN_CANVAS_LABEL: "Main Projects Dashboard Canvas",
+        DASHBOARD_MAIN_HEADER: "Task Manager Workspace",
+        DASHBOARD_NAV_ARIA: "Account navigation shortcuts",
+        DASHBOARD_PROFILE_BTN: "User Profile",
+        DASHBOARD_LOGOUT_ARIA: "Sign out of your workspace session securely",
+        DASHBOARD_LOGOUT_BTN: "Sign Out",
+        DASHBOARD_CREATE_PROJECT_HEADER: "Create New Project",
+        DASHBOARD_PROJECT_TITLE_LABEL: "Project Title",
+        DASHBOARD_PROJECT_TITLE_PLACEHOLDER: "e.g. Website Overhaul",
+        DASHBOARD_DESCRIPTION_LABEL: "Description",
+        DASHBOARD_DESCRIPTION_PLACEHOLDER: "Describe the project goal...",
+        DASHBOARD_CREATE_BTN_ARIA: "Submit form to create new project space",
+        DASHBOARD_CREATE_BTN_TEXT: "Create Project",
+        DASHBOARD_YOUR_PROJECTS_HEADER: "Your Projects",
+        DASHBOARD_EMPTY_MESSAGE: "No projects found. Create one to get started!",
+        DASHBOARD_NO_DESCRIPTION_FALLBACK: "No description provided.",
+        DASHBOARD_OPEN_BOARD_TEXT: "Open Project Board",
+
+        // Dynamic localization functions to ensure perfect sentence structures across all languages
+        DASHBOARD_PROJECT_CARD_ARIA: "Project space: {title}",
+        DASHBOARD_DELETE_PROJECT_ARIA: "Permanently delete project: {title}",
+        DASHBOARD_OPEN_BOARD_ARIA: "Open task board for project: {title}",
     },
 
     ja: {
@@ -267,6 +347,7 @@ export const DICTIONARY: Record<string, LocalePack> = {
         //////////////////////////////////////////////////////
         LOGIN_PORTAL_ARIA: "Account Authentication Portal",
         LOGIN_HEADER_WELCOME_BACK: "Welcome Back",
+        LOGIN_HEADER_FIRST_TIME: "Welcome to Task Manager",
         LOGIN_SUBTITLE_MANAGE: "Log in to manage your projects and tasks",
         LOGIN_FIELD_EMAIL: "Email Address",
         LOGIN_PLACEHOLDER_EMAIL: "enter your email here",
@@ -278,6 +359,43 @@ export const DICTIONARY: Record<string, LocalePack> = {
         LOGIN_FOOTER_NAV_ARIA: "Alternative entry links",
         LOGIN_FOOTER_TEXT: "New to the workspace?",
         LOGIN_FOOTER_LINK: "Create a New Account",
+
+        REG_PORTAL_ARIA: "Account Creation Portal",
+        REG_HEADER_TITLE: "Create Workspace Account",
+        REG_SUBTITLE_JOIN: "Join the project management platform!",
+        REG_LABEL_USERNAME: "Username",
+        REG_PLACEHOLDER_USERNAME: "Pick a unique display name...",
+        REG_PLACEHOLDER_PASSWORD: "Create a secure password...",
+        REG_LABEL_CONFIRM_PASSWORD: "Confirm Password",
+        REG_PLACEHOLDER_CONFIRM_PASSWORD: "Retype your password...",
+        REG_REQUIREMENTS_ARIA: "Both password fields must match exactly before registration requests can submit.",
+        REG_BTN_SUBMIT_ARIA: "Submit credentials to register your new account",
+        REG_BTN_SUBMIT_TEXT: "Sign Up",
+        REG_FOOTER_TEXT: "Already have an account? ",
+        REG_FOOTER_LINK: "Back to Sign In",
+
+        DASHBOARD_MAIN_CANVAS_LABEL: "Main Projects Dashboard Canvas",
+        DASHBOARD_MAIN_HEADER: "Task Manager Workspace",
+        DASHBOARD_NAV_ARIA: "Account navigation shortcuts",
+        DASHBOARD_PROFILE_BTN: "User Profile",
+        DASHBOARD_LOGOUT_ARIA: "Sign out of your workspace session securely",
+        DASHBOARD_LOGOUT_BTN: "Sign Out",
+        DASHBOARD_CREATE_PROJECT_HEADER: "Create New Project",
+        DASHBOARD_PROJECT_TITLE_LABEL: "Project Title",
+        DASHBOARD_PROJECT_TITLE_PLACEHOLDER: "e.g. Website Overhaul",
+        DASHBOARD_DESCRIPTION_LABEL: "Description",
+        DASHBOARD_DESCRIPTION_PLACEHOLDER: "Describe the project goal...",
+        DASHBOARD_CREATE_BTN_ARIA: "Submit form to create new project space",
+        DASHBOARD_CREATE_BTN_TEXT: "Create Project",
+        DASHBOARD_YOUR_PROJECTS_HEADER: "Your Projects",
+        DASHBOARD_EMPTY_MESSAGE: "No projects found. Create one to get started!",
+        DASHBOARD_NO_DESCRIPTION_FALLBACK: "No description provided.",
+        DASHBOARD_OPEN_BOARD_TEXT: "Open Project Board",
+
+        // Dynamic localization functions to ensure perfect sentence structures across all languages
+        DASHBOARD_PROJECT_CARD_ARIA: "Project space: {title}",
+        DASHBOARD_DELETE_PROJECT_ARIA: "Permanently delete project: {title}",
+        DASHBOARD_OPEN_BOARD_ARIA: "Open task board for project: {title}",
     },
 
     ru: {
@@ -347,6 +465,7 @@ export const DICTIONARY: Record<string, LocalePack> = {
         //////////////////////////////////////////////////////
         LOGIN_PORTAL_ARIA: "Account Authentication Portal",
         LOGIN_HEADER_WELCOME_BACK: "Welcome Back",
+        LOGIN_HEADER_FIRST_TIME: "Welcome to Task Manager",
         LOGIN_SUBTITLE_MANAGE: "Log in to manage your projects and tasks",
         LOGIN_FIELD_EMAIL: "Email Address",
         LOGIN_PLACEHOLDER_EMAIL: "enter your email here",
@@ -358,5 +477,42 @@ export const DICTIONARY: Record<string, LocalePack> = {
         LOGIN_FOOTER_NAV_ARIA: "Alternative entry links",
         LOGIN_FOOTER_TEXT: "New to the workspace?",
         LOGIN_FOOTER_LINK: "Create a New Account",
+
+        REG_PORTAL_ARIA: "Account Creation Portal",
+        REG_HEADER_TITLE: "Create Workspace Account",
+        REG_SUBTITLE_JOIN: "Join the project management platform!",
+        REG_LABEL_USERNAME: "Username",
+        REG_PLACEHOLDER_USERNAME: "Pick a unique display name...",
+        REG_PLACEHOLDER_PASSWORD: "Create a secure password...",
+        REG_LABEL_CONFIRM_PASSWORD: "Confirm Password",
+        REG_PLACEHOLDER_CONFIRM_PASSWORD: "Retype your password...",
+        REG_REQUIREMENTS_ARIA: "Both password fields must match exactly before registration requests can submit.",
+        REG_BTN_SUBMIT_ARIA: "Submit credentials to register your new account",
+        REG_BTN_SUBMIT_TEXT: "Sign Up",
+        REG_FOOTER_TEXT: "Already have an account? ",
+        REG_FOOTER_LINK: "Back to Sign In",
+
+        DASHBOARD_MAIN_CANVAS_LABEL: "Main Projects Dashboard Canvas",
+        DASHBOARD_MAIN_HEADER: "Task Manager Workspace",
+        DASHBOARD_NAV_ARIA: "Account navigation shortcuts",
+        DASHBOARD_PROFILE_BTN: "User Profile",
+        DASHBOARD_LOGOUT_ARIA: "Sign out of your workspace session securely",
+        DASHBOARD_LOGOUT_BTN: "Sign Out",
+        DASHBOARD_CREATE_PROJECT_HEADER: "Create New Project",
+        DASHBOARD_PROJECT_TITLE_LABEL: "Project Title",
+        DASHBOARD_PROJECT_TITLE_PLACEHOLDER: "e.g. Website Overhaul",
+        DASHBOARD_DESCRIPTION_LABEL: "Description",
+        DASHBOARD_DESCRIPTION_PLACEHOLDER: "Describe the project goal...",
+        DASHBOARD_CREATE_BTN_ARIA: "Submit form to create new project space",
+        DASHBOARD_CREATE_BTN_TEXT: "Create Project",
+        DASHBOARD_YOUR_PROJECTS_HEADER: "Your Projects",
+        DASHBOARD_EMPTY_MESSAGE: "No projects found. Create one to get started!",
+        DASHBOARD_NO_DESCRIPTION_FALLBACK: "No description provided.",
+        DASHBOARD_OPEN_BOARD_TEXT: "Open Project Board",
+
+        // Dynamic localization functions to ensure perfect sentence structures across all languages
+        DASHBOARD_PROJECT_CARD_ARIA: "Project space: {title}",
+        DASHBOARD_DELETE_PROJECT_ARIA: "Permanently delete project: {title}",
+        DASHBOARD_OPEN_BOARD_ARIA: "Open task board for project: {title}",
     }
 };

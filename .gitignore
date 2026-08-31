@@ -1,6 +1,16 @@
-bin/
+# 🖥️ Compiled C# Backend Binaries & Build Cache Folders
+Backend/bin/
+Backend/obj/
+
+# 🌐 Node/Angular Frontend Dependency Repositories
+Frontend/node_modules/
+Frontend/.angular/
+
+# 🗃️ Local Workspace Data Floors & Databases
 *.db
-.DS_Store
 test.http
-F
+
+# 📋 Comparison Scrap Notes & OS Cache Traces
+.DS_Store
+F1
 F2

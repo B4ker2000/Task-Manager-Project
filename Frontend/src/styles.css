@@ -1054,7 +1054,7 @@ select:focus,
 
 .login-footer-navigation,
 .register-footer {
-    margin-top: 20px;
+    margin-top: 10px;
     font-size: calc(13px * var(--font-scale));
     color: var(--text-muted);
 }

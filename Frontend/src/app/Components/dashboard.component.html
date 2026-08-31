@@ -1,55 +1,60 @@
-<div class="dashboard-wrapper" role="main" aria-label="Main Projects Dashboard Canvas">
+<div class="dashboard-wrapper" role="main" [attr.aria-label]="langService.words().DASHBOARD_MAIN_CANVAS_LABEL">
     <header class="main-header">
-        <h1 id="dashboardMainHeader">Task Manager Workspace</h1>
-        <div class="header-navigation-actions" role="navigation" aria-label="Account navigation shortcuts">
+        <h1 id="dashboardMainHeader" [innerHTML]="langService.words().DASHBOARD_MAIN_HEADER"></h1>
+        <div class="header-navigation-actions" role="navigation" [attr.aria-label]="langService.words().DASHBOARD_NAV_ARIA">
             <button class="submit-btn profile-btn" [routerLink]="['/profile']">
-                <span aria-hidden="true">👤</span> User Profile
+                <span aria-hidden="true">👤</span>
+                <span [innerHTML]="langService.words().DASHBOARD_PROFILE_BTN"></span>
             </button>
-            <button class="cancel-btn logout-btn" (click)="onLogout()" aria-label="Sign out of your workspace session securely">Sign Out</button>
+            <button class="cancel-btn logout-btn" 
+                    (click)="onLogout()" 
+                    [attr.aria-label]="langService.words().DASHBOARD_LOGOUT_ARIA"
+                    [innerHTML]="langService.words().DASHBOARD_LOGOUT_BTN"></button>
         </div>
     </header>
 
     <div class="dashboard-grid">
         <!-- Left Side: Create New Project Form -->
          <section class="form-section" role="region" aria-labelledby="createProjectHeader">
-            <h3 id="createProjectHeader">Create New Project</h3>
+            <h3 id="createProjectHeader" [innerHTML]="langService.words().DASHBOARD_CREATE_PROJECT_HEADER"></h3>
             <form (ngSubmit)="onCreateProject()" #projectForm="ngForm" aria-labelledby="createProjectHeader">
                 <div class="form-group">
-                    <label for="projectTitle">Project Title</label>
+                    <label for="projectTitle" [innerHTML]="langService.words().DASHBOARD_PROJECT_TITLE_LABEL"></label>
                     <input id="projectTitle" 
                            type="text" 
                            name="name" 
                            [(ngModel)]="newProject.name" 
                            required 
-                           placeholder="e.g. Website Overhaul" 
+                           [placeholder]="langService.words().DASHBOARD_PROJECT_TITLE_PLACEHOLDER" 
                            class="new-project input"
                            aria-required="true" />
                 </div>
 
                 <div class="form-group">
-                    <label for="description">Description</label>
+                    <label for="description" [innerHTML]="langService.words().DASHBOARD_DESCRIPTION_LABEL"></label>
                     <textarea id="description" 
                               name="description" 
                               [(ngModel)]="newProject.description" 
-                              placeholder="Describe the project goal..." 
+                              [placeholder]="langService.words().DASHBOARD_DESCRIPTION_PLACEHOLDER" 
                               class="new-project textarea"></textarea>
                 </div>
 
                 <button type="submit" 
                         class="create-btn" 
                         [disabled]="!projectForm.form.valid"
-                        aria-label="Submit form to create new project space">Create Project</button>
+                        [attr.aria-label]="langService.words().DASHBOARD_CREATE_BTN_ARIA"
+                        [innerHTML]="langService.words().DASHBOARD_CREATE_BTN_TEXT"></button>
             </form>
          </section>
 
         <!-- Right Side: Existing Project Cards List -->
         <!-- 📡 Enriched the live region to announce dynamic item card injections and deletions cleanly -->
          <section class="list-section" role="region" aria-labelledby="projectsListHeader" aria-live="polite" aria-relevant="additions removals">
-            <h3 id="projectsListHeader">Your Projects</h3>
-            <p class="empty-msg" *ngIf="projects.length === 0" role="status">No projects found. Create one to get started!</p>
+            <h3 id="projectsListHeader" [innerHTML]="langService.words().DASHBOARD_YOUR_PROJECTS_HEADER"></h3>
+            <p class="empty-msg" *ngIf="projects.length === 0" role="status" [innerHTML]="langService.words().DASHBOARD_EMPTY_MESSAGE"></p>
 
             <div class="project-cards-grid">
-                <div class="project-card" *ngFor="let p of projects" role="article" [attr.aria-label]="'Project space: ' + p.title">
+                <div class="project-card" *ngFor="let p of projects" role="article" [attr.aria-label]="formatLabel(langService.words().DASHBOARD_PROJECT_CARD_ARIA, p.title)">
                     <div class="project-card-header">
                         <h4 [attr.id]="'proj-title-' + p.id">
                             <span aria-hidden="true">🎯</span> {{ p.title }}
@@ -59,17 +64,18 @@
                          <button *ngIf="p.userRole === 'Owner'" 
                                  class="delete-proj-btn" 
                                  (click)="onDeleteProject(p.id, $event)" 
-                                 [attr.aria-label]="'Permanently delete project: ' + p.title"
+                                 [attr.aria-label]="formatLabel(langService.words().DASHBOARD_DELETE_PROJECT_ARIA, p.title)"
                                  [attr.aria-describedby]="'proj-title-' + p.id">
                                  
                             <span aria-hidden="true">🗑️</span>
                          </button>
                     </div>
-                    <p>{{ p.description || 'No description provided.' }}</p>
+                    <p>{{ p.description || langService.words().DASHBOARD_NO_DESCRIPTION_FALLBACK }}</p>
                     
                     <button class="submit-btn view-tasks-btn" 
                             [routerLink]="['/projects', p.id, 'board']"
-                            [attr.aria-label]="'Open task board for project: ' + p.title">Open Project Board</button>
+                            [attr.aria-label]="formatLabel(langService.words().DASHBOARD_OPEN_BOARD_ARIA, p.title)"
+                            [innerHTML]="langService.words().DASHBOARD_OPEN_BOARD_TEXT"></button>
                 </div>
             </div>
          </section>
