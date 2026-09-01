@@ -3,7 +3,7 @@ import { FormsModule } from "@angular/forms";
 import { NgIf } from "@angular/common";
 import { Router, RouterLink } from "@angular/router";
 import { AuthService } from "../Services/auth.service";
-import { LanguageService } from "../language.sevice";
+import { LanguageService } from "../i18n/language.service";
 
 @Component({
     selector: "app-register",
@@ -41,7 +41,7 @@ export class RegisterComponent {
         });
     }
 
-    // Trigger method foe when changing languages
+    // Trigger method for when changing languages
     onLanguageChangeEngineTrigger(newLang: string): void {
         if (this.langService) {
             this.langService.setLanguage(newLang);

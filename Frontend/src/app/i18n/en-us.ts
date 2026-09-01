@@ -1,0 +1,322 @@
+import { LocalePack } from './locale-pack.interface';
+
+export const EnglishUSPack: LocalePack = {
+    GLOBAL: {
+        BACK_BTN_TEXT: "← Back to Dashboard",
+        BACK_BTN_ARIA: "Back to primary task dashboard canvas",
+
+        // Email & Password Fields
+        FIELD_EMAIL: "Email Address",
+        PLACEHOLDER_EMAIL: "enter your email here",
+        FIELD_PASSWORD: "Password",
+        PLACEHOLDER_PASSWORD: "enter password...",
+
+        // Footer Navigation Links
+        FOOTER_NAV_ARIA: "Alternative entry link",
+        FOOTER_TEXT: "New to the workspace? ",
+        FOOTER_LINK: "Create a New Account",
+
+        // Eye Toggle Accessibility Script Targets
+        SHOW_PASS_ARIA: "Show plain text password",
+        HIDE_PASS_ARIA: "Hide plain text password",
+        SHOW_CONFIRM_ARIA: "Show plain text confirmation password",
+        HIDE_CONFIRM_ARIA: "Hide plain text confirmation password",
+
+        // Language Selection Configuration
+        LANGUAGE_SELECTION_TITLE: "Application Language:",
+        LANGUAGE_SELECTION_ARIA: "Application display language selector dropdown",
+        LANGUAGE_OPTION_EN_US: "English (US)",
+        LANGUAGE_OPTION_JP: "日本語 (Japanese)",
+        LANGUAGE_OPTION_RU: "Русский (Russian)"
+    },
+
+    PROFILE: {
+        // Navigation / Headers
+        ARIA_MAIN: "User Profile Settings",
+        IDENTITY_TITLE: "Your Workspace Identity Profile",
+
+        // States
+        SYNCING_CREDENTIALS: "Syncing secure cloud identity credentials...",
+
+        // =========================================================================
+        // SECTION 1: CORE ACCOUNT DETAILS
+        // =========================================================================
+        CORE_ACCOUNT_ARIA: "Core Account Details",
+        SECURITY_LEVEL_LABEL: "Security Level:",
+        REGISTERED_EMAIL_LABEL: "Registered Email:",
+        DATABASE_RECORD_LABEL: "Database Record ID:",
+
+        // =========================================================================
+        // SECTION 2: SYSTEM ACTION METRICS
+        // =========================================================================
+        SYSTEM_METRICS_TITLE: "System Action Metrics",
+        ASSIGNED_ITEMS_LABEL: "Assigned Work Items",
+        ASSIGNED_ITEMS_ARIA: "Currently tracking {value} active operational tasks.",
+        COMPLETED_TASKS_LABEL: "Completed Tasks",
+        COMPLETED_TASKS_ARIA: "Successfully completed and archived {value} finished tasks.",
+        
+        // =========================================================================
+        // SECTION 3: WORKSPACE PREFERENCES CARD
+        // =========================================================================
+        WORKSPACE_TITLE: "Workspace Environment Preferences",
+        THEME_LABEL: "Visual Application Theme:",
+
+        // Theme Selector Options
+        THEME_OPTION_LIGHT: "☀️ Professional Light Mode",
+        THEME_OPTION_DARK: "🌙 Dark Workspace Canvas",
+        THEME_OPTION_AMBER: "💽 Vintage Amber CRT Terminal",
+        THEME_OPTION_MATRIX: "📟 Vintage Green Matrix CRT Terminal",
+        THEME_OPTION_HC_BLACK: "🌓 High Contrast (Black)",
+        THEME_OPTION_HC_WHITE: "⬜️ High Contrast (White)",
+        THEME_OPTION_HC_BEIGE: "🏜️ High Contrast (Beige Desert)",
+        THEME_OPTION_WIN98: "💾 Retro Windows 95/98",
+        THEME_OPTION_WINXP: "💿 Nostalgic Windows XP (Luna Blue)",
+        THEME_OPTION_VISTA: "📀 Classic Windows Vista",
+        THEME_OPTION_WIN7: "🫧 Classic Windows 7",
+        THEME_OPTION_AERO: "🍃 Frutiger Aero (Vibrant Eco-Cyber)",
+        THEME_OPTION_BA: "🔮 SCHALE Workspace (Blue Archive)",
+
+        // Typography Interface Config
+        FONT_LABEL: "Font Style:",
+        FONT_ARIA: "Typography interface font layout switch dropdown",
+        FONT_DESCRIPTION: "Changes the default display typeface for the application workspace",
+        FONT_OPTION_DEFAULT: "Theme Default",
+        FONT_OPTION_LEGI: "🧼 High-Legibility",
+        FONT_OPTION_DYS: "📖 Easy-to-Read (Dyslexia Friendly)",
+
+        // Deficiency Matrix Elements
+        COLORBLIND_LABEL: "Colorblind Filter:",
+        COLORBLIND_ARIA: "Colorblind filter correction simulation matrix selector dropdown",
+        COLORBLIND_OPTION_NONE: "None",
+        COLORBLIND_OPTION_DEU: "Deuteranopia (Green Weakness)",
+        COLORBLIND_OPTION_PRO: "Protanopia (Red Weakness)",
+        COLORBLIND_OPTION_TRI: "Tritanopia (Blue Weakness)",
+        COLORBLIND_OPTION_GRA: "Grayscale (Monochrome)",
+        
+        // =========================================================================
+        // SECTION 4: ACCOUNT MANAGEMENT FORM
+        // =========================================================================
+        ACCOUNT_SETTINGS_TITLE: "Account Management Settings",
+        UPDATE_USER_LABEL: "Update Username",
+        UPDATE_USER_PLACEHOLDER: "Enter new username...",
+        CHANGE_PASS_LABEL: "Change Security Password",
+        CHANGE_PASS_PLACEHOLDER: "Enter new password...",
+        CONFIRM_PASS_LABEL: "Confirm New Password",
+        CONFIRM_PASS_PLACEHOLDER: "Retype your new password...",
+        PASS_REQUIREMENTS_ARIA: "Passwords must match before modifications can commit securely.",
+        SAVE_CHANGES_BTN: "Save Profile Changes",
+
+        // Destructive Actions Area (Danger Zone)
+        DANGER_ZONE_TITLE: "Danger Zone",
+        DANGER_ZONE_WARN: "Deleting your account clears your workspace access profiles completely!<br>This action cannot be reversed.",
+        DANGER_ZONE_BTN: "Permanently Delete Account"
+    },
+    
+    LOGIN: {
+        PORTAL_ARIA: "Account Authentication Portal",
+        HEADER_WELCOME_BACK: "Welcome Back",
+        HEADER_FIRST_TIME: "Welcome to Task Manager",
+        SUBTITLE_MANAGE: "Log in to manage your projects and tasks",
+        CHECKBOX_REMEMBER: "Remember Me",
+        BTN_SIGNIN_ARIA: "Sign in securely to your workspace canvas",
+        BTN_SIGNIN_TEXT: "Sign in"
+    },
+
+    REGISTER: {
+        PORTAL_ARIA: "Account Creation Portal",
+        HEADER_TITLE: "Create Workspace Account",
+        SUBTITLE_JOIN: "Join the project management platform!",
+        LABEL_USERNAME: "Username",
+        PLACEHOLDER_USERNAME: "Pick a unique display name...",
+        PLACEHOLDER_PASSWORD: "Create a secure password...",
+        LABEL_CONFIRM_PASSWORD: "Confirm Password",
+        PLACEHOLDER_CONFIRM_PASSWORD: "Retype your password...",
+        REQUIREMENTS_ARIA: "Both password fields must match exactly before registration requests can submit.",
+        BTN_SUBMIT_TEXT: "Sign Up",
+        BTN_SUBMIT_ARIA: "Submit credentials to register your new account",
+        FOOTER_TEXT: "Already have an account? ",
+        FOOTER_LINK: "Back to Sign In"
+    },
+
+    DASHBOARD: {
+        MAIN_CANVAS_LABEL: "Main Projects Dashboard Canvas",
+        MAIN_HEADER: "Task Manager Workspace",
+        NAV_ARIA: "Account navigation shortcuts",
+        PROFILE_BTN: "User Profile",
+        LOGOUT_ARIA: "Sign out of your workspace session securely",
+        LOGOUT_BTN: "Sign Out",
+        CREATE_PROJECT_HEADER: "Create New Project",
+        PROJECT_TITLE_LABEL: "Project Title",
+        PROJECT_TITLE_PLACEHOLDER: "e.g. Website Overhaul",
+        DESCRIPTION_LABEL: "Description",
+        DESCRIPTION_PLACEHOLDER: "Describe the project goal...",
+        CREATE_BTN_ARIA: "Submit form to create new project space",
+        CREATE_BTN_TEXT: "Create Project",
+        YOUR_PROJECTS_HEADER: "Your Projects",
+        EMPTY_MESSAGE: "No projects found. Create one to get started!",
+
+        // Dynamic localization functions to ensure perfect sentence structures across all languages
+        PROJECT_CARD_ARIA: "Project space: {value}",
+        DELETE_PROJECT_ARIA: "Permanently delete project: {value}",
+        NO_DESCRIPTION_FALLBACK: "No description provided.",
+        OPEN_BOARD_TEXT: "Open Project Board",
+        OPEN_BOARD_ARIA: "Open task board for project: {value}"
+    },
+
+    TASKBOARD: {
+        // Header / Navigation & Modal Buttons
+        MAIN_CANVAS_ARIA: "Project task board for: {title}",
+        HEADER_TITLE: "Project Board ({title})",
+        HEADER_ABANDON_TEXT: "Abandon Space",
+        HEADER_ABANDON_ARIA: "Abandon this project workspace completely",
+        HEADER_CREATE_TAG_TEXT: "Create Workspace Tag",
+        HEADER_CREATE_TAG_ARIA: "Open overlay window to create a new workspace tag",
+        HEADER_CREATE_TASK_TEXT: "Add New Task",
+        HEADER_CREATE_TASK_ARIA: "Open overlay window to add a new task item",
+
+        // Task Crew & Invitation
+        CREW_PANEL_HEADER: "Project Team & Tags Management Workspace",
+        INVITE_FORM_ARIA: "Invite new team member to this space",
+        INVITE_PLACEHOLDER: "Enter teammate's registered email address...",
+        INVITE_INPUT_ARIA: "Teammate email address entry field",
+        INVITE_ROLE_ARIA: "Assigned project administrative security level",
+        INVITE_OPTION_MEMBER: "Regular Member",
+        INVITE_OPTION_OWNER: "Co-Owner / Admin",
+        INVITE_SUBMIT_ARIA: "Submit invitation request to add member",
+        INVITE_SUBMIT_BTN: "Add Member",
+        ROSTER_HEADER: "Current Project Crew",
+        ROSTER_BADGE_ARIA: "Assigned Role: {role}",
+        ROSTER_REMOVE_ARIA: "Remove {email} from project crew",
+
+        // Tags/Categories
+        TAGS_HEADER: "Available Project Tags",
+        TAGS_FALLBACK: "No custom tags created for this project yet",
+        TAGS_PILL_ARIA: "Tag: {value1} with {value2} assigned items",
+        TAG_DELETE_ARIA: "Permanently delete project tag: {name}",
+
+        // Filters & Progress Bar
+        SEARCH_FILTER_HUB_ARIA: "Task board item filtering hub",
+        SEARCH_PLACEHOLDER: "Search tasks by title...",
+        SEARCH_ARIA: "Filter tasks by text title keyword",
+        PRIORITY_ARIA: "Filter tasks by designated priority level",
+        PRIORITY_ALL: "All Priorities",
+        PRIORITY_HIGH: "High Priority",
+        PRIORITY_MEDIUM: "Medium Priority",
+        PRIORITY_LOW: "Low Priority",
+        CATEGORY_ARIA: "Filter tasks by active project category tag assignment",
+        CATEGORY_ALL: "All Tags",
+        CATEGORY_UNASSIGNED: "Unassigned Tasks",
+        PROGRESS_LABEL: "Project Completion Progress:",
+        PROGRESS_ARIA: "Overall project completion progress tracker. Currently at {value} percent.",
+
+        // Mobile Column Selector
+        MOBILE_TABS_ARIA: "Mobile task board column views",
+        MOBILE_TAB_PENDING_TEXT: "Pending",
+        MOBILE_TAB_PENDING_ARIA: "View Pending tasks column",
+        MOBILE_TAB_PROGRESS_TEXT: "Progress & Review",
+        MOBILE_TAB_PROGRESS_ARIA: "View Tasks In Progress and Review column",
+        MOBILE_TAB_COMPLETED_TEXT: "Completed",
+        MOBILE_TAB_COMPLETED_ARIA: "View Completed tasks column",
+
+        // =========================================================================
+        // Pending Column
+        // =========================================================================
+        COLUMN_PENDING_TITLE: "Pending ({value})",
+        LANE_PENDING_ARIA: "Pending task tracking list lane. Contains {value} items.",
+        TASK_CARD_ARIA: "Task item card: {value}",
+        TASK_CATEGORY_ARIA: "Assigned Category Tag: {value}",
+        TASK_DELETE_ARIA: "Delete task card: {value}",
+        TASK_DESCRIPTION_FALLBACK: "No details provided.",
+        
+        // Task Assignee
+        TASK_ASSIGNEE_LABEL: "Assignee:",
+        TASK_ASSIGNEE_ARIA: "Assign staff member to task {value}",
+        TASK_ASSIGNEE_UNASSIGNED: "Unassigned",
+        
+        // Task Tag/Category
+        TASK_CATEGORY_LABEL: "Category:",
+        TASK_CATEGORY_ARIA_ASSIGN: "Assign classification tag to task {value}",
+        TASK_CATEGORY_NONE: "No Category",
+
+        // Task Priority
+        TASK_PRIORITY_ARIA: "Priority level: {value}",
+        TASK_PRIORITY_HIGH: "High",
+        TASK_PRIORITY_MEDIUM: "Medium",
+        TASK_PRIORITY_LOW: "Low",
+        TASK_DEADLINE_ARIA: "Task deadline calendar date: {value}",
+
+        // Start Button
+        TASK_ACTION_START_TEXT: "Start →",
+        TASK_ACTION_START_ARIA: "Start work item: {value}. Moves card to In Progress column.",
+    
+        // =========================================================================
+        // In-Progress & Review Column
+        // =========================================================================
+        COLUMN_INPROGRESS_TITLE: "In-Progress & Review ({value})",
+        LANE_INPROGRESS_ARIA: "In Progress and Review tracking list lane. Contains {value} items.",
+        TASK_CARD_STATUS_ARIA: "Task item card: {value1}. Current status is: {value2}",
+        REVIEW_BANNER_TEXT: "Pending PM Review",
+        REVIEW_BANNER_ARIA: "Alert: {value} is pending project manager validation review.",
+
+        // Related Buttons
+        BTN_BACK_TEXT: "← Back",
+        BTN_BACK_ARIA: "Move {value} backward to Pending column",
+        BTN_SUBMIT_REVIEW_TEXT: "Submit Review →",
+        BTN_SUBMIT_REVIEW_ARIA: "Submit {value} for Project Manager approval review",
+        BTN_CANCEL_REVIEW_TEXT: "← Cancel Review Request",
+        BTN_CANCEL_REVIEW_ARIA: "Cancel review request and return {value} to In Progress",
+        BTN_REJECT_TEXT: "Reject",
+        BTN_REJECT_ARIA: "Reject review request and return {value} to In Progress pipeline",
+        BTN_APPROVE_TEXT: "Approve Task",
+        BTN_APPROVE_ARIA: "Approve review and transition {value} into Completed column",
+
+        // =========================================================================
+        // Completed Column
+        // =========================================================================
+        COLUMN_COMPLETED_TITLE: "Completed ({value})",
+        LANE_COMPLETED_ARIA: "Completed task archive list lane. Contains {value} finished items.",
+        TASK_CARD_COMPLETED_ARIA: "Completed task card: {value}",
+        BADGE_DONE_TEXT: "Done",
+        BADGE_DONE_ARIA: "Task processing state: Done",
+        FINISHED_ASSIGNEE_ARIA: "Assigned staff member for finished task {value}",
+        FINISHED_CATEGORY_ARIA: "Classification category for finished task {value}",
+        FINISHED_PRIORITY_ARIA: "Original priority level: {value}",
+        
+        // Related Button
+        REOPEN_TEXT: "← Reopen", // 💡 Easily flippable to "Reopen →" for RTL configs!
+        REOPEN_ARIA: "Reopen task item: {value}. Returns card back to working In Progress lane.",
+
+        // Create a new Task Modal
+        MODAL_TASK_HEADER: "Create New Task Specification",
+        MODAL_TASK_TITLE_LABEL: "Task Title *",
+        MODAL_TASK_TITLE_PLACEHOLDER: "e.g. Design database schema",
+        MODAL_TASK_DESC_LABEL: "Description",
+        MODAL_TASK_DESC_PLACEHOLDER: "Provide actionable details...",
+        MODAL_TASK_PRIORITY_LABEL: "Priority Tier",
+        MODAL_TASK_DEADLINE_LABEL: "Deadline",
+        MODAL_TASK_DEADLINE_KEYBOARD_ARIA: "Keyboard navigation note: Press the Tab key or Escape key to exit the calendar selector grid.",
+        MODAL_TASK_DEADLINE_INPUT_ARIA: "Designated calendar completion date.",
+        MODAL_TASK_CANCEL_BTN: "Cancel",
+        MODAL_TASK_CANCEL_ARIA: "Dismiss task specification form overlay",
+        MODAL_TASK_SUBMIT_BTN: "Create Task",
+        MODAL_TASK_SUBMIT_ARIA: "Confirm data models to create new task item",
+    
+        // Create a new Tag/Category Modal
+        MODAL_TAG_HEADER: "Create New Workspace Tag",
+        MODAL_TAG_NAME_LABEL: "Tag Name:",
+        MODAL_TAG_NAME_PLACEHOLDER: "e.g., Frontend, Testing, Bug...",
+        MODAL_TAG_COLOR_LABEL: "Tag Theme Color:",
+        MODAL_TAG_COLOR_ARIA: "Select categorization badge background visual color tracking profile",
+
+        MODAL_TAG_COLOR_RED: "Crimson Red (High Contrast)",
+        MODAL_TAG_COLOR_BLUE: "Electric Blue (High Contrast)",
+        MODAL_TAG_COLOR_GREEN: "Forest Green (High Contrast)",
+        MODAL_TAG_COLOR_ORANGE: "Deep Orange (High Contrast)",
+        MODAL_TAG_COLOR_PURPLE: "Royal Purple (High Contrast)",
+
+        MODAL_TAG_CANCEL_BTN: "Cancel",
+        MODAL_TAG_CANCEL_ARIA: "Dismiss workspace tag creation layout form",
+        MODAL_TAG_SUBMIT_BTN: "Create Tag",
+        MODAL_TAG_SUBMIT_ARIA: "Confirm designation to create workspace classification tag"
+    }
+};

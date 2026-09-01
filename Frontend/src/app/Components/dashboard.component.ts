@@ -4,7 +4,7 @@ import { NgFor, NgIf, isPlatformBrowser } from "@angular/common";
 import { ProjectService } from "../Services/project.service";
 import { Router, RouterLink } from "@angular/router";
 import { AuthService } from "../Services/auth.service";
-import { LanguageService } from "../language.sevice";
+import { LanguageService } from "../i18n/language.service";
 
 @Component({
     selector: 'app-dashboard',
@@ -86,7 +86,7 @@ export class DashboardComponent implements OnInit {
         }
     }
 
-    // Trigger method foe when changing languages
+    // Trigger method for when changing languages
     onLanguageChangeEngineTrigger(newLang: string): void {
         if (this.langService) {
             this.langService.setLanguage(newLang);

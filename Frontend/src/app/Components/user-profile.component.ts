@@ -3,7 +3,7 @@ import { isPlatformBrowser, NgIf, NgClass } from "@angular/common";
 import { RouterLink, Router } from "@angular/router";
 import { AuthService } from "../Services/auth.service";
 import { FormsModule } from "@angular/forms";
-import { LanguageService } from "../language.sevice";
+import { LanguageService } from "../i18n/language.service";
 
 @Component({
     selector: 'app-user-profile',
@@ -176,7 +176,7 @@ export class UserProfileComponent implements OnInit {
         }
     }
 
-    // Trigger method foe when changing languages
+    // Trigger method for when changing languages
     onLanguageChangeEngineTrigger(newLang: string): void {
         this.langService.setLanguage(newLang);
     }

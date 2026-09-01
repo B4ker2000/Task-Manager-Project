@@ -1,0 +1,318 @@
+export interface LocalePack {
+    GLOBAL: {
+        BACK_BTN_TEXT: string;
+        BACK_BTN_ARIA: string;
+
+        // Email & Password Fields
+        FIELD_EMAIL: string;
+        PLACEHOLDER_EMAIL: string;
+        FIELD_PASSWORD: string;
+        PLACEHOLDER_PASSWORD: string;
+
+        // Footer Navigation Links
+        FOOTER_NAV_ARIA: string;
+        FOOTER_TEXT: string;
+        FOOTER_LINK: string;
+
+        // Eye Toggle Accessibility Script Targets
+        SHOW_PASS_ARIA: string;
+        HIDE_PASS_ARIA: string;
+        SHOW_CONFIRM_ARIA: string;
+        HIDE_CONFIRM_ARIA: string;
+
+        // Language Selection Configuration
+        LANGUAGE_SELECTION_TITLE: string;
+        LANGUAGE_SELECTION_ARIA: string;
+        LANGUAGE_OPTION_EN_US: string;
+        LANGUAGE_OPTION_JP: string;
+        LANGUAGE_OPTION_RU: string;
+    };
+    
+    PROFILE: {
+        // Navigation / Headers
+        ARIA_MAIN: string;
+        IDENTITY_TITLE: string;
+
+        // States
+        SYNCING_CREDENTIALS: string;
+
+        // =========================================================================
+        // SECTION 1: CORE ACCOUNT DETAILS
+        // =========================================================================
+        CORE_ACCOUNT_ARIA: string;
+        SECURITY_LEVEL_LABEL: string;
+        REGISTERED_EMAIL_LABEL: string;
+        DATABASE_RECORD_LABEL: string;
+
+        // =========================================================================
+        // SECTION 2: SYSTEM ACTION METRICS
+        // =========================================================================
+        SYSTEM_METRICS_TITLE: string;
+        ASSIGNED_ITEMS_LABEL: string;
+        ASSIGNED_ITEMS_ARIA: string;
+        COMPLETED_TASKS_LABEL: string;
+        COMPLETED_TASKS_ARIA: string;
+
+        // =========================================================================
+        // SECTION 3: WORKSPACE PREFERENCES CARD
+        // =========================================================================
+        WORKSPACE_TITLE: string;
+        THEME_LABEL: string;
+    
+        // Theme Selector Options
+        THEME_OPTION_LIGHT: string;
+        THEME_OPTION_DARK: string;
+        THEME_OPTION_AMBER: string;
+        THEME_OPTION_MATRIX: string;
+        THEME_OPTION_HC_BLACK: string;
+        THEME_OPTION_HC_WHITE: string;
+        THEME_OPTION_HC_BEIGE: string;
+        THEME_OPTION_WIN98: string;
+        THEME_OPTION_WINXP: string;
+        THEME_OPTION_VISTA: string;
+        THEME_OPTION_WIN7: string;
+        THEME_OPTION_AERO: string;
+        THEME_OPTION_BA: string;
+
+        // Typography Interface Config
+        FONT_LABEL: string;
+        FONT_ARIA: string;
+        FONT_DESCRIPTION: string;
+        FONT_OPTION_DEFAULT: string;
+        FONT_OPTION_LEGI: string;
+        FONT_OPTION_DYS: string;
+
+        // Deficiency Matrix Elements
+        COLORBLIND_LABEL: string;
+        COLORBLIND_ARIA: string;
+        COLORBLIND_OPTION_NONE: string;
+        COLORBLIND_OPTION_DEU: string;
+        COLORBLIND_OPTION_PRO: string;
+        COLORBLIND_OPTION_TRI: string;
+        COLORBLIND_OPTION_GRA: string;
+
+        // =========================================================================
+        // SECTION 4: ACCOUNT MANAGEMENT FORM
+        // =========================================================================
+        ACCOUNT_SETTINGS_TITLE: string;
+        UPDATE_USER_LABEL: string;
+        UPDATE_USER_PLACEHOLDER: string;
+        CHANGE_PASS_LABEL: string;
+        CHANGE_PASS_PLACEHOLDER: string;
+        CONFIRM_PASS_LABEL: string;
+        CONFIRM_PASS_PLACEHOLDER: string;
+        PASS_REQUIREMENTS_ARIA: string;
+        SAVE_CHANGES_BTN: string;
+
+        // Destructive Actions Area (Danger Zone)
+        DANGER_ZONE_TITLE: string;
+        DANGER_ZONE_WARN: string;
+        DANGER_ZONE_BTN: string;
+    };
+
+    LOGIN: {
+        PORTAL_ARIA: string;
+        HEADER_WELCOME_BACK: string;
+        HEADER_FIRST_TIME: string;
+        SUBTITLE_MANAGE: string;
+        CHECKBOX_REMEMBER: string;
+        BTN_SIGNIN_TEXT: string;
+        BTN_SIGNIN_ARIA: string;
+    };
+
+    REGISTER: {
+        PORTAL_ARIA: string;
+        HEADER_TITLE: string;
+        SUBTITLE_JOIN: string;
+        LABEL_USERNAME: string;
+        PLACEHOLDER_USERNAME: string;
+        PLACEHOLDER_PASSWORD: string;
+        LABEL_CONFIRM_PASSWORD: string;
+        PLACEHOLDER_CONFIRM_PASSWORD: string;
+        REQUIREMENTS_ARIA: string;
+        BTN_SUBMIT_TEXT: string;
+        BTN_SUBMIT_ARIA: string;
+        FOOTER_TEXT: string;
+        FOOTER_LINK: string;
+    };
+
+    DASHBOARD: {
+        MAIN_CANVAS_LABEL: string;
+        MAIN_HEADER: string;
+        NAV_ARIA: string;
+        PROFILE_BTN: string;
+        LOGOUT_ARIA: string;
+        LOGOUT_BTN: string;
+        CREATE_PROJECT_HEADER: string;
+        PROJECT_TITLE_LABEL: string;
+        PROJECT_TITLE_PLACEHOLDER: string;
+        DESCRIPTION_LABEL: string;
+        DESCRIPTION_PLACEHOLDER: string;
+        CREATE_BTN_TEXT: string;
+        CREATE_BTN_ARIA: string;
+        YOUR_PROJECTS_HEADER: string;
+        EMPTY_MESSAGE: string;
+        PROJECT_CARD_ARIA: string;
+        DELETE_PROJECT_ARIA: string;
+        NO_DESCRIPTION_FALLBACK: string;
+        OPEN_BOARD_TEXT: string;
+        OPEN_BOARD_ARIA: string;
+    };
+
+    TASKBOARD: {
+        // Header / Navigation & Modal Buttons
+        MAIN_CANVAS_ARIA: string;
+        HEADER_TITLE: string;
+        HEADER_ABANDON_TEXT: string;
+        HEADER_ABANDON_ARIA: string;
+        HEADER_CREATE_TAG_TEXT: string;
+        HEADER_CREATE_TAG_ARIA: string;
+        HEADER_CREATE_TASK_TEXT: string;
+        HEADER_CREATE_TASK_ARIA: string;
+
+        // Task Crew & Invitation
+        CREW_PANEL_HEADER: string;
+        INVITE_FORM_ARIA: string;
+        INVITE_PLACEHOLDER: string;
+        INVITE_INPUT_ARIA: string;
+        INVITE_ROLE_ARIA: string;
+        INVITE_OPTION_MEMBER: string;
+        INVITE_OPTION_OWNER: string;
+        INVITE_SUBMIT_ARIA: string;
+        INVITE_SUBMIT_BTN: string;
+        ROSTER_HEADER: string;
+        ROSTER_BADGE_ARIA: string;
+        ROSTER_REMOVE_ARIA: string;
+
+        // Tags/Categories
+        TAGS_HEADER: string;
+        TAGS_FALLBACK: string;
+        TAGS_PILL_ARIA: string;
+        TAG_DELETE_ARIA: string;
+
+        // Filters & Progress Bar
+        SEARCH_FILTER_HUB_ARIA: string;
+        SEARCH_PLACEHOLDER: string;
+        SEARCH_ARIA: string;
+        PRIORITY_ARIA: string;
+        PRIORITY_ALL: string;
+        PRIORITY_HIGH: string;
+        PRIORITY_MEDIUM: string;
+        PRIORITY_LOW: string;
+        CATEGORY_ARIA: string;
+        CATEGORY_ALL: string;
+        CATEGORY_UNASSIGNED: string;
+        PROGRESS_LABEL: string;
+        PROGRESS_ARIA: string;
+
+        // Mobile Column Selector
+        MOBILE_TABS_ARIA: string;
+        MOBILE_TAB_PENDING_TEXT: string;
+        MOBILE_TAB_PENDING_ARIA: string;
+        MOBILE_TAB_PROGRESS_TEXT: string;
+        MOBILE_TAB_PROGRESS_ARIA: string;
+        MOBILE_TAB_COMPLETED_TEXT: string;
+        MOBILE_TAB_COMPLETED_ARIA: string;
+
+        // =========================================================================
+        // Pending Column
+        // =========================================================================
+        COLUMN_PENDING_TITLE: string;
+        LANE_PENDING_ARIA: string;
+        TASK_CARD_ARIA: string;
+        TASK_CATEGORY_ARIA: string;
+        TASK_DELETE_ARIA: string;
+        TASK_DESCRIPTION_FALLBACK: string;
+            
+        // Task Asignee
+        TASK_ASSIGNEE_LABEL: string;
+        TASK_ASSIGNEE_ARIA: string;
+        TASK_ASSIGNEE_UNASSIGNED: string;
+            
+        // Task Tag/Category
+        TASK_CATEGORY_LABEL: string;
+        TASK_CATEGORY_ARIA_ASSIGN: string;
+        TASK_CATEGORY_NONE: string;
+
+        // Task Priority
+        TASK_PRIORITY_ARIA: string;
+        TASK_PRIORITY_HIGH: string;
+        TASK_PRIORITY_MEDIUM: string;
+        TASK_PRIORITY_LOW: string;
+        TASK_DEADLINE_ARIA: string;
+
+        // Start Button
+        TASK_ACTION_START_TEXT: string;
+        TASK_ACTION_START_ARIA: string;
+        
+        // =========================================================================
+        // In-preogress/Review Column
+        // =========================================================================
+        COLUMN_INPROGRESS_TITLE: string;
+        LANE_INPROGRESS_ARIA: string;
+        TASK_CARD_STATUS_ARIA: string;
+        REVIEW_BANNER_TEXT: string;
+        REVIEW_BANNER_ARIA: string;
+
+        // Related Buttons
+        BTN_BACK_TEXT: string;
+        BTN_BACK_ARIA: string;
+        BTN_SUBMIT_REVIEW_TEXT: string;
+        BTN_SUBMIT_REVIEW_ARIA: string;
+        BTN_CANCEL_REVIEW_TEXT: string;
+        BTN_CANCEL_REVIEW_ARIA: string;
+        BTN_REJECT_TEXT: string;
+        BTN_REJECT_ARIA: string;
+        BTN_APPROVE_TEXT: string;
+        BTN_APPROVE_ARIA: string;
+
+        // =========================================================================
+        // Completed Column
+        // =========================================================================
+        COLUMN_COMPLETED_TITLE: string;
+        LANE_COMPLETED_ARIA: string;
+        TASK_CARD_COMPLETED_ARIA: string;
+        BADGE_DONE_TEXT: string;
+        BADGE_DONE_ARIA: string;
+        FINISHED_ASSIGNEE_ARIA: string;
+        FINISHED_CATEGORY_ARIA: string;
+        FINISHED_PRIORITY_ARIA: string;
+
+        // Related Button
+        REOPEN_TEXT: string;
+        REOPEN_ARIA: string;
+
+        // Create a new Task Modal
+        MODAL_TASK_HEADER: string;
+        MODAL_TASK_TITLE_LABEL: string;
+        MODAL_TASK_TITLE_PLACEHOLDER: string;
+        MODAL_TASK_DESC_LABEL: string;
+        MODAL_TASK_DESC_PLACEHOLDER: string;
+        MODAL_TASK_PRIORITY_LABEL: string;
+        MODAL_TASK_DEADLINE_LABEL: string;
+        MODAL_TASK_DEADLINE_KEYBOARD_ARIA: string;
+        MODAL_TASK_DEADLINE_INPUT_ARIA: string;
+        MODAL_TASK_CANCEL_BTN: string;
+        MODAL_TASK_CANCEL_ARIA: string;
+        MODAL_TASK_SUBMIT_BTN: string;
+        MODAL_TASK_SUBMIT_ARIA: string;
+        
+        // Create a new Tag/Category Modal
+        MODAL_TAG_HEADER: string;
+        MODAL_TAG_NAME_LABEL: string;
+        MODAL_TAG_NAME_PLACEHOLDER: string;
+        MODAL_TAG_COLOR_LABEL: string;
+        MODAL_TAG_COLOR_ARIA: string;
+
+        MODAL_TAG_COLOR_RED: string;
+        MODAL_TAG_COLOR_BLUE: string;
+        MODAL_TAG_COLOR_GREEN: string;
+        MODAL_TAG_COLOR_ORANGE: string;
+        MODAL_TAG_COLOR_PURPLE: string;
+
+        MODAL_TAG_CANCEL_BTN: string;
+        MODAL_TAG_CANCEL_ARIA: string;
+        MODAL_TAG_SUBMIT_BTN: string;
+        MODAL_TAG_SUBMIT_ARIA: string;
+    };
+}

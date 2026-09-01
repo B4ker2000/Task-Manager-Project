@@ -91,6 +91,7 @@ namespace Backend.Controllers
             if(string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out int currentUserId)) return Unauthorized();
 
             var outcome = await _taskService.AssignTaskAsync(taskId, currentUserId, request.AssignedUserId);
+            // move these stuff like ```var outcome...``` into services
 
             if(outcome == "NotFound") return NotFound("Task not found!");
             if(outcome == "Forbidden") return Forbid();

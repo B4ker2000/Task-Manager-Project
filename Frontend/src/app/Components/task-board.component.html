@@ -1,71 +1,72 @@
-<div class="board-wrapper" role="main" [attr.aria-label]="'Project task board for ' + projectTitle">
+<div class="board-wrapper" role="main" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.MAIN_CANVAS_ARIA, projectTitle)">
     <header class="board-header">
-        <button class="back-btn" [routerLink]="['/dashboard']" aria-label="Return to the main projects dashboard canvas">
-            <span aria-hidden="true">←</span> Back to Dashboard
-        </button>
-        <h2 id="boardTitleHeader">Project Board ({{ projectTitle }})</h2>
+        <button class="back-btn" [routerLink]="['/dashboard']" [attr.aria-label]="langService.words().GLOBAL.BACK_BTN_ARIA" [innerHTML]="langService.words().GLOBAL.BACK_BTN_TEXT"></button>
+        <h2 id="boardTitleHeader">{{ formatLabel(langService.words().TASKBOARD.HEADER_TITLE, projectTitle) }}</h2>
         <div class="board-header-action-triggers" role="navigation" aria-label="Project space configuration controls">
-            <button *ngIf="currentUserProjectRole === 'Member'" class="action-btn resign-project-btn" (click)="onLeaveProjectClick()" aria-label="Abandon this project workspace completely">Abandon Space</button>
+            <button *ngIf="currentUserProjectRole === 'Member'" class="action-btn resign-project-btn" (click)="onLeaveProjectClick()" [attr.aria-label]="langService.words().TASKBOARD.HEADER_ABANDON_ARIA" [innerHTML]="langService.words().TASKBOARD.HEADER_ABANDON_TEXT"></button>
             <!-- Clicking these two opens our form modal overlays -->
              <button *ngIf="currentUserProjectRole === 'Owner'" 
                      #createTagBtn
                      class="submit-btn workspace-header-trigger" 
                      (click)="openCategoryModal()" 
-                     aria-label="Open overlay window to create a new workspace tag">
-                
-                <span aria-hidden="true">+</span> Create Workspace Tag
+                     [attr.aria-label]="langService.words().TASKBOARD.HEADER_CREATE_TAG_ARIA">
+
+                    <span aria-hidden="true">+</span> <span [innerHTML]="langService.words().TASKBOARD.HEADER_CREATE_TAG_TEXT"></span>
              </button>
              <button *ngIf="currentUserProjectRole === 'Owner'" 
                      #createTaskBtn
                      class="submit-btn workspace-header-trigger" 
                      (click)="openModal()" 
-                     aria-label="Open overlay window to add a new task item">
-                
-                <span aria-hidden="true">+</span> Add New Task
+                     [attr.aria-label]="langService.words().TASKBOARD.HEADER_CREATE_TASK_ARIA">
+             
+                <span aria-hidden="true">+</span> <span [innerHTML]="langService.words().TASKBOARD.HEADER_CREATE_TASK_TEXT"></span>
              </button>
         </div>
     </header>
 
     <div class="project-member-management-panel" role="region" aria-labelledby="managementPanelHeader">
         <div id="managementPanelHeader" class="invite-header-title">
-            <span aria-hidden="true">👥</span> <span>Project Team & Tags Management Workspace</span>
+            <span aria-hidden="true">👥</span> <span [innerHTML]="langService.words().TASKBOARD.CREW_PANEL_HEADER"></span>
         </div>
 
         <div class="management-split-row">
             <div class="left-management-column">
                 <!-- Active Invitation Submission Row (Visible only to admins/owners) -->
                  <div class="owner-invite-controls" *ngIf="currentUserProjectRole === 'Owner'">
-                    <form (ngSubmit)="onInviteUser()" #inviteForm="ngForm" class="invite-action-form" aria-label="Invite new team member to this space">
+                    <form (ngSubmit)="onInviteUser()" #inviteForm="ngForm" class="invite-action-form" [attr.aria-label]="langService.words().TASKBOARD.INVITE_FORM_ARIA">
                         <div class="invite-input-container">
                             <input type="email" 
                                    name="inviteEmail" 
                                    [(ngModel)]="inviteEmail" 
                                    required 
-                                   placeholder="Enter teammate's registered email address..." 
+                                   [placeholder]="langService.words().TASKBOARD.INVITE_PLACEHOLDER"
                                    class="invite-text-field"
-                                   aria-label="Teammate email address entry field"
+                                   [attr.aria-label]="langService.words().TASKBOARD.INVITE_INPUT_ARIA"
                                    aria-required="true" />
                         </div>
 
                         <div class="invite-select-container">
-                            <select name="inviteRole" [(ngModel)]="inviteRole" class="invite-dropdown-select" aria-label="Assigned project administrative security level level">
-                                <option value="Member">Regular Member</option>
-                                <option value="Owner">Co-Owner / Admin</option>
+                            <select name="inviteRole" [(ngModel)]="inviteRole" class="invite-dropdown-select" [attr.aria-label]="langService.words().TASKBOARD.INVITE_ROLE_ARIA">
+                                <option value="Member" [innerHTML]="langService.words().TASKBOARD.INVITE_OPTION_MEMBER"></option>
+                                <option value="Owner" [innerHTML]="langService.words().TASKBOARD.INVITE_OPTION_OWNER"></option>
                             </select>
                         </div>
 
-                        <button type="submit" class="submit-btn" [disabled]="!inviteForm.form.valid" aria-label="Submit invitation request to add member">Add Member</button>
+                        <button type="submit" class="submit-btn" [disabled]="!inviteForm.form.valid" [attr.aria-label]="langService.words().TASKBOARD.INVITE_SUBMIT_ARIA" [innerHTML]="langService.words().TASKBOARD.INVITE_SUBMIT_BTN"></button>
                     </form>
                  </div>
         
                 <!-- Dynamic roster display list (Visible to everyone) -->
                  <div aria-live="polite" aria-relevant="additions removals" role="region" aria-labelledby="rosterHeader">
-                    <h2 id="rosterHeader" class="roster-sub-title">Current Project Crew</h2>
+                    <h2 id="rosterHeader" class="roster-sub-title" [innerHTML]="langService.words().TASKBOARD.ROSTER_HEADER"></h2>
                     <ul class="roster-list-element">
                         <li *ngFor="let m of projectMembers" class="roster-item-row">
                             <div class="member-info-block">
                                 <span class="member-display-email">{{ m.userEmail }}</span>
-                                <span class="role-display-badge" [ngClass]="{'badge-owner': m.projectRole === 'Owner', 'badge-member': m.projectRole === 'Member'}" [attr.aria-label]="'Assigned Role: ' + m.projectRole">
+                                <span class="role-display-badge" 
+                                      [ngClass]="{'badge-owner': m.projectRole === 'Owner', 'badge-member': m.projectRole === 'Member'}" 
+                                      [attr.aria-label]="formatLabel(langService.words().TASKBOARD.ROSTER_BADGE_ARIA, m.projectRole)">
+                                      
                                     {{ m.projectRole }}
                                 </span>
                             </div>
@@ -75,7 +76,7 @@
                                     class="delete-card-btn" 
                                     (click)="onRemoveMemberClick(m.userId, m.userEmail)" 
                                     title="Remove Member from Project Workspace"
-                                    [attr.aria-label]="'Remove ' + m.userEmail + ' from project crew'">
+                                    [attr.aria-label]="formatLabel(langService.words().TASKBOARD.ROSTER_REMOVE_ARIA, m.userEmail)">
                                     
                                 <span aria-hidden="true">🗙</span>
                             </button>
@@ -86,16 +87,18 @@
 
             <!-- DYNAMIC MASTER WORKSPACE TAGS ROSTER -->
              <div class="right-tags-column" role="region" aria-labelledby="tagsHeader">
-                <h5 id="tagsHeader"><span aria-hidden="true">🏷️</span> Available Project Tags</h5>
+                <h5 id="tagsHeader"><span aria-hidden="true">🏷️</span> <span [innerHTML]="langService.words().TASKBOARD.TAGS_HEADER"></span></h5>
 
                 <!-- Fallback message if the Project Manager hasn't cooked up any tags yet -->
-                 <div *ngIf="projectCategories.length === 0" class="tags-roster-tray-fallback" role="status">
-                    No custom tags created for this project yet
-                 </div>
+                 <div *ngIf="projectCategories.length === 0" class="tags-roster-tray-fallback" role="status" [innerHTML]="langService.words().TASKBOARD.TAGS_FALLBACK"></div>
 
                 <!-- The colored tag pills gallery -->
                  <div class="tags-flex-container" aria-live="polite" aria-relevant="additions removals">
-                    <span *ngFor="let cat of projectCategories" class="category-badge-pill" [style.backgroundColor]="cat.colorHex" role="text" [attr.aria-label]="'Tag: ' + cat.name + ' with ' + getTaskCountByCategory(cat.id) + ' assigned items'">
+                    <span *ngFor="let cat of projectCategories" 
+                          class="category-badge-pill" 
+                          [style.backgroundColor]="cat.colorHex" 
+                          role="text" 
+                          [attr.aria-label]="langService.words().TASKBOARD.TAGS_PILL_ARIA.replace('{name}', cat.name).replace('{count}', getTaskCountByCategory(cat.id).toString())">
                         <span>{{ cat.name }} ({{ getTaskCountByCategory(cat.id) }})</span>
 
                         <!-- Delete Tag Trigger (Visible exclusively to space/project owners/managers!) -->
@@ -103,7 +106,7 @@
                                  (click)="onDeleteCategoryClick(cat.id, cat.name)" 
                                  title="Permanently Delete Workspace Tag" 
                                  class="category-badge-pill-delete-btn" 
-                                 [attr.aria-label]="'Permanently delete project tag: ' + cat.name">
+                                 [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TAG_DELETE_ARIA, cat.name)">
 
                             <span aria-hidden="true">✕</span>
                          </button>
@@ -113,32 +116,42 @@
         </div>
     </div>
 
-    <div class="board-controls-panel" role="search" aria-label="Task board item filtering hub">
+    <div class="board-controls-panel" role="search" [attr.aria-label]="langService.words().TASKBOARD.SEARCH_FILTER_HUB_ARIA">
         <div class="search-filter-group">
 
             <!-- Task Text Search -->
              <div class="control-input-wrapper">
                 <span class="control-icon-anchor" aria-hidden="true">🔍</span>
-                <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="applyFilters()" placeholder="Search tasks by title..." class="board-interactive-field search" aria-label="Filter tasks by text title keyword" />
+                <input type="text" 
+                       [(ngModel)]="searchQuery" 
+                       (ngModelChange)="applyFilters()" 
+                       [placeholder]="langService.words().TASKBOARD.SEARCH_PLACEHOLDER"
+                       class="board-interactive-field search" 
+                       [attr.aria-label]="langService.words().TASKBOARD.SEARCH_ARIA" />
              </div>
 
             <!-- Search by Selecting Priority -->
              <div class="control-input-wrapper">
                 <span class="control-icon-anchor" aria-hidden="true">🎯</span>
-                <select [(ngModel)]="selectedPriority" (ngModelChange)="applyFilters()" class="board-interactive-field priority" aria-label="Filter tasks by designated priority level">
-                    <option value="All">All Priorities</option>
-                    <option value="High">High Priority</option>
-                    <option value="Medium">Medium Priority</option>
-                    <option value="Low">Low Priority</option>
+                <select [(ngModel)]="selectedPriority" (ngModelChange)="applyFilters()" class="board-interactive-field priority" [attr.aria-label]="langService.words().TASKBOARD.PRIORITY_ARIA">
+                    <option value="All" [innerHTML]="langService.words().TASKBOARD.PRIORITY_ALL"></option>
+                    <option value="High" [innerHTML]="langService.words().TASKBOARD.PRIORITY_HIGH"></option>
+                    <option value="Medium" [innerHTML]="langService.words().TASKBOARD.PRIORITY_MEDIUM"></option>
+                    <option value="Low" [innerHTML]="langService.words().TASKBOARD.PRIORITY_LOW"></option>
                 </select>
              </div>
 
             <!-- Search by Selecting Category Tag -->
              <div class="control-input-wrapper">
                 <span class="control-icon-anchor" aria-hidden="true">🏷️</span>
-                <select id="searchCategory" [(ngModel)]="selectedCategory" (change)="applyFilters()" class="board-interactive-field category" aria-label="Filter tasks by active project category tag assignment">
-                    <option value="All">All Tags</option>
-                    <option value="Null">Unassigned Tasks</option>
+                <select id="searchCategory" 
+                        [(ngModel)]="selectedCategory" 
+                        (change)="applyFilters()" 
+                        class="board-interactive-field category" 
+                        [attr.aria-label]="langService.words().TASKBOARD.CATEGORY_ARIA">
+
+                    <option value="All" [innerHTML]="langService.words().TASKBOARD.CATEGORY_ALL"></option>
+                    <option value="Null" [innerHTML]="langService.words().TASKBOARD.CATEGORY_UNASSIGNED"></option>
                     <option *ngFor="let cat of projectCategories" [value]="cat.id">
                         {{ cat.name }}
                     </option>
@@ -152,10 +165,10 @@
               [attr.aria-valuenow]="completionPercentage"
               aria-valuemin="0"
               aria-valuemax="100"
-              [attr.aria-label]="'Overall project completion progress tracker. Currently at ' + completionPercentage + ' percent.'">
+              [attr.aria-label]="formatLabel(langService.words().TASKBOARD.PROGRESS_ARIA, completionPercentage)">
             
             <div class="priority-text-label">
-                <span>Project Completion Progress:</span>
+                <span [innerHTML]="langService.words().TASKBOARD.PROGRESS_LABEL"></span>
                 <strong>{{ completionPercentage }}%</strong>
             </div>
             <div class="progress-bar-track" aria-hidden="true">
@@ -165,33 +178,35 @@
     </div>
 
     <!-- Mobile/Vertical screen, column navigation buttons -->
-    <div class="mobile-board-lane-switcher" role="tablist" aria-label="Mobile task board column views">
+    <div class="mobile-board-lane-switcher" 
+         role="tablist" 
+         [attr.aria-label]="langService.words().TASKBOARD.MOBILE_TABS_ARIA">
         <button class="lane-tab-trigger" 
                 role="tab"
                 [attr.aria-selected]="activeMobileColumn === 'Pending'"
                 [ngClass]="{'active': activeMobileColumn === 'Pending'}" 
                 (click)="activeMobileColumn = 'Pending'"
-                aria-label="View Pending tasks column">
+                [attr.aria-label]="langService.words().TASKBOARD.MOBILE_TAB_PENDING_ARIA">
                 
-            <span aria-hidden="true">⏳</span> Pending
+            <span aria-hidden="true">⏳</span> <span [innerHTML]="langService.words().TASKBOARD.MOBILE_TAB_PENDING_TEXT"></span>
         </button>
         <button class="lane-tab-trigger" 
                 role="tab"
                 [attr.aria-selected]="activeMobileColumn === 'InProgress'"
                 [ngClass]="{'active': activeMobileColumn === 'InProgress'}" 
                 (click)="activeMobileColumn = 'InProgress'"
-                aria-label="View Tasks In Progress and Review column">
+                [attr.aria-label]="langService.words().TASKBOARD.MOBILE_TAB_PROGRESS_ARIA">
                 
-            <span aria-hidden="true">⚡</span> Progress & Review
+            <span aria-hidden="true">⚡</span> <span [innerHTML]="langService.words().TASKBOARD.MOBILE_TAB_PROGRESS_TEXT"></span>
         </button>
         <button class="lane-tab-trigger" 
                 role="tab"
                 [attr.aria-selected]="activeMobileColumn === 'Completed'"
                 [ngClass]="{'active': activeMobileColumn === 'Completed'}" 
                 (click)="activeMobileColumn = 'Completed'"
-                aria-label="View Completed tasks column">
+                [attr.aria-label]="langService.words().TASKBOARD.MOBILE_TAB_COMPLETED_ARIA">
                 
-            <span aria-hidden="true">✅</span> Completed
+            <span aria-hidden="true">✅</span> <span [innerHTML]="langService.words().TASKBOARD.MOBILE_TAB_COMPLETED_TEXT"></span>
         </button>
     </div>
 
@@ -203,7 +218,7 @@
                   aria-labelledby="pendingColumnHeader">
 			
             <h3 id="pendingColumnHeader">
-                <span aria-hidden="true">⏳</span> Pending ({{ pendingTasks.length }})
+                <span aria-hidden="true">⏳</span> {{ formatLabel(langService.words().TASKBOARD.COLUMN_PENDING_TITLE, pendingTasks.length) }}
             </h3>
 
             <!-- CDK Target Drop Window Container Lane -->
@@ -214,7 +229,7 @@
                  class="tasks-container"
                  aria-live="polite"
                  aria-relevant="additions removals"
-                 [attr.aria-label]="'Pending task tracking list lane. Contains ' + pendingTasks.length + ' items.'">
+                 [attr.aria-label]="formatLabel(langService.words().TASKBOARD.LANE_PENDING_ARIA, pendingTasks.length)">
 
                 <!-- Draggable Task Card Template Block -->
                  <div class="task-card" 
@@ -222,7 +237,7 @@
                      cdkDrag
                      role="article"
                      [attr.id]="'task-card-' + t.id"
-                     [attr.aria-label]="'Task item card: ' + t.title">
+                     [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_CARD_ARIA, t.title)">
 
                     <div class="task-card-header">
                         <h4 [attr.id]="'task-title-' + t.id">{{ t.title }}</h4>
@@ -230,34 +245,34 @@
                         <!-- Only renders on your screen if the task row actually has a category linked in the database! -->
                          <span *ngIf="t.category" class="task-category-tag-wrapper">
                             <!-- Bind the background color directly to the custom hex color code selected by the task creator! -->
-                             <span class="category-badge-pill" [style.backgroundColor]="t.category.colorHex" [attr.aria-label]="'Assigned Category Tag: ' + t.category.name">
+                             <span class="category-badge-pill" [style.backgroundColor]="t.category.colorHex" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_CATEGORY_ARIA, t.category.name)">
                                 <span aria-hidden="true">🏷️</span> {{ t.category.name }}
                              </span>
                          </span>
                         <button *ngIf="currentUserProjectRole === 'Owner'" 
                                 class="delete-card-btn" 
                                 (click)="onDeleteTask(t.id)" 
-                                [attr.aria-label]="'Delete task card: ' + t.title"
+                                [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DELETE_ARIA, t.title)"
                                 [attr.aria-describedby]="'task-title-' + t.id">
                                 
                             <span aria-hidden="true">🗑️</span>
                         </button>
                     </div>
 
-                    <p>{{ t.description || 'No details provided.' }}</p>
+                    <p>{{ t.description || langService.words().TASKBOARD.TASK_DESCRIPTION_FALLBACK }}</p>
 
                     <div class="task-assignment-control">
                         <label [attr.for]="'assignee-select-' + t.id" class="assignment-label">
-                            <span aria-hidden="true">👤</span> Assignee:
+                            <span aria-hidden="true">👤</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_ASSIGNEE_LABEL"></span>
                         </label>
                         <select [id]="'assignee-select-' + t.id" 
                                 [ngModel]="t.assignedUserId" 
                                 (change)="onAssignUser(t.id, $any($event.target).value)" 
                                 class="assignee-dropdown-menu" 
                                 [disabled]="currentUserProjectRole !== 'Owner'"
-                                [attr.aria-label]="'Assign staff member to task ' + t.title">
+                                [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_ASSIGNEE_ARIA, t.title)">
                             
-                            <option [value]="null">Unassigned</option>
+                            <option [value]="null" [innerHTML]="langService.words().TASKBOARD.TASK_ASSIGNEE_UNASSIGNED"></option>
                             <option *ngFor="let m of projectMembers" [value]="m.userId">
                                 {{ m.userName }} ({{ m.userEmail }})
                             </option>
@@ -266,15 +281,15 @@
 
                     <div *ngIf="currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId" class="task-assignment-control">
                         <label [attr.for]="'category-select-' + t.id" class="assignment-label">
-                            <span aria-hidden="true">🏷️</span> Category:
+                            <span aria-hidden="true">🏷️</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_CATEGORY_LABEL"></span>
                         </label>
                         <select [id]="'category-select-' + t.id" 
                                 [ngModel]="t.categoryId" 
                                 (change)="onAssignCategory(t.id, $any($event.target).value)" 
                                 [disabled]="currentUserProjectRole !== 'Owner' && t.assignedUserId !== currentUserId" 
                                 class="assignee-dropdown-menu"
-                                [attr.aria-label]="'Assign classification tag to task ' + t.title">
-                            <option [value]="null">No Category</option>
+                                [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_CATEGORY_ARIA_ASSIGN, t.title)">
+                            <option [value]="null" [innerHTML]="langService.words().TASKBOARD.TASK_CATEGORY_NONE"></option>
                             <option *ngFor="let cat of projectCategories" [value]="cat.id">
                                 {{ cat.name }}
                             </option>
@@ -283,21 +298,21 @@
 
                     <div class="task-actions">
                         <div class="badge-group">
-                            <span class="priority-badge" [ngClass]="t.priority.toLowerCase()" [attr.aria-label]="'Priority level: ' + t.priority">
-                                <span *ngIf="t.priority === 'High'"><span aria-hidden="true">🔴 🔺</span> High</span>
-                                <span *ngIf="t.priority === 'Medium'"><span aria-hidden="true">🟡 🔸</span> Medium</span>
-                                <span *ngIf="t.priority === 'Low'"><span aria-hidden="true">🔵 🔹</span> Low</span>
+                            <span class="priority-badge" [ngClass]="t.priority.toLowerCase()" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_PRIORITY_ARIA, t.priority)">
+                                <span *ngIf="t.priority === 'High'"><span aria-hidden="true">🔴 🔺</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_HIGH"></span></span>
+                                <span *ngIf="t.priority === 'Medium'"><span aria-hidden="true">🟡 🔸</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_MEDIUM"></span></span>
+                                <span *ngIf="t.priority === 'Low'"><span aria-hidden="true">🔵 🔹</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_LOW"></span></span>
                             </span>
-                            <span class="deadline-badge" *ngIf="t.deadline" [attr.aria-label]="'Task deadline calendar date: ' + (t.deadline | date:'yyyy/MM/dd')">
+                            <span class="deadline-badge" *ngIf="t.deadline" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DEADLINE_ARIA, (t.deadline | date:'yyyy/MM/dd') || '')">
                                 <span aria-hidden="true">📅</span> {{ t.deadline | date:"yyyy/MM/dd" }}
                             </span>
                         </div>
                         <button *ngIf="currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId" 
                                 class="action-btn next" 
                                 (click)="onUpdateStatus(t.id, 'In Progress')"
-                                [attr.aria-label]="'Start work item: ' + t.title + '. Moves card to In Progress column.'">
+                                [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_ACTION_START_ARIA, t.title)">
                             
-                            Start <span aria-hidden="true">→</span>
+                            <span [innerHTML]="langService.words().TASKBOARD.TASK_ACTION_START_TEXT"></span>
                         </button>
                     </div>
                  </div>
@@ -311,7 +326,7 @@
                   aria-labelledby="inProgressColumnHeader">
             
             <h3 id="inProgressColumnHeader">
-                <span aria-hidden="true">⚡</span> In-Progress & Review ({{ inProgressTasks.length }})
+                <span aria-hidden="true">⚡</span> {{ formatLabel(langService.words().TASKBOARD.COLUMN_INPROGRESS_TITLE, inProgressTasks.length) }}
             </h3>
             
             <div id="inProgressLaneList"
@@ -321,7 +336,7 @@
                  class="tasks-container"
                  aria-live="polite"
                  aria-relevant="additions removals"
-                 [attr.aria-label]="'In Progress and Review tracking list lane. Contains ' + inProgressTasks.length + ' items.'">
+                 [attr.aria-label]="formatLabel(langService.words().TASKBOARD.LANE_INPROGRESS_ARIA, inProgressTasks.length)">
                 
                 <div class="task-card" 
                      *ngFor="let t of filteredInProgressTasks" 
@@ -329,7 +344,7 @@
                      cdkDrag
                      role="article"
                      [attr.id]="'inprogress-card-' + t.id"
-                     [attr.aria-label]="'Task item card: ' + t.title + '. Current status is: ' + t.status">
+                     [attr.aria-label]="langService.words().TASKBOARD.TASK_CARD_STATUS_ARIA.replace('{title}', t.title).replace('{status}', t.status)">
                     
                     <div class="task-card-header">
                         <h4 [attr.id]="'inprogress-title-' + t.id">{{ t.title }}</h4>
@@ -337,39 +352,39 @@
                         <!-- Only renders on our screen if the task row actually has a category linked in the database! -->
                          <span *ngIf="t.category" class="task-category-tag-wrapper">
                             <!-- Bind the background color directly to the custom hex color code selected by the task creator! -->
-                             <span class="category-badge-pill" [style.backgroundColor]="t.category.colorHex" [attr.aria-label]="'Assigned Category Tag: ' + t.category.name">
+                             <span class="category-badge-pill" [style.backgroundColor]="t.category.colorHex" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_CATEGORY_ARIA, t.category.name)">
                                 <span aria-hidden="true">🏷️</span> {{ t.category.name }}
                              </span>
                          </span>
                         <button *ngIf="currentUserProjectRole === 'Owner'" 
                                 class="delete-card-btn" 
                                 (click)="onDeleteTask(t.id)" 
-                                [attr.aria-label]="'Delete task card: ' + t.title"
+                                [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DELETE_ARIA, t.title)"
                                 [attr.aria-describedby]="'inprogress-title-' + t.id">
                             
                             <span aria-hidden="true">🗑️</span>
                         </button>
                     </div>
 
-                    <p>{{ t.description || 'No details provided.' }}</p>
+                    <p>{{ t.description || langService.words().TASKBOARD.TASK_DESCRIPTION_FALLBACK }}</p>
                     
                     <!-- ⚠️ PENDING REVIEW BANNER: Explicit role attribute lets voice systems emphasize this alert layer -->
-                    <div *ngIf="t.status === 'Review Required'" class="review-status-banner" role="status" [attr.aria-label]="'Alert: ' + t.title + ' is pending project manager validation review.'">
-                        <span aria-hidden="true">⚠️</span> Pending PM Review
+                    <div *ngIf="t.status === 'Review Required'" class="review-status-banner" role="status" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.REVIEW_BANNER_ARIA, t.title)">
+                        <span aria-hidden="true">⚠️</span> <span [innerHTML]="langService.words().TASKBOARD.REVIEW_BANNER_TEXT"></span>
                     </div>
                     
                     <div class="task-assignment-control">
                         <label [attr.for]="'inp-assignee-select-' + t.id" class="assignment-label">
-                            <span aria-hidden="true">👤</span> Assignee:
+                            <span aria-hidden="true">👤</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_ASSIGNEE_LABEL"></span>
                         </label>
                         <select [id]="'inp-assignee-select-' + t.id" 
                                 [ngModel]="t.assignedUserId" 
                                 (change)="onAssignUser(t.id, $any($event.target).value)" 
                                 class="assignee-dropdown-menu" 
                                 [disabled]="currentUserProjectRole !== 'Owner'"
-                                [attr.aria-label]="'Assign staff member to task ' + t.title">
+                                [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_ASSIGNEE_ARIA, t.title)">
 
-                            <option [value]="null">Unassigned</option>
+                            <option [value]="null" [innerHTML]="langService.words().TASKBOARD.TASK_ASSIGNEE_UNASSIGNED"></option>
                             <option *ngFor="let m of projectMembers" [value]="m.userId">
                                 {{ m.userName }} ({{ m.userEmail }})
                             </option>
@@ -378,16 +393,16 @@
                     
                     <div *ngIf="currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId" class="task-assignment-control">
                         <label [attr.for]="'inp-category-select-' + t.id" class="assignment-label">
-                            <span aria-hidden="true">🏷️</span> Category:
+                            <span aria-hidden="true">🏷️</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_CATEGORY_LABEL"></span>
                         </label>
                         <select [id]="'inp-category-select-' + t.id" 
                                 [ngModel]="t.categoryId" 
                                 (change)="onAssignCategory(t.id, $any($event.target).value)" 
                                 [disabled]="currentUserProjectRole !== 'Owner' && t.assignedUserId !== currentUserId" 
                                 class="assignee-dropdown-menu"
-                                [attr.aria-label]="'Assign classification tag to task ' + t.title">
+                                [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_CATEGORY_ARIA_ASSIGN, t.title)">
 
-                            <option [value]="null">No Category</option>
+                            <option [value]="null" [innerHTML]="langService.words().TASKBOARD.TASK_CATEGORY_NONE"></option>
                             <option *ngFor="let cat of projectCategories" [value]="cat.id">
                                 {{ cat.name }}
                             </option>
@@ -396,12 +411,12 @@
                     
                     <div class="task-actions">
                         <div class="badge-group">
-                            <span class="priority-badge" [ngClass]="t.priority.toLowerCase()" [attr.aria-label]="'Priority level: ' + t.priority">
-                                <span *ngIf="t.priority === 'High'"><span aria-hidden="true">🔴 🔺</span> High</span>
-                                <span *ngIf="t.priority === 'Medium'"><span aria-hidden="true">🟡 🔸</span> Medium</span>
-                                <span *ngIf="t.priority === 'Low'"><span aria-hidden="true">🔵 🔹</span> Low</span>
+                            <span class="priority-badge" [ngClass]="t.priority.toLowerCase()" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_PRIORITY_ARIA, t.priority)">
+                                <span *ngIf="t.priority === 'High'"><span aria-hidden="true">🔴 🔺</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_HIGH"></span></span>
+                                <span *ngIf="t.priority === 'Medium'"><span aria-hidden="true">🟡 🔸</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_MEDIUM"></span></span>
+                                <span *ngIf="t.priority === 'Low'"><span aria-hidden="true">🔵 🔹</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_LOW"></span></span>
                             </span>
-                            <span class="deadline-badge" *ngIf="t.deadline" [attr.aria-label]="'Task deadline calendar date: ' + (t.deadline | date:'yyyy/MM/dd')">
+                            <span class="deadline-badge" *ngIf="t.deadline" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DEADLINE_ARIA, (t.deadline | date:'yyyy/MM/dd') || '')">
                                 <span aria-hidden="true">📅</span> {{ t.deadline | date:"yyyy/MM/dd" }}
                             </span>
                         </div>
@@ -412,17 +427,17 @@
                              <button *ngIf="t.status === 'In Progress' && (currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId)" 
                                      class="action-btn cancel-btn" 
                                      (click)="onUpdateStatus(t.id, 'Pending')"
-                                     [attr.aria-label]="'Move ' + t.title + ' backward to Pending column'">
+                                     [attr.aria-label]="formatLabel(langService.words().TASKBOARD.BTN_BACK_ARIA, t.title)">
                                     
-                                <span aria-hidden="true">←</span> Back
+                                <span [innerHTML]="langService.words().TASKBOARD.BTN_BACK_TEXT"></span>
                              </button>
                                 
                              <button *ngIf="t.status === 'In Progress' && (currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId)" 
                                      class="action-btn next" 
                                      (click)="onUpdateStatus(t.id, 'Review Required')"
-                                     [attr.aria-label]="'Submit ' + t.title + ' for Project Manager approval review'">
+                                     [attr.aria-label]="formatLabel(langService.words().TASKBOARD.BTN_SUBMIT_REVIEW_ARIA, t.title)">
                                 
-                                Submit Review <span aria-hidden="true">→</span>
+                                <span [innerHTML]="langService.words().TASKBOARD.BTN_SUBMIT_REVIEW_TEXT"></span>
                              </button>
                             
                             <!-- Review Required task card navigation buttons -->
@@ -430,26 +445,26 @@
                               <button *ngIf="t.status === 'Review Required' && (currentUserProjectRole !== 'Owner' && t.assignedUserId === currentUserId)" 
                                      class="action-btn cancel-btn" 
                                      (click)="onUpdateStatus(t.id, 'In Progress')"
-                                     [attr.aria-label]="'Cancel review request and return ' + t.title + ' to In Progress'">
+                                     [attr.aria-label]="formatLabel(langService.words().TASKBOARD.BTN_CANCEL_REVIEW_ARIA, t.title)">
                                 
-                                <span aria-hidden="true">←</span> Cancel Review Request
+                                <span [innerHTML]="langService.words().TASKBOARD.BTN_CANCEL_REVIEW_TEXT"></span>
                               </button>
                                
                              <!-- For PMs -->
                               <button *ngIf="t.status === 'Review Required' && currentUserProjectRole === 'Owner'" 
                                      class="action-btn reject-review" 
                                      (click)="onUpdateStatus(t.id, 'In Progress')"
-                                     [attr.aria-label]="'Reject review request and return ' + t.title + ' to In Progress pipeline'">
+                                     [attr.aria-label]="formatLabel(langService.words().TASKBOARD.BTN_REJECT_ARIA, t.title)">
                                      
-                                    <span aria-hidden="true">🗙 </span>Reject
+                                <span aria-hidden="true">🗙</span> <span [innerHTML]="langService.words().TASKBOARD.BTN_REJECT_TEXT"></span>
                               </button>
                                 
                               <button *ngIf="t.status === 'Review Required' && currentUserProjectRole === 'Owner'" 
                                       class="submit-btn" 
                                       (click)="onUpdateStatus(t.id, 'Completed')"
-                                      [attr.aria-label]="'Approve review and transition ' + t.title + ' into Completed column'">
+                                      [attr.aria-label]="formatLabel(langService.words().TASKBOARD.BTN_APPROVE_ARIA, t.title)">
                                       
-                                    <span aria-hidden="true">🗹 </span>Approve Task
+                                <span aria-hidden="true">🗹</span> <span [innerHTML]="langService.words().TASKBOARD.BTN_APPROVE_TEXT"></span>
                               </button>
                         </div>
                     </div>
@@ -463,7 +478,7 @@
                   role="region"
                   aria-labelledby="completedColumnHeader">
             
-            <h3 id="completedColumnHeader"><span aria-hidden="true">✅</span> Completed ({{ completedTasks.length }})</h3>
+            <h3 id="completedColumnHeader"><span aria-hidden="true">✅</span> {{ formatLabel(langService.words().TASKBOARD.COLUMN_COMPLETED_TITLE, completedTasks.length) }}</h3>
 			
             <div id="completedLaneList"
                  cdkDropList
@@ -472,14 +487,14 @@
                  class="tasks-container"
                  aria-live="polite"
                  aria-relevant="additions removals"
-                 [attr.aria-label]="'Completed task archieve list lane. Contains ' + completedTasks.length + ' finished items.'">
+                 [attr.aria-label]="formatLabel(langService.words().TASKBOARD.LANE_COMPLETED_ARIA, completedTasks.length)">
                 
 				<div class="task-card done" 
                      *ngFor="let t of filteredCompletedTasks"
                      cdkDrag
                      role="article"
                      [attr.id]="'completed-card-' + t.id"
-                     [attr.aria-label]="'Completed task card: ' + t.title">
+                     [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_CARD_COMPLETED_ARIA, t.title)">
 					
                     <div class="task-card-header">
 						<h4 [attr.id]="'completed-title-' + t.id">{{ t.title }}</h4>
@@ -487,31 +502,31 @@
                         <!-- Only renders on your screen if the task row actually has a category linked in the database! -->
                          <span *ngIf="t.category" class="task-category-tag-wrapper">
                             <!-- Bind the background color directly to the custom hex color code selected by the task creator! -->
-                             <span class="category-badge-pill" [style.backgroundColor]="t.category.colorHex" [attr.aria-label]="'Assigned Category Tag: ' + t.category.name">
+                             <span class="category-badge-pill" [style.backgroundColor]="t.category.colorHex" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_CATEGORY_ARIA, t.category.name)">
                                 <span aria-hidden="true">🏷️</span> {{ t.category.name }}
                              </span>
                          </span>
 						<button *ngIf="currentUserProjectRole === 'Owner'" 
                                 class="delete-card-btn" 
                                 (click)="onDeleteTask(t.id)" 
-                                [attr.aria-label]="'Delete task card: ' + t.title"
+                                [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DELETE_ARIA, t.title)"
                                 [attr.aria-describedby]="'completed-title-' + t.id">
                                 
                                 <span aria-hidden="true">🗑️</span>
                         </button>
 					</div>
 
-                    <p>{{ t.description || 'No details provided.' }}</p>
+                    <p>{{ t.description || langService.words().TASKBOARD.TASK_DESCRIPTION_FALLBACK }}</p>
                     
                     <div class="badge-group">
-                        <span class="priority-badge done" aria-label="Task processing state: Done">
-                            <span aria-hidden="true">🟢 🔹</span>Done
+                        <span class="priority-badge done" [attr.aria-label]="langService.words().TASKBOARD.BADGE_DONE_ARIA">
+                            <span aria-hidden="true">🟢 🔹</span><span [innerHTML]="langService.words().TASKBOARD.BADGE_DONE_TEXT"></span>
                         </span>
                     </div>
                     
                     <div class="task-assignment-control">
                         <label [attr.for]="'comp-assignee-select-' + t.id" class="assignment-label">
-                            <span aria-hidden="true">👤</span> Assignee:
+                            <span aria-hidden="true">👤</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_ASSIGNEE_LABEL"></span>
                         </label>
                         <!-- <select [ngModel]="t.assignedUserId" (change)="onAssignUser(t.id, $any($event.target).value)" class="assignee-dropdown-menu" [disabled]="currentUserProjectRole !== 'Owner'"> -->
                         <select [id]="'comp-assignee-select-' + t.id" 
@@ -519,9 +534,9 @@
                                 class="assignee-dropdown-menu" 
                                 [disabled]="currentUserProjectRole !== 'Owner'"
                                 aria-readonly="true"
-                                [attr.aria-label]="'Assigned staff member for finished task ' + t.title">
+                                [attr.aria-label]="formatLabel(langService.words().TASKBOARD.FINISHED_ASSIGNEE_ARIA, t.title)">
                             
-                            <option [value]="null">Unassigned</option>
+                            <option [value]="null" [innerHTML]="langService.words().TASKBOARD.TASK_ASSIGNEE_UNASSIGNED"></option>
                             <option *ngFor="let m of projectMembers" [value]="m.userId">
                                 {{ m.userName }} ({{ m.userEmail }})
                             </option>
@@ -530,16 +545,16 @@
                     
                     <div *ngIf="currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId" class="task-assignment-control">
                         <label [attr.for]="'comp-category-select-' + t.id" class="assignment-label">
-                            <span aria-hidden="true">🏷️</span> Category:
+                            <span aria-hidden="true">🏷️</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_CATEGORY_LABEL"></span>
                         </label>
                         <select [id]="'comp-category-select-' + t.id" 
                                 [ngModel]="t.categoryId" 
                                 (change)="onAssignCategory(t.id, $any($event.target).value)" 
                                 [disabled]="currentUserProjectRole !== 'Owner' && t.assignedUserId !== currentUserId" 
                                 class="assignee-dropdown-menu"
-                                [attr.aria-label]="'Classification category for finished task ' + t.title">
+                                [attr.aria-label]="formatLabel(langService.words().TASKBOARD.FINISHED_CATEGORY_ARIA, t.title)">
                             
-                            <option [value]="null">No Category</option>
+                            <option [value]="null" [innerHTML]="langService.words().TASKBOARD.TASK_CATEGORY_NONE"></option>
                             <option *ngFor="let cat of projectCategories" [value]="cat.id">
                                 {{ cat.name }}
                             </option>
@@ -548,12 +563,12 @@
                     
                     <div class="task-actions">
                         <div class="badge-group">
-                            <span class="priority-badge" [ngClass]="t.priority.toLowerCase()" [attr.aria-label]="'Original priority level: ' + t.priority">
-                                <span *ngIf="t.priority === 'High'"><span aria-hidden="true">🔴 🔺</span> High</span>
-                                <span *ngIf="t.priority === 'Medium'"><span aria-hidden="true">🟡 🔸</span> Medium</span>
-                                <span *ngIf="t.priority === 'Low'"><span aria-hidden="true">🔵 🔹</span> Low</span>
+                            <span class="priority-badge" [ngClass]="t.priority.toLowerCase()" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.FINISHED_PRIORITY_ARIA, t.priority)">
+                                <span *ngIf="t.priority === 'High'"><span aria-hidden="true">🔴 🔺</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_HIGH"></span></span>
+                                <span *ngIf="t.priority === 'Medium'"><span aria-hidden="true">🟡 🔸</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_MEDIUM"></span></span>
+                                <span *ngIf="t.priority === 'Low'"><span aria-hidden="true">🔵 🔹</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_LOW"></span></span>
                             </span>
-                            <span class="deadline-badge" *ngIf="t.deadline" [attr.aria-label]="'Task deadline calendar date: ' + (t.deadline | date:'yyyy/MM/dd')">
+                            <span class="deadline-badge" *ngIf="t.deadline" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DEADLINE_ARIA, (t.deadline | date:'yyyy/MM/dd') || '')">
                                 <span aria-hidden="true">📅</span> {{ t.deadline | date:"yyyy/MM/dd" }}
                             </span>
                         </div>
@@ -562,9 +577,8 @@
                          <button *ngIf="currentUserProjectRole === 'Owner'" 
                                 class="action-btn cancel-btn" 
                                 (click)="onUpdateStatus(t.id, 'In Progress')"
-                                [attr.aria-label]="'Reopen task item: ' + t.title + '. Returns card back to working In Progress lane.'">
-                                
-                            <span aria-hidden="true">←</span> Reopen
+                                [attr.aria-label]="formatLabel(langService.words().TASKBOARD.REOPEN_ARIA, t.title)"
+                                [innerHTML]="langService.words().TASKBOARD.REOPEN_TEXT">
                          </button>
                     </div>
                 </div>
@@ -584,46 +598,46 @@
               aria-labelledby="createTaskModalHeader">
 
             <!-- ```#taskModalHeader``` & ```tabindex="-1"``` help screen reader engine to focus on the opened modal -->
-             <h3 id="createTaskModalHeader" #taskModalHeader tabindex="-1">Create New Task Specification</h3>
+             <h3 id="createTaskModalHeader" #taskModalHeader tabindex="-1" [innerHTML]="langService.words().TASKBOARD.MODAL_TASK_HEADER"></h3>
             <form (ngSubmit)="onCreateTask()" #taskForm="ngForm" aria-labelledby="createTaskModalHeader">
                 <div class="form-group-row">
-                    <label for="title">Task Title *</label>
+                    <label for="title" [innerHTML]="langService.words().TASKBOARD.MODAL_TASK_TITLE_LABEL"></label>
                     <input id="title" 
                            type="text" 
                            name="title" 
                            [(ngModel)]="newTask.title" 
                            required 
-                           placeholder="e.g. Design database schema" 
+                           [placeholder]="langService.words().TASKBOARD.MODAL_TASK_TITLE_PLACEHOLDER" 
                            class="invite-text-field"
                            aria-required="true" />
                 </div>
 
                 <div class="form-group-row">
-                    <label for="description">Description</label>
-                    <textarea id="description" name="description" [(ngModel)]="newTask.description" placeholder="Provide actionable details..." class="invite-text-field"></textarea>
+                    <label for="description" [innerHTML]="langService.words().TASKBOARD.MODAL_TASK_DESC_LABEL"></label>
+                    <textarea id="description" name="description" [(ngModel)]="newTask.description" [placeholder]="langService.words().TASKBOARD.MODAL_TASK_DESC_PLACEHOLDER" class="invite-text-field"></textarea>
                 </div>
 
                 <div class="form-group-row">
-                    <label for="priority">Priority Tier</label>
-                    <select id="priority" name="priority" [(ngModel)]="newTask.priority" class="invite-dropdown-select" aria-label="Select priority classification tier">
-                        <option value="Low">Low</option>
-                        <option value="Medium">Medium</option>
-                        <option value="High">High</option>
+                    <label for="priority" [innerHTML]="langService.words().TASKBOARD.MODAL_TASK_PRIORITY_LABEL"></label>
+                    <select id="priority" name="priority" [(ngModel)]="newTask.priority" class="invite-dropdown-select" [attr.aria-label]="langService.words().TASKBOARD.PRIORITY_ARIA">
+                        <option value="Low" [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_LOW"></option>
+                        <option value="Medium" [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_MEDIUM"></option>
+                        <option value="High" [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_HIGH"></option>
                     </select>
                 </div>
 
                 <div class="form-group-row">
-                    <label for="deadline" aria-label=" Keyboard navigation note: Press the Tab key or Escape key to exit the calendar selector grid.">Deadline</label>
+                    <label for="deadline" [attr.aria-label]="langService.words().TASKBOARD.MODAL_TASK_DEADLINE_KEYBOARD_ARIA" [innerHTML]="langService.words().TASKBOARD.MODAL_TASK_DEADLINE_LABEL"></label>
                     <input id="deadline" 
                            type="date" 
                            name="deadline" 
                            [(ngModel)]="newTask.deadline" 
-                           aria-label="Designated calendar completion date." />
+                           [attr.aria-label]="langService.words().TASKBOARD.MODAL_TASK_DEADLINE_INPUT_ARIA" />
                 </div>
 				
 				<div class="modal-btn-actions-row">
-                    <button type="button" class="cancel-btn" (click)="closeModal()" aria-label="Dismiss task specification form overlay">Cancel</button>
-                    <button type="submit" class="submit-btn" [disabled]="!taskForm.form.valid" aria-label="Confirm data models to create new task item">Create Task</button>
+                    <button type="button" class="cancel-btn" (click)="closeModal()" [attr.aria-label]="langService.words().TASKBOARD.MODAL_TASK_CANCEL_ARIA" [innerHTML]="langService.words().TASKBOARD.MODAL_TASK_CANCEL_BTN"></button>
+                    <button type="submit" class="submit-btn" [disabled]="!taskForm.form.valid" [attr.aria-label]="langService.words().TASKBOARD.MODAL_TASK_SUBMIT_ARIA" [innerHTML]="langService.words().TASKBOARD.MODAL_TASK_SUBMIT_BTN"></button>
                 </div>
             </form>
          </div>
@@ -637,36 +651,36 @@
              aria-modal="true"
              aria-labelledby="createTagModalHeader">
             
-            <h3 id="createTagModalHeader" #tagModalHeader tabindex="-1">Create New Workspace Tag</h3>
+            <h3 id="createTagModalHeader" #tagModalHeader tabindex="-1" [innerHTML]="langService.words().TASKBOARD.MODAL_TAG_HEADER"></h3>
 
             <form (ngSubmit)="onCreateCategorySubmit()" #categoryForm="ngForm" class="modal-form" aria-labelledby="createTagModalHeader">
                 <div class="form-group-row">
-                    <label for="tagName">Tag Name:</label>
+                    <label for="tagName" [innerHTML]="langService.words().TASKBOARD.MODAL_TAG_NAME_LABEL"></label>
                     <input type="text" 
                            id="tagName" 
                            name="tagName" 
                            [(ngModel)]="newCategoryName" 
                            (input)="0" 
                            required 
-                           placeholder="e.g., Frontend, Testing, Bug..." 
+                           [placeholder]="langService.words().TASKBOARD.MODAL_TAG_NAME_PLACEHOLDER" 
                            class="invite-text-field"
                            aria-required="true" />
                 </div>
 
                 <div class="form-group-row">
-                    <label for="tagColor">Tag Theme Color:</label>
-                    <select id="tagColor" name="tagColor" [(ngModel)]="newCategoryColor" class="invite-dropdown-select" aria-label="Select categorization badge background visual color tracking profile">
-                        <option value="#e53e3e" aria-label="Crimson Red">🔴 Crimson Red (High Contrast)</option>
-                        <option value="#3182ce" aria-label="Electric Blue">🔵 Electric Blue (High Contrast)</option>
-                        <option value="#38a169" aria-label="Forest Green">🟢 Forest Green (High Contrast)</option>
-                        <option value="#dd6b20" aria-label="Deep Orange">🟠 Deep Orange (High Contrast)</option>
-                        <option value="#805ad5" aria-label="Royal Purple">🟣 Royal Purple (High Contrast)</option>
+                    <label for="tagColor" [innerHTML]="langService.words().TASKBOARD.MODAL_TAG_COLOR_LABEL"></label>
+                    <select id="tagColor" name="tagColor" [(ngModel)]="newCategoryColor" class="invite-dropdown-select" [attr.aria-label]="langService.words().TASKBOARD.MODAL_TAG_COLOR_ARIA">
+                        <option value="#e53e3e" [attr.aria-label]="langService.words().TASKBOARD.MODAL_TAG_COLOR_RED">🔴 {{ langService.words().TASKBOARD.MODAL_TAG_COLOR_RED }}</option>
+                        <option value="#3182ce" [attr.aria-label]="langService.words().TASKBOARD.MODAL_TAG_COLOR_BLUE">🔵 {{ langService.words().TASKBOARD.MODAL_TAG_COLOR_BLUE }}</option>
+                        <option value="#38a169" [attr.aria-label]="langService.words().TASKBOARD.MODAL_TAG_COLOR_GREEN">🟢 {{ langService.words().TASKBOARD.MODAL_TAG_COLOR_GREEN }}</option>
+                        <option value="#dd6b20" [attr.aria-label]="langService.words().TASKBOARD.MODAL_TAG_COLOR_ORANGE">🟠 {{ langService.words().TASKBOARD.MODAL_TAG_COLOR_ORANGE }}</option>
+                        <option value="#805ad5" [attr.aria-label]="langService.words().TASKBOARD.MODAL_TAG_COLOR_PURPLE">🟣 {{ langService.words().TASKBOARD.MODAL_TAG_COLOR_PURPLE }}</option>
                     </select>
                 </div>
 
                 <div class="modal-btn-actions-row">
-                    <button type="button" class="cancel-btn" (click)="closeCategoryModal()" aria-label="Dismiss workspace tag creation layout form">Cancel</button>
-                    <button type="submit" class="submit-btn" [disabled]="!newCategoryName || newCategoryName.trim() === '' || newCategoryName.trim().length === 0" aria-label="Confirm designation to create workspace classification tag">Create Tag</button>
+                    <button type="button" class="cancel-btn" (click)="closeCategoryModal()" [attr.aria-label]="langService.words().TASKBOARD.MODAL_TAG_CANCEL_ARIA" [innerHTML]="langService.words().TASKBOARD.MODAL_TAG_CANCEL_BTN"></button>
+                    <button type="submit" class="submit-btn" [disabled]="!newCategoryName || newCategoryName.trim() === '' || newCategoryName.trim().length === 0" [attr.aria-label]="langService.words().TASKBOARD.MODAL_TAG_SUBMIT_ARIA" [innerHTML]="langService.words().TASKBOARD.MODAL_TAG_SUBMIT_BTN"></button>
                 </div>
             </form>
         </div>   

@@ -7,6 +7,7 @@ import { ProjectService } from "../Services/project.service";
 import { AuthService } from "../Services/auth.service";
 import { CategoryService } from "../Services/category.service";
 import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
+import { LanguageService } from "../i18n/language.service";
 
 @Component({
     selector: 'app-task-board',
@@ -85,6 +86,8 @@ export class TaskBoardComponent implements OnInit {
     @ViewChild('tagModalHeader') tagModalHeader!: ElementRef<HTMLHeadingElement>;
     @ViewChild('createTaskBtn') createTaskBtn!: ElementRef<HTMLButtonElement>
     @ViewChild('createTagBtn') createTagBtn!: ElementRef<HTMLButtonElement>
+
+    constructor(public langService: LanguageService) {}
     
     ngOnInit(): void {
         // Read the dynamic route context param parameter safely
@@ -586,5 +589,16 @@ export class TaskBoardComponent implements OnInit {
 
         // Force a structural paint pass to snap the counters into perfect alignment
         this.cdr.detectChanges();
+    }
+
+    // Trigger method for when changing languages
+    onLanguageChangeEngineTrigger(newLang: string): void {
+        this.langService.setLanguage(newLang);
+    }
+
+    // Method to dynamically replace our dictionary tokens to include a value!
+    formatLabel(template: string, value: string | number): string {
+        // "/\{[a-zA-Z0-9_]+\}/" Basically means "anything" :p
+        return template.replace(/\{[a-zA-Z0-9_]+\}/, value.toString());
     }
 }

@@ -1,50 +1,50 @@
 <div class="register-wrapper"
      role="main"
-     [attr.aria-label]="langService.words().REG_PORTAL_ARIA">
+     [attr.aria-label]="langService.words().REGISTER.PORTAL_ARIA">
     
     <div class="register-card">
-        <h2 id="registerHeader" [innerHTML]="langService.words().REG_HEADER_TITLE"></h2>
-        <p class="subtitle" [innerHTML]="langService.words().REG_SUBTITLE_JOIN"></p>
+        <h2 id="registerHeader" [innerHTML]="langService.words().REGISTER.HEADER_TITLE"></h2>
+        <p class="subtitle" [innerHTML]="langService.words().REGISTER.SUBTITLE_JOIN"></p>
         
         <!-- aria-labelledby provides instant spatial context to the screen reader user -->
          <form (ngSubmit)="onRegister()" #registerForm="ngForm" aria-labelledby="registerHeader">
 
             <!-- 👤 Username Input Group -->
              <div class="form-group">
-                <label for="username" [innerHTML]="langService.words().REG_LABEL_USERNAME"></label>
+                <label for="username" [innerHTML]="langService.words().REGISTER.LABEL_USERNAME"></label>
                 <input id="username" 
                        type="text" 
                        name="username" 
                        [(ngModel)]="registerData.Username" 
                        required 
-                       [placeholder]="langService.words().REG_PLACEHOLDER_USERNAME"
+                       [placeholder]="langService.words().REGISTER.PLACEHOLDER_USERNAME"
                        aria-required="true"
                        autofocus />
              </div>
 
             <!-- 📧 Email Input Group -->
              <div class="form-group">
-                <label for="email" [innerHTML]="langService.words().LOGIN_FIELD_EMAIL"></label>
+                <label for="email" [innerHTML]="langService.words().GLOBAL.FIELD_EMAIL"></label>
                 <input id="email" 
                        type="email" 
                        name="email"
                        [(ngModel)]="registerData.Email" 
                        required 
                        email 
-                       [placeholder]="langService.words().LOGIN_PLACEHOLDER_EMAIL"
+                       [placeholder]="langService.words().GLOBAL.PLACEHOLDER_EMAIL"
                        aria-required="true" />
              </div>
 
             <!-- 🔒 Password Selection Input Group -->
              <div class="form-group">
-                <label for="password" [innerHTML]="langService.words().LOGIN_FIELD_PASSWORD"></label>
+                <label for="password" [innerHTML]="langService.words().GLOBAL.FIELD_PASSWORD"></label>
                 <div class="password-input-wrapper">
                     <input id="password" 
                            [type]="showPassword ? 'text' : 'password'" 
                            name="password" 
                            [(ngModel)]="registerData.Password" 
                            required 
-                           [placeholder]="langService.words().REG_PLACEHOLDER_PASSWORD" 
+                           [placeholder]="langService.words().REGISTER.PLACEHOLDER_PASSWORD" 
                            aria-required="true"
                            aria-describedby="registerPasswordRequirements" />
                         
@@ -52,7 +52,7 @@
                      <button type="button" 
                             class="eye-toggle-btn" 
                             (click)="showPassword = !showPassword"
-                            [attr.aria-label]="showPassword ? langService.words().SHOW_PASS_ARIA : langService.words().HIDE_PASS_ARIA"
+                            [attr.aria-label]="showPassword ? langService.words().GLOBAL.SHOW_PASS_ARIA : langService.words().GLOBAL.HIDE_PASS_ARIA"
                             [attr.aria-pressed]="showPassword">
 
                         <span aria-hidden="true">{{ showPassword ? '👁️' : '👁️‍🗨️' }}</span>
@@ -62,14 +62,14 @@
 
             <!-- 🔒 Password Confirmation Input Group -->
              <div class="form-group">
-                <label for="confirmPassword" [innerHTML]="langService.words().REG_LABEL_CONFIRM_PASSWORD"></label>
+                <label for="confirmPassword" [innerHTML]="langService.words().REGISTER.LABEL_CONFIRM_PASSWORD"></label>
                 <div class="password-input-wrapper">
                     <input id="confirmPassword" 
                            [type]="showConfirmPassword ? 'text' : 'password'" 
                            name="confirmPassword" 
                            [(ngModel)]="confirmPassword" 
                            required 
-                           [placeholder]="langService.words().REG_PLACEHOLDER_CONFIRM_PASSWORD"
+                           [placeholder]="langService.words().REGISTER.PLACEHOLDER_CONFIRM_PASSWORD"
                            aria-required="true"
                            [attr.aria-invalid]="registerData.Password !== confirmPassword" />
                     
@@ -77,7 +77,7 @@
                      <button type="button" 
                             class="eye-toggle-btn" 
                             (click)="showConfirmPassword = !showConfirmPassword"
-                            [attr.aria-label]="showConfirmPassword ? langService.words().SHOW_CONFIRM_ARIA : langService.words().HIDE_CONFIRM_ARIA"
+                            [attr.aria-label]="showConfirmPassword ? langService.words().GLOBAL.SHOW_CONFIRM_ARIA : langService.words().GLOBAL.HIDE_CONFIRM_ARIA"
                             [attr.aria-pressed]="showConfirmPassword">
 
                         <span aria-hidden="true">{{ showConfirmPassword ? '👁️' : '👁️‍🗨️' }}</span>
@@ -86,24 +86,24 @@
              </div>
 
             <!-- 💡 Hidden layout helper text linked to inputs -->
-             <span id="registerPasswordRequirements" style="display: none;" [innerHTML]="langService.words().REG_REQUIREMENTS_ARIA"></span>
+             <span id="registerPasswordRequirements" style="display: none;" [innerHTML]="langService.words().REGISTER.REQUIREMENTS_ARIA"></span>
 
             <!-- 🏁 Submission Hub -->
              <button type="submit" 
                     class="submit-btn register-btn" 
                     [disabled]="!registerForm.form.valid"
-                    [attr.aria-label]="langService.words().REG_BTN_SUBMIT_ARIA"
-                    [innerHTML]="langService.words().REG_BTN_SUBMIT_TEXT"></button>
+                    [attr.aria-label]="langService.words().REGISTER.BTN_SUBMIT_ARIA"
+                    [innerHTML]="langService.words().REGISTER.BTN_SUBMIT_TEXT"></button>
          </form>
 
         <!-- 🗺️ Footnote Navigation Links -->
          <div class="register-footer" 
               role="navigation" 
-              [attr.aria-label]="langService.words().LOGIN_FOOTER_NAV_ARIA">
+              [attr.aria-label]="langService.words().GLOBAL.FOOTER_NAV_ARIA">
               
             <p>
-               <span [innerHTML]="langService.words().REG_FOOTER_TEXT"></span>
-               <a [routerLink]="['/login']" class="login-link" [innerHTML]="langService.words().REG_FOOTER_LINK"></a>
+               <span [innerHTML]="langService.words().REGISTER.FOOTER_TEXT"></span>
+               <a [routerLink]="['/login']" class="login-link" [innerHTML]="langService.words().REGISTER.FOOTER_LINK"></a>
             </p>
          </div>
     </div>

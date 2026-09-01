@@ -1,0 +1,322 @@
+import { LocalePack } from './locale-pack.interface';
+
+export const RussianPack: LocalePack = {
+    GLOBAL: {
+        BACK_BTN_TEXT: "← Назад к рабочей области",
+        BACK_BTN_ARIA: "Вернуться на главную панель задач",
+
+        // Email & Password Fields
+        FIELD_EMAIL: "Адрес электронной почты",
+        PLACEHOLDER_EMAIL: "введите ваш email...",
+        FIELD_PASSWORD: "Пароль",
+        PLACEHOLDER_PASSWORD: "введите пароль...",
+
+        // Footer Navigation Links
+        FOOTER_NAV_ARIA: "Альтернативная ссылка для входа",
+        FOOTER_TEXT: "Впервые в рабочей области? ",
+        FOOTER_LINK: "Создать новый аккаунт",
+
+        // Eye Toggle Accessibility Script Targets
+        SHOW_PASS_ARIA: "Показать скрытый пароль",
+        HIDE_PASS_ARIA: "Скрыть читаемый пароль",
+        SHOW_CONFIRM_ARIA: "Показать скрытый пароль подтверждения",
+        HIDE_CONFIRM_ARIA: "Скрыть читаемый пароль подтверждения",
+        
+        // Language Selection Configuration
+        LANGUAGE_SELECTION_TITLE: "Язык приложения:",
+        LANGUAGE_SELECTION_ARIA: "Выпадающий список выбора языка интерфейса",
+        LANGUAGE_OPTION_EN_US: "English (Английский)",
+        LANGUAGE_OPTION_JP: "日本語 (Японский)",
+        LANGUAGE_OPTION_RU: "Русский (Российский)"
+    },
+
+    PROFILE: {
+        // Navigation / Headers
+        ARIA_MAIN: "Настройки профиля пользователя",
+        IDENTITY_TITLE: "Ваш рабочий профиль",
+
+        // States
+        SYNCING_CREDENTIALS: "Синхронизация учетных данных с облаком...",
+        
+        // =========================================================================
+        // SECTION 1: CORE ACCOUNT DETAILS
+        // =========================================================================
+        CORE_ACCOUNT_ARIA: "Основные данные учетной записи",
+        SECURITY_LEVEL_LABEL: "Уровень доступа:",
+        REGISTERED_EMAIL_LABEL: "Зарегистрированный Email:",
+        DATABASE_RECORD_LABEL: "Идентификатор записи базы данных:",
+        
+        // =========================================================================
+        // SECTION 2: SYSTEM ACTION METRICS
+        // =========================================================================
+        SYSTEM_METRICS_TITLE: "Метрики системных действий",
+        ASSIGNED_ITEMS_LABEL: "Назначенные рабочие элементы",
+        ASSIGNED_ITEMS_ARIA: "В настоящее время отслеживается задач в рабочей области: {value}.",
+        COMPLETED_TASKS_LABEL: "Выполненные задачи",
+        COMPLETED_TASKS_ARIA: "Успешно завершено и отправлено в архив задач проекта: {value}.",
+        
+        // =========================================================================
+        // SECTION 3: WORKSPACE PREFERENCES CARD
+        // =========================================================================
+        WORKSPACE_TITLE: "Настройки рабочей среды",
+        THEME_LABEL: "Визуальная тема приложения:",
+
+        // Theme Selector Options
+        THEME_OPTION_LIGHT: "☀️ Профессиональный светлый режим",
+        THEME_OPTION_DARK: "🌙 Темный холст рабочей области",
+        THEME_OPTION_AMBER: "💽 Винтажный янтарный ЭЛТ-терминал",
+        THEME_OPTION_MATRIX: "📟 Винтажный зеленый ЭЛТ-терминал",
+        THEME_OPTION_HC_BLACK: "🌓 Высокая контрастность (Черная)",
+        THEME_OPTION_HC_WHITE: "⬜️ Высокая контрастность (Белая)",
+        THEME_OPTION_HC_BEIGE: "🏜️ Высокая контрастность (Бежевая пустыня)",
+        THEME_OPTION_WIN98: "💾 Ретро Windows 95/98",
+        THEME_OPTION_WINXP: "💿 Ностальгическая Windows XP (Luna Blue)",
+        THEME_OPTION_VISTA: "📀 Классическая Windows Vista",
+        THEME_OPTION_WIN7: "🫧 Классическая Windows 7",
+        THEME_OPTION_AERO: "🍃 Frutiger Aero (Эко-Кибер)",
+        THEME_OPTION_BA: "🔮 Рабочая область Шале (Blue Archive)",
+
+        // Typography Interface Config
+        FONT_LABEL: "Стиль шрифта:",
+        FONT_ARIA: "Выпадающий список выбора шрифта интерфейса",
+        FONT_DESCRIPTION: "Изменяет шрифт отображения текста по умолчанию в рабочей области",
+        FONT_OPTION_DEFAULT: "По умолчанию",
+        FONT_OPTION_LEGI: "🧼 Шрифт высокой читаемости",
+        FONT_OPTION_DYS: "📖 Удобный для чтения (при дислексии)",
+
+        // Deficiency Matrix Elements
+        COLORBLIND_LABEL: "Цветовой фильтр:",
+        COLORBLIND_ARIA: "Выпадающий список выбора фильтра цветокоррекции",
+        COLORBLIND_OPTION_NONE: "Нет",
+        COLORBLIND_OPTION_DEU: "Дейтеранопия (проблемы с зеленым)",
+        COLORBLIND_OPTION_PRO: "Протанопия (проблемы с красным)",
+        COLORBLIND_OPTION_TRI: "Тританопия (проблемы с синим)",
+        COLORBLIND_OPTION_GRA: "Оттенки серого (Монохромный)",
+        
+        // =========================================================================
+        // SECTION 4: ACCOUNT MANAGEMENT FORM
+        // =========================================================================
+        ACCOUNT_SETTINGS_TITLE: "Управление учетной записью",
+        UPDATE_USER_LABEL: "Обновить имя пользователя",
+        UPDATE_USER_PLACEHOLDER: "Введите новое имя пользователя...",
+        CHANGE_PASS_LABEL: "Изменить пароль безопасности",
+        CHANGE_PASS_PLACEHOLDER: "Введите новый пароль...",
+        CONFIRM_PASS_LABEL: "Подтвердите новый пароль",
+        CONFIRM_PASS_PLACEHOLDER: "Повторите новый пароль...",
+        PASS_REQUIREMENTS_ARIA: "Пароли должны совпадать перед безопасным сохранением изменений.",
+        SAVE_CHANGES_BTN: "Сохранить изменения профиля",
+
+        // Destructive Actions Area (Danger Zone)
+        DANGER_ZONE_TITLE: "Опасная зона",
+        DANGER_ZONE_WARN: "Удаление учетной записи полностью очистит ваш рабочий профиль!<br>Это действие необратимо.",
+        DANGER_ZONE_BTN: "Безвозвратно удалить аккаунт"
+    },
+
+    LOGIN: {
+        PORTAL_ARIA: "Портал аутентификации аккаунта",
+        HEADER_WELCOME_BACK: "С возвращением",
+        HEADER_FIRST_TIME: "Добро пожаловать в Менеджер Задач",
+        SUBTITLE_MANAGE: "Войдите в систему для управления проектами и задачами",
+        CHECKBOX_REMEMBER: "Запомнить меня",
+        BTN_SIGNIN_ARIA: "Безопасный вход в рабочую область",
+        BTN_SIGNIN_TEXT: "Войти"
+    },
+
+    REGISTER: {
+        PORTAL_ARIA: "Портал создания учетной записи",
+        HEADER_TITLE: "Создать рабочий аккаунт",
+        SUBTITLE_JOIN: "Присоединяйтесь к платформе управления проектами!",
+        LABEL_USERNAME: "Имя пользователя",
+        PLACEHOLDER_USERNAME: "Выберите уникальное отображаемое имя...",
+        PLACEHOLDER_PASSWORD: "Создайте надежный пароль...",
+        LABEL_CONFIRM_PASSWORD: "Подтверждение пароля",
+        PLACEHOLDER_CONFIRM_PASSWORD: "Введите пароль еще раз...",
+        REQUIREMENTS_ARIA: "Оба поля пароля должны точно совпадать перед отправкой запроса на регистрацию.",
+        BTN_SUBMIT_TEXT: "Зарегистрироваться",
+        BTN_SUBMIT_ARIA: "Отправить учетные данные для регистрации нового аккаунта",
+        FOOTER_TEXT: "Уже есть аккаунт? ",
+        FOOTER_LINK: "Вернуться ко входу"
+    },
+
+    DASHBOARD: {
+        MAIN_CANVAS_LABEL: "Основная панель управления проектами",
+        MAIN_HEADER: "Рабочая область Менеджера Задач",
+        NAV_ARIA: "Быстрые ссылки навигации по аккаунту",
+        PROFILE_BTN: "Профиль пользователя",
+        LOGOUT_ARIA: "Безопасный выход из текущей рабочей сессии",
+        LOGOUT_BTN: "Выйти",
+        CREATE_PROJECT_HEADER: "Создать новый проект",
+        PROJECT_TITLE_LABEL: "Название проекта",
+        PROJECT_TITLE_PLACEHOLDER: "напр., Обновление веб-сайта",
+        DESCRIPTION_LABEL: "Описание",
+        DESCRIPTION_PLACEHOLDER: "Опишите цель проекта...",
+        CREATE_BTN_ARIA: "Отправить форму для создания нового пространства проекта",
+        CREATE_BTN_TEXT: "Создать проект",
+        YOUR_PROJECTS_HEADER: "Ваши проекты",
+        EMPTY_MESSAGE: "Проекты не найдены. Создайте новый проект, чтобы начать работу!",
+
+        // Dynamic localization functions to ensure perfect sentence structures across all languages
+        PROJECT_CARD_ARIA: "Пространство проекта: {value}",
+        DELETE_PROJECT_ARIA: "Безвозвратно удалить проект: {value}",
+        NO_DESCRIPTION_FALLBACK: "Описание отсутствует.",
+        OPEN_BOARD_TEXT: "Открыть доску проекта",
+        OPEN_BOARD_ARIA: "Открыть доску задач для проекта: {value}"
+    },
+
+    TASKBOARD: {
+        // Header / Navigation & Modal Buttons
+        MAIN_CANVAS_ARIA: "Доска задач проекта: {value}",
+        HEADER_TITLE: "Доска проекта ({value})",
+        HEADER_ABANDON_TEXT: "Покинуть пространство",
+        HEADER_ABANDON_ARIA: "Полностью покинуть это рабочее пространство проекта",
+        HEADER_CREATE_TAG_TEXT: "Создать тег пространства",
+        HEADER_CREATE_TAG_ARIA: "Открыть модальное окно для создания нового тега рабочей области",
+        HEADER_CREATE_TASK_TEXT: "Добавить задачу",
+        HEADER_CREATE_TASK_ARIA: "Открыть модальное окно для добавления новой задачи",
+
+        // Task Crew & Invitation
+        CREW_PANEL_HEADER: "Рабочая область управления командой и тегами проекта",
+        INVITE_FORM_ARIA: "Пригласить нового участника команды в это пространство",
+        INVITE_PLACEHOLDER: "Введите зарегистрированный email участника...",
+        INVITE_INPUT_ARIA: "Поле ввода адреса электронной почты участника",
+        INVITE_ROLE_ARIA: "Назначенный уровень административного доступа к проекту",
+        INVITE_OPTION_MEMBER: "Обычный участник",
+        INVITE_OPTION_OWNER: "Совладелец / Админ",
+        INVITE_SUBMIT_ARIA: "Отправить запрос на добавление участника",
+        INVITE_SUBMIT_BTN: "Добавить участника",
+        ROSTER_HEADER: "Текущий состав команды",
+        ROSTER_BADGE_ARIA: "Назначенная роль: {value}",
+        ROSTER_REMOVE_ARIA: "Удалить пользователя {value} из команды проекта",
+
+        // Tags/Categories
+        TAGS_HEADER: "Доступные теги проекта",
+        TAGS_FALLBACK: "Для этого проекта еще не создано ни одного тега",
+        TAGS_PILL_ARIA: "Тег: {value1} с {value2} назначенными элементами", // Unified formatting parameters
+        TAG_DELETE_ARIA: "Безвозвратно удалить тег проекта: {value}",
+
+        // Filters & Progress Bar
+        SEARCH_FILTER_HUB_ARIA: "Центр фильтрации задач на доске",
+        SEARCH_PLACEHOLDER: "Поиск задач по названию...",
+        SEARCH_ARIA: "Фильтрация задач по ключевому слову в названии",
+        PRIORITY_ARIA: "Фильтрация задач по назначенному уровню приоритета",
+        PRIORITY_ALL: "Все приоритеты",
+        PRIORITY_HIGH: "Высокий приоритет",
+        PRIORITY_MEDIUM: "Средний приоритет",
+        PRIORITY_LOW: "Низкий приоритет",
+        CATEGORY_ARIA: "Фильтрация задач по активному тегу категории",
+        CATEGORY_ALL: "Все теги",
+        CATEGORY_UNASSIGNED: "Незанятые задачи",
+        PROGRESS_LABEL: "Прогресс выполнения проекта:",
+        PROGRESS_ARIA: "Общий трекер выполнения проекта. В настоящее время выполнено на {value} процентов.", // Unified layout placeholder
+
+        // Mobile Column Selector
+        MOBILE_TABS_ARIA: "Переключение колонок доски на мобильных устройствах",
+        MOBILE_TAB_PENDING_TEXT: "В ожидании",
+        MOBILE_TAB_PENDING_ARIA: "Показать колонку задач в ожидании",
+        MOBILE_TAB_PROGRESS_TEXT: "В работе и ревью",
+        MOBILE_TAB_PROGRESS_ARIA: "Показать колонку задач в работе и на проверке",
+        MOBILE_TAB_COMPLETED_TEXT: "Завершено",
+        MOBILE_TAB_COMPLETED_ARIA: "Показать колонку завершенных задач",
+
+        // =========================================================================
+        // Pending Column (В ожидании)
+        // =========================================================================
+        COLUMN_PENDING_TITLE: "В ожидании ({value})",
+        LANE_PENDING_ARIA: "Дорожка отслеживания задач в ожидании. Содержит элементов: {value}.",
+        TASK_CARD_ARIA: "Карточка задачи: {value}",
+        TASK_CATEGORY_ARIA: "Назначенный тег категории: {value}",
+        TASK_DELETE_ARIA: "Удалить карточку задачи: {value}",
+        TASK_DESCRIPTION_FALLBACK: "Описание отсутствует.",
+        
+        // Task Assignee
+        TASK_ASSIGNEE_LABEL: "Исполнитель:",
+        TASK_ASSIGNEE_ARIA: "Назначить сотрудника на задачу {value}",
+        TASK_ASSIGNEE_UNASSIGNED: "Не назначено",
+        
+        // Task Tag/Category
+        TASK_CATEGORY_LABEL: "Категория:",
+        TASK_CATEGORY_ARIA_ASSIGN: "Назначить классификационный тег для задачи {value}",
+        TASK_CATEGORY_NONE: "Без категории",
+
+        // Task Priority
+        TASK_PRIORITY_ARIA: "Уровень приоритета: {value}",
+        TASK_PRIORITY_HIGH: "Высокий",
+        TASK_PRIORITY_MEDIUM: "Средний",
+        TASK_PRIORITY_LOW: "Низкий",
+        TASK_DEADLINE_ARIA: "Календарная дата дедлайна задачи: {value}",
+
+        // Start Button
+        TASK_ACTION_START_TEXT: "Начать →",
+        TASK_ACTION_START_ARIA: "Начать выполнение задачи: {value}. Перемещает карточку в колонку задач в работе.",
+    
+        // =========================================================================
+        // In-Progress & Review Column (В работе и ревью)
+        // =========================================================================
+        COLUMN_INPROGRESS_TITLE: "В работе и ревью ({value})",
+        LANE_INPROGRESS_ARIA: "Дорожка отслеживания задач в работе и на проверке. Содержит элементов: {value}.",
+        TASK_CARD_STATUS_ARIA: "Карточка задачи: {value1}. Текущий статус: {value2}",
+        REVIEW_BANNER_TEXT: "Ожидает проверки PM",
+        REVIEW_BANNER_ARIA: "Внимание: {value} ожидает проверочного обзора менеджером проекта.",
+
+        // Related Buttons
+        BTN_BACK_TEXT: "← Назад",
+        BTN_BACK_ARIA: "Переместить {value} назад в колонку ожидания",
+        BTN_SUBMIT_REVIEW_TEXT: "На проверку →",
+        BTN_SUBMIT_REVIEW_ARIA: "Отправить {value} на проверку менеджеру проекта",
+        BTN_CANCEL_REVIEW_TEXT: "← Отменить запрос",
+        BTN_CANCEL_REVIEW_ARIA: "Отменить запрос на проверку и вернуть {value} в работу",
+        BTN_REJECT_TEXT: "Отклонить",
+        BTN_REJECT_ARIA: "Отклонить запрос на проверку и вернуть {value} в процесс работы",
+        BTN_APPROVE_TEXT: "Одобрить задачу",
+        BTN_APPROVE_ARIA: "Одобрить проверку и перевести {value} в колонку завершенных",
+
+        // =========================================================================
+        // Completed Column (Завершено)
+        // =========================================================================
+        COLUMN_COMPLETED_TITLE: "Завершено ({value})",
+        LANE_COMPLETED_ARIA: "Архивная дорожка завершенных задач. Содержит готовых элементов: {value}.",
+        TASK_CARD_COMPLETED_ARIA: "Карточка завершенной задачи: {value}",
+        BADGE_DONE_TEXT: "Готово",
+        BADGE_DONE_ARIA: "Состояние задачи: Выполнено",
+        FINISHED_ASSIGNEE_ARIA: "Назначенный сотрудник для завершенной задачи {value}",
+        FINISHED_CATEGORY_ARIA: "Классификационная категория для завершенной задачи {value}",
+        FINISHED_PRIORITY_ARIA: "Исходный уровень приоритета: {value}",
+        
+        // Related Button
+        REOPEN_TEXT: "← Переоткрыть",
+        REOPEN_ARIA: "Переоткрыть задачу {value}. Возвращает карточку обратно в колонку задач в работе.",
+
+        // Create a new Task Modal
+        MODAL_TASK_HEADER: "Создание спецификации новой задачи",
+        MODAL_TASK_TITLE_LABEL: "Название задачи *",
+        MODAL_TASK_TITLE_PLACEHOLDER: "напр., Проектирование схемы БД",
+        MODAL_TASK_DESC_LABEL: "Описание",
+        MODAL_TASK_DESC_PLACEHOLDER: "Укажите практические детали...",
+        MODAL_TASK_PRIORITY_LABEL: "Уровень приоритета",
+        MODAL_TASK_DEADLINE_LABEL: "Срок выполнения",
+        MODAL_TASK_DEADLINE_KEYBOARD_ARIA: "Примечание для клавиатуры: Нажмите Tab или Escape, чтобы выйти из календаря.",
+        MODAL_TASK_DEADLINE_INPUT_ARIA: "Установленная календарная дата завершения.",
+        MODAL_TASK_CANCEL_BTN: "Отмена",
+        MODAL_TASK_CANCEL_ARIA: "Закрыть форму добавления спецификации задачи",
+        MODAL_TASK_SUBMIT_BTN: "Создать задачу",
+        MODAL_TASK_SUBMIT_ARIA: "Подтвердить модели данных для создания новой задачи",
+    
+        // Create a new Tag/Category Modal
+        MODAL_TAG_HEADER: "Создать новый тег пространства",
+        MODAL_TAG_NAME_LABEL: "Название тега:",
+        MODAL_TAG_NAME_PLACEHOLDER: "напр., Фронтенд, Тестирование, Баг...",
+        MODAL_TAG_COLOR_LABEL: "Цветовая тема тега:",
+        MODAL_TAG_COLOR_ARIA: "Выберите профиль визуального отслеживания цвета фона значка категории",
+
+        MODAL_TAG_COLOR_RED: "Малиново-красный (Высокий контраст)",
+        MODAL_TAG_COLOR_BLUE: "Ярко-синий (Высокий контраст)",
+        MODAL_TAG_COLOR_GREEN: "Лесной зеленый (Высокий контраст)",
+        MODAL_TAG_COLOR_ORANGE: "Насыщенный оранжевый (Высокий контраст)",
+        MODAL_TAG_COLOR_PURPLE: "Королевский пурпурный (Высокий контраст)",
+
+        MODAL_TAG_CANCEL_BTN: "Отмена",
+        MODAL_TAG_CANCEL_ARIA: "Закрыть форму создания тега рабочей области",
+        MODAL_TAG_SUBMIT_BTN: "Создать тег",
+        MODAL_TAG_SUBMIT_ARIA: "Подтвердить назначение для создания классификационного тега пространства"
+    }
+};
