@@ -21,7 +21,8 @@ export const RussianPack: LocalePack = {
         HIDE_CONFIRM_ARIA: "Скрыть читаемый пароль подтверждения",
         
         // Language Selection Configuration
-        LANGUAGE_SELECTION_TITLE: "Язык приложения:",
+        LANGUAGE_SELECTION_TITLE_TEXT: "Язык приложения:",
+        LANGUAGE_SELECTION_TITLE_ARIA: "Язык приложения:",
         LANGUAGE_SELECTION_ARIA: "Выпадающий список выбора языка интерфейса",
         LANGUAGE_OPTION_EN_US: "English (Английский)",
         LANGUAGE_OPTION_JP: "日本語 (Японский)",
@@ -31,23 +32,28 @@ export const RussianPack: LocalePack = {
     PROFILE: {
         // Navigation / Headers
         ARIA_MAIN: "Настройки профиля пользователя",
-        IDENTITY_TITLE: "Ваш рабочий профиль",
+        IDENTITY_TITLE_TEXT: "Ваш рабочий профиль",
+        IDENTITY_TITLE_ARIA: "Ваш рабочий профиль",
 
         // States
-        SYNCING_CREDENTIALS: "Синхронизация учетных данных с облаком...",
+        SYNCING_CREDENTIALS_TEXT: "Синхронизация учетных данных с облаком...",
+        SYNCING_CREDENTIALS_ARIA: "Синхронизация учетных данных с облаком...",
         
         // =========================================================================
         // SECTION 1: CORE ACCOUNT DETAILS
         // =========================================================================
         CORE_ACCOUNT_ARIA: "Основные данные учетной записи",
-        SECURITY_LEVEL_LABEL: "Уровень доступа:",
+        SECURITY_LEVEL_LABEL_TEXT: "Уровень доступа:",
+        SECURITY_LEVEL_LABEL_ARIA: "Уровень доступа:",
         REGISTERED_EMAIL_LABEL: "Зарегистрированный Email:",
-        DATABASE_RECORD_LABEL: "Идентификатор записи базы данных:",
+        DATABASE_RECORD_LABEL_TEXT: "Идентификатор записи базы данных:",
+        DATABASE_RECORD_LABEL_ARIA: "Идентификатор записи базы данных:",
         
         // =========================================================================
         // SECTION 2: SYSTEM ACTION METRICS
         // =========================================================================
-        SYSTEM_METRICS_TITLE: "Метрики системных действий",
+        SYSTEM_METRICS_TITLE_TEXT: "Метрики системных действий",
+        SYSTEM_METRICS_TITLE_ARIA: "Метрики системных действий",
         ASSIGNED_ITEMS_LABEL: "Назначенные рабочие элементы",
         ASSIGNED_ITEMS_ARIA: "В настоящее время отслеживается задач в рабочей области: {value}.",
         COMPLETED_TASKS_LABEL: "Выполненные задачи",
@@ -56,8 +62,10 @@ export const RussianPack: LocalePack = {
         // =========================================================================
         // SECTION 3: WORKSPACE PREFERENCES CARD
         // =========================================================================
-        WORKSPACE_TITLE: "Настройки рабочей среды",
+        WORKSPACE_TITLE_TEXT: "Настройки рабочей среды",
+        WORKSPACE_TITLE_ARIA: "Настройки рабочей среды",
         THEME_LABEL: "Визуальная тема приложения:",
+        THEME_ARIA: "Визуальная тема приложения:",
 
         // Theme Selector Options
         THEME_OPTION_LIGHT: "☀️ Профессиональный светлый режим",
@@ -94,48 +102,67 @@ export const RussianPack: LocalePack = {
         // =========================================================================
         // SECTION 4: ACCOUNT MANAGEMENT FORM
         // =========================================================================
-        ACCOUNT_SETTINGS_TITLE: "Управление учетной записью",
+        ACCOUNT_SETTINGS_TITLE_TEXT: "Управление учетной записью",
+        ACCOUNT_SETTINGS_TITLE_ARIA: "Управление учетной записью",
         UPDATE_USER_LABEL: "Обновить имя пользователя",
+        UPDATE_USER_ARIA: "Обновить имя пользователя",
         UPDATE_USER_PLACEHOLDER: "Введите новое имя пользователя...",
         CHANGE_PASS_LABEL: "Изменить пароль безопасности",
+        CHANGE_PASS_ARIA: "Изменить пароль безопасности",
         CHANGE_PASS_PLACEHOLDER: "Введите новый пароль...",
         CONFIRM_PASS_LABEL: "Подтвердите новый пароль",
+        CONFIRM_PASS_ARIA: "Подтвердите новый пароль",
         CONFIRM_PASS_PLACEHOLDER: "Повторите новый пароль...",
         PASS_REQUIREMENTS_ARIA: "Пароли должны совпадать перед безопасным сохранением изменений.",
-        SAVE_CHANGES_BTN: "Сохранить изменения профиля",
+        SAVE_CHANGES_BTN_TEXT: "Сохранить изменения профиля",
+        SAVE_CHANGES_BTN_ARIA: "Сохранить изменения профиля",
 
         // Destructive Actions Area (Danger Zone)
-        DANGER_ZONE_TITLE: "Опасная зона",
-        DANGER_ZONE_WARN: "Удаление учетной записи полностью очистит ваш рабочий профиль!<br>Это действие необратимо.",
-        DANGER_ZONE_BTN: "Безвозвратно удалить аккаунт"
+        DANGER_ZONE_TITLE_TEXT: "Опасная зона",
+        DANGER_ZONE_TITLE_ARIA: "Опасная зона",
+        DANGER_ZONE_WARN_TEXT: "Удаление учетной записи полностью очистит ваш рабочий профиль!<br>Это действие необратимо.",
+        DANGER_ZONE_WARN_ARIA: "Удаление учетной записи полностью очистит ваш рабочий профиль!<br>Это действие необратимо.",
+        DANGER_ZONE_BTN_TEXT: "Безвозвратно удалить аккаунт",
+        DANGER_ZONE_BTN_ARIA: "Безвозвратно удалить аккаунт"
     },
 
     LOGIN: {
         PORTAL_ARIA: "Портал аутентификации аккаунта",
-        HEADER_WELCOME_BACK: "С возвращением",
+        HEADER_WELCOME_BACK_TEXT: "С возвращением",
+        HEADER_WELCOME_BACK_ARIA: "С возвращением",
         HEADER_FIRST_TIME: "Добро пожаловать в Менеджер Задач",
-        SUBTITLE_MANAGE: "Войдите в систему для управления проектами и задачами",
-        CHECKBOX_REMEMBER: "Запомнить меня",
+        SUBTITLE_MANAGE_TEXT: "Войдите в систему для управления проектами и задачами",
+        SUBTITLE_MANAGE_ARIA: "Войдите в систему для управления проектами и задачами",
+        CHECKBOX_REMEMBER_TEXT: "Запомнить меня",
+        CHECKBOX_REMEMBER_ARIA: "Запомнить меня",
         BTN_SIGNIN_ARIA: "Безопасный вход в рабочую область",
         BTN_SIGNIN_TEXT: "Войти",
         FOOTER_TEXT: "Впервые в рабочей области? ",
-        FOOTER_LINK: "Создать новый аккаунт"
+        FOOTER_ARIA: "Впервые в рабочей области? ",
+        FOOTER_LINK_TEXT: "Создать новый аккаунт",
+        FOOTER_LINK_ARIA: "Создать новый аккаунт"
     },
 
     REGISTER: {
         PORTAL_ARIA: "Портал создания учетной записи",
-        HEADER_TITLE: "Создать рабочий аккаунт",
-        SUBTITLE_JOIN: "Присоединяйтесь к платформе управления проектами!",
-        LABEL_USERNAME: "Имя пользователя",
+        HEADER_TITLE_TEXT: "Создать рабочий аккаунт",
+        HEADER_TITLE_ARIA: "Создать рабочий аккаунт",
+        SUBTITLE_JOIN_TEXT: "Присоединяйтесь к платформе управления проектами!",
+        SUBTITLE_JOIN_ARIA: "Присоединяйтесь к платформе управления проектами!",
+        LABEL_USERNAME_TEXT: "Имя пользователя",
+        LABEL_USERNAME_ARIA: "Имя пользователя",
         PLACEHOLDER_USERNAME: "Выберите уникальное отображаемое имя...",
         PLACEHOLDER_PASSWORD: "Создайте надежный пароль...",
-        LABEL_CONFIRM_PASSWORD: "Подтверждение пароля",
+        LABEL_CONFIRM_PASSWORD_TEXT: "Подтверждение пароля",
+        LABEL_CONFIRM_PASSWORD_ARIA: "Подтверждение пароля",
         PLACEHOLDER_CONFIRM_PASSWORD: "Введите пароль еще раз...",
         REQUIREMENTS_ARIA: "Оба поля пароля должны точно совпадать перед отправкой запроса на регистрацию.",
         BTN_SUBMIT_TEXT: "Зарегистрироваться",
         BTN_SUBMIT_ARIA: "Отправить учетные данные для регистрации нового аккаунта",
         FOOTER_TEXT: "Уже есть аккаунт? ",
-        FOOTER_LINK: "Вернуться ко входу"
+        FOOTER_ARIA: "Уже есть аккаунт? ",
+        FOOTER_LINK_TEXT: "Вернуться ко входу",
+        FOOTER_LINK_ARIA: "Вернуться ко входу"
     },
 
     DASHBOARD: {
@@ -145,15 +172,19 @@ export const RussianPack: LocalePack = {
         PROFILE_BTN: "Профиль пользователя",
         LOGOUT_ARIA: "Безопасный выход из текущей рабочей сессии",
         LOGOUT_BTN: "Выйти",
-        CREATE_PROJECT_HEADER: "Создать новый проект",
-        PROJECT_TITLE_LABEL: "Название проекта",
+        CREATE_PROJECT_HEADER_TEXT: "Создать новый проект",
+        CREATE_PROJECT_HEADER_ARIA: "Создать новый проект",
+        PROJECT_TITLE_LABEL_TEXT: "Название проекта",
+        PROJECT_TITLE_LABEL_ARIA: "Название проекта",
         PROJECT_TITLE_PLACEHOLDER: "напр., Обновление веб-сайта",
-        DESCRIPTION_LABEL: "Описание",
+        DESCRIPTION_LABEL_TEXT: "Описание",
+        DESCRIPTION_LABEL_ARIA: "Описание",
         DESCRIPTION_PLACEHOLDER: "Опишите цель проекта...",
         CREATE_BTN_ARIA: "Отправить форму для создания нового пространства проекта",
         CREATE_BTN_TEXT: "Создать проект",
         YOUR_PROJECTS_HEADER: "Ваши проекты",
-        EMPTY_MESSAGE: "Проекты не найдены. Создайте новый проект, чтобы начать работу!",
+        EMPTY_MESSAGE_TEXT: "Проекты не найдены. Создайте новый проект, чтобы начать работу!",
+        EMPTY_MESSAGE_ARIA: "Проекты не найдены. Создайте новый проект, чтобы начать работу!",
 
         // Dynamic localization functions to ensure perfect sentence structures across all languages
         PROJECT_CARD_ARIA: "Пространство проекта: {value}",
@@ -175,7 +206,8 @@ export const RussianPack: LocalePack = {
         HEADER_CREATE_TASK_ARIA: "Открыть модальное окно для добавления новой задачи",
 
         // Task Crew & Invitation
-        CREW_PANEL_HEADER: "Рабочая область управления командой и тегами проекта",
+        CREW_PANEL_HEADER_TEXT: "Рабочая область управления командой и тегами проекта",
+        CREW_PANEL_HEADER_ARIA: "Рабочая область управления командой и тегами проекта",
         INVITE_FORM_ARIA: "Пригласить нового участника команды в это пространство",
         INVITE_PLACEHOLDER: "Введите зарегистрированный email участника...",
         INVITE_INPUT_ARIA: "Поле ввода адреса электронной почты участника",
@@ -184,13 +216,16 @@ export const RussianPack: LocalePack = {
         INVITE_OPTION_OWNER: "Совладелец / Админ",
         INVITE_SUBMIT_ARIA: "Отправить запрос на добавление участника",
         INVITE_SUBMIT_BTN: "Добавить участника",
-        ROSTER_HEADER: "Текущий состав команды",
+        ROSTER_HEADER_TEXT: "Текущий состав команды",
+        ROSTER_HEADER_ARIA: "Текущий состав команды",
         ROSTER_BADGE_ARIA: "Назначенная роль: {value}",
         ROSTER_REMOVE_ARIA: "Удалить пользователя {value} из команды проекта",
 
         // Tags/Categories
-        TAGS_HEADER: "Доступные теги проекта",
-        TAGS_FALLBACK: "Для этого проекта еще не создано ни одного тега",
+        TAGS_HEADER_TEXT: "Доступные теги проекта",
+        TAGS_HEADER_ARIA: "Доступные теги проекта",
+        TAGS_FALLBACK_TEXT: "Для этого проекта еще не создано ни одного тега",
+        TAGS_FALLBACK_ARIA: "Для этого проекта еще не создано ни одного тега",
         TAGS_PILL_ARIA: "Тег: {value1} с {value2} назначенными элементами", // Unified formatting parameters
         TAG_DELETE_ARIA: "Безвозвратно удалить тег проекта: {value}",
 
@@ -206,7 +241,8 @@ export const RussianPack: LocalePack = {
         CATEGORY_ARIA: "Фильтрация задач по активному тегу категории",
         CATEGORY_ALL: "Все теги",
         CATEGORY_UNASSIGNED: "Незанятые задачи",
-        PROGRESS_LABEL: "Прогресс выполнения проекта:",
+        PROGRESS_LABEL_TEXT: "Прогресс выполнения проекта:",
+        PROGRESS_LABEL_ARIA: "Прогресс выполнения проекта:",
         PROGRESS_ARIA: "Общий трекер выполнения проекта. В настоящее время выполнено на {value} процентов.", // Unified layout placeholder
 
         // Mobile Column Selector
@@ -240,9 +276,12 @@ export const RussianPack: LocalePack = {
 
         // Task Priority
         TASK_PRIORITY_ARIA: "Уровень приоритета: {value}",
-        TASK_PRIORITY_HIGH: "Высокий",
-        TASK_PRIORITY_MEDIUM: "Средний",
-        TASK_PRIORITY_LOW: "Низкий",
+        TASK_PRIORITY_HIGH_TEXT: "Высокий",
+        TASK_PRIORITY_HIGH_ARIA: "Высокий",
+        TASK_PRIORITY_MEDIUM_TEXT: "Средний",
+        TASK_PRIORITY_MEDIUM_ARIA: "Средний",
+        TASK_PRIORITY_LOW_TEXT: "Низкий",
+        TASK_PRIORITY_LOW_ARIA: "Низкий",
         TASK_DEADLINE_ARIA: "Календарная дата дедлайна задачи: {value}",
 
         // Start Button
@@ -287,12 +326,16 @@ export const RussianPack: LocalePack = {
         REOPEN_ARIA: "Переоткрыть задачу {value}. Возвращает карточку обратно в колонку задач в работе.",
 
         // Create a new Task Modal
-        MODAL_TASK_HEADER: "Создание спецификации новой задачи",
-        MODAL_TASK_TITLE_LABEL: "Название задачи *",
+        MODAL_TASK_HEADER_TEXT: "Создание спецификации новой задачи",
+        MODAL_TASK_HEADER_ARIA: "Создание спецификации новой задачи",
+        MODAL_TASK_TITLE_LABEL_TEXT: "Название задачи *",
+        MODAL_TASK_TITLE_LABEL_ARIA: "Название задачи *",
         MODAL_TASK_TITLE_PLACEHOLDER: "напр., Проектирование схемы БД",
-        MODAL_TASK_DESC_LABEL: "Описание",
+        MODAL_TASK_DESC_LABEL_TEXT: "Описание",
+        MODAL_TASK_DESC_LABEL_ARIA: "Описание",
         MODAL_TASK_DESC_PLACEHOLDER: "Укажите практические детали...",
-        MODAL_TASK_PRIORITY_LABEL: "Уровень приоритета",
+        MODAL_TASK_PRIORITY_LABEL_TEXT: "Уровень приоритета",
+        MODAL_TASK_PRIORITY_LABEL_ARIA: "Уровень приоритета",
         MODAL_TASK_DEADLINE_LABEL: "Срок выполнения",
         MODAL_TASK_DEADLINE_KEYBOARD_ARIA: "Примечание для клавиатуры: Нажмите Tab или Escape, чтобы выйти из календаря.",
         MODAL_TASK_DEADLINE_INPUT_ARIA: "Установленная календарная дата завершения.",
@@ -302,8 +345,10 @@ export const RussianPack: LocalePack = {
         MODAL_TASK_SUBMIT_ARIA: "Подтвердить модели данных для создания новой задачи",
     
         // Create a new Tag/Category Modal
-        MODAL_TAG_HEADER: "Создать новый тег пространства",
-        MODAL_TAG_NAME_LABEL: "Название тега:",
+        MODAL_TAG_HEADER_TEXT: "Создать новый тег пространства",
+        MODAL_TAG_HEADER_ARIA: "Создать новый тег пространства",
+        MODAL_TAG_NAME_LABEL_TEXT: "Название тега:",
+        MODAL_TAG_NAME_LABEL_ARIA: "Название тега:",
         MODAL_TAG_NAME_PLACEHOLDER: "напр., Фронтенд, Тестирование, Баг...",
         MODAL_TAG_COLOR_LABEL: "Цветовая тема тега:",
         MODAL_TAG_COLOR_ARIA: "Выберите профиль визуального отслеживания цвета фона значка категории",

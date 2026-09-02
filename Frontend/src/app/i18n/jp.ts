@@ -21,7 +21,8 @@ export const JapanesePack: LocalePack = {
         HIDE_CONFIRM_ARIA: "確認用パスワードを非表示にする",
 
         // Language Selection Configuration
-        LANGUAGE_SELECTION_TITLE: "<ruby>言語<rt>げんご</rt></ruby>の<ruby>選択<rt>せんたく</rt></ruby>:",
+        LANGUAGE_SELECTION_TITLE_TEXT: "<ruby>言語<rt>げんご</rt></ruby>の<ruby>選択<rt>せんたく</rt></ruby>:",
+        LANGUAGE_SELECTION_TITLE_ARIA: "言語の選択:",
         LANGUAGE_SELECTION_ARIA: "言語選択ドロップダウンメニュー",
         LANGUAGE_OPTION_EN_US: "英語 (English US)",
         LANGUAGE_OPTION_JP: "日本語 (Japanese)",
@@ -31,23 +32,28 @@ export const JapanesePack: LocalePack = {
     PROFILE: {
         // Navigation / Headers
         ARIA_MAIN: "ユーザー設定",
-        IDENTITY_TITLE: "プロフィール<ruby>画面<rt>がめん</rt></ruby>",
+        IDENTITY_TITLE_TEXT: "プロフィール<ruby>画面<rt>がめん</rt></ruby>",
+        IDENTITY_TITLE_ARIA: "プロフィール画面",
         
         // States
-        SYNCING_CREDENTIALS: "データを<ruby>同期中<rt>どうきちゅう</rt></ruby>...",
+        SYNCING_CREDENTIALS_TEXT: "データを<ruby>同期中<rt>どうきちゅう</rt></ruby>...",
+        SYNCING_CREDENTIALS_ARIA: "データを同期中...",
 
         // =========================================================================
         // SECTION 1: CORE ACCOUNT DETAILS
         // =========================================================================
         CORE_ACCOUNT_ARIA: "アカウント詳細情報",
-        SECURITY_LEVEL_LABEL: "<ruby>権限<rt>けんげん</rt></ruby>レベル:",
+        SECURITY_LEVEL_LABEL_TEXT: "<ruby>権限<rt>けんげん</rt></ruby>レベル:",
+        SECURITY_LEVEL_LABEL_ARIA: "権限レベル:",
         REGISTERED_EMAIL_LABEL: "メールアドレス:",
-        DATABASE_RECORD_LABEL: "<ruby>登録<rt>とうろく</rt></ruby> ID:",
+        DATABASE_RECORD_LABEL_TEXT: "<ruby>登録<rt>とうろく</rt></ruby> ID:",
+        DATABASE_RECORD_LABEL_ARIA: "登録 ID:",
         
         // =========================================================================
         // SECTION 2: SYSTEM ACTION METRICS
         // =========================================================================
-        SYSTEM_METRICS_TITLE: "タスク<ruby>統計情報<rt>とうけいじょうほう</rt></ruby>",
+        SYSTEM_METRICS_TITLE_TEXT: "タスク<ruby>統計情報<rt>とうけいじょうほう</rt></ruby>",
+        SYSTEM_METRICS_TITLE_ARIA: "タスク統計情報",
         ASSIGNED_ITEMS_LABEL: "<ruby>担当<rt>たんとう</rt></ruby>タスク<ruby>数<rt>すう</rt></ruby>",
         ASSIGNED_ITEMS_ARIA: "現在、{value}個のアクティブなタスクを追跡しています。",
         COMPLETED_TASKS_LABEL: "<ruby>完了<rt>かんりょう</rt></ruby>タスク<ruby>数<rt>すう</rt></ruby>",
@@ -56,8 +62,10 @@ export const JapanesePack: LocalePack = {
         // =========================================================================
         // SECTION 3: WORKSPACE PREFERENCES CARD
         // =========================================================================
-        WORKSPACE_TITLE: "<ruby>環境設定<rt>かんきょうせってい</rt></ruby>",
+        WORKSPACE_TITLE_TEXT: "<ruby>環境設定<rt>かんきょうせってい</rt></ruby>",
+        WORKSPACE_TITLE_ARIA: "環境設定",
         THEME_LABEL: "<ruby>画面<rt>がめん</rt></ruby>テーマ<ruby>設定<rt>せってい</rt></ruby>:",
+        THEME_ARIA: "画面テーマ設定:",
 
         // Theme Selector Options (Skips rubies for dropdown readability)
         THEME_OPTION_LIGHT: "☀️ ライトモード",
@@ -94,48 +102,67 @@ export const JapanesePack: LocalePack = {
         // =========================================================================
         // SECTION 4: ACCOUNT MANAGEMENT FORM
         // =========================================================================
-        ACCOUNT_SETTINGS_TITLE: "アカウント<ruby>管理<rt>かんり</rt></ruby><ruby>設定<rt>せってい</rt></ruby>",
+        ACCOUNT_SETTINGS_TITLE_TEXT: "アカウント<ruby>管理<rt>かんり</rt></ruby><ruby>設定<rt>せってい</rt></ruby>",
+        ACCOUNT_SETTINGS_TITLE_ARIA: "アカウント管理設定",
         UPDATE_USER_LABEL: "ユーザー名の<ruby>変更<rt>へんこう</rt></ruby>",
+        UPDATE_USER_ARIA: "ユーザー名の変更",
         UPDATE_USER_PLACEHOLDER: "新しいユーザー名を入力...",
         CHANGE_PASS_LABEL: "<ruby>新<rt>あたら</rt></ruby>しいパスワード",
+        CHANGE_PASS_ARIA: "新しいパスワード",
         CHANGE_PASS_PLACEHOLDER: "新しいパスワードを入力...",
         CONFIRM_PASS_LABEL: "<ruby>新<rt>あたら</rt></ruby>しいパスワード（<ruby>確認<rt>かくにん</rt></ruby>）",
+        CONFIRM_PASS_ARIA: "新しいパスワード（確認）",
         CONFIRM_PASS_PLACEHOLDER: "もう一度パスワードを入力...",
         PASS_REQUIREMENTS_ARIA: "変更を安全に適用するには、両方のパスワードフィールドが一致している必要があります。",
-        SAVE_CHANGES_BTN: "プロファイルの<ruby>変更<rt>へんこう</rt></ruby>を<ruby>保存<rt>ほぞん</rt></ruby>",
+        SAVE_CHANGES_BTN_TEXT: "プロファイルの<ruby>変更<rt>へんこう</rt></ruby>を<ruby>保存<rt>ほぞん</rt></ruby>",
+        SAVE_CHANGES_BTN_ARIA: "プロファイルの<ruby>変更<rt>へんこう</rt></ruby>を<ruby>保存<rt>ほぞん</rt></ruby>",
 
         // Destructive Actions Area (Danger Zone)
-        DANGER_ZONE_TITLE: "<ruby>危険<rt>きけん</rt></ruby>ゾーン",
-        DANGER_ZONE_WARN: "アカウントを<ruby>削除<rt>さくじょ</rt></ruby>すると、ワークスペースへのアクセス<ruby>権<rt>けん</rt></ruby>が<ruby>完全<rt>かんぜん</rt></ruby>に<ruby>消失<rt>しょおしつ</rt></ruby>します！<br>この<ruby>操作<rt>そうさ</rt></ruby>は<ruby>取消<rt>とりけし</rt></ruby>できません。",
-        DANGER_ZONE_BTN: "アカウントを<ruby>完全<rt>かんぜん</rt></ruby>に<ruby>削除<rt>さくじょ</rt></ruby>する"
+        DANGER_ZONE_TITLE_TEXT: "<ruby>危険<rt>きけん</rt></ruby>ゾーン",
+        DANGER_ZONE_TITLE_ARIA: "危険ゾーン",
+        DANGER_ZONE_WARN_TEXT: "アカウントを<ruby>削除<rt>さくじょ</rt></ruby>すると、ワークスペースへのアクセス<ruby>権<rt>けん</rt></ruby>が<ruby>完全<rt>かんぜん</rt></ruby>に<ruby>消失<rt>しょおしつ</rt></ruby>します！<br>この<ruby>操作<rt>そうさ</rt></ruby>は<ruby>取消<rt>とりけし</rt></ruby>できません。",
+        DANGER_ZONE_WARN_ARIA: "アカウントを削除すると、ワークスペースへのアクセス権が完全に消失します！この操作は取消できません。",
+        DANGER_ZONE_BTN_TEXT: "アカウントを<ruby>完全<rt>かんぜん</rt></ruby>に<ruby>削除<rt>さくじょ</rt></ruby>する",
+        DANGER_ZONE_BTN_ARIA: "アカウントを完全に削除する"
     },
     
     LOGIN: {
         PORTAL_ARIA: "アカウント認証ポータル",
-        HEADER_WELCOME_BACK: "お<ruby>帰<rt>かえ</rt>りなさい</ruby>",
+        HEADER_WELCOME_BACK_TEXT: "お<ruby>帰<rt>かえ</rt></ruby>りなさい",
+        HEADER_WELCOME_BACK_ARIA: "お帰りなさい",
         HEADER_FIRST_TIME: "タスクマネージャーへようこそ",
-        SUBTITLE_MANAGE: "ログインしてプロジェクトとタスクを<ruby>管理<rt>かんり</rt></ruby>しましょう",
-        CHECKBOX_REMEMBER: "ログイン<ruby>状態<rt>じょおたい</rt></ruby>を<ruby>保持<rt>ほじ</rt></ruby>する",
-        BTN_SIGNIN_ARIA: "ワークスペースに<ruby>安全<rt>あんぜん</rt></ruby>にログインするボタン",
+        SUBTITLE_MANAGE_TEXT: "ログインしてプロジェクトとタスクを<ruby>管理<rt>かんり</rt></ruby>しましょう",
+        SUBTITLE_MANAGE_ARIA: "ログインしてプロジェクトとタスクを管理しましょう",
+        CHECKBOX_REMEMBER_TEXT: "ログイン<ruby>状態<rt>じょおたい</rt></ruby>を<ruby>保持<rt>ほじ</rt></ruby>する",
+        CHECKBOX_REMEMBER_ARIA: "ログイン状態を保持する",
+        BTN_SIGNIN_ARIA: "ワークスペースに安全にログインするボタン",
         BTN_SIGNIN_TEXT: "ログイン",
         FOOTER_TEXT: "初めてのご<ruby>利用<rt>りよう</rt></ruby>ですか？",
-        FOOTER_LINK: "<ruby>新規<rt>しんき</rt></ruby>アカウントの<ruby>作成<rt>さくせい</rt></ruby>"
+        FOOTER_ARIA: "初めてのご利用ですか？",
+        FOOTER_LINK_TEXT: "<ruby>新規<rt>しんき</rt></ruby>アカウントの<ruby>作成<rt>さくせい</rt></ruby>",
+        FOOTER_LINK_ARIA: "新規アカウントの作成"
     },
 
     REGISTER: {
         PORTAL_ARIA: "アカウント作成ポータル",
-        HEADER_TITLE: "アカウントの<ruby>作成<rt>さくせい</rt></ruby>",
-        SUBTITLE_JOIN: "プロジェクト<ruby>管理<rt>かんり</rt></ruby>プラットフォームに<ruby>参加<rt>さんか</rt></ruby>しましょう！",
-        LABEL_USERNAME: "ユーザー<ruby>名<rt>めい</rt></ruby>",
+        HEADER_TITLE_TEXT: "アカウントの<ruby>作成<rt>さくせい</rt></ruby>",
+        HEADER_TITLE_ARIA: "アカウントの作成",
+        SUBTITLE_JOIN_TEXT: "プロジェクト<ruby>管理<rt>かんり</rt></ruby>プラットフォームに<ruby>参加<rt>さんか</rt></ruby>しましょう！",
+        SUBTITLE_JOIN_ARIA: "プロジェクト管理プラットフォームに参加しましょう！",
+        LABEL_USERNAME_TEXT: "ユーザー<ruby>名<rt>めい</rt></ruby>",
+        LABEL_USERNAME_ARIA: "ユーザー名",
         PLACEHOLDER_USERNAME: "ユニークな表示名を入力...",
         PLACEHOLDER_PASSWORD: "安全なパスワードを作成...",
-        LABEL_CONFIRM_PASSWORD: "パスワード（<ruby>確認<rt>かくにん</rt></ruby>）",
+        LABEL_CONFIRM_PASSWORD_TEXT: "パスワード（<ruby>確認<rt>かくにん</rt></ruby>）",
+        LABEL_CONFIRM_PASSWORD_ARIA: "パスワード（確認）",
         PLACEHOLDER_CONFIRM_PASSWORD: "パスワードを再入力...",
         REQUIREMENTS_ARIA: "アカウント作成要求を送信するには、両方のパスワードフィールドが正確に一致している必要があります。",
         BTN_SUBMIT_TEXT: "アカウント<ruby>作成<rt>さじゅせい</rt></ruby>",
         BTN_SUBMIT_ARIA: "入力された情報で新しいアカウントを登録するボタン",
         FOOTER_TEXT: "すでにアカウントをお<ruby>持<rt>も</rt></ruby>ちですか？",
-        FOOTER_LINK: "ログイン<ruby>画面<rt>がめん</rt></ruby>に<ruby>戻<rt>もど</rt></ruby>る"
+        FOOTER_ARIA: "すでにアカウントをお持ちですか？",
+        FOOTER_LINK_TEXT: "ログイン<ruby>画面<rt>がめん</rt></ruby>に<ruby>戻<rt>もど</rt></ruby>る",
+        FOOTER_LINK_ARIA: "ログイン画面に戻る"
     },
 
     DASHBOARD: {
@@ -145,20 +172,24 @@ export const JapanesePack: LocalePack = {
         PROFILE_BTN: "ユーザープロフィール",
         LOGOUT_ARIA: "ワークスペースセッションから安全にサインアウトするボタン",
         LOGOUT_BTN: "サインアウト",
-        CREATE_PROJECT_HEADER: "<ruby>新規<rt>しんき</rt></ruby>プロジェクトの<ruby>作成<rt>さくせい</rt></ruby>",
-        PROJECT_TITLE_LABEL: "プロジェクト名",
+        CREATE_PROJECT_HEADER_TEXT: "<ruby>新規<rt>しんき</rt></ruby>プロジェクトの<ruby>作成<rt>さくせい</rt></ruby>",
+        CREATE_PROJECT_HEADER_ARIA: "新規プロジェクトの作成",
+        PROJECT_TITLE_LABEL_TEXT: "プロジェクト<ruby>名<rt>めい</rt></ruby>",
+        PROJECT_TITLE_LABEL_ARIA: "プロジェクト名",
         PROJECT_TITLE_PLACEHOLDER: "例：ウェブサイトのオーバーホール",
-        DESCRIPTION_LABEL: "<ruby>説明<rt>せつめい</rt></ruby>",
+        DESCRIPTION_LABEL_TEXT: "<ruby>説明<rt>せつめい</rt></ruby>",
+        DESCRIPTION_LABEL_ARIA: "説明",
         DESCRIPTION_PLACEHOLDER: "プロジェクトの目標を入力してください...",
         CREATE_BTN_ARIA: "フォームを送信して新しいプロジェクトスペースを作成するボタン",
         CREATE_BTN_TEXT: "プロジェクトを<ruby>作成<rt>さくせい</rt></ruby>",
         YOUR_PROJECTS_HEADER: "あなたのプロジェクト",
-        EMPTY_MESSAGE: "プロジェクトが<ruby>見<rt>み</rt></ruby>つかりません。<ruby>新<rt>あたら</rt></ruby>しく<ruby>作成<rt>さくせい</rt></ruby>して<ruby>開始<rt>かいし</rt></ruby>しましょう！",
+        EMPTY_MESSAGE_TEXT: "プロジェクトが<ruby>見<rt>み</rt></ruby>つかりません。<ruby>新<rt>あたら</rt></ruby>しく<ruby>作成<rt>さくせい</rt></ruby>して<ruby>開始<rt>かいし</rt></ruby>しましょう！",
+        EMPTY_MESSAGE_ARIA: "プロジェクトが見つかりません。新しく作成して開始しましょう！",
 
         PROJECT_CARD_ARIA: "プロジェクトスペース: {value}",
         DELETE_PROJECT_ARIA: "プロジェクトを完全に削除: {value}",
         NO_DESCRIPTION_FALLBACK: "説明はありません。",
-        OPEN_BOARD_TEXT: "ボードを開く",
+        OPEN_BOARD_TEXT: "ボードを<ruby>開<rt>ひら</rt></ruby>く",
         OPEN_BOARD_ARIA: "プロジェクトのタスクボードを開く: {value}"
     },
 
@@ -174,7 +205,8 @@ export const JapanesePack: LocalePack = {
         HEADER_CREATE_TASK_ARIA: "オーバーレイウィンドウを開いて新しいタスクを追加します",
 
         // Task Crew & Invitation
-        CREW_PANEL_HEADER: "プロジェクトチーム＆タグ<ruby>管理<rt>かんり</rt></ruby>ワークスペース",
+        CREW_PANEL_HEADER_TEXT: "プロジェクトチーム＆タグ<ruby>管理<rt>かんり</rt></ruby>ワークスペース",
+        CREW_PANEL_HEADER_ARIA: "プロジェクトチーム＆タグ管理ワークスペース",
         INVITE_FORM_ARIA: "このスペースに新しいチームメンバーを招待するフォーム",
         INVITE_PLACEHOLDER: "チームメイトの登録済みメールアドレスを入力...",
         INVITE_INPUT_ARIA: "チームメイトのメールアドレス入力フィールド",
@@ -183,13 +215,16 @@ export const JapanesePack: LocalePack = {
         INVITE_OPTION_OWNER: "共同所有者 / 管理者",
         INVITE_SUBMIT_ARIA: "招待リクエストを送信してメンバーを追加するボタン",
         INVITE_SUBMIT_BTN: "メンバーを追加",
-        ROSTER_HEADER: "<ruby>現在<rt>げんざい</rt></ruby>のプロジェクトメンバー",
+        ROSTER_HEADER_TEXT: "<ruby>現在<rt>げんざい</rt></ruby>のプロジェクトメンバー",
+        ROSTER_HEADER_ARIA: "現在のプロジェクトメンバー",
         ROSTER_BADGE_ARIA: "割り当てられた役割: {value}",
         ROSTER_REMOVE_ARIA: "プロジェクトメンバーから {value} を削除します",
 
         // Tags/Categories
-        TAGS_HEADER: "<ruby>利用可能<rt>りよおかのお</rt></ruby>なプロジェクトタグ",
-        TAGS_FALLBACK: "このプロジェクトに<ruby>作成<rt>さくせい</rt></ruby>されたカスタムタグはまだありません",
+        TAGS_HEADER_TEXT: "<ruby>利用可能<rt>りよおかのお</rt></ruby>なプロジェクトタグ",
+        TAGS_HEADER_ARIA: "利用可能なプロジェクトタグ",
+        TAGS_FALLBACK_TEXT: "このプロジェクトに<ruby>作成<rt>さくせい</rt></ruby>されたカスタムタグはまだありません",
+        TAGS_FALLBACK_ARIA: "このプロジェクトに作成されたカスタムタグはまだありません",
         TAGS_PILL_ARIA: "タグ: {value1} （割り当てアイテム数: {value2}）",
         TAG_DELETE_ARIA: "プロジェクトタグを完全に削除: {value}",
 
@@ -205,7 +240,8 @@ export const JapanesePack: LocalePack = {
         CATEGORY_ARIA: "アクティブなカテゴリタグの割り当てでタスクをフィルタリングします",
         CATEGORY_ALL: "すべてのタグ",
         CATEGORY_UNASSIGNED: "未割り当てのタスク",
-        PROGRESS_LABEL: "プロジェクト<ruby>完了<rt>かんりょお</rt></ruby>の<ruby>進捗状況<rt>しんちょくじょおきょお</rt></ruby>:",
+        PROGRESS_LABEL_TEXT: "プロジェクト<ruby>完了<rt>かんりょお</rt></ruby>の<ruby>進捗状況<rt>しんちょくじょおきょお</rt></ruby>:",
+        PROGRESS_LABEL_ARIA: "プロジェクト完了の進捗状況:",
         PROGRESS_ARIA: "プロジェクト全体の完了進捗トラッカー。現在 {value} パーセントです。",
 
         // Mobile Column Selector
@@ -239,9 +275,12 @@ export const JapanesePack: LocalePack = {
 
         // Task Priority
         TASK_PRIORITY_ARIA: "優先度レベル: {value}",
-        TASK_PRIORITY_HIGH: "<ruby>高<rt>たか</rt></ruby>",
-        TASK_PRIORITY_MEDIUM: "中",
-        TASK_PRIORITY_LOW: "低",
+        TASK_PRIORITY_HIGH_TEXT: "<ruby>高<rt>たか</rt></ruby>",
+        TASK_PRIORITY_HIGH_ARIA: "高",
+        TASK_PRIORITY_MEDIUM_TEXT: "<ruby>中<rt>なか</rt></ruby>",
+        TASK_PRIORITY_MEDIUM_ARIA: "中",
+        TASK_PRIORITY_LOW_TEXT: "<ruby>低<rt>ひく</rt></ruby>",
+        TASK_PRIORITY_LOW_ARIA: "低",
         TASK_DEADLINE_ARIA: "タスクの締切日: {value}",
 
         // Start Button
@@ -275,7 +314,7 @@ export const JapanesePack: LocalePack = {
         COLUMN_COMPLETED_TITLE: "完了済み ({value})",
         LANE_COMPLETED_ARIA: "完了済みタスクのアーカイブリストレーン。終了したアイテムが {value} 個含まれています。",
         TASK_CARD_COMPLETED_ARIA: "完了したタスクカード: {value}",
-        BADGE_DONE_TEXT: "完了",
+        BADGE_DONE_TEXT: "<ruby>完了<rt>かんりょお</rt></ruby>",
         BADGE_DONE_ARIA: "タスク処理状態：完了",
         FINISHED_ASSIGNEE_ARIA: "終了したタスク {value} の割り当てスタッフ",
         FINISHED_CATEGORY_ARIA: "終了したタスク {value} の分類カテゴリ",
@@ -286,23 +325,29 @@ export const JapanesePack: LocalePack = {
         REOPEN_ARIA: "タスクアイテム {value} を再開します。カードを作業中の進行中レーンに戻します。",
 
         // Create a new Task Modal
-        MODAL_TASK_HEADER: "<ruby>新規<rt>しんき</rt></ruby>タスクの<ruby>作成<rt>さくせい</rt></ruby>",
-        MODAL_TASK_TITLE_LABEL: "タスク<ruby>名<rt>めい</rt></ruby> *",
+        MODAL_TASK_HEADER_TEXT: "<ruby>新規<rt>しんき</rt></ruby>タスクの<ruby>作成<rt>さくせい</rt></ruby>",
+        MODAL_TASK_HEADER_ARIA: "新規タスクの作成",
+        MODAL_TASK_TITLE_LABEL_TEXT: "タスク<ruby>名<rt>めい</rt></ruby> *",
+        MODAL_TASK_TITLE_LABEL_ARIA: "タスク名*",
         MODAL_TASK_TITLE_PLACEHOLDER: "例：データベーススキーマの設計",
-        MODAL_TASK_DESC_LABEL: "<ruby>説明<rt>せつめい</rt></ruby>",
+        MODAL_TASK_DESC_LABEL_TEXT: "<ruby>説明<rt>せつめい</rt></ruby>",
+        MODAL_TASK_DESC_LABEL_ARIA: "説明",
         MODAL_TASK_DESC_PLACEHOLDER: "具体的なタスクの詳細を入力してください...",
-        MODAL_TASK_PRIORITY_LABEL: "<ruby>優先度<rt>ゆうせんど</rt></ruby>階層",
+        MODAL_TASK_PRIORITY_LABEL_TEXT: "<ruby>優先度階層<rt>ゆうせんどかいそお</rt></ruby>",
+        MODAL_TASK_PRIORITY_LABEL_ARIA: "優先度階層",
         MODAL_TASK_DEADLINE_LABEL: "<ruby>締切日<rt>しめきりび</rt></ruby>",
         MODAL_TASK_DEADLINE_KEYBOARD_ARIA: "キーボードナビゲーションの注意：TabキーまたはEscapeキーを押すとカレンダー選択から抜けます。",
         MODAL_TASK_DEADLINE_INPUT_ARIA: "カレンダーで指定された完了日。",
         MODAL_TASK_CANCEL_BTN: "キャンセル",
         MODAL_TASK_CANCEL_ARIA: "タスク追加用フォームを閉じます",
-        MODAL_TASK_SUBMIT_BTN: "タスクを作成",
+        MODAL_TASK_SUBMIT_BTN: "タスクを<ruby>作成<rt>さくせい</rt></ruby>",
         MODAL_TASK_SUBMIT_ARIA: "入力された仕様で新しいタスクを作成します",
     
         // Create a new Tag/Category Modal
-        MODAL_TAG_HEADER: "新しいワークスペースタグの<ruby>作成<rt>さくせい</rt></ruby>",
-        MODAL_TAG_NAME_LABEL: "タグ<ruby>名<rt>めい</rt></ruby>:",
+        MODAL_TAG_HEADER_TEXT: "<ruby>新<rt>あたら</rt></ruby>しいワークスペースタグの<ruby>作成<rt>さくせい</rt></ruby>",
+        MODAL_TAG_HEADER_ARIA: "新しいワークスペースタグの作成",
+        MODAL_TAG_NAME_LABEL_TEXT: "タグ<ruby>名<rt>めい</rt></ruby>:",
+        MODAL_TAG_NAME_LABEL_ARIA: "タグ名:",
         MODAL_TAG_NAME_PLACEHOLDER: "例：フロントエンド、テスト、バグ...",
         MODAL_TAG_COLOR_LABEL: "タグカラー:",
         MODAL_TAG_COLOR_ARIA: "分類バッジの背景色（視覚的識別用カラー）を選択します",
@@ -316,7 +361,7 @@ export const JapanesePack: LocalePack = {
 
         MODAL_TAG_CANCEL_BTN: "キャンセル",
         MODAL_TAG_CANCEL_ARIA: "ワークスペースタグ作成用フォームを閉じます",
-        MODAL_TAG_SUBMIT_BTN: "タグを作成",
+        MODAL_TAG_SUBMIT_BTN: "タグを<ruby>作成<rt>さくせい</rt></ruby>",
         MODAL_TAG_SUBMIT_ARIA: "指定されたパラメータで新しいワークスペース分類タグを作成します"
     }
 };

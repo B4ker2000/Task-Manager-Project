@@ -19,7 +19,8 @@ export interface LocalePack {
         HIDE_CONFIRM_ARIA: string;
 
         // Language Selection Configuration
-        LANGUAGE_SELECTION_TITLE: string;
+        LANGUAGE_SELECTION_TITLE_TEXT: string;
+        LANGUAGE_SELECTION_TITLE_ARIA: string;
         LANGUAGE_SELECTION_ARIA: string;
         LANGUAGE_OPTION_EN_US: string;
         LANGUAGE_OPTION_JP: string;
@@ -29,23 +30,28 @@ export interface LocalePack {
     PROFILE: {
         // Navigation / Headers
         ARIA_MAIN: string;
-        IDENTITY_TITLE: string;
+        IDENTITY_TITLE_TEXT: string;
+        IDENTITY_TITLE_ARIA: string;
 
         // States
-        SYNCING_CREDENTIALS: string;
+        SYNCING_CREDENTIALS_TEXT: string;
+        SYNCING_CREDENTIALS_ARIA: string;
 
         // =========================================================================
         // SECTION 1: CORE ACCOUNT DETAILS
         // =========================================================================
         CORE_ACCOUNT_ARIA: string;
-        SECURITY_LEVEL_LABEL: string;
+        SECURITY_LEVEL_LABEL_TEXT: string;
+        SECURITY_LEVEL_LABEL_ARIA: string;
         REGISTERED_EMAIL_LABEL: string;
-        DATABASE_RECORD_LABEL: string;
+        DATABASE_RECORD_LABEL_TEXT: string;
+        DATABASE_RECORD_LABEL_ARIA: string;
 
         // =========================================================================
         // SECTION 2: SYSTEM ACTION METRICS
         // =========================================================================
-        SYSTEM_METRICS_TITLE: string;
+        SYSTEM_METRICS_TITLE_TEXT: string;
+        SYSTEM_METRICS_TITLE_ARIA: string;
         ASSIGNED_ITEMS_LABEL: string;
         ASSIGNED_ITEMS_ARIA: string;
         COMPLETED_TASKS_LABEL: string;
@@ -54,8 +60,10 @@ export interface LocalePack {
         // =========================================================================
         // SECTION 3: WORKSPACE PREFERENCES CARD
         // =========================================================================
-        WORKSPACE_TITLE: string;
+        WORKSPACE_TITLE_TEXT: string;
+        WORKSPACE_TITLE_ARIA: string;
         THEME_LABEL: string;
+        THEME_ARIA: string;
     
         // Theme Selector Options
         THEME_OPTION_LIGHT: string;
@@ -92,48 +100,67 @@ export interface LocalePack {
         // =========================================================================
         // SECTION 4: ACCOUNT MANAGEMENT FORM
         // =========================================================================
-        ACCOUNT_SETTINGS_TITLE: string;
+        ACCOUNT_SETTINGS_TITLE_TEXT: string;
+        ACCOUNT_SETTINGS_TITLE_ARIA: string;
         UPDATE_USER_LABEL: string;
+        UPDATE_USER_ARIA: string;
         UPDATE_USER_PLACEHOLDER: string;
         CHANGE_PASS_LABEL: string;
+        CHANGE_PASS_ARIA: string;
         CHANGE_PASS_PLACEHOLDER: string;
         CONFIRM_PASS_LABEL: string;
+        CONFIRM_PASS_ARIA: string;
         CONFIRM_PASS_PLACEHOLDER: string;
         PASS_REQUIREMENTS_ARIA: string;
-        SAVE_CHANGES_BTN: string;
+        SAVE_CHANGES_BTN_TEXT: string;
+        SAVE_CHANGES_BTN_ARIA: string;
 
         // Destructive Actions Area (Danger Zone)
-        DANGER_ZONE_TITLE: string;
-        DANGER_ZONE_WARN: string;
-        DANGER_ZONE_BTN: string;
+        DANGER_ZONE_TITLE_TEXT: string;
+        DANGER_ZONE_TITLE_ARIA: string;
+        DANGER_ZONE_WARN_TEXT: string;
+        DANGER_ZONE_WARN_ARIA: string;
+        DANGER_ZONE_BTN_TEXT: string;
+        DANGER_ZONE_BTN_ARIA: string;
     };
 
     LOGIN: {
         PORTAL_ARIA: string;
-        HEADER_WELCOME_BACK: string;
+        HEADER_WELCOME_BACK_TEXT: string;
+        HEADER_WELCOME_BACK_ARIA: string;
         HEADER_FIRST_TIME: string;
-        SUBTITLE_MANAGE: string;
-        CHECKBOX_REMEMBER: string;
+        SUBTITLE_MANAGE_TEXT: string;
+        SUBTITLE_MANAGE_ARIA: string;
+        CHECKBOX_REMEMBER_TEXT: string;
+        CHECKBOX_REMEMBER_ARIA: string;
         BTN_SIGNIN_TEXT: string;
         BTN_SIGNIN_ARIA: string;
         FOOTER_TEXT: string;
-        FOOTER_LINK: string;
+        FOOTER_ARIA: string;
+        FOOTER_LINK_TEXT: string;
+        FOOTER_LINK_ARIA: string;
     };
 
     REGISTER: {
         PORTAL_ARIA: string;
-        HEADER_TITLE: string;
-        SUBTITLE_JOIN: string;
-        LABEL_USERNAME: string;
+        HEADER_TITLE_TEXT: string;
+        HEADER_TITLE_ARIA: string;
+        SUBTITLE_JOIN_TEXT: string;
+        SUBTITLE_JOIN_ARIA: string;
+        LABEL_USERNAME_TEXT: string;
+        LABEL_USERNAME_ARIA: string;
         PLACEHOLDER_USERNAME: string;
         PLACEHOLDER_PASSWORD: string;
-        LABEL_CONFIRM_PASSWORD: string;
+        LABEL_CONFIRM_PASSWORD_TEXT: string;
+        LABEL_CONFIRM_PASSWORD_ARIA: string;
         PLACEHOLDER_CONFIRM_PASSWORD: string;
         REQUIREMENTS_ARIA: string;
         BTN_SUBMIT_TEXT: string;
         BTN_SUBMIT_ARIA: string;
         FOOTER_TEXT: string;
-        FOOTER_LINK: string;
+        FOOTER_ARIA: string;
+        FOOTER_LINK_TEXT: string;
+        FOOTER_LINK_ARIA: string;
     };
 
     DASHBOARD: {
@@ -143,15 +170,19 @@ export interface LocalePack {
         PROFILE_BTN: string;
         LOGOUT_ARIA: string;
         LOGOUT_BTN: string;
-        CREATE_PROJECT_HEADER: string;
-        PROJECT_TITLE_LABEL: string;
+        CREATE_PROJECT_HEADER_TEXT: string;
+        CREATE_PROJECT_HEADER_ARIA: string;
+        PROJECT_TITLE_LABEL_TEXT: string;
+        PROJECT_TITLE_LABEL_ARIA: string;
         PROJECT_TITLE_PLACEHOLDER: string;
-        DESCRIPTION_LABEL: string;
+        DESCRIPTION_LABEL_TEXT: string;
+        DESCRIPTION_LABEL_ARIA: string;
         DESCRIPTION_PLACEHOLDER: string;
         CREATE_BTN_TEXT: string;
         CREATE_BTN_ARIA: string;
         YOUR_PROJECTS_HEADER: string;
-        EMPTY_MESSAGE: string;
+        EMPTY_MESSAGE_TEXT: string;
+        EMPTY_MESSAGE_ARIA: string;
         PROJECT_CARD_ARIA: string;
         DELETE_PROJECT_ARIA: string;
         NO_DESCRIPTION_FALLBACK: string;
@@ -171,7 +202,8 @@ export interface LocalePack {
         HEADER_CREATE_TASK_ARIA: string;
 
         // Task Crew & Invitation
-        CREW_PANEL_HEADER: string;
+        CREW_PANEL_HEADER_TEXT: string;
+        CREW_PANEL_HEADER_ARIA: string;
         INVITE_FORM_ARIA: string;
         INVITE_PLACEHOLDER: string;
         INVITE_INPUT_ARIA: string;
@@ -180,13 +212,16 @@ export interface LocalePack {
         INVITE_OPTION_OWNER: string;
         INVITE_SUBMIT_ARIA: string;
         INVITE_SUBMIT_BTN: string;
-        ROSTER_HEADER: string;
+        ROSTER_HEADER_TEXT: string;
+        ROSTER_HEADER_ARIA: string;
         ROSTER_BADGE_ARIA: string;
         ROSTER_REMOVE_ARIA: string;
 
         // Tags/Categories
-        TAGS_HEADER: string;
-        TAGS_FALLBACK: string;
+        TAGS_HEADER_TEXT: string;
+        TAGS_HEADER_ARIA: string;
+        TAGS_FALLBACK_TEXT: string;
+        TAGS_FALLBACK_ARIA: string;
         TAGS_PILL_ARIA: string;
         TAG_DELETE_ARIA: string;
 
@@ -202,7 +237,8 @@ export interface LocalePack {
         CATEGORY_ARIA: string;
         CATEGORY_ALL: string;
         CATEGORY_UNASSIGNED: string;
-        PROGRESS_LABEL: string;
+        PROGRESS_LABEL_TEXT: string;
+        PROGRESS_LABEL_ARIA: string;
         PROGRESS_ARIA: string;
 
         // Mobile Column Selector
@@ -236,9 +272,12 @@ export interface LocalePack {
 
         // Task Priority
         TASK_PRIORITY_ARIA: string;
-        TASK_PRIORITY_HIGH: string;
-        TASK_PRIORITY_MEDIUM: string;
-        TASK_PRIORITY_LOW: string;
+        TASK_PRIORITY_HIGH_TEXT: string;
+        TASK_PRIORITY_HIGH_ARIA: string;
+        TASK_PRIORITY_MEDIUM_TEXT: string;
+        TASK_PRIORITY_MEDIUM_ARIA: string;
+        TASK_PRIORITY_LOW_TEXT: string;
+        TASK_PRIORITY_LOW_ARIA: string;
         TASK_DEADLINE_ARIA: string;
 
         // Start Button
@@ -283,12 +322,16 @@ export interface LocalePack {
         REOPEN_ARIA: string;
 
         // Create a new Task Modal
-        MODAL_TASK_HEADER: string;
-        MODAL_TASK_TITLE_LABEL: string;
+        MODAL_TASK_HEADER_TEXT: string;
+        MODAL_TASK_HEADER_ARIA: string;
+        MODAL_TASK_TITLE_LABEL_TEXT: string;
+        MODAL_TASK_TITLE_LABEL_ARIA: string;
         MODAL_TASK_TITLE_PLACEHOLDER: string;
-        MODAL_TASK_DESC_LABEL: string;
+        MODAL_TASK_DESC_LABEL_TEXT: string;
+        MODAL_TASK_DESC_LABEL_ARIA: string;
         MODAL_TASK_DESC_PLACEHOLDER: string;
-        MODAL_TASK_PRIORITY_LABEL: string;
+        MODAL_TASK_PRIORITY_LABEL_TEXT: string;
+        MODAL_TASK_PRIORITY_LABEL_ARIA: string;
         MODAL_TASK_DEADLINE_LABEL: string;
         MODAL_TASK_DEADLINE_KEYBOARD_ARIA: string;
         MODAL_TASK_DEADLINE_INPUT_ARIA: string;
@@ -298,8 +341,10 @@ export interface LocalePack {
         MODAL_TASK_SUBMIT_ARIA: string;
         
         // Create a new Tag/Category Modal
-        MODAL_TAG_HEADER: string;
-        MODAL_TAG_NAME_LABEL: string;
+        MODAL_TAG_HEADER_TEXT: string;
+        MODAL_TAG_HEADER_ARIA: string;
+        MODAL_TAG_NAME_LABEL_TEXT: string;
+        MODAL_TAG_NAME_LABEL_ARIA: string;
         MODAL_TAG_NAME_PLACEHOLDER: string;
         MODAL_TAG_COLOR_LABEL: string;
         MODAL_TAG_COLOR_ARIA: string;

@@ -2,13 +2,13 @@
     <header class="profile-header">
         <!-- 🔙 Back Button: Added explicit label and instruction for non-sighted users & Bound to localized descriptive strings -->
         <button class="back-btn" [routerLink]="['/dashboard']" [attr.aria-label]="langService.words().GLOBAL.BACK_BTN_ARIA" [innerHTML]="langService.words().GLOBAL.BACK_BTN_TEXT"></button>
-        <h2 [innerHTML]="langService.words().PROFILE.IDENTITY_TITLE"></h2>
+        <h2 [attr.aria-label]="langService.words().PROFILE.IDENTITY_TITLE_ARIA" [innerHTML]="langService.words().PROFILE.IDENTITY_TITLE_TEXT"></h2>
     </header>
 
     <!-- Loading Placeholder Spinner Card Layout -->
      <!-- 🚨 aria-live="assertive" forces the screen reader to instantly read the loading status on load -->
       <div class="loading-state" *ngIf="isLoading" role="status" aria-live="assertive">
-        <p [innerHTML]="langService.words().PROFILE.SYNCING_CREDENTIALS"></p>
+        <p [attr.aria-label]="langService.words().PROFILE.SYNCING_CREDENTIALS_ARIA" [innerHTML]="langService.words().PROFILE.SYNCING_CREDENTIALS_TEXT"></p>
       </div>
 
     <!-- Active Profile Layout Card Display -->
@@ -20,9 +20,9 @@
                  <div class="avatar-circle" aria-hidden="true">👤</div>
                 <!-- aria-level explicitly clarifies structural typographic depth -->
                  <h3 aria-level="3">{{ userProfile.username }}</h3>
-                 <span class="role-badge" [ngClass]="userProfile.role.toLowerCase()" role="text" [attr.aria-label]="langService.words().PROFILE.SECURITY_LEVEL_LABEL + ' ' + userProfile.role">
+                 <span class="role-badge" [ngClass]="userProfile.role.toLowerCase()" role="text">
                     <span aria-hidden="true">💼 </span> 
-                    <span [innerHTML]="langService.words().PROFILE.SECURITY_LEVEL_LABEL"></span> {{ userProfile.role }}
+                    <span [attr.aria-label]="langService.words().PROFILE.SECURITY_LEVEL_LABEL_ARIA + ' ' + userProfile.role" [innerHTML]="langService.words().PROFILE.SECURITY_LEVEL_LABEL_TEXT"></span> {{ userProfile.role }}
                  </span>
 
                 <div class="info-row">
@@ -30,16 +30,16 @@
                     <span [attr.aria-labelledby]="'emailLabel'">{{ userProfile.email }}</span>
                 </div>
                 <div class="info-row">
-                    <strong id="recordLabel" [innerHTML]="langService.words().PROFILE.DATABASE_RECORD_LABEL"></strong>
+                    <strong id="recordLabel" [attr.aria-label]="langService.words().PROFILE.DATABASE_RECORD_LABEL_ARIA" [innerHTML]="langService.words().PROFILE.DATABASE_RECORD_LABEL_TEXT"></strong>
                     <span [attr.aria-labelledby]="'recordLabel'">#{{ userProfile.id }}</span>
                 </div>
              </div>
 
             <!-- Section 2: Quick Metrics Statistics Card -->
-             <div class="stats-card" role="region" [attr.aria-label]="langService.words().PROFILE.SYSTEM_METRICS_TITLE">
+             <div class="stats-card" role="region">
                 <h4 aria-level="4">
                     <span aria-hidden="true">📋 </span>
-                    <span [innerHTML]="langService.words().PROFILE.SYSTEM_METRICS_TITLE"></span>
+                    <span [attr.aria-label]="langService.words().PROFILE.SYSTEM_METRICS_TITLE_ARIA" [innerHTML]="langService.words().PROFILE.SYSTEM_METRICS_TITLE_TEXT"></span>
                 </h4>
                 <div class="metric-box" [attr.aria-label]="userProfile.stats.total + ' ' + langService.words().PROFILE.ASSIGNED_ITEMS_ARIA">
                     <span class="metric-label" aria-hidden="true" [innerHTML]="langService.words().PROFILE.ASSIGNED_ITEMS_LABEL"></span>
@@ -54,10 +54,10 @@
 
         <div class="profile-layout-vertical-stack">
             <!-- Section 3: Accessibility, Themes & Localization options -->
-             <div class="accessibility-config-card" role="region" [attr.aria-label]="langService.words().PROFILE.WORKSPACE_TITLE">
+             <div class="accessibility-config-card" role="region">
                 <h4 aria-level="4">
                     <span aria-hidden="true">🎨 </span>
-                    <span [innerHTML]="langService.words().PROFILE.WORKSPACE_TITLE"></span>
+                    <span [attr.aria-label]="langService.words().PROFILE.WORKSPACE_TITLE_ARIA" [innerHTML]="langService.words().PROFILE.WORKSPACE_TITLE_TEXT"></span>
                 </h4>
 
                 <div class="config-control-row">
@@ -65,7 +65,7 @@
                      <div class="info-adjustment-group">
                         <label for="languageSelect" class="info-adjustment-label">
                             <span aria-hidden="true">🌐 </span>
-                            <span [innerHTML]="langService.words().GLOBAL.LANGUAGE_SELECTION_TITLE"></span>
+                            <span [attr.aria-label]="langService.words().GLOBAL.LANGUAGE_SELECTION_TITLE_ARIA" [innerHTML]="langService.words().GLOBAL.LANGUAGE_SELECTION_TITLE_TEXT"></span>
                         </label>
                         <select id="languageSelect"
                                 [ngModel]="langService.currentLang()"
@@ -148,13 +148,17 @@
              <div class="settings-card" role="region" aria-label="Account Management Settings">
                 <h4 aria-level="4">
                     <span aria-hidden="true">⚙️ </span>
-                    <span [innerHTML]="langService.words().PROFILE.ACCOUNT_SETTINGS_TITLE"></span>
+                    <span [attr.aria-label]="langService.words().PROFILE.ACCOUNT_SETTINGS_TITLE_ARIA" [innerHTML]="langService.words().PROFILE.ACCOUNT_SETTINGS_TITLE_TEXT"></span>
                 </h4>
 
                 <!-- Account Information Adjustment Form -->
                  <form (ngSubmit)="onUpdateAccount()" #settingsForm="ngForm" class="info-adjustment-form">
                     <div class="info-adjustment-group">
-                        <label for="newUsername" class="info-adjustment-label" [innerHTML]="langService.words().PROFILE.UPDATE_USER_LABEL"></label>
+                        <label for="newUsername" 
+                               class="info-adjustment-label" 
+                               [attr.aria-label]="langService.words().PROFILE.UPDATE_USER_ARIA" 
+                               [innerHTML]="langService.words().PROFILE.UPDATE_USER_LABEL"></label>
+
                         <input id="newUsername" 
                                type="text" 
                                name="newUsername" 
@@ -164,7 +168,11 @@
                     </div>
 
                     <div class="info-adjustment-group">
-                        <label for="newPassword" class="info-adjustment-label" [innerHTML]="langService.words().PROFILE.CHANGE_PASS_LABEL"></label>
+                        <label for="newPassword" 
+                               class="info-adjustment-label" 
+                               [attr.aria-label]="langService.words().PROFILE.CHANGE_PASS_ARIA" 
+                               [innerHTML]="langService.words().PROFILE.CHANGE_PASS_LABEL"></label>
+
                         <div class="password-input-wrapper">
                             <input id="newPassword" 
                                    [type]="showPassword ? 'text' : 'password'" 
@@ -187,7 +195,10 @@
                     </div>
 
                     <div class="info-adjustment-group">
-                        <label for="confirmNewPassword" class="info-adjustment-label" [innerHTML]="langService.words().PROFILE.CONFIRM_PASS_LABEL"></label>
+                        <label for="confirmNewPassword" 
+                               class="info-adjustment-label" 
+                               [attr.aria-label]="langService.words().PROFILE.CONFIRM_PASS_ARIA" 
+                               [innerHTML]="langService.words().PROFILE.CONFIRM_PASS_LABEL"></label>
                         <!-- <input [type]="showPassword ? 'text' : 'password'" name="confirmNewPassword" [(ngModel)]="confirmNewPassword" placeholder="Retype your new password..." class="info-adjustment-input" /> --> <!-- This will make it so that both password textboxes are bound to the same reveal "eye" button -->
                          <div class="password-input-wrapper">
                             <input id="confirmNewPassword" 
@@ -215,7 +226,8 @@
                     <button type="submit" 
                             class="save-settings-btn" 
                             [disabled]="(!updateData.NewUsername?.trim()) && (!updateData.NewPassword?.trim() || updateData.NewPassword !== confirmNewPassword)"
-                            [innerHTML]="langService.words().PROFILE.SAVE_CHANGES_BTN"></button>
+                            [attr.aria-label]="langService.words().PROFILE.SAVE_CHANGES_BTN_ARIA"
+                            [innerHTML]="langService.words().PROFILE.SAVE_CHANGES_BTN_TEXT"></button>
                  </form>
 
                 <hr aria-hidden="true">
@@ -224,12 +236,19 @@
                  <!-- role="alertdialog" alerts the user immediately to prioritize their focus onto this block -->
                  <div class="danger-zone" role="alertdialog" aria-labelledby="dangerZoneHeader" aria-describedby="dangerZoneWarnMsg">
                     <span aria-hidden="true">⚠️ </span>
-                    <span id="dangerZoneHeader" class="danger-zone-header" [innerHTML]="langService.words().PROFILE.DANGER_ZONE_TITLE"></span>
-                    <p id="dangerZoneWarnMsg" class="danger-zone-warning" [innerHTML]="langService.words().PROFILE.DANGER_ZONE_WARN"></p>
+                    <span id="dangerZoneHeader" 
+                          class="danger-zone-header" 
+                          [attr.aria-label]="langService.words().PROFILE.DANGER_ZONE_TITLE_ARIA"
+                          [innerHTML]="langService.words().PROFILE.DANGER_ZONE_TITLE_TEXT"></span>
+                    <p id="dangerZoneWarnMsg" 
+                       class="danger-zone-warning" 
+                       [attr.aria-label]="langService.words().PROFILE.DANGER_ZONE_WARN_ARIA"
+                       [innerHTML]="langService.words().PROFILE.DANGER_ZONE_WARN_TEXT"></p>
                     <button type="button" 
                             (click)="onDeleteAccount()" 
                             class="danger-zone-btn"
-                            aria-label="Permanently delete account workspace and credentials forever" [innerHTML]="langService.words().PROFILE.DANGER_ZONE_BTN"></button>
+                            [attr.aria-label]="langService.words().PROFILE.DANGER_ZONE_BTN_ARIA" 
+                            [innerHTML]="langService.words().PROFILE.DANGER_ZONE_BTN_TEXT"></button>
                  </div>
              </div>
         </div>
