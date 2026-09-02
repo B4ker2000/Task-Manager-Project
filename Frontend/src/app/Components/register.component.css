@@ -23,7 +23,8 @@
 
 .register-footer p {
     margin: 0; 
-    display: inline;
+    display: block;
+    text-align: center;
 }
 
 /* =========================================================================

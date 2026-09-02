@@ -11,10 +11,8 @@ export const JapanesePack: LocalePack = {
         FIELD_PASSWORD: "パスワード",
         PLACEHOLDER_PASSWORD: "パスワードを入力...",
 
-        // Footer Navigation Links
+        // Footer Navigation Aria
         FOOTER_NAV_ARIA: "別のアカウント作成リンク",
-        FOOTER_TEXT: "初めてのご<ruby>利用<rt>りよう</rt></ruby>ですか？ ",
-        FOOTER_LINK: "<ruby>新規<rt>しんき</rt></ruby>アカウントの<ruby>作成<rt>さくせい</rt></ruby>",
 
         // Eye Toggle Accessibility Script Targets
         SHOW_PASS_ARIA: "パスワードを表示する",
@@ -99,43 +97,45 @@ export const JapanesePack: LocalePack = {
         ACCOUNT_SETTINGS_TITLE: "アカウント<ruby>管理<rt>かんり</rt></ruby><ruby>設定<rt>せってい</rt></ruby>",
         UPDATE_USER_LABEL: "ユーザー名の<ruby>変更<rt>へんこう</rt></ruby>",
         UPDATE_USER_PLACEHOLDER: "新しいユーザー名を入力...",
-        CHANGE_PASS_LABEL: "新しいパスワード",
+        CHANGE_PASS_LABEL: "<ruby>新<rt>あたら</rt></ruby>しいパスワード",
         CHANGE_PASS_PLACEHOLDER: "新しいパスワードを入力...",
-        CONFIRM_PASS_LABEL: "新しいパスワード（<ruby>確認<rt>かくにん</rt></ruby>）",
+        CONFIRM_PASS_LABEL: "<ruby>新<rt>あたら</rt></ruby>しいパスワード（<ruby>確認<rt>かくにん</rt></ruby>）",
         CONFIRM_PASS_PLACEHOLDER: "もう一度パスワードを入力...",
         PASS_REQUIREMENTS_ARIA: "変更を安全に適用するには、両方のパスワードフィールドが一致している必要があります。",
         SAVE_CHANGES_BTN: "プロファイルの<ruby>変更<rt>へんこう</rt></ruby>を<ruby>保存<rt>ほぞん</rt></ruby>",
 
         // Destructive Actions Area (Danger Zone)
-        DANGER_ZONE_TITLE: "危険ゾーン",
-        DANGER_ZONE_WARN: "アカウントを<ruby>削除<rt>さくじょ</rt></ruby>すると、ワークスペースへのアクセス権が完全に消失します！<br>この<ruby>操作<rt>そうさ</rt></ruby>は<ruby>取消<rt>とりけし</rt></ruby>できません。",
-        DANGER_ZONE_BTN: "アカウントを完全に削除する"
+        DANGER_ZONE_TITLE: "<ruby>危険<rt>きけん</rt></ruby>ゾーン",
+        DANGER_ZONE_WARN: "アカウントを<ruby>削除<rt>さくじょ</rt></ruby>すると、ワークスペースへのアクセス<ruby>権<rt>けん</rt></ruby>が<ruby>完全<rt>かんぜん</rt></ruby>に<ruby>消失<rt>しょおしつ</rt></ruby>します！<br>この<ruby>操作<rt>そうさ</rt></ruby>は<ruby>取消<rt>とりけし</rt></ruby>できません。",
+        DANGER_ZONE_BTN: "アカウントを<ruby>完全<rt>かんぜん</rt></ruby>に<ruby>削除<rt>さくじょ</rt></ruby>する"
     },
     
     LOGIN: {
         PORTAL_ARIA: "アカウント認証ポータル",
-        HEADER_WELCOME_BACK: "お<ruby>帰りなさい<rt>かえりなさい</rt></ruby>",
+        HEADER_WELCOME_BACK: "お<ruby>帰<rt>かえ</rt>りなさい</ruby>",
         HEADER_FIRST_TIME: "タスクマネージャーへようこそ",
-        SUBTITLE_MANAGE: "ログインしてプロジェクトとタスクを管理しましょう",
-        CHECKBOX_REMEMBER: "ログイン状態を保持する",
-        BTN_SIGNIN_ARIA: "ワークスペースに安全にログインするボタン",
-        BTN_SIGNIN_TEXT: "ログイン"
+        SUBTITLE_MANAGE: "ログインしてプロジェクトとタスクを<ruby>管理<rt>かんり</rt></ruby>しましょう",
+        CHECKBOX_REMEMBER: "ログイン<ruby>状態<rt>じょおたい</rt></ruby>を<ruby>保持<rt>ほじ</rt></ruby>する",
+        BTN_SIGNIN_ARIA: "ワークスペースに<ruby>安全<rt>あんぜん</rt></ruby>にログインするボタン",
+        BTN_SIGNIN_TEXT: "ログイン",
+        FOOTER_TEXT: "初めてのご<ruby>利用<rt>りよう</rt></ruby>ですか？",
+        FOOTER_LINK: "<ruby>新規<rt>しんき</rt></ruby>アカウントの<ruby>作成<rt>さくせい</rt></ruby>"
     },
 
     REGISTER: {
         PORTAL_ARIA: "アカウント作成ポータル",
         HEADER_TITLE: "アカウントの<ruby>作成<rt>さくせい</rt></ruby>",
-        SUBTITLE_JOIN: "プロジェクト管理プラットフォームに参加しましょう！",
-        LABEL_USERNAME: "ユーザー名",
+        SUBTITLE_JOIN: "プロジェクト<ruby>管理<rt>かんり</rt></ruby>プラットフォームに<ruby>参加<rt>さんか</rt></ruby>しましょう！",
+        LABEL_USERNAME: "ユーザー<ruby>名<rt>めい</rt></ruby>",
         PLACEHOLDER_USERNAME: "ユニークな表示名を入力...",
         PLACEHOLDER_PASSWORD: "安全なパスワードを作成...",
-        LABEL_CONFIRM_PASSWORD: "パスワード（確認）",
+        LABEL_CONFIRM_PASSWORD: "パスワード（<ruby>確認<rt>かくにん</rt></ruby>）",
         PLACEHOLDER_CONFIRM_PASSWORD: "パスワードを再入力...",
         REQUIREMENTS_ARIA: "アカウント作成要求を送信するには、両方のパスワードフィールドが正確に一致している必要があります。",
-        BTN_SUBMIT_TEXT: "アカウント作成",
+        BTN_SUBMIT_TEXT: "アカウント<ruby>作成<rt>さじゅせい</rt></ruby>",
         BTN_SUBMIT_ARIA: "入力された情報で新しいアカウントを登録するボタン",
-        FOOTER_TEXT: "すでにアカウントをお持ちですか？ ",
-        FOOTER_LINK: "ログイン画面に<ruby>戻<rt>もど</rt></ruby>る"
+        FOOTER_TEXT: "すでにアカウントをお<ruby>持<rt>も</rt></ruby>ちですか？",
+        FOOTER_LINK: "ログイン<ruby>画面<rt>がめん</rt></ruby>に<ruby>戻<rt>もど</rt></ruby>る"
     },
 
     DASHBOARD: {
@@ -151,9 +151,9 @@ export const JapanesePack: LocalePack = {
         DESCRIPTION_LABEL: "<ruby>説明<rt>せつめい</rt></ruby>",
         DESCRIPTION_PLACEHOLDER: "プロジェクトの目標を入力してください...",
         CREATE_BTN_ARIA: "フォームを送信して新しいプロジェクトスペースを作成するボタン",
-        CREATE_BTN_TEXT: "プロジェクトを作成",
+        CREATE_BTN_TEXT: "プロジェクトを<ruby>作成<rt>さくせい</rt></ruby>",
         YOUR_PROJECTS_HEADER: "あなたのプロジェクト",
-        EMPTY_MESSAGE: "プロジェクトが見つかりません。新しく作成して開始しましょう！",
+        EMPTY_MESSAGE: "プロジェクトが<ruby>見<rt>み</rt></ruby>つかりません。<ruby>新<rt>あたら</rt></ruby>しく<ruby>作成<rt>さくせい</rt></ruby>して<ruby>開始<rt>かいし</rt></ruby>しましょう！",
 
         PROJECT_CARD_ARIA: "プロジェクトスペース: {value}",
         DELETE_PROJECT_ARIA: "プロジェクトを完全に削除: {value}",
@@ -174,7 +174,7 @@ export const JapanesePack: LocalePack = {
         HEADER_CREATE_TASK_ARIA: "オーバーレイウィンドウを開いて新しいタスクを追加します",
 
         // Task Crew & Invitation
-        CREW_PANEL_HEADER: "プロジェクトチーム＆タグ管理ワークスペース",
+        CREW_PANEL_HEADER: "プロジェクトチーム＆タグ<ruby>管理<rt>かんり</rt></ruby>ワークスペース",
         INVITE_FORM_ARIA: "このスペースに新しいチームメンバーを招待するフォーム",
         INVITE_PLACEHOLDER: "チームメイトの登録済みメールアドレスを入力...",
         INVITE_INPUT_ARIA: "チームメイトのメールアドレス入力フィールド",
@@ -183,13 +183,13 @@ export const JapanesePack: LocalePack = {
         INVITE_OPTION_OWNER: "共同所有者 / 管理者",
         INVITE_SUBMIT_ARIA: "招待リクエストを送信してメンバーを追加するボタン",
         INVITE_SUBMIT_BTN: "メンバーを追加",
-        ROSTER_HEADER: "現在のプロジェクトメンバー",
+        ROSTER_HEADER: "<ruby>現在<rt>げんざい</rt></ruby>のプロジェクトメンバー",
         ROSTER_BADGE_ARIA: "割り当てられた役割: {value}",
         ROSTER_REMOVE_ARIA: "プロジェクトメンバーから {value} を削除します",
 
         // Tags/Categories
-        TAGS_HEADER: "利用可能なプロジェクトタグ",
-        TAGS_FALLBACK: "このプロジェクトに作成されたカスタムタグはまだありません",
+        TAGS_HEADER: "<ruby>利用可能<rt>りよおかのお</rt></ruby>なプロジェクトタグ",
+        TAGS_FALLBACK: "このプロジェクトに<ruby>作成<rt>さくせい</rt></ruby>されたカスタムタグはまだありません",
         TAGS_PILL_ARIA: "タグ: {value1} （割り当てアイテム数: {value2}）",
         TAG_DELETE_ARIA: "プロジェクトタグを完全に削除: {value}",
 
@@ -205,7 +205,7 @@ export const JapanesePack: LocalePack = {
         CATEGORY_ARIA: "アクティブなカテゴリタグの割り当てでタスクをフィルタリングします",
         CATEGORY_ALL: "すべてのタグ",
         CATEGORY_UNASSIGNED: "未割り当てのタスク",
-        PROGRESS_LABEL: "プロジェクト完了の進捗状況:",
+        PROGRESS_LABEL: "プロジェクト<ruby>完了<rt>かんりょお</rt></ruby>の<ruby>進捗状況<rt>しんちょくじょおきょお</rt></ruby>:",
         PROGRESS_ARIA: "プロジェクト全体の完了進捗トラッカー。現在 {value} パーセントです。",
 
         // Mobile Column Selector
@@ -220,7 +220,7 @@ export const JapanesePack: LocalePack = {
         // =========================================================================
         // Pending Column (保留中レーン)
         // =========================================================================
-        COLUMN_PENDING_TITLE: "<ruby>保留中<rt>ほりうちゅう</rt></ruby> ({value})",
+        COLUMN_PENDING_TITLE: "保留中 ({value})",
         LANE_PENDING_ARIA: "保留中のタスク追跡リストレーン。アイテムが {value} 個含まれています。",
         TASK_CARD_ARIA: "タスクカード: {value}",
         TASK_CATEGORY_ARIA: "割り当てられたカテゴリタグ: {value}",
@@ -239,7 +239,7 @@ export const JapanesePack: LocalePack = {
 
         // Task Priority
         TASK_PRIORITY_ARIA: "優先度レベル: {value}",
-        TASK_PRIORITY_HIGH: "高",
+        TASK_PRIORITY_HIGH: "<ruby>高<rt>たか</rt></ruby>",
         TASK_PRIORITY_MEDIUM: "中",
         TASK_PRIORITY_LOW: "低",
         TASK_DEADLINE_ARIA: "タスクの締切日: {value}",
@@ -251,7 +251,7 @@ export const JapanesePack: LocalePack = {
         // =========================================================================
         // In-Progress & Review Column (進行中＆レビューレーン)
         // =========================================================================
-        COLUMN_INPROGRESS_TITLE: "<ruby>進行中<rt>しんこうちゅう</rt></ruby>＆レビュー ({value})",
+        COLUMN_INPROGRESS_TITLE: "進行中／レビュー ({value})",
         LANE_INPROGRESS_ARIA: "進行中およびレビュー中のタスク追跡リストレーン。アイテムが {value} 個含まれています。",
         TASK_CARD_STATUS_ARIA: "タスクカード: {value1}、現在のステータス: {value2}",
         REVIEW_BANNER_TEXT: "PMレビュー<ruby>待ち<rt>まち</rt></ruby>",
@@ -272,7 +272,7 @@ export const JapanesePack: LocalePack = {
         // =========================================================================
         // Completed Column (完了済みレーン)
         // =========================================================================
-        COLUMN_COMPLETED_TITLE: "<ruby>完了<rt>かんりょう</rt></ruby>済み ({value})",
+        COLUMN_COMPLETED_TITLE: "完了済み ({value})",
         LANE_COMPLETED_ARIA: "完了済みタスクのアーカイブリストレーン。終了したアイテムが {value} 個含まれています。",
         TASK_CARD_COMPLETED_ARIA: "完了したタスクカード: {value}",
         BADGE_DONE_TEXT: "完了",

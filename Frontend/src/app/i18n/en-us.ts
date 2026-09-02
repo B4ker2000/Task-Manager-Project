@@ -13,8 +13,6 @@ export const EnglishUSPack: LocalePack = {
 
         // Footer Navigation Links
         FOOTER_NAV_ARIA: "Alternative entry link",
-        FOOTER_TEXT: "New to the workspace? ",
-        FOOTER_LINK: "Create a New Account",
 
         // Eye Toggle Accessibility Script Targets
         SHOW_PASS_ARIA: "Show plain text password",
@@ -119,7 +117,9 @@ export const EnglishUSPack: LocalePack = {
         SUBTITLE_MANAGE: "Log in to manage your projects and tasks",
         CHECKBOX_REMEMBER: "Remember Me",
         BTN_SIGNIN_ARIA: "Sign in securely to your workspace canvas",
-        BTN_SIGNIN_TEXT: "Sign in"
+        BTN_SIGNIN_TEXT: "Sign in",
+        FOOTER_TEXT: "New to the workspace? ",
+        FOOTER_LINK: "Create a New Account"
     },
 
     REGISTER: {

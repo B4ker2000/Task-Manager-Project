@@ -13,8 +13,6 @@ export const RussianPack: LocalePack = {
 
         // Footer Navigation Links
         FOOTER_NAV_ARIA: "Альтернативная ссылка для входа",
-        FOOTER_TEXT: "Впервые в рабочей области? ",
-        FOOTER_LINK: "Создать новый аккаунт",
 
         // Eye Toggle Accessibility Script Targets
         SHOW_PASS_ARIA: "Показать скрытый пароль",
@@ -119,7 +117,9 @@ export const RussianPack: LocalePack = {
         SUBTITLE_MANAGE: "Войдите в систему для управления проектами и задачами",
         CHECKBOX_REMEMBER: "Запомнить меня",
         BTN_SIGNIN_ARIA: "Безопасный вход в рабочую область",
-        BTN_SIGNIN_TEXT: "Войти"
+        BTN_SIGNIN_TEXT: "Войти",
+        FOOTER_TEXT: "Впервые в рабочей области? ",
+        FOOTER_LINK: "Создать новый аккаунт"
     },
 
     REGISTER: {

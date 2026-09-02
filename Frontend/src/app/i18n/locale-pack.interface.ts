@@ -9,10 +9,8 @@ export interface LocalePack {
         FIELD_PASSWORD: string;
         PLACEHOLDER_PASSWORD: string;
 
-        // Footer Navigation Links
+        // Footer Navigation Aria
         FOOTER_NAV_ARIA: string;
-        FOOTER_TEXT: string;
-        FOOTER_LINK: string;
 
         // Eye Toggle Accessibility Script Targets
         SHOW_PASS_ARIA: string;
@@ -118,6 +116,8 @@ export interface LocalePack {
         CHECKBOX_REMEMBER: string;
         BTN_SIGNIN_TEXT: string;
         BTN_SIGNIN_ARIA: string;
+        FOOTER_TEXT: string;
+        FOOTER_LINK: string;
     };
 
     REGISTER: {

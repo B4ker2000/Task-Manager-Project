@@ -30,9 +30,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Super_Secret_Key_That_Is_Long_Enough_For_Sha256_Compliance!")),
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("GreatLeaderTheEsteemedPresidentBeautifierOfLandsScriberOfMinutesAthleticsClubCaptainChiefOfSanitationHeadOfAllPrefectsMavenOfMealServicePuddingGourmetPresidentOfRedWinterScienceDepartmentAndDirectorOfCastellaProductionRenkawaCherino")),
             ValidateIssuer = false,
-            ValidateAudience = false
+            ValidateAudience = false,
+            ClockSkew = TimeSpan.Zero // Eliminates the default 5-minute token expiration delay cushion
         };
     });
 
@@ -41,7 +42,8 @@ builder.Services.AddCors(options => {
     options.AddPolicy("AllowAngular", policy => policy
         .WithOrigins("http://localhost:4200") // Default Angular port
         .AllowAnyHeader()
-        .AllowAnyMethod());
+        .AllowAnyMethod()
+        .AllowCredentials()); // Browser cookies related
 });
 
 var app = builder.Build();

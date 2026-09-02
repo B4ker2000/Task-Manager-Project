@@ -107,7 +107,7 @@ namespace Backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("AssigendUserId")
+                    b.Property<int?>("AssignedUserId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int?>("AssignedUserId")
@@ -147,7 +147,7 @@ namespace Backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AssigendUserId");
+                    b.HasIndex("AssignedUserId");
 
                     b.HasIndex("CategoryId");
 
@@ -234,9 +234,9 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Backend.Models.TaskItem", b =>
                 {
-                    b.HasOne("Backend.Models.User", "AssigendUser")
+                    b.HasOne("Backend.Models.User", "AssignedUser")
                         .WithMany()
-                        .HasForeignKey("AssigendUserId");
+                        .HasForeignKey("AssignedUserId");
 
                     b.HasOne("Backend.Models.Category", "Category")
                         .WithMany("Tasks")
@@ -249,7 +249,7 @@ namespace Backend.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("AssigendUser");
+                    b.Navigation("AssignedUser");
 
                     b.Navigation("Category");
 

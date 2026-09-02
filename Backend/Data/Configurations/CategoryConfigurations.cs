@@ -8,7 +8,19 @@ namespace Backend.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Category> builder)
         {
-            // Connects Projects to Categories
+            // Explicitly set the Primary Key mapping
+            builder.HasKey(c => c.Id);
+
+            // Column Constraints
+            builder.Property(c => c.Name)
+                   .IsRequired()
+                   .HasMaxLength(50);
+
+            builder.Property(c => c.ColorHex)
+                   .IsRequired()
+                   .HasMaxLength(7); // Accommodates standard '#ffffff' layout perfectly
+        
+            // Core Relationships: Connects Projects to Categories
             builder.HasOne(c => c.Project)
                    .WithMany()
                    .HasForeignKey(c => c.ProjectId)

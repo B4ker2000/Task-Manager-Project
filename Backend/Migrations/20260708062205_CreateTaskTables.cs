@@ -24,8 +24,7 @@ namespace Backend.Migrations
                     Deadline = table.Column<DateTime>(type: "TEXT", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
                     ProjectId = table.Column<int>(type: "INTEGER", nullable: false),
-                    AssignedUserId = table.Column<int>(type: "INTEGER", nullable: true),
-                    AssigendUserId = table.Column<int>(type: "INTEGER", nullable: true)
+                    AssignedUserId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -37,16 +36,16 @@ namespace Backend.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Tasks_Users_AssigendUserId",
-                        column: x => x.AssigendUserId,
+                        name: "FK_Tasks_Users_AssignedUserId",
+                        column: x => x.AssignedUserId,
                         principalTable: "Users",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tasks_AssigendUserId",
+                name: "IX_Tasks_AssignedUserId",
                 table: "Tasks",
-                column: "AssigendUserId");
+                column: "AssignedUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tasks_ProjectId",

@@ -86,7 +86,8 @@ input[type="email"] {
    ========================================================================= */
 .login-footer-navigation p {
     margin: 0;
-    display: inline;
+    display: block;
+    text-align: center;
 }
 
 .error-msg {
