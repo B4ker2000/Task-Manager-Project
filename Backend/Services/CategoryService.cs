@@ -14,15 +14,30 @@ namespace Backend.Services
             _context = context;
         }
 
+        public async Task<IEnumerable<Category>> GetCategoriesByProjectAsync(int projectId)
+        {
+            return await _context.Categories
+                .Where(c => c.ProjectId == projectId)
+                .AsNoTracking() // Keeps RAM usage ultra-low for simple fetches!
+                .ToListAsync();
+        }
+
         public async Task<Category?> CreateCategoryAsync(int projectId, int userId, CategoryCreateDto dto)
         {
+            // Guard Clause: Protect against bad payloads breaking string manipulation (.Trim())
+            if (string.IsNullOrWhiteSpace(dto.Name) || string.IsNullOrWhiteSpace(dto.ColorHex))
+            {
+                return null;
+            }
+
             // 1. Verify Authorization: Only Project Owners/Managers can create categories
             var membership = await _context.ProjectMembers
+                .AsNoTracking()
                 .FirstOrDefaultAsync(pm => pm.ProjectId == projectId && pm.UserId == userId);
 
-            if(membership == null || membership.ProjectRole != "Owner")
+            if (membership == null || membership.ProjectRole != "Owner")
             {
-                // Returning null lets our controller know authorization failed or was forbiddden
+                // Returning null lets our controller know authorization failed or was forbidden
                 return null;
             }
 
@@ -45,9 +60,10 @@ namespace Backend.Services
         {
             // 1. Verify Authorization: Only space Owners can delete categories!
             var membership = await _context.ProjectMembers
+                .AsNoTracking()
                 .FirstOrDefaultAsync(pm => pm.ProjectId == projectId && pm.UserId == userId);
         
-            if(membership == null || membership.ProjectRole != "Owner")
+            if (membership == null || membership.ProjectRole != "Owner")
             {
                 return false;
             }
@@ -56,7 +72,7 @@ namespace Backend.Services
             var category = await _context.Categories
                 .FirstOrDefaultAsync(cat => cat.ProjectId == projectId && cat.Id == categoryId);
 
-            if(category == null)
+            if (category == null)
             {
                 return false;
             }

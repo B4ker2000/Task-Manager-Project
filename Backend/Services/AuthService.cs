@@ -13,17 +13,19 @@ namespace Backend.Services
     public class AuthService : IAuthService
     {
         private readonly ApplicationDbContext _context;
+        private readonly IConfiguration _configuration;
 
         // Inject our Database Context directly into our service
-        public AuthService(ApplicationDbContext context)
+        public AuthService(ApplicationDbContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         // 1. Handles User Registration Logic
         public async Task<bool> RegisterAsync(UserRegisterDto request)
         {
-            if(await _context.Users.AnyAsync(u => u.Email == request.Email))
+            if (await _context.Users.AnyAsync(u => u.Email == request.Email))
             {
                 return false; // Email already taken
             }
@@ -32,8 +34,8 @@ namespace Backend.Services
 
             var user = new User
             {
-                Username = request.Username,
-                Email = request.Email,
+                Username = request.Username.Trim(),
+                Email = request.Email.Trim().ToLower(), // Standardize casing for query matches
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt
             };
@@ -46,8 +48,14 @@ namespace Backend.Services
         // 2. Handle User Login Token Generation
         public async Task<string?> LoginAsync(UserLoginDto request)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
-            if(user == null || !VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
+
+            if (string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.Password))
+            {
+                return null;
+            }
+
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email.Trim().ToLower());
+            if (user == null || !VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
             {
                 return null; // Invalid credentials
             }
@@ -58,18 +66,18 @@ namespace Backend.Services
         // 3. Process Profile Statistics Generation
         public async Task<object?> GetProfileAsync(int userId)
         {
-            var user = await _context.Users.FindAsync(userId);
-            if(user == null) return null;
+            var user = await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Id == userId);
+            if (user == null) return null;
 
             int totalAssignedTasks = 0;
             int completedTasksCount = 0;
 
             try
             {
-                totalAssignedTasks = await _context.Tasks.CountAsync(t => t.AssignedUserId == userId);
-                completedTasksCount = await _context.Tasks.CountAsync(t => t.AssignedUserId == userId && t.Status == "Completed");
+                totalAssignedTasks = await _context.Tasks.AsNoTracking().CountAsync(t => t.AssignedUserId == userId);
+                completedTasksCount = await _context.Tasks.AsNoTracking().CountAsync(t => t.AssignedUserId == userId && t.Status == "Completed");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine($"Metrics loading encounter: {ex.Message}");
             }
@@ -80,12 +88,57 @@ namespace Backend.Services
                 username = user.Username,
                 email = user.Email,
                 role = "Member",
-                stats = new
-                {
+                stats = new {
                     total = totalAssignedTasks,
                     completed = completedTasksCount
                 }
             };
+        }
+
+        // 4. Handle Account Details Modification
+        public async Task<bool> UpdateAccountAsync(int userId, UpdateAccountDto request)
+        {
+            var user = await _context.Users.FindAsync(userId);
+            if (user == null) return false;
+
+            // 4.1 Optional Username Update
+            if (!string.IsNullOrWhiteSpace(request.NewUsername))
+            {
+                user.Username = request.NewUsername.Trim();
+            }
+
+            // 4.2 Optional Password Update (Re-hashes using internal helper)
+            if (!string.IsNullOrWhiteSpace(request.NewPassword))
+            {
+                CreatePasswordHash(request.NewPassword, out byte[] hash, out byte[] salt);
+                user.PasswordHash = hash;
+                user.PasswordSalt = salt;
+            }
+
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+        // 5. Handle Permanent Account Removal
+        public async Task<bool> DeleteAccountAsync(int userId)
+        {
+            var user = await _context.Users.FindAsync(userId);
+            if (user == null) return false;
+
+            // Purge target entity assignments and records explicitly before user removal
+            var memberships = await _context.ProjectMembers.Where(pm => pm.UserId == userId).ToListAsync();
+            if (memberships.Any()) _context.ProjectMembers.RemoveRange(memberships);
+
+            // Reassign or unassign tasks instead of leaving them orphaned
+            var assignedTasks = await _context.Tasks.Where(t => t.AssignedUserId == userId).ToListAsync();
+            foreach (var task in assignedTasks)
+            {
+                task.AssignedUserId = null; // Mark task as unassigned cleanly
+            }
+
+            _context.Users.Remove(user);
+            await _context.SaveChangesAsync();
+            return true;
         }
 
         // --- Core Internal Crypto Helper Utilities ---
@@ -120,17 +173,24 @@ namespace Backend.Services
                 new Claim(ClaimTypes.Email, user.Email)
             };
             
-            // 3.2. Create a temporary super-secret key for signing the token
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Super_Secret_Key_That_Is_Long_Enough_For_Sha256_Compliance!"));
+            // 3.2. Dynamic Pull: Read key securely from appsettings.json!
+            var secretKey = _configuration["JwtSettings:SecretKey"];
+            if (string.IsNullOrEmpty(secretKey))
+            {
+                throw new InvalidOperationException("JWT Secret Key is missing from configuration settings.");
+            } 
 
             // 3.3. Generate signing credentials using the secret key
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
 
-            // 3.4. Build the token specifications
+            // 3.4. Dynamic Pull: Read expiration duration dynamically too!
+            var expiryDays = double.TryParse(_configuration["JwtSettings:ExpiryDays"], out var days) ? days : 1;
+
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddDays(1), // Token lasts for 1 day!
+                Expires = DateTime.UtcNow.AddDays(expiryDays), // Token lasts for 1 day!
                 SigningCredentials = creds
             };
 
@@ -139,45 +199,6 @@ namespace Backend.Services
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
             return tokenHandler.WriteToken(token);
-        }
-
-        // 4. Handle Account Details Modification
-        public async Task<bool> UpdateAccountAsync(int userId, UpdateAccountDto request)
-        {
-            var user = await _context.Users.FindAsync(userId);
-            if(user == null) return false;
-
-            // 4.1 Optional Username Update
-            if(!string.IsNullOrWhiteSpace(request.NewUsername))
-            {
-                user.Username = request.NewUsername;
-            }
-
-            // 4.2 Optional Password Update (Re-hashes using internal helper)
-            if(!string.IsNullOrWhiteSpace(request.NewPassword))
-            {
-                CreatePasswordHash(request.NewPassword, out byte[] hash, out byte[] salt);
-                user.PasswordHash = hash;
-                user.PasswordSalt = salt;
-            }
-
-            await _context.SaveChangesAsync();
-            return true;
-        }
-
-        // 5. Handle Permanent Account Removal
-        public async Task<bool> DeleteAccountAsync(int userId)
-        {
-            var user = await _context.Users.FindAsync(userId);
-            if(user == null) return false;
-
-            // Clean out all personal projects and orphan tasks first to avoid database locking constraints
-            var userProjects = _context.Projects.Where(p => p.Id == userId);
-            var userTasks = _context.Tasks.Where(t => t.ProjectId == userId);
-
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
-            return true;
         }
     }
 }

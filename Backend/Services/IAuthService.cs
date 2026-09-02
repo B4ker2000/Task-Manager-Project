@@ -1,5 +1,4 @@
 using Backend.Dtos;
-using Backend.Models;
 
 namespace Backend.Services
 {

@@ -43,8 +43,8 @@ namespace Backend.Services
         // 2. Process User Project Lists with LINQ Join Queries
         public async Task<object> GetMyProjectsAsync(int userId)
         {
-            var projectWithRoles = await (from pm in _context.ProjectMembers
-                                            join p in _context.Projects on pm.ProjectId equals p.Id
+            var projectWithRoles = await (from pm in _context.ProjectMembers.AsNoTracking()
+                                            join p in _context.Projects.AsNoTracking() on pm.ProjectId equals p.Id
                                             where pm.UserId == userId
                                             select new
                                             {
@@ -56,11 +56,17 @@ namespace Backend.Services
             return projectWithRoles;
         }
 
-        // 3. Cascade Delete Projects and Associated Board Tasks
-        public async Task<bool> DeleteProjectAsync(int projectId)
+        // 3. Cascade Delete Projects and Associated Board Tasks safely
+        public async Task<bool> DeleteProjectAsync(int projectId, int currentUserId)
         {
             var project = await _context.Projects.FindAsync(projectId);
-            if(project == null) return false;
+            if (project == null) return false;
+
+            // Security gate: Verify requester is the true project creator/owner/manager before destroying records
+            var isOwner = await _context.ProjectMembers
+                .AnyAsync(pm => pm.ProjectId == projectId && pm.UserId == currentUserId && pm.ProjectRole == "Owner");
+
+            if (!isOwner) return false;
 
             var associatedTasks = _context.Tasks.Where(t => t.ProjectId == projectId);
             _context.Tasks.RemoveRange(associatedTasks);
@@ -72,31 +78,31 @@ namespace Backend.Services
         }
 
         // 4. Handle Workspace Invites and Collateral Integrity Checks
-        public async Task<string> InviteMemberAsync(int projectId, int currentUserId, ProjectInviteDto request)
+        public async Task<(ServiceOutcome Outcome, string? Username)> InviteMemberAsync(int projectId, int currentUserId, ProjectInviteDto request)
         {
             // 4.1. Security Check: Verify that the current user is an Owner
-            var currentMemberRecord = await _context.ProjectMembers
-                .FirstOrDefaultAsync(pm => pm.ProjectId == projectId && pm.UserId == currentUserId);
+            var isOwner = await _context.ProjectMembers
+                .AnyAsync(pm => pm.ProjectId == projectId && pm.UserId == currentUserId && pm.ProjectRole == "Owner");
 
-            if(currentMemberRecord == null || currentMemberRecord.ProjectRole != "Owner")
+            if (!isOwner)
             {
-                return "Forbidden";
+                return (ServiceOutcome.Forbidden, null);
             }
 
             // 4.2. User Validation: Search for target colleague by email
             var targetUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.InvitedEmail);
-            if(targetUser == null)
+            if (targetUser == null)
             {
-                return "UserNotFound";
+                return (ServiceOutcome.NotFound, null);
             }
 
-            // 4.3. Duplicate Check: Ensuer user is not already part of the project crew
+            // 4.3. Duplicate Check: Ensure user is not already part of the project crew
             var alreadyMember = await _context.ProjectMembers
                 .AnyAsync(pm => pm.ProjectId == projectId && pm.UserId == targetUser.Id);
 
-            if(alreadyMember)
+            if (alreadyMember)
             {
-                return "AlreadyMember";
+                return (ServiceOutcome.InvalidStatus, null); // Using InvalidStatus to represent duplicate payload states
             }
 
             // 4.4. Success Execution
@@ -110,89 +116,84 @@ namespace Backend.Services
             _context.ProjectMembers.Add(newMembership);
             await _context.SaveChangesAsync();
 
-            return targetUser.Username; // Return the username to display in the success alert
+            return (ServiceOutcome.Success, targetUser.Username); // Return the username to display in the success alert
         }
 
         // 5. Process Workspace Eviction or Voluntary Self-Removal
-        public async Task<string> RemoveProjectMemberAsync(int projectId, int currentUserId, int targetUserId)
+        public async Task<ServiceOutcome> RemoveProjectMemberAsync(int projectId, int currentUserId, int targetUserId)
         {
-            // 5.1.Find target membership record
+            // 5.1. Find target membership record
             var targetMembership = await _context.ProjectMembers
                 .FirstOrDefaultAsync(pm => pm.ProjectId == projectId && pm.UserId == targetUserId);
 
-            if(targetMembership == null) return "NotFound";
+            if (targetMembership == null) return ServiceOutcome.NotFound;
 
             // 5.2. Read authorization clearance roles
-            var currentUserMembership = await _context.ProjectMembers
-                .FirstOrDefaultAsync(pm => pm.ProjectId == projectId && pm.UserId == currentUserId);
+            var currentUserRole = await _context.ProjectMembers
+                .Where(pm => pm.ProjectId == projectId && pm.UserId == currentUserId)
+                .Select(pm => pm.ProjectRole)
+                .FirstOrDefaultAsync() ?? "None";
 
-            string currentUserRole = currentUserMembership?.ProjectRole ?? "None";
             bool isKickingSomeoneElse = currentUserId != targetUserId;
 
             // Rule A: Kicking someone else requires Owner clearance
-            if(isKickingSomeoneElse && currentUserRole != "Owner")
+            if (isKickingSomeoneElse && currentUserRole != "Owner")
             {
-                return "Forbidden";
+                return ServiceOutcome.Forbidden;
             }
 
             // Rule B: Cannot leave voluntarily if you are the last surviving project owner
-            if(!isKickingSomeoneElse && currentUserRole == "Owner")
+            if (!isKickingSomeoneElse && currentUserRole == "Owner")
             {
                 var ownerCount = await _context.ProjectMembers
                     .CountAsync(pm => pm.ProjectId == projectId && pm.ProjectRole == "Owner");
 
-                if(ownerCount <= 1)
+                if (ownerCount <= 1)
                 {
-                    return "SoleOwnerTrap";
+                    return ServiceOutcome.InvalidStatus; // Using InvalidStatus as our block trigger for the SoleOwnerTrap
                 }
             }
 
-            // 5.3. METRICS SAFETY CLEANUP: Nullify tasks assigned to this user inside this room
-            var assignedTasks = await _context.Tasks
+            // 5.3. METRICS SAFETY CLEANUP: Safely wipe out assigned tasks inside this room without manual loop overheads
+            await _context.Tasks
                 .Where(t => t.ProjectId == projectId && t.AssignedUserId == targetUserId)
-                .ToListAsync();
-
-            foreach(var task in assignedTasks)
-            {
-                task.AssignedUserId = null;
-            }
+                .ExecuteUpdateAsync(setters => setters.SetProperty(t => t.AssignedUserId, (int?)null));
 
             // 5.4. Remove record
             _context.ProjectMembers.Remove(targetMembership);
             await _context.SaveChangesAsync();
 
-            return isKickingSomeoneElse ? "KickedSuccess" : "LeftSuccess";
+            return ServiceOutcome.Success;
         }
 
         // 6. Fetch Single Project Metadata Profile
         public async Task<Project?> GetProjectByIdAsync(int projectId)
         {
-            return await _context.Projects.FirstOrDefaultAsync(p => p.Id == projectId);
+            return await _context.Projects.AsNoTracking().FirstOrDefaultAsync(p => p.Id == projectId);
         }
 
         // 7. Read Current User's Workspace Clearance Role
         public async Task<string?> GetProjectRoleAsync(int projectId, int userId)
         {
-            var memberRecord = await _context.ProjectMembers
-                .FirstOrDefaultAsync(pm => pm.ProjectId == projectId && pm.UserId == userId);
-
-            return memberRecord?.ProjectRole;
+            return await _context.ProjectMembers
+                .Where(pm => pm.ProjectId == projectId && pm.UserId == userId)
+                .Select(pm => pm.ProjectRole)
+                .FirstOrDefaultAsync();
         }
 
         // 8. Extract Project Room's Registered Roster Directory
         public async Task<object> GetProjectMembersAsync(int projectId)
         {
-            var rosterList = await _context.ProjectMembers
+            return await _context.ProjectMembers
+                .AsNoTracking()
                 .Where(pm => pm.ProjectId == projectId)
                 .Select(pm => new
                 {
                     UserId = pm.UserId,
-                    UserEmail = pm.User!.Email,
+                    UserEmail = pm.User != null ? pm.User.Email : "Unknown",
                     ProjectRole = pm.ProjectRole
                 })
                 .ToListAsync();
-
-            return rosterList;
         }
     }
 }

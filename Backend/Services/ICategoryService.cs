@@ -5,6 +5,8 @@ namespace Backend.Services
 {
     public interface ICategoryService
     {
+        Task<IEnumerable<Category>> GetCategoriesByProjectAsync(int projectId);
+
         // The "?" means this method is allowed to return null if authorization fails
         Task<Category?> CreateCategoryAsync(int projectId, int userId, CategoryCreateDto dto);
 

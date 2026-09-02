@@ -13,10 +13,10 @@ namespace Backend.Services
     public interface ITaskService
     {
         Task<TaskCreationResult> CreateTaskAsync(int currentUserId, TaskCreateDto request);
-        Task<object> GetProjectTasksAsync(int projectId, int currentUserId);
-        Task<string> UpdateTaskStatusAsync(int taskId, string newStatus);
-        Task<string> DeleteTaskAsync(int taskId, int currentUserId);
-        Task<string> AssignTaskAsync(int taskId, int currentUserId, int? assignedUserId);
-        Task<string> AssignTaskCategoryAsync(int taskId, int currentUserId, int? categoryId);
+        Task<object?> GetProjectTasksAsync(int projectId, int currentUserId);
+        Task<ServiceOutcome> UpdateTaskStatusAsync(int taskId, string newStatus);
+        Task<ServiceOutcome> DeleteTaskAsync(int taskId, int currentUserId);
+        Task<ServiceOutcome> AssignTaskAsync(int taskId, int currentUserId, int? assignedUserId);
+        Task<ServiceOutcome> AssignTaskCategoryAsync(int taskId, int currentUserId, int? categoryId);
     }
 }
