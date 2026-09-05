@@ -3,17 +3,15 @@
      [attr.aria-label]="langService.words().REGISTER.PORTAL_ARIA">
     
     <div class="register-card">
-        <h2 id="registerHeader" [attr.aria-label]="langService.words().REGISTER.HEADER_TITLE_ARIA" [innerHTML]="langService.words().REGISTER.HEADER_TITLE_TEXT"></h2>
-        <p class="subtitle" [attr.aria-label]="langService.words().REGISTER.SUBTITLE_JOIN_ARIA" [innerHTML]="langService.words().REGISTER.SUBTITLE_JOIN_TEXT"></p>
+        <h2 id="registerHeader" [innerHTML]="langService.words().REGISTER.HEADER_TITLE"></h2>
+        <p class="subtitle" [innerHTML]="langService.words().REGISTER.SUBTITLE_JOIN"></p>
         
         <!-- aria-labelledby provides instant spatial context to the screen reader user -->
          <form (ngSubmit)="onRegister()" #registerForm="ngForm" aria-labelledby="registerHeader">
 
             <!-- 👤 Username Input Group -->
              <div class="form-group">
-                <label for="username" 
-                       [attr.aria-label]="langService.words().REGISTER.LABEL_USERNAME_ARIA" 
-                       [innerHTML]="langService.words().REGISTER.LABEL_USERNAME_TEXT"></label>
+                <label for="username" [innerHTML]="langService.words().REGISTER.LABEL_USERNAME"></label>
                 <input id="username" 
                        type="text" 
                        name="username" 
@@ -64,9 +62,7 @@
 
             <!-- 🔒 Password Confirmation Input Group -->
              <div class="form-group">
-                <label for="confirmPassword" 
-                       [attr.aria-label]="langService.words().REGISTER.LABEL_CONFIRM_PASSWORD_ARIA" 
-                       [innerHTML]="langService.words().REGISTER.LABEL_CONFIRM_PASSWORD_TEXT"></label>
+                <label for="confirmPassword" [innerHTML]="langService.words().REGISTER.LABEL_CONFIRM_PASSWORD"></label>
                 <div class="password-input-wrapper">
                     <input id="confirmPassword" 
                            [type]="showConfirmPassword ? 'text' : 'password'" 
@@ -106,7 +102,7 @@
               [attr.aria-label]="langService.words().GLOBAL.FOOTER_NAV_ARIA">
               
             <p>
-               <span [attr.aria-label]="langService.words().REGISTER.FOOTER_ARIA" [innerHTML]="langService.words().REGISTER.FOOTER_TEXT"></span>
+               <span [innerHTML]="langService.words().REGISTER.FOOTER_TEXT"></span>
                <a [routerLink]="['/login']" class="login-link" [attr.aria-label]="langService.words().REGISTER.FOOTER_LINK_ARIA" [innerHTML]="langService.words().REGISTER.FOOTER_LINK_TEXT"></a>
             </p>
          </div>

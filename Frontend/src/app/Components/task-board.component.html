@@ -27,8 +27,7 @@
     <div class="project-member-management-panel" role="region" aria-labelledby="managementPanelHeader">
         <div id="managementPanelHeader" class="invite-header-title">
             <span aria-hidden="true">👥</span> 
-            <span [attr.aria-label]="langService.words().TASKBOARD.CREW_PANEL_HEADER_ARIA" 
-                  [innerHTML]="langService.words().TASKBOARD.CREW_PANEL_HEADER_TEXT"></span>
+            <span [innerHTML]="langService.words().TASKBOARD.CREW_PANEL_HEADER"></span>
         </div>
 
         <div class="management-split-row">
@@ -62,8 +61,7 @@
                  <div aria-live="polite" aria-relevant="additions removals" role="region" aria-labelledby="rosterHeader">
                     <h2 id="rosterHeader" 
                         class="roster-sub-title" 
-                        [attr.aria-label]="langService.words().TASKBOARD.ROSTER_HEADER_ARIA"
-                        [innerHTML]="langService.words().TASKBOARD.ROSTER_HEADER_TEXT"></h2>
+                        [innerHTML]="langService.words().TASKBOARD.ROSTER_HEADER"></h2>
                     <ul class="roster-list-element">
                         <li *ngFor="let m of projectMembers" class="roster-item-row">
                             <div class="member-info-block">
@@ -93,16 +91,14 @@
             <!-- DYNAMIC MASTER WORKSPACE TAGS ROSTER -->
              <div class="right-tags-column" role="region" aria-labelledby="tagsHeader">
                 <h5 id="tagsHeader"><span aria-hidden="true">🏷️</span> 
-                    <span [attr.aria-label]="langService.words().TASKBOARD.TAGS_HEADER_ARIA"
-                          [innerHTML]="langService.words().TASKBOARD.TAGS_HEADER_TEXT"></span>
+                    <span [innerHTML]="langService.words().TASKBOARD.TAGS_HEADER"></span>
                 </h5>
 
                 <!-- Fallback message if the Project Manager hasn't cooked up any tags yet -->
                  <div *ngIf="projectCategories.length === 0" 
                       class="tags-roster-tray-fallback" 
                       role="status" 
-                      [attr.aria-label]="langService.words().TASKBOARD.TAGS_FALLBACK_ARIA"
-                      [innerHTML]="langService.words().TASKBOARD.TAGS_FALLBACK_TEXT"></div>
+                      [innerHTML]="langService.words().TASKBOARD.TAGS_FALLBACK"></div>
 
                 <!-- The colored tag pills gallery -->
                  <div class="tags-flex-container" aria-live="polite" aria-relevant="additions removals">
@@ -180,8 +176,7 @@
               [attr.aria-label]="formatLabel(langService.words().TASKBOARD.PROGRESS_ARIA, completionPercentage)">
             
             <div class="priority-text-label">
-                <span [attr.aria-label]="formatLabel(langService.words().TASKBOARD.PROGRESS_LABEL_ARIA, completionPercentage)"
-                      [innerHTML]="langService.words().TASKBOARD.PROGRESS_LABEL_TEXT"></span>
+                <span [innerHTML]="langService.words().TASKBOARD.PROGRESS_LABEL"></span>
                 <strong>{{ completionPercentage }}%</strong>
             </div>
             <div class="progress-bar-track" aria-hidden="true">
@@ -314,9 +309,9 @@
                     <div class="task-actions">
                         <div class="badge-group">
                             <span class="priority-badge" [ngClass]="t.priority.toLowerCase()" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_PRIORITY_ARIA, t.priority)">
-                                <span *ngIf="t.priority === 'High'"><span aria-hidden="true">🔴 🔺</span> <span [attr.aria-label]="langService.words().TASKBOARD.TASK_PRIORITY_HIGH_ARIA" [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_HIGH_TEXT"></span></span>
-                                <span *ngIf="t.priority === 'Medium'"><span aria-hidden="true">🟡 🔸</span> <span [attr.aria-label]="langService.words().TASKBOARD.TASK_PRIORITY_MEDIUM_ARIA" [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_MEDIUM_TEXT"></span></span>
-                                <span *ngIf="t.priority === 'Low'"><span aria-hidden="true">🔵 🔹</span> <span [attr.aria-label]="langService.words().TASKBOARD.TASK_PRIORITY_LOW_ARIA" [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_LOW_TEXT"></span></span>
+                                <span *ngIf="t.priority === 'High'"><span aria-hidden="true">🔴 🔺</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_HIGH"></span></span>
+                                <span *ngIf="t.priority === 'Medium'"><span aria-hidden="true">🟡 🔸</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_MEDIUM"></span></span>
+                                <span *ngIf="t.priority === 'Low'"><span aria-hidden="true">🔵 🔹</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_LOW"></span></span>
                             </span>
                             <span class="deadline-badge" *ngIf="t.deadline" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DEADLINE_ARIA, (t.deadline | date:'yyyy/MM/dd') || '')">
                                 <span aria-hidden="true">📅</span> {{ t.deadline | date:"yyyy/MM/dd" }}
@@ -427,9 +422,9 @@
                     <div class="task-actions">
                         <div class="badge-group">
                             <span class="priority-badge" [ngClass]="t.priority.toLowerCase()" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_PRIORITY_ARIA, t.priority)">
-                                <span *ngIf="t.priority === 'High'"><span aria-hidden="true">🔴 🔺</span> <span [attr.aria-label]="langService.words().TASKBOARD.TASK_PRIORITY_HIGH_ARIA" [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_HIGH_TEXT"></span></span>
-                                <span *ngIf="t.priority === 'Medium'"><span aria-hidden="true">🟡 🔸</span> <span [attr.aria-label]="langService.words().TASKBOARD.TASK_PRIORITY_MEDIUM_ARIA" [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_MEDIUM_TEXT"></span></span>
-                                <span *ngIf="t.priority === 'Low'"><span aria-hidden="true">🔵 🔹</span> <span [attr.aria-label]="langService.words().TASKBOARD.TASK_PRIORITY_LOW_ARIA" [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_LOW_TEXT"></span></span>
+                                <span *ngIf="t.priority === 'High'"><span aria-hidden="true">🔴 🔺</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_HIGH"></span></span>
+                                <span *ngIf="t.priority === 'Medium'"><span aria-hidden="true">🟡 🔸</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_MEDIUM"></span></span>
+                                <span *ngIf="t.priority === 'Low'"><span aria-hidden="true">🔵 🔹</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_LOW"></span></span>
                             </span>
                             <span class="deadline-badge" *ngIf="t.deadline" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DEADLINE_ARIA, (t.deadline | date:'yyyy/MM/dd') || '')">
                                 <span aria-hidden="true">📅</span> {{ t.deadline | date:"yyyy/MM/dd" }}
@@ -579,9 +574,9 @@
                     <div class="task-actions">
                         <div class="badge-group">
                             <span class="priority-badge" [ngClass]="t.priority.toLowerCase()" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.FINISHED_PRIORITY_ARIA, t.priority)">
-                                <span *ngIf="t.priority === 'High'"><span aria-hidden="true">🔴 🔺</span> <span [attr.aria-label]="langService.words().TASKBOARD.TASK_PRIORITY_HIGH_ARIA" [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_HIGH_TEXT"></span></span>
-                                <span *ngIf="t.priority === 'Medium'"><span aria-hidden="true">🟡 🔸</span> <span [attr.aria-label]="langService.words().TASKBOARD.TASK_PRIORITY_MEDIUM_ARIA" [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_MEDIUM_TEXT"></span></span>
-                                <span *ngIf="t.priority === 'Low'"><span aria-hidden="true">🔵 🔹</span> <span [attr.aria-label]="langService.words().TASKBOARD.TASK_PRIORITY_LOW_ARIA" [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_LOW_TEXT"></span></span>
+                                <span *ngIf="t.priority === 'High'"><span aria-hidden="true">🔴 🔺</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_HIGH"></span></span>
+                                <span *ngIf="t.priority === 'Medium'"><span aria-hidden="true">🟡 🔸</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_MEDIUM"></span></span>
+                                <span *ngIf="t.priority === 'Low'"><span aria-hidden="true">🔵 🔹</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_LOW"></span></span>
                             </span>
                             <span class="deadline-badge" *ngIf="t.deadline" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DEADLINE_ARIA, (t.deadline | date:'yyyy/MM/dd') || '')">
                                 <span aria-hidden="true">📅</span> {{ t.deadline | date:"yyyy/MM/dd" }}
@@ -621,10 +616,7 @@
 
             <form (ngSubmit)="onCreateTask()" #taskForm="ngForm" aria-labelledby="createTaskModalHeader">
                 <div class="form-group-row">
-                    <label for="title" 
-                           aria-label="langService.words().TASKBOARD.MODAL_TASK_TITLE_LABEL_ARIA"
-                           [innerHTML]="langService.words().TASKBOARD.MODAL_TASK_TITLE_LABEL_TEXT"></label>
-
+                    <label for="title" [innerHTML]="langService.words().TASKBOARD.MODAL_TASK_TITLE_LABEL"></label>
                     <input id="title" 
                            type="text" 
                            name="title" 
@@ -636,18 +628,16 @@
                 </div>
 
                 <div class="form-group-row">
-                    <label for="description" 
-                           [attr.aria-label]="langService.words().TASKBOARD.MODAL_TASK_DESC_LABEL_ARIA"
-                           [innerHTML]="langService.words().TASKBOARD.MODAL_TASK_DESC_LABEL_TEXT"></label>
+                    <label for="description" [innerHTML]="langService.words().TASKBOARD.MODAL_TASK_DESC_LABEL"></label>
                     <textarea id="description" name="description" [(ngModel)]="newTask.description" [placeholder]="langService.words().TASKBOARD.MODAL_TASK_DESC_PLACEHOLDER" class="invite-text-field"></textarea>
                 </div>
 
                 <div class="form-group-row">
-                    <label for="priority" [attr.aria-label]="langService.words().TASKBOARD.MODAL_TASK_PRIORITY_LABEL_ARIA" [innerHTML]="langService.words().TASKBOARD.MODAL_TASK_PRIORITY_LABEL_TEXT"></label>
+                    <label for="priority" [innerHTML]="langService.words().TASKBOARD.MODAL_TASK_PRIORITY_LABEL"></label>
                     <select id="priority" name="priority" [(ngModel)]="newTask.priority" class="invite-dropdown-select" [attr.aria-label]="langService.words().TASKBOARD.PRIORITY_ARIA">
-                        <option value="Low" [attr.aria-label]="langService.words().TASKBOARD.TASK_PRIORITY_LOW_ARIA" [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_LOW_TEXT"></option>
-                        <option value="Medium" [attr.aria-label]="langService.words().TASKBOARD.TASK_PRIORITY_MEDIUM_ARIA" [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_MEDIUM_TEXT"></option>
-                        <option value="High" [attr.aria-label]="langService.words().TASKBOARD.TASK_PRIORITY_HIGH_ARIA" [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_HIGH_TEXT"></option>
+                        <option value="Low" [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_LOW"></option>
+                        <option value="Medium" [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_MEDIUM"></option>
+                        <option value="High" [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_HIGH"></option>
                     </select>
                 </div>
 
@@ -679,15 +669,12 @@
              aria-modal="true"
              aria-labelledby="createTagModalHeader">
             
-            <h3 id="createTagModalHeader" #tagModalHeader tabindex="-1" [attr.aria-label]="langService.words().TASKBOARD.MODAL_TAG_HEADER_ARIA" [innerHTML]="langService.words().TASKBOARD.MODAL_TAG_HEADER_TEXT"></h3>
+            <h3 id="createTagModalHeader" #tagModalHeader tabindex="-1" [innerHTML]="langService.words().TASKBOARD.MODAL_TAG_HEADER"></h3>
 
             <form (ngSubmit)="onCreateCategorySubmit()" #categoryForm="ngForm" class="modal-form" aria-labelledby="createTagModalHeader">
                 <div class="form-group-row">
-                    <label for="tagName" 
-                           [attr.aria-label]="langService.words().TASKBOARD.MODAL_TAG_NAME_LABEL_ARIA"
-                           [innerHTML]="langService.words().TASKBOARD.MODAL_TAG_NAME_LABEL_TEXT"></label>
-                           
-                    <input type="text" 
+                    <label for="tagName" [innerHTML]="langService.words().TASKBOARD.MODAL_TAG_NAME_LABEL"></label>
+                    <input type="text"
                            id="tagName" 
                            name="tagName" 
                            [(ngModel)]="newCategoryName" 

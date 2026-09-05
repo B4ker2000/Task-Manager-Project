@@ -61,7 +61,13 @@ export class LoginComponent implements OnInit {
             },
             error: (err) => {
                 console.error(err);
-                this.errorMessage = err.error || 'Invalid email or password. Please try again.';
+
+                // Safely extract our backend's structured JSON message, or fall back to our dictionary token
+                if (err.error && typeof err.error === 'object' && err.error.message) {
+                    this.errorMessage = err.error.message;
+                } else {
+                    this.errorMessage = this.langService.words().LOGIN.ERROR_FALLBACK;
+                }
                 this.cdr.detectChanges();
             }
         });

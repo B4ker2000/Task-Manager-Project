@@ -3,7 +3,7 @@ import { LocalePack } from './locale-pack.interface';
 export const EnglishUSPack: LocalePack = {
     GLOBAL: {
         BACK_BTN_TEXT: "← Back to Dashboard",
-        BACK_BTN_ARIA: "Back to primary task dashboard canvas",
+        BACK_BTN_ARIA: "Back to main project dashboard",
 
         // Email & Password Fields
         FIELD_EMAIL: "Email Address",
@@ -12,7 +12,7 @@ export const EnglishUSPack: LocalePack = {
         PLACEHOLDER_PASSWORD: "enter password...",
 
         // Footer Navigation Links
-        FOOTER_NAV_ARIA: "Alternative entry link",
+        FOOTER_NAV_ARIA: "Authentication page navigation link",
 
         // Eye Toggle Accessibility Script Targets
         SHOW_PASS_ARIA: "Show plain text password",
@@ -21,9 +21,8 @@ export const EnglishUSPack: LocalePack = {
         HIDE_CONFIRM_ARIA: "Hide plain text confirmation password",
 
         // Language Selection Configuration
-        LANGUAGE_SELECTION_TITLE_TEXT: "Application Language:",
-        LANGUAGE_SELECTION_TITLE_ARIA: "Application Language:",
-        LANGUAGE_SELECTION_ARIA: "Application display language selector dropdown",
+        LANGUAGE_SELECTION_TITLE: "Application Language:",
+        LANGUAGE_SELECTION_ARIA: "Application language selection dropdown list",
         LANGUAGE_OPTION_EN_US: "English (US)",
         LANGUAGE_OPTION_JP: "日本語 (Japanese)",
         LANGUAGE_OPTION_RU: "Русский (Russian)"
@@ -31,29 +30,24 @@ export const EnglishUSPack: LocalePack = {
 
     PROFILE: {
         // Navigation / Headers
-        ARIA_MAIN: "User Profile Settings",
-        IDENTITY_TITLE_TEXT: "Your Workspace Identity Profile",
-        IDENTITY_TITLE_ARIA: "Your Workspace Identity Profile",
+        ARIA_MAIN: "User Profile Settings page",
+        IDENTITY_TITLE: "Your Workspace Identity Profile",
 
         // States
-        SYNCING_CREDENTIALS_TEXT: "Syncing secure cloud identity credentials...",
-        SYNCING_CREDENTIALS_ARIA: "Syncing secure cloud identity credentials...",
+        SYNCING_CREDENTIALS: "Syncing secure cloud identity credentials...",
 
         // =========================================================================
         // SECTION 1: CORE ACCOUNT DETAILS
         // =========================================================================
-        CORE_ACCOUNT_ARIA: "Core Account Details",
-        SECURITY_LEVEL_LABEL_TEXT: "Security Level:",
-        SECURITY_LEVEL_LABEL_ARIA: "Security Level:",
+        CORE_ACCOUNT_ARIA: "Core Account details section",
+        SECURITY_LEVEL_LABEL: "Security Level:",
         REGISTERED_EMAIL_LABEL: "Registered Email:",
-        DATABASE_RECORD_LABEL_TEXT: "Database Record ID:",
-        DATABASE_RECORD_LABEL_ARIA: "Database Record ID:",
+        DATABASE_RECORD_LABEL: "Database Record ID:",
 
         // =========================================================================
         // SECTION 2: SYSTEM ACTION METRICS
         // =========================================================================
-        SYSTEM_METRICS_TITLE_TEXT: "System Action Metrics",
-        SYSTEM_METRICS_TITLE_ARIA: "System Action Metrics",
+        SYSTEM_METRICS_TITLE: "System Action Metrics",
         ASSIGNED_ITEMS_LABEL: "Assigned Work Items",
         ASSIGNED_ITEMS_ARIA: "Currently tracking {value} active operational tasks.",
         COMPLETED_TASKS_LABEL: "Completed Tasks",
@@ -62,10 +56,9 @@ export const EnglishUSPack: LocalePack = {
         // =========================================================================
         // SECTION 3: WORKSPACE PREFERENCES CARD
         // =========================================================================
-        WORKSPACE_TITLE_TEXT: "Workspace Environment Preferences",
-        WORKSPACE_TITLE_ARIA: "Workspace Environment Preferences",
+        WORKSPACE_TITLE: "Workspace Environment Preferences",
         THEME_LABEL: "Visual Application Theme:",
-        THEME_ARIA: "Visual Application Theme:",
+        THEME_ARIA: "Select visual application theme layout",
 
         // Theme Selector Options
         THEME_OPTION_LIGHT: "☀️ Professional Light Mode",
@@ -102,135 +95,114 @@ export const EnglishUSPack: LocalePack = {
         // =========================================================================
         // SECTION 4: ACCOUNT MANAGEMENT FORM
         // =========================================================================
-        ACCOUNT_SETTINGS_TITLE_TEXT: "Account Management Settings",
-        ACCOUNT_SETTINGS_TITLE_ARIA: "Account Management Settings",
-        UPDATE_USER_LABEL: "Update Username",
-        UPDATE_USER_ARIA: "Update Username",
+        ACCOUNT_SETTINGS_TITLE: "Account Management Settings",
+        UPDATE_USER_LABEL: "Update Username field",
         UPDATE_USER_PLACEHOLDER: "Enter new username...",
-        CHANGE_PASS_LABEL: "Change Security Password",
-        CHANGE_PASS_ARIA: "Change Security Password",
+        CHANGE_PASS_LABEL: "Change Security Password field",
         CHANGE_PASS_PLACEHOLDER: "Enter new password...",
-        CONFIRM_PASS_LABEL: "Confirm New Password",
-        CONFIRM_PASS_ARIA: "Confirm New Password",
+        CONFIRM_PASS_LABEL: "Confirm New Password field",
         CONFIRM_PASS_PLACEHOLDER: "Retype your new password...",
         PASS_REQUIREMENTS_ARIA: "Passwords must match before modifications can commit securely.",
         SAVE_CHANGES_BTN_TEXT: "Save Profile Changes",
         SAVE_CHANGES_BTN_ARIA: "Save Profile Changes",
 
         // Destructive Actions Area (Danger Zone)
-        DANGER_ZONE_TITLE_TEXT: "Danger Zone",
-        DANGER_ZONE_TITLE_ARIA: "Danger Zone",
+        DANGER_ZONE_TITLE: "Danger Zone section",
         DANGER_ZONE_WARN_TEXT: "Deleting your account clears your workspace access profiles completely!<br>This action cannot be reversed.",
-        DANGER_ZONE_WARN_ARIA: "Deleting your account clears your workspace access profiles completely!<br>This action cannot be reversed.",
+        DANGER_ZONE_WARN_ARIA: "Deleting your account clears your workspace access profiles completely! This action cannot be reversed.",
         DANGER_ZONE_BTN_TEXT: "Permanently Delete Account",
         DANGER_ZONE_BTN_ARIA: "Permanently Delete Account"
     },
     
     LOGIN: {
-        PORTAL_ARIA: "Account Authentication Portal",
-        HEADER_WELCOME_BACK_TEXT: "Welcome Back",
-        HEADER_WELCOME_BACK_ARIA: "Welcome Back",
+        PORTAL_ARIA: "Account Authentication page",
+        HEADER_WELCOME_BACK: "Welcome Back",
         HEADER_FIRST_TIME: "Welcome to Task Manager",
-        SUBTITLE_MANAGE_TEXT: "Log in to manage your projects and tasks",
-        SUBTITLE_MANAGE_ARIA: "Log in to manage your projects and tasks",
-        CHECKBOX_REMEMBER_TEXT: "Remember Me",
-        CHECKBOX_REMEMBER_ARIA: "Remember Me",
-        BTN_SIGNIN_ARIA: "Sign in securely to your workspace canvas",
+        SUBTITLE_MANAGE: "Log in to manage your projects and tasks",
+        CHECKBOX_REMEMBER: "Remember Me checkbox",
+        BTN_SIGNIN_ARIA: "Sign in to your account dashboard",
         BTN_SIGNIN_TEXT: "Sign in",
         FOOTER_TEXT: "New to the workspace? ",
-        FOOTER_ARIA: "New to the workspace? ",
         FOOTER_LINK_TEXT: "Create a New Account",
-        FOOTER_LINK_ARIA: "Create a New Account"
+        FOOTER_LINK_ARIA: "Navigate to account creation page",
+        ERROR_FALLBACK: "Invalid email or password. Please try again."
     },
 
     REGISTER: {
-        PORTAL_ARIA: "Account Creation Portal",
-        HEADER_TITLE_TEXT: "Create Workspace Account",
-        HEADER_TITLE_ARIA: "Create Workspace Account",
-        SUBTITLE_JOIN_TEXT: "Join the project management platform!",
-        SUBTITLE_JOIN_ARIA: "Join the project management platform!",
-        LABEL_USERNAME_TEXT: "Username",
-        LABEL_USERNAME_ARIA: "Username",
+        PORTAL_ARIA: "Account Creation page",
+        HEADER_TITLE: "Create Workspace Account",
+        SUBTITLE_JOIN: "Join the project management platform!",
+        LABEL_USERNAME: "Username field",
         PLACEHOLDER_USERNAME: "Pick a unique display name...",
         PLACEHOLDER_PASSWORD: "Create a secure password...",
-        LABEL_CONFIRM_PASSWORD_TEXT: "Confirm Password",
-        LABEL_CONFIRM_PASSWORD_ARIA: "Confirm Password",
+        LABEL_CONFIRM_PASSWORD: "Confirm Password field",
         PLACEHOLDER_CONFIRM_PASSWORD: "Retype your password...",
         REQUIREMENTS_ARIA: "Both password fields must match exactly before registration requests can submit.",
         BTN_SUBMIT_TEXT: "Sign Up",
         BTN_SUBMIT_ARIA: "Submit credentials to register your new account",
         FOOTER_TEXT: "Already have an account? ",
-        FOOTER_ARIA: "Already have an account? ",
         FOOTER_LINK_TEXT: "Back to Sign In",
-        FOOTER_LINK_ARIA: "Back to Sign In"
+        FOOTER_LINK_ARIA: "Navigate back to login page"
     },
 
     DASHBOARD: {
-        MAIN_CANVAS_LABEL: "Main Projects Dashboard Canvas",
+        MAIN_CANVAS_LABEL: "Main Projects Dashboard view",
         MAIN_HEADER: "Task Manager Workspace",
-        NAV_ARIA: "Account navigation shortcuts",
+        NAV_ARIA: "Account navigation shortcuts links",
         PROFILE_BTN: "User Profile",
-        LOGOUT_ARIA: "Sign out of your workspace session securely",
+        LOGOUT_ARIA: "Sign out of your session securely",
         LOGOUT_BTN: "Sign Out",
-        CREATE_PROJECT_HEADER_TEXT: "Create New Project",
-        CREATE_PROJECT_HEADER_ARIA: "Create New Project",
-        PROJECT_TITLE_LABEL_TEXT: "Project Title",
-        PROJECT_TITLE_LABEL_ARIA: "Project Title",
+        CREATE_PROJECT_HEADER: "Create New Project overlay header",
+        PROJECT_TITLE_LABEL: "Project Title input field",
         PROJECT_TITLE_PLACEHOLDER: "e.g. Website Overhaul",
-        DESCRIPTION_LABEL_TEXT: "Description",
-        DESCRIPTION_LABEL_ARIA: "Description",
+        DESCRIPTION_LABEL: "Description comment text box",
         DESCRIPTION_PLACEHOLDER: "Describe the project goal...",
-        CREATE_BTN_ARIA: "Submit form to create new project space",
+        CREATE_BTN_ARIA: "Submit form to instantiate new project workspace",
         CREATE_BTN_TEXT: "Create Project",
         YOUR_PROJECTS_HEADER: "Your Projects",
-        EMPTY_MESSAGE_TEXT: "No projects found. Create one to get started!",
-        EMPTY_MESSAGE_ARIA: "No projects found. Create one to get started!",
+        EMPTY_MESSAGE: "No projects found. Create one to get started!",
 
         // Dynamic localization functions to ensure perfect sentence structures across all languages
-        PROJECT_CARD_ARIA: "Project space: {value}",
-        DELETE_PROJECT_ARIA: "Permanently delete project: {value}",
+        PROJECT_CARD_ARIA: "Project workspace: {value}",
+        DELETE_PROJECT_ARIA: "Permanently delete project workspace: {value}",
         NO_DESCRIPTION_FALLBACK: "No description provided.",
         OPEN_BOARD_TEXT: "Open Project Board",
-        OPEN_BOARD_ARIA: "Open task board for project: {value}"
+        OPEN_BOARD_ARIA: "Open task board overview for project: {value}"
     },
 
     TASKBOARD: {
         // Header / Navigation & Modal Buttons
-        MAIN_CANVAS_ARIA: "Project task board for: {title}",
+        MAIN_CANVAS_ARIA: "Project task board overview for: {title}",
         HEADER_TITLE: "Project Board ({title})",
         HEADER_ABANDON_TEXT: "Abandon Space",
         HEADER_ABANDON_ARIA: "Abandon this project workspace completely",
         HEADER_CREATE_TAG_TEXT: "Create Workspace Tag",
-        HEADER_CREATE_TAG_ARIA: "Open overlay window to create a new workspace tag",
+        HEADER_CREATE_TAG_ARIA: "Open overlay view to create a new workspace category tag",
         HEADER_CREATE_TASK_TEXT: "Add New Task",
-        HEADER_CREATE_TASK_ARIA: "Open overlay window to add a new task item",
+        HEADER_CREATE_TASK_ARIA: "Open overlay view to add a new task item",
 
         // Task Crew & Invitation
-        CREW_PANEL_HEADER_TEXT: "Project Team & Tags Management Workspace",
-        CREW_PANEL_HEADER_ARIA: "Project Team & Tags Management Workspace",
-        INVITE_FORM_ARIA: "Invite new team member to this space",
+        CREW_PANEL_HEADER: "Project Team and Tags Management panel",
+        INVITE_FORM_ARIA: "Invite new team member form",
         INVITE_PLACEHOLDER: "Enter teammate's registered email address...",
-        INVITE_INPUT_ARIA: "Teammate email address entry field",
-        INVITE_ROLE_ARIA: "Assigned project administrative security level",
+        INVITE_INPUT_ARIA: "Teammate email address text entry field",
+        INVITE_ROLE_ARIA: "Assigned project member role level selector dropdown",
         INVITE_OPTION_MEMBER: "Regular Member",
         INVITE_OPTION_OWNER: "Co-Owner / Admin",
-        INVITE_SUBMIT_ARIA: "Submit invitation request to add member",
+        INVITE_SUBMIT_ARIA: "Submit invitation request",
         INVITE_SUBMIT_BTN: "Add Member",
-        ROSTER_HEADER_TEXT: "Current Project Crew",
-        ROSTER_HEADER_ARIA: "Current Project Crew",
+        ROSTER_HEADER: "Current Project Crew directory list",
         ROSTER_BADGE_ARIA: "Assigned Role: {role}",
-        ROSTER_REMOVE_ARIA: "Remove {email} from project crew",
+        ROSTER_REMOVE_ARIA: "Remove user {email} from project crew",
 
         // Tags/Categories
-        TAGS_HEADER_TEXT: "Available Project Tags",
-        TAGS_HEADER_ARIA: "Available Project Tags",
-        TAGS_FALLBACK_TEXT: "No custom tags created for this project yet",
-        TAGS_FALLBACK_ARIA: "No custom tags created for this project yet",
+        TAGS_HEADER: "Available Project Tags",
+        TAGS_FALLBACK: "No custom tags created for this project yet",
         TAGS_PILL_ARIA: "Tag: {value1} with {value2} assigned items",
         TAG_DELETE_ARIA: "Permanently delete project tag: {name}",
 
         // Filters & Progress Bar
-        SEARCH_FILTER_HUB_ARIA: "Task board item filtering hub",
+        SEARCH_FILTER_HUB_ARIA: "Task board item filtering controls section",
         SEARCH_PLACEHOLDER: "Search tasks by title...",
         SEARCH_ARIA: "Filter tasks by text title keyword",
         PRIORITY_ARIA: "Filter tasks by designated priority level",
@@ -241,12 +213,11 @@ export const EnglishUSPack: LocalePack = {
         CATEGORY_ARIA: "Filter tasks by active project category tag assignment",
         CATEGORY_ALL: "All Tags",
         CATEGORY_UNASSIGNED: "Unassigned Tasks",
-        PROGRESS_LABEL_TEXT: "Project Completion Progress:",
-        PROGRESS_LABEL_ARIA: "Project Completion Progress:",
+        PROGRESS_LABEL: "Project Completion Progress:",
         PROGRESS_ARIA: "Overall project completion progress tracker. Currently at {value} percent.",
 
         // Mobile Column Selector
-        MOBILE_TABS_ARIA: "Mobile task board column views",
+        MOBILE_TABS_ARIA: "Mobile task board column selector",
         MOBILE_TAB_PENDING_TEXT: "Pending",
         MOBILE_TAB_PENDING_ARIA: "View Pending tasks column",
         MOBILE_TAB_PROGRESS_TEXT: "Progress & Review",
@@ -258,7 +229,7 @@ export const EnglishUSPack: LocalePack = {
         // Pending Column
         // =========================================================================
         COLUMN_PENDING_TITLE: "Pending ({value})",
-        LANE_PENDING_ARIA: "Pending task tracking list lane. Contains {value} items.",
+        LANE_PENDING_ARIA: "Pending task tracking list column. Contains {value} items.",
         TASK_CARD_ARIA: "Task item card: {value}",
         TASK_CATEGORY_ARIA: "Assigned Category Tag: {value}",
         TASK_DELETE_ARIA: "Delete task card: {value}",
@@ -276,12 +247,9 @@ export const EnglishUSPack: LocalePack = {
 
         // Task Priority
         TASK_PRIORITY_ARIA: "Priority level: {value}",
-        TASK_PRIORITY_HIGH_TEXT: "High",
-        TASK_PRIORITY_HIGH_ARIA: "High",
-        TASK_PRIORITY_MEDIUM_TEXT: "Medium",
-        TASK_PRIORITY_MEDIUM_ARIA: "Medium",
-        TASK_PRIORITY_LOW_TEXT: "Low",
-        TASK_PRIORITY_LOW_ARIA: "Low",
+        TASK_PRIORITY_HIGH: "High",
+        TASK_PRIORITY_MEDIUM: "Medium",
+        TASK_PRIORITY_LOW: "Low",
         TASK_DEADLINE_ARIA: "Task deadline calendar date: {value}",
 
         // Start Button
@@ -292,7 +260,7 @@ export const EnglishUSPack: LocalePack = {
         // In-Progress & Review Column
         // =========================================================================
         COLUMN_INPROGRESS_TITLE: "In-Progress & Review ({value})",
-        LANE_INPROGRESS_ARIA: "In Progress and Review tracking list lane. Contains {value} items.",
+        LANE_INPROGRESS_ARIA: "In Progress and Review tracking list column. Contains {value} items.",
         TASK_CARD_STATUS_ARIA: "Task item card: {value1}. Current status is: {value2}",
         REVIEW_BANNER_TEXT: "Pending PM Review",
         REVIEW_BANNER_ARIA: "Alert: {value} is pending project manager validation review.",
@@ -303,9 +271,9 @@ export const EnglishUSPack: LocalePack = {
         BTN_SUBMIT_REVIEW_TEXT: "Submit Review →",
         BTN_SUBMIT_REVIEW_ARIA: "Submit {value} for Project Manager approval review",
         BTN_CANCEL_REVIEW_TEXT: "← Cancel Review Request",
-        BTN_CANCEL_REVIEW_ARIA: "Cancel review request and return {value} to In Progress",
+        BTN_CANCEL_REVIEW_ARIA: "Cancel review request and return {value} to In Progress column",
         BTN_REJECT_TEXT: "Reject",
-        BTN_REJECT_ARIA: "Reject review request and return {value} to In Progress pipeline",
+        BTN_REJECT_ARIA: "Reject review request and return {value} to working list",
         BTN_APPROVE_TEXT: "Approve Task",
         BTN_APPROVE_ARIA: "Approve review and transition {value} into Completed column",
 
@@ -313,7 +281,7 @@ export const EnglishUSPack: LocalePack = {
         // Completed Column
         // =========================================================================
         COLUMN_COMPLETED_TITLE: "Completed ({value})",
-        LANE_COMPLETED_ARIA: "Completed task archive list lane. Contains {value} finished items.",
+        LANE_COMPLETED_ARIA: "Completed task archive list column. Contains {value} finished items.",
         TASK_CARD_COMPLETED_ARIA: "Completed task card: {value}",
         BADGE_DONE_TEXT: "Done",
         BADGE_DONE_ARIA: "Task processing state: Done",
@@ -323,36 +291,32 @@ export const EnglishUSPack: LocalePack = {
         
         // Related Button
         REOPEN_TEXT: "← Reopen", // 💡 Easily flippable to "Reopen →" for RTL configs!
-        REOPEN_ARIA: "Reopen task item: {value}. Returns card back to working In Progress lane.",
+        REOPEN_ARIA: "Reopen task item: {value}. Returns card back to working In Progress column.",
 
         // Create a new Task Modal
         MODAL_TASK_HEADER_TEXT: "Create New Task Specification",
         MODAL_TASK_HEADER_ARIA: "Create New Task Specification",
-        MODAL_TASK_TITLE_LABEL_TEXT: "Task Title *",
-        MODAL_TASK_TITLE_LABEL_ARIA: "Task Title *",
+        MODAL_TASK_TITLE_LABEL: "Task Title input field",
         MODAL_TASK_TITLE_PLACEHOLDER: "e.g. Design database schema",
-        MODAL_TASK_DESC_LABEL_TEXT: "Description",
-        MODAL_TASK_DESC_LABEL_ARIA: "Description",
+        MODAL_TASK_DESC_LABEL: "Description comment input text box",
         MODAL_TASK_DESC_PLACEHOLDER: "Provide actionable details...",
-        MODAL_TASK_PRIORITY_LABEL_TEXT: "Priority Tier",
-        MODAL_TASK_PRIORITY_LABEL_ARIA: "Priority Tier",
+        MODAL_TASK_PRIORITY_LABEL: "Select task priority tier dropdown list",
         MODAL_TASK_DEADLINE_LABEL: "Deadline",
         MODAL_TASK_DEADLINE_KEYBOARD_ARIA: "Keyboard navigation note: Press the Tab key or Escape key to exit the calendar selector grid.",
-        MODAL_TASK_DEADLINE_INPUT_ARIA: "Designated calendar completion date.",
+        MODAL_TASK_DEADLINE_INPUT_ARIA: "Designated calendar completion date field.",
         MODAL_TASK_CANCEL_BTN: "Cancel",
         MODAL_TASK_CANCEL_ARIA: "Dismiss task specification form overlay",
         MODAL_TASK_SUBMIT_BTN: "Create Task",
         MODAL_TASK_SUBMIT_ARIA: "Confirm data models to create new task item",
     
         // Create a new Tag/Category Modal
-        MODAL_TAG_HEADER_TEXT: "Create New Workspace Tag",
-        MODAL_TAG_HEADER_ARIA: "Create New Workspace Tag",
-        MODAL_TAG_NAME_LABEL_TEXT: "Tag Name:",
-        MODAL_TAG_NAME_LABEL_ARIA: "Tag Name:",
+        MODAL_TAG_HEADER: "Create New Workspace Tag",
+        MODAL_TAG_NAME_LABEL: "Tag Name input field",
         MODAL_TAG_NAME_PLACEHOLDER: "e.g., Frontend, Testing, Bug...",
         MODAL_TAG_COLOR_LABEL: "Tag Theme Color:",
-        MODAL_TAG_COLOR_ARIA: "Select categorization badge background visual color tracking profile",
+        MODAL_TAG_COLOR_ARIA: "Select categorization badge background visual color tracking profile dropdown",
 
+        // Color Selection Text Items 
         MODAL_TAG_COLOR_RED: "Crimson Red (High Contrast)",
         MODAL_TAG_COLOR_BLUE: "Electric Blue (High Contrast)",
         MODAL_TAG_COLOR_GREEN: "Forest Green (High Contrast)",

@@ -1,9 +1,9 @@
 <div class="login-wrapper" role="main" [attr.aria-label]="langService.words().LOGIN.PORTAL_ARIA">
     <div class="login-container">
         <h2 id="loginHeader" 
-            [attr.aria-label]="isFirstTimeUser ? langService.words().LOGIN.HEADER_FIRST_TIME : langService.words().LOGIN.HEADER_WELCOME_BACK_ARIA"
-            [innerHTML]="isFirstTimeUser ? langService.words().LOGIN.HEADER_FIRST_TIME : langService.words().LOGIN.HEADER_WELCOME_BACK_TEXT"></h2>
-        <p [attr.aria-label]="langService.words().LOGIN.SUBTITLE_MANAGE_ARIA" [innerHTML]="langService.words().LOGIN.SUBTITLE_MANAGE_TEXT"></p>
+            [attr.aria-label]="isFirstTimeUser ? langService.words().LOGIN.HEADER_FIRST_TIME : langService.words().LOGIN.HEADER_WELCOME_BACK"
+            [innerHTML]="isFirstTimeUser ? langService.words().LOGIN.HEADER_FIRST_TIME : langService.words().LOGIN.HEADER_WELCOME_BACK"></h2>
+        <p [innerHTML]="langService.words().LOGIN.SUBTITLE_MANAGE"></p>
 
         <!-- aria-describedby links the main structural headers directly to the input scope -->
          <form (ngSubmit)="onLogin()" #loginForm="ngForm" aria-labelledby="loginHeader">
@@ -55,7 +55,7 @@
                                name="rememberMe"
                                [attr.aria-checked]="rememberMe" />
                         
-                        <span class="remember-me-text" [attr.aria-label]="langService.words().LOGIN.CHECKBOX_REMEMBER_ARIA" [innerHTML]="langService.words().LOGIN.CHECKBOX_REMEMBER_TEXT"></span>
+                        <span class="remember-me-text" [innerHTML]="langService.words().LOGIN.CHECKBOX_REMEMBER"></span>
                     </label>
                 </div>
              </div>
@@ -71,7 +71,7 @@
              <div class="form-group">
                 <label for="loginLangSelect" class="login-language-switcher-label">
                     <span aria-hidden="true">🌐 </span>
-                    <span [attr.aria-label]="langService.words().GLOBAL.LANGUAGE_SELECTION_TITLE_ARIA" [innerHTML]="langService.words().GLOBAL.LANGUAGE_SELECTION_TITLE_TEXT"></span>
+                    <span [innerHTML]="langService.words().GLOBAL.LANGUAGE_SELECTION_TITLE"></span>
                 </label>
                 <select id="loginLangSelect"
                         name="loginLangSelect"
@@ -94,7 +94,7 @@
               [attr.aria-label]="langService.words().GLOBAL.FOOTER_NAV_ARIA">
 
             <p>
-                <span [attr.aria-label]="langService.words().LOGIN.FOOTER_ARIA" [innerHTML]="langService.words().LOGIN.FOOTER_TEXT"></span>
+                <span [innerHTML]="langService.words().LOGIN.FOOTER_TEXT"></span>
                 <a [routerLink]="['/register']" class="create-new-account-link" [attr.aria-label]="langService.words().LOGIN.FOOTER_LINK_ARIA" [innerHTML]="langService.words().LOGIN.FOOTER_LINK_TEXT"></a>
             </p>
          </div>

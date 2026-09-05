@@ -123,8 +123,9 @@ export class UserProfileComponent implements OnInit {
                     next: (res) => {
                         alert(res.message || "Your identity profile was successfully removed");
 
-                        // Clear out security tokens so the browser realizes the user is logged out
+                        // Clear out security tokens so the browser realizes the user is logged out no matter if their token was saved in local or session storage!
                         localStorage.removeItem('token');
+                        sessionStorage.removeItem('token');
 
                         // Boot the user back out onto the login screen instantly
                         this.router.navigate(['/login']);

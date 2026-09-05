@@ -16,14 +16,10 @@
     <div class="dashboard-grid">
         <!-- Left Side: Create New Project Form -->
          <section class="form-section" role="region" aria-labelledby="createProjectHeader">
-            <h3 id="createProjectHeader" 
-                [attr.aria-label]="langService.words().DASHBOARD.CREATE_PROJECT_HEADER_ARIA" 
-                [innerHTML]="langService.words().DASHBOARD.CREATE_PROJECT_HEADER_TEXT"></h3>
+            <h3 id="createProjectHeader" [innerHTML]="langService.words().DASHBOARD.CREATE_PROJECT_HEADER"></h3>
             <form (ngSubmit)="onCreateProject()" #projectForm="ngForm" aria-labelledby="createProjectHeader">
                 <div class="form-group">
-                    <label for="projectTitle" 
-                           [attr.aria-label]="langService.words().DASHBOARD.PROJECT_TITLE_LABEL_ARIA" 
-                           [innerHTML]="langService.words().DASHBOARD.PROJECT_TITLE_LABEL_TEXT"></label>
+                    <label for="projectTitle" [innerHTML]="langService.words().DASHBOARD.PROJECT_TITLE_LABEL"></label>
                     <input id="projectTitle" 
                            type="text" 
                            name="name" 
@@ -35,9 +31,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="description" 
-                           [attr.aria-label]="langService.words().DASHBOARD.DESCRIPTION_LABEL_ARIA" 
-                           [innerHTML]="langService.words().DASHBOARD.DESCRIPTION_LABEL_TEXT"></label>
+                    <label for="description" [innerHTML]="langService.words().DASHBOARD.DESCRIPTION_LABEL"></label>
                     <textarea id="description" 
                               name="description" 
                               [(ngModel)]="newProject.description" 
@@ -60,8 +54,7 @@
             <p class="empty-msg" 
                *ngIf="projects.length === 0" 
                role="status" 
-               [attr.aria-label]="langService.words().DASHBOARD.EMPTY_MESSAGE_ARIA"
-               [innerHTML]="langService.words().DASHBOARD.EMPTY_MESSAGE_TEXT"></p>
+               [innerHTML]="langService.words().DASHBOARD.EMPTY_MESSAGE"></p>
 
             <div class="project-cards-grid">
                 <div class="project-card" *ngFor="let p of projects" role="article" [attr.aria-label]="formatLabel(langService.words().DASHBOARD.PROJECT_CARD_ARIA, p.title)">
