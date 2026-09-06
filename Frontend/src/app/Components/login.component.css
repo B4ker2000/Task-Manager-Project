@@ -7,7 +7,7 @@
 
 .form-group { 
     margin-bottom: 16px;
-    text-align: left; 
+    text-align: start; 
 }
 
 .form-group label {
@@ -45,7 +45,7 @@ input[type="email"] {
 
 .eye-toggle-btn { 
     position: absolute; 
-    right: 10px; 
+    inset-inline-end: 10px; 
     background: none; 
     border: none; 
     cursor: pointer; 
@@ -107,7 +107,7 @@ input[type="email"] {
         width: 100%;
         position: absolute;
         top: 45%;
-        left: 50%;
+        inset-inline-start: 50%;
         transform: translate(-50%, -55%);
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
     }

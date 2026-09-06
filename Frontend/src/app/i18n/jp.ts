@@ -6,7 +6,7 @@ export const JapanesePack: LocalePack = {
         BACK_BTN_ARIA: "メインプロジェクトのダッシュボードに戻る",
 
         // Dynamic Date Formatting Pattern (US Standard)
-        DATE_FORMAT: "yyyy/MM/dd",
+        DATE_FORMAT: "yyyy年M月d日",
 
         // Email & Password Fields
         FIELD_EMAIL: "メールアドレス",
@@ -29,7 +29,28 @@ export const JapanesePack: LocalePack = {
         LANGUAGE_OPTION_EN_US: "American English (アメリカ英語)",
         LANGUAGE_OPTION_EN_UK: "British English (イギリス英語)",
         LANGUAGE_OPTION_JP: "日本語",
-        LANGUAGE_OPTION_RU: "Русский (ロシア語)"
+        LANGUAGE_OPTION_RU: "Русский (ロシア語)",
+
+        // Language direction format
+        DIRECTION: "ltr"
+    },
+
+    NOTIFICATIONS: {
+        // Confirmation Overlays
+        CONFIRM_DELETE_PROFILE_TITLE: "⚠️ <ruby>重大<rt aria-hidden=\"true\">じゅうだい</rt></ruby>なアクセシビリティ<ruby>警告<rt aria-hidden=\"true\">けいこく</rt></ruby>",
+        CONFIRM_DELETE_PROFILE_BODY: "<ruby>本当<rt aria-hidden=\"true\">ほんとう</rt></ruby>にワークスペースのプロフィールを<ruby>完全<rt aria-hidden=\"true\">かんぜん</rt></ruby>に<ruby>削除<rt aria-hidden=\"true\">さくじょ</rt></ruby>してもよろしいですか？",
+        CONFIRM_FINAL_WARNING_TITLE: "‼️ <ruby>最終確認<rt aria-hidden=\"true\">さいしゅうかくにん</rt></ruby>",
+        CONFIRM_FINAL_WARNING_BODY: "この<ruby>操作<rt aria-hidden=\"true\">そうさ</rt></ruby>を<ruby>行<rt aria-hidden=\"true\">おこな</rt></ruby>うと、システムデータベースからすべての<ruby>記録<rt aria-hidden=\"true\">きろく</rt></ruby>が<ruby>完全<rt aria-hidden=\"true\">かんぜん</rt></ruby>に<ruby>消去<rt aria-hidden=\"true\">しょうきょ</rt></ruby>されます。この<ruby>操作<rt aria-hidden=\"true\">そうさ</rt></ruby>は<ruby>取<rt aria-hidden=\"true\">と</rt></ruby>り<ruby>消<rt aria-hidden=\"true\">け</rt></ruby>すことができません。<ruby>続行<rt aria-hidden=\"true\">ぞっこう</rt></ruby>しますか？",
+        
+        // Success Actions
+        SUCCESS_PROFILE_REMOVED: "プロフィール<ruby>情報<rt aria-hidden=\"true\">じょうほう</rt></ruby>が<ruby>正常<rt aria-hidden=\"true\">せいじょう</rt></ruby>に<ruby>削除<rt aria-hidden=\"true\">さくじょ</rt></ruby>されました。",
+        SUCCESS_TASK_CREATED: "タスクが<ruby>正常<rt aria-hidden=\"true\">せいじょう</rt></ruby>に<ruby>作成<rt aria-hidden=\"true\">さくせい</rt></ruby>されました！",
+        SUCCESS_TAG_CREATED: "カテゴリタグが<ruby>正常<rt aria-hidden=\"true\">せいじょう</rt></ruby>にリンクされました！",
+
+        // Button Layouts
+        BTN_PROCEED: "<ruby>続行<rt aria-hidden=\"true\">ぞっこう</rt></ruby>する",
+        BTN_CANCEL: "キャンセル",
+        BTN_CLOSE: "<ruby>閉<rt aria-hidden=\"true\">と</rt></ruby>じる",
     },
 
     PROFILE: {
@@ -190,6 +211,7 @@ export const JapanesePack: LocalePack = {
         INVITE_INPUT_ARIA: "招待メンバーのメールアドレス入力フィールド",
         INVITE_ROLE_ARIA: "割り当てる権限レベルの選択ドロップダウン",
         INVITE_OPTION_MEMBER: "一般メンバー",
+        INVITE_OPTION_VIEWER: "閲覧専用ユーザー",
         INVITE_OPTION_OWNER: "共同所有者 / 管理者",
         INVITE_SUBMIT_ARIA: "招待リクエストを送信してメンバーを追加するボタン",
         INVITE_SUBMIT_BTN: "メンバーを追加",

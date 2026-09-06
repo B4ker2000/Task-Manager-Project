@@ -60,7 +60,7 @@
     border-bottom: 2px solid var(--border-color, #cbd5e1); 
     padding-bottom: 10px; 
     color: var(--text-secondary);
-    text-align: left;
+    text-align: start;
 }
 
 /* =========================================================================
@@ -89,7 +89,7 @@
     margin: 0; 
     color: var(--text-secondary); 
     flex: 1; 
-    text-align: left; 
+    text-align: start; 
 }
 
 .task-card p { 
@@ -97,7 +97,7 @@
     color: var(--text-muted); 
     font-size: calc(13px * var(--font-scale)); 
     line-height: 1.4;  
-    text-align: left; 
+    text-align: start; 
 }
 
 .task-card.done {
@@ -106,7 +106,7 @@
 }
 
 .task-card.review-needed-card {
-    border-left: 4px solid var(--badge-medium-text, #dd6b20) !important;
+    border-inline-start: 4px solid var(--badge-medium-text, #dd6b20) !important;
     background-color: var(--badge-medium-bg, #fffaf0) !important;
     border-color: var(--badge-medium-border, #feebc8);
 }
@@ -122,7 +122,7 @@
     display: inline-block;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    text-align: left;
+    text-align: start;
 }
 
 /* =========================================================================
@@ -130,7 +130,7 @@
    ========================================================================= */
 .task-assignment-control {
     margin-bottom: 12px;
-    text-align: left;
+    text-align: start;
 }
 
 .assignment-label {
@@ -207,7 +207,7 @@
 
 .control-icon-anchor {
     position: absolute;
-    left: 12px;
+    inset-inline-start: 12px;
     font-size: calc(14px * var(--font-scale));
     pointer-events: none; /* Mouse clicks pass straight through icon directly to the field background */
     z-index: 5;
@@ -306,9 +306,9 @@
 .right-tags-column {
     flex: 2;
     min-width: 220px;
-    border-left: 2px dashed var(--border-color, #e2e8f0);
-    padding-left: 25px;
-    text-align: left;
+    border-inline-start: 2px dashed var(--border-color, #e2e8f0);
+    padding-inline-start: 25px;
+    text-align: start;
 }
 
 /* Roster listings fields models */
@@ -329,19 +329,25 @@
     padding: 6px 10px;
     border: 1px solid var(--border-color);
     border-radius: 6px;
-    border-left: 4px solid var(--filter-focus-color);
+    border-inline-start: 4px solid var(--filter-focus-color);
 }
 
 .badge-owner {
     background-color: var(--badge-done-bg);
     color: var(--badge-done-text);
-    border: 1px solid var(--badge-done-border);
+    border: 2px solid var(--badge-done-border);
 }
 
 .badge-member {
     background-color: var(--badge-medium-bg);
     color: var(--badge-medium-text);
-    border: 1px solid var(--badge-medium-border);
+    border: 2px solid var(--badge-medium-border);
+}
+
+.badge-viewer {
+    background-color: var(--badge-low-bg);
+    color: var(--badge-low-text);
+    border: 2px solid var(--badge-low-border);
 }
 
 .roster-sub-title {
@@ -350,7 +356,7 @@
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    text-align: left;
+    text-align: start;
 }
 
 .member-display-email {
@@ -376,7 +382,7 @@
     color: var(--text-muted);
     font-style: italic;
     padding: 10px 0;
-    text-align: left;
+    text-align: start;
 }
 
 .tags-flex-container {
@@ -391,7 +397,7 @@
    ========================================================================= */
 .task-category-tag-wrapper {
     margin-bottom: 10px;
-    text-align: left;
+    text-align: start;
 }
 
 .category-badge-pill {
@@ -417,7 +423,7 @@
     font-size: calc(10px * var(--font-scale));
     font-weight: bold;
     padding: 0 4px;
-    margin-left: 5px;
+    margin-inline-start: 5px;
     opacity: 0.7;
     border-radius: 50%;    /* Turns the background into a perfect tiny circle */
     display: inline-flex;
@@ -449,8 +455,8 @@
 .right-tags-column {
     flex: 2;
     min-width: 220px;
-    border-left: 2px dashed var(--border-color);
-    padding-left: 25px;
+    border-inline-start: 2px dashed var(--border-color);
+    padding-inline-start: 25px;
 }
 
 .right-tags-column h5 {
@@ -478,17 +484,6 @@
     gap: 6px;
     width: 100%;
     justify-content: flex-end;
-}
-
-.btn-logo {
-    position: relative;
-}
-.btn-logo.cross {
-    top: -2px;
-}
-.btn-logo.tick,
-.btn-logo.back-arrow {
-    top: -1px;
 }
 
 /* This ensures that our standalone buttons (like the Column 1 Star button) align right too! */
@@ -563,9 +558,9 @@
 /* Narrow Tablets & Large Phones Layout Spacings */
 @media(max-width: 768px) {
     .right-tags-column {
-        border-left: none;
+        border-inline-start: none;
         border-top: 2px dashed var(--border-color);
-        padding-left: 0;
+        padding-inline-start: 0;
         padding-top: 20px;
         width: 100%;
     }
@@ -597,12 +592,12 @@
     .task-card-header .delete-card-btn {
         position: absolute;
         top: 0;
-        right: 0;
+        inset-inline-end: 0;
         padding: 2px;
     }
 
     .task-card h4 {
-        padding-right: 25px; /* Ensures text never bleeds underneath the absolute trashcan position! */
+        padding-inline-end: 25px; /* Ensures text never bleeds underneath the absolute trashcan position! */
         font-size: calc(14px * var(--font-scale));
     }
     

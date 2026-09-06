@@ -48,11 +48,14 @@ namespace Backend.Controllers
         [HttpPut("{id}/status")] // PUT api/task/1/status (update the task status)
         public async Task<IActionResult> UpdateTaskStatus(int id, [FromBody] TaskUpdateStatusDto request)
         {
-            var outcome = await _taskService.UpdateTaskStatusAsync(id, request.Status);
+            if (!TryGetUserId(out int currentUserId)) return UnauthorizedSession();
+
+            var outcome = await _taskService.UpdateTaskStatusAsync(id, currentUserId, request.Status);
 
             return outcome switch
             {
                 ServiceOutcome.NotFound => NotFound(new { message = "Task not found." }),
+                ServiceOutcome.Forbidden => Forbid(), // Returns 403 instantly if a Viewer attempts to change status!
                 ServiceOutcome.InvalidStatus => BadRequest(new { message = $"'{request.Status}' is not a valid task status!" }),
                _ => Ok(new { message = "Task status updated successfully!" })
             };

@@ -29,7 +29,28 @@ export const EnglishUSPack: LocalePack = {
         LANGUAGE_OPTION_EN_US: "American English",
         LANGUAGE_OPTION_EN_UK: "British English",
         LANGUAGE_OPTION_JP: "日本語 (Japanese)",
-        LANGUAGE_OPTION_RU: "Русский (Russian)"
+        LANGUAGE_OPTION_RU: "Русский (Russian)",
+
+        // Language direction format
+        DIRECTION: "ltr"
+    },
+
+    NOTIFICATIONS: {
+        // Confirmation Overlays
+        CONFIRM_DELETE_PROFILE_TITLE: "CRITICAL ACCESSIBILITY ALERT!",
+        CONFIRM_DELETE_PROFILE_BODY: "Are you sure you want to permanently delete your workspace profile?",
+        CONFIRM_FINAL_WARNING_TITLE: "FINAL WARNING",
+        CONFIRM_FINAL_WARNING_BODY: "This completely wipes out all your records from the system database. This action cannot be reversed. Proceed?",
+
+        // Success Actions
+        SUCCESS_PROFILE_REMOVED: "Your identity profile was successfully removed.",
+        SUCCESS_TASK_CREATED: "Task created successfully!",
+        SUCCESS_TAG_CREATED: "Category tag linked successfully!",
+
+        // Button Layouts
+        BTN_PROCEED: "Proceed",
+        BTN_CANCEL: "Cancel",
+        BTN_CLOSE: "Close"
     },
 
     PROFILE: {
@@ -192,6 +213,7 @@ export const EnglishUSPack: LocalePack = {
         INVITE_INPUT_ARIA: "Teammate email address",
         INVITE_ROLE_ARIA: "Assigned project member role level",
         INVITE_OPTION_MEMBER: "Regular Member",
+        INVITE_OPTION_VIEWER: "Read-Only Viewer",
         INVITE_OPTION_OWNER: "Co-Owner / Admin",
         INVITE_SUBMIT_ARIA: "Submit invitation request",
         INVITE_SUBMIT_BTN: "Add Member",

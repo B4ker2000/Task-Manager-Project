@@ -253,10 +253,10 @@
     --btn-cancel-bg: rgba(255, 255, 255, 0.9);  --btn-cancel-text: #505f75;         --btn-cancel-border: rgba(255, 255, 255, 0.4);
     --btn-cancel-hover-bg: #505f75;             --btn-cancel-hover-text: #ffffff;   --btn-cancel-hover-border: #1a202c;
 
-    --btn-filter-bg: rgba(255, 255, 255, 0.9);  --btn-filter-text: #38a169;         --btn-filter-border: rgba(255, 255, 255, 0.4);
+    --btn-filter-bg: rgba(255, 255, 255, 0.9);  --btn-filter-text: #38a169;         --btn-filter-border: rgba(56, 161, 105, 0.5);
     --btn-filter-hover-bg: #38a169;             --btn-filter-hover-text: #ffffff;   --btn-filter-hover-border: #22543d;
 
-    --btn-delete-bg: rgba(255, 255, 255, 0.9);  --btn-delete-text: #e53e3e;         --btn-delete-border: rgba(255, 255, 255, 0.4);
+    --btn-delete-bg: rgba(255, 255, 255, 0.9);  --btn-delete-text: #e53e3e;         --btn-delete-border: rgba(229, 62, 62, 0.5);
     --btn-delete-hover-bg: #e53e3e;             --btn-delete-hover-text: #ffffff;   --btn-delete-hover-border: #9b2c2c;
 
     /* THEMATIC TYPE MODIFIERS */
@@ -305,10 +305,10 @@
     --btn-cancel-bg: rgba(255, 255, 255, 0.9);  --btn-cancel-text: #505f75;         --btn-cancel-border: rgba(255, 255, 255, 0.4);
     --btn-cancel-hover-bg: #505f75;             --btn-cancel-hover-text: #ffffff;   --btn-cancel-hover-border: #1a202c;
 
-    --btn-filter-bg: rgba(255, 255, 255, 0.9);  --btn-filter-text: #38a169;         --btn-filter-border: rgba(255, 255, 255, 0.4);
+    --btn-filter-bg: rgba(255, 255, 255, 0.9);  --btn-filter-text: #38a169;         --btn-filter-border: rgba(56, 161, 105, 0.4);
     --btn-filter-hover-bg: #38a169;             --btn-filter-hover-text: #ffffff;   --btn-filter-hover-border: #22543d;
 
-    --btn-delete-bg: rgba(255, 255, 255, 0.9);  --btn-delete-text: #e53e3e;         --btn-delete-border: rgba(255, 255, 255, 0.4);
+    --btn-delete-bg: rgba(255, 255, 255, 0.9);  --btn-delete-text: #e53e3e;         --btn-delete-border: rgba(229, 62, 62, 0.4);
     --btn-delete-hover-bg: #e53e3e;             --btn-delete-hover-text: #ffffff;   --btn-delete-hover-border: #9b2c2c;
 
     /* THEMATIC TYPE MODIFIERS */
@@ -964,6 +964,20 @@ button:disabled {
     box-shadow: none !important;
 }
 
+.btn-logo {
+    position: relative;
+}
+.btn-logo.tick,
+.btn-logo.arrow {
+    bottom: 1px;
+}
+.btn-logo.loop-arrow {
+    top: 1px;
+}
+.btn-logo.cross {
+    bottom: 2px;
+}
+
 /* =========================================================================
    CENTRALIZED SELECT DROPDOWNS ENGINE REFACTORING
    ========================================================================= */
@@ -997,8 +1011,8 @@ select:focus,
     box-shadow: 0 0 0 3px var(--focus-halo-shadow) !important;
 }
 
-.board-interactive-field.select-config { padding-left: 5px !important;}
-.control-input-wrapper select { padding-left: 30px !important; }
+.board-interactive-field.select-config { padding-inline-start: 5px !important;}
+.control-input-wrapper select { padding-inline-start: 30px !important; }
 
 /* =========================================================================
    UNIVERSAL AUTHENTICATION GATE STYLES (LOGIN & SIGNUP CONSOLES)
@@ -1049,7 +1063,7 @@ select:focus,
     font-size: calc(13px * var(--font-scale));
     margin-bottom: 5px;
     color: var(--text-muted);
-    text-align: left;
+    text-align: start;
 }
 
 .login-footer-navigation,
@@ -1194,7 +1208,7 @@ body.cdk-drag-dragging * {
 .modal-card h3 {
     margin-top: 0 0 20px 0;
     color: var(--text-secondary);
-    text-align: left;
+    text-align: start;
 }
 
 .form-group-row {
@@ -1202,7 +1216,7 @@ body.cdk-drag-dragging * {
     flex-direction: column;
     gap: 6px;
     margin-bottom: 15px; 
-    text-align: left;
+    text-align: start;
 }
 
 .form-group-row label {

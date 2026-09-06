@@ -29,8 +29,30 @@ export const RussianPack: LocalePack = {
         LANGUAGE_OPTION_EN_US: "American English (Американский Английский)",
         LANGUAGE_OPTION_EN_UK: "British English (Британский Английский)",
         LANGUAGE_OPTION_JP: "日本語 (Японский)",
-        LANGUAGE_OPTION_RU: "Русский"
+        LANGUAGE_OPTION_RU: "Русский",
+
+        // Language direction format
+        DIRECTION: "ltr"
     },
+
+    NOTIFICATIONS: {
+        // Confirmation Overlays
+        CONFIRM_DELETE_PROFILE_TITLE: "КРИТИЧЕСКОЕ ПРЕДУПРЕЖДЕНИЕ!",
+        CONFIRM_DELETE_PROFILE_BODY: "Вы уверены, что хотите навсегда удалить свой профиль?",
+        CONFIRM_FINAL_WARNING_TITLE: "ПОСЛЕДНЕЕ ПРЕДУПРЕЖДЕНИЕ",
+        CONFIRM_FINAL_WARNING_BODY: "Это действие полностью сотрет все ваши записи из базы данных системы. Это действие нельзя отменить. Продолжить?",
+        
+        // Success Actions
+        SUCCESS_PROFILE_REMOVED: "Ваш профиль пользователя был успешно удален.",
+        SUCCESS_TASK_CREATED: "Задача успешно создана!",
+        SUCCESS_TAG_CREATED: "Категория успешно привязана к задаче!",
+
+        // Button Layouts
+        BTN_PROCEED: "Продолжить",
+        BTN_CANCEL: "Отмена",
+        BTN_CLOSE: "Закрыть"
+    },
+
 
     PROFILE: {
         // Navigation / Headers
@@ -192,6 +214,7 @@ export const RussianPack: LocalePack = {
         INVITE_INPUT_ARIA: "Поле ввода адреса электронной почты участника",
         INVITE_ROLE_ARIA: "Назначенный уровень административного доступа к проекту",
         INVITE_OPTION_MEMBER: "Обычный участник",
+        INVITE_OPTION_VIEWER: "Только для чтения (Наблюдатель)",
         INVITE_OPTION_OWNER: "Совладелец / Админ",
         INVITE_SUBMIT_ARIA: "Отправить запрос на добавление участника",
         INVITE_SUBMIT_BTN: "Добавить участника",

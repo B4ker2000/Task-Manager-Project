@@ -28,6 +28,27 @@ export interface LocalePack {
         LANGUAGE_OPTION_EN_UK: string;
         LANGUAGE_OPTION_JP: string;
         LANGUAGE_OPTION_RU: string;
+
+        // Language direction format
+        DIRECTION: 'ltr' | 'rtl'; // Can only be one of these two!
+    };
+
+    NOTIFICATIONS: {
+        // Confirmation Overlays
+        CONFIRM_DELETE_PROFILE_TITLE: string;
+        CONFIRM_DELETE_PROFILE_BODY: string;
+        CONFIRM_FINAL_WARNING_TITLE: string;
+        CONFIRM_FINAL_WARNING_BODY: string;
+
+        // Success Actions
+        SUCCESS_PROFILE_REMOVED: string;
+        SUCCESS_TASK_CREATED: string;
+        SUCCESS_TAG_CREATED: string;
+
+        // Button Layouts
+        BTN_PROCEED: string;
+        BTN_CANCEL: string;
+        BTN_CLOSE: string;
     };
     
     PROFILE: {
@@ -188,6 +209,7 @@ export interface LocalePack {
         INVITE_INPUT_ARIA: string;
         INVITE_ROLE_ARIA: string;
         INVITE_OPTION_MEMBER: string;
+        INVITE_OPTION_VIEWER: string;
         INVITE_OPTION_OWNER: string;
         INVITE_SUBMIT_ARIA: string;
         INVITE_SUBMIT_BTN: string;

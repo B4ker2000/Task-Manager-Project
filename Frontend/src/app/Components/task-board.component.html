@@ -1,11 +1,20 @@
 <div class="board-wrapper" role="main" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.MAIN_CANVAS_ARIA, projectTitle)">
     <header class="board-header">
-        <button class="back-btn" [routerLink]="['/dashboard']" [attr.aria-label]="langService.words().GLOBAL.BACK_BTN_ARIA">
-            <span class="btn-logo back-arrow" aria-hidden="true">←</span> <span [innerHTML]="langService.words().GLOBAL.BACK_BTN_TEXT"></span>
+        <button class="back-btn" 
+                [routerLink]="['/dashboard']" 
+                [attr.aria-label]="langService.words().GLOBAL.BACK_BTN_ARIA">
+                
+            <span class="btn-logo arrow" aria-hidden="true">←</span>
+            <span [innerHTML]="langService.words().GLOBAL.BACK_BTN_TEXT"></span>
         </button>
         <h2 id="boardTitleHeader">{{ formatLabel(langService.words().TASKBOARD.HEADER_TITLE, projectTitle) }}</h2>
         <div class="board-header-action-triggers" role="navigation" aria-label="Project space configuration controls">
-            <button *ngIf="currentUserProjectRole === 'Member'" class="action-btn resign-project-btn" (click)="onLeaveProjectClick()" [attr.aria-label]="langService.words().TASKBOARD.HEADER_ABANDON_ARIA" [innerHTML]="langService.words().TASKBOARD.HEADER_ABANDON_TEXT"></button>
+            <button *ngIf="currentUserProjectRole === 'Member' || currentUserProjectRole === 'Viewer'" 
+                    class="action-btn resign-project-btn" 
+                    (click)="onLeaveProjectClick()" 
+                    [attr.aria-label]="langService.words().TASKBOARD.HEADER_ABANDON_ARIA" 
+                    [innerHTML]="langService.words().TASKBOARD.HEADER_ABANDON_TEXT"></button>
+
             <!-- Clicking these two opens our form modal overlays -->
              <button *ngIf="currentUserProjectRole === 'Owner'" 
                      #createTagBtn
@@ -13,7 +22,8 @@
                      (click)="openCategoryModal()" 
                      [attr.aria-label]="langService.words().TASKBOARD.HEADER_CREATE_TAG_ARIA">
 
-                    <span aria-hidden="true">+</span> <span [innerHTML]="langService.words().TASKBOARD.HEADER_CREATE_TAG_TEXT"></span>
+                    <span aria-hidden="true">+</span>
+                    <span [innerHTML]="langService.words().TASKBOARD.HEADER_CREATE_TAG_TEXT"></span>
              </button>
              <button *ngIf="currentUserProjectRole === 'Owner'" 
                      #createTaskBtn
@@ -21,7 +31,8 @@
                      (click)="openModal()" 
                      [attr.aria-label]="langService.words().TASKBOARD.HEADER_CREATE_TASK_ARIA">
              
-                <span aria-hidden="true">+</span> <span [innerHTML]="langService.words().TASKBOARD.HEADER_CREATE_TASK_TEXT"></span>
+                <span aria-hidden="true">+</span>
+                <span [innerHTML]="langService.words().TASKBOARD.HEADER_CREATE_TASK_TEXT"></span>
              </button>
         </div>
     </header>
@@ -51,6 +62,7 @@
                         <div class="invite-select-container">
                             <select name="inviteRole" [(ngModel)]="inviteRole" class="invite-dropdown-select" [attr.aria-label]="langService.words().TASKBOARD.INVITE_ROLE_ARIA">
                                 <option value="Member" [innerHTML]="langService.words().TASKBOARD.INVITE_OPTION_MEMBER"></option>
+                                <option value="Viewer" [innerHTML]="langService.words().TASKBOARD.INVITE_OPTION_VIEWER"></option>
                                 <option value="Owner" [innerHTML]="langService.words().TASKBOARD.INVITE_OPTION_OWNER"></option>
                             </select>
                         </div>
@@ -69,7 +81,7 @@
                             <div class="member-info-block">
                                 <span class="member-display-email">{{ m.userEmail }}</span>
                                 <span class="role-display-badge" 
-                                      [ngClass]="{'badge-owner': m.projectRole === 'Owner', 'badge-member': m.projectRole === 'Member'}" 
+                                      [ngClass]="{'badge-owner': m.projectRole === 'Owner', 'badge-member': m.projectRole === 'Member', 'badge-viewer': m.projectRole === 'Viewer'}" 
                                       [attr.aria-label]="formatLabel(langService.words().TASKBOARD.ROSTER_BADGE_ARIA, m.projectRole)">
                                       
                                     {{ m.projectRole }}
@@ -315,8 +327,12 @@
                                 <span *ngIf="t.priority === 'Medium'"><span aria-hidden="true">🟡 🔸</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_MEDIUM"></span></span>
                                 <span *ngIf="t.priority === 'Low'"><span aria-hidden="true">🔵 🔹</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_LOW"></span></span>
                             </span>
-                            <span [class]="'deadline-badge ' + (langService.currentLang())" *ngIf="t.deadline" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DEADLINE_ARIA, (t.deadline | date:'yyyy/MM/dd') || '')">
-                                <span aria-hidden="true">📅</span> {{ t.deadline | date:"yyyy/MM/dd" }}
+                            <span [class]="'deadline-badge ' + (langService.currentLang())" 
+                                  *ngIf="t.deadline" 
+                                  [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DEADLINE_ARIA, (t.deadline | date:'langService.words().GLOBAL.DATE_FORMAT') || '')">
+                                
+                                <span aria-hidden="true">📅</span> 
+                                <span>{{ t.deadline | date: langService.words().GLOBAL.DATE_FORMAT }}</span>
                             </span>
                         </div>
                         <button *ngIf="currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId" 
@@ -325,7 +341,7 @@
                                 [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_ACTION_START_ARIA, t.title)">
                             
                             <span [innerHTML]="langService.words().TASKBOARD.TASK_ACTION_START_TEXT"></span>
-                            <span aria-hidden="true">↪</span>
+                            <span class="btn-logo loop-arrow" aria-hidden="true">↪</span>
                         </button>
                     </div>
                  </div>
@@ -429,8 +445,12 @@
                                 <span *ngIf="t.priority === 'Medium'"><span aria-hidden="true">🟡 🔸</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_MEDIUM"></span></span>
                                 <span *ngIf="t.priority === 'Low'"><span aria-hidden="true">🔵 🔹</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_LOW"></span></span>
                             </span>
-                            <span [class]="'deadline-badge ' + (langService.currentLang())" *ngIf="t.deadline" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DEADLINE_ARIA, (t.deadline | date:'yyyy/MM/dd') || '')">
-                                <span aria-hidden="true">📅</span> {{ t.deadline | date:"yyyy/MM/dd" }}
+                            <span [class]="'deadline-badge ' + (langService.currentLang())" 
+                                  *ngIf="t.deadline" 
+                                  [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DEADLINE_ARIA, (t.deadline | date:'langService.words().GLOBAL.DATE_FORMAT') || '')">
+                                
+                                <span aria-hidden="true">📅</span> 
+                                <span>{{ t.deadline | date: langService.words().GLOBAL.DATE_FORMAT }}</span>
                             </span>
                         </div>
 
@@ -442,7 +462,7 @@
                                      (click)="onUpdateStatus(t.id, 'Pending')"
                                      [attr.aria-label]="formatLabel(langService.words().TASKBOARD.BTN_BACK_ARIA, t.title)">
                                     
-                                <span aria-hidden="true">↩</span>
+                                <span class="btn-logo loop-arrow" aria-hidden="true">↩</span>
                                 <span [innerHTML]="langService.words().TASKBOARD.BTN_BACK_TEXT"></span>
                              </button>
                                 
@@ -452,7 +472,7 @@
                                      [attr.aria-label]="formatLabel(langService.words().TASKBOARD.BTN_SUBMIT_REVIEW_ARIA, t.title)">
                                 
                                 <span [innerHTML]="langService.words().TASKBOARD.BTN_SUBMIT_REVIEW_TEXT"></span>
-                                <span aria-hidden="true">↪</span>
+                                <span class="btn-logo loop-arrow" aria-hidden="true">↪</span>
                              </button>
                             
                             <!-- Review Required task card navigation buttons -->
@@ -462,7 +482,7 @@
                                      (click)="onUpdateStatus(t.id, 'In Progress')"
                                      [attr.aria-label]="formatLabel(langService.words().TASKBOARD.BTN_CANCEL_REVIEW_ARIA, t.title)">
                                 
-                                <span aria-hidden="true">↩</span>
+                                <span class="btn-logo loop-arrow" aria-hidden="true">↩</span>
                                 <span [innerHTML]="langService.words().TASKBOARD.BTN_CANCEL_REVIEW_TEXT"></span>
                               </button>
                                
@@ -472,15 +492,17 @@
                                      (click)="onUpdateStatus(t.id, 'In Progress')"
                                      [attr.aria-label]="formatLabel(langService.words().TASKBOARD.BTN_REJECT_ARIA, t.title)">
                                      
-                                <span class="btn-logo cross" aria-hidden="true">🗙</span> <span [innerHTML]="langService.words().TASKBOARD.BTN_REJECT_TEXT"></span>
+                                <span class="btn-logo cross" aria-hidden="true">🗙</span>
+                                <span [innerHTML]="langService.words().TASKBOARD.BTN_REJECT_TEXT"></span>
                               </button>
                                 
                               <button *ngIf="t.status === 'Review Required' && currentUserProjectRole === 'Owner'" 
-                                      class="submit-btn" 
+                                      class="create-btn" 
                                       (click)="onUpdateStatus(t.id, 'Completed')"
                                       [attr.aria-label]="formatLabel(langService.words().TASKBOARD.BTN_APPROVE_ARIA, t.title)">
                                       
-                                <span class="btn-logo tick" aria-hidden="true">🗹</span> <span [innerHTML]="langService.words().TASKBOARD.BTN_APPROVE_TEXT"></span>
+                                <span class="btn-logo tick" aria-hidden="true">🗹</span>
+                                <span [innerHTML]="langService.words().TASKBOARD.BTN_APPROVE_TEXT"></span>
                               </button>
                         </div>
                     </div>
@@ -544,7 +566,6 @@
                         <label [attr.for]="'comp-assignee-select-' + t.id" class="assignment-label">
                             <span aria-hidden="true">👤</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_ASSIGNEE_LABEL"></span>
                         </label>
-                        <!-- <select [ngModel]="t.assignedUserId" (change)="onAssignUser(t.id, $any($event.target).value)" class="assignee-dropdown-menu" [disabled]="currentUserProjectRole !== 'Owner'"> -->
                         <select [id]="'comp-assignee-select-' + t.id" 
                                 [ngModel]="t.assignedUserId" 
                                 class="assignee-dropdown-menu" 
@@ -584,8 +605,12 @@
                                 <span *ngIf="t.priority === 'Medium'"><span aria-hidden="true">🟡 🔸</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_MEDIUM"></span></span>
                                 <span *ngIf="t.priority === 'Low'"><span aria-hidden="true">🔵 🔹</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_LOW"></span></span>
                             </span>
-                            <span [class]="'deadline-badge ' + (langService.currentLang())" *ngIf="t.deadline" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DEADLINE_ARIA, (t.deadline | date:'yyyy/MM/dd') || '')">
-                                <span aria-hidden="true">📅</span> {{ t.deadline | date:"yyyy/MM/dd" }}
+                            <span [class]="'deadline-badge ' + (langService.currentLang())" 
+                                  *ngIf="t.deadline" 
+                                  [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DEADLINE_ARIA, (t.deadline | date:'langService.words().GLOBAL.DATE_FORMAT') || '')">
+                                
+                                <span aria-hidden="true">📅</span> 
+                                <span>{{ t.deadline | date: langService.words().GLOBAL.DATE_FORMAT }}</span>
                             </span>
                         </div>
 
@@ -595,7 +620,7 @@
                                 (click)="onUpdateStatus(t.id, 'In Progress')"
                                 [attr.aria-label]="formatLabel(langService.words().TASKBOARD.REOPEN_ARIA, t.title)">
                                 
-                                <span aria-hidden="true">↩</span>
+                                <span class="btn-logo loop-arrow" aria-hidden="true">↩</span>
                                 <span [innerHTML]="langService.words().TASKBOARD.REOPEN_TEXT"></span>
                          </button>
                     </div>

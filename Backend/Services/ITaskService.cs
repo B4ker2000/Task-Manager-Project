@@ -14,7 +14,7 @@ namespace Backend.Services
     {
         Task<TaskCreationResult> CreateTaskAsync(int currentUserId, TaskCreateDto request);
         Task<object?> GetProjectTasksAsync(int projectId, int currentUserId);
-        Task<ServiceOutcome> UpdateTaskStatusAsync(int taskId, string newStatus);
+        Task<ServiceOutcome> UpdateTaskStatusAsync(int taskId, int currentUserId, string newStatus);
         Task<ServiceOutcome> DeleteTaskAsync(int taskId, int currentUserId);
         Task<ServiceOutcome> AssignTaskAsync(int taskId, int currentUserId, int? assignedUserId);
         Task<ServiceOutcome> AssignTaskCategoryAsync(int taskId, int currentUserId, int? categoryId);

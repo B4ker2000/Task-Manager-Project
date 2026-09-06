@@ -1,6 +1,7 @@
 using Backend.Data;
 using Backend.Dtos;
 using Backend.Models;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Services
@@ -29,6 +30,7 @@ namespace Backend.Services
                 };
             }
 
+            // Guard: Block the request if the user is not an Owner
             if (memberRecord.ProjectRole != "Owner")
             {
                 return new TaskCreationResult { IsForbidden = true };
@@ -86,10 +88,18 @@ namespace Backend.Services
         }
 
         // 3. Update Task Status with explicit array safety guards
-        public async Task<ServiceOutcome> UpdateTaskStatusAsync(int taskId, string newStatus)
+        public async Task<ServiceOutcome> UpdateTaskStatusAsync(int taskId, int currentUserId, string newStatus)
         {
             var task = await _context.Tasks.FindAsync(taskId);
             if (task == null) return ServiceOutcome.NotFound;
+
+            // Viewer Guard: Fetch their workspace role profile
+            var userRole = await _context.ProjectMembers
+                 .Where(pm => pm.ProjectId == task.ProjectId && pm.UserId == currentUserId)
+                 .Select(pm => pm.ProjectRole)
+                 .FirstOrDefaultAsync();
+
+            if (userRole == null || userRole == "Viewer") return ServiceOutcome.Forbidden;
 
             var validStatuses = new[] { "Pending", "In Progress", "Review Required", "Completed" };
             if (!validStatuses.Contains(newStatus)) return ServiceOutcome.InvalidStatus;
@@ -136,6 +146,12 @@ namespace Backend.Services
         {
             var taskItem = await _context.Tasks.FindAsync(taskId);
             if (taskItem == null) return ServiceOutcome.NotFound;
+
+            var membership = await _context.ProjectMembers
+                 .FirstOrDefaultAsync(pm => pm.ProjectId == taskItem.ProjectId && pm.UserId == currentUserId);
+
+            // Block explicitly if the user's registered identity role is a Viewer
+            if (membership == null || membership.ProjectRole == "Viewer") return ServiceOutcome.Forbidden;
 
             // Gate passing rule: Must be an Owner OR the exact person assigned to handle this card
             var isAuthorized = await _context.ProjectMembers
