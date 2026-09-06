@@ -170,6 +170,10 @@
     border-radius: 12px; 
 }
 
+.deadline-badge.jp {
+    padding: 6px 10px 3px;
+}
+
 /* =========================================================================
    BOARD FILTER CONTROLS HUB (PROGRESS BALANCING MARGINS)
    ========================================================================= */
@@ -474,6 +478,17 @@
     gap: 6px;
     width: 100%;
     justify-content: flex-end;
+}
+
+.btn-logo {
+    position: relative;
+}
+.btn-logo.cross {
+    top: -2px;
+}
+.btn-logo.tick,
+.btn-logo.back-arrow {
+    top: -1px;
 }
 
 /* This ensures that our standalone buttons (like the Column 1 Star button) align right too! */

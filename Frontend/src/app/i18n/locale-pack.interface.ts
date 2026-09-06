@@ -3,6 +3,9 @@ export interface LocalePack {
         BACK_BTN_TEXT: string;
         BACK_BTN_ARIA: string;
 
+        // Dynamic Date Formatting Pattern Based on selected language!
+        DATE_FORMAT: string;
+
         // Email & Password Fields
         FIELD_EMAIL: string;
         PLACEHOLDER_EMAIL: string;
@@ -22,6 +25,7 @@ export interface LocalePack {
         LANGUAGE_SELECTION_TITLE: string;
         LANGUAGE_SELECTION_ARIA: string;
         LANGUAGE_OPTION_EN_US: string;
+        LANGUAGE_OPTION_EN_UK: string;
         LANGUAGE_OPTION_JP: string;
         LANGUAGE_OPTION_RU: string;
     };
@@ -227,7 +231,7 @@ export interface LocalePack {
         COLUMN_PENDING_TITLE: string;
         LANE_PENDING_ARIA: string;
         TASK_CARD_ARIA: string;
-        TASK_CATEGORY_ARIA: string;
+        TASK_CARD_CATEGORY_ARIA: string;
         TASK_DELETE_ARIA: string;
         TASK_DESCRIPTION_FALLBACK: string;
             

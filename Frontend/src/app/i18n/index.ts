@@ -2,6 +2,7 @@ import { LocalePack } from "./locale-pack.interface";
 import { EnglishUSPack } from "./en-us";
 import { JapanesePack } from "./jp";
 import { RussianPack } from "./ru";
+import { EnglishUKPack } from "./en-gb"
 
 export * from './locale-pack.interface';
 export * from './language.service';
@@ -10,5 +11,6 @@ export * from './language.service';
 export const DictionaryMatrix: Record<string, LocalePack> = {
     'en-us': EnglishUSPack,
     'jp': JapanesePack,
-    'ru': RussianPack
+    'ru': RussianPack,
+    'en-gb': EnglishUKPack
 };

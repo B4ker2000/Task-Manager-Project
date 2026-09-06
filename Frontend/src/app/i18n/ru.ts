@@ -2,30 +2,34 @@ import { LocalePack } from './locale-pack.interface';
 
 export const RussianPack: LocalePack = {
     GLOBAL: {
-        BACK_BTN_TEXT: "← Назад к рабочей области",
+        BACK_BTN_TEXT: "Назад к рабочей области",
         BACK_BTN_ARIA: "Вернуться на главную панель задач",
+
+        // Dynamic Date Formatting Pattern (US Standard)
+        DATE_FORMAT: "dd.MM.yyyy",
 
         // Email & Password Fields
         FIELD_EMAIL: "Адрес электронной почты",
-        PLACEHOLDER_EMAIL: "введите ваш email...",
+        PLACEHOLDER_EMAIL: "Введите ваш email...",
         FIELD_PASSWORD: "Пароль",
-        PLACEHOLDER_PASSWORD: "введите пароль...",
+        PLACEHOLDER_PASSWORD: "Введите пароль...",
 
         // Footer Navigation Links
         FOOTER_NAV_ARIA: "Альтернативная ссылка для входа",
 
         // Eye Toggle Accessibility Script Targets
-        SHOW_PASS_ARIA: "Показать скрытый пароль",
-        HIDE_PASS_ARIA: "Скрыть читаемый пароль",
-        SHOW_CONFIRM_ARIA: "Показать скрытый пароль подтверждения",
-        HIDE_CONFIRM_ARIA: "Скрыть читаемый пароль подтверждения",
+        SHOW_PASS_ARIA: "Показать пароль",
+        HIDE_PASS_ARIA: "Скрыть пароль",
+        SHOW_CONFIRM_ARIA: "Показать пароль подтверждения",
+        HIDE_CONFIRM_ARIA: "Скрыть пароль подтверждения",
         
         // Language Selection Configuration
         LANGUAGE_SELECTION_TITLE: "Язык приложения:",
-        LANGUAGE_SELECTION_ARIA: "Выпадающий список выбора языка интерфейса",
-        LANGUAGE_OPTION_EN_US: "English (Английский)",
+        LANGUAGE_SELECTION_ARIA: "Выбор языка интерфейса",
+        LANGUAGE_OPTION_EN_US: "American English (Американский Английский)",
+        LANGUAGE_OPTION_EN_UK: "British English (Британский Английский)",
         LANGUAGE_OPTION_JP: "日本語 (Японский)",
-        LANGUAGE_OPTION_RU: "Русский (Российский)"
+        LANGUAGE_OPTION_RU: "Русский"
     },
 
     PROFILE: {
@@ -51,14 +55,14 @@ export const RussianPack: LocalePack = {
         ASSIGNED_ITEMS_LABEL: "Назначенные рабочие элементы",
         ASSIGNED_ITEMS_ARIA: "В настоящее время отслеживается задач в рабочей области: {value}.",
         COMPLETED_TASKS_LABEL: "Выполненные задачи",
-        COMPLETED_TASKS_ARIA: "Успешно завершено и отправлено в архив задач проекта: {value}.",
+        COMPLETED_TASKS_ARIA: "Количество успешно завершенных и архивированных задач проекта: {value}.",
         
         // =========================================================================
         // SECTION 3: WORKSPACE PREFERENCES CARD
         // =========================================================================
         WORKSPACE_TITLE: "Настройки рабочей среды",
         THEME_LABEL: "Визуальная тема приложения:",
-        THEME_ARIA: "Визуальная тема приложения:",
+        THEME_ARIA: "Выбор визуальной темы приложения",
 
         // Theme Selector Options
         THEME_OPTION_LIGHT: "☀️ Профессиональный светлый режим",
@@ -73,11 +77,11 @@ export const RussianPack: LocalePack = {
         THEME_OPTION_VISTA: "📀 Классическая Windows Vista",
         THEME_OPTION_WIN7: "🫧 Классическая Windows 7",
         THEME_OPTION_AERO: "🍃 Frutiger Aero (Эко-Кибер)",
-        THEME_OPTION_BA: "🔮 Рабочая область Шале (Blue Archive)",
+        THEME_OPTION_BA: "🔮 Тема Шале (Blue Archive)",
 
         // Typography Interface Config
         FONT_LABEL: "Стиль шрифта:",
-        FONT_ARIA: "Выпадающий список выбора шрифта интерфейса",
+        FONT_ARIA: "Выбор шрифта интерфейса",
         FONT_DESCRIPTION: "Изменяет шрифт отображения текста по умолчанию в рабочей области",
         FONT_OPTION_DEFAULT: "По умолчанию",
         FONT_OPTION_LEGI: "🧼 Шрифт высокой читаемости",
@@ -85,11 +89,11 @@ export const RussianPack: LocalePack = {
 
         // Deficiency Matrix Elements
         COLORBLIND_LABEL: "Цветовой фильтр:",
-        COLORBLIND_ARIA: "Выпадающий список выбора фильтра цветокоррекции",
+        COLORBLIND_ARIA: "Выбор фильтра цветокоррекции",
         COLORBLIND_OPTION_NONE: "Нет",
-        COLORBLIND_OPTION_DEU: "Дейтеранопия (проблемы с зеленым)",
-        COLORBLIND_OPTION_PRO: "Протанопия (проблемы с красным)",
-        COLORBLIND_OPTION_TRI: "Тританопия (проблемы с синим)",
+        COLORBLIND_OPTION_DEU: "Дейтеранопия (сниженное восприятие зеленого)",
+        COLORBLIND_OPTION_PRO: "Протанопия (сниженное восприятие красного)",
+        COLORBLIND_OPTION_TRI: "Тританопия (сниженное восприятие синего)",
         COLORBLIND_OPTION_GRA: "Оттенки серого (Монохромный)",
         
         // =========================================================================
@@ -102,14 +106,14 @@ export const RussianPack: LocalePack = {
         CHANGE_PASS_PLACEHOLDER: "Введите новый пароль...",
         CONFIRM_PASS_LABEL: "Подтвердите новый пароль",
         CONFIRM_PASS_PLACEHOLDER: "Повторите новый пароль...",
-        PASS_REQUIREMENTS_ARIA: "Пароли должны совпадать перед безопасным сохранением изменений.",
+        PASS_REQUIREMENTS_ARIA: "Пароли должны совпадать перед безопасным сохранением изменений",
         SAVE_CHANGES_BTN_TEXT: "Сохранить изменения профиля",
         SAVE_CHANGES_BTN_ARIA: "Сохранить изменения профиля",
 
         // Destructive Actions Area (Danger Zone)
         DANGER_ZONE_TITLE: "Опасная зона",
         DANGER_ZONE_WARN_TEXT: "Удаление учетной записи полностью очистит ваш рабочий профиль!<br>Это действие необратимо.",
-        DANGER_ZONE_WARN_ARIA: "Удаление учетной записи полностью очистит ваш рабочий профиль!<br>Это действие необратимо.",
+        DANGER_ZONE_WARN_ARIA: "Удаление учетной записи полностью очистит ваш рабочий профиль! Это действие необратимо.",
         DANGER_ZONE_BTN_TEXT: "Безвозвратно удалить аккаунт",
         DANGER_ZONE_BTN_ARIA: "Безвозвратно удалить аккаунт"
     },
@@ -117,7 +121,7 @@ export const RussianPack: LocalePack = {
     LOGIN: {
         PORTAL_ARIA: "Портал аутентификации аккаунта",
         HEADER_WELCOME_BACK: "С возвращением",
-        HEADER_FIRST_TIME: "Добро пожаловать в Менеджер Задач",
+        HEADER_FIRST_TIME: "Добро пожаловать в Менеджер задач",
         SUBTITLE_MANAGE: "Войдите в систему для управления проектами и задачами",
         CHECKBOX_REMEMBER: "Запомнить меня",
         BTN_SIGNIN_ARIA: "Безопасный вход в рабочую область",
@@ -137,7 +141,7 @@ export const RussianPack: LocalePack = {
         PLACEHOLDER_PASSWORD: "Создайте надежный пароль...",
         LABEL_CONFIRM_PASSWORD: "Подтверждение пароля",
         PLACEHOLDER_CONFIRM_PASSWORD: "Введите пароль еще раз...",
-        REQUIREMENTS_ARIA: "Оба поля пароля должны точно совпадать перед отправкой запроса на регистрацию.",
+        REQUIREMENTS_ARIA: "Оба поля пароля должны точно совпадать перед отправкой запроса на регистрацию",
         BTN_SUBMIT_TEXT: "Зарегистрироваться",
         BTN_SUBMIT_ARIA: "Отправить учетные данные для регистрации нового аккаунта",
         FOOTER_TEXT: "Уже есть аккаунт? ",
@@ -147,14 +151,14 @@ export const RussianPack: LocalePack = {
 
     DASHBOARD: {
         MAIN_CANVAS_LABEL: "Основная панель управления проектами",
-        MAIN_HEADER: "Рабочая область Менеджера Задач",
+        MAIN_HEADER: "Рабочая область Менеджера задач",
         NAV_ARIA: "Быстрые ссылки навигации по аккаунту",
         PROFILE_BTN: "Профиль пользователя",
         LOGOUT_ARIA: "Безопасный выход из текущей рабочей сессии",
         LOGOUT_BTN: "Выйти",
         CREATE_PROJECT_HEADER: "Создать новый проект",
         PROJECT_TITLE_LABEL: "Название проекта",
-        PROJECT_TITLE_PLACEHOLDER: "напр., Обновление веб-сайта",
+        PROJECT_TITLE_PLACEHOLDER: "Например, Обновление веб-сайта",
         DESCRIPTION_LABEL: "Описание",
         DESCRIPTION_PLACEHOLDER: "Опишите цель проекта...",
         CREATE_BTN_TEXT: "Создать проект",
@@ -198,7 +202,7 @@ export const RussianPack: LocalePack = {
         // Tags/Categories
         TAGS_HEADER: "Доступные теги проекта",
         TAGS_FALLBACK: "Для этого проекта еще не создано ни одного тега",
-        TAGS_PILL_ARIA: "Тег: {value1} с {value2} назначенными элементами", // Unified formatting parameters
+        TAGS_PILL_ARIA: "Тег: {value1}. Количество назначенных элементов: {value2}",
         TAG_DELETE_ARIA: "Безвозвратно удалить тег проекта: {value}",
 
         // Filters & Progress Bar
@@ -212,9 +216,9 @@ export const RussianPack: LocalePack = {
         PRIORITY_LOW: "Низкий приоритет",
         CATEGORY_ARIA: "Фильтрация задач по активному тегу категории",
         CATEGORY_ALL: "Все теги",
-        CATEGORY_UNASSIGNED: "Незанятые задачи",
+        CATEGORY_UNASSIGNED: "Задачи без категории",
         PROGRESS_LABEL: "Прогресс выполнения проекта:",
-        PROGRESS_ARIA: "Общий трекер выполнения проекта. В настоящее время выполнено на {value} процентов.", // Unified layout placeholder
+        PROGRESS_ARIA: "Общий трекер выполнения проекта. Прогресс: {value}%.",
 
         // Mobile Column Selector
         MOBILE_TABS_ARIA: "Переключение колонок доски на мобильных устройствах",
@@ -231,7 +235,7 @@ export const RussianPack: LocalePack = {
         COLUMN_PENDING_TITLE: "В ожидании ({value})",
         LANE_PENDING_ARIA: "Дорожка отслеживания задач в ожидании. Содержит элементов: {value}.",
         TASK_CARD_ARIA: "Карточка задачи: {value}",
-        TASK_CATEGORY_ARIA: "Назначенный тег категории: {value}",
+        TASK_CARD_CATEGORY_ARIA: "Назначенный тег категории: {value}",
         TASK_DELETE_ARIA: "Удалить карточку задачи: {value}",
         TASK_DESCRIPTION_FALLBACK: "Описание отсутствует.",
         
@@ -253,7 +257,7 @@ export const RussianPack: LocalePack = {
         TASK_DEADLINE_ARIA: "Календарная дата дедлайна задачи: {value}",
 
         // Start Button
-        TASK_ACTION_START_TEXT: "Начать →",
+        TASK_ACTION_START_TEXT: "Начать",
         TASK_ACTION_START_ARIA: "Начать выполнение задачи: {value}. Перемещает карточку в колонку задач в работе.",
     
         // =========================================================================
@@ -266,11 +270,11 @@ export const RussianPack: LocalePack = {
         REVIEW_BANNER_ARIA: "Внимание: {value} ожидает проверочного обзора менеджером проекта.",
 
         // Related Buttons
-        BTN_BACK_TEXT: "← Назад",
+        BTN_BACK_TEXT: "Назад",
         BTN_BACK_ARIA: "Переместить {value} назад в колонку ожидания",
-        BTN_SUBMIT_REVIEW_TEXT: "На проверку →",
+        BTN_SUBMIT_REVIEW_TEXT: "На проверку",
         BTN_SUBMIT_REVIEW_ARIA: "Отправить {value} на проверку менеджеру проекта",
-        BTN_CANCEL_REVIEW_TEXT: "← Отменить запрос",
+        BTN_CANCEL_REVIEW_TEXT: "Отменить запрос",
         BTN_CANCEL_REVIEW_ARIA: "Отменить запрос на проверку и вернуть {value} в работу",
         BTN_REJECT_TEXT: "Отклонить",
         BTN_REJECT_ARIA: "Отклонить запрос на проверку и вернуть {value} в процесс работы",
@@ -290,31 +294,31 @@ export const RussianPack: LocalePack = {
         FINISHED_PRIORITY_ARIA: "Исходный уровень приоритета: {value}",
         
         // Related Button
-        REOPEN_TEXT: "← Переоткрыть",
+        REOPEN_TEXT: "Переоткрыть",
         REOPEN_ARIA: "Переоткрыть задачу {value}. Возвращает карточку обратно в колонку задач в работе.",
 
         // Create a new Task Modal
         MODAL_TASK_HEADER_TEXT: "Создание спецификации новой задачи",
         MODAL_TASK_HEADER_ARIA: "Создание спецификации новой задачи",
         MODAL_TASK_TITLE_LABEL: "Название задачи *",
-        MODAL_TASK_TITLE_PLACEHOLDER: "напр., Проектирование схемы БД",
+        MODAL_TASK_TITLE_PLACEHOLDER: "Например, Проектирование схемы БД",
         MODAL_TASK_DESC_LABEL: "Описание",
         MODAL_TASK_DESC_PLACEHOLDER: "Укажите практические детали...",
         MODAL_TASK_PRIORITY_LABEL: "Уровень приоритета",
         MODAL_TASK_DEADLINE_LABEL: "Срок выполнения",
-        MODAL_TASK_DEADLINE_KEYBOARD_ARIA: "Примечание для клавиатуры: Нажмите Tab или Escape, чтобы выйти из календаря.",
-        MODAL_TASK_DEADLINE_INPUT_ARIA: "Установленная календарная дата завершения.",
+        MODAL_TASK_DEADLINE_KEYBOARD_ARIA: "Примечание для клавиатуры: Нажмите Tab или Escape, чтобы выйти из календаря",
+        MODAL_TASK_DEADLINE_INPUT_ARIA: "Установленная календарная дата завершения",
         MODAL_TASK_CANCEL_BTN: "Отмена",
         MODAL_TASK_CANCEL_ARIA: "Закрыть форму добавления спецификации задачи",
         MODAL_TASK_SUBMIT_BTN: "Создать задачу",
-        MODAL_TASK_SUBMIT_ARIA: "Подтвердить модели данных для создания новой задачи",
+        MODAL_TASK_SUBMIT_ARIA: "Создать новую задачу",
     
         // Create a new Tag/Category Modal
         MODAL_TAG_HEADER: "Создать новый тег пространства",
         MODAL_TAG_NAME_LABEL: "Название тега:",
-        MODAL_TAG_NAME_PLACEHOLDER: "напр., Фронтенд, Тестирование, Баг...",
+        MODAL_TAG_NAME_PLACEHOLDER: "Например, Фронтенд, Тестирование, Баг...",
         MODAL_TAG_COLOR_LABEL: "Цветовая тема тега:",
-        MODAL_TAG_COLOR_ARIA: "Выберите профиль визуального отслеживания цвета фона значка категории",
+        MODAL_TAG_COLOR_ARIA: "Выберите цвет фона для значка категории из палитры",
 
         // Color Selection Text Items 
         MODAL_TAG_COLOR_RED: "Малиново-красный (Высокий контраст)",
@@ -326,6 +330,6 @@ export const RussianPack: LocalePack = {
         MODAL_TAG_CANCEL_BTN: "Отмена",
         MODAL_TAG_CANCEL_ARIA: "Закрыть форму создания тега рабочей области",
         MODAL_TAG_SUBMIT_BTN: "Создать тег",
-        MODAL_TAG_SUBMIT_ARIA: "Подтвердить назначение для создания классификационного тега пространства"
+        MODAL_TAG_SUBMIT_ARIA: "Создать новый тег"
     }
 };

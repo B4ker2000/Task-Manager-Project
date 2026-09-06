@@ -1,6 +1,8 @@
 <div class="board-wrapper" role="main" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.MAIN_CANVAS_ARIA, projectTitle)">
     <header class="board-header">
-        <button class="back-btn" [routerLink]="['/dashboard']" [attr.aria-label]="langService.words().GLOBAL.BACK_BTN_ARIA" [innerHTML]="langService.words().GLOBAL.BACK_BTN_TEXT"></button>
+        <button class="back-btn" [routerLink]="['/dashboard']" [attr.aria-label]="langService.words().GLOBAL.BACK_BTN_ARIA">
+            <span class="btn-logo back-arrow" aria-hidden="true">←</span> <span [innerHTML]="langService.words().GLOBAL.BACK_BTN_TEXT"></span>
+        </button>
         <h2 id="boardTitleHeader">{{ formatLabel(langService.words().TASKBOARD.HEADER_TITLE, projectTitle) }}</h2>
         <div class="board-header-action-triggers" role="navigation" aria-label="Project space configuration controls">
             <button *ngIf="currentUserProjectRole === 'Member'" class="action-btn resign-project-btn" (click)="onLeaveProjectClick()" [attr.aria-label]="langService.words().TASKBOARD.HEADER_ABANDON_ARIA" [innerHTML]="langService.words().TASKBOARD.HEADER_ABANDON_TEXT"></button>
@@ -253,7 +255,7 @@
                         <!-- Only renders on your screen if the task row actually has a category linked in the database! -->
                          <span *ngIf="t.category" class="task-category-tag-wrapper">
                             <!-- Bind the background color directly to the custom hex color code selected by the task creator! -->
-                             <span class="category-badge-pill" [style.backgroundColor]="t.category.colorHex" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_CATEGORY_ARIA, t.category.name)">
+                             <span class="category-badge-pill" [style.backgroundColor]="t.category.colorHex" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_CARD_CATEGORY_ARIA, t.category.name)">
                                 <span aria-hidden="true">🏷️</span> {{ t.category.name }}
                              </span>
                          </span>
@@ -313,7 +315,7 @@
                                 <span *ngIf="t.priority === 'Medium'"><span aria-hidden="true">🟡 🔸</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_MEDIUM"></span></span>
                                 <span *ngIf="t.priority === 'Low'"><span aria-hidden="true">🔵 🔹</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_LOW"></span></span>
                             </span>
-                            <span class="deadline-badge" *ngIf="t.deadline" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DEADLINE_ARIA, (t.deadline | date:'yyyy/MM/dd') || '')">
+                            <span [class]="'deadline-badge ' + (langService.currentLang())" *ngIf="t.deadline" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DEADLINE_ARIA, (t.deadline | date:'yyyy/MM/dd') || '')">
                                 <span aria-hidden="true">📅</span> {{ t.deadline | date:"yyyy/MM/dd" }}
                             </span>
                         </div>
@@ -323,6 +325,7 @@
                                 [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_ACTION_START_ARIA, t.title)">
                             
                             <span [innerHTML]="langService.words().TASKBOARD.TASK_ACTION_START_TEXT"></span>
+                            <span aria-hidden="true">↪</span>
                         </button>
                     </div>
                  </div>
@@ -362,7 +365,7 @@
                         <!-- Only renders on our screen if the task row actually has a category linked in the database! -->
                          <span *ngIf="t.category" class="task-category-tag-wrapper">
                             <!-- Bind the background color directly to the custom hex color code selected by the task creator! -->
-                             <span class="category-badge-pill" [style.backgroundColor]="t.category.colorHex" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_CATEGORY_ARIA, t.category.name)">
+                             <span class="category-badge-pill" [style.backgroundColor]="t.category.colorHex" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_CARD_CATEGORY_ARIA, t.category.name)">
                                 <span aria-hidden="true">🏷️</span> {{ t.category.name }}
                              </span>
                          </span>
@@ -426,7 +429,7 @@
                                 <span *ngIf="t.priority === 'Medium'"><span aria-hidden="true">🟡 🔸</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_MEDIUM"></span></span>
                                 <span *ngIf="t.priority === 'Low'"><span aria-hidden="true">🔵 🔹</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_LOW"></span></span>
                             </span>
-                            <span class="deadline-badge" *ngIf="t.deadline" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DEADLINE_ARIA, (t.deadline | date:'yyyy/MM/dd') || '')">
+                            <span [class]="'deadline-badge ' + (langService.currentLang())" *ngIf="t.deadline" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DEADLINE_ARIA, (t.deadline | date:'yyyy/MM/dd') || '')">
                                 <span aria-hidden="true">📅</span> {{ t.deadline | date:"yyyy/MM/dd" }}
                             </span>
                         </div>
@@ -439,6 +442,7 @@
                                      (click)="onUpdateStatus(t.id, 'Pending')"
                                      [attr.aria-label]="formatLabel(langService.words().TASKBOARD.BTN_BACK_ARIA, t.title)">
                                     
+                                <span aria-hidden="true">↩</span>
                                 <span [innerHTML]="langService.words().TASKBOARD.BTN_BACK_TEXT"></span>
                              </button>
                                 
@@ -448,6 +452,7 @@
                                      [attr.aria-label]="formatLabel(langService.words().TASKBOARD.BTN_SUBMIT_REVIEW_ARIA, t.title)">
                                 
                                 <span [innerHTML]="langService.words().TASKBOARD.BTN_SUBMIT_REVIEW_TEXT"></span>
+                                <span aria-hidden="true">↪</span>
                              </button>
                             
                             <!-- Review Required task card navigation buttons -->
@@ -457,6 +462,7 @@
                                      (click)="onUpdateStatus(t.id, 'In Progress')"
                                      [attr.aria-label]="formatLabel(langService.words().TASKBOARD.BTN_CANCEL_REVIEW_ARIA, t.title)">
                                 
+                                <span aria-hidden="true">↩</span>
                                 <span [innerHTML]="langService.words().TASKBOARD.BTN_CANCEL_REVIEW_TEXT"></span>
                               </button>
                                
@@ -466,7 +472,7 @@
                                      (click)="onUpdateStatus(t.id, 'In Progress')"
                                      [attr.aria-label]="formatLabel(langService.words().TASKBOARD.BTN_REJECT_ARIA, t.title)">
                                      
-                                <span aria-hidden="true">🗙</span> <span [innerHTML]="langService.words().TASKBOARD.BTN_REJECT_TEXT"></span>
+                                <span class="btn-logo cross" aria-hidden="true">🗙</span> <span [innerHTML]="langService.words().TASKBOARD.BTN_REJECT_TEXT"></span>
                               </button>
                                 
                               <button *ngIf="t.status === 'Review Required' && currentUserProjectRole === 'Owner'" 
@@ -474,7 +480,7 @@
                                       (click)="onUpdateStatus(t.id, 'Completed')"
                                       [attr.aria-label]="formatLabel(langService.words().TASKBOARD.BTN_APPROVE_ARIA, t.title)">
                                       
-                                <span aria-hidden="true">🗹</span> <span [innerHTML]="langService.words().TASKBOARD.BTN_APPROVE_TEXT"></span>
+                                <span class="btn-logo tick" aria-hidden="true">🗹</span> <span [innerHTML]="langService.words().TASKBOARD.BTN_APPROVE_TEXT"></span>
                               </button>
                         </div>
                     </div>
@@ -512,7 +518,7 @@
                         <!-- Only renders on your screen if the task row actually has a category linked in the database! -->
                          <span *ngIf="t.category" class="task-category-tag-wrapper">
                             <!-- Bind the background color directly to the custom hex color code selected by the task creator! -->
-                             <span class="category-badge-pill" [style.backgroundColor]="t.category.colorHex" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_CATEGORY_ARIA, t.category.name)">
+                             <span class="category-badge-pill" [style.backgroundColor]="t.category.colorHex" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_CARD_CATEGORY_ARIA, t.category.name)">
                                 <span aria-hidden="true">🏷️</span> {{ t.category.name }}
                              </span>
                          </span>
@@ -578,7 +584,7 @@
                                 <span *ngIf="t.priority === 'Medium'"><span aria-hidden="true">🟡 🔸</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_MEDIUM"></span></span>
                                 <span *ngIf="t.priority === 'Low'"><span aria-hidden="true">🔵 🔹</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_LOW"></span></span>
                             </span>
-                            <span class="deadline-badge" *ngIf="t.deadline" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DEADLINE_ARIA, (t.deadline | date:'yyyy/MM/dd') || '')">
+                            <span [class]="'deadline-badge ' + (langService.currentLang())" *ngIf="t.deadline" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DEADLINE_ARIA, (t.deadline | date:'yyyy/MM/dd') || '')">
                                 <span aria-hidden="true">📅</span> {{ t.deadline | date:"yyyy/MM/dd" }}
                             </span>
                         </div>
@@ -587,8 +593,10 @@
                          <button *ngIf="currentUserProjectRole === 'Owner'" 
                                 class="action-btn cancel-btn" 
                                 (click)="onUpdateStatus(t.id, 'In Progress')"
-                                [attr.aria-label]="formatLabel(langService.words().TASKBOARD.REOPEN_ARIA, t.title)"
-                                [innerHTML]="langService.words().TASKBOARD.REOPEN_TEXT">
+                                [attr.aria-label]="formatLabel(langService.words().TASKBOARD.REOPEN_ARIA, t.title)">
+                                
+                                <span aria-hidden="true">↩</span>
+                                <span [innerHTML]="langService.words().TASKBOARD.REOPEN_TEXT"></span>
                          </button>
                     </div>
                 </div>

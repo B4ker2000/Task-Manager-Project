@@ -1,7 +1,9 @@
 <div class="profile-wrapper" role="main" [attr.aria-label]="langService.words().PROFILE.ARIA_MAIN">
     <header class="profile-header">
         <!-- 🔙 Back Button: Added explicit label and instruction for non-sighted users & Bound to localized descriptive strings -->
-        <button class="back-btn" [routerLink]="['/dashboard']" [attr.aria-label]="langService.words().GLOBAL.BACK_BTN_ARIA" [innerHTML]="langService.words().GLOBAL.BACK_BTN_TEXT"></button>
+        <button class="back-btn" [routerLink]="['/dashboard']" [attr.aria-label]="langService.words().GLOBAL.BACK_BTN_ARIA">
+            <span class="btn-logo back-arrow" aria-hidden="true">←</span> <span [innerHTML]="langService.words().GLOBAL.BACK_BTN_TEXT"></span>
+        </button>
         <h2 [innerHTML]="langService.words().PROFILE.IDENTITY_TITLE"></h2>
     </header>
 
@@ -74,6 +76,7 @@
                                 [attr.aria-label]="langService.words().GLOBAL.LANGUAGE_SELECTION_ARIA">
 
                             <option value="en-us" [innerHTML]="langService.words().GLOBAL.LANGUAGE_OPTION_EN_US"></option>
+                            <option value="en-gb" [innerHTML]="langService.words().GLOBAL.LANGUAGE_OPTION_EN_UK"></option>
                             <option value="jp" [innerHTML]="langService.words().GLOBAL.LANGUAGE_OPTION_JP"></option>
                             <option value="ru" [innerHTML]="langService.words().GLOBAL.LANGUAGE_OPTION_RU"></option>
                         </select>

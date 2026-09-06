@@ -2,8 +2,11 @@ import { LocalePack } from './locale-pack.interface';
 
 export const JapanesePack: LocalePack = {
     GLOBAL: {
-        BACK_BTN_TEXT: "← ダッシュボードに<ruby>戻<rt aria-hidden=\"true\">もど</rt>る</ruby>",
+        BACK_BTN_TEXT: "ダッシュボードに<ruby>戻<rt aria-hidden=\"true\">もど</rt>る</ruby>",
         BACK_BTN_ARIA: "メインプロジェクトのダッシュボードに戻る",
+
+        // Dynamic Date Formatting Pattern (US Standard)
+        DATE_FORMAT: "yyyy/MM/dd",
 
         // Email & Password Fields
         FIELD_EMAIL: "メールアドレス",
@@ -23,9 +26,10 @@ export const JapanesePack: LocalePack = {
         // Language Selection Configuration
         LANGUAGE_SELECTION_TITLE: "<ruby>言語<rt aria-hidden=\"true\">げんご</rt></ruby>の<ruby>選択<rt aria-hidden=\"true\">せんたく</rt></ruby>:",
         LANGUAGE_SELECTION_ARIA: "アプリケーションの表示言語選択ドロップダウンリスト",
-        LANGUAGE_OPTION_EN_US: "英語 (English US)",
-        LANGUAGE_OPTION_JP: "日本語 (Japanese)",
-        LANGUAGE_OPTION_RU: "ロシア語 (Russian)"
+        LANGUAGE_OPTION_EN_US: "American English (アメリカ英語)",
+        LANGUAGE_OPTION_EN_UK: "British English (イギリス英語)",
+        LANGUAGE_OPTION_JP: "日本語",
+        LANGUAGE_OPTION_RU: "Русский (ロシア語)"
     },
 
     PROFILE: {
@@ -229,7 +233,7 @@ export const JapanesePack: LocalePack = {
         COLUMN_PENDING_TITLE: "保留中 ({value})",
         LANE_PENDING_ARIA: "保留中のタスク追跡リストレーン。アイテムが {value} 個含まれています。",
         TASK_CARD_ARIA: "タスクカード: {value}",
-        TASK_CATEGORY_ARIA: "割り当てられたカテゴリタグ: {value}",
+        TASK_CARD_CATEGORY_ARIA: "割り当てられたカテゴリタグ: {value}",
         TASK_DELETE_ARIA: "タスクカードを削除: {value}",
         TASK_DESCRIPTION_FALLBACK: "説明はありません。",
         
@@ -251,7 +255,7 @@ export const JapanesePack: LocalePack = {
         TASK_DEADLINE_ARIA: "タスクの締切日: {value}",
 
         // Start Button
-        TASK_ACTION_START_TEXT: "<ruby>開始<rt aria-hidden=\"true\">かいし</rt></ruby>する →",
+        TASK_ACTION_START_TEXT: "<ruby>開始<rt aria-hidden=\"true\">かいし</rt></ruby>する",
         TASK_ACTION_START_ARIA: "タスク {value} を開始します。カードを進行中レーンに移動します。",
     
         // =========================================================================
@@ -264,11 +268,11 @@ export const JapanesePack: LocalePack = {
         REVIEW_BANNER_ARIA: "警告：{value} はプロジェクトマネージャーの承認レビュー待ちです。",
 
         // Related Buttons
-        BTN_BACK_TEXT: "← <ruby>戻<rt aria-hidden=\"true\">もど</rt>す</ruby>",
+        BTN_BACK_TEXT: "<ruby>戻<rt aria-hidden=\"true\">もど</rt>す</ruby>",
         BTN_BACK_ARIA: "{value} を前の保留中レーンに戻します",
-        BTN_SUBMIT_REVIEW_TEXT: "レビューを<ruby>依頼<rt aria-hidden=\"true\">いらい</rt></ruby> →",
+        BTN_SUBMIT_REVIEW_TEXT: "レビューを<ruby>依頼<rt aria-hidden=\"true\">いらい</rt></ruby>",
         BTN_SUBMIT_REVIEW_ARIA: "プロジェクトマネージャーの承認レビュー用に {value} を提出します",
-        BTN_CANCEL_REVIEW_TEXT: "← 依頼を<ruby>取消<rt aria-hidden=\"true\">とりけし</rt></ruby>",
+        BTN_CANCEL_REVIEW_TEXT: "依頼を<ruby>取消<rt aria-hidden=\"true\">とりけし</rt></ruby>",
         BTN_CANCEL_REVIEW_ARIA: "レビュー依頼をキャンセルし、{value} を進行中に戻します",
         BTN_REJECT_TEXT: "<ruby>差戻<rt aria-hidden=\"true\">さしもど</rt></ruby>し",
         BTN_REJECT_ARIA: "レビュー依頼を却下し、{value} を進行中レーンに戻します",
@@ -288,7 +292,7 @@ export const JapanesePack: LocalePack = {
         FINISHED_PRIORITY_ARIA: "元の優先度レベル: {value}",
         
         // Related Button
-        REOPEN_TEXT: "← <ruby>再開<rt aria-hidden=\"true\">さいかい</rt></ruby>する",
+        REOPEN_TEXT: "<ruby>再開<rt aria-hidden=\"true\">さいかい</rt></ruby>する",
         REOPEN_ARIA: "タスクアイテム {value} を再開します。カードを作業中の進行中レーンに戻します。",
 
         // Create a new Task Modal
@@ -298,7 +302,7 @@ export const JapanesePack: LocalePack = {
         MODAL_TASK_TITLE_PLACEHOLDER: "例：データベーススキーマの設計",
         MODAL_TASK_DESC_LABEL: "<ruby>説明<rt aria-hidden=\"true\">せつめい</rt></ruby>",
         MODAL_TASK_DESC_PLACEHOLDER: "具体的なタスクの詳細を入力してください...",
-        MODAL_TASK_PRIORITY_LABEL: "<ruby>優先度階層<rt aria-hidden=\"true\">ゆうせんどかいそお</rt></ruby>",
+        MODAL_TASK_PRIORITY_LABEL: "<ruby>優先度階層<rt aria-hidden=\"true\">ゆうせんどかいそう</rt></ruby>",
         MODAL_TASK_DEADLINE_LABEL: "<ruby>締切日<rt aria-hidden=\"true\">しめきりび</rt></ruby>",
         MODAL_TASK_DEADLINE_KEYBOARD_ARIA: "キーボードナビゲーションの注意：TabキーまたはEscapeキーを押すとカレンダー選択から抜けます。",
         MODAL_TASK_DEADLINE_INPUT_ARIA: "カレンダーで指定された完了日。",

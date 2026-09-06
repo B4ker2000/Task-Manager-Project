@@ -1,12 +1,12 @@
 import { LocalePack } from './locale-pack.interface';
 
-export const EnglishUSPack: LocalePack = {
+export const EnglishUKPack: LocalePack = {
     GLOBAL: {
         BACK_BTN_TEXT: "Back to Dashboard",
         BACK_BTN_ARIA: "Back to main project dashboard",
 
         // Dynamic Date Formatting Pattern (US Standard)
-        DATE_FORMAT: "MMM d, yyyy",
+        DATE_FORMAT: "d MMM yyyy",
 
         // Email & Password Fields
         FIELD_EMAIL: "Email Address",
@@ -88,8 +88,8 @@ export const EnglishUSPack: LocalePack = {
         FONT_OPTION_DYS: "📖 Easy-to-Read (Dyslexia Friendly)",
 
         // Deficiency Matrix Elements
-        COLORBLIND_LABEL: "Colorblind Filter:",
-        COLORBLIND_ARIA: "Select colorblind filter correction simulation matrix",
+        COLORBLIND_LABEL: "Colourblind Filter:",
+        COLORBLIND_ARIA: "Select colourblind filter correction simulation matrix",
         COLORBLIND_OPTION_NONE: "None",
         COLORBLIND_OPTION_DEU: "Deuteranopia (Green Weakness)",
         COLORBLIND_OPTION_PRO: "Protanopia (Red Weakness)",
@@ -125,7 +125,7 @@ export const EnglishUSPack: LocalePack = {
         SUBTITLE_MANAGE: "Log in to manage your projects and tasks",
         CHECKBOX_REMEMBER: "Remember me",
         BTN_SIGNIN_ARIA: "Sign in to your account dashboard",
-        BTN_SIGNIN_TEXT: "Sign In",
+        BTN_SIGNIN_TEXT: "Sign in",
         FOOTER_TEXT: "New to the workspace? ",
         FOOTER_LINK_TEXT: "Create a New Account",
         FOOTER_LINK_ARIA: "Navigate to account creation profile",
@@ -158,7 +158,7 @@ export const EnglishUSPack: LocalePack = {
         LOGOUT_BTN: "Sign Out",
         CREATE_PROJECT_HEADER: "Create New Project",
         PROJECT_TITLE_LABEL: "Project Title",
-        PROJECT_TITLE_PLACEHOLDER: "e.g. Website Overhaul",
+        PROJECT_TITLE_PLACEHOLDER: "e.g. Website Redesign",
         DESCRIPTION_LABEL: "Description",
         DESCRIPTION_PLACEHOLDER: "Describe the project goal...",
         CREATE_BTN_ARIA: "Submit form to create a new project workspace",
@@ -209,7 +209,7 @@ export const EnglishUSPack: LocalePack = {
         SEARCH_FILTER_HUB_ARIA: "Task board item filtering controls",
         SEARCH_PLACEHOLDER: "Search tasks by title...",
         SEARCH_ARIA: "Filter tasks by text title keyword",
-        PRIORITY_ARIA: "Filter tasks by designated priority level",
+        PRIORITY_ARIA: "Filter tasks by assigned priority level",
         PRIORITY_ALL: "All Priorities",
         PRIORITY_HIGH: "High Priority",
         PRIORITY_MEDIUM: "Medium Priority",
@@ -218,7 +218,7 @@ export const EnglishUSPack: LocalePack = {
         CATEGORY_ALL: "All Tags",
         CATEGORY_UNASSIGNED: "Unassigned Tasks",
         PROGRESS_LABEL: "Project Completion Progress:",
-        PROGRESS_ARIA: "Overall project completion progress tracker. Currently at {value} percent.",
+        PROGRESS_ARIA: "Overall project completion progress tracker. Currently at {value} per cent.",
 
         // Mobile Column Selector
         MOBILE_TABS_ARIA: "Mobile task board column selector",
@@ -241,7 +241,7 @@ export const EnglishUSPack: LocalePack = {
         
         // Task Assignee
         TASK_ASSIGNEE_LABEL: "Assignee:",
-        TASK_ASSIGNEE_ARIA: "Assign staff member to task {value}",
+        TASK_ASSIGNEE_ARIA: "Assign team member to task {value}",
         TASK_ASSIGNEE_UNASSIGNED: "Unassigned",
         
         // Task Tag/Category
@@ -263,7 +263,7 @@ export const EnglishUSPack: LocalePack = {
         // =========================================================================
         // In-Progress & Review Column
         // =========================================================================
-        COLUMN_INPROGRESS_TITLE: "In-Progress & Review ({value})",
+        COLUMN_INPROGRESS_TITLE: "In Progress & Review ({value})",
         LANE_INPROGRESS_ARIA: "In Progress and Review tracking column. Contains {value} items.",
         TASK_CARD_STATUS_ARIA: "Task item card: {value1}. Current status is: {value2}",
         REVIEW_BANNER_TEXT: "Pending PM Review",
@@ -289,7 +289,7 @@ export const EnglishUSPack: LocalePack = {
         TASK_CARD_COMPLETED_ARIA: "Completed task card: {value}",
         BADGE_DONE_TEXT: "Done",
         BADGE_DONE_ARIA: "Task processing state: Done",
-        FINISHED_ASSIGNEE_ARIA: "Assigned staff member for finished task {value}",
+        FINISHED_ASSIGNEE_ARIA: "Assigned team member for finished task {value}",
         FINISHED_CATEGORY_ARIA: "Classification category for finished task {value}",
         FINISHED_PRIORITY_ARIA: "Original priority level: {value}",
         
@@ -317,8 +317,8 @@ export const EnglishUSPack: LocalePack = {
         MODAL_TAG_HEADER: "Create New Workspace Tag",
         MODAL_TAG_NAME_LABEL: "Tag Name",
         MODAL_TAG_NAME_PLACEHOLDER: "e.g., Frontend, Testing, Bug...",
-        MODAL_TAG_COLOR_LABEL: "Tag Theme Color:",
-        MODAL_TAG_COLOR_ARIA: "Select categorization badge background color",
+        MODAL_TAG_COLOR_LABEL: "Tag Theme Colour:",
+        MODAL_TAG_COLOR_ARIA: "Select categorisation badge background colour",
 
         // Color Selection Text Items 
         MODAL_TAG_COLOR_RED: "Crimson Red (High Contrast)",
