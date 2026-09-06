@@ -856,7 +856,6 @@ input[type="date"] {
 .cancel-btn,
 .back-btn,
 .profile-btn,
-.send-invite-btn,
 .view-tasks-btn {
     height: 38px;
     padding: 0 16px;
@@ -909,14 +908,12 @@ input[type="date"] {
 }
 
 /* --- FUNCTIONAL BUTTON CATEGORY 3: FILTER CONTROLS & SIDEBAR INVITATIONS --- */
-.send-invite-btn,
 .profile-btn,
 .create-btn {
     background-color: var(--btn-filter-bg) !important;
     color: var(--btn-filter-text) !important;
     border-color: var(--btn-filter-border) !important;
 }
-.send-invite-btn:hover:not(:disabled),
 .profile-btn:hover:not(:disabled),
 .create-btn:hover:not(:disabled) {
     background-color: var(--btn-filter-hover-bg) !important;

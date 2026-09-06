@@ -4,11 +4,12 @@ import { RouterLink, Router } from "@angular/router";
 import { AuthService } from "../Services/auth.service";
 import { FormsModule } from "@angular/forms";
 import { LanguageService } from "../i18n/language.service";
+import { PopupComponent } from "./popup.component";
 
 @Component({
     selector: 'app-user-profile',
     standalone: true,
-    imports: [NgIf, NgClass, RouterLink, FormsModule], // [(ngModel)] needs FormsModule to be imported!
+    imports: [NgIf, NgClass, RouterLink, FormsModule, PopupComponent], // [(ngModel)] needs FormsModule to be imported!
     templateUrl: "./user-profile.component.html",
     styleUrl: "./user-profile.component.css"
 })
@@ -37,6 +38,18 @@ export class UserProfileComponent implements OnInit {
     activeColorblind: string = "";
 
     constructor(public langService: LanguageService) {}
+
+    //////////////////////////////////////
+    // Popup component state controller //
+    //////////////////////////////////////
+    public popupConfig = {
+        visible: false,
+        type: "success" as "success" | "warning" | "danger",
+        title: "",
+        body: "",
+        isConfirmation: false,
+        actionType: "" // Tracks what to do when clicking "Proceed"
+    };
 
     ngOnInit(): void {
         // Only run data fetches inside the browser window context shell
@@ -91,20 +104,40 @@ export class UserProfileComponent implements OnInit {
     }
 
     onUpdateAccount(): void {
-        // Validation check: Make sure the user typed something before clicking save!
-        if(!this.updateData.NewUsername && !this.updateData.NewPassword) {
-            alert("Please fill out at least one field to save profile updates!");
+        // 1. Core Evaluation: Did the user actually leave both input forms blank?
+        if (!this.updateData.NewUsername && !this.updateData.NewPassword) {
+            this.showPopup("warning", "Empty Fields", "Please fill out at least one field to save profile updates!", false, "update-missing");
             return;
         }
 
-        if(this.updateData.NewPassword && this.updateData.NewPassword !== this.confirmNewPassword) {
-            alert("Security mismatch: Your updated passwords do not match");
+        // 2. Identity Check: Stop the users if they typed a username identical to their active profile username!
+        if (this.updateData.NewUsername && this.updateData.NewUsername === this.userProfile?.username) {
+            this.showPopup("warning", "Identical Username", "Your new username must be different from your current one!", false, "identical-username");
             return;
         }
 
-        this.authService.updateAccountDetails(this.updateData).subscribe({
+        // 3. Password Verification Layer: Evaluate ONLY if the user is actively trying to set a new password
+        if (this.updateData.NewPassword) {
+            if (!this.confirmNewPassword) {
+                this.showPopup("warning", "Confirm Password", "Please confirm your new security password.", false, "confirm-missing");
+                return;
+            }
+
+            if (this.updateData.NewPassword !== this.confirmNewPassword) {
+                this.showPopup("warning", "Security Mismatch", "Your updated passwords do not match.", false, "mismatch");
+                return;
+            }
+        }
+        
+        const payload: any = {};
+        if (this.updateData.NewUsername) payload.NewUsername = this.updateData.NewUsername;
+        if (this.updateData.NewPassword) payload.NewPassword = this.updateData.NewPassword;
+
+        this.authService.updateAccountDetails(payload).subscribe({
             next: (res) => {
-                alert(res.message || "Account updated successfully!");
+                const msg = res.message || 'Account information committed cleanly.';
+                this.showPopup("success", "Profile Updated", msg, false, "success-update");
+                
                 // Clear the input fields out beautifully
                 this.updateData = { NewUsername: '', NewPassword: '' };
                 this.confirmNewPassword = ''; // Clear confirmation fields out cleanly
@@ -115,24 +148,48 @@ export class UserProfileComponent implements OnInit {
     }
 
     onDeleteAccount(): void {
-        const primaryConfirm = confirm("CRITICAL ACCESSIBILITY ALERT!\nAre you sure you want to permanently delete your workspace profile?");
-        if(primaryConfirm) {
-            const secondaryConfirm = confirm("FINAL WARNING: This completely wipes out all your records from the system database. This action cannot be reversed. Proceed?");
-            if(secondaryConfirm) {
-                this.authService.deleteAccountPermanently().subscribe({
-                    next: (res) => {
-                        alert(res.message || "Your identity profile was successfully removed");
+        // Fire off the localized critical accessibility alert confirmation modal
+        this.showPopup(
+            "warning",
+            this.langService.words().NOTIFICATIONS.CONFIRM_DELETE_PROFILE_TITLE,
+            this.langService.words().NOTIFICATIONS.CONFIRM_DELETE_PROFILE_BODY,
+            true,
+            "delete-primary"
+        );
+    }
 
-                        // Clear out security tokens so the browser realizes the user is logged out no matter if their token was saved in local or session storage!
-                        localStorage.removeItem('token');
-                        sessionStorage.removeItem('token');
+    // Core Routing Engine for Popup Submissions
+    public handlePopupConfirm(): void {
+        const currentAction = this.popupConfig.actionType;
+        this.closePopup(); // Clear overlay box instantly
 
-                        // Boot the user back out onto the login screen instantly
-                        this.router.navigate(['/login']);
-                    },
-                    error: (err) => console.error("Account destruction failed:", err)
-                });
-            }
+        if (currentAction === "delete-primary") {
+            // Advance user smoothly onto the second final critical warning stage
+            setTimeout(() => {
+                this.showPopup(
+                    "danger",
+                    this.langService.words().NOTIFICATIONS.CONFIRM_FINAL_WARNING_TITLE,
+                    this.langService.words().NOTIFICATIONS.CONFIRM_FINAL_WARNING_BODY,
+                    true,
+                    "delete-secondary"
+                );
+            }, 300);
+        } else if (currentAction === 'delete-secondary') {
+            // Execute the database erasure request securely
+            this.authService.deleteAccountPermanently().subscribe({
+                next: (res) => {
+                    // Clear out security tokens so the browser realizes the user is logged out no matter if their token was saved in local or session storage!
+                    localStorage.removeItem('token');
+                    sessionStorage.removeItem('token');
+
+                    const msg = res.message || this.langService.words().NOTIFICATIONS.SUCCESS_PROFILE_REMOVED;
+                    this.showPopup("success", "Profile Removed", msg, false, "success-redirect");
+                },
+                error: (err) => console.error("Account destruction failed:", err)
+            });
+        } else if (currentAction === "success-redirect") {
+            // Boot the user back out onto the login screen instantly
+            this.router.navigate(['/login']);
         }
     }
 
@@ -180,5 +237,16 @@ export class UserProfileComponent implements OnInit {
     // Trigger method for when changing languages
     onLanguageChangeEngineTrigger(newLang: string): void {
         this.langService.setLanguage(newLang);
+    }
+    
+    // Popup related methods
+    showPopup(type: "success" | "warning" | "danger", title: string, body: string, isConfirmation: boolean, actionType: string): void {
+        this.popupConfig = { visible: true, type, title, body, isConfirmation, actionType };
+        this.cdr.detectChanges();
+    }
+
+    closePopup(): void {
+        this.popupConfig.visible = false;
+        this.cdr.detectChanges();
     }
 }

@@ -1,0 +1,40 @@
+<div class="popup-backdrop" (click)="onDismissOutside($event)">
+    <div class="popup-box"
+         [class]="'popup-' + type"
+         role="alertdialog"
+         aria-modal="true"
+         [attr.aria-labelledby]="'popupTitle'"
+         [attr.aria-describedby]="'popupBody'">
+
+        <!-- Top Visual Alert Header Strip -->
+         <div class="popup-header-icon">
+            <span aria-hidden="true" *ngIf="type === 'success'">✔️</span>
+            <span aria-hidden="true" *ngIf="type === 'warning'">⚠️</span>
+            <span aria-hidden="true" *ngIf="type === 'danger'">‼️</span>
+         </div>
+
+        <div class="popup-content">
+            <!-- Dynamic Header Binding -->
+             <h3 id="popupTitle" class="popup-title" [innerHTML]="title"></h3>
+
+            <!-- Dynamic Body Text Binding -->
+             <p id="popupBody" class="popup-body" [innerHTML]="body"></p>
+        </div>
+
+        <!-- Dynamic Action Footer Container -->
+         <div class="popup-footer">
+            <!-- Render cancel button ONLY if this is a confirmation type layout -->
+             <button *ngIf="isConfirmation"
+                     type="button"
+                     class="popup-btn cancel-btn"
+                     (click)="onCancel()"
+                     [innerHTML]="langService.words().NOTIFICATIONS.BTN_CANCEL"></button>
+
+            <!-- Execution Action Button -->
+             <button type="button"
+                     [class]="'popup-btn ' + (type === 'danger' ? 'danger-zone-btn' : 'submit-btn')"
+                     (click)="onConfirm()"
+                     [innerHTML]="isConfirmation ? langService.words().NOTIFICATIONS.BTN_PROCEED : langService.words().NOTIFICATIONS.BTN_CLOSE"></button>
+        </div>
+    </div>
+</div>

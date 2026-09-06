@@ -1,0 +1,80 @@
+/* Overlay Backdrop Layer */
+.popup-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999; /* Standard topmost presentation boundary */
+    padding: 20px;
+}
+
+/* Standard Component Box Profile */
+.popup-box {
+    background: var(--surface-bg, #ffffff);
+    color: var(--text-primary, #222222);
+    border: 2px solid var(--border-color, #cbd5e1);
+    border-radius: 12px;
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    animation: popupSlideIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    border-top: 6px solid transparent;
+    padding: 24px;
+    text-align: center;
+}
+
+/* Theme-Specific Accent Lines */
+.popup-success { border-top-color: #10b981; }
+.popup-warning { border-top-color: #f59e0b; }
+.popup-danger  { border-top-color: #ef4444; }
+
+/* Structural Content Formatting */
+.popup-header-icon {
+    font-size: 2rem;
+    margin-bottom: 12px;
+}
+
+.popup-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.popup-body {
+    font-size: 0.95rem;
+    color: var(--text-muted, #666666);
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+/* Action Button Layout Footer (Uses CSS Mirroring) */
+.popup-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+/* .popup-btn {
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.15s ease;
+} */
+
+/* Entry Frame Keyframes Animation */
+@keyframes popupSlideIn {
+    from {
+        transform: translateY(20px) scale(0.96);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
