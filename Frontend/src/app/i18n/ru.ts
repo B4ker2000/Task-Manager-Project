@@ -2,6 +2,7 @@ import { LocalePack } from './locale-pack.interface';
 
 export const RussianPack: LocalePack = {
     GLOBAL: {
+        GENERIC_LOADING: "Загрузка...",
         BACK_BTN_TEXT: "Назад к рабочей области",
         BACK_BTN_ARIA: "Вернуться на главную панель задач",
 
@@ -35,24 +36,54 @@ export const RussianPack: LocalePack = {
         DIRECTION: "ltr"
     },
 
-    NOTIFICATIONS: {
-        // Confirmation Overlays
-        CONFIRM_DELETE_PROFILE_TITLE: "КРИТИЧЕСКОЕ ПРЕДУПРЕЖДЕНИЕ!",
-        CONFIRM_DELETE_PROFILE_BODY: "Вы уверены, что хотите навсегда удалить свой профиль?",
-        CONFIRM_FINAL_WARNING_TITLE: "ПОСЛЕДНЕЕ ПРЕДУПРЕЖДЕНИЕ",
-        CONFIRM_FINAL_WARNING_BODY: "Это действие полностью сотрет все ваши записи из базы данных системы. Это действие нельзя отменить. Продолжить?",
-        
+    POPUP: {
         // Success Actions
-        SUCCESS_PROFILE_REMOVED: "Ваш профиль пользователя был успешно удален.",
+        SUCCESS_PROFILE_REMOVED_TITLE: "Профиль удален",
+        SUCCESS_PROFILE_REMOVED_BODY: "Ваш профиль пользователя был успешно удален.",
+        SUCCESS_USER_INFO_UPDATED_TITLE: "Профиль обновлен",
+        SUCCESS_USER_INFO_UPDATED_BODY: "Данные учетной записи успешно изменены.",
         SUCCESS_TASK_CREATED: "Задача успешно создана!",
         SUCCESS_TAG_CREATED: "Категория успешно привязана к задаче!",
+
+        // Warning Actions
+        WARNING_EMPTY_FIELDS_TITLE: "Пустые поля",
+        WARNING_EMPTY_FIELDS_BODY: "Пожалуйста, заполните хотя бы одно поле для обновления профиля!", 
+        WARNING_IDENTICAL_USERNAME_TITLE: "Имя пользователя совпадает", 
+        WARNING_IDENTICAL_USERNAME_BODY: "Новое имя пользователя должно отличаться от текущего!", 
+        WARNING_NEW_PASSWORD_MISMATCH_TITLE: "Несовпадение паролей",
+        WARNING_NEW_PASSWORD_MISMATCH_BODY: "Введенные новые пароли не совпадают.", 
+        WARNING_DELETE_PROFILE_TITLE: "КРИТИЧЕСКОЕ ПРЕДУПРЕЖДЕНИЕ!",
+        WARNING_DELETE_PROFILE_BODY: "Вы уверены, что хотите навсегда удалить свой профиль?",
+        WARNING_NEW_PASSWORD_TITLE: "Подтверждение пароля", 
+        WARNING_NEW_PASSWORD_BODY: "Пожалуйста, подтвердите ваш новый пароль безопасности.", 
+        WARNING_DELETE_PROJECT_TITLE: "Удаление проекта",
+        WARNING_DELETE_PROJECT_BODY: "Вы уверены, что хотите удалить этот проект и все связанные с ним задачи?",
+        WARNING_DELETE_TASK_TITLE: "Удаление задачи",
+        WARNING_DELETE_TASK_BODY: "Вы уверены, что хотите полностью удалить эту задачу?",
+        WARNING_DELETE_CATEGORY_TITLE: "Удаление тега",
+        WARNING_DELETE_CATEGORY_BODY_PART_1: "Вы уверены, что хотите навсегда удалить тег ",
+        WARNING_DELETE_CATEGORY_BODY_PART_2: "? Он будет убран из всех связанных задач.",
+        WARNING_REMOVE_MEMBER_TITLE: "Исключение из команды",
+        WARNING_REMOVE_MEMBER_BODY_PART_1: "Вы уверены, что хотите удалить пользователя ",
+        WARNING_REMOVE_MEMBER_BODY_PART_2: " из рабочего пространства этого проекта?",
+        WARNING_LEAVE_PROJECT_TITLE: "Выход из проекта",
+        WARNING_LEAVE_PROJECT_BODY: "Вы абсолютно уверены, что хотите покинуть этот проект? Вы полностью потеряете доступ к этой доске задач!",
+
+        // Danger Actions
+        DANGER_FINAL_WARNING_TITLE: "ПОСЛЕДНЕЕ ПРЕДУПРЕЖДЕНИЕ",
+        DANGER_FINAL_WARNING_BODY: "Это действие полностью сотрет все ваши записи из базы данных системы. Это действие нельзя отменить. Продолжить?",
+        DANGER_ACCESS_DENIED_TITLE: "Доступ запрещен!",
+        DANGER_TASK_DELETE_ACCESS_DENIED_BODY: "Только создатель проекта имеет разрешение на удаление рабочих элементов.",
+        ERROR_GENERIC_TITLE: "Произошла ошибка",
+        ERROR_TASK_DELETE_BODY: "Не удалось завершить удаление задачи. Пожалуйста, попробуйте еще раз.",
+        ERROR_SOLE_OWNER_BODY: "Не удалось выйти из проекта. Назначьте другого владельца перед уходом.",
+        ERROR_INVITE_FAILED_BODY: "Не удалось пригласить пользователя. Пожалуйста, проверьте корректность آدرس электронной почты.",
 
         // Button Layouts
         BTN_PROCEED: "Продолжить",
         BTN_CANCEL: "Отмена",
         BTN_CLOSE: "Закрыть"
     },
-
 
     PROFILE: {
         // Navigation / Headers

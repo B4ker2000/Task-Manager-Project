@@ -2,6 +2,7 @@ import { LocalePack } from './locale-pack.interface';
 
 export const JapanesePack: LocalePack = {
     GLOBAL: {
+        GENERIC_LOADING: "<ruby>読<rt aria-hidden=\"true\">よ</rt></ruby>み<ruby>込<rt aria-hidden=\"true\">こ</rt></ruby>み<ruby>中<rt aria-hidden=\"true\">ちょう</rt></ruby>...",
         BACK_BTN_TEXT: "ダッシュボードに<ruby>戻<rt aria-hidden=\"true\">もど</rt>る</ruby>",
         BACK_BTN_ARIA: "メインプロジェクトのダッシュボードに戻る",
 
@@ -35,22 +36,53 @@ export const JapanesePack: LocalePack = {
         DIRECTION: "ltr"
     },
 
-    NOTIFICATIONS: {
-        // Confirmation Overlays
-        CONFIRM_DELETE_PROFILE_TITLE: "⚠️ <ruby>重大<rt aria-hidden=\"true\">じゅうだい</rt></ruby>なアクセシビリティ<ruby>警告<rt aria-hidden=\"true\">けいこく</rt></ruby>",
-        CONFIRM_DELETE_PROFILE_BODY: "<ruby>本当<rt aria-hidden=\"true\">ほんとう</rt></ruby>にワークスペースのプロフィールを<ruby>完全<rt aria-hidden=\"true\">かんぜん</rt></ruby>に<ruby>削除<rt aria-hidden=\"true\">さくじょ</rt></ruby>してもよろしいですか？",
-        CONFIRM_FINAL_WARNING_TITLE: "‼️ <ruby>最終確認<rt aria-hidden=\"true\">さいしゅうかくにん</rt></ruby>",
-        CONFIRM_FINAL_WARNING_BODY: "この<ruby>操作<rt aria-hidden=\"true\">そうさ</rt></ruby>を<ruby>行<rt aria-hidden=\"true\">おこな</rt></ruby>うと、システムデータベースからすべての<ruby>記録<rt aria-hidden=\"true\">きろく</rt></ruby>が<ruby>完全<rt aria-hidden=\"true\">かんぜん</rt></ruby>に<ruby>消去<rt aria-hidden=\"true\">しょうきょ</rt></ruby>されます。この<ruby>操作<rt aria-hidden=\"true\">そうさ</rt></ruby>は<ruby>取<rt aria-hidden=\"true\">と</rt></ruby>り<ruby>消<rt aria-hidden=\"true\">け</rt></ruby>すことができません。<ruby>続行<rt aria-hidden=\"true\">ぞっこう</rt></ruby>しますか？",
-        
+    POPUP: {
         // Success Actions
-        SUCCESS_PROFILE_REMOVED: "プロフィール<ruby>情報<rt aria-hidden=\"true\">じょうほう</rt></ruby>が<ruby>正常<rt aria-hidden=\"true\">せいじょう</rt></ruby>に<ruby>削除<rt aria-hidden=\"true\">さくじょ</rt></ruby>されました。",
+        SUCCESS_PROFILE_REMOVED_TITLE: "アカウント<ruby>削除完了<rt aria-hidden=\"true\">さくじょかんりょう</rt></ruby>",
+        SUCCESS_PROFILE_REMOVED_BODY: "プロフィール<ruby>情報<rt aria-hidden=\"true\">じょうほう</rt></ruby>が<ruby>正常<rt aria-hidden=\"true\">せいじょう</rt></ruby>に<ruby>削除<rt aria-hidden=\"true\">さくじょ</rt></ruby>されました。",
+        SUCCESS_USER_INFO_UPDATED_TITLE: "プロフィール<ruby>更新<rt aria-hidden=\"true\">こうしん</rt></ruby>",
+        SUCCESS_USER_INFO_UPDATED_BODY: "アカウント<ruby>情報<rt aria-hidden=\"true\">じょうほう</rt></ruby>が<ruby>正常<rt aria-hidden=\"true\">せいじょう</rt></ruby>に<ruby>更新<rt aria-hidden=\"true\">こうしん</rt></ruby>されました。",
         SUCCESS_TASK_CREATED: "タスクが<ruby>正常<rt aria-hidden=\"true\">せいじょう</rt></ruby>に<ruby>作成<rt aria-hidden=\"true\">さくせい</rt></ruby>されました！",
         SUCCESS_TAG_CREATED: "カテゴリタグが<ruby>正常<rt aria-hidden=\"true\">せいじょう</rt></ruby>にリンクされました！",
 
+        // Warning Actions
+        WARNING_EMPTY_FIELDS_TITLE: "<ruby>未入力<rt aria-hidden=\"true\">みにゅうりょく</rt></ruby>の<ruby>項目<rt aria-hidden=\"true\">こおうもく</rt></ruby>",
+        WARNING_EMPTY_FIELDS_BODY: "プロフィールの<ruby>更新内容<rt aria-hidden=\"true\">こうしんないよう</rt></ruby>を<ruby>保存<rt aria-hidden=\"true\">ほぞん</rt></ruby>するには、<ruby>少<rt aria-hidden=\"true\">すく</rt></ruby>なくとも1つのフィールドに<ruby>入力<rt aria-hidden=\"true\">にゅうりょく</rt></ruby>してください！", 
+        WARNING_IDENTICAL_USERNAME_TITLE: "<ruby>同<rt aria-hidden=\"true\">おな</rt></ruby>じユーザー<ruby>名<rt aria-hidden=\"true\">めい</rt></ruby>", 
+        WARNING_IDENTICAL_USERNAME_BODY: "<ruby>新<rt aria-hidden=\"true\">あたら</rt></ruby>しいユーザー<ruby>名<rt aria-hidden=\"true\">めい</rt></ruby>は、<ruby>現在<rt aria-hidden=\"true\">げんざい</rt></ruby>のユーザー<ruby>名<rt aria-hidden=\"true\">めい</rt></ruby>と<ruby>異<rt aria-hidden=\"true\">こと</rt></ruby>なるものを<ruby>設定<rt aria-hidden=\"true\">せってい</rt></ruby>してください！", 
+        WARNING_NEW_PASSWORD_MISMATCH_TITLE: "パスワードの<ruby>不<rt aria-hidden=\"true\">ふい</rt></ruby>一<ruby>致<rt aria-hidden=\"true\">ち</rt></ruby>",
+        WARNING_NEW_PASSWORD_MISMATCH_BODY: "<ruby>入力<rt aria-hidden=\"true\">みにゅうりょく</rt></ruby>された<ruby>新<rt aria-hidden=\"true\">あたら</rt></ruby>しいパスワードが一<ruby>致<rt aria-hidden=\"true\">ち</rt></ruby>しません。",  
+        WARNING_DELETE_PROFILE_TITLE: "<ruby>重大<rt aria-hidden=\"true\">じゅうだい</rt></ruby>なアクセシビリティ<ruby>警告<rt aria-hidden=\"true\">けいこく</rt></ruby>",
+        WARNING_DELETE_PROFILE_BODY: "<ruby>本当<rt aria-hidden=\"true\">ほんとう</rt></ruby>にワークスペースのプロフィールを<ruby>完全<rt aria-hidden=\"true\">かんぜん</rt></ruby>に<ruby>削除<rt aria-hidden=\"true\">さくじょ</rt></ruby>してもよろしいですか？",
+        WARNING_NEW_PASSWORD_TITLE: "パスワードの<ruby>確認<rt aria-hidden=\"true\">かくにん </rt></ruby>",
+        WARNING_NEW_PASSWORD_BODY: "<ruby>新<rt aria-hidden=\"true\">あたら</rt></ruby>しいセキュリティパスワードを<ruby>再入力<rt aria-hidden=\"true\">さいにゅうりょく</rt></ruby>して<ruby>確認<rt aria-hidden=\"true\">かくにん</rt></ruby>してください。", 
+        WARNING_DELETE_PROJECT_TITLE: "プロジェクトの<ruby>削除<rt aria-hidden=\"true\">さくじょ</rt></ruby>",
+        WARNING_DELETE_PROJECT_BODY: "このプロジェクト、および<ruby>関連<rt aria-hidden=\"true\">かんれん</rt></ruby>するすべてのタスクを<ruby>本当<rt aria-hidden=\"true\">ほんとう</rt></ruby>に<ruby>削除<rt aria-hidden=\"true\">さくじょ</rt></ruby>してもよろしいですか？この<ruby>操作<rt aria-hidden=\"true\">そうさ</rt></ruby>は<ruby>取<rt aria-hidden=\"true\">と</rt></ruby>り<ruby>消<rt aria-hidden=\"true\">け</rt></ruby>せません。",
+        WARNING_DELETE_TASK_TITLE: "タスクの<ruby>削除<rt aria-hidden=\"true\">さくじょ</rt></ruby>",
+        WARNING_DELETE_TASK_BODY: "このタスクを<ruby>完全<rt aria-hidden=\"true\">かんぜん</rt></ruby>に<ruby>削除<rt aria-hidden=\"true\">さくじょ</rt></ruby>してもよろしいですか？",
+        WARNING_DELETE_CATEGORY_TITLE: "タグの<ruby>削除<rt aria-hidden=\"true\">さくじょ</rt></ruby>",
+        WARNING_DELETE_CATEGORY_BODY_PART_1: "<ruby>本当<rt aria-hidden=\"true\">ほんとう</rt></ruby>にカテゴリタグ ",
+        WARNING_DELETE_CATEGORY_BODY_PART_2: " を<ruby>永久<rt aria-hidden=\"true\">えいきゅう</rt></ruby>に<ruby>削除<rt aria-hidden=\"true\">さくじょ</rt></ruby>しますか？このタグを<ruby>使用<rt aria-hidden=\"true\">しよう</rt></ruby>しているタスクからタグ<ruby>情報<rt aria-hidden=\"true\">じょうほう</rt></ruby>が<ruby>解除<rt aria-hidden=\"true\">かいじょ</rt></ruby>されます。",
+        WARNING_REMOVE_MEMBER_TITLE: "メンバーの<ruby>除外<rt aria-hidden=\"true\">じょがい</rt></ruby>",
+        WARNING_REMOVE_MEMBER_BODY_PART_1: "<ruby>本当<rt aria-hidden=\"true\">ほんとう</rt></ruby>にユーザー ",
+        WARNING_REMOVE_MEMBER_BODY_PART_2: " をこのプロジェクトのワークスペースから<ruby>除外<rt aria-hidden=\"true\">じょがい</rt></ruby>してもよろしいですか？",
+        WARNING_LEAVE_PROJECT_TITLE: "プロジェクトからの<ruby>脱退<rt aria-hidden=\"true\">だったい</rt></ruby>",
+        WARNING_LEAVE_PROJECT_BODY: "<ruby>本当<rt aria-hidden=\"true\">ほんとう</rt></ruby>にこのプロジェクトスペースから<ruby>脱退<rt aria-hidden=\"true\">だったい</rt></ruby>してもよろしいですか？このボードに<ruby>対<rt aria-hidden=\"true\">たい</rt></ruby>するすべてのアクセス<ruby>権<rt aria-hidden=\"true\">けん</rt></ruby>が<ruby>失<rt aria-hidden=\"true\">うしな</rt></ruby>われます！",
+
+        // Danger Actions
+        DANGER_FINAL_WARNING_TITLE: "<ruby>最終確認<rt aria-hidden=\"true\">さいしゅうかくにん</rt></ruby>",
+        DANGER_FINAL_WARNING_BODY: "この<ruby>操作<rt aria-hidden=\"true\">そうさ</rt></ruby>を<ruby>行<rt aria-hidden=\"true\">おこな</rt></ruby>うと、システムデータベースからすべての<ruby>記録<rt aria-hidden=\"true\">きろく</rt></ruby>が<ruby>完全<rt aria-hidden=\"true\">かんぜん</rt></ruby>に<ruby>消去<rt aria-hidden=\"true\">しょうきょ</rt></ruby>されます。この<ruby>操作<rt aria-hidden=\"true\">そうさ</rt></ruby>は<ruby>取<rt aria-hidden=\"true\">と</rt></ruby>り<ruby>消<rt aria-hidden=\"true\">け</rt></ruby>すことができません。<ruby>続行<rt aria-hidden=\"true\">ぞっこう</rt></ruby>しますか？",
+        DANGER_ACCESS_DENIED_TITLE: "アクセス<ruby>拒否<rt aria-hidden=\"true\">きょひ</rt></ruby>！",
+        DANGER_TASK_DELETE_ACCESS_DENIED_BODY: "タスクを<ruby>削除<rt aria-hidden=\"true\">さくじょ</rt></ruby>する<ruby>権限<rt aria-hidden=\"true\">けんげん</rt></ruby>がありません。この<ruby>操作<rt aria-hidden=\"true\">そうさ</rt></ruby>はプロジェクトのオーナーのみ<ruby>可能<rt aria-hidden=\"true\">かのう</rt></ruby>です。",
+        ERROR_GENERIC_TITLE: "エラーが<ruby>発生<rt aria-hidden=\"true\">はっせい</rt></ruby>しました",
+        ERROR_TASK_DELETE_BODY: "タスクの<ruby>削除処理<rt aria-hidden=\"true\">さくじょしょり</rt></ruby>に<ruby>失敗<rt aria-hidden=\"true\">しっぱい</rt></ruby>しました。もう一<ruby>度<rt aria-hidden=\"true\">ど</rt></ruby>お<ruby>試<rt aria-hidden=\"true\">ため</rt></ruby>しください。",
+        ERROR_SOLE_OWNER_BODY: "プロジェクトから<ruby>脱退<rt aria-hidden=\"true\">だったい</rt></ruby>できませんでした。<ruby>脱退<rt aria-hidden=\"true\">だったい</rt></ruby>する<ruby>前<rt aria-hidden=\"true\">まえ</rt></ruby>に<ruby>別<rt aria-hidden=\"true\">べつ</rt></ruby>の<ruby>共同<rt aria-hidden=\"true\">きょうどう</rt></ruby>オーナーを<ruby>指定<rt aria-hidden=\"true\">してい</rt></ruby>するか、ダッシュボードからプロジェクト<ruby>自体<rt aria-hidden=\"true\">じたい</rt></ruby>を<ruby>削除<rt aria-hidden=\"true\">さくじょ</rt></ruby>してください。",
+        ERROR_INVITE_FAILED_BODY: "メンバーの<ruby>招待処理<rt aria-hidden=\"true\">しょうたいしょり</rt></ruby>に<ruby>失敗<rt aria-hidden=\"true\">しっぱい</rt></ruby>しました。<ruby>未入力<rt aria-hidden=\"true\">にゅうりょく</rt></ruby>されたメールアドレスが<ruby>正<rt aria-hidden=\"true\">ただ</rt></ruby>しいかご<ruby>確認<rt aria-hidden=\"true\">かくにん</rt></ruby>ください。",
+        
         // Button Layouts
         BTN_PROCEED: "<ruby>続行<rt aria-hidden=\"true\">ぞっこう</rt></ruby>する",
         BTN_CANCEL: "キャンセル",
-        BTN_CLOSE: "<ruby>閉<rt aria-hidden=\"true\">と</rt></ruby>じる",
+        BTN_CLOSE: "<ruby>閉<rt aria-hidden=\"true\">と</rt></ruby>じる"
     },
 
     PROFILE: {

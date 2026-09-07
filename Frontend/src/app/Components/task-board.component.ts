@@ -8,11 +8,12 @@ import { AuthService } from "../Services/auth.service";
 import { CategoryService } from "../Services/category.service";
 import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
 import { LanguageService } from "../i18n/language.service";
+import { PopupComponent } from "./popup.component";
 
 @Component({
     selector: 'app-task-board',
     standalone: true,
-    imports: [FormsModule, NgFor, NgIf, NgClass, RouterLink, DatePipe, DragDropModule],
+    imports: [FormsModule, NgFor, NgIf, NgClass, RouterLink, DatePipe, DragDropModule, PopupComponent],
     templateUrl: "./task-board.component.html",
     styleUrl: "./task-board.component.css"
 })
@@ -87,6 +88,23 @@ export class TaskBoardComponent implements OnInit {
     @ViewChild('createTaskBtn') createTaskBtn!: ElementRef<HTMLButtonElement>
     @ViewChild('createTagBtn') createTagBtn!: ElementRef<HTMLButtonElement>
 
+    private pendingDeleteTaskId: number | null = null; 
+    private pendingDeleteCategoryId: number | null = null;
+    private pendingRemoveMemberId: number | null = null;
+    private pendingLeavingMemberId: number | null = null;
+
+    //////////////////////////////////////
+    // Popup component state controller //
+    //////////////////////////////////////
+    public popupConfig = {
+        visible: false,
+        type: "success" as "success" | "warning" | "danger",
+        title: "",
+        body: "",
+        isConfirmation: false,
+        actionType: "" // Tracks what to do when clicking "Proceed"
+    };
+
     constructor(public langService: LanguageService) {}
     
     ngOnInit(): void {
@@ -96,8 +114,8 @@ export class TaskBoardComponent implements OnInit {
 
             // Ensure we are running inside a browser window environment safely
             if(this.projectId && isPlatformBrowser(this.platformId)) {
-                this.projectTitle = "Now Loading...";
-                this.currentUserProjectRole = "Loading...";
+                this.projectTitle = this.langService.words().GLOBAL.GENERIC_LOADING;
+                this.currentUserProjectRole = this.langService.words().GLOBAL.GENERIC_LOADING;
 
                 // SECURITY TOKEN CHECK GATEWAY: Prevents unauthorized empty requests on reload!
                 const token = localStorage.getItem('token') || sessionStorage.getItem('token');
@@ -203,23 +221,124 @@ export class TaskBoardComponent implements OnInit {
     }
 
     onDeleteTask(taskId: number): void {
-        // A quick browser pop-up confirmation to prevent accidental clicks
-        if(confirm("Are you sure you want to delete this task completely?")) {
-            this.taskService.deleteTask(taskId).subscribe({
+        this.pendingDeleteTaskId = taskId;
+        
+        // A quick pop-up confirmation to prevent accidental clicks!
+        this.showPopup(
+            "warning",
+            this.langService.words().POPUP.WARNING_DELETE_TASK_TITLE,
+            this.langService.words().POPUP.WARNING_DELETE_TASK_BODY,
+            true,
+            "delete-task"
+        );
+    }
+        
+    handlePopupConfirm(): void {
+        const currentAction = this.popupConfig.actionType;
+        this.closePopup();
+
+        if (currentAction === "delete-task" && this.pendingDeleteTaskId !== null) {
+            this.taskService.deleteTask(this.pendingDeleteTaskId).subscribe({
                 next: () => {
+                    this.pendingDeleteTaskId = null;
                     this.loadTasks(); // Instantly reload columns to remove the deleted card
                 },
                 error: (err) => {
+                    this.pendingDeleteTaskId = null;
                     console.error("Failed to delete task item!", err);
 
-                    if(err.status === 403) {
-                        alert("🛑 Access Denied!\nOnly the project Owner has permission to delete workspace items.");
+                    if (err.status === 403) {
+                        this.showPopup(
+                            "danger",
+                            this.langService.words().POPUP.DANGER_ACCESS_DENIED_TITLE,
+                            this.langService.words().POPUP.DANGER_TASK_DELETE_ACCESS_DENIED_BODY,
+                            false,
+                            "error-dismiss"
+                        );
                     } else {
-                        alert("Failed to complete task deletion. Please try again.")
+                        this.showPopup(
+                            "danger",
+                            this.langService.words().POPUP.ERROR_GENERIC_TITLE,
+                            this.langService.words().POPUP.ERROR_TASK_DELETE_BODY,
+                            false,
+                            "error-dismiss"
+                        );
                     }
                 }
             });
+        } else if (currentAction === "delete-category" && this.pendingDeleteCategoryId !== null) {
+            this.categoryService.deleteCategory(this.projectId, this.pendingDeleteCategoryId).subscribe({
+                next: (res: any) => {
+                    this.pendingDeleteCategoryId = null;
+                    console.log("Category tag expunged successfully:", res.message);
+                    // Refresh tags tray and task board arrays immediately on the fly!
+                    this.loadProjectCategories();
+                    this.loadTasks();
+                },
+                error: (err: any) => {
+                    this.pendingDeleteCategoryId = null;
+                    console.error("Failed to delete workspace tag row:", err);
+                    this.showPopup(
+                        "danger",
+                        this.langService.words().POPUP.ERROR_GENERIC_TITLE,
+                        this.langService.words().POPUP.ERROR_TASK_DELETE_BODY,
+                        false,
+                        "error-dismiss"
+                    );
+                }
+            });
+        } else if (currentAction === "remove-member" && this.pendingRemoveMemberId !== null) {
+            this.projectService.removeProjectMember(this.projectId, this.pendingRemoveMemberId).subscribe({
+                next: (res: any) => {
+                    this.pendingRemoveMemberId = null;
+                    console.log("Roster update executed successfully:", res.message);
+                    // Refresh your dashboard panel lists immediately on the fly!
+                    this.loadProjectMembers();
+                    this.loadTasks();
+                },
+                error: (err: any) => {
+                    this.pendingRemoveMemberId = null;
+                    console.error("Failed to execute member removal:", err);
+                    this.showPopup(
+                        "danger",
+                        this.langService.words().POPUP.ERROR_GENERIC_TITLE,
+                        this.langService.words().POPUP.ERROR_TASK_DELETE_BODY,
+                        false,
+                        "error-dismiss"
+                    );
+                }
+            });
+        } else if (currentAction === "leave-project" && this.pendingLeavingMemberId !== null) {
+            this.projectService.removeProjectMember(this.projectId, this.pendingLeavingMemberId).subscribe({
+                next: (res: any) => {
+                    this.pendingLeavingMemberId = null;
+                    console.log("Resignation sequence tracking successful:", res.message);
+                    // Redirect the user straight back to their main clean dashboard portal room!
+                    this.router.navigate(['/dashboard']);
+                },
+                error: (err: any) => {
+                    this.pendingLeavingMemberId = null;
+                    const errorMsg = err.error?.message || this.langService.words().POPUP.ERROR_SOLE_OWNER_BODY;
+                    this.showPopup(
+                        "danger",
+                        this.langService.words().POPUP.DANGER_ACCESS_DENIED_TITLE,
+                        errorMsg,
+                        false,
+                        "error-dismiss"
+                    );
+                }
+            });
         }
+    }
+
+    showPopup(type: "success" | "warning" | "danger", title: string, body: string, isConfirmation: boolean, actionType: string): void {
+        this.popupConfig = { visible: true, type, title, body, isConfirmation, actionType };
+        this.cdr.detectChanges();
+    }
+
+    closePopup(): void {
+        this.popupConfig.visible = false;
+        this.cdr.detectChanges();
     }
 
     // Prepare our form model structure before opening overlay container view
@@ -317,7 +436,16 @@ export class TaskBoardComponent implements OnInit {
             },
             error: (err: any) => {
                 console.error("Invitation process failure:", err);
-                alert(err.error?.message || "Failed to complete member assignment.");
+
+                const msg = err.error?.message || this.langService.words().POPUP.ERROR_INVITE_FAILED_BODY;
+
+                this.showPopup(
+                    "danger",
+                    this.langService.words().POPUP.ERROR_GENERIC_TITLE,
+                    msg,
+                    false,
+                    "error-dismiss"
+                );
             }
         });
     }
@@ -402,18 +530,15 @@ export class TaskBoardComponent implements OnInit {
     }
 
     onDeleteCategoryClick(categoryId: number, categoryName: string): void {
-        const confirmSystem = confirm(`Are you sure you want to permanently delete the '${categoryName}' tag? Ant tasks using this tag will have it removed.`);
-        if(!confirmSystem) return;
-
-        this.categoryService.deleteCategory(this.projectId, categoryId).subscribe({
-            next: (res: any) => {
-                console.log("Category tag expunged successfully:", res.message);
-                // Refresh tags tray and task board arrays immediately on the fly!
-                this.loadProjectCategories();
-                this.loadTasks();
-            },
-            error: (err: any) => console.error("Failed to delete workspace tag row:", err)
-        });
+        this.pendingDeleteCategoryId = categoryId;
+        
+        this.showPopup(
+            "warning",
+            this.langService.words().POPUP.WARNING_DELETE_CATEGORY_TITLE,
+            this.langService.words().POPUP.WARNING_DELETE_CATEGORY_BODY_PART_1 + `'${categoryName}'` + this.langService.words().POPUP.WARNING_DELETE_CATEGORY_BODY_PART_2,
+            true,
+            "delete-category"
+        );
     }
 
     openCategoryModal(): void {
@@ -458,32 +583,27 @@ export class TaskBoardComponent implements OnInit {
     }
 
     onRemoveMemberClick(targetUserId: number, targetEmail: string): void {
-        const confirmSystem = confirm(`Are you sure you want to remove ${targetEmail} from this project workspace room?`);
-        if(!confirmSystem) return;
+        this.pendingRemoveMemberId = targetUserId
 
-        this.projectService.removeProjectMember(this.projectId, targetUserId).subscribe({
-            next: (res: any) => {
-                console.log("Roster update executed successfully:", res.message);
-                // Refresh your dashboard panel lists immediately on the fly!
-                this.loadProjectMembers();
-                this.loadTasks();
-            },
-            error: (err: any) => console.error("Failed to execute member removal:", err)
-        });
+        this.showPopup(
+            "warning",
+            this.langService.words().POPUP.WARNING_REMOVE_MEMBER_TITLE,
+            this.langService.words().POPUP.WARNING_REMOVE_MEMBER_BODY_PART_1 + `${targetEmail}` + this.langService.words().POPUP.WARNING_REMOVE_MEMBER_BODY_PART_2,
+            true,
+            "remove-member"
+        );
     }
 
     onLeaveProjectClick(): void {
-        const confirmSystem = confirm("Are you absolutely sure you want to resign and leave this project workspace? You will lose all access to this board!");
-        if(!confirmSystem) return;
+        this.pendingLeavingMemberId = this.currentUserId;
 
-        this.projectService.removeProjectMember(this.projectId, this.currentUserId).subscribe({
-            next: (res: any) => {
-                console.log("Resignation sequence tracking successful:", res.message);
-                // Redirect the user straight back to their main clean dashboard portal room!
-                this.router.navigate(['/dashboard']);
-            },
-            error: (err: any) => alert(err.error?.message || "Failed to process project resignation request.")
-        });
+        this.showPopup(
+            "warning",
+            this.langService.words().POPUP.WARNING_LEAVE_PROJECT_TITLE,
+            this.langService.words().POPUP.WARNING_LEAVE_PROJECT_BODY,
+            true,
+            "leave-project"
+        );
     }
 
     // Method to hide category select drop down menu from unassigned members since they can already see the tag pills if any tag is assigned!

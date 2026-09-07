@@ -2,6 +2,7 @@ import { LocalePack } from './locale-pack.interface';
 
 export const EnglishUSPack: LocalePack = {
     GLOBAL: {
+        GENERIC_LOADING: "Now Loading...",
         BACK_BTN_TEXT: "Back to Dashboard",
         BACK_BTN_ARIA: "Back to main project dashboard",
 
@@ -35,17 +36,48 @@ export const EnglishUSPack: LocalePack = {
         DIRECTION: "ltr"
     },
 
-    NOTIFICATIONS: {
-        // Confirmation Overlays
-        CONFIRM_DELETE_PROFILE_TITLE: "CRITICAL ACCESSIBILITY ALERT!",
-        CONFIRM_DELETE_PROFILE_BODY: "Are you sure you want to permanently delete your workspace profile?",
-        CONFIRM_FINAL_WARNING_TITLE: "FINAL WARNING",
-        CONFIRM_FINAL_WARNING_BODY: "This completely wipes out all your records from the system database. This action cannot be reversed. Proceed?",
-
+    POPUP: {
         // Success Actions
-        SUCCESS_PROFILE_REMOVED: "Your identity profile was successfully removed.",
+        SUCCESS_PROFILE_REMOVED_TITLE: "Profile Removed",
+        SUCCESS_PROFILE_REMOVED_BODY: "Your identity profile was successfully removed.",
+        SUCCESS_USER_INFO_UPDATED_TITLE: "Profile Updated",
+        SUCCESS_USER_INFO_UPDATED_BODY: "Account information updated.",
         SUCCESS_TASK_CREATED: "Task created successfully!",
         SUCCESS_TAG_CREATED: "Category tag linked successfully!",
+
+        // Warning Actions
+        WARNING_EMPTY_FIELDS_TITLE: "Empty Fields",
+        WARNING_EMPTY_FIELDS_BODY: "Please fill out at least one field to save profile updates!", 
+        WARNING_IDENTICAL_USERNAME_TITLE: "Identical Username", 
+        WARNING_IDENTICAL_USERNAME_BODY: "Your new username must be different from your current one!", 
+        WARNING_NEW_PASSWORD_MISMATCH_TITLE: "Security Mismatch",
+        WARNING_NEW_PASSWORD_MISMATCH_BODY: "Your updated passwords do not match.", 
+        WARNING_DELETE_PROFILE_TITLE: "CRITICAL ACCESSIBILITY ALERT!",
+        WARNING_DELETE_PROFILE_BODY: "Are you sure you want to permanently delete your workspace profile?",
+        WARNING_NEW_PASSWORD_TITLE: "Confirm Password", 
+        WARNING_NEW_PASSWORD_BODY: "Please confirm your new security password.", 
+        WARNING_DELETE_PROJECT_TITLE: "Delete Project",
+        WARNING_DELETE_PROJECT_BODY: "Are you sure you want to delete this project and all its associated tasks?",
+        WARNING_DELETE_TASK_TITLE: "Delete Task",
+        WARNING_DELETE_TASK_BODY: "Are you sure you want to delete this task completely?",
+        WARNING_DELETE_CATEGORY_TITLE: "Delete Tag",
+        WARNING_DELETE_CATEGORY_BODY_PART_1: "Are you sure you want to permanently delete the ",
+        WARNING_DELETE_CATEGORY_BODY_PART_2: " tag? Any tasks using this categorization tag will have it removed.",
+        WARNING_REMOVE_MEMBER_TITLE: "Remove Team Member",
+        WARNING_REMOVE_MEMBER_BODY_PART_1: "Are you sure you want to remove ",
+        WARNING_REMOVE_MEMBER_BODY_PART_2: " from this project workspace room?",
+        WARNING_LEAVE_PROJECT_TITLE: "Leave Project Workspace",
+        WARNING_LEAVE_PROJECT_BODY: "Are you absolutely sure you want to resign and leave this project workspace? You will lose all access to this board layout!",
+
+        // Danger Actions
+        DANGER_FINAL_WARNING_TITLE: "FINAL WARNING",
+        DANGER_FINAL_WARNING_BODY: "This completely wipes out all your records from the system database. This action cannot be reversed. Proceed?",
+        DANGER_ACCESS_DENIED_TITLE: "Access Denied!",
+        DANGER_TASK_DELETE_ACCESS_DENIED_BODY: "Only the project Owner has permission to delete workspace items.",
+        ERROR_GENERIC_TITLE: "Error Encountered",
+        ERROR_TASK_DELETE_BODY: "Failed to complete task deletion. Please try again.",
+        ERROR_SOLE_OWNER_BODY: "Failed to process project resignation request.",
+        ERROR_INVITE_FAILED_BODY: "Failed to complete member assignment email input.",
 
         // Button Layouts
         BTN_PROCEED: "Proceed",

@@ -251,30 +251,11 @@
 .save-settings-btn { 
     width: 100%; 
     height: 42px; 
-    background-color: var(--btn-filter-bg, #ffffff);
-    outline: none;
-    border-color: var(--btn-filter-border);
-    color: var(--btn-filter-text);
-    border-radius: 4px; 
-    font-weight: bold; 
-    cursor: pointer; 
-    transition: all 0.2s ease;
 }
 
-.save-settings-btn:hover:not(:disabled) { 
-    background-color: var(--btn-filter-hover-bg);
-    color: var(--btn-filter-hover-text);
-    border-color: var(--btn-filter-hover-border);
-}
-
-/* Base dimensions stretch for local danger action buttons */
 .danger-zone-btn { 
     width: 100%; 
     height: 42px;
-    border-radius: 4px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* =========================================================================

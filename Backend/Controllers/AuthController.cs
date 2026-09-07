@@ -2,7 +2,6 @@ using Backend.Dtos;
 using Backend.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace Backend.Controllers
 {
@@ -12,20 +11,12 @@ namespace Backend.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
+        private readonly IUserContextService _userContext;
 
-        public AuthController(IAuthService authService)
+        public AuthController(IAuthService authService, IUserContextService userContext)
         {
             _authService = authService;
-        }
-
-        // Reusable token claim interpreter
-        private int CurrentUserId
-        {
-            get
-            {
-                var claimValue = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-                return int.TryParse(claimValue, out int userId) ? userId : 0;
-            }
+            _userContext = userContext;
         }
         
         [HttpPost("register")] // This makes the URL: api/auth/register
@@ -71,8 +62,8 @@ namespace Backend.Controllers
         public async Task<IActionResult> GetUserProfile()
         {
             // Extract the unique User ID embedded inside the secure token claims payload!
-            var userId = CurrentUserId;
-            if (userId == 0) 
+            var CurrentUserId = _userContext.GetCurrentUserId();
+            if (CurrentUserId == null) 
             {
                 return Unauthorized(new { 
                     Success = false,
@@ -81,7 +72,7 @@ namespace Backend.Controllers
             }
 
             // Look up the user record in our SQLite context file
-            var profileData = await _authService.GetProfileAsync(userId);
+            var profileData = await _authService.GetProfileAsync(CurrentUserId.Value);
             if (profileData == null)
             {
                 return NotFound(new { 
@@ -96,10 +87,10 @@ namespace Backend.Controllers
         [HttpPut("update-account")]
         public async Task<IActionResult> UpdateAccount([FromBody] UpdateAccountDto request)
         {
-            var userId = CurrentUserId;
-            if (userId == 0) return Unauthorized();
+            var CurrentUserId = _userContext.GetCurrentUserId();
+            if (CurrentUserId == null) return Unauthorized();
 
-            var success = await _authService.UpdateAccountAsync(userId, request);
+            var success = await _authService.UpdateAccountAsync(CurrentUserId.Value, request);
             if (!success) 
             {
                 return NotFound(new { 
@@ -117,10 +108,10 @@ namespace Backend.Controllers
         [HttpDelete("delete-account")]
         public async Task<IActionResult> DeleteAccount()
         {
-            var userId = CurrentUserId;
-            if (userId == 0) return Unauthorized();
+            var CurrentUserId = _userContext.GetCurrentUserId();
+            if (CurrentUserId == null) return Unauthorized();
 
-            var success = await _authService.DeleteAccountAsync(userId);
+            var success = await _authService.DeleteAccountAsync(CurrentUserId.Value);
             if (!success) 
             {
                 return NotFound(new { 

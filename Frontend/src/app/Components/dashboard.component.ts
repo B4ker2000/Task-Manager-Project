@@ -5,11 +5,12 @@ import { ProjectService } from "../Services/project.service";
 import { Router, RouterLink } from "@angular/router";
 import { AuthService } from "../Services/auth.service";
 import { LanguageService } from "../i18n/language.service";
+import { PopupComponent } from "./popup.component";
 
 @Component({
     selector: 'app-dashboard',
     standalone: true,
-    imports: [FormsModule, NgFor, NgIf, RouterLink],
+    imports: [FormsModule, NgFor, NgIf, RouterLink, PopupComponent],
     templateUrl: "./dashboard.component.html",
     styleUrl: "./dashboard.component.css"
 })
@@ -23,15 +24,27 @@ export class DashboardComponent implements OnInit {
     projects: any[] = [];
     newProject = { name: '', description: '' };
 
+    private pendingDeleteProjectId: number | null = null;
+
+    //////////////////////////////////////
+    // Popup component state controller //
+    //////////////////////////////////////
+    public popupConfig = {
+        visible: false,
+        type: "success" as "success" | "warning" | "danger",
+        title: "",
+        body: "",
+        isConfirmation: false,
+        actionType: "" // Tracks what to do when clicking "Proceed"
+    };
+
     constructor(public langService: LanguageService) {}
 
     ngOnInit(): void {
         // Only trigger initial project load if we are fully inside the browser
         if(isPlatformBrowser(this.platformId)) {
             this.authService.getUserProfile().subscribe({
-                next: (user: any) => {
-                    this.loadProjects();
-                },
+                next: () => this.loadProjects(),
                 error: (err: any) => {
                     console.error("Identity check pending on reload, trying fallback...", err);
                     this.loadProjects();
@@ -50,17 +63,17 @@ export class DashboardComponent implements OnInit {
                 this.projects = data; 
                 this.cdr.detectChanges(); // Instantly refresh the cards so they show up immidetly after login!
             },
-            error: (err) => { console.error('Could not fetch projects', err); }
+            error: (err) => console.error('Could not fetch projects', err)
         });
     }
 
     onCreateProject(): void {
         this.projectService.createProject(this.newProject).subscribe({
-            next: (response) => {
+            next: () => {
                 this.newProject = { name: '', description: '' }; // Clear fields
                 this.loadProjects(); // Instantly refresh layout card list view!
             },
-            error: (err) => { console.error('Failed to create a project!', err); }
+            error: (err) => console.error('Failed to create a project!', err)
         });
     }
 
@@ -74,16 +87,43 @@ export class DashboardComponent implements OnInit {
 
     onDeleteProject(projectId: number, event: Event): void {
         event.stopPropagation(); // Prevents clicking the delete button from opening the project board!
+        this.pendingDeleteProjectId = projectId;
+        
+        this.showPopup(
+            "warning",
+            this.langService.words().POPUP.WARNING_DELETE_PROJECT_TITLE,
+            this.langService.words().POPUP.WARNING_DELETE_PROJECT_BODY,
+            true,
+            "delete-project"
+        );
+    }
 
-        if(confirm("Are you sure you want to delete this project and all its associated tasks?")) {
-            this.projectService.deleteProject(projectId).subscribe({
+    handlePopupConfirm(): void {
+        const currentAction = this.popupConfig.actionType;
+        this.closePopup(); 
+
+        if (currentAction === "delete-project" && this.pendingDeleteProjectId !== null) {
+            this.projectService.deleteProject(this.pendingDeleteProjectId).subscribe({
                 next: () => {
-                    this.loadProjects(); // Reloads the project grid layout automatically
-                    this.cdr.detectChanges();
+                    this.pendingDeleteProjectId = null; // Flush cache identifier
+                    this.loadProjects();
                 },
-                error: (err) => console.error("Failed to delete project:", err)
+                error: (err) => {
+                    this.pendingDeleteProjectId = null;
+                    console.error("Failed to delete project:", err);
+                }
             });
         }
+    }
+
+    showPopup(type: "success" | "warning" | "danger", title: string, body: string, isConfirmation: boolean, actionType: string): void {
+        this.popupConfig = { visible: true, type, title, body, isConfirmation, actionType };
+        this.cdr.detectChanges();
+    }
+
+    closePopup(): void {
+        this.popupConfig.visible = false;
+        this.cdr.detectChanges();
     }
 
     // Trigger method for when changing languages

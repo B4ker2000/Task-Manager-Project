@@ -37,8 +37,6 @@ export class UserProfileComponent implements OnInit {
     activeFont: string = "";
     activeColorblind: string = "";
 
-    constructor(public langService: LanguageService) {}
-
     //////////////////////////////////////
     // Popup component state controller //
     //////////////////////////////////////
@@ -50,6 +48,8 @@ export class UserProfileComponent implements OnInit {
         isConfirmation: false,
         actionType: "" // Tracks what to do when clicking "Proceed"
     };
+
+    constructor(public langService: LanguageService) {}
 
     ngOnInit(): void {
         // Only run data fetches inside the browser window context shell
@@ -106,25 +106,48 @@ export class UserProfileComponent implements OnInit {
     onUpdateAccount(): void {
         // 1. Core Evaluation: Did the user actually leave both input forms blank?
         if (!this.updateData.NewUsername && !this.updateData.NewPassword) {
-            this.showPopup("warning", "Empty Fields", "Please fill out at least one field to save profile updates!", false, "update-missing");
+            this.showPopup(
+                "warning", 
+                this.langService.words().POPUP.WARNING_EMPTY_FIELDS_TITLE, 
+                this.langService.words().POPUP.WARNING_EMPTY_FIELDS_BODY, 
+                false, 
+                "update-missing");
             return;
         }
 
         // 2. Identity Check: Stop the users if they typed a username identical to their active profile username!
         if (this.updateData.NewUsername && this.updateData.NewUsername === this.userProfile?.username) {
-            this.showPopup("warning", "Identical Username", "Your new username must be different from your current one!", false, "identical-username");
+            this.showPopup(
+                "warning", 
+                this.langService.words().POPUP.WARNING_IDENTICAL_USERNAME_TITLE,
+                this.langService.words().POPUP.WARNING_IDENTICAL_USERNAME_BODY,
+                false, 
+                "identical-username"
+            );
             return;
         }
 
         // 3. Password Verification Layer: Evaluate ONLY if the user is actively trying to set a new password
         if (this.updateData.NewPassword) {
             if (!this.confirmNewPassword) {
-                this.showPopup("warning", "Confirm Password", "Please confirm your new security password.", false, "confirm-missing");
+                this.showPopup(
+                    "warning", 
+                    this.langService.words().POPUP.WARNING_NEW_PASSWORD_TITLE, 
+                    this.langService.words().POPUP.WARNING_NEW_PASSWORD_BODY,
+                    false, 
+                    "confirm-missing"
+                );
                 return;
             }
 
             if (this.updateData.NewPassword !== this.confirmNewPassword) {
-                this.showPopup("warning", "Security Mismatch", "Your updated passwords do not match.", false, "mismatch");
+                this.showPopup(
+                    "warning", 
+                    this.langService.words().POPUP.WARNING_NEW_PASSWORD_MISMATCH_TITLE,
+                    this.langService.words().POPUP.WARNING_NEW_PASSWORD_MISMATCH_BODY,
+                    false, 
+                    "mismatch"
+                );
                 return;
             }
         }
@@ -135,8 +158,14 @@ export class UserProfileComponent implements OnInit {
 
         this.authService.updateAccountDetails(payload).subscribe({
             next: (res) => {
-                const msg = res.message || 'Account information committed cleanly.';
-                this.showPopup("success", "Profile Updated", msg, false, "success-update");
+                const msg = res.message || this.langService.words().POPUP.SUCCESS_USER_INFO_UPDATED_BODY;
+                this.showPopup(
+                    "success", 
+                    this.langService.words().POPUP.SUCCESS_USER_INFO_UPDATED_TITLE, 
+                    msg, 
+                    false, 
+                    "success-update"
+                );
                 
                 // Clear the input fields out beautifully
                 this.updateData = { NewUsername: '', NewPassword: '' };
@@ -151,8 +180,8 @@ export class UserProfileComponent implements OnInit {
         // Fire off the localized critical accessibility alert confirmation modal
         this.showPopup(
             "warning",
-            this.langService.words().NOTIFICATIONS.CONFIRM_DELETE_PROFILE_TITLE,
-            this.langService.words().NOTIFICATIONS.CONFIRM_DELETE_PROFILE_BODY,
+            this.langService.words().POPUP.WARNING_DELETE_PROFILE_TITLE,
+            this.langService.words().POPUP.WARNING_DELETE_PROFILE_BODY,
             true,
             "delete-primary"
         );
@@ -168,8 +197,8 @@ export class UserProfileComponent implements OnInit {
             setTimeout(() => {
                 this.showPopup(
                     "danger",
-                    this.langService.words().NOTIFICATIONS.CONFIRM_FINAL_WARNING_TITLE,
-                    this.langService.words().NOTIFICATIONS.CONFIRM_FINAL_WARNING_BODY,
+                    this.langService.words().POPUP.DANGER_FINAL_WARNING_TITLE,
+                    this.langService.words().POPUP.DANGER_FINAL_WARNING_BODY,
                     true,
                     "delete-secondary"
                 );
@@ -182,8 +211,14 @@ export class UserProfileComponent implements OnInit {
                     localStorage.removeItem('token');
                     sessionStorage.removeItem('token');
 
-                    const msg = res.message || this.langService.words().NOTIFICATIONS.SUCCESS_PROFILE_REMOVED;
-                    this.showPopup("success", "Profile Removed", msg, false, "success-redirect");
+                    const msg = res.message || this.langService.words().POPUP.SUCCESS_PROFILE_REMOVED_TITLE;
+                    this.showPopup(
+                        "success", 
+                        this.langService.words().POPUP.SUCCESS_PROFILE_REMOVED_BODY, 
+                        msg, 
+                        false, 
+                        "success-redirect"
+                    );
                 },
                 error: (err) => console.error("Account destruction failed:", err)
             });

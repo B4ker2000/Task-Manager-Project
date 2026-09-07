@@ -99,7 +99,13 @@ namespace Backend.Services
                  .Select(pm => pm.ProjectRole)
                  .FirstOrDefaultAsync();
 
-            if (userRole == null || userRole == "Viewer") return ServiceOutcome.Forbidden;
+            if (userRole == null) return ServiceOutcome.Forbidden;
+
+            // Viewer Shield: Blocks project members with "Viewer" role unconditionally!
+            if ( userRole == "Viewer") return ServiceOutcome.Forbidden;
+
+            // Ensures non-owners can only touch cards assigned directly to them!
+            if ( userRole != "Owner" && task.AssignedUserId != currentUserId) return ServiceOutcome.Forbidden;
 
             var validStatuses = new[] { "Pending", "In Progress", "Review Required", "Completed" };
             if (!validStatuses.Contains(newStatus)) return ServiceOutcome.InvalidStatus;

@@ -297,9 +297,11 @@
                                 [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_ASSIGNEE_ARIA, t.title)">
                             
                             <option [value]="null" [innerHTML]="langService.words().TASKBOARD.TASK_ASSIGNEE_UNASSIGNED"></option>
-                            <option *ngFor="let m of projectMembers" [value]="m.userId">
-                                {{ m.userName }} ({{ m.userEmail }})
-                            </option>
+                            <ng-container *ngFor="let m of projectMembers">
+                                <option *ngIf="m.projectRole !== 'Viewer'" [value]="m.userId">
+                                    {{ m.userName }} ({{ m.userEmail }})
+                                </option>
+                            </ng-container>
                         </select>
                     </div>
 
@@ -414,9 +416,11 @@
                                 [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_ASSIGNEE_ARIA, t.title)">
 
                             <option [value]="null" [innerHTML]="langService.words().TASKBOARD.TASK_ASSIGNEE_UNASSIGNED"></option>
-                            <option *ngFor="let m of projectMembers" [value]="m.userId">
-                                {{ m.userName }} ({{ m.userEmail }})
-                            </option>
+                            <ng-container *ngFor="let m of projectMembers">
+                                <option *ngIf="m.projectRole !== 'Viewer'" [value]="m.userId">
+                                    {{ m.userName }} ({{ m.userEmail }})
+                                </option>
+                            </ng-container>
                         </select>
                     </div>
                     
@@ -574,9 +578,11 @@
                                 [attr.aria-label]="formatLabel(langService.words().TASKBOARD.FINISHED_ASSIGNEE_ARIA, t.title)">
                             
                             <option [value]="null" [innerHTML]="langService.words().TASKBOARD.TASK_ASSIGNEE_UNASSIGNED"></option>
-                            <option *ngFor="let m of projectMembers" [value]="m.userId">
-                                {{ m.userName }} ({{ m.userEmail }})
-                            </option>
+                            <ng-container *ngFor="let m of projectMembers">
+                                <option *ngIf="m.projectRole !== 'Viewer'" [value]="m.userId">
+                                    {{ m.userName }} ({{ m.userEmail }})
+                                </option>
+                            </ng-container>
                         </select>
                     </div>
                     
@@ -736,4 +742,13 @@
             </form>
         </div>   
      </div>
+
+    <!-- Universally Bound Popup Context Overlay -->
+     <app-popup *ngIf="popupConfig.visible"
+                [type]="popupConfig.type"
+                [title]="popupConfig.title"
+                [body]="popupConfig.body"
+                [isConfirmation]="popupConfig.isConfirmation"
+                (confirm)="handlePopupConfirm()"
+                (cancel)="closePopup()"></app-popup>
 </div>

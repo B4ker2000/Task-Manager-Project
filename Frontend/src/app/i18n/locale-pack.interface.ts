@@ -1,5 +1,6 @@
 export interface LocalePack {
     GLOBAL: {
+        GENERIC_LOADING: string;
         BACK_BTN_TEXT: string;
         BACK_BTN_ARIA: string;
 
@@ -33,17 +34,48 @@ export interface LocalePack {
         DIRECTION: 'ltr' | 'rtl'; // Can only be one of these two!
     };
 
-    NOTIFICATIONS: {
-        // Confirmation Overlays
-        CONFIRM_DELETE_PROFILE_TITLE: string;
-        CONFIRM_DELETE_PROFILE_BODY: string;
-        CONFIRM_FINAL_WARNING_TITLE: string;
-        CONFIRM_FINAL_WARNING_BODY: string;
-
+    POPUP: {
         // Success Actions
-        SUCCESS_PROFILE_REMOVED: string;
+        SUCCESS_PROFILE_REMOVED_TITLE: string;
+        SUCCESS_PROFILE_REMOVED_BODY: string;
+        SUCCESS_USER_INFO_UPDATED_TITLE: string;
+        SUCCESS_USER_INFO_UPDATED_BODY: string;
         SUCCESS_TASK_CREATED: string;
         SUCCESS_TAG_CREATED: string;
+
+        // Warning Actions
+        WARNING_EMPTY_FIELDS_TITLE: string;
+        WARNING_EMPTY_FIELDS_BODY: string;
+        WARNING_IDENTICAL_USERNAME_TITLE: string;
+        WARNING_IDENTICAL_USERNAME_BODY: string;
+        WARNING_NEW_PASSWORD_MISMATCH_TITLE: string;
+        WARNING_NEW_PASSWORD_MISMATCH_BODY: string;
+        WARNING_DELETE_PROFILE_TITLE: string;
+        WARNING_DELETE_PROFILE_BODY: string;
+        WARNING_NEW_PASSWORD_TITLE: string;
+        WARNING_NEW_PASSWORD_BODY: string;
+        WARNING_DELETE_PROJECT_TITLE: string;
+        WARNING_DELETE_PROJECT_BODY: string;
+        WARNING_DELETE_TASK_TITLE: string;
+        WARNING_DELETE_TASK_BODY: string;
+        WARNING_DELETE_CATEGORY_TITLE: string;
+        WARNING_DELETE_CATEGORY_BODY_PART_1: string;
+        WARNING_DELETE_CATEGORY_BODY_PART_2: string;
+        WARNING_REMOVE_MEMBER_TITLE: string;
+        WARNING_REMOVE_MEMBER_BODY_PART_1: string;
+        WARNING_REMOVE_MEMBER_BODY_PART_2: string;
+        WARNING_LEAVE_PROJECT_TITLE: string;
+        WARNING_LEAVE_PROJECT_BODY: string;
+
+        // Danger Actions
+        DANGER_FINAL_WARNING_TITLE: string;
+        DANGER_FINAL_WARNING_BODY: string;
+        DANGER_ACCESS_DENIED_TITLE: string;
+        DANGER_TASK_DELETE_ACCESS_DENIED_BODY: string;
+        ERROR_GENERIC_TITLE: string;
+        ERROR_TASK_DELETE_BODY: string;
+        ERROR_SOLE_OWNER_BODY: string;
+        ERROR_INVITE_FAILED_BODY: string;
 
         // Button Layouts
         BTN_PROCEED: string;

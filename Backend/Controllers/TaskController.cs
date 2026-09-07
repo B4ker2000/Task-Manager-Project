@@ -1,9 +1,7 @@
 using Backend.Dtos;
 using Backend.Services;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace Backend.Controllers
 {
@@ -13,19 +11,22 @@ namespace Backend.Controllers
     public class TaskController : ControllerBase
     {
         private readonly ITaskService _taskService;
+        private readonly IUserContextService _userContext;
         
-        public TaskController(ITaskService taskService)
+        public TaskController(ITaskService taskService, IUserContextService userContext)
         {
             _taskService = taskService;
+            _userContext = userContext;
         }
 
         [HttpPost] // POST api/tasks
         public async Task<IActionResult> CreateTask([FromBody] TaskCreateDto request)
         {
-            if (!TryGetUserId(out int currentUserId)) return UnauthorizedSession();
+            var currentUserId = _userContext.GetCurrentUserId();
+            if (currentUserId == null) return UnauthorizedSession();
 
             // Let the service handle checking permission records and saving files
-            var result = await _taskService.CreateTaskAsync(currentUserId, request);
+            var result = await _taskService.CreateTaskAsync(currentUserId.Value, request);
 
             if (result.IsForbidden) return Forbid();
             if (result.ErrorMessage != null) return BadRequest(new { message = result.ErrorMessage });
@@ -36,10 +37,11 @@ namespace Backend.Controllers
         [HttpGet("project/{projectId}")] // GET api/task/project/1 (Get all tasks for a specific project)
         public async Task<IActionResult> GetProjectTasks(int projectId)
         {
-            if (!TryGetUserId(out int currentUserId)) return UnauthorizedSession();
+            var currentUserId = _userContext.GetCurrentUserId();
+            if (currentUserId == null) return UnauthorizedSession();
 
             // Call service to bundle up roles, task lists, and dropdown teams together
-            var workspaceData = await _taskService.GetProjectTasksAsync(projectId, currentUserId);
+            var workspaceData = await _taskService.GetProjectTasksAsync(projectId, currentUserId.Value);
             if (workspaceData == null) return NotFound(new { message = "Project not found or inaccessible." });
 
             return Ok(workspaceData);
@@ -48,9 +50,10 @@ namespace Backend.Controllers
         [HttpPut("{id}/status")] // PUT api/task/1/status (update the task status)
         public async Task<IActionResult> UpdateTaskStatus(int id, [FromBody] TaskUpdateStatusDto request)
         {
-            if (!TryGetUserId(out int currentUserId)) return UnauthorizedSession();
+            var currentUserId = _userContext.GetCurrentUserId();
+            if (currentUserId == null) return UnauthorizedSession();
 
-            var outcome = await _taskService.UpdateTaskStatusAsync(id, currentUserId, request.Status);
+            var outcome = await _taskService.UpdateTaskStatusAsync(id, currentUserId.Value, request.Status);
 
             return outcome switch
             {
@@ -64,9 +67,10 @@ namespace Backend.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTask(int id)
         {
-            if (!TryGetUserId(out int currentUserId)) return UnauthorizedSession();
+            var currentUserId = _userContext.GetCurrentUserId();
+            if (currentUserId == null) return UnauthorizedSession();
 
-            var outcome = await _taskService.DeleteTaskAsync(id, currentUserId);
+            var outcome = await _taskService.DeleteTaskAsync(id, currentUserId.Value);
             
             return outcome switch
             {
@@ -79,9 +83,10 @@ namespace Backend.Controllers
         [HttpPut("{taskId}/assign")]
         public async Task<IActionResult> AssignTask(int taskId, [FromBody] TaskAssignDto request)
         {
-            if (!TryGetUserId(out int currentUserId)) return UnauthorizedSession();
+            var currentUserId = _userContext.GetCurrentUserId();
+            if (currentUserId == null) return UnauthorizedSession();
 
-            var outcome = await _taskService.AssignTaskAsync(taskId, currentUserId, request.AssignedUserId);
+            var outcome = await _taskService.AssignTaskAsync(taskId, currentUserId.Value, request.AssignedUserId);
 
             return outcome switch
             {
@@ -94,9 +99,10 @@ namespace Backend.Controllers
         [HttpPut("{taskId}/category")]
         public async Task<IActionResult> AssignTaskCategory(int taskId, [FromBody] TaskCategoryUpdateDto request)
         {
-            if (!TryGetUserId(out int currentUserId)) return UnauthorizedSession();
+            var currentUserId = _userContext.GetCurrentUserId();
+            if (currentUserId == null) return UnauthorizedSession();
 
-            var outcome = await _taskService.AssignTaskCategoryAsync(taskId, currentUserId, request.CategoryId);
+            var outcome = await _taskService.AssignTaskCategoryAsync(taskId, currentUserId.Value, request.CategoryId);
 
             return outcome switch
             {
@@ -104,13 +110,6 @@ namespace Backend.Controllers
                 ServiceOutcome.Forbidden => Forbid(),
                 _ => Ok(new { message = "Category tag linked to task successfully!" })
             };
-        }
-
-        // Shared helpers to eliminate duplicate boilerplate code
-        private bool TryGetUserId(out int userId)
-        {
-            var claimValue = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            return int.TryParse(claimValue, out userId);
         }
 
         private UnauthorizedObjectResult UnauthorizedSession()

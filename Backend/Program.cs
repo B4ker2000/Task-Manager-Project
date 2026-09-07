@@ -23,6 +23,11 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ITaskService, TaskService>();
 builder.Services.AddScoped<IProjectService, ProjectService>();
 
+// Enable HttpContext access inside independent class service layers
+builder.Services.AddHttpContextAccessor();
+// Register the User Identity context tracking engine
+builder.Services.AddScoped<IUserContextService, UserContextService>();
+
 // 4. Configure JWT Security Guard 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>

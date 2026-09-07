@@ -26,15 +26,15 @@
             <!-- Render cancel button ONLY if this is a confirmation type layout -->
              <button *ngIf="isConfirmation"
                      type="button"
-                     class="popup-btn cancel-btn"
+                     class="cancel-btn"
                      (click)="onCancel()"
-                     [innerHTML]="langService.words().NOTIFICATIONS.BTN_CANCEL"></button>
+                     [innerHTML]="langService.words().POPUP.BTN_CANCEL"></button>
 
             <!-- Execution Action Button -->
              <button type="button"
-                     [class]="'popup-btn ' + (type === 'danger' ? 'danger-zone-btn' : 'submit-btn')"
+                     [class]="type === 'danger' ? 'danger-zone-btn' : 'submit-btn'"
                      (click)="onConfirm()"
-                     [innerHTML]="isConfirmation ? langService.words().NOTIFICATIONS.BTN_PROCEED : langService.words().NOTIFICATIONS.BTN_CLOSE"></button>
+                     [innerHTML]="isConfirmation ? langService.words().POPUP.BTN_PROCEED : langService.words().POPUP.BTN_CLOSE"></button>
         </div>
     </div>
 </div>

@@ -1,4 +1,3 @@
-using System.Security.Claims;
 using Backend.Dtos;
 using Backend.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -12,19 +11,22 @@ namespace Backend.Controllers
     public class ProjectController : ControllerBase
     {
         private readonly IProjectService _projectService;
+        private readonly IUserContextService _userContext;
 
-        public ProjectController(IProjectService projectService)
+        public ProjectController(IProjectService projectService, IUserContextService userContext)
         {
             _projectService = projectService;
+            _userContext = userContext;
         }
 
         [HttpPost] // POST api/project
         public async Task<IActionResult> CreateProject([FromBody] ProjectCreateDto request)
         {
-            if (!TryGetUserId(out int currentUserId)) return UnauthorizedSession();
+            var currentUserId = _userContext.GetCurrentUserId();
+            if (currentUserId == null) return UnauthorizedSession();
             
             // Call service to instantiate the project and map creator permissions
-            int projectId = await _projectService.CreateProjectAsync(currentUserId, request);
+            int projectId = await _projectService.CreateProjectAsync(currentUserId.Value, request);
 
             return Ok(new { message = "Project created successfully!", projectId = projectId });
         }
@@ -32,11 +34,13 @@ namespace Backend.Controllers
         [HttpGet] // GET api/project (Retrieves all projects belonging to the logged-in user)
         public async Task<IActionResult> GetMyProjects()
         {
-            // Extract the unique User ID safely from the encrypted JWT Token claims
-            if (!TryGetUserId(out int currentUserId)) return UnauthorizedSession();
+            var currentUserId = _userContext.GetCurrentUserId();
+            
+            // Extract the unique User ID safely from the encrypted JWT Token claims via our services!
+            if (currentUserId == null) return UnauthorizedSession();
 
             // Call service to execute our LINQ layout join queries cleanly
-            var projectWithRoles = await _projectService.GetMyProjectsAsync(currentUserId);
+            var projectWithRoles = await _projectService.GetMyProjectsAsync(currentUserId.Value);
 
             return Ok(projectWithRoles);
         }
@@ -44,10 +48,12 @@ namespace Backend.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProject(int id)
         {
-            // Call service to wipe the project room alongside its tasks safely
-            if (!TryGetUserId(out int currentUserId)) return UnauthorizedSession();
+            var currentUserId = _userContext.GetCurrentUserId();
 
-            var success = await _projectService.DeleteProjectAsync(id, currentUserId);
+            // Call service to wipe the project room alongside its tasks safely
+            if (currentUserId == null) return UnauthorizedSession();
+
+            var success = await _projectService.DeleteProjectAsync(id, currentUserId.Value);
             if (!success) return NotFound(new { message = "Project not found or you lack Owner rights!" });
 
             return Ok(new { message = "Project and all its tasks were deleted successfully!" });
@@ -56,10 +62,11 @@ namespace Backend.Controllers
         [HttpPost("{projectId}/invite")]
         public async Task<IActionResult> InviteMember(int projectId, [FromBody] ProjectInviteDto request)
         {
-            if (!TryGetUserId(out int currentUserId)) return UnauthorizedSession();
+            var currentUserId = _userContext.GetCurrentUserId();
+            if (currentUserId == null) return UnauthorizedSession();
 
             // Offload workspace invite verification logic to service engine
-            var result = await _projectService.InviteMemberAsync(projectId, currentUserId, request);
+            var result = await _projectService.InviteMemberAsync(projectId, currentUserId.Value, request);
 
             return result.Outcome switch
             {
@@ -73,12 +80,13 @@ namespace Backend.Controllers
         [HttpDelete("{projectId}/members/{targetUserId}")]
         public async Task<IActionResult> RemoveProjectMember(int projectId, int targetUserId)
         {
-            if (!TryGetUserId(out int currentUserId)) return UnauthorizedSession();
+            var currentUserId = _userContext.GetCurrentUserId();
+            if (currentUserId == null) return UnauthorizedSession();
 
             // Execute removal rules safely down inside the service
-            var outcome = await _projectService.RemoveProjectMemberAsync(projectId, currentUserId, targetUserId);
+            var outcome = await _projectService.RemoveProjectMemberAsync(projectId, currentUserId.Value, targetUserId);
 
-            bool isKickingSomeoneElse = currentUserId != targetUserId;
+            bool isKickingSomeoneElse = currentUserId.Value != targetUserId;
 
             return outcome switch
             {
@@ -101,9 +109,10 @@ namespace Backend.Controllers
         [HttpGet("{id}/role")]
         public async Task<IActionResult> GetProjectRole(int id)
         {
-            if (!TryGetUserId(out int currentUserId)) return UnauthorizedSession();
+            var currentUserId = _userContext.GetCurrentUserId();
+            if (currentUserId == null) return UnauthorizedSession();
 
-            var role = await _projectService.GetProjectRoleAsync(id, currentUserId);
+            var role = await _projectService.GetProjectRoleAsync(id, currentUserId.Value);
             if (role == null) return NotFound(new { message = "You are not a member of this project!" });
 
             return Ok(new { role = role });
@@ -112,18 +121,12 @@ namespace Backend.Controllers
         [HttpGet("{id}/members")]
         public async Task<IActionResult> GetProjectMembers(int id)
         {
-            if (!TryGetUserId(out int currentUserId)) return UnauthorizedSession();
+            var currentUserId = _userContext.GetCurrentUserId();
+            if (currentUserId == null) return UnauthorizedSession();
 
             var rosterList = await _projectService.GetProjectMembersAsync(id);
             
             return Ok(rosterList);
-        }
-
-        // Shared helpers to eliminate duplicate boilerplate code across account verification checkpoints
-        private bool TryGetUserId(out int userId)
-        {
-            var claimValue = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            return int.TryParse(claimValue, out userId);
         }
 
         private UnauthorizedObjectResult UnauthorizedSession()
