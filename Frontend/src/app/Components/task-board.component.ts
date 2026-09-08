@@ -156,7 +156,8 @@ export class TaskBoardComponent implements OnInit {
                         this.completedTasks = allTasks.filter((t: any) => t.status === "Completed");
 
                         // Overwrite crew roster with data straight from our combined response payload packet!
-                        this.projectMembers = boardData.team || [];
+                        // this.projectMembers = boardData.team || [];
+                        this.loadProjectMembers();
 
                         // Compute analytics progress scales and filter views
                         this.calculateProgress(allTasks);
@@ -467,7 +468,6 @@ export class TaskBoardComponent implements OnInit {
     loadProjectMembers(): void {
         this.projectService.getProjectMembers(this.projectId).subscribe({
             next: (members: any[]) => {
-                console.log("🔍 RAW ROSTER DATA FROM BACKEND:", members);
                 // Custom weight mapper that ranks member based on their roles in this order: Owners -> Members -> Viewers
                 const roleWeights: Record<string, number> = { 
                     'owner': 1, 
@@ -482,12 +482,9 @@ export class TaskBoardComponent implements OnInit {
                     const weightA = roleWeights[roleA] || 99;
                     const weightB = roleWeights[roleB] || 99;
 
-                    console.log(`⚖️ Sorting comparison: "${roleA}" (Weight: ${weightA}) vs "${roleB}" (Weight: ${weightB})`);
-
                     return weightA - weightB; // Ascending order layout sorting
                 });
 
-                console.log("🎯 FINAL ORDERED ROSTER TARGETS:", this.projectMembers);
                 this.cdr.detectChanges();
             },
             error: (err) => {
