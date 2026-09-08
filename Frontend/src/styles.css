@@ -764,7 +764,6 @@ input[type="text"],
 input[type="date"],
 input[type="email"],
 input[type="password"],
-select, 
 textarea {
     width: 100%;
     height: 38px;
@@ -984,15 +983,17 @@ button:disabled {
    ========================================================================= */
 select,
 .invite-dropdown-select,
-.assignee-dropdown-menu {
+.assignee-dropdown-menu,
+.board-interactive-field.select-config {
     width: 100%;
     height: 38px;
     max-height: 200px;
     overflow-y: auto; /* Automatically spins up a scroll wheel if elements overflow! */
-    padding: 8px 30px 8px 12px !important;
+    /* padding: 8px 30px 8px 12px !important; */
+    padding-inline-start: 5px !important;
     border-radius: 4px;
     box-sizing: border-box;
-    font-size: calc(13px * var(--font-scale));
+    font-size: calc(14px * var(--font-scale));
     outline: none;
     cursor: pointer;
     background-color: var(--input-bg, #ffffff) !important;
@@ -1003,14 +1004,12 @@ select,
 }
 
 /* Master focus highlight loop for selection inputs across all pages */
-select:focus,
 .invite-dropdown-select:focus,
 .assignee-dropdown-menu:focus {
     border: 2px solid var(--focus-halo-color) !important;
     box-shadow: 0 0 0 3px var(--focus-halo-shadow) !important;
 }
 
-.board-interactive-field.select-config { padding-inline-start: 5px !important;}
 .control-input-wrapper select { padding-inline-start: 30px !important; }
 
 select::-webkit-scrollbar,

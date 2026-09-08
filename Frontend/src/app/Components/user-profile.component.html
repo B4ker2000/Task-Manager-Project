@@ -83,6 +83,7 @@
                             <option value="en-gb" [innerHTML]="langService.words().GLOBAL.LANGUAGE_OPTION_EN_UK"></option>
                             <option value="jp" [innerHTML]="langService.words().GLOBAL.LANGUAGE_OPTION_JP"></option>
                             <option value="ru" [innerHTML]="langService.words().GLOBAL.LANGUAGE_OPTION_RU"></option>
+                            <option value="fa" [innerHTML]="langService.words().GLOBAL.LANGUAGE_OPTION_FA"></option>
                         </select>
                      </div>
 
@@ -122,6 +123,7 @@
                         <select id="fontSelect" 
                                 [(ngModel)]="activeFont" 
                                 (change)="onFontChangeEngineTrigger()"
+                                class="board-interactive-field select-config"
                                 aria-haspopup="listbox"
                                 [attr.aria-label]="langService.words().PROFILE.FONT_ARIA"
                                 [attr.aria-description]="langService.words().PROFILE.FONT_DESCRIPTION">
@@ -138,6 +140,7 @@
                         <select id="colorblindSelect" 
                                 [(ngModel)]="activeColorblind" 
                                 (change)="onColorblindChangeEngineTrigger()"
+                                class="board-interactive-field select-config"
                                 aria-haspopup="listbox"
                                 [attr.aria-label]="langService.words().PROFILE.COLORBLIND_ARIA">
                             

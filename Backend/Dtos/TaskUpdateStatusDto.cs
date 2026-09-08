@@ -5,7 +5,7 @@ namespace Backend.Dtos
     public class TaskUpdateStatusDto
     {
         [Required]
-        [RegularExpression("^(Pending|In Progress|Completed)$", ErrorMessage ="Invalid status value.")]
+        [RegularExpression("^(Pending|In Progress|Review Required|Completed)$", ErrorMessage ="Invalid status value.")]
         public required string Status { get; set; } = "Pending"; // Pending, In Progress
     }
 }

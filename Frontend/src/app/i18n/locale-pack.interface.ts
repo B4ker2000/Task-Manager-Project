@@ -29,6 +29,7 @@ export interface LocalePack {
         LANGUAGE_OPTION_EN_UK: string;
         LANGUAGE_OPTION_JP: string;
         LANGUAGE_OPTION_RU: string;
+        LANGUAGE_OPTION_FA: string;
 
         // Language direction format
         DIRECTION: 'ltr' | 'rtl'; // Can only be one of these two!
@@ -40,8 +41,6 @@ export interface LocalePack {
         SUCCESS_PROFILE_REMOVED_BODY: string;
         SUCCESS_USER_INFO_UPDATED_TITLE: string;
         SUCCESS_USER_INFO_UPDATED_BODY: string;
-        SUCCESS_TASK_CREATED: string;
-        SUCCESS_TAG_CREATED: string;
 
         // Warning Actions
         WARNING_EMPTY_FIELDS_TITLE: string;
@@ -142,8 +141,8 @@ export interface LocalePack {
         COLORBLIND_LABEL: string;
         COLORBLIND_ARIA: string;
         COLORBLIND_OPTION_NONE: string;
-        COLORBLIND_OPTION_DEU: string;
         COLORBLIND_OPTION_PRO: string;
+        COLORBLIND_OPTION_DEU: string;
         COLORBLIND_OPTION_TRI: string;
         COLORBLIND_OPTION_GRA: string;
 

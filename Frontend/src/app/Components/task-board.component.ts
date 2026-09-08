@@ -467,7 +467,27 @@ export class TaskBoardComponent implements OnInit {
     loadProjectMembers(): void {
         this.projectService.getProjectMembers(this.projectId).subscribe({
             next: (members: any[]) => {
-                this.projectMembers = members;
+                console.log("🔍 RAW ROSTER DATA FROM BACKEND:", members);
+                // Custom weight mapper that ranks member based on their roles in this order: Owners -> Members -> Viewers
+                const roleWeights: Record<string, number> = { 
+                    'owner': 1, 
+                    'member': 2, 
+                    'viewer': 3 
+                };
+
+                this.projectMembers = [...members].sort((a, b) => {
+                    const roleA = (a.projectRole || a.ProjectRole || '').toString().toLowerCase().trim();
+                    const roleB = (b.projectRole || b.ProjectRole || '').toString().toLowerCase().trim();
+                    
+                    const weightA = roleWeights[roleA] || 99;
+                    const weightB = roleWeights[roleB] || 99;
+
+                    console.log(`⚖️ Sorting comparison: "${roleA}" (Weight: ${weightA}) vs "${roleB}" (Weight: ${weightB})`);
+
+                    return weightA - weightB; // Ascending order layout sorting
+                });
+
+                console.log("🎯 FINAL ORDERED ROSTER TARGETS:", this.projectMembers);
                 this.cdr.detectChanges();
             },
             error: (err) => {

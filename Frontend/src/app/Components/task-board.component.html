@@ -76,12 +76,17 @@
                     <h2 id="rosterHeader" 
                         class="roster-sub-title" 
                         [innerHTML]="langService.words().TASKBOARD.ROSTER_HEADER"></h2>
+                    
                     <ul class="roster-list-element">
                         <li *ngFor="let m of projectMembers" class="roster-item-row">
                             <div class="member-info-block">
                                 <span class="member-display-email">{{ m.userEmail }}</span>
                                 <span class="role-display-badge" 
-                                      [ngClass]="{'badge-owner': m.projectRole === 'Owner', 'badge-member': m.projectRole === 'Member', 'badge-viewer': m.projectRole === 'Viewer'}" 
+                                      [ngClass]="{
+                                        'badge-owner': m.projectRole === 'Owner', 
+                                        'badge-member': m.projectRole === 'Member', 
+                                        'badge-viewer': m.projectRole === 'Viewer'
+                                      }" 
                                       [attr.aria-label]="formatLabel(langService.words().TASKBOARD.ROSTER_BADGE_ARIA, m.projectRole)">
                                       
                                     {{ m.projectRole }}
@@ -331,10 +336,10 @@
                             </span>
                             <span [class]="'deadline-badge ' + (langService.currentLang())" 
                                   *ngIf="t.deadline" 
-                                  [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DEADLINE_ARIA, (t.deadline | date:'langService.words().GLOBAL.DATE_FORMAT') || '')">
+                                  [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DEADLINE_ARIA, (t.deadline | date: langService.words().GLOBAL.DATE_FORMAT) || '')">
                                 
                                 <span aria-hidden="true">📅</span> 
-                                <span>{{ t.deadline | date: langService.words().GLOBAL.DATE_FORMAT }}</span>
+                                <span>{{ t.deadline | date: (langService.words()?.GLOBAL?.DATE_FORMAT || 'yyyy/MM/dd') }}</span>
                             </span>
                         </div>
                         <button *ngIf="currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId" 
@@ -451,10 +456,10 @@
                             </span>
                             <span [class]="'deadline-badge ' + (langService.currentLang())" 
                                   *ngIf="t.deadline" 
-                                  [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DEADLINE_ARIA, (t.deadline | date:'langService.words().GLOBAL.DATE_FORMAT') || '')">
+                                  [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DEADLINE_ARIA, (t.deadline | date: langService.words().GLOBAL.DATE_FORMAT) || '')">
                                 
                                 <span aria-hidden="true">📅</span> 
-                                <span>{{ t.deadline | date: langService.words().GLOBAL.DATE_FORMAT }}</span>
+                                <span>{{ t.deadline | date: (langService.words()?.GLOBAL?.DATE_FORMAT || 'yyyy/MM/dd') }}</span>
                             </span>
                         </div>
 
@@ -613,10 +618,10 @@
                             </span>
                             <span [class]="'deadline-badge ' + (langService.currentLang())" 
                                   *ngIf="t.deadline" 
-                                  [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DEADLINE_ARIA, (t.deadline | date:'langService.words().GLOBAL.DATE_FORMAT') || '')">
+                                  [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DEADLINE_ARIA, (t.deadline | date: langService.words().GLOBAL.DATE_FORMAT) || '')">
                                 
                                 <span aria-hidden="true">📅</span> 
-                                <span>{{ t.deadline | date: langService.words().GLOBAL.DATE_FORMAT }}</span>
+                                <span>{{ t.deadline | date: (langService.words()?.GLOBAL?.DATE_FORMAT || 'yyyy/MM/dd') }}</span>
                             </span>
                         </div>
 
@@ -673,7 +678,7 @@
 
                 <div class="form-group-row">
                     <label for="priority" [innerHTML]="langService.words().TASKBOARD.MODAL_TASK_PRIORITY_LABEL"></label>
-                    <select id="priority" name="priority" [(ngModel)]="newTask.priority" class="invite-dropdown-select" [attr.aria-label]="langService.words().TASKBOARD.PRIORITY_ARIA">
+                    <select id="priority" name="priority" [(ngModel)]="newTask.priority" class="board-interactive-field select-config" [attr.aria-label]="langService.words().TASKBOARD.PRIORITY_ARIA">
                         <option value="Low" [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_LOW"></option>
                         <option value="Medium" [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_MEDIUM"></option>
                         <option value="High" [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_HIGH"></option>
@@ -726,7 +731,7 @@
 
                 <div class="form-group-row">
                     <label for="tagColor" [innerHTML]="langService.words().TASKBOARD.MODAL_TAG_COLOR_LABEL"></label>
-                    <select id="tagColor" name="tagColor" [(ngModel)]="newCategoryColor" class="invite-dropdown-select" [attr.aria-label]="langService.words().TASKBOARD.MODAL_TAG_COLOR_ARIA">
+                    <select id="tagColor" name="tagColor" [(ngModel)]="newCategoryColor" class="board-interactive-field select-config" [attr.aria-label]="langService.words().TASKBOARD.MODAL_TAG_COLOR_ARIA">
                         <option value="#e53e3e" [attr.aria-label]="langService.words().TASKBOARD.MODAL_TAG_COLOR_RED">🔴 {{ langService.words().TASKBOARD.MODAL_TAG_COLOR_RED }}</option>
                         <option value="#3182ce" [attr.aria-label]="langService.words().TASKBOARD.MODAL_TAG_COLOR_BLUE">🔵 {{ langService.words().TASKBOARD.MODAL_TAG_COLOR_BLUE }}</option>
                         <option value="#38a169" [attr.aria-label]="langService.words().TASKBOARD.MODAL_TAG_COLOR_GREEN">🟢 {{ langService.words().TASKBOARD.MODAL_TAG_COLOR_GREEN }}</option>

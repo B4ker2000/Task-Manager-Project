@@ -2,6 +2,7 @@ import { Injectable, inject, PLATFORM_ID } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { isPlatformBrowser } from "@angular/common";
 import { observable, Observable } from "rxjs";
+import { stat } from "fs";
 
 @Injectable({
     providedIn: 'root'

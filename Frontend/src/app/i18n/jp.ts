@@ -6,7 +6,7 @@ export const JapanesePack: LocalePack = {
         BACK_BTN_TEXT: "ダッシュボードに<ruby>戻<rt aria-hidden=\"true\">もど</rt>る</ruby>",
         BACK_BTN_ARIA: "メインプロジェクトのダッシュボードに戻る",
 
-        // Dynamic Date Formatting Pattern (US Standard)
+        // Dynamic Date Formatting Pattern
         DATE_FORMAT: "yyyy年M月d日",
 
         // Email & Password Fields
@@ -31,6 +31,7 @@ export const JapanesePack: LocalePack = {
         LANGUAGE_OPTION_EN_UK: "British English (イギリス英語)",
         LANGUAGE_OPTION_JP: "日本語",
         LANGUAGE_OPTION_RU: "Русский (ロシア語)",
+        LANGUAGE_OPTION_FA: "فارسی (ペルシャ語)",
 
         // Language direction format
         DIRECTION: "ltr"
@@ -42,8 +43,6 @@ export const JapanesePack: LocalePack = {
         SUCCESS_PROFILE_REMOVED_BODY: "プロフィール<ruby>情報<rt aria-hidden=\"true\">じょうほう</rt></ruby>が<ruby>正常<rt aria-hidden=\"true\">せいじょう</rt></ruby>に<ruby>削除<rt aria-hidden=\"true\">さくじょ</rt></ruby>されました。",
         SUCCESS_USER_INFO_UPDATED_TITLE: "プロフィール<ruby>更新<rt aria-hidden=\"true\">こうしん</rt></ruby>",
         SUCCESS_USER_INFO_UPDATED_BODY: "アカウント<ruby>情報<rt aria-hidden=\"true\">じょうほう</rt></ruby>が<ruby>正常<rt aria-hidden=\"true\">せいじょう</rt></ruby>に<ruby>更新<rt aria-hidden=\"true\">こうしん</rt></ruby>されました。",
-        SUCCESS_TASK_CREATED: "タスクが<ruby>正常<rt aria-hidden=\"true\">せいじょう</rt></ruby>に<ruby>作成<rt aria-hidden=\"true\">さくせい</rt></ruby>されました！",
-        SUCCESS_TAG_CREATED: "カテゴリタグが<ruby>正常<rt aria-hidden=\"true\">せいじょう</rt></ruby>にリンクされました！",
 
         // Warning Actions
         WARNING_EMPTY_FIELDS_TITLE: "<ruby>未入力<rt aria-hidden=\"true\">みにゅうりょく</rt></ruby>の<ruby>項目<rt aria-hidden=\"true\">こおうもく</rt></ruby>",
@@ -144,8 +143,8 @@ export const JapanesePack: LocalePack = {
         COLORBLIND_LABEL: "<ruby>色覚<rt aria-hidden=\"true\">しきかく</rt></ruby>フィルター:",
         COLORBLIND_ARIA: "色覚補正フィルター選択ドロップダウンメニュー",
         COLORBLIND_OPTION_NONE: "なし",
-        COLORBLIND_OPTION_DEU: "第2色覚（緑色特性サポート）",
         COLORBLIND_OPTION_PRO: "第1色覚（赤色特性サポート）",
+        COLORBLIND_OPTION_DEU: "第2色覚（緑色特性サポート）",
         COLORBLIND_OPTION_TRI: "第3色覚（青黄色特性サポート）",
         COLORBLIND_OPTION_GRA: "グレースケール（モノクロ）",
         

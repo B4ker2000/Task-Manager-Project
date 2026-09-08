@@ -6,7 +6,7 @@ export const EnglishUKPack: LocalePack = {
         BACK_BTN_TEXT: "Back to Dashboard",
         BACK_BTN_ARIA: "Back to main project dashboard",
 
-        // Dynamic Date Formatting Pattern (US Standard)
+        // Dynamic Date Formatting Pattern
         DATE_FORMAT: "d MMM yyyy",
 
         // Email & Password Fields
@@ -31,6 +31,7 @@ export const EnglishUKPack: LocalePack = {
         LANGUAGE_OPTION_EN_UK: "British English",
         LANGUAGE_OPTION_JP: "日本語 (Japanese)",
         LANGUAGE_OPTION_RU: "Русский (Russian)",
+        LANGUAGE_OPTION_FA: "فارسی (Persian)",
 
         // Language direction format
         DIRECTION: "ltr"
@@ -42,8 +43,6 @@ export const EnglishUKPack: LocalePack = {
         SUCCESS_PROFILE_REMOVED_BODY: "Your identity profile was successfully removed.",
         SUCCESS_USER_INFO_UPDATED_TITLE: "Profile Updated",
         SUCCESS_USER_INFO_UPDATED_BODY: "Account information updated.",
-        SUCCESS_TASK_CREATED: "Task created successfully!",
-        SUCCESS_TAG_CREATED: "Category tag linked successfully!",
 
         // Warning Actions
         WARNING_EMPTY_FIELDS_TITLE: "Empty Fields",
@@ -144,8 +143,8 @@ export const EnglishUKPack: LocalePack = {
         COLORBLIND_LABEL: "Colourblind Filter:",
         COLORBLIND_ARIA: "Select colourblind filter correction simulation matrix",
         COLORBLIND_OPTION_NONE: "None",
-        COLORBLIND_OPTION_DEU: "Deuteranopia (Green Weakness)",
         COLORBLIND_OPTION_PRO: "Protanopia (Red Weakness)",
+        COLORBLIND_OPTION_DEU: "Deuteranopia (Green Weakness)",
         COLORBLIND_OPTION_TRI: "Tritanopia (Blue Weakness)",
         COLORBLIND_OPTION_GRA: "Grayscale (Monochrome)",
         
@@ -214,8 +213,8 @@ export const EnglishUKPack: LocalePack = {
         PROJECT_TITLE_PLACEHOLDER: "e.g. Website Redesign",
         DESCRIPTION_LABEL: "Description",
         DESCRIPTION_PLACEHOLDER: "Describe the project goal...",
-        CREATE_BTN_ARIA: "Submit form to create a new project workspace",
         CREATE_BTN_TEXT: "Create Project",
+        CREATE_BTN_ARIA: "Submit form to create a new project workspace",
         YOUR_PROJECTS_HEADER: "Your Projects",
         EMPTY_MESSAGE: "No projects found. Create one to get started!",
 

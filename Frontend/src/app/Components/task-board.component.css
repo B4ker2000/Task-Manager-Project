@@ -216,7 +216,7 @@
 .board-interactive-field.search {
     width: 100%;
     height: 38px;
-    padding: 8px 12px 8px 34px !important;
+    padding-inline-start: 34px !important;
     box-sizing: border-box;
     cursor: text;
 }
@@ -296,19 +296,6 @@
     display: flex;
     gap: 30px;
     flex-wrap: wrap;
-}
-
-.left-management-column {
-    flex: 3;
-    min-width: 300px;
-}
-
-.right-tags-column {
-    flex: 2;
-    min-width: 220px;
-    border-inline-start: 2px dashed var(--border-color, #e2e8f0);
-    padding-inline-start: 25px;
-    text-align: start;
 }
 
 /* Roster listings fields models */
@@ -457,6 +444,7 @@
     min-width: 220px;
     border-inline-start: 2px dashed var(--border-color);
     padding-inline-start: 25px;
+    text-align: start;
 }
 
 .right-tags-column h5 {
@@ -496,11 +484,6 @@
    ========================================================================= */
 .mobile-board-lane-switcher { display: none; }
 
-@media(max-width: 1024px) {
-    .board-columns-grid { gap: 15px; }
-    .board-column { min-width: 250px; }
-}
-
 /* Medium Monitors & Tablets */
 @media(max-width: 800px) {
     .board-header {
@@ -522,19 +505,19 @@
     .mobile-board-lane-switcher {
         border: 2px solid var(--border-color);
         display: flex;
-        width: 100%;
+        padding: 20px; 
         background-color: var(--container-bg);
         padding: 4px;
         border-radius: 6px;
         margin-bottom: 10px;
-        gap: 4px;
+        gap: 15px;
     }
 
     .lane-tab-trigger {
         flex: 1;
         background: transparent;
         border: none;
-        padding: 8px 4px;
+        padding: 10px;
         font-size: calc(12px * var(--font-scale));
         font-weight: 700;
         color: var(--text-muted);
@@ -550,9 +533,12 @@
         box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
 
-    .board-columns-grid { flex-direction: column !important; }
+    .board-columns-grid { 
+        flex-direction: column !important; 
+        grid-template-columns: none !important;
+    }
     .board-column.mobile-hidden { display: none !important; }
-    .board-column { width: 100% !important; }
+    /* .board-column { width: 100% !important; } */
 }
 
 /* Narrow Tablets & Large Phones Layout Spacings */

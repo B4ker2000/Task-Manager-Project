@@ -6,7 +6,7 @@ export const RussianPack: LocalePack = {
         BACK_BTN_TEXT: "Назад к рабочей области",
         BACK_BTN_ARIA: "Вернуться на главную панель задач",
 
-        // Dynamic Date Formatting Pattern (US Standard)
+        // Dynamic Date Formatting Pattern
         DATE_FORMAT: "dd.MM.yyyy",
 
         // Email & Password Fields
@@ -31,6 +31,7 @@ export const RussianPack: LocalePack = {
         LANGUAGE_OPTION_EN_UK: "British English (Британский Английский)",
         LANGUAGE_OPTION_JP: "日本語 (Японский)",
         LANGUAGE_OPTION_RU: "Русский",
+        LANGUAGE_OPTION_FA: "فارسی (Персидский)",
 
         // Language direction format
         DIRECTION: "ltr"
@@ -42,8 +43,6 @@ export const RussianPack: LocalePack = {
         SUCCESS_PROFILE_REMOVED_BODY: "Ваш профиль пользователя был успешно удален.",
         SUCCESS_USER_INFO_UPDATED_TITLE: "Профиль обновлен",
         SUCCESS_USER_INFO_UPDATED_BODY: "Данные учетной записи успешно изменены.",
-        SUCCESS_TASK_CREATED: "Задача успешно создана!",
-        SUCCESS_TAG_CREATED: "Категория успешно привязана к задаче!",
 
         // Warning Actions
         WARNING_EMPTY_FIELDS_TITLE: "Пустые поля",
@@ -144,8 +143,8 @@ export const RussianPack: LocalePack = {
         COLORBLIND_LABEL: "Цветовой фильтр:",
         COLORBLIND_ARIA: "Выбор фильтра цветокоррекции",
         COLORBLIND_OPTION_NONE: "Нет",
-        COLORBLIND_OPTION_DEU: "Дейтеранопия (сниженное восприятие зеленого)",
         COLORBLIND_OPTION_PRO: "Протанопия (сниженное восприятие красного)",
+        COLORBLIND_OPTION_DEU: "Дейтеранопия (сниженное восприятие зеленого)",
         COLORBLIND_OPTION_TRI: "Тританопия (сниженное восприятие синего)",
         COLORBLIND_OPTION_GRA: "Оттенки серого (Монохромный)",
         

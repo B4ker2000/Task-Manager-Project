@@ -18,7 +18,7 @@ namespace Backend.Data.Configurations
 
             builder.Property(c => c.ColorHex)
                    .IsRequired()
-                   .HasMaxLength(7); // Accommodates standard '#ffffff' layout perfectly
+                   .HasMaxLength(7); // Accommodates standard '#ffffff' layout!
         
             // Core Relationships: Connects Projects to Categories
             builder.HasOne(c => c.Project)
