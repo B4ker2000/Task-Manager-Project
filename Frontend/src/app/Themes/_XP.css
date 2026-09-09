@@ -1,0 +1,51 @@
+[data-theme="XP"] {
+    /* 💿 CLASSIC WINDOWS XP LUNA BLUE SYSTEM */
+    --surface-bg: #ffffff;              /* Clean white workspace paper sheets */
+    --container-bg: #efebde;            /* Classic sand-gray explorer window background tint */
+    --wallpaper: #4a7af4;               /* Legendary Bliss Sky-Blue Desktop wallpaper background! */
+    --border-color: #0046d5;            /* Everything is framed in clean royal blue desktop borders! */
+    --input-bg: #ffffff;
+    --font-override: Tahoma, "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+    --font-scale: 1;
+    --line-height-scale: 1.5;
+
+    /* 🔤 Text Elements */
+    --text-primary: #ffffff;            /* Sharp white headers over Bliss wallpaper background */
+    --text-secondary: #000000;          /* Sharp dark black ink inside card canvases */
+    --text-muted: #0022a6;              /* Classic Windows XP Titlebar Royal Blue tint */
+
+    /* 📊 DYNAMIC LUNA ACCESSIBILITY BADGES: Styled like classic early-2000s warning error alerts! */
+    --badge-high-bg: #ff3333;       --badge-high-text: #ffffff;     --badge-high-border: #990000;
+    --badge-medium-bg: #ffcc00;     --badge-medium-text: #000000;   --badge-medium-border: #cc9900;
+    --badge-low-bg: #dff0fe;        --badge-low-text: #0046d5;      --badge-low-border: #0046d5;
+    --badge-done-bg: #225b11;       --badge-done-text: #ffffff;     --badge-done-border: #153a04;
+
+    /* 🎨 PROGRESS AND FILTER TRACKS */
+    --progress-bar-fill: linear-gradient(180deg, #3cd53c, #225b11);       /* Glossy dynamic green bar tracker gradient! */
+    
+    --filter-border-color: #0046d5;
+    --filter-focus-color: #225b11;                                          /* Olive-green filter borders */
+    --filter-focus-shadow: rgba(34, 91, 17, 0.2);
+
+    --focus-halo-color: #0046d5;                                            /* Royal blue text box selection outline rings */
+    --focus-halo-shadow: rgba(0, 70, 213, 0.15);
+
+    /* 💿 AUTHENTIC XP ROUNDED PLASTIC LUNA BEVELS: Adds the premium crescent bottom shading offsets! */
+    --btn-submit-bg: #ffffff;         --btn-submit-text: #225b11;         --btn-submit-border: #acd89d #153a04 #153a04 #acd89d;
+    --btn-submit-hover-bg: #225b11;   --btn-submit-hover-text: #ffffff;   --btn-submit-hover-border: #153a04;
+
+    --btn-cancel-bg: #ffffff;         --btn-cancel-text: #0022a6;         --btn-cancel-border: #b1cbf9 #0022a6 #0022a6 #b1cbf9;
+    --btn-cancel-hover-bg: #0046d5;   --btn-cancel-hover-text: #ffffff;   --btn-cancel-hover-border: #0022a6;
+
+    --btn-filter-bg: #ffffff;         --btn-filter-text: #225b11;         --btn-filter-border: #acd89d #153a04 #153a04 #acd89d;
+    --btn-filter-hover-bg: #225b11;   --btn-filter-hover-text: #ffffff;   --btn-filter-hover-border: #153a04;
+
+    --btn-delete-bg: #ffffff;         --btn-delete-text: #ff3333;         --btn-delete-border: #ffb1b1 #990000 #990000 #ffb1b1;
+    --btn-delete-hover-bg: #ff3333;   --btn-delete-hover-text: #ffffff;   --btn-delete-hover-border: #990000;
+
+    /* THEMATIC TYPE MODIFIERS */
+    --btn-text-transform: none;
+    --btn-font-style: normal;
+
+    --link-color-override: #0022a6;
+}

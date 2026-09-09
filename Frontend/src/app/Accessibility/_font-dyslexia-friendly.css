@@ -1,0 +1,6 @@
+[data-accessible-font="dyslexia-friendly"] *,
+[data-accessible-font="dyslexia-friendly"] *:before,
+[data-accessible-font="dyslexia-friendly"] *:after {
+   --font-override: "OpenDyslexic", "Comic Sans MS", "Comic Sans", cursive !important;
+   --font-monospace: "OpenDyslexicMono", monospace !important;                          /* Temporary for now */
+}

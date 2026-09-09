@@ -1,0 +1,51 @@
+[data-theme="high-contrast-black"] {
+    /* 🌓 CLASSIC HIGH CONTRAST STARK BLACK THEME */
+    --surface-bg: #000000;
+    --container-bg: #000000;
+    --wallpaper: #000000;
+    --border-color: #ffffff;
+    --input-bg: #000000;
+    --font-override: monospace, sans-serif;
+    --font-scale: 1;
+    --line-height-scale: 1.5;
+
+    /* 🔤 Text Elements */
+    --text-primary: #ffffff;
+    --text-secondary: #ffffff;
+    --text-muted: #aaaaaa;
+    
+    /* 📊 Accessibility Badge Matrices */
+    --badge-high-bg: #ffffff;       --badge-high-text: #000000;     --badge-high-border: #ffffff;
+    --badge-medium-bg: #000000;     --badge-medium-text: #ffffff;   --badge-medium-border: #ffffff;
+    --badge-low-bg: #000000;        --badge-low-text: #ffffff;      --badge-low-border: #aaaaaa;
+    --badge-done-bg: #ffffff;       --badge-done-text: #000000;     --badge-done-border: #aaaaaa;
+
+    /* 🎨 Progress & Focus Halos */
+    --progress-bar-fill: #ffffff;
+
+    --filter-border-color: #ffffff;
+    --filter-focus-color: #ffffff;
+    --filter-focus-shadow: rgba(255, 255, 255, 0.25);
+
+    --focus-halo-color: #ffffff;
+    --focus-halo-shadow: rgba(255, 255, 255, 0.4);
+
+    /* Semantic Button Four-Tier Structural Inventory */
+    --btn-submit-bg: #000000;         --btn-submit-text: #ffffff;         --btn-submit-border: #ffffff;
+    --btn-submit-hover-bg: #ffffff;   --btn-submit-hover-text: #000000;   --btn-submit-hover-border: #ffffff;
+
+    --btn-cancel-bg: #000000;         --btn-cancel-text: #ffffff;         --btn-cancel-border: #ffffff;
+    --btn-cancel-hover-bg: #ffffff;   --btn-cancel-hover-text: #000000;   --btn-cancel-hover-border: #ffffff;
+
+    --btn-filter-bg: #000000;         --btn-filter-text: #ffffff;         --btn-filter-border: #ffffff;
+    --btn-filter-hover-bg: #ffffff;   --btn-filter-hover-text: #000000;   --btn-filter-hover-border: #ffffff;
+
+    --btn-delete-bg: #000000;         --btn-delete-text: #ffffff;         --btn-delete-border: #ffffff;
+    --btn-delete-hover-bg: #ffffff;   --btn-delete-hover-text: #000000;   --btn-delete-hover-border: #ffffff;
+
+    /* THEMATIC SCHALE TYPE MODIFIERS */
+    --btn-text-transform: none;
+    --btn-font-style: normal;
+
+    --link-color-override: #ffffff;
+}

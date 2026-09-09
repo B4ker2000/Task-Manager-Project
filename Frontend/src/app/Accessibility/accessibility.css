@@ -1,0 +1,7 @@
+@import './_font-dyslexia-friendly.css';
+@import './_font-high-legibility.css';
+
+@import './_vis-protanopia.css';
+@import './_vis-deuteranopia.css';
+@import './_vis-tritanopia.css';
+@import './_vis-grayscale.css';

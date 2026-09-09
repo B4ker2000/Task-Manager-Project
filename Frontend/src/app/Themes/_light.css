@@ -1,0 +1,51 @@
+:root, [data-theme="light"] {
+    /* ☀️ DEFAULT LIGHT THEME */
+    --surface-bg: #ffffff;                                              /* Main cards background canvas */
+    --container-bg: #f8f9fa;                                            /* App layout shell backdrop tint */
+    --wallpaper: #f8f9fa;
+    --border-color: #cbd5e1;                                            /* Universal border color for the different cards */
+    --input-bg: #ffffff;
+    --font-override: sans-serif;
+    --font-scale: 1;
+    --line-height-scale: 1.5;
+
+    /* 🔤 Text Elements */
+    --text-primary: #212529;                                            /* Dominant heavy font header color */
+    --text-secondary: #212529;
+    --text-muted: #6c757d;                                              /* Subtitles, labels and helper notes */
+
+    /* 📊 PRIORITY VALUE ACCESSIBILITY BADGES */
+    --badge-high-bg: #fff5f5;       --badge-high-text: #e53e3e;     --badge-high-border: #fed7d7;
+    --badge-medium-bg: #fffaf0;     --badge-medium-text: #dd6b20;   --badge-medium-border: #feebc8;
+    --badge-low-bg: #ebf8ff;        --badge-low-text: #3182ce;      --badge-low-border: #bee3f8;
+    --badge-done-bg: #e6fffa;       --badge-done-text: #234e52;     --badge-done-border: #319795;
+
+    /* 🎨 PROGRESS AND FILTER TRACKS */
+    --progress-bar-fill: linear-gradient(90deg, #28a745, #34ce57);    /* Emerald light gradient */
+
+    --filter-border-color: #cbd5e1;
+    --filter-focus-color: #28a745;                                      /* Green focus lines */
+    --filter-focus-shadow: rgba(40, 167, 69, 0.15);
+
+    --focus-halo-color: #3182ce;                                        /* Focus halo color and shadow for buttons, input fields & drop-down menus */
+    --focus-halo-shadow: rgba(49, 130, 206, 0.15);
+
+    /* SEMANTIC BUTTON FOUR-TIER STRUCTURAL INVENTORY */
+    --btn-submit-bg: #ffffff;         --btn-submit-text: #3182ce;         --btn-submit-border: #3182ce;
+    --btn-submit-hover-bg: #3182ce;   --btn-submit-hover-text: #ffffff;   --btn-submit-hover-border: #2b6cb0;
+
+    --btn-cancel-bg: #ffffff;         --btn-cancel-text: #4a5568;         --btn-cancel-border: #cbd5e1;
+    --btn-cancel-hover-bg: #4a5568;   --btn-cancel-hover-text: #ffffff;   --btn-cancel-hover-border: #2d3748;
+
+    --btn-filter-bg: #ffffff;         --btn-filter-text: #28a745;         --btn-filter-border: #28a745;
+    --btn-filter-hover-bg: #28a745;   --btn-filter-hover-text: #ffffff;   --btn-filter-hover-border: #218838;
+
+    --btn-delete-bg: #ffffff;         --btn-delete-text: #e53e3e;         --btn-delete-border: #e53e3e;
+    --btn-delete-hover-bg: #e53e3e;   --btn-delete-hover-text: #ffffff;   --btn-delete-hover-border: #c53030;
+
+    /* THEMATIC TYPE MODIFIERS */
+    --btn-text-transform: none;
+    --btn-font-style: normal;
+
+    --link-color-override: #007bff;
+}

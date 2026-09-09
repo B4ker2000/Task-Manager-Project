@@ -1,0 +1,53 @@
+[data-theme="BA"] {
+    /* 🔮 BLUE ARCHIVE SCHALE WORKSPACE ENVIRONMENT (BRIGHT CYBER MINIMALIST) */
+    --surface-bg: rgba(255, 255, 255, 0.9);         /* Pristine semi-translucent Schale terminal white sheets */
+    --container-bg: #e1f0ff;
+    /* THE LUNA SKY GRADIENT: Simulates a gorgeous pre-rendered morning aurora skyline artwork! */
+    --wallpaper: radial-gradient(circle at top right, #fff0f5 0%, #e1f5fe 40%, #bbdefb 100%);
+    --border-color: #bbdefb;
+    --input-bg: #ffffff;
+    --font-override: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-scale: 1;
+    --line-height-scale: 1.5;
+    
+    /* 🔤 Text Elements */
+    --text-primary: #1a365d;                        /* Deep Schale Federal Navy blue text */
+    --text-secondary: #2d3748;                      /* Highly legible charcoal layout secondary text color */
+    --text-muted: #4a90e2;                          /* Bright clean sky blue subtitles strings */
+    
+    /* 📊 ACCESSIBILITY BADGES */
+    --badge-high-bg: #fff0f3;       --badge-high-text: #e53e3e;     --badge-high-border: #ffa7b6;
+    --badge-medium-bg: #fffdf0;     --badge-medium-text: #b7791f;   --badge-medium-border: #f6e05e;
+    --badge-low-bg: #e1f5fe;        --badge-low-text: #3182ce;      --badge-low-border: #90cdf4;
+    --badge-done-bg: #e6fffa;       --badge-done-text: #234e52;     --badge-done-border: #4fd1c5;
+
+    /* 🎨 PROGRESS AND FILTER TRACKS */
+    /* Gorgeous pink/blue custom mixed tracker fill line! */
+    --progress-bar-fill: linear-gradient(90deg, #4a90e2, #ff69b4);
+
+    --filter-border-color: #ff69b4;                 /* Iconic soft neon pink border highlights! */
+    --filter-focus-color: #ff69b4;
+    --filter-focus-shadow: rgba(255, 105, 180, 0.25);
+
+    --focus-halo-color: #4a90e2;
+    --focus-halo-shadow: rgba(74, 144, 226, 0.15);
+
+    /* SCHALE MASTER BUTTON COLOR REDIRECTIONS */
+    --btn-submit-bg: #ffcc00;         --btn-submit-text: #1a365d;         --btn-submit-border: #d4a000;
+    --btn-submit-hover-bg: #64b5f6;   --btn-submit-hover-text: #ffffff;   --btn-submit-hover-border: #ffffff;
+
+    --btn-cancel-bg: #ffffff;         --btn-cancel-text: #4a90e2;         --btn-cancel-border: #bbdefb;
+    --btn-cancel-hover-bg: #64b5f6;   --btn-cancel-hover-text: #ffffff;   --btn-cancel-hover-border: #ffffff;
+
+    --btn-filter-bg: #ffffff;         --btn-filter-text: #ff69b4;         --btn-filter-border: #ff69b4;
+    --btn-filter-hover-bg: #ff69b4;   --btn-filter-hover-text: #ffffff;   --btn-filter-hover-border: #ffffff;
+
+    --btn-delete-bg: #ffffff;         --btn-delete-text: #e53e3e;         --btn-delete-border: #ffa7b6;
+    --btn-delete-hover-bg: #e53e3e;   --btn-delete-hover-text: #ffffff;   --btn-delete-hover-border: #e53e3e;
+
+    /* THEMATIC SCHALE TYPE MODIFIERS */
+    --btn-text-transform: uppercase;
+    --btn-font-style: italic;
+
+    --link-color-override: #ff69b4;
+}

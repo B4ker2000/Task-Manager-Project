@@ -1,0 +1,6 @@
+[data-accessible-font="high-legibility"] *,
+[data-accessible-font="high-legibility"] *:before,
+[data-accessible-font="high-legibility"] *:after {
+   --font-override: "DejaVu Sans", "Trebuchet MS", Arial, sans-serif !important;
+   --font-monospace: "DejaVu Sans Mono", monospace !important;                          /* Temporary for now */
+}

@@ -25,7 +25,9 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/app/Themes/themes.css",
+              "src/app/Accessibility/accessibility.css"
             ],
             "server": "src/main.server.ts",
             "outputMode": "server",

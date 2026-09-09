@@ -1,0 +1,51 @@
+[data-theme="amber-crt"] {
+    /* 💽 RETRO AMBER CRT TERMINAL THEME 🟠🖥️ */
+    --surface-bg: #110b00;                              /* Deep pitch dark charcoal amber canvas */
+    --container-bg: #050300;                            /* Pure obsidian black terminal floor backdrop */
+    --wallpaper: #050300;
+    --border-color: #ffb000;                            /* Everything is framed in uniform amber glowing circuits! */
+    --input-bg: #110b00;
+    --font-override: monospace, sans-serif;               /* Enforces perfect retro matrix font tracking lines! */
+    --font-scale: 1;
+    --line-height-scale: 1.5;
+
+    /* 🔤 Text Elements */
+    --text-primary: #ffb000;                            /* Glowing vintage high-vis phosphorus amber ink text */
+    --text-secondary: #ffb000;
+    --text-muted: #aa7500;                              /* Muted copper phosphor amber subtitles notes */
+    
+    /* 📊 Amber-CRT ACCESSIBILITY BADGE MATRICES */
+    --badge-high-bg: #ffb000;       --badge-high-text: #050300;     --badge-high-border: #ffb000;
+    --badge-medium-bg: #110b00;     --badge-medium-text: #ffb000;   --badge-medium-border: #ffb000;
+    --badge-low-bg: #110b00;        --badge-low-text: #ffb000;      --badge-low-border: #aa7500;
+    --badge-done-bg: #ffb000;       --badge-done-text: #050300;     --badge-done-border: #aa7500;
+
+    /* 🎨 PROGRESS AND FILTER TRACKS */
+    --progress-bar-fill: #ffb000;
+
+    --filter-border-color: #ffb000;
+    --filter-focus-color: #ffb000;
+    --filter-focus-shadow: rgba(255, 176, 0, 0.2);
+
+    --focus-halo-color: #ffb000;
+    --focus-halo-shadow: rgba(255, 176, 0, 0.3);
+
+    /* SEMANTIC BUTTON FOUR-TIER STRUCTURAL INVENTORY */
+    --btn-submit-bg: #110b00;         --btn-submit-text: #ffb000;         --btn-submit-border: #ffb000;
+    --btn-submit-hover-bg: #ffb000;   --btn-submit-hover-text: #050300;   --btn-submit-hover-border: #ffb000;
+
+    --btn-cancel-bg: #110b00;         --btn-cancel-text: #aa7500;         --btn-cancel-border: #aa7500;
+    --btn-cancel-hover-bg: #aa7500;   --btn-cancel-hover-text: #050300;   --btn-cancel-hover-border: #ffb000;
+
+    --btn-filter-bg: #110b00;         --btn-filter-text: #ffb000;         --btn-filter-border: #ffb000;
+    --btn-filter-hover-bg: #ffb000;   --btn-filter-hover-text: #050300;   --btn-filter-hover-border: #ffb000;
+
+    --btn-delete-bg: #110b00;         --btn-delete-text: #ffb000;         --btn-delete-border: #ffb000;
+    --btn-delete-hover-bg: #ffb000;   --btn-delete-hover-text: #050300;   --btn-delete-hover-border: #ffb000;
+
+    /* THEMATIC TYPE MODIFIERS */
+    --btn-text-transform: none;
+    --btn-font-style: normal;
+
+    --link-color-override: #ffb000;
+}

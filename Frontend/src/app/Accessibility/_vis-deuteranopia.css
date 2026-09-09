@@ -1,0 +1,3 @@
+[data-colorblind="deuteranopia"] {
+    filter: url('#deuteranopia-filter') !important;
+}

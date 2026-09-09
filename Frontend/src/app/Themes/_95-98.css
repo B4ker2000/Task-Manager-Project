@@ -1,0 +1,56 @@
+[data-theme="95/98"] {
+    /* 💾 CLASSIC WINDOWS 95 / 98 LEGACY HARDWARE PRESETS */
+    --surface-bg: #d4d0c8;                                              /* True 90s physical computer chassis gray */
+    --container-bg: #d4d0c8;
+    --wallpaper: #008080;                                               /* Iconic solid desktop Teal Green Wallpaper! */
+    --border-color: #808080;                                            /* High-contrast hardware edge line highlights */
+    --input-bg: #ffffff;
+    --font-override: "MS Sans Serif", Tahoma, Arial, sans-serif;
+    --font-scale: 1;
+    --line-height-scale: 1.5;
+
+    /* 🔤 Text Elements */
+    --text-primary: #ffffff;                                            /* Full white primary text color over wallpaper */
+    --text-secondary: #000000;                                          /* Stark terminal letter ink black inside cards */
+    --text-muted: #000080;                                              /* Classic Titlebar Blue identifiers */
+
+    /* Specific styles for this theme! */
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: none;
+    text-shadow: none !important;                                          /* Windows 95 & 98 did not do text shadows! */
+
+    /* 📊 95/98 Era Flat Alerts layout profiles */
+    --badge-high-bg: #cbd5e1;       --badge-high-text: #c53030;     --badge-high-border: #000000;
+    --badge-medium-bg: #cbd5e1;     --badge-medium-text: #dd6b20;   --badge-medium-border: #000000;
+    --badge-low-bg: #cbd5e1;        --badge-low-text: #3182ce;      --badge-low-border: #000000;
+    --badge-done-bg: #008000;       --badge-done-text: #ffffff;     --badge-done-border: #000000;
+
+    /* 🎨 PROGRESS AND FILTER TRACKS */
+    --progress-bar-fill: #000080;
+    
+    --filter-border-color: #808080;
+    --filter-focus-color: #000080;                      
+    --filter-focus-shadow: rgba(0, 0, 128, 0.15);
+
+    --focus-halo-color: #000080;
+    --focus-halo-shadow: rgba(0, 0, 128, 0.2);
+
+    /* 🏛️ AUTHENTIC 95 ERA 4-COLOR HIGH-CONTRAST CHASSIS INTERACTION BEVELS */
+    --btn-submit-bg: #d4d0c8;         --btn-submit-text: #000000;         --btn-submit-border: #ffffff #808080 #808080 #ffffff;
+    --btn-submit-hover-bg: #000080;   --btn-submit-hover-text: #ffffff;   --btn-submit-hover-border: #000000;
+
+    --btn-cancel-bg: #d4d0c8;         --btn-cancel-text: #000000;         --btn-cancel-border: #ffffff #808080 #808080 #ffffff;
+    --btn-cancel-hover-bg: #808080;   --btn-cancel-hover-text: #ffffff;   --btn-cancel-hover-border: #000000;
+
+    --btn-filter-bg: #d4d0c8;         --btn-filter-text: #000000;         --btn-filter-border: #ffffff #808080 #808080 #ffffff;
+    --btn-filter-hover-bg: #008000;   --btn-filter-hover-text: #ffffff;   --btn-filter-hover-border: #000000;
+
+    --btn-delete-bg: #d4d0c8;         --btn-delete-text: #c53030;         --btn-delete-border: #ffffff #808080 #808080 #ffffff;
+    --btn-delete-hover-bg: #c53030;   --btn-delete-hover-text: #ffffff;   --btn-delete-hover-border: #000000;
+
+    /* THEMATIC TYPE MODIFIERS */
+    --btn-text-transform: none;
+    --btn-font-style: normal;
+
+    --link-color-override: #000080;
+}

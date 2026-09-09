@@ -1,0 +1,51 @@
+[data-theme="matrix-crt"] {
+    /* 📟 MATRIX GREEN CRT TERMINAL MONITOR ENVIRONMENT 🟢📟 */
+    --surface-bg: #001100;                              /* Deep pitch dark charcoal matrix green base canvas */
+    --container-bg: #000500;                            /* Pure monochrome green digital fall matrix floor */
+    --wallpaper: #000500;
+    --border-color: #33ff33;                            /* Everything is framed in uniform green glowing circuits! */
+    --input-bg: #001100;
+    --font-override: monospace, sans-serif;               /* Enforces vintage layout terminal line mappings */
+    --font-scale: 1;
+    --line-height-scale: 1.5;
+
+    /* 🔤 Text Elements */
+    --text-primary: #33ff33;                            /* Glowing vintage high-vis green ink text */
+    --text-secondary: #33ff33;                          /* High contrast green tracking text inside cards */
+    --text-muted: #00aa00;
+    
+    /* 📊 GREEN-CRT ACCESSIBILITY BADGE MATRICES */
+    --badge-high-bg: #33ff33;       --badge-high-text: #000500;     --badge-high-border: #33ff33;
+    --badge-medium-bg: #001100;     --badge-medium-text: #33ff33;   --badge-medium-border: #33ff33;
+    --badge-low-bg: #001100;        --badge-low-text: #33ff33;      --badge-low-border: #00aa00;
+    --badge-done-bg: #33ff33;       --badge-done-text: #000500;     --badge-done-border: #00aa00;
+
+    /* 🎨 PROGRESS AND FILTER TRACKS */
+    --progress-bar-fill: #33ff33;
+
+    --filter-border-color: #33ff33;
+    --filter-focus-color: #33ff33;
+    --filter-focus-shadow: rgba(51, 255, 51, 0.2);
+
+    --focus-halo-color: #33ff33;
+    --focus-halo-shadow: rgba(51, 255, 51, 0.3);
+
+    /* SEMANTIC BUTTON FOUR-TIER STRUCTURAL INVENTORY */
+    --btn-submit-bg: #001100;         --btn-submit-text: #33ff33;         --btn-submit-border: #33ff33;
+    --btn-submit-hover-bg: #33ff33;   --btn-submit-hover-text: #000500;   --btn-submit-hover-border: #33ff33;
+
+    --btn-cancel-bg: #001100;         --btn-cancel-text: #00aa00;         --btn-cancel-border: #00aa00;
+    --btn-cancel-hover-bg: #00aa00;   --btn-cancel-hover-text: #000500;   --btn-cancel-hover-border: #33ff33;
+
+    --btn-filter-bg: #001100;         --btn-filter-text: #33ff33;         --btn-filter-border: #33ff33;
+    --btn-filter-hover-bg: #33ff33;   --btn-filter-hover-text: #000500;   --btn-filter-hover-border: #33ff33;
+
+    --btn-delete-bg: #001100;         --btn-delete-text: #33ff33;         --btn-delete-border: #33ff33;
+    --btn-delete-hover-bg: #33ff33;   --btn-delete-hover-text: #000500;   --btn-delete-hover-border: #33ff33;
+
+    /* THEMATIC TYPE MODIFIERS */
+    --btn-text-transform: none;
+    --btn-font-style: normal;
+
+    --link-color-override: #33ff33;
+}

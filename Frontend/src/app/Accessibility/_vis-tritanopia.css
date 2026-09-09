@@ -1,0 +1,3 @@
+[data-colorblind="tritanopia"] {
+    filter: url('#tritanopia-filter') !important;
+}

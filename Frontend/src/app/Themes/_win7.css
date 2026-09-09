@@ -1,0 +1,51 @@
+[data-theme="win7"] {
+    /* 🫧 WINDOWS 7 GLOSSY AERO ARCHITECTURE PRESETS */
+    --surface-bg: rgba(255, 255, 255, 0.85);                                                              /* Translucent frosted glass panel sheet */
+    --container-bg: rgba(185, 201, 211, 0.45);                                                            /* Translucent window backdrop backing layers */
+    --wallpaper: linear-gradient(135deg, #1e4d8c 0%, #3182ce 50%, #90cdf4 100%);
+    --border-color: rgba(75, 75, 75, 0.85);                                                               /* Vista/7 start menu background color */
+    --input-bg: #ffffff;
+    --font-override: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;   /* True default corporate system typeface */
+    --font-scale: 1;
+    --line-height-scale: 1.5;
+
+    /* 🔤 Text Elements */
+    --text-primary: #ffffff;                                                                              /* Soft glowing glass text */
+    --text-secondary: #1a202c;                                                                            /* Deep dark contrast text inside glass sheets */
+    --text-muted: #1e3a8a; 
+
+    /* 📊 DYNAMIC AERO GLASS ACCESSIBILITY BADGES */
+    --badge-high-bg: rgba(254, 215, 217, 0.95);   --badge-high-text: #9b2c2c;   --badge-high-border: #e53e3e;
+    --badge-medium-bg: rgba(254, 235, 200, 0.95); --badge-medium-text: #c05621; --badge-medium-border: #dd6b20;
+    --badge-low-bg: rgba(190, 227, 248, 0.95);    --badge-low-text: #2b6cb0;    --badge-low-border: #3182ce;
+    --badge-done-bg: rgba(198, 246, 213, 0.95);   --badge-done-text: #22543d;   --badge-done-border: #38a169;
+
+    /* 🎨 PROGRESS AND FILTER TRACKS */
+    --progress-bar-fill: linear-gradient(180deg, #52c2ff, #1574d5);
+    
+    --filter-border-color: rgba(255, 255, 255, 0.8);
+    --filter-focus-color: #3182ce;
+    --filter-focus-shadow: rgba(49, 130, 206, 0.3);
+
+    --focus-halo-color: #3182ce;
+    --focus-halo-shadow: rgba(49, 130, 206, 0.25);
+
+    /* 🔮 WINDOWS 7 GLOSSY HOVER AND FILL VARIATION MATRICES */
+    --btn-submit-bg: #3182ce;                   --btn-submit-text: #ffffff;         --btn-submit-border: #1a4975;
+    --btn-submit-hover-bg: #52c2ff;             --btn-submit-hover-text: #ffffff;   --btn-submit-hover-border: #3182ce;
+
+    --btn-cancel-bg: rgba(255, 255, 255, 0.9);  --btn-cancel-text: #505f75;         --btn-cancel-border: rgba(255, 255, 255, 0.4);
+    --btn-cancel-hover-bg: #505f75;             --btn-cancel-hover-text: #ffffff;   --btn-cancel-hover-border: #1a202c;
+
+    --btn-filter-bg: rgba(255, 255, 255, 0.9);  --btn-filter-text: #38a169;         --btn-filter-border: rgba(56, 161, 105, 0.4);
+    --btn-filter-hover-bg: #38a169;             --btn-filter-hover-text: #ffffff;   --btn-filter-hover-border: #22543d;
+
+    --btn-delete-bg: rgba(255, 255, 255, 0.9);  --btn-delete-text: #e53e3e;         --btn-delete-border: rgba(229, 62, 62, 0.4);
+    --btn-delete-hover-bg: #e53e3e;             --btn-delete-hover-text: #ffffff;   --btn-delete-hover-border: #9b2c2c;
+
+    /* THEMATIC TYPE MODIFIERS */
+    --btn-text-transform: none;
+    --btn-font-style: normal;
+
+    --link-color-override: #3182ce;
+}

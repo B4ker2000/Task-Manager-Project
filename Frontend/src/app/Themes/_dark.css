@@ -1,0 +1,51 @@
+[data-theme="dark"] {
+    /* 🌙 SYSTEM DARK MODE OVERRIDES */
+    --surface-bg: #1e1e1e;                                              /* Deep rich carbon surface color */
+    --container-bg: #121212;                                            /* Flat midnight background floor canvas */
+    --wallpaper: #121212;
+    --border-color: #3e3e3e;                                            /* Dark carbon outlines */
+    --input-bg: #1e1e1e;
+    --font-override: sans-serif;
+    --font-scale: 1;
+    --line-height-scale: 1.5;
+
+    /* 🔤 Text Elements */
+    --text-primary: #f8f9fa;                                            /* Crisp white readable header font block */
+    --text-secondary: #f8f9fa;
+    --text-muted: #a0aec0;                                              /* Soft grey structural subtext text */
+
+    /* 📊 DARK MODE ACCESSIBILITY BADGE MATRICES */
+    --badge-high-bg: #3c1e1e;       --badge-high-text: #fc8181;     --badge-high-border: #e53e3e;
+    --badge-medium-bg: #3c2a1a;     --badge-medium-text: #f6ad55;   --badge-medium-border: #dd6b20;
+    --badge-low-bg: #1a2e3b;        --badge-low-text: #63b3ed;      --badge-low-border: #3182ce;
+    --badge-done-bg: #1c3d27;       --badge-done-text: #68d391;     --badge-done-border: #28a745;
+
+    /* 🎨 PROGRESS AND FILTER TRACKS */
+    --progress-bar-fill: linear-gradient(90deg, #48bb78, #38a169);    /* Soft glowing green */
+    
+    --filter-border-color: #3e3e3e;
+    --filter-focus-color: #48bb78;
+    --filter-focus-shadow: rgba(72, 187, 120, 0.2);
+
+    --focus-halo-color: #63b3ed;
+    --focus-halo-shadow: rgba(99, 179, 237, 0.2);
+
+    /* SEMANTIC BUTTON FOUR-TIER STRUCTURAL INVENTORY */
+    --btn-submit-bg: #1e1e1e;         --btn-submit-text: #63b3ed;         --btn-submit-border: #3182ce;
+    --btn-submit-hover-bg: #3182ce;   --btn-submit-hover-text: #ffffff;   --btn-submit-hover-border: #63b3ed;
+
+    --btn-cancel-bg: #1e1e1e;         --btn-cancel-text: #a0aec0;         --btn-cancel-border: #3e3e3e;
+    --btn-cancel-hover-bg: #4a5568;   --btn-cancel-hover-text: #ffffff;   --btn-cancel-hover-border: #a0aec0;
+
+    --btn-filter-bg: #1e1e1e;         --btn-filter-text: #48bb78;         --btn-filter-border: #38a169;
+    --btn-filter-hover-bg: #38a169;   --btn-filter-hover-text: #ffffff;   --btn-filter-hover-border: #48bb78;
+
+    --btn-delete-bg: #1e1e1e;         --btn-delete-text: #fc8181;         --btn-delete-border: #e53e3e;
+    --btn-delete-hover-bg: #e53e3e;   --btn-delete-hover-text: #ffffff;   --btn-delete-hover-border: #fc8181;
+
+    /* THEMATIC TYPE MODIFIERS */
+    --btn-text-transform: none;
+    --btn-font-style: normal;
+
+    --link-color-override: #63b3ed;
+}

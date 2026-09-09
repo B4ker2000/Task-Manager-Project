@@ -1,0 +1,3 @@
+[data-colorblind="protanopia"] {
+    filter: url('#protanopia-filter') !important;
+}
