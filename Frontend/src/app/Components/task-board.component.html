@@ -339,7 +339,7 @@
                                   [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DEADLINE_ARIA, (t.deadline | date: langService.words().GLOBAL.DATE_FORMAT) || '')">
                                 
                                 <span aria-hidden="true">📅</span> 
-                                <span>{{ t.deadline | date: (langService.words()?.GLOBAL?.DATE_FORMAT || 'yyyy/MM/dd') }}</span>
+                                <span>{{ t.deadline | date: (langService.words()?.GLOBAL?.DATE_FORMAT || 'yyyy/MM/dd') | localizeNumber }}</span>
                             </span>
                         </div>
                         <button *ngIf="currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId" 
@@ -459,7 +459,7 @@
                                   [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DEADLINE_ARIA, (t.deadline | date: langService.words().GLOBAL.DATE_FORMAT) || '')">
                                 
                                 <span aria-hidden="true">📅</span> 
-                                <span>{{ t.deadline | date: (langService.words()?.GLOBAL?.DATE_FORMAT || 'yyyy/MM/dd') }}</span>
+                                <span>{{ t.deadline | date: (langService.words()?.GLOBAL?.DATE_FORMAT || 'yyyy/MM/dd') | localizeNumber }}</span>
                             </span>
                         </div>
 
@@ -621,7 +621,7 @@
                                   [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DEADLINE_ARIA, (t.deadline | date: langService.words().GLOBAL.DATE_FORMAT) || '')">
                                 
                                 <span aria-hidden="true">📅</span> 
-                                <span>{{ t.deadline | date: (langService.words()?.GLOBAL?.DATE_FORMAT || 'yyyy/MM/dd') }}</span>
+                                <span>{{ t.deadline | date: (langService.words()?.GLOBAL?.DATE_FORMAT || 'yyyy/MM/dd') | localizeNumber }}</span>
                             </span>
                         </div>
 

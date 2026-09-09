@@ -12,18 +12,15 @@ export class LocalizeNumberPipe implements PipeTransform {
     transform(value: number | string | null | undefined): string {
         if (value === null || value === undefined) return '';
 
-        const num = Number(value);
-        if (isNaN(num)) return value.toString();
-
+        const inputStr = value.toString();
         const currentLang = this.langService.currentLang();
-        let cultureCode = 'en-US';
+        
+        // If the selected language is Persian, manually swap out digits globally!
+        if (currentLang === 'fa') {
+            const persianDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+            return inputStr.replace(/[0-9]/g, (w) => persianDigits[parseInt(w, 10)]);
+        }
 
-        if (currentLang === 'fa') cultureCode = 'fa-IR';
-        else if (currentLang === 'jp') cultureCode = 'ja-JP';
-        else if (currentLang === 'ru') cultureCode = 'ru-RU';
-        else if (currentLang === 'en-gb') cultureCode = 'en-GB';
-
-        // Native browser execution context engine automatically translates digits!
-        return new Intl.NumberFormat(cultureCode).format(num);
+        return inputStr; // Returns standard formatting for the rest of the languages!
     }
 }
