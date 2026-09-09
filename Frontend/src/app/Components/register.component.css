@@ -39,7 +39,7 @@
 
 .password-input-wrapper input { 
     width: 100%; 
-    padding: 10px 40px 10px 10px;   /* Leaves enough room for our eye icons! */
+    padding-inline-end: 40px; 
     box-sizing: border-box; 
 }
 

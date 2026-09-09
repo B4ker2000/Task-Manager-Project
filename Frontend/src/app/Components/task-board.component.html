@@ -4,7 +4,7 @@
                 [routerLink]="['/dashboard']" 
                 [attr.aria-label]="langService.words().GLOBAL.BACK_BTN_ARIA">
                 
-            <span class="btn-logo arrow" aria-hidden="true">←</span>
+            <span [class]="'btn-logo arrow ' + langService.words().GLOBAL.DIRECTION" aria-hidden="true">←</span>
             <span [innerHTML]="langService.words().GLOBAL.BACK_BTN_TEXT"></span>
         </button>
         <h2 id="boardTitleHeader">{{ formatLabel(langService.words().TASKBOARD.HEADER_TITLE, projectTitle) }}</h2>
@@ -126,7 +126,7 @@
                           [style.backgroundColor]="cat.colorHex" 
                           role="text" 
                           [attr.aria-label]="langService.words().TASKBOARD.TAGS_PILL_ARIA.replace('{name}', cat.name).replace('{count}', getTaskCountByCategory(cat.id).toString())">
-                        <span>{{ cat.name }} ({{ getTaskCountByCategory(cat.id) }})</span>
+                        <span>{{ cat.name }} ({{ getTaskCountByCategory(cat.id) | localizeNumber }})</span>
 
                         <!-- Delete Tag Trigger (Visible exclusively to space/project owners/managers!) -->
                          <button *ngIf="currentUserProjectRole === 'Owner'" 
@@ -196,7 +196,7 @@
             
             <div class="priority-text-label">
                 <span [innerHTML]="langService.words().TASKBOARD.PROGRESS_LABEL"></span>
-                <strong>{{ completionPercentage }}%</strong>
+                <strong>{{ completionPercentage | localizeNumber }}%</strong>
             </div>
             <div class="progress-bar-track" aria-hidden="true">
                 <div class="progress-bar-fill" [style.width.%]="completionPercentage"></div>
@@ -245,7 +245,7 @@
                   aria-labelledby="pendingColumnHeader">
 			
             <h3 id="pendingColumnHeader">
-                <span aria-hidden="true">⏳</span> {{ formatLabel(langService.words().TASKBOARD.COLUMN_PENDING_TITLE, pendingTasks.length) }}
+                <span aria-hidden="true">⏳</span> {{ formatLabel(langService.words().TASKBOARD.COLUMN_PENDING_TITLE, pendingTasks.length | localizeNumber) }}
             </h3>
 
             <!-- CDK Target Drop Window Container Lane -->
@@ -348,7 +348,7 @@
                                 [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_ACTION_START_ARIA, t.title)">
                             
                             <span [innerHTML]="langService.words().TASKBOARD.TASK_ACTION_START_TEXT"></span>
-                            <span class="btn-logo loop-arrow" aria-hidden="true">↪</span>
+                            <span [class]="'btn-logo loop-arrow ' + langService.words().GLOBAL.DIRECTION" aria-hidden="true">↪</span>
                         </button>
                     </div>
                  </div>
@@ -362,7 +362,7 @@
                   aria-labelledby="inProgressColumnHeader">
             
             <h3 id="inProgressColumnHeader">
-                <span aria-hidden="true">⚡</span> {{ formatLabel(langService.words().TASKBOARD.COLUMN_INPROGRESS_TITLE, inProgressTasks.length) }}
+                <span aria-hidden="true">⚡</span> {{ formatLabel(langService.words().TASKBOARD.COLUMN_INPROGRESS_TITLE, inProgressTasks.length | localizeNumber) }}
             </h3>
             
             <div id="inProgressLaneList"
@@ -471,7 +471,7 @@
                                      (click)="onUpdateStatus(t.id, 'Pending')"
                                      [attr.aria-label]="formatLabel(langService.words().TASKBOARD.BTN_BACK_ARIA, t.title)">
                                     
-                                <span class="btn-logo loop-arrow" aria-hidden="true">↩</span>
+                                <span [class]="'btn-logo loop-arrow ' + langService.words().GLOBAL.DIRECTION" aria-hidden="true">↩</span>
                                 <span [innerHTML]="langService.words().TASKBOARD.BTN_BACK_TEXT"></span>
                              </button>
                                 
@@ -481,7 +481,7 @@
                                      [attr.aria-label]="formatLabel(langService.words().TASKBOARD.BTN_SUBMIT_REVIEW_ARIA, t.title)">
                                 
                                 <span [innerHTML]="langService.words().TASKBOARD.BTN_SUBMIT_REVIEW_TEXT"></span>
-                                <span class="btn-logo loop-arrow" aria-hidden="true">↪</span>
+                                <span [class]="'btn-logo loop-arrow ' + langService.words().GLOBAL.DIRECTION" aria-hidden="true">↪</span>
                              </button>
                             
                             <!-- Review Required task card navigation buttons -->
@@ -491,7 +491,7 @@
                                      (click)="onUpdateStatus(t.id, 'In Progress')"
                                      [attr.aria-label]="formatLabel(langService.words().TASKBOARD.BTN_CANCEL_REVIEW_ARIA, t.title)">
                                 
-                                <span class="btn-logo loop-arrow" aria-hidden="true">↩</span>
+                                <span [class]="'btn-logo loop-arrow ' + langService.words().GLOBAL.DIRECTION" aria-hidden="true">↩</span>
                                 <span [innerHTML]="langService.words().TASKBOARD.BTN_CANCEL_REVIEW_TEXT"></span>
                               </button>
                                
@@ -525,7 +525,7 @@
                   role="region"
                   aria-labelledby="completedColumnHeader">
             
-            <h3 id="completedColumnHeader"><span aria-hidden="true">✅</span> {{ formatLabel(langService.words().TASKBOARD.COLUMN_COMPLETED_TITLE, completedTasks.length) }}</h3>
+            <h3 id="completedColumnHeader"><span aria-hidden="true">✅</span> {{ formatLabel(langService.words().TASKBOARD.COLUMN_COMPLETED_TITLE, completedTasks.length | localizeNumber) }}</h3>
 			
             <div id="completedLaneList"
                  cdkDropList
@@ -631,7 +631,7 @@
                                 (click)="onUpdateStatus(t.id, 'In Progress')"
                                 [attr.aria-label]="formatLabel(langService.words().TASKBOARD.REOPEN_ARIA, t.title)">
                                 
-                                <span class="btn-logo loop-arrow" aria-hidden="true">↩</span>
+                                <span [class]="'btn-logo loop-arrow ' + langService.words().GLOBAL.DIRECTION" aria-hidden="true">↩</span>
                                 <span [innerHTML]="langService.words().TASKBOARD.REOPEN_TEXT"></span>
                          </button>
                     </div>

@@ -5,7 +5,7 @@
                 [routerLink]="['/dashboard']" 
                 [attr.aria-label]="langService.words().GLOBAL.BACK_BTN_ARIA">
                 
-            <span class="btn-logo arrow" aria-hidden="true">←</span>
+            <span [class]="'btn-logo arrow ' + langService.words().GLOBAL.DIRECTION" aria-hidden="true">←</span>
             <span [innerHTML]="langService.words().GLOBAL.BACK_BTN_TEXT"></span>
         </button>
         <h2 [innerHTML]="langService.words().PROFILE.IDENTITY_TITLE"></h2>
@@ -37,7 +37,7 @@
                 </div>
                 <div class="info-row">
                     <strong id="recordLabel" [innerHTML]="langService.words().PROFILE.DATABASE_RECORD_LABEL"></strong>
-                    <span [attr.aria-labelledby]="'recordLabel'">#{{ userProfile.id }}</span>
+                    <span [attr.aria-labelledby]="'recordLabel'">#{{ userProfile.id | localizeNumber }}</span>
                 </div>
              </div>
 
@@ -49,11 +49,11 @@
                 </h4>
                 <div class="metric-box" [attr.aria-label]="userProfile.stats.total + ' ' + langService.words().PROFILE.ASSIGNED_ITEMS_ARIA">
                     <span class="metric-label" aria-hidden="true" [innerHTML]="langService.words().PROFILE.ASSIGNED_ITEMS_LABEL"></span>
-                    <span class="metric-num" aria-hidden="true">{{ userProfile.stats.total }}</span>
+                    <span class="metric-num" aria-hidden="true">{{ userProfile.stats.total | localizeNumber }}</span>
                 </div>
                 <div class="metric-box status-done" [attr.aria-label]="userProfile.stats.completed + ' ' + langService.words().PROFILE.COMPLETED_TASKS_ARIA">
                     <span class="metric-label" aria-hidden="true" [innerHTML]="langService.words().PROFILE.COMPLETED_TASKS_LABEL"></span>
-                    <span class="metric-num" aria-hidden="true">{{ userProfile.stats.completed }}</span>
+                    <span class="metric-num" aria-hidden="true">{{ userProfile.stats.completed | localizeNumber }}</span>
                 </div>
              </div>
         </div>

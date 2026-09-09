@@ -39,27 +39,8 @@ input[type="email"] {
 
 .password-input-wrapper input { 
     width: 100%; 
-    padding: 10px 40px 10px 10px;
+    padding-inline-end: 40px;
     box-sizing: border-box; 
-}
-
-.eye-toggle-btn { 
-    position: absolute; 
-    inset-inline-end: 10px; 
-    background: none; 
-    border: none; 
-    cursor: pointer; 
-    font-size: calc(16px * var(--font-scale)); 
-    padding: 0; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    opacity: 0.5; 
-    transition: opacity 0.2s; 
-}
-
-.eye-toggle-btn:hover { 
-    opacity: 1; 
 }
 
 /* =========================================================================

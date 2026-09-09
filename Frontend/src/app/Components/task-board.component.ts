@@ -8,12 +8,13 @@ import { AuthService } from "../Services/auth.service";
 import { CategoryService } from "../Services/category.service";
 import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
 import { LanguageService } from "../i18n/language.service";
+import { LocalizeNumberPipe } from "../i18n/localize-number.pipe";
 import { PopupComponent } from "./popup.component";
 
 @Component({
     selector: 'app-task-board',
     standalone: true,
-    imports: [FormsModule, NgFor, NgIf, NgClass, RouterLink, DatePipe, DragDropModule, PopupComponent],
+    imports: [FormsModule, NgFor, NgIf, NgClass, RouterLink, DatePipe, DragDropModule, LocalizeNumberPipe, PopupComponent],
     templateUrl: "./task-board.component.html",
     styleUrl: "./task-board.component.css"
 })
@@ -482,7 +483,7 @@ export class TaskBoardComponent implements OnInit {
                     const weightA = roleWeights[roleA] || 99;
                     const weightB = roleWeights[roleB] || 99;
 
-                    return weightA - weightB; // Ascending order layout sorting
+                    return weightA - weightB;   // Ascending order layout sorting
                 });
 
                 this.cdr.detectChanges();

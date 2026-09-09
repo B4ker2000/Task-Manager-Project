@@ -4,12 +4,13 @@ import { RouterLink, Router } from "@angular/router";
 import { AuthService } from "../Services/auth.service";
 import { FormsModule } from "@angular/forms";
 import { LanguageService } from "../i18n/language.service";
+import { LocalizeNumberPipe } from "../i18n/localize-number.pipe";
 import { PopupComponent } from "./popup.component";
 
 @Component({
     selector: 'app-user-profile',
     standalone: true,
-    imports: [NgIf, NgClass, RouterLink, FormsModule, PopupComponent], // [(ngModel)] needs FormsModule to be imported!
+    imports: [NgIf, NgClass, RouterLink, FormsModule, LocalizeNumberPipe, PopupComponent], // [(ngModel)] needs FormsModule to be imported!
     templateUrl: "./user-profile.component.html",
     styleUrl: "./user-profile.component.css"
 })

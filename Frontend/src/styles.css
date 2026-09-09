@@ -971,11 +971,18 @@ button:disabled {
 .btn-logo.arrow {
     bottom: 1px;
 }
-.btn-logo.loop-arrow {
-    top: 1px;
-}
 .btn-logo.cross {
     bottom: 2px;
+}
+
+/* Dynamic arrow mirrorer based on user preferred language's DIRECTION token! */
+.btn-logo.arrow.rtl,
+.btn-logo.loop-arrow.rtl {
+    transform: scaleX(-1);
+}
+.btn-logo.arrow.ltr,
+.btn-logo.loop-arrow.ltr {
+    transform: scaleX(1);
 }
 
 /* =========================================================================
@@ -1278,4 +1285,26 @@ body.cdk-drag-dragging * {
 .delete-card-btn:hover { 
     background-color: var(--btn-delete-hover-bg) !important;
     transform: scale(1.05); /* Adds a tiny, responsive tactile pop! */
+}
+
+/* =========================================================================
+   Global visibility eye toggle button styles
+   ========================================================================= */
+.eye-toggle-btn { 
+    position: absolute; 
+    inset-inline-end: 10px; 
+    background: none; 
+    border: none; 
+    cursor: pointer; 
+    font-size: calc(16px * var(--font-scale));
+    padding: 0; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    opacity: 0.5; 
+    transition: opacity 0.2s;
+}
+
+.eye-toggle-btn:hover { 
+    opacity: 1; 
 }
