@@ -1,7 +1,6 @@
 using Backend.Data;
 using Backend.Dtos;
 using Backend.Models;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Services

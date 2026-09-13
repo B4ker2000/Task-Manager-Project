@@ -2,7 +2,7 @@ import { Component, inject } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { NgIf } from "@angular/common";
 import { Router, RouterLink } from "@angular/router";
-import { AuthService } from "../Services/auth.service";
+import { AuthService } from "../services/auth.service";
 import { LanguageService } from "../i18n/language.service";
 
 @Component({

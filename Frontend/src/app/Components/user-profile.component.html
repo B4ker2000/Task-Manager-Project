@@ -100,19 +100,20 @@
                                     [attr.aria-label]="langService.words().PROFILE.THEME_LABEL">
 
                                 <!-- The aria-label forces the voice engine to read clean text, ignoring the emojis! -->
-                                 <option value="light" [attr.aria-label]="langService.words().PROFILE.THEME_OPTION_LIGHT" [innerHTML]="langService.words().PROFILE.THEME_OPTION_LIGHT"></option>
-                                 <option value="dark" [attr.aria-label]="langService.words().PROFILE.THEME_OPTION_DARK" [innerHTML]="langService.words().PROFILE.THEME_OPTION_DARK"></option>
-                                 <option value="amber-crt" [attr.aria-label]="langService.words().PROFILE.THEME_OPTION_AMBER" [innerHTML]="langService.words().PROFILE.THEME_OPTION_AMBER"></option>
-                                 <option value="matrix-crt" [attr.aria-label]="langService.words().PROFILE.THEME_OPTION_MATRIX" [innerHTML]="langService.words().PROFILE.THEME_OPTION_MATRIX"></option>
-                                 <option value="high-contrast-black" [attr.aria-label]="langService.words().PROFILE.THEME_OPTION_HC_BLACK" [innerHTML]="langService.words().PROFILE.THEME_OPTION_HC_BLACK"></option>
-                                 <option value="high-contrast-white" [attr.aria-label]="langService.words().PROFILE.THEME_OPTION_HC_WHITE" [innerHTML]="langService.words().PROFILE.THEME_OPTION_HC_WHITE"></option>
-                                 <option value="high-contrast-beige" [attr.aria-label]="langService.words().PROFILE.THEME_OPTION_HC_BEIGE" [innerHTML]="langService.words().PROFILE.THEME_OPTION_HC_BEIGE"></option>
-                                 <option value="95/98" [attr.aria-label]="langService.words().PROFILE.THEME_OPTION_WIN98" [innerHTML]="langService.words().PROFILE.THEME_OPTION_WIN98"></option>
-                                 <option value="XP" [attr.aria-label]="langService.words().PROFILE.THEME_OPTION_WINXP" [innerHTML]="langService.words().PROFILE.THEME_OPTION_WINXP"></option>
-                                 <option value="vista" [attr.aria-label]="langService.words().PROFILE.THEME_OPTION_VISTA" [innerHTML]="langService.words().PROFILE.THEME_OPTION_VISTA"></option>
-                                 <option value="win7" [attr.aria-label]="langService.words().PROFILE.THEME_OPTION_WIN7" [innerHTML]="langService.words().PROFILE.THEME_OPTION_WIN7"></option>
-                                 <option value="frutiger-aero" [attr.aria-label]="langService.words().PROFILE.THEME_OPTION_AERO" [innerHTML]="langService.words().PROFILE.THEME_OPTION_AERO"></option>
-                                 <option value="BA" [attr.aria-label]="langService.words().PROFILE.THEME_OPTION_BA" [innerHTML]="langService.words().PROFILE.THEME_OPTION_BA"></option>
+                                 <option value="light" [attr.aria-label]="langService.words().PROFILE.THEME_OPTION_LIGHT_ARIA" [innerHTML]="langService.words().PROFILE.THEME_OPTION_LIGHT_TEXT"></option>
+                                 <option value="dark" [attr.aria-label]="langService.words().PROFILE.THEME_OPTION_DARK_ARIA" [innerHTML]="langService.words().PROFILE.THEME_OPTION_DARK_TEXT"></option>
+                                 <option value="amber-crt" [attr.aria-label]="langService.words().PROFILE.THEME_OPTION_AMBER_ARIA" [innerHTML]="langService.words().PROFILE.THEME_OPTION_AMBER_TEXT"></option>
+                                 <option value="matrix-crt" [attr.aria-label]="langService.words().PROFILE.THEME_OPTION_MATRIX_ARIA" [innerHTML]="langService.words().PROFILE.THEME_OPTION_MATRIX_TEXT"></option>
+                                 <option value="high-contrast-black" [attr.aria-label]="langService.words().PROFILE.THEME_OPTION_HC_BLACK_ARIA" [innerHTML]="langService.words().PROFILE.THEME_OPTION_HC_BLACK_TEXT"></option>
+                                 <option value="high-contrast-white" [attr.aria-label]="langService.words().PROFILE.THEME_OPTION_HC_WHITE_ARIA" [innerHTML]="langService.words().PROFILE.THEME_OPTION_HC_WHITE_TEXT"></option>
+                                 <option value="high-contrast-beige" [attr.aria-label]="langService.words().PROFILE.THEME_OPTION_HC_BEIGE_ARIA" [innerHTML]="langService.words().PROFILE.THEME_OPTION_HC_BEIGE_TEXT"></option>
+                                 <option value="95/98" [attr.aria-label]="langService.words().PROFILE.THEME_OPTION_WIN98_ARIA" [innerHTML]="langService.words().PROFILE.THEME_OPTION_WIN98_TEXT"></option>
+                                 <option value="xp" [attr.aria-label]="langService.words().PROFILE.THEME_OPTION_WINXP_ARIA" [innerHTML]="langService.words().PROFILE.THEME_OPTION_WINXP_TEXT"></option>
+                                 <option value="vista" [attr.aria-label]="langService.words().PROFILE.THEME_OPTION_VISTA_ARIA" [innerHTML]="langService.words().PROFILE.THEME_OPTION_VISTA_TEXT"></option>
+                                 <option value="win7" [attr.aria-label]="langService.words().PROFILE.THEME_OPTION_WIN7_ARIA" [innerHTML]="langService.words().PROFILE.THEME_OPTION_WIN7_TEXT"></option>
+                                 <option value="frutiger-aero" [attr.aria-label]="langService.words().PROFILE.THEME_OPTION_AERO_ARIA" [innerHTML]="langService.words().PROFILE.THEME_OPTION_AERO_TEXT"></option>
+                                 <option value="ba" [attr.aria-label]="langService.words().PROFILE.THEME_OPTION_BA_ARIA" [innerHTML]="langService.words().PROFILE.THEME_OPTION_BA_TEXT"></option>
+                                 <option value="hl" [attr.aria-label]="langService.words().PROFILE.THEME_OPTION_HL_ARIA" [innerHTML]="langService.words().PROFILE.THEME_OPTION_HL_TEXT"></option>
                              </select>
                         </div>
                      </div>
@@ -129,8 +130,8 @@
                                 [attr.aria-description]="langService.words().PROFILE.FONT_DESCRIPTION">
                             
                             <option value="" [innerHTML]="langService.words().PROFILE.FONT_OPTION_DEFAULT"></option>
-                            <option value="high-legibility" [innerHTML]="langService.words().PROFILE.FONT_OPTION_LEGI"></option>
-                            <option value="dyslexia-friendly" [innerHTML]="langService.words().PROFILE.FONT_OPTION_DYS"></option>
+                            <option value="high-legibility" [attr.aria-label]="langService.words().PROFILE.FONT_OPTION_LEGI_ARIA" [innerHTML]="langService.words().PROFILE.FONT_OPTION_LEGI_TEXT"></option>
+                            <option value="dyslexia-friendly" [attr.aria-label]="langService.words().PROFILE.FONT_OPTION_DYS_ARIA" [innerHTML]="langService.words().PROFILE.FONT_OPTION_DYS_TEXT"></option>
                         </select>
                      </div>
 

@@ -1,9 +1,9 @@
 import { Component, OnInit, inject, ChangeDetectorRef, PLATFORM_ID } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { NgFor, NgIf, isPlatformBrowser } from "@angular/common";
-import { ProjectService } from "../Services/project.service";
+import { ProjectService } from "../services/project.service";
 import { Router, RouterLink } from "@angular/router";
-import { AuthService } from "../Services/auth.service";
+import { AuthService } from "../services/auth.service";
 import { LanguageService } from "../i18n/language.service";
 import { PopupComponent } from "./popup.component";
 

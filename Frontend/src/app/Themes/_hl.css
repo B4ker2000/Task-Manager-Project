@@ -1,0 +1,50 @@
+[data-theme="hl"] {
+    --surface-bg: #201f1b;                                              /* Deep sunken dark bunker paneling */
+    --container-bg: #2d2c27;                                            /* Tactical charcoal concrete flooring */
+    --wallpaper: #1a1916;                                               /* Absolute depth shadows */
+    --border-color: #545145;                                            /* Weathered dark brass/olive military trim */
+    --input-bg: #151412;                                                /* CRT Terminal entry box void */
+    --font-override: 'Courier New', monospace, sans-serif;                /* Forced retro-terminal typography footprint */
+    --font-scale: 1.05;                                                   /* Slightly emphasized terminal sizing */
+    --line-height-scale: 1.6;
+
+    /* 🔤 Text Elements */
+    --text-primary: #ffb000;                                            /* High-intensity classic HEV amber */
+    --text-secondary: #ffb000;                                          /* Uniform amber readout */
+    --text-muted: #a49e85;                                              /* Dull, tactical sand military subtext */
+
+    /* 📊 HALF-LIFE HAZARD PRIORITY BADGE MATRICES */
+    --badge-high-bg: #4a1212;       --badge-high-text: #ff4545;     --badge-high-border: #9c2222;
+    --badge-medium-bg: #422500;     --badge-medium-text: #ffb000;   --badge-medium-border: #d47a00;
+    --badge-low-bg: #1a2a22;        --badge-low-text: #50c878;      --badge-low-border: #2e6f40;
+    --badge-done-bg: #112233;       --badge-done-text: #00ffff;     --badge-done-border: #0088cc;
+
+    /* 🎨 PROGRESS AND FILTER TRACKS */
+    --progress-bar-fill: linear-gradient(90deg, #ffb000, #d47a00);    /* Pure liquid HEV energy track */
+    
+    --filter-border-color: #545145;
+    --filter-focus-color: #ffb000;
+    --filter-focus-shadow: rgba(255, 176, 0, 0.25);
+
+    --focus-halo-color: #ffb000;
+    --focus-halo-shadow: rgba(255, 176, 0, 0.4);                        /* Radioactive neon glow aura when tabbed */
+
+    /* SEMANTIC BUTTON FOUR-TIER STRUCTURAL INVENTORY */
+    --btn-submit-bg: #201f1b;         --btn-submit-text: #ffb000;         --btn-submit-border: #ffb000;
+    --btn-submit-hover-bg: #ffb000;   --btn-submit-hover-text: #1a1916;   --btn-submit-hover-border: #ffb000;
+
+    --btn-cancel-bg: #201f1b;         --btn-cancel-text: #a49e85;         --btn-cancel-border: #545145;
+    --btn-cancel-hover-bg: #3c3a32;   --btn-cancel-hover-text: #ffb000;   --btn-cancel-hover-border: #a49e85;
+
+    --btn-filter-bg: #201f1b;         --btn-filter-text: #50c878;         --btn-filter-border: #2e6f40;
+    --btn-filter-hover-bg: #2e6f40;   --btn-filter-hover-text: #ffffff;   --btn-filter-hover-border: #50c878;
+
+    --btn-delete-bg: #201f1b;         --btn-delete-text: #ff4545;         --btn-delete-border: #9c2222;
+    --btn-delete-hover-bg: #9c2222;   --btn-delete-hover-text: #ffffff;   --btn-delete-hover-border: #ff4545;
+
+    /* THEMATIC TYPE MODIFIERS */
+    --btn-text-transform: uppercase;                                    /* Heavy industrial printout rules */
+    --btn-font-style: normal;
+
+    --link-color-override: #ffb000;
+}

@@ -431,6 +431,10 @@
     transform: scale(1.1);                    /* Clean tactile interactive scaling pop */
 }
 
+.assignee-dropdown-menu.completed {
+    cursor: default;
+}
+
 /* =========================================================================
    WORKSPACE MANAGEMENT PANEL PROPORTIONS
    ========================================================================= */
@@ -449,6 +453,7 @@
 
 .right-tags-column h5 {
     margin: 0 0 10px 0;
+    padding-top: 16px;
     font-size: calc(13px * var(--font-scale));
     color: var(--text-muted);
     text-transform: uppercase;

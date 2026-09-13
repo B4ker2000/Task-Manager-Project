@@ -115,27 +115,44 @@ export interface LocalePack {
         THEME_ARIA: string;
     
         // Theme Selector Options
-        THEME_OPTION_LIGHT: string;
-        THEME_OPTION_DARK: string;
-        THEME_OPTION_AMBER: string;
-        THEME_OPTION_MATRIX: string;
-        THEME_OPTION_HC_BLACK: string;
-        THEME_OPTION_HC_WHITE: string;
-        THEME_OPTION_HC_BEIGE: string;
-        THEME_OPTION_WIN98: string;
-        THEME_OPTION_WINXP: string;
-        THEME_OPTION_VISTA: string;
-        THEME_OPTION_WIN7: string;
-        THEME_OPTION_AERO: string;
-        THEME_OPTION_BA: string;
+        THEME_OPTION_LIGHT_TEXT: string;
+        THEME_OPTION_LIGHT_ARIA: string;
+        THEME_OPTION_DARK_TEXT: string;
+        THEME_OPTION_DARK_ARIA: string;
+        THEME_OPTION_AMBER_TEXT: string;
+        THEME_OPTION_AMBER_ARIA: string;
+        THEME_OPTION_MATRIX_TEXT: string;
+        THEME_OPTION_MATRIX_ARIA: string;
+        THEME_OPTION_HC_BLACK_TEXT: string;
+        THEME_OPTION_HC_BLACK_ARIA: string;
+        THEME_OPTION_HC_WHITE_TEXT: string;
+        THEME_OPTION_HC_WHITE_ARIA: string;
+        THEME_OPTION_HC_BEIGE_TEXT: string;
+        THEME_OPTION_HC_BEIGE_ARIA: string;
+        THEME_OPTION_WIN98_TEXT: string;
+        THEME_OPTION_WIN98_ARIA: string;
+        THEME_OPTION_WINXP_TEXT: string;
+        THEME_OPTION_WINXP_ARIA: string;
+        THEME_OPTION_VISTA_TEXT: string;
+        THEME_OPTION_VISTA_ARIA: string;
+        THEME_OPTION_WIN7_TEXT: string;
+        THEME_OPTION_WIN7_ARIA: string;
+        THEME_OPTION_AERO_TEXT: string;
+        THEME_OPTION_AERO_ARIA: string;
+        THEME_OPTION_BA_TEXT: string;
+        THEME_OPTION_BA_ARIA: string;
+        THEME_OPTION_HL_TEXT: string;
+        THEME_OPTION_HL_ARIA: string;
 
         // Typography Interface Config
         FONT_LABEL: string;
         FONT_ARIA: string;
         FONT_DESCRIPTION: string;
         FONT_OPTION_DEFAULT: string;
-        FONT_OPTION_LEGI: string;
-        FONT_OPTION_DYS: string;
+        FONT_OPTION_LEGI_TEXT: string;
+        FONT_OPTION_LEGI_ARIA: string;
+        FONT_OPTION_DYS_TEXT: string;
+        FONT_OPTION_DYS_ARIA: string;
 
         // Deficiency Matrix Elements
         COLORBLIND_LABEL: string;
@@ -266,6 +283,9 @@ export interface LocalePack {
         CATEGORY_ARIA: string;
         CATEGORY_ALL: string;
         CATEGORY_UNASSIGNED: string;
+        USER_ARIA: string;
+        USER_ALL: string;
+        USER_UNASSIGNED: string;
         PROGRESS_LABEL: string;
         PROGRESS_ARIA: string;
 

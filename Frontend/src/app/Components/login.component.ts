@@ -1,7 +1,7 @@
 import { Component, inject, ChangeDetectorRef, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { Router, RouterLink } from "@angular/router";
-import { AuthService } from "../Services/auth.service";
+import { AuthService } from "../services/auth.service";
 import { NgIf } from "@angular/common";
 import { LanguageService } from "../i18n/language.service";
 

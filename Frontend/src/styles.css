@@ -19,11 +19,14 @@ html,
     font-size: calc(16px * var(--font-scale));
     line-height: var(--line-height-scale);
     font-family: var(--font-override, sans-serif) !important;
+}
 
-    /* 📈 HARDWARE ACCELERATED TRANSITIONS: Interpolates visual states cleanly */
+/* 📈 HARDWARE ACCELERATED TRANSITIONS: Interpolates visual states cleanly */
+body, div, label, input,
+button, select, section {
     transition: background-color 0.5s ease-in-out,
-                color 0.4s ease-in-out,
-                border-color 0.4s ease-in-out,
+                color 0.5s ease-in-out,
+                border-color 0.3s ease-in-out,
                 filter 0.6s cubic-bezier(0.25, 1, 0.5, 1), /* Smooths out colorblind SVG matrix transitions! */
                 box-shadow 0.4s ease-in-out;
 }
@@ -575,7 +578,6 @@ body.cdk-drag-dragging * {
     opacity: 0.5; 
     transition: opacity 0.2s;
 }
-
 .eye-toggle-btn:hover { 
     opacity: 1; 
 }

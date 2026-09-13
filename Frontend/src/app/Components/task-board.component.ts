@@ -2,10 +2,10 @@ import { Component, OnInit, inject, ChangeDetectorRef, PLATFORM_ID, ElementRef, 
 import { FormsModule } from "@angular/forms";
 import { NgFor, NgIf, NgClass, DatePipe, isPlatformBrowser } from "@angular/common";
 import { ActivatedRoute, RouterLink, Router } from "@angular/router";
-import { TaskService } from "../Services/task.service";
-import { ProjectService } from "../Services/project.service";
-import { AuthService } from "../Services/auth.service";
-import { CategoryService } from "../Services/category.service";
+import { TaskService } from "../services/task.service";
+import { ProjectService } from "../services/project.service";
+import { AuthService } from "../services/auth.service";
+import { CategoryService } from "../services/category.service";
 import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
 import { LanguageService } from "../i18n/language.service";
 import { LocalizeNumberPipe } from "../i18n/localize-number.pipe";
@@ -651,8 +651,8 @@ export class TaskBoardComponent implements OnInit {
         // =========================================================================
         // PERMISSION GATE 1: THE DYNAMIC SELF-DROP PROGRESS/REVIEW TOGGLE SWITCH
         // =========================================================================
-        if(sourceLaneId === targetLaneId && targetLaneId === "inProgressLaneList") {
-            // SECURTITY: Block regular users from toggling cards that are NOT assigned to them!
+        if (sourceLaneId === targetLaneId && targetLaneId === "inProgressLaneList") {
+            // SECURITY: Block regular users from toggling cards that are NOT assigned to them!
             if(!isOwner && !isAssignee) {
                 alert("🔒 Access Denied: You are not authorized to modify a task card assigned to another teammate!");
                 return;

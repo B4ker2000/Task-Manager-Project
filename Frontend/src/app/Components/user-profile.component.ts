@@ -1,7 +1,7 @@
 import { Component, OnInit, inject, PLATFORM_ID, ChangeDetectorRef } from "@angular/core";
 import { isPlatformBrowser, NgIf, NgClass } from "@angular/common";
 import { RouterLink, Router } from "@angular/router";
-import { AuthService } from "../Services/auth.service";
+import { AuthService } from "../services/auth.service";
 import { FormsModule } from "@angular/forms";
 import { LanguageService } from "../i18n/language.service";
 import { LocalizeNumberPipe } from "../i18n/localize-number.pipe";
