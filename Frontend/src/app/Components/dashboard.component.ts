@@ -1,6 +1,6 @@
 import { Component, OnInit, inject, ChangeDetectorRef, PLATFORM_ID } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { NgFor, NgIf, isPlatformBrowser } from "@angular/common";
+import { NgFor, NgIf, DatePipe, isPlatformBrowser } from "@angular/common";
 import { ProjectService } from "../services/project.service";
 import { Router, RouterLink } from "@angular/router";
 import { AuthService } from "../services/auth.service";
@@ -10,7 +10,7 @@ import { PopupComponent } from "./popup.component";
 @Component({
     selector: 'app-dashboard',
     standalone: true,
-    imports: [FormsModule, NgFor, NgIf, RouterLink, PopupComponent],
+    imports: [FormsModule, NgFor, NgIf, DatePipe, RouterLink, PopupComponent],
     templateUrl: "./dashboard.component.html",
     styleUrl: "./dashboard.component.css"
 })
@@ -23,6 +23,7 @@ export class DashboardComponent implements OnInit {
 
     projects: any[] = [];
     newProject = { name: '', description: '' };
+    pendingInvitations: any[] = [];
 
     private pendingDeleteProjectId: number | null = null;
 
@@ -44,10 +45,14 @@ export class DashboardComponent implements OnInit {
         // Only trigger initial project load if we are fully inside the browser
         if(isPlatformBrowser(this.platformId)) {
             this.authService.getUserProfile().subscribe({
-                next: () => this.loadProjects(),
+                next: () => {
+                    this.loadProjects();
+                    this.loadPendingInvitations();
+                },
                 error: (err: any) => {
                     console.error("Identity check pending on reload, trying fallback...", err);
                     this.loadProjects();
+                    this.loadPendingInvitations();
                 }
             })
         }
@@ -61,9 +66,84 @@ export class DashboardComponent implements OnInit {
         this.projectService.getMyProjects().subscribe({
             next: (data: any[]) => { 
                 this.projects = data; 
-                this.cdr.detectChanges(); // Instantly refresh the cards so they show up immidetly after login!
+                this.cdr.detectChanges(); // Instantly refresh the cards so they show up immediately after login!
             },
             error: (err) => console.error('Could not fetch projects', err)
+        });
+    }
+
+    loadPendingInvitations():void {
+        const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+        if (!token) return;
+
+        this.projectService.getPendingInvitations().subscribe({
+            next: (invitations: any[]) => {
+                this.pendingInvitations = invitations;
+                this.cdr.detectChanges();
+            },
+            error: (err) => {
+                console.error("Could not fetch pending invitations", err);
+            }
+        });
+    }
+
+    acceptInvitation(invitationId: number): void {
+        this.projectService.acceptInvitation(invitationId).subscribe({
+            next: () => {
+                this.pendingInvitations = this.pendingInvitations.filter(
+                    invitation => invitation.id != invitationId
+                );
+
+                this.loadProjects();
+                
+                this.showPopup(
+                    "success",
+                    "Invitation accepted",
+                    "You have joined the project successfully.",
+                    false,
+                    "invitation-accepted"
+                );
+            },
+            error: (err) => {
+                console.error("Could not accept invitation", err);
+
+                this.showPopup(
+                    "danger",
+                    "Invitation failed",
+                    err.error?.message || "The invitation could not be accepted.",
+                    false,
+                    "error-dismiss"
+                );
+            }
+        });
+    }
+
+    declineInvitation(invitationId: number): void {
+        this.projectService.declineInvitation(invitationId).subscribe({
+            next: () => {
+                this.pendingInvitations = this.pendingInvitations.filter(
+                    invitation => invitation.id != invitationId
+                );
+                
+                this.showPopup(
+                    "success",
+                    "Invitation declined",
+                    "The project invitation was declined.",
+                    false,
+                    "invitation-declined"
+                );
+            },
+            error: (err) => {
+                console.error("Could not decline invitation", err);
+
+                this.showPopup(
+                    "danger",
+                    "Invitation failed",
+                    err.error?.message || "The invitation could not be declined.",
+                    false,
+                    "error-dismiss"
+                );
+            }
         });
     }
 

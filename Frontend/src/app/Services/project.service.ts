@@ -31,43 +31,96 @@ export class ProjectService {
 
     // 1. Fetch all projects belonging to the logged-in user
     getMyProjects(): Observable<any[]> {
-        return this.http.get<any[]>(this.apiUrl, { headers: this.getHeaders() });
+        return this.http.get<any[]>(
+            this.apiUrl, 
+            { headers: this.getHeaders() }
+        )
     }
 
     // 2. Send a request payload to create a new project
     createProject(project: { name: string, description: string }): Observable<any> {
-        return this.http.post<any>(this.apiUrl, project, { headers: this.getHeaders() });
+        return this.http.post<any>(
+            this.apiUrl, 
+            project, 
+            { headers: this.getHeaders() }
+        )
     }
 
     // 3. Delete a project
     deleteProject(projectId: number): Observable<any> {
-        return this.http.delete(`http://localhost:5283/api/project/${projectId}`);
+        return this.http.delete<any>(
+            `${this.apiUrl}/${projectId}`, 
+            { headers: this.getHeaders() }
+        )
     }
 
-    // 4. Add a new project member!
-    inviteMemberToProject(projectId: number, invitePayload: { InvitedEmail: string; ProjectRole: string }): Observable<any> {
-        return this.http.post(`http://localhost:5283/api/project/${projectId}/invite`, invitePayload);
-    }
-
-    // 5. Get the user role in a given project
+    // 4. Get the user role in a given project
     getProjectRole(projectId: number): Observable<any> {
-        return this.http.get<any>(`${this.apiUrl}/${projectId}/role`, {
-            headers: this.getHeaders()
-        });
+        return this.http.get<any>(
+            `${this.apiUrl}/${projectId}/role`, 
+            { headers: this.getHeaders()}
+        )
     }
 
-    // 6. Get details of just one project via it's ID
+    // 5. Get details of just one project via it's ID
     getProjectById(projectId: number): Observable<any> {
-        return this.http.get<any>(`${this.apiUrl}/${projectId}`, { headers: this.getHeaders() });
+        return this.http.get<any>(
+            `${this.apiUrl}/${projectId}`, 
+            { headers: this.getHeaders() }
+        )
     }
 
-    // 7. Get member details for the roster list
+    // 6. Get member details for the roster list
     getProjectMembers(projectId: number): Observable<any[]> {
-        return this .http.get<any[]>(`${this.apiUrl}/${projectId}/members`, { headers: this.getHeaders() });
+        return this .http.get<any[]>(
+            `${this.apiUrl}/${projectId}/members`, 
+            { headers: this.getHeaders() }
+        )
     }
 
-    // 8. Remove members from projects as an Owner/Admin or leave one yourself
+    // 7. Remove members from projects as an Owner/Admin or leave one yourself
     removeProjectMember(projectId: number, targetUserId: number): Observable<any> {
-        return this.http.delete<any>(`${this.apiUrl}/${projectId}/members/${targetUserId}`, { headers: this.getHeaders() })
+        return this.http.delete<any>(
+            `${this.apiUrl}/${projectId}/members/${targetUserId}`, 
+            { headers: this.getHeaders() }
+        )
+    }
+
+    // 8. Create an invitation
+    createInvitation(
+        projectId: number,
+        invitePayload: { InvitedEmail: string, ProjectRole: string }
+    ): Observable<any> {
+        return this.http.post<any>(
+            `${this.apiUrl}/${projectId}/invitations`,
+            invitePayload,
+            { headers: this.getHeaders() }
+        )
+    }
+
+    // 9. Fetch pending Invitations
+    getPendingInvitations(): Observable<any[]> {
+        return this.http.get<any[]>(
+            `${this.apiUrl}/invitations/pending`,
+            { headers: this.getHeaders() }
+        )
+    }
+
+    // 10. Accept an Invitation!
+    acceptInvitation(invitationId: number): Observable<any> {
+        return this.http.post<any>(
+            `${this.apiUrl}/invitations/${invitationId}/accept`, 
+            {}, 
+            { headers: this.getHeaders() }
+        )
+    }
+
+    // 11. Decline an Invitation!
+    declineInvitation(invitationId: number): Observable<any> {
+        return this.http.post<any>(
+            `${this.apiUrl}/invitations/${invitationId}/decline`, 
+            {}, 
+            { headers: this.getHeaders() }
+        )
     }
 }

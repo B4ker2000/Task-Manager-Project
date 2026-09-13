@@ -418,7 +418,7 @@ export class TaskBoardComponent implements OnInit {
     }
 
     onInviteUser(): void {
-        if(!this.inviteEmail) {
+        if (!this.inviteEmail.trim()) {
             alert("Validation Alert: Please type a valid email address first!");
             return;
         }
@@ -428,13 +428,20 @@ export class TaskBoardComponent implements OnInit {
             ProjectRole: this.inviteRole
         };
 
-        this.projectService.inviteMemberToProject(this.projectId, payload).subscribe({
+        this.projectService.createInvitation(this.projectId, payload).subscribe({
             next: (res: any) => {
-                alert(res.message || "Teammate successfully mapped into this project room!");
                 this.inviteEmail = ""; // Clear out the text input field box on success
                 this.inviteRole = "Member"; // Snap the selector dropdown back to default member status!
                 this.loadProjectMembers();
                 this.loadTasks();
+
+                this.showPopup(
+                    "success",
+                    "Invitation sent",
+                    res.message,
+                    false,
+                    "invitation-created"
+                );
             },
             error: (err: any) => {
                 console.error("Invitation process failure:", err);

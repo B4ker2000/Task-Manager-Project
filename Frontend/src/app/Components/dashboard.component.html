@@ -13,6 +13,49 @@
         </div>
     </header>
 
+    <section *ngIf="pendingInvitations.length > 0"
+             class="invitations-section"
+             role="region"
+             aria-labelledby="invitationsHeader"
+             aria-live="polite">
+             
+        <div class="invitations-header">
+            <h2 id="invitationsHeader">Project Invitaions</h2>
+            <span class="invitation-count">{{ pendingInvitations.length }}</span>
+        </div>
+
+        <div class="invitation-list">
+            <article *ngFor="let invitation of pendingInvitations"
+                     class="invitation-card">
+                     
+                <div class="invitation-details">
+                    <h3>{{ invitation.project?.name || "Project invitation" }}</h3>
+                    <p>
+                        You have been invited to join this project as
+                        <strong>{{ invitation.projectRole }}</strong>
+                    </p>
+                    <small>
+                        Invitation expires:
+                        {{ invitation.expiresAt | date:"mediumDate" }}
+                    </small>
+                </div>
+                <div class="invitation-actions">
+                    <button type="button"
+                            class="submit-btn"
+                            (click)="acceptInvitation(invitation.id)">
+                        Accept
+                    </button>
+
+                    <button type="button"
+                            class="cancel-btn"
+                            (click)="declineInvitation(invitation.id)">
+                        Decline
+                    </button>
+                </div>
+            </article>
+        </div>
+    </section>
+
     <div class="dashboard-grid">
         <!-- Left Side: Create New Project Form -->
          <section class="form-section" role="region" aria-labelledby="createProjectHeader">

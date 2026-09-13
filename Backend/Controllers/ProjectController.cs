@@ -59,24 +59,6 @@ namespace Backend.Controllers
             return Ok(new { message = "Project and all its tasks were deleted successfully!" });
         }
 
-        [HttpPost("{projectId}/invite")]
-        public async Task<IActionResult> InviteMember(int projectId, [FromBody] ProjectInviteDto request)
-        {
-            var currentUserId = _userContext.GetCurrentUserId();
-            if (currentUserId == null) return UnauthorizedSession();
-
-            // Offload workspace invite verification logic to service engine
-            var result = await _projectService.InviteMemberAsync(projectId, currentUserId.Value, request);
-
-            return result.Outcome switch
-            {
-                ServiceOutcome.Forbidden => Forbid(),
-                ServiceOutcome.NotFound => NotFound(new { message = "No user found with that email address!" }),
-                ServiceOutcome.InvalidStatus => BadRequest(new { message = "This user is already a member of this project workspace!" }),
-                _ => Ok(new { message = $"User '{result.Username}' successfully added to the project room!" })
-            };
-        }
-
         [HttpDelete("{projectId}/members/{targetUserId}")]
         public async Task<IActionResult> RemoveProjectMember(int projectId, int targetUserId)
         {
@@ -95,6 +77,91 @@ namespace Backend.Controllers
                 ServiceOutcome.InvalidStatus => BadRequest(new { message = "You are the sole Owner of this project! Assign another Owner before leaving or delete the project from dashboard." }),
                 _ => Ok(new { message = isKickingSomeoneElse ? "Member successfully removed from project." : "You have left the project room safely." })
             };
+        }
+
+        [HttpPost("{projectId}/invitations")]
+        public async Task<IActionResult> CreateInvitation(
+            int projectId,
+            [FromBody] ProjectInviteDto request)
+        {
+            var currentUserId = _userContext.GetCurrentUserId();
+            if (currentUserId == null) return UnauthorizedSession();
+
+            var invitation = await _projectService.CreateInvitationAsync(
+                projectId,
+                currentUserId.Value,
+                request);
+
+            if (invitation == null)
+            {
+                return BadRequest(new
+                {
+                    message = "The invitation could not be created. Check permissions, membership, or duplicate invitations."
+                });
+            }
+
+            return Ok(new
+            {
+                message = "Invitation created successfully."
+            });
+        }
+
+        [HttpGet("invitations/pending")]
+        public async Task<IActionResult> GetPendingInvitations()
+        {
+            var currentUserId = _userContext.GetCurrentUserId();
+            if (currentUserId == null) return UnauthorizedSession();
+
+            var invitations = await _projectService
+                .GetPendingInvitationsAsync(currentUserId.Value);
+
+            return Ok(invitations);
+        }
+
+        [HttpPost("invitations/{invitationId}/accept")]
+        public async Task<IActionResult> AcceptInvitation(int invitationId)
+        {
+            var currentUserId = _userContext.GetCurrentUserId();
+            if (currentUserId == null) return UnauthorizedSession();
+
+            var accepted = await _projectService
+                .AcceptInvitationAsync(invitationId, currentUserId.Value);
+
+            if (!accepted)
+            {
+                return BadRequest(new
+                {
+                    message = "The invitation could not be accepted."
+                });
+            }
+
+            return Ok(new
+            {
+                message = "Invitation accepted successfully."
+            });
+        }
+
+        [HttpPost("invitations/{invitationId}/decline")]
+        public async Task<IActionResult> DeclineInvitation(int invitationId)
+        {
+            var currentUserId = _userContext.GetCurrentUserId();
+            if (currentUserId == null) return UnauthorizedSession();
+
+            var declined = await _projectService
+                .DeclineInvitationAsync(invitationId, currentUserId.Value);
+            
+            if (!declined)
+            {
+                return BadRequest(new
+                {
+                    message = "The invitation could not be declined."
+                });
+            }
+
+            return Ok(new
+            {
+                message  = "Invitation declined successfully."
+            });
         }
 
         [HttpGet("{id}")]

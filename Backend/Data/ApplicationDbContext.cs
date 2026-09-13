@@ -14,6 +14,7 @@ namespace Backend.Data
         public DbSet<TaskItem> Tasks { get; set; }
         public DbSet<ProjectMember> ProjectMembers { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Invitation> Invitations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

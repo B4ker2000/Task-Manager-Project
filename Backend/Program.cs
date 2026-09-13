@@ -36,7 +36,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("GreatLeaderTheEsteemedPresidentBeautifierOfLandsScriberOfMinutesAthleticsClubCaptainChiefOfSanitationHeadOfAllPrefectsMavenOfMealServicePuddingGourmetPresidentOfRedWinterScienceDepartmentAndDirectorOfCastellaProductionRenkawaCherino")),
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Great-Leader-The-Esteemed-President-Beautifier-of-Lands-Scriber-of-Minutes-Athletics-Club-Captain-Chief-of-Sanitation-Head-of-All-Prefects-Maven-of-Meal-Service-Pudding-Gourmet-President-of-Red-Winter-Science-Department-and-Director-of-Castella-Production-Renkawa-Cherino")),
             ValidateIssuer = false,
             ValidateAudience = false,
             ClockSkew = TimeSpan.Zero // Eliminates the default 5-minute token expiration delay cushion
