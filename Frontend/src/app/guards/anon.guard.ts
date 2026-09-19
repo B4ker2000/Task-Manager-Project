@@ -11,7 +11,7 @@ export class AnonGuard implements CanActivate {
         @Inject(PLATFORM_ID) private platformId: Object
     ) {}
 
-    canActivate(): boolean {
+    public canActivate(): boolean {
         if(isPlatformBrowser(this.platformId)) {
             // Check if the local token exists in the browser cache
             const token = localStorage.getItem("token") || sessionStorage.getItem("token");

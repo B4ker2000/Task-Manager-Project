@@ -30,7 +30,7 @@ export class ProjectService {
     }
 
     // 1. Fetch all projects belonging to the logged-in user
-    getMyProjects(): Observable<any[]> {
+    public getMyProjects(): Observable<any[]> {
         return this.http.get<any[]>(
             this.apiUrl, 
             { headers: this.getHeaders() }
@@ -38,7 +38,7 @@ export class ProjectService {
     }
 
     // 2. Send a request payload to create a new project
-    createProject(project: { name: string, description: string }): Observable<any> {
+    public createProject(project: { name: string, description: string }): Observable<any> {
         return this.http.post<any>(
             this.apiUrl, 
             project, 
@@ -47,7 +47,7 @@ export class ProjectService {
     }
 
     // 3. Delete a project
-    deleteProject(projectId: number): Observable<any> {
+    public deleteProject(projectId: number): Observable<any> {
         return this.http.delete<any>(
             `${this.apiUrl}/${projectId}`, 
             { headers: this.getHeaders() }
@@ -55,7 +55,7 @@ export class ProjectService {
     }
 
     // 4. Get the user role in a given project
-    getProjectRole(projectId: number): Observable<any> {
+    public getProjectRole(projectId: number): Observable<any> {
         return this.http.get<any>(
             `${this.apiUrl}/${projectId}/role`, 
             { headers: this.getHeaders()}
@@ -63,7 +63,7 @@ export class ProjectService {
     }
 
     // 5. Get details of just one project via it's ID
-    getProjectById(projectId: number): Observable<any> {
+    public getProjectById(projectId: number): Observable<any> {
         return this.http.get<any>(
             `${this.apiUrl}/${projectId}`, 
             { headers: this.getHeaders() }
@@ -71,7 +71,7 @@ export class ProjectService {
     }
 
     // 6. Get member details for the roster list
-    getProjectMembers(projectId: number): Observable<any[]> {
+    public getProjectMembers(projectId: number): Observable<any[]> {
         return this .http.get<any[]>(
             `${this.apiUrl}/${projectId}/members`, 
             { headers: this.getHeaders() }
@@ -79,7 +79,7 @@ export class ProjectService {
     }
 
     // 7. Remove members from projects as an Owner/Admin or leave one yourself
-    removeProjectMember(projectId: number, targetUserId: number): Observable<any> {
+    public removeProjectMember(projectId: number, targetUserId: number): Observable<any> {
         return this.http.delete<any>(
             `${this.apiUrl}/${projectId}/members/${targetUserId}`, 
             { headers: this.getHeaders() }
@@ -87,7 +87,7 @@ export class ProjectService {
     }
 
     // 8. Create an invitation
-    createInvitation(
+    public createInvitation(
         projectId: number,
         invitePayload: { InvitedEmail: string, ProjectRole: string }
     ): Observable<any> {
@@ -99,7 +99,7 @@ export class ProjectService {
     }
 
     // 9. Fetch pending Invitations
-    getPendingInvitations(): Observable<any[]> {
+    public getPendingInvitations(): Observable<any[]> {
         return this.http.get<any[]>(
             `${this.apiUrl}/invitations/pending`,
             { headers: this.getHeaders() }
@@ -107,7 +107,7 @@ export class ProjectService {
     }
 
     // 10. Accept an Invitation!
-    acceptInvitation(invitationId: number): Observable<any> {
+    public acceptInvitation(invitationId: number): Observable<any> {
         return this.http.post<any>(
             `${this.apiUrl}/invitations/${invitationId}/accept`, 
             {}, 
@@ -116,7 +116,7 @@ export class ProjectService {
     }
 
     // 11. Decline an Invitation!
-    declineInvitation(invitationId: number): Observable<any> {
+    public declineInvitation(invitationId: number): Observable<any> {
         return this.http.post<any>(
             `${this.apiUrl}/invitations/${invitationId}/decline`, 
             {}, 

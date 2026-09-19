@@ -22,9 +22,9 @@ export class DashboardComponent implements OnInit {
     private platformId = inject(PLATFORM_ID);
     private authService = inject(AuthService);
 
-    projects: any[] = [];
-    newProject = { name: '', description: '' };
-    pendingInvitations: any[] = [];
+    public projects: any[] = [];
+    public newProject = { name: '', description: '' };
+    public pendingInvitations: any[] = [];
 
     private pendingDeleteProjectId: number | null = null;
     private pendingDeclineInvitationId: number | null = null;
@@ -60,7 +60,7 @@ export class DashboardComponent implements OnInit {
         }
     }
 
-    loadProjects(): void {
+    private loadProjects(): void {
         // Defensive check: If there is no token in the browser, stop immediately and don't call the the API!
         const token = localStorage.getItem('token') || sessionStorage.getItem('token');
         if(!token) return; // Stop completely if no token exists
@@ -74,7 +74,7 @@ export class DashboardComponent implements OnInit {
         });
     }
 
-    loadPendingInvitations():void {
+    private loadPendingInvitations():void {
         const token = localStorage.getItem('token') || sessionStorage.getItem('token');
         if (!token) return;
 
@@ -89,7 +89,7 @@ export class DashboardComponent implements OnInit {
         });
     }
 
-    acceptInvitation(invitationId: number): void {
+    public acceptInvitation(invitationId: number): void {
         this.projectService.acceptInvitation(invitationId).subscribe({
             next: () => {
                 this.pendingInvitations = this.pendingInvitations.filter(
@@ -120,7 +120,7 @@ export class DashboardComponent implements OnInit {
         });
     }
 
-    declineInvitation(invitationId: number): void {
+    public declineInvitation(invitationId: number): void {
         this.pendingDeclineInvitationId = invitationId;
                  
         this.showPopup(
@@ -132,7 +132,7 @@ export class DashboardComponent implements OnInit {
         );
     }
 
-    onCreateProject(): void {
+    public onCreateProject(): void {
         this.projectService.createProject(this.newProject).subscribe({
             next: () => {
                 this.newProject = { name: '', description: '' }; // Clear fields
@@ -142,7 +142,7 @@ export class DashboardComponent implements OnInit {
         });
     }
 
-    onLogout(): void {
+    public onLogout(): void {
         if(isPlatformBrowser(this.platformId)) {
             localStorage.removeItem('token');
             sessionStorage.removeItem('token');
@@ -150,7 +150,7 @@ export class DashboardComponent implements OnInit {
         }
     }
 
-    onDeleteProject(projectId: number, event: Event): void {
+    public onDeleteProject(projectId: number, event: Event): void {
         event.stopPropagation(); // Prevents clicking the delete button from opening the project board!
         this.pendingDeleteProjectId = projectId;
         
@@ -163,7 +163,7 @@ export class DashboardComponent implements OnInit {
         );
     }
 
-    handlePopupConfirm(): void {
+    public handlePopupConfirm(): void {
         const currentAction = this.popupConfig.actionType;
         this.closePopup(); 
 
@@ -213,18 +213,18 @@ export class DashboardComponent implements OnInit {
         }
     }
 
-    showPopup(type: "success" | "warning" | "danger", title: string, body: string, isConfirmation: boolean, actionType: string): void {
+    private showPopup(type: "success" | "warning" | "danger", title: string, body: string, isConfirmation: boolean, actionType: string): void {
         this.popupConfig = { visible: true, type, title, body, isConfirmation, actionType };
         this.cdr.detectChanges();
     }
 
-    closePopup(): void {
+    public closePopup(): void {
         this.popupConfig.visible = false;
         this.cdr.detectChanges();
     }
 
     // Method to dynamically replace our dictionary tokens to include a value!
-    formatLabel(template: string, value: string): string {
+    public formatLabel(template: string, value: string): string {
         return template.replace(/\{[a-zA-Z0-9_]+\}/, value);
     }
 }

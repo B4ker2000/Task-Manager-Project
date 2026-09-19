@@ -17,11 +17,11 @@ export class LoginComponent implements OnInit {
     private router = inject(Router);
     private cdr = inject(ChangeDetectorRef);
 
-    credentials = { email: '', password: '' };
-    errorMessage: string = '';
-    showPassword = false; 
-    rememberMe: boolean = false;
-    isFirstTimeUser: boolean = true;
+    public credentials = { email: '', password: '' };
+    public errorMessage: string = '';
+    public showPassword = false;
+    public rememberMe: boolean = false;
+    public isFirstTimeUser: boolean = true;
 
     constructor(public langService: LanguageService) {}
 
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         }
     }
 
-    onLogin(): void { 
+    public onLogin(): void { 
         this.errorMessage = ''; // Clears out past error notices before trying again
 
         this.authService.login(this.credentials).subscribe({

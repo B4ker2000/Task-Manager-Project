@@ -1,6 +1,5 @@
 import { Component, inject } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { NgIf } from "@angular/common";
 import { Router, RouterLink } from "@angular/router";
 import { AuthService } from "../services/auth.service";
 import { LanguageService } from "../i18n/language.service";
@@ -16,14 +15,14 @@ export class RegisterComponent {
     private authService = inject(AuthService);
     private router = inject(Router);
 
-    registerData = { Username: '', Email: '', Password: '' };
-    confirmPassword = '';
-    showPassword = false;
-    showConfirmPassword = false;
+    public registerData = { Username: '', Email: '', Password: '' };
+    public confirmPassword = '';
+    public showPassword = false;
+    public showConfirmPassword = false;
 
     constructor(public langService: LanguageService) {}
 
-    onRegister(): void {
+    public onRegister(): void {
         if(this.registerData.Password !== this.confirmPassword) {
             alert("Security match mismatch: Your entered passwords do not match!");
             return;

@@ -20,23 +20,21 @@ export class UserProfileComponent implements OnInit {
     private cdr = inject(ChangeDetectorRef);
     private router = inject(Router);
 
-    userProfile: any = null;
-    isLoading: boolean = true;
+    public userProfile: any = null;
+    public isLoading: boolean = true;
 
-    updateData = { NewUsername: '', NewPassword: '' }; // Data package tracking model for profile updates
-    confirmNewPassword = '';
-    showPassword = false;
-    showConfirmPassword = false;
+    public updateData = { NewUsername: '', NewPassword: '' }; // Data package tracking model for profile updates
+    public confirmNewPassword = '';
+    public showPassword = false;
+    public showConfirmPassword = false;
 
-    assignedWorkItems: number = 0;
-    completedTasks: number = 0;
+    private assignedWorkItems: number = 0;
+    private completedTasks: number = 0;
 
-    // Theme related variable
-    activeTheme: string = "light";
-
-    // Accessibility related variables
-    activeFont: string = "";
-    activeColorblind: string = "";
+    // Theme and Accessibility variables
+    public activeTheme: string = "light";
+    public activeFont: string = "";
+    public activeColorblind: string = "";
 
     //////////////////////////////////////
     // Popup component state controller //
@@ -89,7 +87,7 @@ export class UserProfileComponent implements OnInit {
         }
     }
 
-    loadProfile(): void {
+    private loadProfile(): void {
         this.authService.getUserProfile().subscribe({
             next: (data: any) => {
                 this.userProfile = data;
@@ -104,7 +102,7 @@ export class UserProfileComponent implements OnInit {
         });
     }
 
-    onUpdateAccount(): void {
+    public onUpdateAccount(): void {
         // 1. Core Evaluation: Did the user actually leave both input forms blank?
         if (!this.updateData.NewUsername && !this.updateData.NewPassword) {
             this.showPopup(
@@ -177,7 +175,7 @@ export class UserProfileComponent implements OnInit {
         });
     }
 
-    onDeleteAccount(): void {
+    public onDeleteAccount(): void {
         // Fire off the localized critical accessibility alert confirmation modal
         this.showPopup(
             "warning",
@@ -228,9 +226,23 @@ export class UserProfileComponent implements OnInit {
             this.router.navigate(['/login']);
         }
     }
+    
+    // Popup related methods
+    private showPopup(type: "success" | "warning" | "danger", title: string, body: string, isConfirmation: boolean, actionType: string): void {
+        this.popupConfig = { visible: true, type, title, body, isConfirmation, actionType };
+        this.cdr.detectChanges();
+    }
 
+    public closePopup(): void {
+        this.popupConfig.visible = false;
+        this.cdr.detectChanges();
+    }
+
+    /////////////////////////////////////
+    // Accessibility controller method //
+    /////////////////////////////////////
     // Theme controller method
-    onThemeChangeEngineTrigger(): void {
+    public onThemeChangeEngineTrigger(): void {
         if(typeof document !== "undefined") {
             // Instantly sets the data-theme attribute on the global <html> tag!
             document.documentElement.setAttribute("data-theme", this.activeTheme);
@@ -240,12 +252,8 @@ export class UserProfileComponent implements OnInit {
             console.log(`Application theme shifted to "${this.activeTheme}" successfully.`);
         }
     }
-
-    /////////////////////////////////////
-    // Accessibility controller method //
-    /////////////////////////////////////
     // Font Controller Method
-    onFontChangeEngineTrigger(): void {
+    public onFontChangeEngineTrigger(): void {
         if (typeof document !== "undefined") {
             if (this.activeFont) {
                 document.documentElement.setAttribute("data-accessible-font", this.activeFont);
@@ -258,7 +266,7 @@ export class UserProfileComponent implements OnInit {
     }
 
     // Colorblind Controller Method
-    onColorblindChangeEngineTrigger(): void {
+    public onColorblindChangeEngineTrigger(): void {
         if (typeof document !== "undefined") {
             if (this.activeColorblind) {
                 document.documentElement.setAttribute("data-colorblind", this.activeColorblind);
@@ -268,16 +276,5 @@ export class UserProfileComponent implements OnInit {
             localStorage.setItem("user-preferred-colorblind", this.activeColorblind);
             console.log(`Colorblind matrix shifted to "${this.activeColorblind || 'None'}" successfully.`);
         }
-    }
-    
-    // Popup related methods
-    showPopup(type: "success" | "warning" | "danger", title: string, body: string, isConfirmation: boolean, actionType: string): void {
-        this.popupConfig = { visible: true, type, title, body, isConfirmation, actionType };
-        this.cdr.detectChanges();
-    }
-
-    closePopup(): void {
-        this.popupConfig.visible = false;
-        this.cdr.detectChanges();
     }
 }

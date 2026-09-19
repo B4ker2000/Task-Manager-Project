@@ -28,26 +28,26 @@ export class TaskBoardComponent implements OnInit {
     private authService = inject(AuthService);
     private categoryService = inject(CategoryService);
 
-    projectId!: number; // Here we basically declare "projectId" but don't assign anything to it yet (null) but because TypeScript restricts use of variables that are declared but aren't assigned anything immediately afterwards, we put an "!" after the name to basically tell TypeScript "Trust me, I know what I'm doing by not assigning anything to 'projectId' right now, but I promise it will absolutely have a number inside it before the HTML page tries to read it!"
-    isModalOpen = false; // Tracks whether form window is visible
+    private projectId!: number; // Here we basically declare "projectId" but don't assign anything to it yet (null) but because TypeScript restricts use of variables that are declared but aren't assigned anything immediately afterwards, we put an "!" after the name to basically tell TypeScript "Trust me, I know what I'm doing by not assigning anything to 'projectId' right now, but I promise it will absolutely have a number inside it before the HTML page tries to read it!"
+    public isModalOpen = false; // Tracks whether form window is visible
 
     // Split our fetched tasks into specific arrays for each column mapping. Also raw records from backend database
-    pendingTasks: any[] = [];
-    inProgressTasks: any[] = [];
-    completedTasks: any[] = [];
+    public pendingTasks: any[] = [];
+    public inProgressTasks: any[] = [];
+    public completedTasks: any[] = [];
 
     // Dynamic sub-arrays rendered on screen layout
-    filteredPendingTasks: any[] = [];
-    filteredInProgressTasks: any[] = [];
-    filteredCompletedTasks: any[] = [];
+    public filteredPendingTasks: any[] = [];
+    public filteredInProgressTasks: any[] = [];
+    public filteredCompletedTasks: any[] = [];
 
     // Live input binding tracking values
-    searchQuery: string = '';
-    selectedPriority: string = 'All';
-    completionPercentage: number = 0;
+    public searchQuery: string = '';
+    public selectedPriority: string = 'All';
+    public completionPercentage: number = 0;
 
     // Tracks properties typed into form fields matching TaskCreateDto.cs fields exactly
-    newTask = { 
+    public newTask = { 
         title: '', 
         description: '', 
         priority: 'Medium', 
@@ -56,38 +56,39 @@ export class TaskBoardComponent implements OnInit {
     };
 
     // "Add new member" related values
-    inviteEmail: string = "";
-    inviteRole: string = "Member"; // Defaults to regular Member assignment 
+    public inviteEmail: string = "";
+    public inviteRole: string = "Member"; // Defaults to regular Member assignment 
 
-    currentUserId!: number;
+    public currentUserId!: number;
 
     // Dynamic title string with a gaming twist! :D
-    projectTitle: string = "";
+    public projectTitle: string = "";
     
-    currentUserProjectRole: string = "";
+    public currentUserProjectRole: string = "";
 
     // Array to hold our teammate info
-    projectMembers: any[] = [];
+    public projectMembers: any[] = [];
 
     // Array to store our category tasks
-    projectCategories: any[] = [];
+    public projectCategories: any[] = [];
 
     // Task category related properties 
-    isCategoryModalOpen: boolean = false;
-    newCategoryName: string = "";
-    newCategoryColor: string = "#3182ce"; // Default category color is Electric Blue!
+    public isCategoryModalOpen: boolean = false;
+    public newCategoryName: string = "";
+    public newCategoryColor: string = "#3182ce"; // Default category color is Electric Blue!
 
     // Filter by category related property
-    selectedCategory: string = "All";
+    public selectedCategory: string = "All";
 
     // Vertical screen related properity
-    activeMobileColumn: string = 'Pending'; // Default view lane tracking 
+    public activeMobileColumn: string = 'Pending'; // Default view lane tracking 
+    public isMobileView: boolean = false;
 
     // Modal focus related
-    @ViewChild('taskModalHeader') taskModalHeader!: ElementRef<HTMLHeadingElement>;
-    @ViewChild('tagModalHeader') tagModalHeader!: ElementRef<HTMLHeadingElement>;
-    @ViewChild('createTaskBtn') createTaskBtn!: ElementRef<HTMLButtonElement>
-    @ViewChild('createTagBtn') createTagBtn!: ElementRef<HTMLButtonElement>
+    @ViewChild('taskModalHeader') public taskModalHeader!: ElementRef<HTMLHeadingElement>;
+    @ViewChild('tagModalHeader') public tagModalHeader!: ElementRef<HTMLHeadingElement>;
+    @ViewChild('createTaskBtn') public createTaskBtn!: ElementRef<HTMLButtonElement>
+    @ViewChild('createTagBtn') public createTagBtn!: ElementRef<HTMLButtonElement>
 
     private pendingDeleteTaskId: number | null = null; 
     private pendingDeleteCategoryId: number | null = null;
@@ -118,6 +119,10 @@ export class TaskBoardComponent implements OnInit {
                 this.projectTitle = this.langService.words().GLOBAL.GENERIC_LOADING;
                 this.currentUserProjectRole = this.langService.words().GLOBAL.GENERIC_LOADING;
 
+                // Mobile view state update
+                this.updateMobileViewState();
+                window.addEventListener('resize', this.updateMobileViewState);
+
                 // SECURITY TOKEN CHECK GATEWAY: Prevents unauthorized empty requests on reload!
                 const token = localStorage.getItem('token') || sessionStorage.getItem('token');
                 if(token) {
@@ -141,7 +146,7 @@ export class TaskBoardComponent implements OnInit {
         }
     }
     
-    loadBoardRequirements(): void {
+    private loadBoardRequirements(): void {
         this.authService.getUserProfile().subscribe({
             next: (data: any) => {
                 this.currentUserId = Number(data.id);
@@ -181,7 +186,7 @@ export class TaskBoardComponent implements OnInit {
         });
     }
 
-    loadTasks(): void {
+    private loadTasks(): void {
         this.taskService.getProjectTasks(this.projectId).subscribe({
             next: (response: any) => {                
                 // Intercept and extract the role metadata sent from backend
@@ -211,7 +216,7 @@ export class TaskBoardComponent implements OnInit {
         });
     }
 
-    onUpdateStatus(taskId: number, newStatus: string, skipNetworkReload: boolean = false): void {
+    public onUpdateStatus(taskId: number, newStatus: string, skipNetworkReload: boolean = false): void {
         this.taskService.updateTaskStatus(taskId, newStatus).subscribe({
             next: () => {
                 if(!skipNetworkReload) {
@@ -222,7 +227,7 @@ export class TaskBoardComponent implements OnInit {
         });
     }
 
-    onDeleteTask(taskId: number): void {
+    public onDeleteTask(taskId: number): void {
         this.pendingDeleteTaskId = taskId;
         
         // A quick pop-up confirmation to prevent accidental clicks!
@@ -235,7 +240,7 @@ export class TaskBoardComponent implements OnInit {
         );
     }
         
-    handlePopupConfirm(): void {
+    public handlePopupConfirm(): void {
         const currentAction = this.popupConfig.actionType;
         this.closePopup();
 
@@ -333,18 +338,18 @@ export class TaskBoardComponent implements OnInit {
         }
     }
 
-    showPopup(type: "success" | "warning" | "danger", title: string, body: string, isConfirmation: boolean, actionType: string): void {
+    private showPopup(type: "success" | "warning" | "danger", title: string, body: string, isConfirmation: boolean, actionType: string): void {
         this.popupConfig = { visible: true, type, title, body, isConfirmation, actionType };
         this.cdr.detectChanges();
     }
 
-    closePopup(): void {
+    public closePopup(): void {
         this.popupConfig.visible = false;
         this.cdr.detectChanges();
     }
 
     // Prepare our form model structure before opening overlay container view
-    openModal(): void {
+    public openModal(): void {
         this.newTask = { title: '', description: '', priority: 'Medium', deadline: '', projectId: this.projectId };
         this.isModalOpen = true;
 
@@ -356,7 +361,7 @@ export class TaskBoardComponent implements OnInit {
         }, 50);
     }
 
-    closeModal(): void { 
+    public closeModal(): void { 
         this.isModalOpen = false; 
 
         setTimeout(() => {
@@ -368,7 +373,7 @@ export class TaskBoardComponent implements OnInit {
     }
 
     // If deadline is an empty string, turn it to null so .NET backend dates parse perfectly
-    onCreateTask(): void {
+    public onCreateTask(): void {
         if(this.newTask.deadline === '') {
             (this.newTask as any).deadline = null;
         }
@@ -382,7 +387,7 @@ export class TaskBoardComponent implements OnInit {
         });
     }
 
-    applyFilters(): void {
+    public applyFilters(): void {
         const filterFn = (task: any) => {
             const matchesSearch = task.title.toLowerCase().includes(this.searchQuery.toLowerCase());
             const matchesPriority = this.selectedPriority === 'All' || task.priority === this.selectedPriority;
@@ -406,7 +411,7 @@ export class TaskBoardComponent implements OnInit {
         this.cdr.detectChanges();
     }
 
-    calculateProgress(allTasks: any[]): void {
+    private calculateProgress(allTasks: any[]): void {
         if(!allTasks || allTasks.length === 0) {
             this.completionPercentage = 0;
             return;
@@ -417,7 +422,7 @@ export class TaskBoardComponent implements OnInit {
         this.completionPercentage = Math.round((completedCount / total) * 100);
     }
 
-    onInviteUser(): void {
+    public onInviteUser(): void {
         if (!this.inviteEmail.trim()) {
             this.showPopup(
                 "warning",
@@ -465,7 +470,7 @@ export class TaskBoardComponent implements OnInit {
         });
     }
 
-    loadProjectDetails(): void {
+    private loadProjectDetails(): void {
         this.projectService.getProjectById(this.projectId).subscribe({
             next: (project: any) => {
                 this.projectTitle = project.name;
@@ -479,7 +484,7 @@ export class TaskBoardComponent implements OnInit {
         });
     }
 
-    loadProjectMembers(): void {
+    private loadProjectMembers(): void {
         this.projectService.getProjectMembers(this.projectId).subscribe({
             next: (members: any[]) => {
                 // Custom weight mapper that ranks member based on their roles in this order: Owners -> Members -> Viewers
@@ -507,7 +512,7 @@ export class TaskBoardComponent implements OnInit {
         });
     }
 
-    onAssignUser(taskId: number, selectedValue: any): void {
+    public onAssignUser(taskId: number, selectedValue: any): void {
         const userId = selectedValue === "null" || selectedValue === null ? null : Number(selectedValue);
         this.taskService.assignTask(taskId, userId).subscribe({
             next: (res: any) => {
@@ -520,7 +525,7 @@ export class TaskBoardComponent implements OnInit {
         });
     }
 
-    loadCurrentUserId(): void {
+    private loadCurrentUserId(): void {
         this.authService.getUserProfile().subscribe({
             next: (data: any) => {
                 this.currentUserId = Number(data.id);
@@ -532,7 +537,7 @@ export class TaskBoardComponent implements OnInit {
         });
     }
 
-    loadProjectCategories(): void {
+    private loadProjectCategories(): void {
         this.categoryService.getProjectCategories(this.projectId).subscribe({
             next: (data: any[]) => {
                 this.projectCategories = data;
@@ -542,7 +547,7 @@ export class TaskBoardComponent implements OnInit {
         });
     }
 
-    onAssignCategory(taskId: number, selectedValue: any): void {
+    public onAssignCategory(taskId: number, selectedValue: any): void {
         const categoryId = selectedValue === "null" || selectedValue === null ? null: Number(selectedValue);
 
         this.taskService.assignTaskCategory(taskId, categoryId).subscribe({
@@ -554,13 +559,13 @@ export class TaskBoardComponent implements OnInit {
         });
     }
 
-    getTaskCountByCategory(categoryId: number): number {
+    public getTaskCountByCategory(categoryId: number): number {
         // Merge the active columns into a single flat array to count matching category keys
         const totalCurrentBoardTasks = [...this.pendingTasks, ...this.inProgressTasks, ...this.completedTasks];
         return totalCurrentBoardTasks.filter(t => t.categoryId === categoryId).length;
     }
 
-    onDeleteCategoryClick(categoryId: number, categoryName: string): void {
+    public onDeleteCategoryClick(categoryId: number, categoryName: string): void {
         this.pendingDeleteCategoryId = categoryId;
         
         this.showPopup(
@@ -572,7 +577,7 @@ export class TaskBoardComponent implements OnInit {
         );
     }
 
-    openCategoryModal(): void {
+    public openCategoryModal(): void {
         this.newCategoryName = "";
         this.newCategoryColor = "#3182ce";
         this.isCategoryModalOpen = true;
@@ -585,7 +590,7 @@ export class TaskBoardComponent implements OnInit {
         }, 50);
     }
 
-    closeCategoryModal(): void {
+    public closeCategoryModal(): void {
         this.isCategoryModalOpen = false;
 
         setTimeout(() => {
@@ -596,7 +601,7 @@ export class TaskBoardComponent implements OnInit {
         }, 50);
     }
 
-    onCreateCategorySubmit(): void {
+    public onCreateCategorySubmit(): void {
         const payload = {
             name: this.newCategoryName.trim(),
             colorHex: this.newCategoryColor
@@ -613,7 +618,7 @@ export class TaskBoardComponent implements OnInit {
         });
     }
 
-    onRemoveMemberClick(targetUserId: number, targetEmail: string): void {
+    public onRemoveMemberClick(targetUserId: number, targetEmail: string): void {
         this.pendingRemoveMemberId = targetUserId
 
         this.showPopup(
@@ -625,7 +630,7 @@ export class TaskBoardComponent implements OnInit {
         );
     }
 
-    onLeaveProjectClick(): void {
+    public onLeaveProjectClick(): void {
         this.pendingLeavingMemberId = this.currentUserId;
 
         this.showPopup(
@@ -637,13 +642,13 @@ export class TaskBoardComponent implements OnInit {
         );
     }
 
-    // Method to hide category select drop down menu from unassigned members since they can already see the tag pills if any tag is assigned!
-    isUserAssignedToThisTask(task: any): boolean {
+    // Method to hide category select drop down menu
+    public hideCategorySelect(task: any): boolean {
         return this.currentUserProjectRole === 'Owner' || task.assignedUserId === this.currentUserId;
     }
 
     // Angular CDK drag-and-drop master event router interceptor
-    onTaskCardDropTrigger(event: CdkDragDrop<any[]>): void {
+    public onTaskCardDropTrigger(event: CdkDragDrop<any[]>): void {
         const targetTaskItem = event.previousContainer.data[event.previousIndex];
         if(!targetTaskItem) return;
 
@@ -761,8 +766,17 @@ export class TaskBoardComponent implements OnInit {
     }
 
     // Method to dynamically replace our dictionary tokens to include a value!
-    formatLabel(template: string, value: string | number): string {
+    public formatLabel(template: string, value: string | number): string {
         // "/\{[a-zA-Z0-9_]+\}/" Basically means "anything" :p
         return template.replace(/\{[a-zA-Z0-9_]+\}/, value.toString());
+    }
+
+    private updateMobileViewState(): void {
+        if (!isPlatformBrowser(this.platformId)) return;
+        this.isMobileView = window.innerWidth <= 800;
+    }
+
+    public setActiveMobileColumn(column: 'Pending' | 'InProgress' | 'Completed'): void {
+        this.activeMobileColumn = column.toString();
     }
 }

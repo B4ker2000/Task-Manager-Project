@@ -209,7 +209,7 @@
                 role="tab"
                 [attr.aria-selected]="activeMobileColumn === 'Pending'"
                 [ngClass]="{'active': activeMobileColumn === 'Pending'}" 
-                (click)="activeMobileColumn = 'Pending'"
+                (click)="setActiveMobileColumn('Pending')"
                 [attr.aria-label]="langService.words().TASKBOARD.MOBILE_TAB_PENDING_ARIA">
                 
             <span aria-hidden="true">⏳</span> <span [innerHTML]="langService.words().TASKBOARD.MOBILE_TAB_PENDING_TEXT"></span>
@@ -218,7 +218,7 @@
                 role="tab"
                 [attr.aria-selected]="activeMobileColumn === 'InProgress'"
                 [ngClass]="{'active': activeMobileColumn === 'InProgress'}" 
-                (click)="activeMobileColumn = 'InProgress'"
+                (click)="setActiveMobileColumn('InProgress')"
                 [attr.aria-label]="langService.words().TASKBOARD.MOBILE_TAB_PROGRESS_ARIA">
                 
             <span aria-hidden="true">⚡</span> <span [innerHTML]="langService.words().TASKBOARD.MOBILE_TAB_PROGRESS_TEXT"></span>
@@ -227,7 +227,7 @@
                 role="tab"
                 [attr.aria-selected]="activeMobileColumn === 'Completed'"
                 [ngClass]="{'active': activeMobileColumn === 'Completed'}" 
-                (click)="activeMobileColumn = 'Completed'"
+                (click)="setActiveMobileColumn('Completed')"
                 [attr.aria-label]="langService.words().TASKBOARD.MOBILE_TAB_COMPLETED_ARIA">
                 
             <span aria-hidden="true">✅</span> <span [innerHTML]="langService.words().TASKBOARD.MOBILE_TAB_COMPLETED_TEXT"></span>
@@ -248,6 +248,7 @@
             <!-- CDK Target Drop Window Container Lane -->
              <div id="pendingLaneList"
                  cdkDropList
+                 [cdkDropListDisabled]="isMobileView"
                  [cdkDropListData]="pendingTasks"
                  (cdkDropListDropped)="onTaskCardDropTrigger($event)" 
                  class="tasks-container"
@@ -307,7 +308,7 @@
                         </select>
                     </div>
 
-                    <div *ngIf="currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId" class="task-assignment-control">
+                    <div *ngIf="hideCategorySelect(t)" class="task-assignment-control">
                         <label [attr.for]="'category-select-' + t.id" class="assignment-label">
                             <span aria-hidden="true">🏷️</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_CATEGORY_LABEL"></span>
                         </label>
@@ -364,6 +365,7 @@
             
             <div id="inProgressLaneList"
                  cdkDropList
+                 [cdkDropListDisabled]="isMobileView"
                  [cdkDropListData]="inProgressTasks"
                  (cdkDropListDropped)="onTaskCardDropTrigger($event)"
                  class="tasks-container"
@@ -426,7 +428,7 @@
                         </select>
                     </div>
                     
-                    <div *ngIf="currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId" class="task-assignment-control">
+                    <div *ngIf="hideCategorySelect(t)" class="task-assignment-control">
                         <label [attr.for]="'inp-category-select-' + t.id" class="assignment-label">
                             <span aria-hidden="true">🏷️</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_CATEGORY_LABEL"></span>
                         </label>
@@ -526,6 +528,7 @@
 			
             <div id="completedLaneList"
                  cdkDropList
+                 [cdkDropListDisabled]="isMobileView"
                  [cdkDropListData]="completedTasks"
                  (cdkDropListDropped)="onTaskCardDropTrigger($event)"
                  class="tasks-container"
@@ -588,23 +591,6 @@
                         </select>
                     </div>
                     
-                    <div *ngIf="currentUserProjectRole === 'Owner' || t.assignedUserId === currentUserId" class="task-assignment-control">
-                        <label [attr.for]="'comp-category-select-' + t.id" class="assignment-label">
-                            <span aria-hidden="true">🏷️</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_CATEGORY_LABEL"></span>
-                        </label>
-                        <select [id]="'comp-category-select-' + t.id" 
-                                [ngModel]="t.categoryId" 
-                                (change)="onAssignCategory(t.id, $any($event.target).value)"
-                                disabled="true"
-                                class="assignee-dropdown-menu completed"
-                                [attr.aria-label]="formatLabel(langService.words().TASKBOARD.FINISHED_CATEGORY_ARIA, t.title)">
-                            
-                            <option [value]="null" [innerHTML]="langService.words().TASKBOARD.TASK_CATEGORY_NONE"></option>
-                            <option *ngFor="let cat of projectCategories" [value]="cat.id">
-                                {{ cat.name }}
-                            </option>
-                        </select>
-                    </div>
                     
                     <div class="task-actions">
                         <div class="badge-group">

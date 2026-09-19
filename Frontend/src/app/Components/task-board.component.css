@@ -540,8 +540,13 @@
         flex-direction: column !important; 
         grid-template-columns: none !important;
     }
-    .board-column.mobile-hidden { display: none !important; }
-    /* .board-column { width: 100% !important; } */
+    .board-column.mobile-hidden { 
+        display: none !important; 
+    }
+    
+    .task-card { 
+        cursor: default;
+    }
 }
 
 /* Narrow Tablets & Large Phones Layout Spacings */
