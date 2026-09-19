@@ -41,6 +41,12 @@ export interface LocalePack {
         SUCCESS_PROFILE_REMOVED_BODY: string;
         SUCCESS_USER_INFO_UPDATED_TITLE: string;
         SUCCESS_USER_INFO_UPDATED_BODY: string;
+        SUCCESS_INVITATION_ACCEPTED_TITLE: string;
+        SUCCESS_INVITATION_ACCEPTED_BODY: string;
+        SUCCESS_INVITATION_DECLINED_TITLE: string;
+        SUCCESS_INVITATION_DECLINED_BODY: string;
+        SUCCESS_INVITATION_SENT_TITLE: string;
+        SUCCESS_INVITATION_SENT_BODY: string;
 
         // Warning Actions
         WARNING_EMPTY_FIELDS_TITLE: string;
@@ -65,6 +71,10 @@ export interface LocalePack {
         WARNING_REMOVE_MEMBER_BODY_PART_2: string;
         WARNING_LEAVE_PROJECT_TITLE: string;
         WARNING_LEAVE_PROJECT_BODY: string;
+        WARNING_INVITATION_DECLINE_TITLE: string;
+        WARNING_INVITATION_DECLINE_BODY: string;
+        WARNING_INVALID_EMAIL_INPUT_TITLE: string;
+        WARNING_INVALID_EMAIL_INPUT_BODY: string;
 
         // Danger Actions
         DANGER_FINAL_WARNING_TITLE: string;
@@ -75,6 +85,10 @@ export interface LocalePack {
         ERROR_TASK_DELETE_BODY: string;
         ERROR_SOLE_OWNER_BODY: string;
         ERROR_INVITE_FAILED_BODY: string;
+        ERROR_INVITATION_ACCEPT_FAILED_BODY: string;
+        ERROR_INVITATION_DECLINE_FAILED_BODY: string;
+        DANGER_UNAUTHORIZED_TASK_ACCESS: string;
+        DANGER_UNAUTHORIZED_TASK_APPROVE: string;
 
         // Button Layouts
         BTN_PROCEED: string;
@@ -223,6 +237,15 @@ export interface LocalePack {
         PROFILE_BTN: string;
         LOGOUT_BTN: string;
         LOGOUT_ARIA: string;
+        INVITATION_HEADER: string;
+        INVITATION_ARIA: string;
+        INVITATION_DETAILS_ARIA: string;
+        INVITATION_DESCRIPTION_TEXT: string;
+        INVITATION_DESCRIPTION_ARIA: string;
+        INVITATION_EXPIRY_TEXT: string;
+        INVITATION_EXPIRY_ARIA: string;
+        INVITATION_ACCEPT_BTN: string;
+        INVITATION_DECLINE_BTN: string;
         CREATE_PROJECT_HEADER: string;
         PROJECT_TITLE_LABEL: string;
         PROJECT_TITLE_PLACEHOLDER: string;

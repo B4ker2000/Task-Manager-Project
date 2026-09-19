@@ -20,36 +20,40 @@
              aria-live="polite">
              
         <div class="invitations-header">
-            <h2 id="invitationsHeader">Project Invitaions</h2>
-            <span class="invitation-count">{{ pendingInvitations.length }}</span>
+            <h2 id="invitationsHeader"
+                [attr.aria-label]="formatLabel(langService.words().DASHBOARD.INVITATION_ARIA, pendingInvitations.length.toString())"
+                [innerHTML]="langService.words().DASHBOARD.INVITATION_HEADER"></h2>
+            <span class="invitation-count" aria-hidden="true">{{ pendingInvitations.length | localizeNumber }}</span>
         </div>
 
         <div class="invitation-list">
             <article *ngFor="let invitation of pendingInvitations"
                      class="invitation-card">
                      
-                <div class="invitation-details">
-                    <h3>{{ invitation.project?.name || "Project invitation" }}</h3>
-                    <p>
-                        You have been invited to join this project as
-                        <strong>{{ invitation.projectRole }}</strong>
+                <div class="invitation-details" [attr.aria-label]="formatLabel(langService.words().DASHBOARD.INVITATION_DETAILS_ARIA, invitation.project?.name)">
+                    <h3 aria-hidden="true">{{ invitation.project?.name }}</h3>
+                    <p [attr.aria-label]="formatLabel(langService.words().DASHBOARD.INVITATION_DESCRIPTION_ARIA, invitation.projectRole)">
+                        <span [innerHTML]="langService.words().DASHBOARD.INVITATION_DESCRIPTION_TEXT"></span>
+                        <strong aria-hidden="true">{{ invitation.projectRole }}</strong>
                     </p>
-                    <small>
-                        Invitation expires:
-                        {{ invitation.expiresAt | date:"mediumDate" }}
-                    </small>
+                    <span [attr.aria-label]="formatLabel(langService.words().DASHBOARD.INVITATION_EXPIRY_ARIA, (invitation.expiresAt | date: langService.words().GLOBAL.DATE_FORMAT) || '')">
+                        <small aria-hidden="true" >
+                            <span [innerHTML]="langService.words().DASHBOARD.INVITATION_EXPIRY_TEXT"></span>
+                            {{ invitation.expiresAt | date: (langService.words()?.GLOBAL?.DATE_FORMAT || 'yyyy/MM/dd') | localizeNumber }}
+                        </small>
+                    </span>
                 </div>
                 <div class="invitation-actions">
                     <button type="button"
-                            class="submit-btn"
-                            (click)="acceptInvitation(invitation.id)">
-                        Accept
+                            class="action-btn decline-invite"
+                            (click)="declineInvitation(invitation.id)"
+                            [innerHTML]="langService.words().DASHBOARD.INVITATION_DECLINE_BTN">
                     </button>
 
                     <button type="button"
-                            class="cancel-btn"
-                            (click)="declineInvitation(invitation.id)">
-                        Decline
+                            class="action-btn accept-invite"
+                            (click)="acceptInvitation(invitation.id)"
+                            [innerHTML]="langService.words().DASHBOARD.INVITATION_ACCEPT_BTN">
                     </button>
                 </div>
             </article>

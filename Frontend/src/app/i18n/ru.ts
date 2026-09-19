@@ -43,6 +43,12 @@ export const RussianPack: LocalePack = {
         SUCCESS_PROFILE_REMOVED_BODY: "Ваш профиль пользователя был успешно удален.",
         SUCCESS_USER_INFO_UPDATED_TITLE: "Профиль обновлен",
         SUCCESS_USER_INFO_UPDATED_BODY: "Данные учетной записи успешно изменены.",
+        SUCCESS_INVITATION_ACCEPTED_TITLE: "Приглашение принято",
+        SUCCESS_INVITATION_ACCEPTED_BODY: "Вы успешно присоединились к проекту.",
+        SUCCESS_INVITATION_DECLINED_TITLE: "Приглашение отклонено",
+        SUCCESS_INVITATION_DECLINED_BODY: "Приглашение успешно отклонено.",
+        SUCCESS_INVITATION_SENT_TITLE: "Приглашение отправлено",
+        SUCCESS_INVITATION_SENT_BODY: "Приглашение успешно отправлено.",
 
         // Warning Actions
         WARNING_EMPTY_FIELDS_TITLE: "Пустые поля",
@@ -67,6 +73,10 @@ export const RussianPack: LocalePack = {
         WARNING_REMOVE_MEMBER_BODY_PART_2: " из рабочего пространства этого проекта?",
         WARNING_LEAVE_PROJECT_TITLE: "Выход из проекта",
         WARNING_LEAVE_PROJECT_BODY: "Вы абсолютно уверены, что хотите покинуть этот проект? Вы полностью потеряете доступ к этой доске задач!",
+        WARNING_INVITATION_DECLINE_TITLE: "Отклонить приглашение",
+        WARNING_INVITATION_DECLINE_BODY: "Вы уверены, что хотите отклонить приглашение?",
+        WARNING_INVALID_EMAIL_INPUT_TITLE: "Неверный адрес электронной почты!",
+        WARNING_INVALID_EMAIL_INPUT_BODY: "Введите корректный адрес электронной почты.",
 
         // Danger Actions
         DANGER_FINAL_WARNING_TITLE: "ПОСЛЕДНЕЕ ПРЕДУПРЕЖДЕНИЕ",
@@ -76,7 +86,11 @@ export const RussianPack: LocalePack = {
         ERROR_GENERIC_TITLE: "Произошла ошибка",
         ERROR_TASK_DELETE_BODY: "Не удалось завершить удаление задачи. Пожалуйста, попробуйте еще раз.",
         ERROR_SOLE_OWNER_BODY: "Не удалось выйти из проекта. Назначьте другого владельца перед уходом.",
-        ERROR_INVITE_FAILED_BODY: "Не удалось пригласить пользователя. Пожалуйста, проверьте корректность آدرس электронной почты.",
+        ERROR_INVITE_FAILED_BODY: "Не удалось пригласить пользователя. Пожалуйста, проверьте корректность электронной почты.",
+        ERROR_INVITATION_ACCEPT_FAILED_BODY: "Не удалось принять приглашение.",
+        ERROR_INVITATION_DECLINE_FAILED_BODY: "Не удалось отклонить приглашение.",
+        DANGER_UNAUTHORIZED_TASK_ACCESS: "У вас нет прав изменять карточку задачи, назначенную другому участнику команды!",
+        DANGER_UNAUTHORIZED_TASK_APPROVE: "Только менеджер проекта может одобрять задачи и перемещать их в колонку «Завершено»!",
 
         // Button Layouts
         BTN_PROCEED: "Продолжить",
@@ -97,7 +111,7 @@ export const RussianPack: LocalePack = {
         // =========================================================================
         CORE_ACCOUNT_ARIA: "Основные данные учетной записи",
         SECURITY_LEVEL_LABEL: "Уровень доступа:",
-        REGISTERED_EMAIL_LABEL: "Зарегистрированный Email:",
+        REGISTERED_EMAIL_LABEL: "Зарегистрированный адрес электронной почты:",
         DATABASE_RECORD_LABEL: "Идентификатор записи базы данных:",
         
         // =========================================================================
@@ -163,7 +177,7 @@ export const RussianPack: LocalePack = {
         COLORBLIND_OPTION_PRO: "Протанопия (сниженное восприятие красного)",
         COLORBLIND_OPTION_DEU: "Дейтеранопия (сниженное восприятие зеленого)",
         COLORBLIND_OPTION_TRI: "Тританопия (сниженное восприятие синего)",
-        COLORBLIND_OPTION_GRA: "Оттенки серого (Монохромный)",
+        COLORBLIND_OPTION_GRA: "Оттенки серого (монохромный режим)",
         
         // =========================================================================
         // SECTION 4: ACCOUNT MANAGEMENT FORM
@@ -225,6 +239,15 @@ export const RussianPack: LocalePack = {
         PROFILE_BTN: "Профиль пользователя",
         LOGOUT_ARIA: "Безопасный выход из текущей рабочей сессии",
         LOGOUT_BTN: "Выйти",
+        INVITATION_HEADER: "Приглашения в проекты",
+        INVITATION_ARIA: "Список приглашений в проекты; количество приглашений: {value}",
+        INVITATION_DETAILS_ARIA: "Сведения о приглашении в проект: {title}",
+        INVITATION_DESCRIPTION_TEXT: "Вас пригласили присоединиться к этому проекту в качестве ",
+        INVITATION_DESCRIPTION_ARIA: "Вас пригласили присоединиться к этому проекту в качестве: {role}",
+        INVITATION_EXPIRY_TEXT: "Срок действия приглашения истекает: ",
+        INVITATION_EXPIRY_ARIA: "Срок действия этого приглашения истекает: {value}",
+        INVITATION_ACCEPT_BTN: "Принять",
+        INVITATION_DECLINE_BTN: "Отклонить",
         CREATE_PROJECT_HEADER: "Создать новый проект",
         PROJECT_TITLE_LABEL: "Название проекта",
         PROJECT_TITLE_PLACEHOLDER: "Например, Обновление веб-сайта",
@@ -245,10 +268,10 @@ export const RussianPack: LocalePack = {
 
     TASKBOARD: {
         // Header / Navigation & Modal Buttons
-        MAIN_CANVAS_ARIA: "Доска задач проекта: {value}",
-        HEADER_TITLE: "Доска проекта ({value})",
-        HEADER_ABANDON_TEXT: "Покинуть пространство",
-        HEADER_ABANDON_ARIA: "Полностью покинуть это рабочее пространство проекта",
+        MAIN_CANVAS_ARIA: "Доска задач проекта: {title}",
+        HEADER_TITLE: "Доска проекта ({title})",
+        HEADER_ABANDON_TEXT: "Покинуть проект",
+        HEADER_ABANDON_ARIA: "Покинуть это рабочее пространство проекта",
         HEADER_CREATE_TAG_TEXT: "Создать тег пространства",
         HEADER_CREATE_TAG_ARIA: "Открыть модальное окно для создания нового тега рабочей области",
         HEADER_CREATE_TASK_TEXT: "Добавить задачу",

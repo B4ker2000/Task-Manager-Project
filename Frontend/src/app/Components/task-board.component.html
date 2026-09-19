@@ -8,32 +8,20 @@
             <span [innerHTML]="langService.words().GLOBAL.BACK_BTN_TEXT"></span>
         </button>
         <h2 id="boardTitleHeader">{{ formatLabel(langService.words().TASKBOARD.HEADER_TITLE, projectTitle) }}</h2>
-        <div class="board-header-action-triggers" role="navigation" aria-label="Project space configuration controls">
-            <button *ngIf="currentUserProjectRole === 'Member' || currentUserProjectRole === 'Viewer'" 
-                    class="action-btn resign-project-btn" 
-                    (click)="onLeaveProjectClick()" 
-                    [attr.aria-label]="langService.words().TASKBOARD.HEADER_ABANDON_ARIA" 
-                    [innerHTML]="langService.words().TASKBOARD.HEADER_ABANDON_TEXT"></button>
-
-            <!-- Clicking these two opens our form modal overlays -->
-             <button *ngIf="currentUserProjectRole === 'Owner'" 
-                     #createTagBtn
-                     class="submit-btn workspace-header-trigger" 
-                     (click)="openCategoryModal()" 
-                     [attr.aria-label]="langService.words().TASKBOARD.HEADER_CREATE_TAG_ARIA">
-
-                    <span aria-hidden="true">+</span>
-                    <span [innerHTML]="langService.words().TASKBOARD.HEADER_CREATE_TAG_TEXT"></span>
-             </button>
-             <button *ngIf="currentUserProjectRole === 'Owner'" 
-                     #createTaskBtn
-                     class="submit-btn workspace-header-trigger" 
-                     (click)="openModal()" 
-                     [attr.aria-label]="langService.words().TASKBOARD.HEADER_CREATE_TASK_ARIA">
+        <div class="board-header-action-triggers" role="navigation">
+            <button *ngIf="currentUserProjectRole === 'Owner'" 
+                    #createTaskBtn
+                    class="submit-btn workspace-header-trigger" 
+                    (click)="openModal()" 
+                    [attr.aria-label]="langService.words().TASKBOARD.HEADER_CREATE_TASK_ARIA">
              
                 <span aria-hidden="true">+</span>
                 <span [innerHTML]="langService.words().TASKBOARD.HEADER_CREATE_TASK_TEXT"></span>
-             </button>
+            </button>
+            <button class="action-btn resign-project-btn" 
+                    (click)="onLeaveProjectClick()" 
+                    [attr.aria-label]="langService.words().TASKBOARD.HEADER_ABANDON_ARIA" 
+                    [innerHTML]="langService.words().TASKBOARD.HEADER_ABANDON_TEXT"></button>
         </div>
     </header>
 
@@ -109,6 +97,15 @@
 
             <!-- DYNAMIC MASTER WORKSPACE TAGS ROSTER -->
              <div class="right-tags-column" role="region" aria-labelledby="tagsHeader">
+                <button *ngIf="currentUserProjectRole === 'Owner'" 
+                        #createTagBtn
+                        class="submit-btn workspace-header-trigger" 
+                        (click)="openCategoryModal()" 
+                        [attr.aria-label]="langService.words().TASKBOARD.HEADER_CREATE_TAG_ARIA">
+
+                    <span aria-hidden="true">+</span>
+                    <span [innerHTML]="langService.words().TASKBOARD.HEADER_CREATE_TAG_TEXT"></span>
+                </button>
                 <h5 id="tagsHeader"><span aria-hidden="true">🏷️</span> 
                     <span [innerHTML]="langService.words().TASKBOARD.TAGS_HEADER"></span>
                 </h5>
@@ -655,7 +652,7 @@
              <h3 id="createTaskModalHeader" 
                  #taskModalHeader 
                  tabindex="-1" 
-                 aria-label="langService.words().TASKBOARD.MODAL_TASK_HEADER_ARIA"
+                 [attr.aria-label]="langService.words().TASKBOARD.MODAL_TASK_HEADER_ARIA"
                  [innerHTML]="langService.words().TASKBOARD.MODAL_TASK_HEADER_TEXT"></h3>
 
             <form (ngSubmit)="onCreateTask()" #taskForm="ngForm" aria-labelledby="createTaskModalHeader">

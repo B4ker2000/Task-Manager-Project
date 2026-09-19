@@ -419,7 +419,13 @@ export class TaskBoardComponent implements OnInit {
 
     onInviteUser(): void {
         if (!this.inviteEmail.trim()) {
-            alert("Validation Alert: Please type a valid email address first!");
+            this.showPopup(
+                "warning",
+                this.langService.words().POPUP.WARNING_INVALID_EMAIL_INPUT_TITLE,
+                this.langService.words().POPUP.WARNING_INVALID_EMAIL_INPUT_BODY,
+                false,
+                "invalid-email"
+            );
             return;
         }
 
@@ -437,8 +443,8 @@ export class TaskBoardComponent implements OnInit {
 
                 this.showPopup(
                     "success",
-                    "Invitation sent",
-                    res.message,
+                    this.langService.words().POPUP.SUCCESS_INVITATION_SENT_TITLE,
+                    this.langService.words().POPUP.SUCCESS_INVITATION_SENT_BODY,
                     false,
                     "invitation-created"
                 );
@@ -661,7 +667,13 @@ export class TaskBoardComponent implements OnInit {
         if (sourceLaneId === targetLaneId && targetLaneId === "inProgressLaneList") {
             // SECURITY: Block regular users from toggling cards that are NOT assigned to them!
             if(!isOwner && !isAssignee) {
-                alert("🔒 Access Denied: You are not authorized to modify a task card assigned to another teammate!");
+                this.showPopup(
+                    "danger",
+                    this.langService.words().POPUP.DANGER_ACCESS_DENIED_TITLE,
+                    this.langService.words().POPUP.DANGER_UNAUTHORIZED_TASK_ACCESS,
+                    false,
+                    "unauthorized-access"
+                );
                 return;
             }
 
@@ -695,15 +707,27 @@ export class TaskBoardComponent implements OnInit {
         
         // RULE A: Absolute lock on the Completed Column lane! Only Project Managers can approve tasks.
         if(computedDatabaseStatusString === "Completed" && !isOwner) {
-            alert("🔒 Gatekeeper Policy: Only a Project Manager can approve tasks and move them to 'the Completed' column!");
+            this.showPopup(
+                "danger",
+                this.langService.words().POPUP.DANGER_ACCESS_DENIED_TITLE,
+                this.langService.words().POPUP.DANGER_UNAUTHORIZED_TASK_APPROVE,
+                false,
+                "unauthorized-approve"
+            );
             return;
         }
 
         // RULE B: Prevent regular members from grabbing or picking up unassigned work items entirely.
         if(!isOwner && !isAssignee) {
-            alert("🔒 Security Lock: You cannot touch or relocate workspace actions not explicitly assigned to you!");
-            return;
-        }
+                this.showPopup(
+                    "danger",
+                    this.langService.words().POPUP.DANGER_ACCESS_DENIED_TITLE,
+                    this.langService.words().POPUP.DANGER_UNAUTHORIZED_TASK_ACCESS,
+                    false,
+                    "unauthorized-access"
+                );
+                return;
+            }
 
         // RULE C: If a regular member drags their card from 'Pending' into 'In Progress', force it to 'In Progress'
         // and strip any old historical 'Review Required' flags seamlessly.
@@ -734,11 +758,6 @@ export class TaskBoardComponent implements OnInit {
 
         // Force a structural paint pass to snap the counters into perfect alignment
         this.cdr.detectChanges();
-    }
-
-    // Trigger method for when changing languages
-    onLanguageChangeEngineTrigger(newLang: string): void {
-        this.langService.setLanguage(newLang);
     }
 
     // Method to dynamically replace our dictionary tokens to include a value!

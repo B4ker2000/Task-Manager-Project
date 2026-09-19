@@ -72,11 +72,4 @@ export class LoginComponent implements OnInit {
             }
         });
     }
-
-    // Trigger method for when changing languages
-    onLanguageChangeEngineTrigger(newLang: string): void {
-        if (this.langService) {
-            this.langService.setLanguage(newLang);
-        }
-    }
 }

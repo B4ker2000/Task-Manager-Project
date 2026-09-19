@@ -153,14 +153,16 @@ input[type="date"] {
 /* --- FUNCTIONAL BUTTON CATEGORY 1: FORWARD SUBMIT ACTIONS --- */
 .submit-btn,
 .view-tasks-btn,
-.action-btn.next {
+.action-btn.next,
+.action-btn.accept-invite {
     background-color: var(--btn-submit-bg) !important;
     color: var(--btn-submit-text) !important;
     border-color: var(--btn-submit-border) !important;
 }
 .submit-btn:hover:not(:disabled),
 .view-tasks-btn:hover:not(:disabled),
-.action-btn.next:hover:not(:disabled) {
+.action-btn.next:hover:not(:disabled),
+.action-btn.accept-invite:hover:not(:disabled) {
     background-color: var(--btn-submit-hover-bg) !important;
     color: var(--btn-submit-hover-text) !important;
     border-color: var(--btn-submit-hover-border) !important;
@@ -202,6 +204,7 @@ input[type="date"] {
 .delete-proj-btn,
 .delete-card-btn,
 .action-btn.reject-review,
+.action-btn.decline-invite,
 .action-btn.resign-project-btn {
     background-color: var(--btn-delete-bg) !important;
     color: var(--btn-delete-text) !important;
@@ -210,6 +213,7 @@ input[type="date"] {
 .delete-proj-btn:hover:not(:disabled),
 .delete-card-btn:hover:not(:disabled),
 .action-btn.reject-review:hover:not(:disabled),
+.action-btn.decline-invite:hover:not(:disabled),
 .action-btn.resign-project-btn:hover:not(:disabled) {
     background-color: var(--btn-delete-hover-bg) !important;
     color: var(--btn-delete-hover-text) !important;

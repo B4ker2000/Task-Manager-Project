@@ -76,7 +76,7 @@
                 <select id="loginLangSelect"
                         name="loginLangSelect"
                         [ngModel]="langService.currentLang()"
-                        (ngModelChange)="onLanguageChangeEngineTrigger($event)"
+                        (ngModelChange)="langService.setLanguage($event)"
                         [ngModelOptions]="{standalone: true}"
                         class="login-language-switcher-selector"
                         [attr.aria-label]="langService.words().GLOBAL.LANGUAGE_SELECTION_ARIA">

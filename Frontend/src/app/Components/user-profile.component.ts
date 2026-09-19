@@ -269,11 +269,6 @@ export class UserProfileComponent implements OnInit {
             console.log(`Colorblind matrix shifted to "${this.activeColorblind || 'None'}" successfully.`);
         }
     }
-
-    // Trigger method for when changing languages
-    onLanguageChangeEngineTrigger(newLang: string): void {
-        this.langService.setLanguage(newLang);
-    }
     
     // Popup related methods
     showPopup(type: "success" | "warning" | "danger", title: string, body: string, isConfirmation: boolean, actionType: string): void {

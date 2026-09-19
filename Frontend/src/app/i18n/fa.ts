@@ -21,8 +21,8 @@ export const PersianPack: LocalePack = {
         // Eye Toggle Accessibility Script Targets
         SHOW_PASS_ARIA: "نمایش رمز عبور به صورت متن ساده",
         HIDE_PASS_ARIA: "پنهان کردن رمز عبور",
-        SHOW_CONFIRM_ARIA: "نمایش تاییدیه رمز عبور به صورت متن ساده",
-        HIDE_CONFIRM_ARIA: "پنهان کردن تاییدیه رمز عبور",
+        SHOW_CONFIRM_ARIA: "نمایش تأیید یه رمز عبور به صورت متن ساده",
+        HIDE_CONFIRM_ARIA: "پنهان کردن تأیید یه رمز عبور",
 
         // Language Selection Configuration
         LANGUAGE_SELECTION_TITLE: "زبان برنامه:",
@@ -43,6 +43,12 @@ export const PersianPack: LocalePack = {
         SUCCESS_PROFILE_REMOVED_BODY: "اطلاعات حساب کاربری شما با موفقیت حذف گردید.",
         SUCCESS_USER_INFO_UPDATED_TITLE: "بروزرسانی پروفایل",
         SUCCESS_USER_INFO_UPDATED_BODY: "اطلاعات پروفایل شما با موفقیت بروزرسانی شد.",
+        SUCCESS_INVITATION_ACCEPTED_TITLE: "دعوت قبول شد",
+        SUCCESS_INVITATION_ACCEPTED_BODY: "شما با موفقیت به پروژه پیوستید.",
+        SUCCESS_INVITATION_DECLINED_TITLE: "دعوت رد شد",
+        SUCCESS_INVITATION_DECLINED_BODY: "دعوت با موفقیت رد شد.",
+        SUCCESS_INVITATION_SENT_TITLE: "دعوت ارسال شد",
+        SUCCESS_INVITATION_SENT_BODY: "دعوت با موفقیت ارسال شد.",
 
         // Warning Actions
         WARNING_EMPTY_FIELDS_TITLE: "فیلدهای خالی",
@@ -50,11 +56,11 @@ export const PersianPack: LocalePack = {
         WARNING_IDENTICAL_USERNAME_TITLE: "نام کاربری تکراری", 
         WARNING_IDENTICAL_USERNAME_BODY: "نام کاربری جدید شما باید متفاوت از نام کاربری فعلی شما باشد!", 
         WARNING_NEW_PASSWORD_MISMATCH_TITLE: "عدم تطابق امنیتی",
-        WARNING_NEW_PASSWORD_MISMATCH_BODY: "رمز عبور جدید شما با تاییدیه آن مطابقت ندارد!", 
+        WARNING_NEW_PASSWORD_MISMATCH_BODY: "رمز عبور جدید شما با تأیید یه آن مطابقت ندارد!", 
         WARNING_DELETE_PROFILE_TITLE: "هشدار دسترسی بحرانی!",
         WARNING_DELETE_PROFILE_BODY: "آیا واقعاً می‌خواهید حساب کاربری و اطلاعات خود را برای همیشه حذف کنید؟",
-        WARNING_NEW_PASSWORD_TITLE: "تایید رمز عبور", 
-        WARNING_NEW_PASSWORD_BODY: "لطفاً رمز عبور جدید خود را تایید کنید.", 
+        WARNING_NEW_PASSWORD_TITLE: "تأیید رمز عبور", 
+        WARNING_NEW_PASSWORD_BODY: "لطفاً رمز عبور جدید خود را تأیید کنید.", 
         WARNING_DELETE_PROJECT_TITLE: "حذف پروژه",
         WARNING_DELETE_PROJECT_BODY: "آیا مطمئن هستید که می‌خواهید این پروژه و تمام وظایف مربوط به آن را حذف کنید؟",
         WARNING_DELETE_TASK_TITLE: "حذف وظیفه",
@@ -67,6 +73,10 @@ export const PersianPack: LocalePack = {
         WARNING_REMOVE_MEMBER_BODY_PART_2: " را از این پروژه حذف کنید؟",
         WARNING_LEAVE_PROJECT_TITLE: "خروج از پروژه",
         WARNING_LEAVE_PROJECT_BODY: "آیا واقعاً مطمئن هستید که می‌خواهید از این پروژه خارج شوید؟ دسترسی شما به این بورد کاملاً قطع خواهد شد!",
+        WARNING_INVITATION_DECLINE_TITLE: "رد دعوت",
+        WARNING_INVITATION_DECLINE_BODY: "آیا مطمئن هستید که می‌خواهید دعوت را رد کنید؟",
+        WARNING_INVALID_EMAIL_INPUT_TITLE: "ایمیل نامعتبر!",
+        WARNING_INVALID_EMAIL_INPUT_BODY: "لطفاً ابتدا یک ایمیل معتبر وارد کنید!",
 
         // Danger Actions
         DANGER_FINAL_WARNING_TITLE: "اخطار نهایی",
@@ -77,6 +87,10 @@ export const PersianPack: LocalePack = {
         ERROR_TASK_DELETE_BODY: "حذف وظیفه با خطا مواجه شد. لطفاً دوباره امتحان کنید.",
         ERROR_SOLE_OWNER_BODY: "خطایی در هنگام خروج از پروژه رخ داد! شما تنها مالک این پروژه هستید.",
         ERROR_INVITE_FAILED_BODY: "خطایی در دعوت عضو جدید رخ داد. لطفاً ایمیل را بررسی کنید.",
+        ERROR_INVITATION_ACCEPT_FAILED_BODY: "پذیرش دعوت با خطا مواجه شد.",
+        ERROR_INVITATION_DECLINE_FAILED_BODY: "رد دعوت با خطا مواجه شد.",
+        DANGER_UNAUTHORIZED_TASK_ACCESS: "شما نمی‌توانید وظیفه دیگران را جابه‌جا کنید!",
+        DANGER_UNAUTHORIZED_TASK_APPROVE: "فقط مدیر پروژه می‌تواند وظایف را تأیید کرده و به ستون «تکمیل‌شده» منتقل کند.",
 
         // Button Layouts
         BTN_PROCEED: "ادامه",
@@ -173,7 +187,7 @@ export const PersianPack: LocalePack = {
         UPDATE_USER_PLACEHOLDER: "نام کاربری جدید را وارد کنید...",
         CHANGE_PASS_LABEL: "تغییر رمز عبور امنیتی",
         CHANGE_PASS_PLACEHOLDER: "رمز عبور جدید را وارد کنید...",
-        CONFIRM_PASS_LABEL: "تایید رمز عبور جدید",
+        CONFIRM_PASS_LABEL: "تأیید رمز عبور جدید",
         CONFIRM_PASS_PLACEHOLDER: "رمز عبور جدید را دوباره تایپ کنید...",
         PASS_REQUIREMENTS_ARIA: "رمزهای عبور باید قبل از اعمال تغییرات کاملاً با یکدیگر مطابقت داشته باشند.",
         SAVE_CHANGES_BTN_TEXT: "ذخیره تغییرات پروفایل",
@@ -208,7 +222,7 @@ export const PersianPack: LocalePack = {
         LABEL_USERNAME: "نام کاربری",
         PLACEHOLDER_USERNAME: "یک نام کاربری یکتا انتخاب کنید...",
         PLACEHOLDER_PASSWORD: "یک رمز عبور امن بسازید...",
-        LABEL_CONFIRM_PASSWORD: "تایید رمز عبور",
+        LABEL_CONFIRM_PASSWORD: "تأیید رمز عبور",
         PLACEHOLDER_CONFIRM_PASSWORD: "رمز عبور خود را دوباره وارد کنید...",
         REQUIREMENTS_ARIA: "هر دو فیلد رمز عبور باید قبل از ارسال درخواست ثبت‌نام کاملاً یکسان باشند.",
         BTN_SUBMIT_TEXT: "ثبت نام",
@@ -225,6 +239,15 @@ export const PersianPack: LocalePack = {
         PROFILE_BTN: "پروفایل کاربر",
         LOGOUT_ARIA: "خروج امن از نشست فعال حساب کاربری",
         LOGOUT_BTN: "خروج از حساب",
+        INVITATION_HEADER: "دعوت‌های پروژه",
+        INVITATION_ARIA: "فهرست دعوت‌های پروژه؛ شامل {value} دعوت",
+        INVITATION_DETAILS_ARIA: "جزئیات دعوت به پروژه برای {title}",
+        INVITATION_DESCRIPTION_TEXT: "شما برای پیوستن به این پروژه، به‌عنوان ",
+        INVITATION_DESCRIPTION_ARIA: "شما برای پیوستن به این پروژه، به‌عنوان {role} دعوت شده‌اید",
+        INVITATION_EXPIRY_TEXT: "انقضای دعوت: ",
+        INVITATION_EXPIRY_ARIA: "این دعوت در تاریخ {value} منقضی خواهد شد",
+        INVITATION_ACCEPT_BTN: "پذیرش",
+        INVITATION_DECLINE_BTN: "رد",
         CREATE_PROJECT_HEADER: "ایجاد پروژه جدید",
         PROJECT_TITLE_LABEL: "عنوان پروژه",
         PROJECT_TITLE_PLACEHOLDER: "مانند: بازسازی کامل وب‌سایت",
@@ -279,7 +302,7 @@ export const PersianPack: LocalePack = {
         SEARCH_FILTER_HUB_ARIA: "بخش ابزارهای فیلترینگ و جستجوی بورد وظایف",
         SEARCH_PLACEHOLDER: "جستجوی وظایف...",
         SEARCH_ARIA: "فیلتر کردن وظایف بر اساس کلمه کلیدی عنوان",
-        PRIORITY_ARIA: "فیلتر کردن وظایف بر اساس سطح اولویت بندی شده",
+        PRIORITY_ARIA: "فیلتر کردن وظایف بر اساس سطح اولویت",
         PRIORITY_ALL: "همه اولویت‌ها",
         PRIORITY_HIGH: "اولویت بالا",
         PRIORITY_MEDIUM: "اولویت متوسط",
@@ -288,8 +311,8 @@ export const PersianPack: LocalePack = {
         CATEGORY_ALL: "همه برچسب‌ها",
         CATEGORY_UNASSIGNED: "وظایف بدون برچسب",
         USER_ARIA: "فیلتر کردن وظایف بر اساس نام مسئول وظیفه",
-        USER_ALL: "همه وظیفه ها",
-        USER_UNASSIGNED: "وظیفه های بدونه مسئول",
+        USER_ALL: "همه وظیفه‌ها",
+        USER_UNASSIGNED: "وظیفه‌های بدونه مسئول",
         PROGRESS_LABEL: "میزان پیشرفت پروژه:",
         PROGRESS_ARIA: "شاخص کل پیشرفت پروژه. در حال حاضر {value} درصد.",
 
@@ -337,22 +360,22 @@ export const PersianPack: LocalePack = {
         // In-Progress & Review Column
         // =========================================================================
         COLUMN_INPROGRESS_TITLE: "در حال اجرا و بررسی ({value})",
-        LANE_INPROGRESS_ARIA: "ستون ردیابی وظایف در حال اجرا و تایید. شامل {value} آیتم.",
+        LANE_INPROGRESS_ARIA: "ستون ردیابی وظایف در حال اجرا و تأیید. شامل {value} آیتم.",
         TASK_CARD_STATUS_ARIA: "کارت وظیفه: {value1}. وضعیت فعلی: {value2}",
         REVIEW_BANNER_TEXT: "در انتظار بررسی مدیر پروژه",
-        REVIEW_BANNER_ARIA: "هشدار: وظیفه {value} در انتظار تایید نهایی مدیر پروژه است.",
+        REVIEW_BANNER_ARIA: "هشدار: وظیفه {value} در انتظار تأیید نهایی مدیر پروژه است.",
 
         // Related Buttons
         BTN_BACK_TEXT: "بازگشت",
         BTN_BACK_ARIA: "انتقال معکوس وظیفه {value} به ستون در انتظار",
         BTN_SUBMIT_REVIEW_TEXT: "ارسال برای بررسی",
-        BTN_SUBMIT_REVIEW_ARIA: "ارسال وظیفه {value} جهت بررسی و تایید مدیر پروژه",
+        BTN_SUBMIT_REVIEW_ARIA: "ارسال وظیفه {value} جهت بررسی و تأیید مدیر پروژه",
         BTN_CANCEL_REVIEW_TEXT: "لغو درخواست بررسی",
         BTN_CANCEL_REVIEW_ARIA: "لغو درخواست بررسی و بازگرداندن وظیفه {value} به وضعیت در حال اجرا",
-        BTN_REJECT_TEXT: "رد تایید",
-        BTN_REJECT_ARIA: "رد درخواست تایید و بازگرداندن وظیفه {value} به جریان کار",
-        BTN_APPROVE_TEXT: "تایید نهایی وظیفه",
-        BTN_APPROVE_ARIA: "تایید نهایی بررسی و انتقال وظیفه {value} به ستون تکمیل شده",
+        BTN_REJECT_TEXT: "رد تأیید",
+        BTN_REJECT_ARIA: "رد درخواست تأیید و بازگرداندن وظیفه {value} به جریان کار",
+        BTN_APPROVE_TEXT: "تأیید نهایی وظیفه",
+        BTN_APPROVE_ARIA: "تأیید نهایی بررسی و انتقال وظیفه {value} به ستون تکمیل شده",
 
         // =========================================================================
         // Completed Column
@@ -384,7 +407,7 @@ export const PersianPack: LocalePack = {
         MODAL_TASK_CANCEL_BTN: "انصراف",
         MODAL_TASK_CANCEL_ARIA: "بستن پنجره فرم مشخصات وظیفه جدید",
         MODAL_TASK_SUBMIT_BTN: "ایجاد وظیفه",
-        MODAL_TASK_SUBMIT_ARIA: "تایید داده‌ها جهت ایجاد کارت وظیفه جدید در پروژه",
+        MODAL_TASK_SUBMIT_ARIA: "تأیید داده‌ها جهت ایجاد کارت وظیفه جدید در پروژه",
     
         // Create a new Tag/Category Modal
         MODAL_TAG_HEADER: "ایجاد برچسب فضای کاری جدید",
@@ -403,6 +426,6 @@ export const PersianPack: LocalePack = {
         MODAL_TAG_CANCEL_BTN: "انصراف",
         MODAL_TAG_CANCEL_ARIA: "بستن فرم ایجاد برچسب جدید پروژه",
         MODAL_TAG_SUBMIT_BTN: "ایجاد برچسب",
-        MODAL_TAG_SUBMIT_ARIA: "تایید مشخصات جهت ایجاد برچسب دسته‌بندی جدید"
+        MODAL_TAG_SUBMIT_ARIA: "تأیید مشخصات جهت ایجاد برچسب دسته‌بندی جدید"
     }
 };

@@ -75,7 +75,7 @@
                         </label>
                         <select id="languageSelect"
                                 [ngModel]="langService.currentLang()"
-                                (ngModelChange)="onLanguageChangeEngineTrigger($event)"
+                                (ngModelChange)="langService.setLanguage($event)"
                                 class="board-interactive-field select-config"
                                 [attr.aria-label]="langService.words().GLOBAL.LANGUAGE_SELECTION_ARIA">
 

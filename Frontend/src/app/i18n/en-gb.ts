@@ -43,6 +43,12 @@ export const EnglishUKPack: LocalePack = {
         SUCCESS_PROFILE_REMOVED_BODY: "Your identity profile was successfully removed.",
         SUCCESS_USER_INFO_UPDATED_TITLE: "Profile Updated",
         SUCCESS_USER_INFO_UPDATED_BODY: "Account information updated.",
+        SUCCESS_INVITATION_ACCEPTED_TITLE: "Invitation accepted",
+        SUCCESS_INVITATION_ACCEPTED_BODY: "You have joined the project successfully.",
+        SUCCESS_INVITATION_DECLINED_TITLE: "Invitation declined",
+        SUCCESS_INVITATION_DECLINED_BODY: "The project invitation was declined successfully.",
+        SUCCESS_INVITATION_SENT_TITLE: "Invitation sent",
+        SUCCESS_INVITATION_SENT_BODY: "Invitation sent successfully.",
 
         // Warning Actions
         WARNING_EMPTY_FIELDS_TITLE: "Empty Fields",
@@ -67,6 +73,10 @@ export const EnglishUKPack: LocalePack = {
         WARNING_REMOVE_MEMBER_BODY_PART_2: " from this project workspace room?",
         WARNING_LEAVE_PROJECT_TITLE: "Leave Project Workspace",
         WARNING_LEAVE_PROJECT_BODY: "Are you absolutely sure you want to resign and leave this project workspace? You will lose all access to this board layout!",
+        WARNING_INVITATION_DECLINE_TITLE: "Decline invitation",
+        WARNING_INVITATION_DECLINE_BODY: "Are you sure you want to decline the invitation?",
+        WARNING_INVALID_EMAIL_INPUT_TITLE: "Invalid email address.",
+        WARNING_INVALID_EMAIL_INPUT_BODY: "Please enter a valid email address first.",
 
         // Danger Actions
         DANGER_FINAL_WARNING_TITLE: "FINAL WARNING",
@@ -76,7 +86,11 @@ export const EnglishUKPack: LocalePack = {
         ERROR_GENERIC_TITLE: "Error Encountered",
         ERROR_TASK_DELETE_BODY: "Failed to complete task deletion. Please try again.",
         ERROR_SOLE_OWNER_BODY: "Failed to process project resignation request.",
-        ERROR_INVITE_FAILED_BODY: "Failed to complete member assignment email input.",
+        ERROR_INVITE_FAILED_BODY: "The invitation could not be sent. Please check the email address and try again.",
+        ERROR_INVITATION_ACCEPT_FAILED_BODY: "The invitation could not be accepted.",
+        ERROR_INVITATION_DECLINE_FAILED_BODY: "The invitation could not be declined.",
+        DANGER_UNAUTHORIZED_TASK_ACCESS: "You are not authorized to modify a task card assigned to another teammate!",
+        DANGER_UNAUTHORIZED_TASK_APPROVE: "Only a Project Manager can approve tasks and move them to the 'Completed' column!",
 
         // Button Layouts
         BTN_PROCEED: "Proceed",
@@ -163,7 +177,7 @@ export const EnglishUKPack: LocalePack = {
         COLORBLIND_OPTION_PRO: "Protanopia (Red Weakness)",
         COLORBLIND_OPTION_DEU: "Deuteranopia (Green Weakness)",
         COLORBLIND_OPTION_TRI: "Tritanopia (Blue Weakness)",
-        COLORBLIND_OPTION_GRA: "Grayscale (Monochrome)",
+        COLORBLIND_OPTION_GRA: "Greyscale (Monochrome)",
         
         // =========================================================================
         // SECTION 4: ACCOUNT MANAGEMENT FORM
@@ -225,6 +239,15 @@ export const EnglishUKPack: LocalePack = {
         PROFILE_BTN: "User Profile",
         LOGOUT_ARIA: "Sign out of your session securely",
         LOGOUT_BTN: "Sign Out",
+        INVITATION_HEADER: "Project Invitations",
+        INVITATION_ARIA: "Project invitation list, containing {value} pending invitation(s)",
+        INVITATION_DETAILS_ARIA: "Project invitation details for {title}",
+        INVITATION_DESCRIPTION_TEXT: "You have been invited to join this project as ",
+        INVITATION_DESCRIPTION_ARIA: "You have been invited to join this project under the role {role}",
+        INVITATION_EXPIRY_TEXT: "Invitation expires on: ",
+        INVITATION_EXPIRY_ARIA: "This invitation will expire at {value}",
+        INVITATION_ACCEPT_BTN: "Accept",
+        INVITATION_DECLINE_BTN: "Decline",
         CREATE_PROJECT_HEADER: "Create New Project",
         PROJECT_TITLE_LABEL: "Project Title",
         PROJECT_TITLE_PLACEHOLDER: "e.g. Website Redesign",
@@ -247,8 +270,8 @@ export const EnglishUKPack: LocalePack = {
         // Header / Navigation & Modal Buttons
         MAIN_CANVAS_ARIA: "Project task board overview for: {title}",
         HEADER_TITLE: "Project Board ({title})",
-        HEADER_ABANDON_TEXT: "Abandon Space",
-        HEADER_ABANDON_ARIA: "Abandon this project workspace completely",
+        HEADER_ABANDON_TEXT: "Leave Project",
+        HEADER_ABANDON_ARIA: "Leave this project workspace completely",
         HEADER_CREATE_TAG_TEXT: "Create Workspace Tag",
         HEADER_CREATE_TAG_ARIA: "Create a new workspace category tag",
         HEADER_CREATE_TASK_TEXT: "Add New Task",

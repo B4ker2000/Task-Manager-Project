@@ -5,12 +5,13 @@ import { ProjectService } from "../services/project.service";
 import { Router, RouterLink } from "@angular/router";
 import { AuthService } from "../services/auth.service";
 import { LanguageService } from "../i18n/language.service";
+import { LocalizeNumberPipe } from "../i18n/localize-number.pipe";
 import { PopupComponent } from "./popup.component";
 
 @Component({
     selector: 'app-dashboard',
     standalone: true,
-    imports: [FormsModule, NgFor, NgIf, DatePipe, RouterLink, PopupComponent],
+    imports: [FormsModule, NgFor, NgIf, DatePipe, RouterLink, LocalizeNumberPipe, PopupComponent],
     templateUrl: "./dashboard.component.html",
     styleUrl: "./dashboard.component.css"
 })
@@ -26,6 +27,7 @@ export class DashboardComponent implements OnInit {
     pendingInvitations: any[] = [];
 
     private pendingDeleteProjectId: number | null = null;
+    private pendingDeclineInvitationId: number | null = null;
 
     //////////////////////////////////////
     // Popup component state controller //
@@ -98,8 +100,8 @@ export class DashboardComponent implements OnInit {
                 
                 this.showPopup(
                     "success",
-                    "Invitation accepted",
-                    "You have joined the project successfully.",
+                    this.langService.words().POPUP.SUCCESS_INVITATION_ACCEPTED_TITLE,
+                    this.langService.words().POPUP.SUCCESS_INVITATION_ACCEPTED_BODY,
                     false,
                     "invitation-accepted"
                 );
@@ -109,8 +111,8 @@ export class DashboardComponent implements OnInit {
 
                 this.showPopup(
                     "danger",
-                    "Invitation failed",
-                    err.error?.message || "The invitation could not be accepted.",
+                    this.langService.words().POPUP.ERROR_GENERIC_TITLE,
+                    err.error?.message || this.langService.words().POPUP.ERROR_INVITATION_ACCEPT_FAILED_BODY,
                     false,
                     "error-dismiss"
                 );
@@ -119,32 +121,15 @@ export class DashboardComponent implements OnInit {
     }
 
     declineInvitation(invitationId: number): void {
-        this.projectService.declineInvitation(invitationId).subscribe({
-            next: () => {
-                this.pendingInvitations = this.pendingInvitations.filter(
-                    invitation => invitation.id != invitationId
-                );
-                
-                this.showPopup(
-                    "success",
-                    "Invitation declined",
-                    "The project invitation was declined.",
-                    false,
-                    "invitation-declined"
-                );
-            },
-            error: (err) => {
-                console.error("Could not decline invitation", err);
-
-                this.showPopup(
-                    "danger",
-                    "Invitation failed",
-                    err.error?.message || "The invitation could not be declined.",
-                    false,
-                    "error-dismiss"
-                );
-            }
-        });
+        this.pendingDeclineInvitationId = invitationId;
+                 
+        this.showPopup(
+            "warning",
+            this.langService.words().POPUP.WARNING_INVITATION_DECLINE_TITLE,
+            this.langService.words().POPUP.WARNING_INVITATION_DECLINE_BODY,
+            true,
+            "invitation-declined"
+        );
     }
 
     onCreateProject(): void {
@@ -193,6 +178,38 @@ export class DashboardComponent implements OnInit {
                     console.error("Failed to delete project:", err);
                 }
             });
+        } else if (currentAction === "invitation-declined" && this.pendingDeclineInvitationId !== null) {    
+            this.projectService.declineInvitation(this.pendingDeclineInvitationId).subscribe({
+                next: () => {
+                    this.pendingInvitations = this.pendingInvitations.filter(
+                        invitation => invitation.id !== this.pendingDeclineInvitationId
+                    );
+
+                    this.pendingDeclineInvitationId = null;
+                    
+                    this.loadProjects();
+                    
+                    this.showPopup(
+                        "success",
+                        this.langService.words().POPUP.SUCCESS_INVITATION_DECLINED_TITLE,
+                        this.langService.words().POPUP.SUCCESS_INVITATION_DECLINED_BODY,
+                        false,
+                        "invitation-declined"
+                    );
+                }, 
+                error: (err) => {
+                    console.error("Could not decline invitation", err);
+                    this.pendingDeclineInvitationId = null;
+
+                    this.showPopup(
+                        "danger",
+                        this.langService.words().POPUP.ERROR_GENERIC_TITLE,
+                        err.error?.message || this.langService.words().POPUP.ERROR_INVITATION_DECLINE_FAILED_BODY,
+                        false,
+                        "error-dismiss"
+                    );
+                }
+            });
         }
     }
 
@@ -206,15 +223,8 @@ export class DashboardComponent implements OnInit {
         this.cdr.detectChanges();
     }
 
-    // Trigger method for when changing languages
-    onLanguageChangeEngineTrigger(newLang: string): void {
-        if (this.langService) {
-            this.langService.setLanguage(newLang);
-        }
-    }
-
     // Method to dynamically replace our dictionary tokens to include a value!
     formatLabel(template: string, value: string): string {
-        return template.replace('{title}', value);
+        return template.replace(/\{[a-zA-Z0-9_]+\}/, value);
     }
 }

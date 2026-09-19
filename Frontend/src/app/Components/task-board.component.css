@@ -145,29 +145,27 @@
 /* =========================================================================
    ACCESSIBILITY PRIORITY BADGES (MINIMAL STRUCTURAL FOOTPRINT)
    ========================================================================= */
-.priority-badge {
+.priority-badge,
+.deadline-badge {
     display: inline-flex;
     align-items: center;
     font-size: calc(11px * var(--font-scale));
     font-weight: 700;
     padding: 3px 10px;
     border-radius: 12px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+.priority-badge {
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
     margin: 0 5px 5px 0;
 }
 
 .deadline-badge { 
-    display: inline-flex;
-    align-items: center;
-    font-size: calc(11px * var(--font-scale));
     background-color: var(--container-bg, #f1f5f9); 
     color: var(--text-muted); 
     border: 2px solid var(--border-color, #cbd5e1);
-    font-weight: 700; 
-    padding: 3px 10px; 
-    border-radius: 12px; 
 }
 
 .deadline-badge.jp {

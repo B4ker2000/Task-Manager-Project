@@ -43,6 +43,12 @@ export const JapanesePack: LocalePack = {
         SUCCESS_PROFILE_REMOVED_BODY: "プロフィール<ruby>情報<rt aria-hidden=\"true\">じょうほう</rt></ruby>が<ruby>正常<rt aria-hidden=\"true\">せいじょう</rt></ruby>に<ruby>削除<rt aria-hidden=\"true\">さくじょ</rt></ruby>されました。",
         SUCCESS_USER_INFO_UPDATED_TITLE: "プロフィール<ruby>更新<rt aria-hidden=\"true\">こうしん</rt></ruby>",
         SUCCESS_USER_INFO_UPDATED_BODY: "アカウント<ruby>情報<rt aria-hidden=\"true\">じょうほう</rt></ruby>が<ruby>正常<rt aria-hidden=\"true\">せいじょう</rt></ruby>に<ruby>更新<rt aria-hidden=\"true\">こうしん</rt></ruby>されました。",
+        SUCCESS_INVITATION_ACCEPTED_TITLE: "<ruby>招待<rt aria-hidden=\"true\">しょうたい</rt></ruby>を<ruby>承認<rt aria-hidden=\"true\">しょうにん</rt></ruby>しました",
+        SUCCESS_INVITATION_ACCEPTED_BODY: "プロジェクトに<ruby>正常<rt aria-hidden=\"true\">せいじょう</rt></ruby>に<ruby>参加<rt aria-hidden=\"true\">さんか</rt></ruby>しました。",
+        SUCCESS_INVITATION_DECLINED_TITLE: "<ruby>招待<rt aria-hidden=\"true\">しょうたい</rt></ruby>を<ruby>辞退<rt aria-hidden=\"true\">じたい</rt></ruby>しました",
+        SUCCESS_INVITATION_DECLINED_BODY: "<ruby>招待<rt aria-hidden=\"true\">しょうたい</rt></ruby>を<ruby>正常<rt aria-hidden=\"true\">せいじょう</rt></ruby>に<ruby>辞退<rt aria-hidden=\"true\">じたい</rt></ruby>しました。",
+        SUCCESS_INVITATION_SENT_TITLE: "<ruby>招待<rt aria-hidden=\"true\">しょうたい</rt></ruby>を<ruby>送信<rt aria-hidden=\"true\">そうしん</rt></ruby>しました",
+        SUCCESS_INVITATION_SENT_BODY: "<ruby>招待<rt aria-hidden=\"true\">しょうたい</rt></ruby>を<ruby>正常<rt aria-hidden=\"true\">せいじょう</rt></ruby>に<ruby>送信<rt aria-hidden=\"true\">そうしん</rt></ruby>しました。",
 
         // Warning Actions
         WARNING_EMPTY_FIELDS_TITLE: "<ruby>未入力<rt aria-hidden=\"true\">みにゅうりょく</rt></ruby>の<ruby>項目<rt aria-hidden=\"true\">こおうもく</rt></ruby>",
@@ -67,6 +73,10 @@ export const JapanesePack: LocalePack = {
         WARNING_REMOVE_MEMBER_BODY_PART_2: " をこのプロジェクトのワークスペースから<ruby>除外<rt aria-hidden=\"true\">じょがい</rt></ruby>してもよろしいですか？",
         WARNING_LEAVE_PROJECT_TITLE: "プロジェクトからの<ruby>脱退<rt aria-hidden=\"true\">だったい</rt></ruby>",
         WARNING_LEAVE_PROJECT_BODY: "<ruby>本当<rt aria-hidden=\"true\">ほんとう</rt></ruby>にこのプロジェクトスペースから<ruby>脱退<rt aria-hidden=\"true\">だったい</rt></ruby>してもよろしいですか？このボードに<ruby>対<rt aria-hidden=\"true\">たい</rt></ruby>するすべてのアクセス<ruby>権<rt aria-hidden=\"true\">けん</rt></ruby>が<ruby>失<rt aria-hidden=\"true\">うしな</rt></ruby>われます！",
+        WARNING_INVITATION_DECLINE_TITLE: "<ruby>招待<rt aria-hidden=\"true\">しょうたい</rt></ruby>を<ruby>辞退<rt aria-hidden=\"true\">じたい</rt></ruby>する",
+        WARNING_INVITATION_DECLINE_BODY: "この<ruby>招待<rt aria-hidden=\"true\">しょうたい</rt></ruby>を<ruby>辞退<rt aria-hidden=\"true\">じたい</rt></ruby>してもよろしいですか？",
+        WARNING_INVALID_EMAIL_INPUT_TITLE: "メールアドレスが<ruby>無効<rt aria-hidden=\"true\">むこう</rt></ruby>です",
+        WARNING_INVALID_EMAIL_INPUT_BODY: "<ruby>有効<rt aria-hidden=\"true\">ゆうこう</rt></ruby>なメールアドレスを<ruby>入力<rt aria-hidden=\"true\">にゅうりょく</rt></ruby>してください。",
 
         // Danger Actions
         DANGER_FINAL_WARNING_TITLE: "<ruby>最終確認<rt aria-hidden=\"true\">さいしゅうかくにん</rt></ruby>",
@@ -77,6 +87,10 @@ export const JapanesePack: LocalePack = {
         ERROR_TASK_DELETE_BODY: "タスクの<ruby>削除処理<rt aria-hidden=\"true\">さくじょしょり</rt></ruby>に<ruby>失敗<rt aria-hidden=\"true\">しっぱい</rt></ruby>しました。もう一<ruby>度<rt aria-hidden=\"true\">ど</rt></ruby>お<ruby>試<rt aria-hidden=\"true\">ため</rt></ruby>しください。",
         ERROR_SOLE_OWNER_BODY: "プロジェクトから<ruby>脱退<rt aria-hidden=\"true\">だったい</rt></ruby>できませんでした。<ruby>脱退<rt aria-hidden=\"true\">だったい</rt></ruby>する<ruby>前<rt aria-hidden=\"true\">まえ</rt></ruby>に<ruby>別<rt aria-hidden=\"true\">べつ</rt></ruby>の<ruby>共同<rt aria-hidden=\"true\">きょうどう</rt></ruby>オーナーを<ruby>指定<rt aria-hidden=\"true\">してい</rt></ruby>するか、ダッシュボードからプロジェクト<ruby>自体<rt aria-hidden=\"true\">じたい</rt></ruby>を<ruby>削除<rt aria-hidden=\"true\">さくじょ</rt></ruby>してください。",
         ERROR_INVITE_FAILED_BODY: "メンバーの<ruby>招待処理<rt aria-hidden=\"true\">しょうたいしょり</rt></ruby>に<ruby>失敗<rt aria-hidden=\"true\">しっぱい</rt></ruby>しました。<ruby>未入力<rt aria-hidden=\"true\">にゅうりょく</rt></ruby>されたメールアドレスが<ruby>正<rt aria-hidden=\"true\">ただ</rt></ruby>しいかご<ruby>確認<rt aria-hidden=\"true\">かくにん</rt></ruby>ください。",
+        ERROR_INVITATION_ACCEPT_FAILED_BODY: "<ruby>招待<rt aria-hidden=\"true\">しょうたい</rt></ruby>を<ruby>承認<rt aria-hidden=\"true\">しょうにん</rt></ruby>できませんでした。",
+        ERROR_INVITATION_DECLINE_FAILED_BODY: "<ruby>招待<rt aria-hidden=\"true\">しょうたい</rt></ruby>を<ruby>辞退<rt aria-hidden=\"true\">じたい</rt></ruby>できませんでした。",
+        DANGER_UNAUTHORIZED_TASK_ACCESS: "<ruby>他<rt aria-hidden=\"true\">ほか</rt></ruby>のチームメンバーに<ruby>割<rt aria-hidden=\"true\">わ</rt></ruby>り<ruby>当<rt aria-hidden=\"true\">あ</rt></ruby>てられたタスクカードを<ruby>変更<rt aria-hidden=\"true\">へんこう</rt></ruby>する<ruby>権限<rt aria-hidden=\"true\">けんげん</rt></ruby>がありません。",
+        DANGER_UNAUTHORIZED_TASK_APPROVE: "プロジェクトマネージャーのみがタスクを<ruby>承認<rt aria-hidden=\"true\">しょうにん</rt></ruby>し、「<ruby>完了<rt aria-hidden=\"true\">かんりょう</rt></ruby>」<ruby>列<rt aria-hidden=\"true\">れつ</rt></ruby>に<ruby>移動<rt aria-hidden=\"true\">いどう</rt></ruby>できます。",
         
         // Button Layouts
         BTN_PROCEED: "<ruby>続行<rt aria-hidden=\"true\">ぞっこう</rt></ruby>する",
@@ -225,6 +239,15 @@ export const JapanesePack: LocalePack = {
         PROFILE_BTN: "ユーザープロフィール",
         LOGOUT_BTN: "サインアウト",
         LOGOUT_ARIA: "現在のセッションから安全にサインアウトします",
+        INVITATION_HEADER: "<ruby>招待<rt aria-hidden=\"true\">しょうたい</rt></ruby>されたプロジェクト",
+        INVITATION_ARIA: "プロジェクトへの招待リスト。招待の件数: {value}",
+        INVITATION_DETAILS_ARIA: "プロジェクトへの招待の詳細: {title}",
+        INVITATION_DESCRIPTION_TEXT: "このプロジェクトに<ruby>次<rt aria-hidden=\"true\">つぎ</rt></ruby>の<ruby>役割<rt aria-hidden=\"true\">やくわり</rt></ruby>で<ruby>招待<rt aria-hidden=\"true\">しょうたい</rt></ruby>されています: ",
+        INVITATION_DESCRIPTION_ARIA: "このプロジェクトに、次の役割で招待されています: {role}",
+        INVITATION_EXPIRY_TEXT: "<ruby>招待<rt aria-hidden=\"true\">しょうたい</rt></ruby>の<ruby>有効期限<rt aria-hidden=\"true\">ゆうこうきげん</rt></ruby>: ",
+        INVITATION_EXPIRY_ARIA: "この招待の有効期限: {value}",
+        INVITATION_ACCEPT_BTN: "<ruby>承認<rt aria-hidden=\"true\">しょうにん</rt></ruby>",
+        INVITATION_DECLINE_BTN: "<ruby>辞退<rt aria-hidden=\"true\">じたい</rt></ruby>",
         CREATE_PROJECT_HEADER: "<ruby>新規<rt aria-hidden=\"true\">しんき</rt></ruby>プロジェクトの<ruby>作成<rt aria-hidden=\"true\">さくせい</rt></ruby>",
         PROJECT_TITLE_LABEL: "プロジェクト<ruby>名<rt aria-hidden=\"true\">めい</rt></ruby>",
         PROJECT_TITLE_PLACEHOLDER: "例：ウェブサイトの刷新",
