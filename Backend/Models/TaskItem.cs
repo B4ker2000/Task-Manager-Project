@@ -9,6 +9,7 @@ namespace Backend.Models
         public string Status { get; set; } = "Pending"; // Pending, In Progress
         public DateTime? Deadline { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public int SortOrder { get; set; }
 
         // Foreign Key link to the Project it belongs to
         public int ProjectId { get; set; }

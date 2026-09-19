@@ -33,6 +33,11 @@ export const JapanesePack: LocalePack = {
         LANGUAGE_OPTION_RU: "Русский (ロシア語)",
         LANGUAGE_OPTION_FA: "فارسی (ペルシャ語)",
 
+        // User Roles
+        ROLE_OWNER: "オーナー",
+        ROLE_MEMBER: "メンバー",
+        ROLE_VIEWER: "ゲスト",
+
         // Language direction format
         DIRECTION: "ltr"
     },
@@ -281,9 +286,9 @@ export const JapanesePack: LocalePack = {
         INVITE_PLACEHOLDER: "メンバーの登録メールアドレスを入力...",
         INVITE_INPUT_ARIA: "招待メンバーのメールアドレス入力フィールド",
         INVITE_ROLE_ARIA: "割り当てる権限レベルの選択ドロップダウン",
+        INVITE_OPTION_OWNER: "共同所有者 / 管理者",
         INVITE_OPTION_MEMBER: "一般メンバー",
         INVITE_OPTION_VIEWER: "閲覧専用ユーザー",
-        INVITE_OPTION_OWNER: "共同所有者 / 管理者",
         INVITE_SUBMIT_ARIA: "招待リクエストを送信してメンバーを追加するボタン",
         INVITE_SUBMIT_BTN: "メンバーを追加",
         ROSTER_HEADER: "<ruby>現在<rt aria-hidden=\"true\">げんざい</rt></ruby>のプロジェクトメンバー",

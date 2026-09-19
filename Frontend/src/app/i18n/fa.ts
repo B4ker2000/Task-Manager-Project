@@ -33,6 +33,11 @@ export const PersianPack: LocalePack = {
         LANGUAGE_OPTION_RU: "Русский (روسی)",
         LANGUAGE_OPTION_FA: "فارسی",
 
+        // User Roles
+        ROLE_OWNER: "مالک پروژه",
+        ROLE_MEMBER: "عضو",
+        ROLE_VIEWER: "مهمان",
+
         // Language direction format
         DIRECTION: "rtl"
     },
@@ -283,9 +288,9 @@ export const PersianPack: LocalePack = {
         INVITE_PLACEHOLDER: "آدرس ایمیل هم‌تیمی خود را وارد کنید...",
         INVITE_INPUT_ARIA: "فیلد ورود ایمیل هم‌تیمی",
         INVITE_ROLE_ARIA: "انتخاب سطح دسترسی امنیتی عضو در پروژه",
+        INVITE_OPTION_OWNER: "مالک مشترک / مدیر سیستم",
         INVITE_OPTION_MEMBER: "عضو عادی",
         INVITE_OPTION_VIEWER: "مهمان",
-        INVITE_OPTION_OWNER: "مالک مشترک / مدیر سیستم",
         INVITE_SUBMIT_ARIA: "ارسال درخواست دعوت به پروژه",
         INVITE_SUBMIT_BTN: "افزودن عضو",
         ROSTER_HEADER: "اعضای فعلی تیم پروژه",

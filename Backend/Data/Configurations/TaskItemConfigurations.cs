@@ -26,6 +26,9 @@ namespace Backend.Data.Configurations
                    .IsRequired()
                    .HasMaxLength(15); // For: "Low", "Medium", "High"
 
+            builder.Property(t => t.SortOrder)
+                   .IsRequired();
+                               
             // Core Relationships: Connects Categories to TaskItems 
             builder.HasOne(t => t.Category)
                    .WithMany(c => c.Tasks)

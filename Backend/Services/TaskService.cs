@@ -1,3 +1,5 @@
+using System.Data.Common;
+using System.Security.Cryptography;
 using Backend.Data;
 using Backend.Dtos;
 using Backend.Models;
@@ -15,7 +17,9 @@ namespace Backend.Services
         }
 
         // 1. Create Task with Security Clearance Checks
-        public async Task<TaskCreationResult> CreateTaskAsync(int currentUserId, TaskCreateDto request)
+        public async Task<TaskCreationResult> CreateTaskAsync(
+            int currentUserId, 
+            TaskCreateDto request)
         {
             // Check membership and role in one single database trip
             var memberRecord = await _context.ProjectMembers
@@ -35,6 +39,11 @@ namespace Backend.Services
                 return new TaskCreationResult { IsForbidden = true };
             }
 
+            var nextSortOrder = await _context.Tasks
+                .Where(t => t.ProjectId == request.ProjectId)
+                .Select(t => (int?)t.SortOrder)
+                .MaxAsync() ?? -1;
+
             var taskItem = new TaskItem
             {
                 Title = request.Title,
@@ -42,7 +51,8 @@ namespace Backend.Services
                 Priority = request.Priority,
                 Deadline = request.Deadline,
                 Status = "Pending",
-                ProjectId = request.ProjectId
+                ProjectId = request.ProjectId,
+                SortOrder = nextSortOrder + 1
             };
 
             _context.Tasks.Add(taskItem);
@@ -52,7 +62,9 @@ namespace Backend.Services
         }
 
         // 2. Gather Board Tasks and Roster Data Packages
-        public async Task<object?> GetProjectTasksAsync(int projectId, int currentUserId)
+        public async Task<object?> GetProjectTasksAsync(
+            int projectId, 
+            int currentUserId)
         {
             // Security Check: Return null if the user does not belong to the project workspace
             var membership = await _context.ProjectMembers
@@ -64,6 +76,9 @@ namespace Backend.Services
                 .AsNoTracking()
                 .Include(t => t.Category)
                 .Where(t => t.ProjectId == projectId)
+                .OrderBy(t => t.Status == "Review Required" ? 0 : 1)
+                .ThenBy(t => t.SortOrder)
+                .ThenBy(t => t.Id)
                 .ToListAsync();
 
             var teamRoster = await _context.ProjectMembers
@@ -87,16 +102,19 @@ namespace Backend.Services
         }
 
         // 3. Update Task Status with explicit array safety guards
-        public async Task<ServiceOutcome> UpdateTaskStatusAsync(int taskId, int currentUserId, string newStatus)
+        public async Task<ServiceOutcome> UpdateTaskStatusAsync(
+            int taskId, 
+            int currentUserId, 
+            string newStatus)
         {
             var task = await _context.Tasks.FindAsync(taskId);
             if (task == null) return ServiceOutcome.NotFound;
 
             // Viewer Guard: Fetch their workspace role profile
             var userRole = await _context.ProjectMembers
-                 .Where(pm => pm.ProjectId == task.ProjectId && pm.UserId == currentUserId)
-                 .Select(pm => pm.ProjectRole)
-                 .FirstOrDefaultAsync();
+                .Where(pm => pm.ProjectId == task.ProjectId && pm.UserId == currentUserId)
+                .Select(pm => pm.ProjectRole)
+                .FirstOrDefaultAsync();
 
             if (userRole == null) return ServiceOutcome.Forbidden;
 
@@ -115,7 +133,9 @@ namespace Backend.Services
         }
 
         // 4. Delete Task with comprehensive Owner role verification
-        public async Task<ServiceOutcome> DeleteTaskAsync(int taskId, int currentUserId)
+        public async Task<ServiceOutcome> DeleteTaskAsync(
+            int taskId, 
+            int currentUserId)
         {
             var task = await _context.Tasks.FindAsync(taskId);
             if (task == null) return ServiceOutcome.NotFound;
@@ -131,7 +151,10 @@ namespace Backend.Services
         }
 
         // 5. Assign Team Members to Tasks
-        public async Task<ServiceOutcome> AssignTaskAsync(int taskId, int currentUserId, int? assignedUserId)
+        public async Task<ServiceOutcome> AssignTaskAsync(
+            int taskId, 
+            int currentUserId, 
+            int? assignedUserId)
         {
             var taskItem = await _context.Tasks.FindAsync(taskId);
             if (taskItem == null) return ServiceOutcome.NotFound;
@@ -147,7 +170,10 @@ namespace Backend.Services
         }
 
         // 6. Map Category Tags to Task Items
-        public async Task<ServiceOutcome> AssignTaskCategoryAsync(int taskId, int currentUserId, int? categoryId)
+        public async Task<ServiceOutcome> AssignTaskCategoryAsync(
+            int taskId, 
+            int currentUserId, 
+            int? categoryId)
         {
             var taskItem = await _context.Tasks.FindAsync(taskId);
             if (taskItem == null) return ServiceOutcome.NotFound;
@@ -168,6 +194,59 @@ namespace Backend.Services
 
             taskItem.CategoryId = categoryId;
             await _context.SaveChangesAsync();
+            return ServiceOutcome.Success;
+        }
+
+        // 7. Re-order task cards in the same column
+        public async Task<ServiceOutcome> ReorderTasksAsync(
+            int projectId,
+            int currentUserId,
+            string status,
+            List<int> taskIds)
+        {
+            var membership = await _context.ProjectMembers
+                .FirstOrDefaultAsync(pm =>
+                    pm.ProjectId == projectId &&
+                    pm.UserId == currentUserId);
+
+            if (membership == null || membership.ProjectRole == "Viewer")
+            {
+                return ServiceOutcome.Forbidden;
+            }
+
+            var projectTasks = await _context.Tasks
+                .Where(t => 
+                    t.ProjectId == projectId &&
+                    t.Status == status)
+                .ToListAsync();
+
+            if (projectTasks.Count != taskIds.Count)
+            {
+                return ServiceOutcome.InvalidStatus;
+            }
+
+            var projectTaskIds = projectTasks
+                .Select(t => t.Id)
+                .OrderBy(id => id)
+                .ToList();
+
+            var requestedTaskIds = taskIds
+                .OrderBy(id => id)
+                .ToList();
+
+            if (!projectTaskIds.SequenceEqual(requestedTaskIds))
+            {
+                return ServiceOutcome.InvalidStatus;
+            }
+
+            for (var index = 0; index < taskIds.Count; index++)
+            {
+                var task = projectTasks.First(t => t.Id == taskIds[index]);
+                task.SortOrder = index;
+            }
+
+            await _context.SaveChangesAsync();
+            
             return ServiceOutcome.Success;
         }
     }

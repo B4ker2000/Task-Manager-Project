@@ -31,6 +31,11 @@ export interface LocalePack {
         LANGUAGE_OPTION_RU: string;
         LANGUAGE_OPTION_FA: string;
 
+        // User Roles
+        ROLE_OWNER: string;
+        ROLE_MEMBER: string;
+        ROLE_VIEWER: string;
+
         // Language direction format
         DIRECTION: 'ltr' | 'rtl'; // Can only be one of these two!
     };
@@ -279,9 +284,9 @@ export interface LocalePack {
         INVITE_PLACEHOLDER: string;
         INVITE_INPUT_ARIA: string;
         INVITE_ROLE_ARIA: string;
+        INVITE_OPTION_OWNER: string;
         INVITE_OPTION_MEMBER: string;
         INVITE_OPTION_VIEWER: string;
-        INVITE_OPTION_OWNER: string;
         INVITE_SUBMIT_ARIA: string;
         INVITE_SUBMIT_BTN: string;
         ROSTER_HEADER: string;

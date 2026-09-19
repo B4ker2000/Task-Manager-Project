@@ -33,6 +33,11 @@ export const EnglishUSPack: LocalePack = {
         LANGUAGE_OPTION_RU: "Русский (Russian)",
         LANGUAGE_OPTION_FA: "فارسی (Persian)",
 
+        // User Roles
+        ROLE_OWNER: "Owner",
+        ROLE_MEMBER: "Member",
+        ROLE_VIEWER: "Viewer",
+
         // Language direction format
         DIRECTION: "ltr"
     },
@@ -283,9 +288,9 @@ export const EnglishUSPack: LocalePack = {
         INVITE_PLACEHOLDER: "Enter teammate's registered email address...",
         INVITE_INPUT_ARIA: "Teammate email address",
         INVITE_ROLE_ARIA: "Assigned project member role level",
+        INVITE_OPTION_OWNER: "Co-Owner / Admin",
         INVITE_OPTION_MEMBER: "Regular Member",
         INVITE_OPTION_VIEWER: "Read-Only Viewer",
-        INVITE_OPTION_OWNER: "Co-Owner / Admin",
         INVITE_SUBMIT_ARIA: "Submit invitation request",
         INVITE_SUBMIT_BTN: "Add Member",
         ROSTER_HEADER: "Current Project Crew",

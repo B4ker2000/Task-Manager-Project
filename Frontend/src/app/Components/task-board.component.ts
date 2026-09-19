@@ -643,7 +643,7 @@ export class TaskBoardComponent implements OnInit {
     }
 
     // Method to hide category select drop down menu
-    public hideCategorySelect(task: any): boolean {
+    public canManageTaskCategory(task: any): boolean {
         return this.currentUserProjectRole === 'Owner' || task.assignedUserId === this.currentUserId;
     }
 
@@ -669,7 +669,11 @@ export class TaskBoardComponent implements OnInit {
         // =========================================================================
         // PERMISSION GATE 1: THE DYNAMIC SELF-DROP PROGRESS/REVIEW TOGGLE SWITCH
         // =========================================================================
-        if (sourceLaneId === targetLaneId && targetLaneId === "inProgressLaneList") {
+        if (
+            sourceLaneId === targetLaneId && 
+            targetLaneId === "inProgressLaneList" &&
+            event.previousIndex === event.currentIndex
+        ) {
             // SECURITY: Block regular users from toggling cards that are NOT assigned to them!
             if(!isOwner && !isAssignee) {
                 this.showPopup(
@@ -700,9 +704,35 @@ export class TaskBoardComponent implements OnInit {
         }
 
         // Standard local row index swapping slot handler fallback if shuffling within same columns (excluding middle lane)
-        if(sourceLaneId === targetLaneId) {
-            moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+        if (sourceLaneId === targetLaneId) {
+            const status = this.getStatusFromLaneId(targetLaneId);
+
+            if (!status) return;
+
+            moveItemInArray(
+                event.container.data, 
+                event.previousIndex, 
+                event.currentIndex
+            );
+            
+            const taskIds = event.container.data.map(task => task.id);
+
             this.cdr.detectChanges();
+
+            this.taskService.reorderTasks(
+                this.projectId,
+                status,
+                taskIds
+            ).subscribe({
+                next: () => {
+                    this.cdr.detectChanges();
+                },
+                error: (err) => {
+                    console.error("Failed to save task order: ", err);
+                    this.loadTasks();
+                }
+            });
+
             return;
         }
 
@@ -778,5 +808,38 @@ export class TaskBoardComponent implements OnInit {
 
     public setActiveMobileColumn(column: 'Pending' | 'InProgress' | 'Completed'): void {
         this.activeMobileColumn = column.toString();
+    }
+
+    public get isReorderingDisabled(): boolean {
+        return this.isMobileView
+            || this.searchQuery.trim() !== ""
+            || this.selectedPriority !== "All"
+            || this.selectedCategory !== "All";
+    }
+
+    private getStatusFromLaneId(laneId: string): string {
+        switch (laneId) {
+            case "pendingLaneList":
+                return "Pending";
+            case "inProgressLaneList":
+                return "In Progress";
+            case "completedLaneList":
+                return "Completed";
+            default:
+                return "";
+        }
+    }
+
+    public getLocalizedRole(role: string): string {
+        switch (role) {
+            case "Owner":
+                return this.langService.words().GLOBAL.ROLE_OWNER;
+            case "Member":
+                return this.langService.words().GLOBAL.ROLE_MEMBER;
+            case "Viewer":
+                return this.langService.words().GLOBAL.ROLE_VIEWER;
+            default:
+                return role;
+        }
     }
 }

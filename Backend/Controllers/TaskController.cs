@@ -116,5 +116,31 @@ namespace Backend.Controllers
         {
             return Unauthorized(new { message = "Invalid or expired session token!" });
         }
+
+        [HttpPut("project/{projectId}/reorder")]
+        public async Task<IActionResult> ReorderTasks(
+            int projectId,
+            [FromBody] TaskReorderDto request)
+        {
+            var currentUserId = _userContext.GetCurrentUserId();
+            if (currentUserId == null)
+            {
+                return UnauthorizedSession();
+            }
+
+            var outcome = await _taskService.ReorderTasksAsync(
+                projectId,
+                currentUserId.Value,
+                request.Status,
+                request.TaskIds);
+
+            return outcome switch
+            {
+                ServiceOutcome.Forbidden => Forbid(),
+                ServiceOutcome.InvalidStatus => BadRequest(
+                    new { message = "The submitted task order is invalid." }),
+                    _ => Ok(new { message = "Task order updated successfully." })
+            };
+        }
     }
 }

@@ -32,9 +32,9 @@
                      
                 <div class="invitation-details" [attr.aria-label]="formatLabel(langService.words().DASHBOARD.INVITATION_DETAILS_ARIA, invitation.project?.name)">
                     <h3 aria-hidden="true">{{ invitation.project?.name }}</h3>
-                    <p [attr.aria-label]="formatLabel(langService.words().DASHBOARD.INVITATION_DESCRIPTION_ARIA, invitation.projectRole)">
+                    <p [attr.aria-label]="formatLabel(langService.words().DASHBOARD.INVITATION_DESCRIPTION_ARIA, getLocalizedRole(invitation.projectRole))">
                         <span [innerHTML]="langService.words().DASHBOARD.INVITATION_DESCRIPTION_TEXT"></span>
-                        <strong aria-hidden="true">{{ invitation.projectRole }}</strong>
+                        <strong aria-hidden="true">{{ getLocalizedRole(invitation.projectRole) }}</strong>
                     </p>
                     <span [attr.aria-label]="formatLabel(langService.words().DASHBOARD.INVITATION_EXPIRY_ARIA, (invitation.expiresAt | date: langService.words().GLOBAL.DATE_FORMAT) || '')">
                         <small aria-hidden="true" >

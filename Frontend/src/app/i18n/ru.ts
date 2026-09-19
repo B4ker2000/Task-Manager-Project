@@ -33,6 +33,11 @@ export const RussianPack: LocalePack = {
         LANGUAGE_OPTION_RU: "Русский",
         LANGUAGE_OPTION_FA: "فارسی (Персидский)",
 
+        // User Roles
+        ROLE_OWNER: "Владелец",
+        ROLE_MEMBER: "Участник",
+        ROLE_VIEWER: "Наблюдатель",
+
         // Language direction format
         DIRECTION: "ltr"
     },
@@ -283,9 +288,9 @@ export const RussianPack: LocalePack = {
         INVITE_PLACEHOLDER: "Введите зарегистрированный email участника...",
         INVITE_INPUT_ARIA: "Поле ввода адреса электронной почты участника",
         INVITE_ROLE_ARIA: "Назначенный уровень административного доступа к проекту",
+        INVITE_OPTION_OWNER: "Совладелец / Админ",
         INVITE_OPTION_MEMBER: "Обычный участник",
         INVITE_OPTION_VIEWER: "Только для чтения (Наблюдатель)",
-        INVITE_OPTION_OWNER: "Совладелец / Админ",
         INVITE_SUBMIT_ARIA: "Отправить запрос на добавление участника",
         INVITE_SUBMIT_BTN: "Добавить участника",
         ROSTER_HEADER: "Текущий состав команды",

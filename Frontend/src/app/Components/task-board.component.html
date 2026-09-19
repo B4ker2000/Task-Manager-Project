@@ -75,9 +75,9 @@
                                         'badge-member': m.projectRole === 'Member', 
                                         'badge-viewer': m.projectRole === 'Viewer'
                                       }" 
-                                      [attr.aria-label]="formatLabel(langService.words().TASKBOARD.ROSTER_BADGE_ARIA, m.projectRole)">
+                                      [attr.aria-label]="formatLabel(langService.words().TASKBOARD.ROSTER_BADGE_ARIA, getLocalizedRole(m.projectRole))">
                                       
-                                    {{ m.projectRole }}
+                                    {{ getLocalizedRole(m.projectRole) }}
                                 </span>
                             </div>
 
@@ -248,7 +248,7 @@
             <!-- CDK Target Drop Window Container Lane -->
              <div id="pendingLaneList"
                  cdkDropList
-                 [cdkDropListDisabled]="isMobileView"
+                 [cdkDropListDisabled]="isReorderingDisabled"
                  [cdkDropListData]="pendingTasks"
                  (cdkDropListDropped)="onTaskCardDropTrigger($event)" 
                  class="tasks-container"
@@ -258,8 +258,9 @@
 
                 <!-- Draggable Task Card Template Block -->
                  <div class="task-card" 
-                     *ngFor="let t of filteredPendingTasks"
+                     *ngFor="let t of pendingTasks"
                      cdkDrag
+                     [cdkDragDisabled]="isReorderingDisabled"
                      role="article"
                      [attr.id]="'task-card-' + t.id"
                      [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_CARD_ARIA, t.title)">
@@ -308,7 +309,7 @@
                         </select>
                     </div>
 
-                    <div *ngIf="hideCategorySelect(t)" class="task-assignment-control">
+                    <div *ngIf="canManageTaskCategory(t)" class="task-assignment-control">
                         <label [attr.for]="'category-select-' + t.id" class="assignment-label">
                             <span aria-hidden="true">🏷️</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_CATEGORY_LABEL"></span>
                         </label>
@@ -365,7 +366,7 @@
             
             <div id="inProgressLaneList"
                  cdkDropList
-                 [cdkDropListDisabled]="isMobileView"
+                 [cdkDropListDisabled]="isReorderingDisabled"
                  [cdkDropListData]="inProgressTasks"
                  (cdkDropListDropped)="onTaskCardDropTrigger($event)"
                  class="tasks-container"
@@ -374,9 +375,10 @@
                  [attr.aria-label]="formatLabel(langService.words().TASKBOARD.LANE_INPROGRESS_ARIA, inProgressTasks.length)">
                 
                 <div class="task-card" 
-                     *ngFor="let t of filteredInProgressTasks" 
+                     *ngFor="let t of inProgressTasks" 
                      [ngClass]="{'review-needed-card': t.status === 'Review Required'}"
                      cdkDrag
+                     [cdkDragDisabled]="isReorderingDisabled"
                      role="article"
                      [attr.id]="'inprogress-card-' + t.id"
                      [attr.aria-label]="langService.words().TASKBOARD.TASK_CARD_STATUS_ARIA.replace('{title}', t.title).replace('{status}', t.status)">
@@ -428,7 +430,7 @@
                         </select>
                     </div>
                     
-                    <div *ngIf="hideCategorySelect(t)" class="task-assignment-control">
+                    <div *ngIf="canManageTaskCategory(t)" class="task-assignment-control">
                         <label [attr.for]="'inp-category-select-' + t.id" class="assignment-label">
                             <span aria-hidden="true">🏷️</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_CATEGORY_LABEL"></span>
                         </label>
@@ -528,7 +530,7 @@
 			
             <div id="completedLaneList"
                  cdkDropList
-                 [cdkDropListDisabled]="isMobileView"
+                 [cdkDropListDisabled]="isReorderingDisabled"
                  [cdkDropListData]="completedTasks"
                  (cdkDropListDropped)="onTaskCardDropTrigger($event)"
                  class="tasks-container"
@@ -537,8 +539,9 @@
                  [attr.aria-label]="formatLabel(langService.words().TASKBOARD.LANE_COMPLETED_ARIA, completedTasks.length)">
                 
 				<div class="task-card done" 
-                     *ngFor="let t of filteredCompletedTasks"
+                     *ngFor="let t of completedTasks"
                      cdkDrag
+                     [cdkDragDisabled]="isReorderingDisabled"
                      role="article"
                      [attr.id]="'completed-card-' + t.id"
                      [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_CARD_COMPLETED_ARIA, t.title)">

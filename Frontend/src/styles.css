@@ -451,6 +451,14 @@ div::-webkit-scrollbar-thumb:hover {
     border-radius: 6px;
     box-sizing: border-box;
 }
+html[dir="rtl"] .cdk-drag-preview {
+    direction: rtl;
+    text-align: right;
+}
+html[dir="ltr"] .cdk-drag-preview {
+    direction: ltr;
+    text-align: left;
+}
 
 .task-card:active,
 .project-card:active,

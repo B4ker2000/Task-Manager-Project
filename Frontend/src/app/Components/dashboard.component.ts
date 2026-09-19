@@ -227,4 +227,17 @@ export class DashboardComponent implements OnInit {
     public formatLabel(template: string, value: string): string {
         return template.replace(/\{[a-zA-Z0-9_]+\}/, value);
     }
+
+    public getLocalizedRole(role: string): string {
+        switch (role) {
+            case "Owner":
+                return this.langService.words().GLOBAL.ROLE_OWNER;
+            case "Member":
+                return this.langService.words().GLOBAL.ROLE_MEMBER;
+            case "Viewer":
+                return this.langService.words().GLOBAL.ROLE_VIEWER;
+            default:
+                return role;
+        }
+    }
 }
