@@ -185,16 +185,21 @@ input[type="date"] {
 }
 
 /* --- FUNCTIONAL BUTTON CATEGORY 3: FILTER CONTROLS & SIDEBAR INVITATIONS --- */
+.task-reorder-menu button,
 .save-settings-btn,
+.task-reorder-btn,
 .profile-btn,
 .create-btn {
     background-color: var(--btn-filter-bg) !important;
     color: var(--btn-filter-text) !important;
     border-color: var(--btn-filter-border) !important;
 }
+.task-reorder-menu button:hover:not(:disabled),
 .save-settings-btn:hover:not(:disabled),
+.task-reorder-btn:hover:not(:disabled),
 .profile-btn:hover:not(:disabled),
-.create-btn:hover:not(:disabled) {
+.create-btn:hover:not(:disabled),
+.task-reorder-btn.is-active {
     background-color: var(--btn-filter-hover-bg) !important;
     color: var(--btn-filter-hover-text) !important;
     border-color: var(--btn-filter-hover-border) !important;
@@ -550,16 +555,20 @@ body.cdk-drag-dragging * {
    Tactile Trashcan Deletion Button Properties
    ========================================================================= */
 .delete-proj-btn,
-.delete-card-btn { 
+.delete-card-btn,
+.task-reorder-btn { 
     background-color: transparent; 
     border: none; 
     cursor: pointer; 
     padding: 4px; 
     font-size: calc(14px * var(--font-scale));
     border-radius: 4px; 
-    opacity: 0.4; 
     transition: opacity 0.2s ease, background-color 0.2s ease; 
     line-height: 1; 
+}
+.delete-proj-btn,
+.delete-card-btn {
+    opacity: 0.4; 
 }
 
 .project-card:hover .delete-proj-btn,
@@ -568,7 +577,8 @@ body.cdk-drag-dragging * {
 }
 
 .delete-proj-btn:hover,
-.delete-card-btn:hover { 
+.delete-card-btn:hover,
+.task-reorder-btn:hover { 
     background-color: var(--btn-delete-hover-bg) !important;
     transform: scale(1.05); /* Adds a tiny, responsive tactile pop! */
 }

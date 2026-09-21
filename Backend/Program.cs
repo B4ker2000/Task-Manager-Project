@@ -60,6 +60,7 @@ app.UseCors("AllowAngular"); // Related to 5. but should be between "var app = b
 app.UseAuthentication(); // Checks who you are via JWT
 app.UseAuthorization();  // Checks what you are allowed to do
 app.UseMiddleware<ExceptionMiddleware>(); // Root-level high performance shield!
+app.UseMiddleware<UserSessionMiddleware>(); // Root-level high performance shield!
 
 app.MapControllers();
 app.Run();

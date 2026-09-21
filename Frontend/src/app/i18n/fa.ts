@@ -281,6 +281,11 @@ export const PersianPack: LocalePack = {
         HEADER_CREATE_TAG_ARIA: "باز کردن پنجره ایجاد برچسب دسته‌بندی جدید پروژه",
         HEADER_CREATE_TASK_TEXT: "افزودن وظیفه جدید",
         HEADER_CREATE_TASK_ARIA: "باز کردن پنجره افزودن کارت وظیفه جدید به پروژه",
+        REORDER_MENU_ARIA: "تغییر ترتیب کارت وظیفه {title} به بالا و پایین در همان ستون",
+        REORDER_MOVE_TOP: "انتقال به بالای ستون",
+        REORDER_MOVE_UP: "به بالا",
+        REORDER_MOVE_DOWN: "به پایین",
+        REORDER_MOVE_BOTTOM: "انتقال به پایین ستون",
 
         // Task Crew & Invitation
         CREW_PANEL_HEADER: "مدیریت اعضای تیم و برچسب‌های پروژه",

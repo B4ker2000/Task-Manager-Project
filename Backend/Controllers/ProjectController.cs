@@ -23,10 +23,9 @@ namespace Backend.Controllers
         public async Task<IActionResult> CreateProject([FromBody] ProjectCreateDto request)
         {
             var currentUserId = _userContext.GetCurrentUserId();
-            if (currentUserId == null) return UnauthorizedSession();
             
             // Call service to instantiate the project and map creator permissions
-            int projectId = await _projectService.CreateProjectAsync(currentUserId.Value, request);
+            int projectId = await _projectService.CreateProjectAsync(currentUserId, request);
 
             return Ok(new { message = "Project created successfully!", projectId = projectId });
         }
@@ -35,12 +34,9 @@ namespace Backend.Controllers
         public async Task<IActionResult> GetMyProjects()
         {
             var currentUserId = _userContext.GetCurrentUserId();
-            
-            // Extract the unique User ID safely from the encrypted JWT Token claims via our services!
-            if (currentUserId == null) return UnauthorizedSession();
 
             // Call service to execute our LINQ layout join queries cleanly
-            var projectWithRoles = await _projectService.GetMyProjectsAsync(currentUserId.Value);
+            var projectWithRoles = await _projectService.GetMyProjectsAsync(currentUserId);
 
             return Ok(projectWithRoles);
         }
@@ -50,10 +46,7 @@ namespace Backend.Controllers
         {
             var currentUserId = _userContext.GetCurrentUserId();
 
-            // Call service to wipe the project room alongside its tasks safely
-            if (currentUserId == null) return UnauthorizedSession();
-
-            var success = await _projectService.DeleteProjectAsync(id, currentUserId.Value);
+            var success = await _projectService.DeleteProjectAsync(id, currentUserId);
             if (!success) return NotFound(new { message = "Project not found or you lack Owner rights!" });
 
             return Ok(new { message = "Project and all its tasks were deleted successfully!" });
@@ -63,12 +56,11 @@ namespace Backend.Controllers
         public async Task<IActionResult> RemoveProjectMember(int projectId, int targetUserId)
         {
             var currentUserId = _userContext.GetCurrentUserId();
-            if (currentUserId == null) return UnauthorizedSession();
 
             // Execute removal rules safely down inside the service
-            var outcome = await _projectService.RemoveProjectMemberAsync(projectId, currentUserId.Value, targetUserId);
+            var outcome = await _projectService.RemoveProjectMemberAsync(projectId, currentUserId, targetUserId);
 
-            bool isKickingSomeoneElse = currentUserId.Value != targetUserId;
+            bool isKickingSomeoneElse = currentUserId != targetUserId;
 
             return outcome switch
             {
@@ -85,11 +77,10 @@ namespace Backend.Controllers
             [FromBody] ProjectInviteDto request)
         {
             var currentUserId = _userContext.GetCurrentUserId();
-            if (currentUserId == null) return UnauthorizedSession();
 
             var invitation = await _projectService.CreateInvitationAsync(
                 projectId,
-                currentUserId.Value,
+                currentUserId,
                 request);
 
             if (invitation == null)
@@ -110,10 +101,9 @@ namespace Backend.Controllers
         public async Task<IActionResult> GetPendingInvitations()
         {
             var currentUserId = _userContext.GetCurrentUserId();
-            if (currentUserId == null) return UnauthorizedSession();
 
             var invitations = await _projectService
-                .GetPendingInvitationsAsync(currentUserId.Value);
+                .GetPendingInvitationsAsync(currentUserId);
 
             return Ok(invitations);
         }
@@ -122,10 +112,9 @@ namespace Backend.Controllers
         public async Task<IActionResult> AcceptInvitation(int invitationId)
         {
             var currentUserId = _userContext.GetCurrentUserId();
-            if (currentUserId == null) return UnauthorizedSession();
 
             var accepted = await _projectService
-                .AcceptInvitationAsync(invitationId, currentUserId.Value);
+                .AcceptInvitationAsync(invitationId, currentUserId);
 
             if (!accepted)
             {
@@ -145,10 +134,9 @@ namespace Backend.Controllers
         public async Task<IActionResult> DeclineInvitation(int invitationId)
         {
             var currentUserId = _userContext.GetCurrentUserId();
-            if (currentUserId == null) return UnauthorizedSession();
 
             var declined = await _projectService
-                .DeclineInvitationAsync(invitationId, currentUserId.Value);
+                .DeclineInvitationAsync(invitationId, currentUserId);
             
             if (!declined)
             {
@@ -177,9 +165,8 @@ namespace Backend.Controllers
         public async Task<IActionResult> GetProjectRole(int id)
         {
             var currentUserId = _userContext.GetCurrentUserId();
-            if (currentUserId == null) return UnauthorizedSession();
 
-            var role = await _projectService.GetProjectRoleAsync(id, currentUserId.Value);
+            var role = await _projectService.GetProjectRoleAsync(id, currentUserId);
             if (role == null) return NotFound(new { message = "You are not a member of this project!" });
 
             return Ok(new { role = role });
@@ -189,16 +176,10 @@ namespace Backend.Controllers
         public async Task<IActionResult> GetProjectMembers(int id)
         {
             var currentUserId = _userContext.GetCurrentUserId();
-            if (currentUserId == null) return UnauthorizedSession();
 
             var rosterList = await _projectService.GetProjectMembersAsync(id);
             
             return Ok(rosterList);
-        }
-
-        private UnauthorizedObjectResult UnauthorizedSession()
-        {
-            return Unauthorized(new { message = "Invalid or expired session token!" });
         }
     }
 }

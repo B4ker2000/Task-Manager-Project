@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, ChangeDetectorRef, PLATFORM_ID, ElementRef, ViewChild } from "@angular/core";
+import { Component, OnInit, inject, ChangeDetectorRef, PLATFORM_ID, ElementRef, ViewChild, HostListener } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { NgFor, NgIf, NgClass, DatePipe, isPlatformBrowser } from "@angular/common";
 import { ActivatedRoute, RouterLink, Router } from "@angular/router";
@@ -83,6 +83,11 @@ export class TaskBoardComponent implements OnInit {
     // Vertical screen related properity
     public activeMobileColumn: string = 'Pending'; // Default view lane tracking 
     public isMobileView: boolean = false;
+    public mobileReorderTask: any | null = null;
+    public mobileDragTaskId: number | null = null;
+    private mobileReorderTimer: ReturnType<typeof setTimeout> | null = null;
+    public isMenuClosing: boolean = false;
+    public isHoldingCard: number | null = null;
 
     // Modal focus related
     @ViewChild('taskModalHeader') public taskModalHeader!: ElementRef<HTMLHeadingElement>;
@@ -107,7 +112,7 @@ export class TaskBoardComponent implements OnInit {
         actionType: "" // Tracks what to do when clicking "Proceed"
     };
 
-    constructor(public langService: LanguageService) {}
+    constructor(private eRef: ElementRef, public langService: LanguageService) {}
     
     ngOnInit(): void {
         // Read the dynamic route context param parameter safely
@@ -811,10 +816,7 @@ export class TaskBoardComponent implements OnInit {
     }
 
     public get isReorderingDisabled(): boolean {
-        return this.isMobileView
-            || this.searchQuery.trim() !== ""
-            || this.selectedPriority !== "All"
-            || this.selectedCategory !== "All";
+        return this.isMobileView || this.hasActiveFilters;
     }
 
     private getStatusFromLaneId(laneId: string): string {
@@ -840,6 +842,139 @@ export class TaskBoardComponent implements OnInit {
                 return this.langService.words().GLOBAL.ROLE_VIEWER;
             default:
                 return role;
+        }
+    }
+
+    public startMobileTaskHold(taskId: number): void {
+        if (!this.isMobileView || this.hasActiveFilters) {
+            return;
+        }
+
+        this.clearMobileTaskHold();
+
+        this.mobileReorderTimer = setTimeout(() => {
+            this.mobileDragTaskId = taskId;
+            this.cdr.detectChanges();
+        }, 750);
+    }
+
+    public clearMobileTaskHold(): void {
+        if (this.mobileReorderTimer !== null) {
+            clearTimeout(this.mobileReorderTimer);
+            this.mobileReorderTimer = null;
+        }
+
+        if (this.mobileDragTaskId !== null) {
+            this.mobileDragTaskId == null;
+            this.cdr.detectChanges();
+        }
+    }
+
+    public isTaskDragDisabled(taskId: number): boolean {
+        if (this.hasActiveFilters) {
+            return true;
+        }
+
+        if (!this.isMobileView) {
+            return false;
+        }
+
+        return this.mobileDragTaskId !== taskId;
+    }
+
+    public openReorderMenu(task: any): void {
+        if (this.mobileReorderTask?.id === task.id) {
+            this.closeReorderMenu();
+        } else {
+            this.isMenuClosing = false;
+            this.mobileReorderTask = task;
+        }
+        this.clearMobileTaskHold();
+        this.cdr.detectChanges();
+    }
+
+    public closeReorderMenu(): void {
+        if (!this.mobileReorderTask || this.isMenuClosing) return;
+
+        this.isMenuClosing = true;
+
+        setTimeout(() => {
+            this.mobileReorderTask = null;
+            this.cdr.detectChanges();
+        }, 200);
+    }
+
+    public isReorderActionDisabled(task: any, action: 'top' | 'up' | 'down' | 'bottom'): boolean {
+        const taskList = this.getTaskListForReorder(task);
+        const taskIndex = taskList.findIndex(item => item.id === task.id);
+
+        if (taskIndex < 0) return true;
+
+        if (action === 'top' || action === 'up') {
+            return taskIndex === 0;
+        }
+
+        return taskIndex === taskList.length - 1;
+    }
+
+    public moveTaskToPosition(task: any, position: 'top' | 'up' | 'down' | 'bottom'): void {
+        const taskList = this.getTaskListForReorder(task);
+        const currentIndex = taskList.findIndex(item => item.id === task.id);
+
+        if (currentIndex < 0) return;
+
+        let targetIndex = currentIndex;
+        if (position === 'top') targetIndex = 0;
+        if (position === 'up') targetIndex = currentIndex - 1;
+        if (position === 'down') targetIndex = currentIndex + 1;
+        if (position === 'bottom') targetIndex = taskList.length - 1;
+
+        if (targetIndex < 0 || targetIndex >= taskList.length || targetIndex === currentIndex) {
+            return;
+        }
+
+        moveItemInArray(taskList, currentIndex, targetIndex);
+        this.mobileReorderTask = null;
+        this.cdr.detectChanges();
+
+        const status = task.status === 'Review Required' || task.status === 'In Progress'
+            ? 'In Progress'
+            : task.status;
+
+        this.taskService.reorderTasks(
+            this.projectId,
+            status,
+            taskList.map(item => item.id)
+        ).subscribe({
+            error: (err) => {
+                console.error('Failed to save task order:', err);
+                this.loadTasks();
+            }
+        });
+    }
+
+    private getTaskListForReorder(task: any): any[] {
+        if (task.status === 'Pending') return this.pendingTasks;
+        if (task.status === 'Completed') return this.completedTasks;
+        return this.inProgressTasks;
+    }
+
+    public get hasActiveFilters(): boolean {
+        return this.searchQuery.trim() !== "" 
+            || this.selectedPriority !== "All" 
+            || this.selectedCategory !== "All";
+    }
+
+    @HostListener('document:click', ['$event'])
+    clickout(event: Event) {
+        if (!this.mobileReorderTask) return;
+
+        const clickedInside = this.eRef.nativeElement.contains(event.target);
+        const isTriggerButton = (event.target as HTMLElement).closest('.task-reorder-btn');
+        const isMenuClick = (event.target as HTMLElement).closest('.task-reorder-menu');
+
+        if (!clickedInside || (!isTriggerButton && !isMenuClick)) {
+            this.closeReorderMenu();
         }
     }
 }

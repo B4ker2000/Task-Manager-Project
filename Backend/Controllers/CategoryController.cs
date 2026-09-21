@@ -31,10 +31,9 @@ namespace Backend.Controllers
         public async Task<IActionResult> CreateCategory(int projectId, [FromBody] CategoryCreateDto dto)
         {
             var CurrentUserId = _userContext.GetCurrentUserId();
-            if (CurrentUserId == null) return Unauthorized();
 
             // Call our service to handle the heavy lifting!
-            var createdCategory = await _categoryService.CreateCategoryAsync(projectId, CurrentUserId.Value, dto);
+            var createdCategory = await _categoryService.CreateCategoryAsync(projectId, CurrentUserId, dto);
             if (createdCategory == null)
             {
                 return Forbid(); // The service returned null because the user isn't an Owner 
@@ -51,10 +50,9 @@ namespace Backend.Controllers
         public async Task<IActionResult> DeleteCategory(int projectId, int categoryId)
         {
             var CurrentUserId = _userContext.GetCurrentUserId();
-            if (CurrentUserId == null) return Unauthorized();
 
             // Call our service to delete the category
-            var success = await _categoryService.DeleteCategoryAsync(projectId, categoryId, CurrentUserId.Value);
+            var success = await _categoryService.DeleteCategoryAsync(projectId, categoryId, CurrentUserId);
             if (!success)
             {
                 // If it fails, it means the user isn't an Owner or the Category doesn't exist

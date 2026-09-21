@@ -248,7 +248,7 @@
             <!-- CDK Target Drop Window Container Lane -->
              <div id="pendingLaneList"
                  cdkDropList
-                 [cdkDropListDisabled]="isReorderingDisabled"
+                 [cdkDropListDisabled]="hasActiveFilters"
                  [cdkDropListData]="pendingTasks"
                  (cdkDropListDropped)="onTaskCardDropTrigger($event)" 
                  class="tasks-container"
@@ -260,7 +260,11 @@
                  <div class="task-card" 
                      *ngFor="let t of pendingTasks"
                      cdkDrag
-                     [cdkDragDisabled]="isReorderingDisabled"
+                     [cdkDragDisabled]="isTaskDragDisabled(t.id)"
+                     (touchstart)="startMobileTaskHold(t.id)"
+                     (touchend)="clearMobileTaskHold()"
+                     (touchmove)="clearMobileTaskHold()"
+                     (touchcancel)="clearMobileTaskHold()"
                      role="article"
                      [attr.id]="'task-card-' + t.id"
                      [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_CARD_ARIA, t.title)">
@@ -275,14 +279,40 @@
                                 <span aria-hidden="true">🏷️</span> {{ t.category.name }}
                              </span>
                          </span>
-                        <button *ngIf="currentUserProjectRole === 'Owner'" 
-                                class="delete-card-btn" 
-                                (click)="onDeleteTask(t.id)" 
-                                [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DELETE_ARIA, t.title)"
-                                [attr.aria-describedby]="'task-title-' + t.id">
-                                
-                            <span aria-hidden="true">🗑️</span>
-                        </button>
+
+                        <span class="task-card-header-buttons">        
+                            <!-- Reorder Trigger Button -->
+                             <button *ngIf="currentUserProjectRole === 'Owner' || t.assignedUserId == currentUserId" 
+                                     class="task-reorder-btn" 
+                                     [class.is-active]="mobileReorderTask?.id === t.id"
+                                     (click)="openReorderMenu(t); $event.stopPropagation()" 
+                                     [attr.aria-label]="formatLabel(langService.words().TASKBOARD.REORDER_MENU_ARIA, t.title)"
+                                     [attr.aria-describedby]="'task-title-' + t.id">
+                                <span class="task-reorder-icon" aria-hidden="true">↕</span>
+                             </button>
+                            
+                            <!-- Dropdown Menu Options -->
+                             <div *ngIf="mobileReorderTask?.id === t.id" 
+                                  class="task-reorder-menu" 
+                                  [class.is-closing]="isMenuClosing"
+                                  role="group" 
+                                  [attr.aria-label]="formatLabel(langService.words().TASKBOARD.REORDER_MENU_ARIA, t.title)">
+
+                                <button type="button" (click)="moveTaskToPosition(t, 'top')" [disabled]="isReorderActionDisabled(t, 'top')" [innerHTML]="langService.words().TASKBOARD.REORDER_MOVE_TOP"></button>
+                                <button type="button" (click)="moveTaskToPosition(t, 'up')" [disabled]="isReorderActionDisabled(t, 'up')" [innerHTML]="langService.words().TASKBOARD.REORDER_MOVE_UP"></button>
+                                <button type="button" (click)="moveTaskToPosition(t, 'down')" [disabled]="isReorderActionDisabled(t, 'down')" [innerHTML]="langService.words().TASKBOARD.REORDER_MOVE_DOWN"></button>
+                                <button type="button" class="last-button" (click)="moveTaskToPosition(t, 'bottom')" [disabled]="isReorderActionDisabled(t, 'bottom')" [innerHTML]="langService.words().TASKBOARD.REORDER_MOVE_BOTTOM"></button>
+                             </div>
+
+                            <!-- Delete Task Button -->
+                             <button *ngIf="currentUserProjectRole === 'Owner'" 
+                                    class="delete-card-btn" 
+                                    (click)="onDeleteTask(t.id)" 
+                                    [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DELETE_ARIA, t.title)"
+                                    [attr.aria-describedby]="'task-title-' + t.id">
+                                <span aria-hidden="true">🗑️</span>
+                             </button>
+                        </span>  
                     </div>
 
                     <p>{{ t.description || langService.words().TASKBOARD.TASK_DESCRIPTION_FALLBACK }}</p>
@@ -366,7 +396,7 @@
             
             <div id="inProgressLaneList"
                  cdkDropList
-                 [cdkDropListDisabled]="isReorderingDisabled"
+                 [cdkDropListDisabled]="hasActiveFilters"
                  [cdkDropListData]="inProgressTasks"
                  (cdkDropListDropped)="onTaskCardDropTrigger($event)"
                  class="tasks-container"
@@ -378,7 +408,11 @@
                      *ngFor="let t of inProgressTasks" 
                      [ngClass]="{'review-needed-card': t.status === 'Review Required'}"
                      cdkDrag
-                     [cdkDragDisabled]="isReorderingDisabled"
+                     [cdkDragDisabled]="isTaskDragDisabled(t.id)"
+                     (touchstart)="startMobileTaskHold(t.id)"
+                     (touchend)="clearMobileTaskHold()"
+                     (touchmove)="clearMobileTaskHold()"
+                     (touchcancel)="clearMobileTaskHold()"
                      role="article"
                      [attr.id]="'inprogress-card-' + t.id"
                      [attr.aria-label]="langService.words().TASKBOARD.TASK_CARD_STATUS_ARIA.replace('{title}', t.title).replace('{status}', t.status)">
@@ -393,14 +427,40 @@
                                 <span aria-hidden="true">🏷️</span> {{ t.category.name }}
                              </span>
                          </span>
-                        <button *ngIf="currentUserProjectRole === 'Owner'" 
-                                class="delete-card-btn" 
-                                (click)="onDeleteTask(t.id)" 
-                                [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DELETE_ARIA, t.title)"
-                                [attr.aria-describedby]="'inprogress-title-' + t.id">
+
+                        <span class="task-card-header-buttons">        
+                            <!-- Reorder Trigger Button -->
+                             <button *ngIf="currentUserProjectRole === 'Owner' || t.assignedUserId == currentUserId" 
+                                     class="task-reorder-btn" 
+                                     [class.is-active]="mobileReorderTask?.id === t.id"
+                                     (click)="openReorderMenu(t); $event.stopPropagation()" 
+                                     [attr.aria-label]="formatLabel(langService.words().TASKBOARD.REORDER_MENU_ARIA, t.title)"
+                                     [attr.aria-describedby]="'task-title-' + t.id">
+                                <span class="task-reorder-icon" aria-hidden="true">↕</span>
+                             </button>
                             
-                            <span aria-hidden="true">🗑️</span>
-                        </button>
+                            <!-- Dropdown Menu Options -->
+                             <div *ngIf="mobileReorderTask?.id === t.id" 
+                                  class="task-reorder-menu" 
+                                  [class.is-closing]="isMenuClosing"
+                                  role="group" 
+                                  [attr.aria-label]="formatLabel(langService.words().TASKBOARD.REORDER_MENU_ARIA, t.title)">
+
+                                <button type="button" (click)="moveTaskToPosition(t, 'top')" [disabled]="isReorderActionDisabled(t, 'top')" [innerHTML]="langService.words().TASKBOARD.REORDER_MOVE_TOP"></button>
+                                <button type="button" (click)="moveTaskToPosition(t, 'up')" [disabled]="isReorderActionDisabled(t, 'up')" [innerHTML]="langService.words().TASKBOARD.REORDER_MOVE_UP"></button>
+                                <button type="button" (click)="moveTaskToPosition(t, 'down')" [disabled]="isReorderActionDisabled(t, 'down')" [innerHTML]="langService.words().TASKBOARD.REORDER_MOVE_DOWN"></button>
+                                <button type="button" class="last-button" (click)="moveTaskToPosition(t, 'bottom')" [disabled]="isReorderActionDisabled(t, 'bottom')" [innerHTML]="langService.words().TASKBOARD.REORDER_MOVE_BOTTOM"></button>
+                             </div>
+
+                            <!-- Delete Task Button -->
+                             <button *ngIf="currentUserProjectRole === 'Owner'" 
+                                    class="delete-card-btn" 
+                                    (click)="onDeleteTask(t.id)" 
+                                    [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DELETE_ARIA, t.title)"
+                                    [attr.aria-describedby]="'task-title-' + t.id">
+                                <span aria-hidden="true">🗑️</span>
+                             </button>
+                        </span>  
                     </div>
 
                     <p>{{ t.description || langService.words().TASKBOARD.TASK_DESCRIPTION_FALLBACK }}</p>
@@ -530,7 +590,7 @@
 			
             <div id="completedLaneList"
                  cdkDropList
-                 [cdkDropListDisabled]="isReorderingDisabled"
+                 [cdkDropListDisabled]="hasActiveFilters"
                  [cdkDropListData]="completedTasks"
                  (cdkDropListDropped)="onTaskCardDropTrigger($event)"
                  class="tasks-container"
@@ -541,7 +601,11 @@
 				<div class="task-card done" 
                      *ngFor="let t of completedTasks"
                      cdkDrag
-                     [cdkDragDisabled]="isReorderingDisabled"
+                     [cdkDragDisabled]="isTaskDragDisabled(t.id)"
+                     (touchstart)="startMobileTaskHold(t.id)"
+                     (touchend)="clearMobileTaskHold()"
+                     (touchmove)="clearMobileTaskHold()"
+                     (touchcancel)="clearMobileTaskHold()"
                      role="article"
                      [attr.id]="'completed-card-' + t.id"
                      [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_CARD_COMPLETED_ARIA, t.title)">
@@ -556,15 +620,41 @@
                                 <span aria-hidden="true">🏷️</span> {{ t.category.name }}
                              </span>
                          </span>
-						<button *ngIf="currentUserProjectRole === 'Owner'" 
-                                class="delete-card-btn" 
-                                (click)="onDeleteTask(t.id)" 
-                                [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DELETE_ARIA, t.title)"
-                                [attr.aria-describedby]="'completed-title-' + t.id">
-                                
+
+                        <span class="task-card-header-buttons">        
+                            <!-- Reorder Trigger Button -->
+                             <button *ngIf="currentUserProjectRole === 'Owner' || t.assignedUserId == currentUserId" 
+                                     class="task-reorder-btn" 
+                                     [class.is-active]="mobileReorderTask?.id === t.id"
+                                     (click)="openReorderMenu(t); $event.stopPropagation()" 
+                                     [attr.aria-label]="formatLabel(langService.words().TASKBOARD.REORDER_MENU_ARIA, t.title)"
+                                     [attr.aria-describedby]="'task-title-' + t.id">
+                                <span class="task-reorder-icon" aria-hidden="true">↕</span>
+                             </button>
+                            
+                            <!-- Dropdown Menu Options -->
+                             <div *ngIf="mobileReorderTask?.id === t.id" 
+                                  class="task-reorder-menu" 
+                                  [class.is-closing]="isMenuClosing"
+                                  role="group" 
+                                  [attr.aria-label]="formatLabel(langService.words().TASKBOARD.REORDER_MENU_ARIA, t.title)">
+
+                                <button type="button" (click)="moveTaskToPosition(t, 'top')" [disabled]="isReorderActionDisabled(t, 'top')" [innerHTML]="langService.words().TASKBOARD.REORDER_MOVE_TOP"></button>
+                                <button type="button" (click)="moveTaskToPosition(t, 'up')" [disabled]="isReorderActionDisabled(t, 'up')" [innerHTML]="langService.words().TASKBOARD.REORDER_MOVE_UP"></button>
+                                <button type="button" (click)="moveTaskToPosition(t, 'down')" [disabled]="isReorderActionDisabled(t, 'down')" [innerHTML]="langService.words().TASKBOARD.REORDER_MOVE_DOWN"></button>
+                                <button type="button" class="last-button" (click)="moveTaskToPosition(t, 'bottom')" [disabled]="isReorderActionDisabled(t, 'bottom')" [innerHTML]="langService.words().TASKBOARD.REORDER_MOVE_BOTTOM"></button>
+                             </div>
+
+                            <!-- Delete Task Button -->
+                             <button *ngIf="currentUserProjectRole === 'Owner'" 
+                                    class="delete-card-btn" 
+                                    (click)="onDeleteTask(t.id)" 
+                                    [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_DELETE_ARIA, t.title)"
+                                    [attr.aria-describedby]="'task-title-' + t.id">
                                 <span aria-hidden="true">🗑️</span>
-                        </button>
-					</div>
+                             </button>
+                        </span>  
+                    </div>
 
                     <p>{{ t.description || langService.words().TASKBOARD.TASK_DESCRIPTION_FALLBACK }}</p>
                     

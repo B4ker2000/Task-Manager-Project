@@ -23,10 +23,9 @@ namespace Backend.Controllers
         public async Task<IActionResult> CreateTask([FromBody] TaskCreateDto request)
         {
             var currentUserId = _userContext.GetCurrentUserId();
-            if (currentUserId == null) return UnauthorizedSession();
 
             // Let the service handle checking permission records and saving files
-            var result = await _taskService.CreateTaskAsync(currentUserId.Value, request);
+            var result = await _taskService.CreateTaskAsync(currentUserId, request);
 
             if (result.IsForbidden) return Forbid();
             if (result.ErrorMessage != null) return BadRequest(new { message = result.ErrorMessage });
@@ -38,10 +37,9 @@ namespace Backend.Controllers
         public async Task<IActionResult> GetProjectTasks(int projectId)
         {
             var currentUserId = _userContext.GetCurrentUserId();
-            if (currentUserId == null) return UnauthorizedSession();
 
             // Call service to bundle up roles, task lists, and dropdown teams together
-            var workspaceData = await _taskService.GetProjectTasksAsync(projectId, currentUserId.Value);
+            var workspaceData = await _taskService.GetProjectTasksAsync(projectId, currentUserId);
             if (workspaceData == null) return NotFound(new { message = "Project not found or inaccessible." });
 
             return Ok(workspaceData);
@@ -51,9 +49,7 @@ namespace Backend.Controllers
         public async Task<IActionResult> UpdateTaskStatus(int id, [FromBody] TaskUpdateStatusDto request)
         {
             var currentUserId = _userContext.GetCurrentUserId();
-            if (currentUserId == null) return UnauthorizedSession();
-
-            var outcome = await _taskService.UpdateTaskStatusAsync(id, currentUserId.Value, request.Status);
+            var outcome = await _taskService.UpdateTaskStatusAsync(id, currentUserId, request.Status);
 
             return outcome switch
             {
@@ -68,9 +64,8 @@ namespace Backend.Controllers
         public async Task<IActionResult> DeleteTask(int id)
         {
             var currentUserId = _userContext.GetCurrentUserId();
-            if (currentUserId == null) return UnauthorizedSession();
 
-            var outcome = await _taskService.DeleteTaskAsync(id, currentUserId.Value);
+            var outcome = await _taskService.DeleteTaskAsync(id, currentUserId);
             
             return outcome switch
             {
@@ -84,9 +79,8 @@ namespace Backend.Controllers
         public async Task<IActionResult> AssignTask(int taskId, [FromBody] TaskAssignDto request)
         {
             var currentUserId = _userContext.GetCurrentUserId();
-            if (currentUserId == null) return UnauthorizedSession();
 
-            var outcome = await _taskService.AssignTaskAsync(taskId, currentUserId.Value, request.AssignedUserId);
+            var outcome = await _taskService.AssignTaskAsync(taskId, currentUserId, request.AssignedUserId);
 
             return outcome switch
             {
@@ -100,9 +94,8 @@ namespace Backend.Controllers
         public async Task<IActionResult> AssignTaskCategory(int taskId, [FromBody] TaskCategoryUpdateDto request)
         {
             var currentUserId = _userContext.GetCurrentUserId();
-            if (currentUserId == null) return UnauthorizedSession();
 
-            var outcome = await _taskService.AssignTaskCategoryAsync(taskId, currentUserId.Value, request.CategoryId);
+            var outcome = await _taskService.AssignTaskCategoryAsync(taskId, currentUserId, request.CategoryId);
 
             return outcome switch
             {
@@ -112,25 +105,16 @@ namespace Backend.Controllers
             };
         }
 
-        private UnauthorizedObjectResult UnauthorizedSession()
-        {
-            return Unauthorized(new { message = "Invalid or expired session token!" });
-        }
-
         [HttpPut("project/{projectId}/reorder")]
         public async Task<IActionResult> ReorderTasks(
             int projectId,
             [FromBody] TaskReorderDto request)
         {
             var currentUserId = _userContext.GetCurrentUserId();
-            if (currentUserId == null)
-            {
-                return UnauthorizedSession();
-            }
 
             var outcome = await _taskService.ReorderTasksAsync(
                 projectId,
-                currentUserId.Value,
+                currentUserId,
                 request.Status,
                 request.TaskIds);
 

@@ -217,7 +217,11 @@ namespace Backend.Services
             var projectTasks = await _context.Tasks
                 .Where(t => 
                     t.ProjectId == projectId &&
-                    t.Status == status)
+                    (
+                        status == "In Progress"
+                            ? t.Status == "In Progress" || t.Status == "Review Required"
+                            : t.Status == status
+                    ))
                 .ToListAsync();
 
             if (projectTasks.Count != taskIds.Count)

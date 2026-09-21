@@ -63,16 +63,9 @@ namespace Backend.Controllers
         {
             // Extract the unique User ID embedded inside the secure token claims payload!
             var CurrentUserId = _userContext.GetCurrentUserId();
-            if (CurrentUserId == null) 
-            {
-                return Unauthorized(new { 
-                    Success = false,
-                    Message = "Session expired or invalid token structure!"
-                });
-            }
 
             // Look up the user record in our SQLite context file
-            var profileData = await _authService.GetProfileAsync(CurrentUserId.Value);
+            var profileData = await _authService.GetProfileAsync(CurrentUserId);
             if (profileData == null)
             {
                 return NotFound(new { 
@@ -88,9 +81,8 @@ namespace Backend.Controllers
         public async Task<IActionResult> UpdateAccount([FromBody] UpdateAccountDto request)
         {
             var CurrentUserId = _userContext.GetCurrentUserId();
-            if (CurrentUserId == null) return Unauthorized();
 
-            var success = await _authService.UpdateAccountAsync(CurrentUserId.Value, request);
+            var success = await _authService.UpdateAccountAsync(CurrentUserId, request);
             if (!success) 
             {
                 return NotFound(new { 
@@ -109,9 +101,8 @@ namespace Backend.Controllers
         public async Task<IActionResult> DeleteAccount()
         {
             var CurrentUserId = _userContext.GetCurrentUserId();
-            if (CurrentUserId == null) return Unauthorized();
 
-            var success = await _authService.DeleteAccountAsync(CurrentUserId.Value);
+            var success = await _authService.DeleteAccountAsync(CurrentUserId);
             if (!success) 
             {
                 return NotFound(new { 

@@ -279,6 +279,11 @@ export const JapanesePack: LocalePack = {
         HEADER_CREATE_TAG_ARIA: "新しいカテゴリタグを作成するオーバーレイを開きます",
         HEADER_CREATE_TASK_TEXT: "タスクを<ruby>追加<rt aria-hidden=\"true\">ついか</rt></ruby>",
         HEADER_CREATE_TASK_ARIA: "新しいタスク項目を追加するオーバーレイを開きます",
+        REORDER_MENU_ARIA: "同じ列内でタスクカード「{title}」を上下に並べ替えます",
+        REORDER_MOVE_TOP: "<ruby>最上部<rt aria-hidden=\"true\">さいじょうぶ</rt></ruby>に<ruby>移動<rt aria-hidden=\"true\">いどう</rt></ruby>",
+        REORDER_MOVE_UP: "<ruby>上<rt aria-hidden=\"true\">うえ</rt></ruby>に<ruby>移動<rt aria-hidden=\"true\">いどう</rt></ruby>する",
+        REORDER_MOVE_DOWN: "<ruby>下<rt aria-hidden=\"true\">した</rt></ruby>に<ruby>移動<rt aria-hidden=\"true\">いどう</rt></ruby>する",
+        REORDER_MOVE_BOTTOM: "<ruby>最下部<rt aria-hidden=\"true\">さいかぶ</rt></ruby>に<ruby>移動<rt aria-hidden=\"true\">いどう</rt></ruby>",
 
         // Task Crew & Invitation
         CREW_PANEL_HEADER: "プロジェクトチーム・タグ<ruby>管理<rt aria-hidden=\"true\">かんり</rt></ruby>ワークスペース",

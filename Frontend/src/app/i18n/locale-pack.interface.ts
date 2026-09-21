@@ -277,6 +277,11 @@ export interface LocalePack {
         HEADER_CREATE_TAG_ARIA: string;
         HEADER_CREATE_TASK_TEXT: string;
         HEADER_CREATE_TASK_ARIA: string;
+        REORDER_MENU_ARIA: string;
+        REORDER_MOVE_TOP: string;
+        REORDER_MOVE_UP: string;
+        REORDER_MOVE_DOWN: string;
+        REORDER_MOVE_BOTTOM: string;
 
         // Task Crew & Invitation
         CREW_PANEL_HEADER: string;

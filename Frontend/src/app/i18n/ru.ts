@@ -281,6 +281,11 @@ export const RussianPack: LocalePack = {
         HEADER_CREATE_TAG_ARIA: "Открыть модальное окно для создания нового тега рабочей области",
         HEADER_CREATE_TASK_TEXT: "Добавить задачу",
         HEADER_CREATE_TASK_ARIA: "Открыть модальное окно для добавления новой задачи",
+        REORDER_MENU_ARIA: "Переместить карточку задачи «{title}» вверх или вниз в этой же колонке",
+        REORDER_MOVE_TOP: "Переместить в самое начало",
+        REORDER_MOVE_UP: "Переместить выше",
+        REORDER_MOVE_DOWN: "Переместить ниже",
+        REORDER_MOVE_BOTTOM: "Переместить в самый конец",
 
         // Task Crew & Invitation
         CREW_PANEL_HEADER: "Рабочая область управления командой и тегами проекта",

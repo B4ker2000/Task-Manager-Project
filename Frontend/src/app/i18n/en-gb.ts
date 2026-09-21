@@ -281,6 +281,11 @@ export const EnglishUKPack: LocalePack = {
         HEADER_CREATE_TAG_ARIA: "Create a new workspace category tag",
         HEADER_CREATE_TASK_TEXT: "Add New Task",
         HEADER_CREATE_TASK_ARIA: "Add a new task item",
+        REORDER_MENU_ARIA: "Reorder task card {title} up and down in the same column",
+        REORDER_MOVE_TOP: "Move to Top",
+        REORDER_MOVE_UP: "Move Up",
+        REORDER_MOVE_DOWN: "Move Down",
+        REORDER_MOVE_BOTTOM: "Move to Bottom",
 
         // Task Crew & Invitation
         CREW_PANEL_HEADER: "Project Team and Tags Management",

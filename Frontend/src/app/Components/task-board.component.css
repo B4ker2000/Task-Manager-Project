@@ -67,6 +67,7 @@
    INDIVIDUAL WORKSPACE KANBAN TASK CARDS (THEME ADAPTIVE HOOKS)
    ========================================================================= */
 .task-card { 
+    position: relative;
     background-color: var(--surface-bg, #ffffff); 
     border: 2px solid var(--border-color, #cbd5e1); 
     border-radius: 6px; 
@@ -83,6 +84,12 @@
     align-items: flex-start; 
     gap: 10px; 
     margin-bottom: 8px; 
+}
+
+.task-card-header .task-card-header-buttons {
+    display: flex;
+    gap: 7px;
+    margin-top: 3px;
 }
 
 .task-card h4 { 
@@ -159,7 +166,7 @@
 .priority-badge {
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    margin: 0 5px 5px 0;
+    margin-inline-end: 5px;
 }
 
 .deadline-badge { 
@@ -482,6 +489,66 @@
     align-self: flex-end;
 }
 
+/* Task card reordering navigation menu and buttons */
+.task-reorder-btn {
+    padding: 4px 10px;
+}
+.task-reorder-icon {
+    position: relative;
+    bottom: 1px;
+}
+
+.task-reorder-menu {
+    position: absolute;
+    top: 42px;
+    background-color: var(--surface-bg);
+    border: 2px solid var(--filter-border-color);
+    border-radius: 4px;
+    box-shadow: 0 4px 6px var(--filter-focus-shadow);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    min-width: 120px;
+    animation: menuFadeIn 0.2s ease-out forwards;
+}
+.task-reorder-menu.is-closing {
+    animation: menuFadeOut 0.2s ease-in forwards;
+}
+@keyframes menuFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes menuFadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+}
+
+.task-reorder-menu button {
+    background: none;
+    border: none;
+    border-bottom: 1px dashed var(--border-color) !important;
+    padding: 8px 12px;
+    text-align: start;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.task-reorder-menu button.last-button {
+    border-bottom: none !important;
+}
+
 /* =========================================================================
    FLUID CROSS-RESOLUTION DEVICE SCALING ENGINE (MOBILE MATRIX CONTROLS)
    ========================================================================= */
@@ -547,6 +614,36 @@
     .task-card { 
         cursor: default;
     }
+
+    .task-reorder-menu {
+        inset-inline-end: 49px;
+    }
+
+    /* .task-card.is-holding {
+        animation: holdPulse 1.2s ease-in-out infinite;
+    } */
+
+    /* .task-card.is-draggable {
+        border: 2px dashed #3b82f6;
+        transform: scale(1.02);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    } */
+
+    @keyframes holdPulse {
+        0% {
+            transform: scale(1);
+            opacity: 1;
+        }
+        50% {
+            transform: scale(0.97);
+            opacity: 0.85;
+        }
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
 }
 
 /* Narrow Tablets & Large Phones Layout Spacings */
@@ -583,7 +680,8 @@
     }
 
     /* Anchors the delete button neatly to the top-right corner to save title layout space */
-    .task-card-header .delete-card-btn {
+    .task-card-header .delete-card-btn,
+    .task-card-header .task-reorder-btn {
         position: absolute;
         top: 0;
         inset-inline-end: 0;
