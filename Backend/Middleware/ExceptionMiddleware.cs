@@ -1,46 +1,50 @@
 using System.Net;
 using System.Text.Json;
 
-namespace Backend.Middleware
+namespace Backend.Middleware;
+
+public class ExceptionMiddleware
 {
-    public class ExceptionMiddleware
+    private readonly RequestDelegate _next;
+    private readonly ILogger<ExceptionMiddleware> _logger;
+    private readonly IWebHostEnvironment _env;
+
+    public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger, IWebHostEnvironment env)
     {
-        private readonly RequestDelegate _next;
-        private readonly ILogger<ExceptionMiddleware> _logger;
+        _next = next;
+        _logger = logger;
+        _env = env;
+    }
 
-        public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
+    public async Task InvokeAsync(HttpContext context)
+    {
+        try
         {
-            _next = next;
-            _logger = logger;
+            await _next(context); // Passes traffic along smoothly if no crash happens!
         }
-
-        public async Task InvokeAsync(HttpContext context)
+        catch (Exception ex)
         {
-            try
-            {
-                await _next(context); // Passes traffic along smoothly if no crash happens!
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "An unhandled server exception was intercepted at the root middleware layer.");
-                await HandleExceptionAsync(context, ex);
-            }
+            _logger.LogError(ex, "An unhandled exception occurred: {Message}", ex.Message);
+            await HandleExceptionAsync(context, ex);
         }
+    }
 
-        private static Task HandleExceptionAsync(HttpContext context, Exception exception)
+    private Task HandleExceptionAsync(HttpContext context, Exception exception)
+    {
+        context.Response.ContentType = "application/json";
+        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+
+        var responseMessage = _env.IsDevelopment()
+            ? exception.Message
+            : "An internal server error occurred. Please contact support if the issue persists.";
+
+        var response = new
         {
-            context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            StatusCode = context.Response.StatusCode,
+            Message = responseMessage
+        };
 
-            var response = new
-            {
-                Success = false,
-                Message = "An unexpected processing anomaly occurred on the server layer. Please refresh and try again.",
-                DetailedError = exception.Message
-            };
-
-            var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
-            return context.Response.WriteAsync(JsonSerializer.Serialize(response, options));
-        }
+        var jsonOptions = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+        return context.Response.WriteAsync(JsonSerializer.Serialize(response, jsonOptions));
     }
 }
