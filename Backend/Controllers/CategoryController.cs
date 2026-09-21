@@ -23,21 +23,16 @@ namespace Backend.Controllers
         public async Task<IActionResult> GetProjectCategories(int projectId)
         {
             var categories = await _categoryService.GetCategoriesByProjectAsync(projectId);
-            
             return Ok(categories);
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateCategory(int projectId, [FromBody] CategoryCreateDto dto)
         {
-            var CurrentUserId = _userContext.GetCurrentUserId();
+            var currentUserId = _userContext.GetCurrentUserId();
 
-            // Call our service to handle the heavy lifting!
-            var createdCategory = await _categoryService.CreateCategoryAsync(projectId, CurrentUserId, dto);
-            if (createdCategory == null)
-            {
-                return Forbid(); // The service returned null because the user isn't an Owner 
-            }
+            // Call our service to handle the heavy lifting! Middleware handles returning a 403 status code!
+            var createdCategory = await _categoryService.CreateCategoryAsync(projectId, currentUserId, dto);
 
             return StatusCode(201, new {
                 Success = true,
@@ -49,18 +44,10 @@ namespace Backend.Controllers
         [HttpDelete("{categoryId}")]
         public async Task<IActionResult> DeleteCategory(int projectId, int categoryId)
         {
-            var CurrentUserId = _userContext.GetCurrentUserId();
+            var currentUserId = _userContext.GetCurrentUserId();
 
-            // Call our service to delete the category
-            var success = await _categoryService.DeleteCategoryAsync(projectId, categoryId, CurrentUserId);
-            if (!success)
-            {
-                // If it fails, it means the user isn't an Owner or the Category doesn't exist
-                return BadRequest(new { 
-                    Success = false,
-                    Message = "Category deletion failed. Verify permissions or category existence." 
-                });
-            }
+            // Call our service to delete the category. Middleware handles the 400 response!
+            await _categoryService.DeleteCategoryAsync(projectId, categoryId, currentUserId);
 
             return Ok(new { 
                 Success = true,

@@ -23,15 +23,7 @@ namespace Backend.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody] UserRegisterDto request)
         {
-            var registered = await _authService.RegisterAsync(request);
-            // 1. Check if the email is already taken
-            if (!registered)
-            {
-                return BadRequest(new { 
-                    Success = false,
-                    Message = "A user with this email already exists!"
-                });
-            }
+            await _authService.RegisterAsync(request);
 
             return StatusCode(201, new {
                 Success = true,
@@ -39,18 +31,11 @@ namespace Backend.Controllers
             });
         }
         
-        [HttpPost("login")] // This makes the URL: api/auth/Login
+        [HttpPost("login")] // This makes the URL: api/auth/login
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] UserLoginDto request)
         {
             var token = await _authService.LoginAsync(request);
-            if (token == null)
-            {
-                return BadRequest(new {
-                    Success = false,
-                    Message = "Invalid email or password!"
-                });
-            }
 
             return Ok(new { 
                 Success = true,
@@ -62,17 +47,10 @@ namespace Backend.Controllers
         public async Task<IActionResult> GetUserProfile()
         {
             // Extract the unique User ID embedded inside the secure token claims payload!
-            var CurrentUserId = _userContext.GetCurrentUserId();
+            var currentUserId = _userContext.GetCurrentUserId();
 
             // Look up the user record in our SQLite context file
-            var profileData = await _authService.GetProfileAsync(CurrentUserId);
-            if (profileData == null)
-            {
-                return NotFound(new { 
-                    Success = false, 
-                    Message = "User account no longer exists!" 
-                });
-            }
+            var profileData = await _authService.GetProfileAsync(currentUserId);
 
             return Ok(profileData);
         }
@@ -80,16 +58,9 @@ namespace Backend.Controllers
         [HttpPut("update-account")]
         public async Task<IActionResult> UpdateAccount([FromBody] UpdateAccountDto request)
         {
-            var CurrentUserId = _userContext.GetCurrentUserId();
+            var currentUserId = _userContext.GetCurrentUserId();
 
-            var success = await _authService.UpdateAccountAsync(CurrentUserId, request);
-            if (!success) 
-            {
-                return NotFound(new { 
-                    Success = false, 
-                    Message = "User not found." 
-                });
-            }
+            await _authService.UpdateAccountAsync(currentUserId, request);
 
             return Ok(new { 
                 Success = true, 
@@ -100,17 +71,10 @@ namespace Backend.Controllers
         [HttpDelete("delete-account")]
         public async Task<IActionResult> DeleteAccount()
         {
-            var CurrentUserId = _userContext.GetCurrentUserId();
+            var currentUserId = _userContext.GetCurrentUserId();
 
-            var success = await _authService.DeleteAccountAsync(CurrentUserId);
-            if (!success) 
-            {
-                return NotFound(new { 
-                    Success = false, 
-                    Message = "User not found." 
-                });
-            }
-
+            await _authService.DeleteAccountAsync(currentUserId);
+            
             return Ok(new { 
                 Success = true, 
                 Message = "Your account has been permanently removed." 

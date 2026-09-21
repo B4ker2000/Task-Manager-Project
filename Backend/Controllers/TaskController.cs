@@ -7,7 +7,7 @@ namespace Backend.Controllers
 {
     [Authorize] // Protects all task operations
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/task")]
     public class TaskController : ControllerBase
     {
         private readonly ITaskService _taskService;
@@ -19,18 +19,17 @@ namespace Backend.Controllers
             _userContext = userContext;
         }
 
-        [HttpPost] // POST api/tasks
+        [HttpPost] // POST api/task
         public async Task<IActionResult> CreateTask([FromBody] TaskCreateDto request)
         {
             var currentUserId = _userContext.GetCurrentUserId();
 
-            // Let the service handle checking permission records and saving files
-            var result = await _taskService.CreateTaskAsync(currentUserId, request);
+            var createdTask = await _taskService.CreateTaskAsync(currentUserId, request);
 
-            if (result.IsForbidden) return Forbid();
-            if (result.ErrorMessage != null) return BadRequest(new { message = result.ErrorMessage });
-
-            return Ok(new { message = "Task created successfully!", taskId = result.Task?.Id });
+            return StatusCode(201, new {
+                Message = "Task created successfully!",
+                TaskId = createdTask.Id
+            });
         }
 
         [HttpGet("project/{projectId}")] // GET api/task/project/1 (Get all tasks for a specific project)
@@ -38,9 +37,7 @@ namespace Backend.Controllers
         {
             var currentUserId = _userContext.GetCurrentUserId();
 
-            // Call service to bundle up roles, task lists, and dropdown teams together
             var workspaceData = await _taskService.GetProjectTasksAsync(projectId, currentUserId);
-            if (workspaceData == null) return NotFound(new { message = "Project not found or inaccessible." });
 
             return Ok(workspaceData);
         }
@@ -49,15 +46,10 @@ namespace Backend.Controllers
         public async Task<IActionResult> UpdateTaskStatus(int id, [FromBody] TaskUpdateStatusDto request)
         {
             var currentUserId = _userContext.GetCurrentUserId();
-            var outcome = await _taskService.UpdateTaskStatusAsync(id, currentUserId, request.Status);
+            
+            await _taskService.UpdateTaskStatusAsync(id, currentUserId, request.Status);
 
-            return outcome switch
-            {
-                ServiceOutcome.NotFound => NotFound(new { message = "Task not found." }),
-                ServiceOutcome.Forbidden => Forbid(), // Returns 403 instantly if a Viewer attempts to change status!
-                ServiceOutcome.InvalidStatus => BadRequest(new { message = $"'{request.Status}' is not a valid task status!" }),
-               _ => Ok(new { message = "Task status updated successfully!" })
-            };
+            return Ok(new { Message = "Task status updated successfully!" });
         }
 
         [HttpDelete("{id}")]
@@ -65,14 +57,9 @@ namespace Backend.Controllers
         {
             var currentUserId = _userContext.GetCurrentUserId();
 
-            var outcome = await _taskService.DeleteTaskAsync(id, currentUserId);
+            await _taskService.DeleteTaskAsync(id, currentUserId);
             
-            return outcome switch
-            {
-                ServiceOutcome.NotFound => NotFound(new { message = "Task not found." }),
-                ServiceOutcome.Forbidden => Forbid(),
-                _ => Ok(new { message = "Task deleted successfully!" })
-            };
+            return Ok(new { message = "Task deleted successfully!" });
         }
 
         [HttpPut("{taskId}/assign")]
@@ -80,14 +67,9 @@ namespace Backend.Controllers
         {
             var currentUserId = _userContext.GetCurrentUserId();
 
-            var outcome = await _taskService.AssignTaskAsync(taskId, currentUserId, request.AssignedUserId);
+            await _taskService.AssignTaskAsync(taskId, currentUserId, request.AssignedUserId);
 
-            return outcome switch
-            {
-                ServiceOutcome.NotFound => NotFound(new { message = "Task not found!" }),
-                ServiceOutcome.Forbidden => Forbid(),
-                _ => Ok(new { message = "Task assignment updated successfully!" })
-            };
+            return Ok(new { message = "Task assignment updated successfully!" });
         }
 
         [HttpPut("{taskId}/category")]
@@ -95,14 +77,9 @@ namespace Backend.Controllers
         {
             var currentUserId = _userContext.GetCurrentUserId();
 
-            var outcome = await _taskService.AssignTaskCategoryAsync(taskId, currentUserId, request.CategoryId);
+            await _taskService.AssignTaskCategoryAsync(taskId, currentUserId, request.CategoryId);
 
-            return outcome switch
-            {
-                ServiceOutcome.NotFound => NotFound(new { message = "Task not found." }),
-                ServiceOutcome.Forbidden => Forbid(),
-                _ => Ok(new { message = "Category tag linked to task successfully!" })
-            };
+            return Ok(new { message = "Category tag linked to task successfully!" });
         }
 
         [HttpPut("project/{projectId}/reorder")]
@@ -112,19 +89,13 @@ namespace Backend.Controllers
         {
             var currentUserId = _userContext.GetCurrentUserId();
 
-            var outcome = await _taskService.ReorderTasksAsync(
+            await _taskService.ReorderTasksAsync(
                 projectId,
                 currentUserId,
                 request.Status,
                 request.TaskIds);
 
-            return outcome switch
-            {
-                ServiceOutcome.Forbidden => Forbid(),
-                ServiceOutcome.InvalidStatus => BadRequest(
-                    new { message = "The submitted task order is invalid." }),
-                    _ => Ok(new { message = "Task order updated successfully." })
-            };
+            return Ok(new { message = "Task order updated successfully." });
         }
     }
 }

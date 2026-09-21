@@ -3,43 +3,37 @@ using Backend.Models;
 
 namespace Backend.Services
 {
-    public class TaskCreationResult
-    {
-        public TaskItem? Task { get; set; }
-        public string? ErrorMessage { get; set; }
-        public bool IsForbidden { get; set; }
-    }
 
     public interface ITaskService
     {
-        Task<TaskCreationResult> CreateTaskAsync(
+        Task<TaskItem> CreateTaskAsync(
             int currentUserId, 
             TaskCreateDto request);
         
-        Task<object?> GetProjectTasksAsync(
+        Task<object> GetProjectTasksAsync(
             int projectId, 
             int currentUserId);
 
-        Task<ServiceOutcome> UpdateTaskStatusAsync(
+        Task UpdateTaskStatusAsync(
             int taskId, 
             int currentUserId, 
             string newStatus);
         
-        Task<ServiceOutcome> DeleteTaskAsync(
+        Task DeleteTaskAsync(
             int taskId, 
             int currentUserId);
         
-        Task<ServiceOutcome> AssignTaskAsync(
+        Task AssignTaskAsync(
             int taskId, 
             int currentUserId, 
             int? assignedUserId);
         
-        Task<ServiceOutcome> AssignTaskCategoryAsync(
+        Task AssignTaskCategoryAsync(
             int taskId, 
             int currentUserId, 
             int? categoryId);
         
-        Task<ServiceOutcome> ReorderTasksAsync(
+        Task ReorderTasksAsync(
             int projectId,
             int currentUserId,
             string status,

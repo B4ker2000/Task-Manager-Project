@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers
 {
-    [Authorize] // This locks down EVERY endpoint inside this contoller & Enforces security validation JWT token checks!
+    [Authorize] // Enforces security validation JWT token checks!
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/project")]
     public class ProjectController : ControllerBase
     {
         private readonly IProjectService _projectService;
@@ -27,10 +27,10 @@ namespace Backend.Controllers
             // Call service to instantiate the project and map creator permissions
             int projectId = await _projectService.CreateProjectAsync(currentUserId, request);
 
-            return Ok(new { message = "Project created successfully!", projectId = projectId });
+            return StatusCode(201, new { message = "Project created successfully!", projectId = projectId });
         }
 
-        [HttpGet] // GET api/project (Retrieves all projects belonging to the logged-in user)
+        [HttpGet] // GET api/project
         public async Task<IActionResult> GetMyProjects()
         {
             var currentUserId = _userContext.GetCurrentUserId();
@@ -46,8 +46,7 @@ namespace Backend.Controllers
         {
             var currentUserId = _userContext.GetCurrentUserId();
 
-            var success = await _projectService.DeleteProjectAsync(id, currentUserId);
-            if (!success) return NotFound(new { message = "Project not found or you lack Owner rights!" });
+            await _projectService.DeleteProjectAsync(id, currentUserId);
 
             return Ok(new { message = "Project and all its tasks were deleted successfully!" });
         }
@@ -57,18 +56,13 @@ namespace Backend.Controllers
         {
             var currentUserId = _userContext.GetCurrentUserId();
 
-            // Execute removal rules safely down inside the service
-            var outcome = await _projectService.RemoveProjectMemberAsync(projectId, currentUserId, targetUserId);
+            await _projectService.RemoveProjectMemberAsync(projectId, currentUserId, targetUserId);
 
-            bool isKickingSomeoneElse = currentUserId != targetUserId;
+            var message = currentUserId != targetUserId
+                ? "Member successfully removed from project." 
+                : "You have left the project room safely.";
 
-            return outcome switch
-            {
-                ServiceOutcome.NotFound => NotFound(new { message = "Target member record not found in this project room." }),
-                ServiceOutcome.Forbidden => Forbid(),
-                ServiceOutcome.InvalidStatus => BadRequest(new { message = "You are the sole Owner of this project! Assign another Owner before leaving or delete the project from dashboard." }),
-                _ => Ok(new { message = isKickingSomeoneElse ? "Member successfully removed from project." : "You have left the project room safely." })
-            };
+            return Ok(new { message = message });
         }
 
         [HttpPost("{projectId}/invitations")]
@@ -78,18 +72,10 @@ namespace Backend.Controllers
         {
             var currentUserId = _userContext.GetCurrentUserId();
 
-            var invitation = await _projectService.CreateInvitationAsync(
+            await _projectService.CreateInvitationAsync(
                 projectId,
                 currentUserId,
                 request);
-
-            if (invitation == null)
-            {
-                return BadRequest(new
-                {
-                    message = "The invitation could not be created. Check permissions, membership, or duplicate invitations."
-                });
-            }
 
             return Ok(new
             {
@@ -113,21 +99,9 @@ namespace Backend.Controllers
         {
             var currentUserId = _userContext.GetCurrentUserId();
 
-            var accepted = await _projectService
-                .AcceptInvitationAsync(invitationId, currentUserId);
+            await _projectService.AcceptInvitationAsync(invitationId, currentUserId);
 
-            if (!accepted)
-            {
-                return BadRequest(new
-                {
-                    message = "The invitation could not be accepted."
-                });
-            }
-
-            return Ok(new
-            {
-                message = "Invitation accepted successfully."
-            });
+            return Ok(new { message = "Invitation accepted successfully." });
         }
 
         [HttpPost("invitations/{invitationId}/decline")]
@@ -135,28 +109,15 @@ namespace Backend.Controllers
         {
             var currentUserId = _userContext.GetCurrentUserId();
 
-            var declined = await _projectService
-                .DeclineInvitationAsync(invitationId, currentUserId);
+            await _projectService.DeclineInvitationAsync(invitationId, currentUserId);
             
-            if (!declined)
-            {
-                return BadRequest(new
-                {
-                    message = "The invitation could not be declined."
-                });
-            }
-
-            return Ok(new
-            {
-                message  = "Invitation declined successfully."
-            });
+            return Ok(new { message  = "Invitation declined successfully." });
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProjectById(int id)
         {
             var project = await _projectService.GetProjectByIdAsync(id);
-            if (project == null) return NotFound(new { message = "Project not found!" });
 
             return Ok(project);
         }
@@ -167,7 +128,6 @@ namespace Backend.Controllers
             var currentUserId = _userContext.GetCurrentUserId();
 
             var role = await _projectService.GetProjectRoleAsync(id, currentUserId);
-            if (role == null) return NotFound(new { message = "You are not a member of this project!" });
 
             return Ok(new { role = role });
         }
@@ -175,8 +135,6 @@ namespace Backend.Controllers
         [HttpGet("{id}/members")]
         public async Task<IActionResult> GetProjectMembers(int id)
         {
-            var currentUserId = _userContext.GetCurrentUserId();
-
             var rosterList = await _projectService.GetProjectMembersAsync(id);
             
             return Ok(rosterList);

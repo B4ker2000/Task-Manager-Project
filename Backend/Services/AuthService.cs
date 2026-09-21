@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Backend.Models;
 using Backend.Data;
 using Backend.Dtos;
+using Backend.Exceptions;
 
 namespace Backend.Services
 {
@@ -23,11 +24,11 @@ namespace Backend.Services
         }
 
         // 1. Handles User Registration Logic
-        public async Task<bool> RegisterAsync(UserRegisterDto request)
+        public async Task RegisterAsync(UserRegisterDto request)
         {
             if (await _context.Users.AnyAsync(u => u.Email == request.Email))
             {
-                return false; // Email already taken
+                throw new BadRequestException("A user with this email already exists!");
             }
 
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
@@ -42,32 +43,31 @@ namespace Backend.Services
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
-            return true;
         }
 
         // 2. Handle User Login Token Generation
-        public async Task<string?> LoginAsync(UserLoginDto request)
+        public async Task<string> LoginAsync(UserLoginDto request)
         {
-
             if (string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.Password))
             {
-                return null;
+                throw new BadRequestException("Email and Password are required fields.");
             }
 
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email.Trim().ToLower());
             if (user == null || !VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
             {
-                return null; // Invalid credentials
+                // Invalid credentials
+                throw new BadRequestException("Invalid email or password!");
             }
 
             return CreateToken(user);
         }
 
         // 3. Process Profile Statistics Generation
-        public async Task<object?> GetProfileAsync(int userId)
+        public async Task<object> GetProfileAsync(int userId)
         {
-            var user = await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Id == userId);
-            if (user == null) return null;
+            var user = await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Id == userId) 
+                ?? throw new NotFoundException("User account no longer exists!");
 
             int totalAssignedTasks = 0;
             int completedTasksCount = 0;
@@ -96,10 +96,10 @@ namespace Backend.Services
         }
 
         // 4. Handle Account Details Modification
-        public async Task<bool> UpdateAccountAsync(int userId, UpdateAccountDto request)
+        public async Task UpdateAccountAsync(int userId, UpdateAccountDto request)
         {
-            var user = await _context.Users.FindAsync(userId);
-            if (user == null) return false;
+            var user = await _context.Users.FindAsync(userId)
+                ?? throw new NotFoundException("User not found");
 
             // 4.1 Optional Username Update
             if (!string.IsNullOrWhiteSpace(request.NewUsername))
@@ -116,14 +116,13 @@ namespace Backend.Services
             }
 
             await _context.SaveChangesAsync();
-            return true;
         }
 
         // 5. Handle Permanent Account Removal
-        public async Task<bool> DeleteAccountAsync(int userId)
+        public async Task DeleteAccountAsync(int userId)
         {
-            var user = await _context.Users.FindAsync(userId);
-            if (user == null) return false;
+            var user = await _context.Users.FindAsync(userId)
+                ?? throw new NotFoundException("User not found");
 
             // Purge target entity assignments and records explicitly before user removal
             var memberships = await _context.ProjectMembers.Where(pm => pm.UserId == userId).ToListAsync();
@@ -138,7 +137,6 @@ namespace Backend.Services
 
             _context.Users.Remove(user);
             await _context.SaveChangesAsync();
-            return true;
         }
 
         // --- Core Internal Crypto Helper Utilities ---

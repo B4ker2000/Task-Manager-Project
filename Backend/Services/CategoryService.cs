@@ -1,6 +1,7 @@
 using Backend.Data;
 using Backend.Dtos;
 using Backend.Models;
+using Backend.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Services
@@ -22,12 +23,12 @@ namespace Backend.Services
                 .ToListAsync();
         }
 
-        public async Task<Category?> CreateCategoryAsync(int projectId, int userId, CategoryCreateDto dto)
+        public async Task<Category> CreateCategoryAsync(int projectId, int userId, CategoryCreateDto dto)
         {
             // Guard Clause: Protect against bad payloads breaking string manipulation (.Trim())
             if (string.IsNullOrWhiteSpace(dto.Name) || string.IsNullOrWhiteSpace(dto.ColorHex))
             {
-                return null;
+                throw new BadRequestException("Category Name and ColorHex cannot be empty.");
             }
 
             // 1. Verify Authorization: Only Project Owners/Managers can create categories
@@ -37,8 +38,7 @@ namespace Backend.Services
 
             if (membership == null || membership.ProjectRole != "Owner")
             {
-                // Returning null lets our controller know authorization failed or was forbidden
-                return null;
+                throw new ForbiddenException("You must be the project owner to create categories.");
             }
 
             // 2. Build the new category object
@@ -56,7 +56,7 @@ namespace Backend.Services
             return newCategory;
         }
 
-        public async Task<bool> DeleteCategoryAsync(int projectId, int categoryId, int userId)
+        public async Task DeleteCategoryAsync(int projectId, int categoryId, int userId)
         {
             // 1. Verify Authorization: Only space Owners can delete categories!
             var membership = await _context.ProjectMembers
@@ -65,7 +65,7 @@ namespace Backend.Services
         
             if (membership == null || membership.ProjectRole != "Owner")
             {
-                return false;
+                throw new ForbiddenException("Category deletion failed. You do not have permission to delete tags.");
             }
 
             // 2. Locate target category tag record
@@ -74,14 +74,12 @@ namespace Backend.Services
 
             if (category == null)
             {
-                return false;
+                throw new BadRequestException("Category deletion failed. The targeted category tag does not exist.");
             }
 
             // 3. Erase the record!
             _context.Categories.Remove(category);
             await _context.SaveChangesAsync();
-
-            return true;
         }
     }
 }

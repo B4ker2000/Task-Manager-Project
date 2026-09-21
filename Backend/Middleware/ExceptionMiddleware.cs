@@ -1,5 +1,6 @@
 using System.Net;
 using System.Text.Json;
+using Backend.Exceptions;
 
 namespace Backend.Middleware;
 
@@ -32,16 +33,26 @@ public class ExceptionMiddleware
     private Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
         context.Response.ContentType = "application/json";
-        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
-        var responseMessage = _env.IsDevelopment()
+        // Default values
+        var statusCode = (int)HttpStatusCode.InternalServerError;
+        var message = _env.IsDevelopment()
             ? exception.Message
             : "An internal server error occurred. Please contact support if the issue persists.";
 
+        if (exception is HttpResponseException httpException)
+        {
+           statusCode = (int)httpException.StatusCode;
+           message = httpException.Message;
+        }
+
+        context.Response.StatusCode = statusCode;
+
         var response = new
         {
-            StatusCode = context.Response.StatusCode,
-            Message = responseMessage
+            Success = false,
+            StatusCode = statusCode,
+            Message = message
         };
 
         var jsonOptions = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };

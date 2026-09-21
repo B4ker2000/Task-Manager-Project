@@ -57,10 +57,10 @@ var app = builder.Build();
 app.UseCors("AllowAngular"); // Related to 5. but should be between "var app = builder.build();" and "app.UseAuthentication();"
 
 // 6. Middleware Pipeline Routing (Order matters here!)
+app.UseMiddleware<ExceptionMiddleware>(); // Root-level high performance shield!
 app.UseAuthentication(); // Checks who you are via JWT
 app.UseAuthorization();  // Checks what you are allowed to do
-app.UseMiddleware<ExceptionMiddleware>(); // Root-level high performance shield!
-app.UseMiddleware<UserSessionMiddleware>(); // Root-level high performance shield!
+app.UseMiddleware<UserSessionMiddleware>(); // Root-level user session management!
 
 app.MapControllers();
 app.Run();

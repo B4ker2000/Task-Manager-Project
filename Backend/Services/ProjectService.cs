@@ -1,5 +1,6 @@
 using Backend.Data;
 using Backend.Dtos;
+using Backend.Exceptions;
 using Backend.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -57,34 +58,32 @@ namespace Backend.Services
         }
 
         // 3. Cascade Delete Projects and Associated Board Tasks safely
-        public async Task<bool> DeleteProjectAsync(int projectId, int currentUserId)
+        public async Task DeleteProjectAsync(int projectId, int currentUserId)
         {
-            var project = await _context.Projects.FindAsync(projectId);
-            if (project == null) return false;
+            var project = await _context.Projects.FindAsync(projectId)
+                ?? throw new NotFoundException("Project not found.");
 
             // Security gate: Verify requester is the true project creator/owner/manager before destroying records
             var isOwner = await _context.ProjectMembers
                 .AnyAsync(pm => pm.ProjectId == projectId && pm.UserId == currentUserId && pm.ProjectRole == "Owner");
-
-            if (!isOwner) return false;
+                
+            if (!isOwner) 
+                throw new ForbiddenException("Only Project Owners can delete projects");
 
             var associatedTasks = _context.Tasks.Where(t => t.ProjectId == projectId);
             _context.Tasks.RemoveRange(associatedTasks);
 
             _context.Projects.Remove(project);
             await _context.SaveChangesAsync();
-
-            return true;
         }
 
         // 4. Process Workspace Eviction or Voluntary Self-Removal
-        public async Task<ServiceOutcome> RemoveProjectMemberAsync(int projectId, int currentUserId, int targetUserId)
+        public async Task RemoveProjectMemberAsync(int projectId, int currentUserId, int targetUserId)
         {
             // 4.1. Find target membership record
             var targetMembership = await _context.ProjectMembers
-                .FirstOrDefaultAsync(pm => pm.ProjectId == projectId && pm.UserId == targetUserId);
-
-            if (targetMembership == null) return ServiceOutcome.NotFound;
+                .FirstOrDefaultAsync(pm => pm.ProjectId == projectId && pm.UserId == targetUserId)
+                ?? throw new NotFoundException("Target user is not a member of the project.");
 
             // 4.2. Read authorization clearance roles
             var currentUserRole = await _context.ProjectMembers
@@ -96,9 +95,7 @@ namespace Backend.Services
 
             // Rule A: Kicking someone else requires Owner clearance
             if (isKickingSomeoneElse && currentUserRole != "Owner")
-            {
-                return ServiceOutcome.Forbidden;
-            }
+                throw new ForbiddenException("Only Project Owners can kick other members.");
 
             // Rule B: Cannot leave voluntarily if you are the last surviving project owner
             if (!isKickingSomeoneElse && currentUserRole == "Owner")
@@ -108,7 +105,7 @@ namespace Backend.Services
 
                 if (ownerCount <= 1)
                 {
-                    return ServiceOutcome.InvalidStatus; // Using InvalidStatus as our block trigger for the SoleOwnerTrap
+                    throw new BadRequestException("You are the sole Owner of this project! Assign another Owner before leaving or delete the project from the dashboard.");
                 }
             }
 
@@ -120,23 +117,23 @@ namespace Backend.Services
             // 4.4. Remove record
             _context.ProjectMembers.Remove(targetMembership);
             await _context.SaveChangesAsync();
-
-            return ServiceOutcome.Success;
         }
 
         // 5. Fetch Single Project Metadata Profile
-        public async Task<Project?> GetProjectByIdAsync(int projectId)
+        public async Task<Project> GetProjectByIdAsync(int projectId)
         {
-            return await _context.Projects.AsNoTracking().FirstOrDefaultAsync(p => p.Id == projectId);
+            return await _context.Projects.AsNoTracking().FirstOrDefaultAsync(p => p.Id == projectId) 
+                ?? throw new NotFoundException("Project not found.");
         }
 
         // 6. Read Current User's Workspace Clearance Role
-        public async Task<string?> GetProjectRoleAsync(int projectId, int userId)
+        public async Task<string> GetProjectRoleAsync(int projectId, int userId)
         {
             return await _context.ProjectMembers
                 .Where(pm => pm.ProjectId == projectId && pm.UserId == userId)
                 .Select(pm => pm.ProjectRole)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync() 
+                ?? throw new NotFoundException("You are not a member of this project!");
         }
 
         // 7. Extract Project Room's Registered Roster Directory
@@ -155,21 +152,24 @@ namespace Backend.Services
         }
 
         // 8. Create an invitation with set rules!
-        public async Task<Invitation?> CreateInvitationAsync(int projectId, int currentUserId, ProjectInviteDto request)
+        public async Task CreateInvitationAsync(int projectId, int currentUserId, ProjectInviteDto request)
         {
             var isOwner = await _context.ProjectMembers
                 .AnyAsync(pm => pm.ProjectId == projectId
                     && pm.UserId == currentUserId
                     && pm.ProjectRole == "Owner");
             
-            if (!isOwner) return null;
+            if (!isOwner) 
+                throw new ForbiddenException("Only Owners can invite new members.");
 
-            var invitedEmail = request.InvitedEmail.Trim().ToLower();
+            var invitedEmail = request.InvitedEmail?.Trim().ToLower()
+                ?? throw new BadRequestException("Invalid invited email.");
 
             var existingMember = await _context.ProjectMembers
                 .AnyAsync(pm => pm.ProjectId == projectId && pm.User != null && pm.User.Email == invitedEmail);
                 
-            if (existingMember) return null;
+            if (existingMember)
+                throw new BadRequestException("User is already a member.");
 
             var existingPendingInvite = await _context.Invitations
                 .AnyAsync(i => 
@@ -177,7 +177,8 @@ namespace Backend.Services
                     i.InvitedEmail == invitedEmail &&
                     i.Status == "Pending");
 
-            if (existingPendingInvite) return null;
+            if (existingPendingInvite) 
+                throw new BadRequestException("User has already been invited.");
 
             var invitedUser = await _context.Users
                 .FirstOrDefaultAsync(u => u.Email == invitedEmail);
@@ -196,8 +197,6 @@ namespace Backend.Services
 
             _context.Invitations.Add(invitation);
             await _context.SaveChangesAsync();
-
-            return invitation;
         }
         
         // 9. Method to fetch notifications sent to the current user
@@ -230,30 +229,31 @@ namespace Backend.Services
         }
 
         // 10. What to do when an invitation is Accepted
-        public async Task<bool> AcceptInvitationAsync(int invitationId, int userId)
+        public async Task AcceptInvitationAsync(int invitationId, int userId)
         {
             var invitation = await _context.Invitations
                 .FirstOrDefaultAsync(i => i.Id == invitationId);
 
             var now = DateTime.UtcNow;
 
-            if (invitation == null) return false;
-            if (invitation.InvitedUserId != userId) return false;
-            if (invitation.Status != "Pending") return false;
-            if (invitation.InvitedUserId == null) return false;
+            if (invitation == null) throw new NotFoundException("Invitation not found.");
+            if (invitation.InvitedUserId != userId) throw new BadRequestException("Invalid user ID.");
+            if (invitation.Status != "Pending") throw new BadRequestException("User has already responded to this invitation.");
+            if (invitation.InvitedUserId == null) throw new NotFoundException("User Id not found.");
             if (invitation.ExpiresAt.HasValue && invitation.ExpiresAt.Value <= now)
             {
                 invitation.Status = "TimedOut";
                 invitation.RespondedAt = now;
                 await _context.SaveChangesAsync();
-                return false;
+                throw new BadRequestException("Invitation was expired.");
             }
 
             var alreadyMember = await _context.ProjectMembers
                 .AnyAsync(pm => pm.ProjectId == invitation.ProjectId
                                 && pm.UserId == invitation.InvitedUserId.Value);
 
-            if (alreadyMember) return false;
+            if (alreadyMember)
+                throw new BadRequestException("User is already a member.");
 
             _context.ProjectMembers.Add(new ProjectMember
             {
@@ -266,34 +266,32 @@ namespace Backend.Services
             invitation.RespondedAt = now;
 
             await _context.SaveChangesAsync();
-            return true;
         }
 
         // 11. What to do if the invitaion is declined!
-        public async Task<bool> DeclineInvitationAsync(int invitationId, int userId)
+        public async Task DeclineInvitationAsync(int invitationId, int userId)
         {
             var invitation = await _context.Invitations
                 .FirstOrDefaultAsync(i => i.Id == invitationId);
             
             var now = DateTime.UtcNow;
                 
-            if (invitation == null) return false;
-            if (invitation.InvitedUserId != userId) return false;
-            if (invitation.Status != "Pending") return false;
+            if (invitation == null) throw new NotFoundException("Invitation not found.");
+            if (invitation.InvitedUserId != userId) throw new BadRequestException("Invalid user ID.");
+            if (invitation.Status != "Pending") throw new BadRequestException("User has already responded to this invitation.");
 
             if (invitation.ExpiresAt.HasValue && invitation.ExpiresAt.Value <= now)
             {
                 invitation.Status = "TimedOut";
                 invitation.RespondedAt = now;
                 await _context.SaveChangesAsync();
-                return false;
+                throw new BadRequestException("Invitation was expired.");
             }
 
             invitation.Status = "Declined";
             invitation.RespondedAt = now;
 
             await _context.SaveChangesAsync();
-            return true;
         }
     }
 }
