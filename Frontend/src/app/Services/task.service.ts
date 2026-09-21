@@ -1,7 +1,7 @@
-import { Injectable, inject, PLATFORM_ID } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { isPlatformBrowser } from "@angular/common";
+import { Injectable, inject } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { TaskItem, ProjectWorkspaceData, TaskCreateDto } from "../models/task.model";
 
 @Injectable({
     providedIn: 'root'
@@ -9,95 +9,39 @@ import { Observable } from "rxjs";
 export class TaskService {
     private apiUrl = 'http://localhost:5283/api/task';
     private http = inject(HttpClient);
-    private platformId = inject(PLATFORM_ID); // Inject platform checking context
 
-    private getHeaders(): HttpHeaders {
-        let token = '';
-
-        if(isPlatformBrowser(this.platformId)) {
-            token = localStorage.getItem('token') || '';
-        }
-        
-        return new HttpHeaders({
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        });
-    }
-
-    // 1. Get all tasks for a specific project
-    public getProjectTasks(projectId: number): Observable<any[]> {
-        return this.http.get<any[]>(
-            `${this.apiUrl}/project/${projectId}`, 
-            { headers: this.getHeaders() }
-        );
+    // 1. Get all tasks, user role, and roster list for a project room
+    public getProjectTasks(projectId: number): Observable<ProjectWorkspaceData> {
+        return this.http.get<ProjectWorkspaceData>(`${this.apiUrl}/project/${projectId}`);
     }
 
     // 2. Create a new task
-    public createTask(task: any): Observable<any> {
-        return this.http.post<any>(
-            this.apiUrl, 
-            task, 
-            { headers: this.getHeaders() }
-        );
+    public createTask(task: TaskCreateDto): Observable<{ message: string, taskId: number }> {
+        return this.http.post<{ message: string, taskId: number }>(this.apiUrl, task);
     }
 
     // 3. Update status (Pending -> In Progress -> Completed)
-    public updateTaskStatus(
-        taskId: number, 
-        status: string
-    ): Observable<any> {
-        return this.http.put<any>(
-            `${this.apiUrl}/${taskId}/status`, 
-            { status }, 
-            { headers: this.getHeaders() }
-        );
+    public updateTaskStatus(taskId: number, status: string): Observable<{ message: string }> {
+        return this.http.put<{ message: string }>(`${this.apiUrl}/${taskId}/status`, { status });
     }
 
     // 4. Delete a task completely from the database
-    public deleteTask(taskId: number): Observable<any> {
-        return this.http.delete<any>(
-            `${this.apiUrl}/${taskId}`, 
-            { headers: this.getHeaders() }
-        );
+    public deleteTask(taskId: number): Observable<{ message: string }> {
+        return this.http.delete<{ message: string }>(`${this.apiUrl}/${taskId}`);
     }
 
     // 5. Assign tasks to users
-    public assignTask(
-        taskId: number, 
-        assignedUserId: number | null
-    ): Observable<any> {
-    return this.http.put<any>(
-        `${this.apiUrl}/${taskId}/assign`, 
-        { assignedUserId }, 
-        { headers: this.getHeaders() }
-    );
+    public assignTask(taskId: number, assignedUserId: number | null): Observable<{ message: string }> {
+    return this.http.put<{ message: string }>(`${this.apiUrl}/${taskId}/assign`, { assignedUserId });
     }
 
     // 6. Assign tags/categories to tasks
-    public assignTaskCategory(
-        taskId: number, 
-        categoryId: number | null
-    ): Observable<any> {
-        return this.http.put<any>(
-            `${this.apiUrl}/${taskId}/category`, 
-            { categoryId }, 
-            { headers: this.getHeaders() }
-        );
+    public assignTaskCategory(taskId: number, categoryId: number | null): Observable<{ message: string }> {
+        return this.http.put<{ message: string }>(`${this.apiUrl}/${taskId}/category`, { categoryId });
     }
 
-    // 7. Re-order task cards
-    public reorderTasks(
-        projectId: number,
-        status: string,
-        taskIds: number[]
-    ): Observable<any> {
-        return this.http.put<any>(
-            `${this.apiUrl}/project/${projectId}/reorder`,
-            {
-                status,
-                taskIds
-            },
-            { headers: this.getHeaders() }
-        );
+    // 7. Re-order task cards in a column layout
+    public reorderTasks(projectId: number, status: string, taskIds: number[]): Observable<{ message: string }> {
+        return this.http.put<{ message: string }>(`${this.apiUrl}/project/${projectId}/reorder`, { status, taskIds });
     }
 }

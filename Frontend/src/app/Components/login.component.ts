@@ -4,6 +4,8 @@ import { Router, RouterLink } from "@angular/router";
 import { AuthService } from "../services/auth.service";
 import { NgIf } from "@angular/common";
 import { LanguageService } from "../i18n/language.service";
+import { AuthResponse, UserLoginDto } from "../models/auth.model";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
     selector: 'app-login',
@@ -17,7 +19,7 @@ export class LoginComponent implements OnInit {
     private router = inject(Router);
     private cdr = inject(ChangeDetectorRef);
 
-    public credentials = { email: '', password: '' };
+    public credentials: UserLoginDto = { email: '', password: '' };
     public errorMessage: string = '';
     public showPassword = false;
     public rememberMe: boolean = false;
@@ -37,7 +39,7 @@ export class LoginComponent implements OnInit {
         this.errorMessage = ''; // Clears out past error notices before trying again
 
         this.authService.login(this.credentials).subscribe({
-            next: (res: any) => {
+            next: (res: AuthResponse) => {
                 console.log("Authentication sequence successful!");
 
                 // 1. Wipe out any old conflicting residual keys first
@@ -59,12 +61,12 @@ export class LoginComponent implements OnInit {
                 
                 this.router.navigate(['/dashboard']);
             },
-            error: (err) => {
+            error: (err: HttpErrorResponse) => {
                 console.error(err);
 
-                // Safely extract our backend's structured JSON message, or fall back to our dictionary token
-                if (err.error && typeof err.error === 'object' && err.error.message) {
-                    this.errorMessage = err.error.message;
+                // Safely extract our structured backend JSON exception signature
+                if (err.error && typeof err.error === 'object' && 'message' in err.error) {
+                    this.errorMessage = (err.error as { message: string }).message;
                 } else {
                     this.errorMessage = this.langService.words().LOGIN.ERROR_FALLBACK;
                 }

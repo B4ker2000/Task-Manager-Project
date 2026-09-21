@@ -2,11 +2,14 @@ import { Component, OnInit, inject, ChangeDetectorRef, PLATFORM_ID } from "@angu
 import { FormsModule } from "@angular/forms";
 import { NgFor, NgIf, DatePipe, isPlatformBrowser } from "@angular/common";
 import { ProjectService } from "../services/project.service";
+import { ProjectItem, ProjectInvitation } from "../models/project.model";
 import { Router, RouterLink } from "@angular/router";
 import { AuthService } from "../services/auth.service";
 import { LanguageService } from "../i18n/language.service";
 import { LocalizeNumberPipe } from "../i18n/localize-number.pipe";
 import { PopupComponent } from "./popup.component";
+import { UserProfile } from "../models/auth.model";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
     selector: 'app-dashboard',
@@ -22,9 +25,9 @@ export class DashboardComponent implements OnInit {
     private platformId = inject(PLATFORM_ID);
     private authService = inject(AuthService);
 
-    public projects: any[] = [];
+    public projects: ProjectItem[] = [];
     public newProject = { name: '', description: '' };
-    public pendingInvitations: any[] = [];
+    public pendingInvitations: ProjectInvitation[] = [];
 
     private pendingDeleteProjectId: number | null = null;
     private pendingDeclineInvitationId: number | null = null;
@@ -47,11 +50,11 @@ export class DashboardComponent implements OnInit {
         // Only trigger initial project load if we are fully inside the browser
         if(isPlatformBrowser(this.platformId)) {
             this.authService.getUserProfile().subscribe({
-                next: () => {
+                next: (profile: UserProfile) => {
                     this.loadProjects();
                     this.loadPendingInvitations();
                 },
-                error: (err: any) => {
+                error: (err: HttpErrorResponse) => {
                     console.error("Identity check pending on reload, trying fallback...", err);
                     this.loadProjects();
                     this.loadPendingInvitations();
@@ -66,11 +69,11 @@ export class DashboardComponent implements OnInit {
         if(!token) return; // Stop completely if no token exists
         
         this.projectService.getMyProjects().subscribe({
-            next: (data: any[]) => { 
+            next: (data: ProjectItem[]) => { 
                 this.projects = data; 
                 this.cdr.detectChanges(); // Instantly refresh the cards so they show up immediately after login!
             },
-            error: (err) => console.error('Could not fetch projects', err)
+            error: (err: HttpErrorResponse) => console.error('Could not fetch projects', err)
         });
     }
 
@@ -79,11 +82,11 @@ export class DashboardComponent implements OnInit {
         if (!token) return;
 
         this.projectService.getPendingInvitations().subscribe({
-            next: (invitations: any[]) => {
+            next: (invitations: ProjectInvitation[]) => {
                 this.pendingInvitations = invitations;
                 this.cdr.detectChanges();
             },
-            error: (err) => {
+            error: (err: HttpErrorResponse) => {
                 console.error("Could not fetch pending invitations", err);
             }
         });
@@ -93,7 +96,7 @@ export class DashboardComponent implements OnInit {
         this.projectService.acceptInvitation(invitationId).subscribe({
             next: () => {
                 this.pendingInvitations = this.pendingInvitations.filter(
-                    invitation => invitation.id != invitationId
+                    invitation => invitation.id !== invitationId
                 );
 
                 this.loadProjects();
@@ -106,13 +109,17 @@ export class DashboardComponent implements OnInit {
                     "invitation-accepted"
                 );
             },
-            error: (err) => {
+            error: (err: HttpErrorResponse) => {
                 console.error("Could not accept invitation", err);
+
+                const serverMessage = err.error && typeof err.error === 'object' && 'message' in err.error
+                    ? (err.error as { message: string }).message
+                    : null;
 
                 this.showPopup(
                     "danger",
                     this.langService.words().POPUP.ERROR_GENERIC_TITLE,
-                    err.error?.message || this.langService.words().POPUP.ERROR_INVITATION_ACCEPT_FAILED_BODY,
+                    serverMessage || this.langService.words().POPUP.ERROR_INVITATION_ACCEPT_FAILED_BODY,
                     false,
                     "error-dismiss"
                 );
@@ -138,7 +145,7 @@ export class DashboardComponent implements OnInit {
                 this.newProject = { name: '', description: '' }; // Clear fields
                 this.loadProjects(); // Instantly refresh layout card list view!
             },
-            error: (err) => console.error('Failed to create a project!', err)
+            error: (err: HttpErrorResponse) => console.error('Failed to create a project!', err)
         });
     }
 
@@ -173,7 +180,7 @@ export class DashboardComponent implements OnInit {
                     this.pendingDeleteProjectId = null; // Flush cache identifier
                     this.loadProjects();
                 },
-                error: (err) => {
+                error: (err: HttpErrorResponse) => {
                     this.pendingDeleteProjectId = null;
                     console.error("Failed to delete project:", err);
                 }
@@ -186,7 +193,6 @@ export class DashboardComponent implements OnInit {
                     );
 
                     this.pendingDeclineInvitationId = null;
-                    
                     this.loadProjects();
                     
                     this.showPopup(
@@ -197,14 +203,18 @@ export class DashboardComponent implements OnInit {
                         "invitation-declined"
                     );
                 }, 
-                error: (err) => {
+                error: (err: HttpErrorResponse) => {
                     console.error("Could not decline invitation", err);
                     this.pendingDeclineInvitationId = null;
+
+                    const serverMessage = err.error && typeof err.error === 'object' && 'message' in err.error
+                        ? (err.error as { message: string }).message
+                        : null;
 
                     this.showPopup(
                         "danger",
                         this.langService.words().POPUP.ERROR_GENERIC_TITLE,
-                        err.error?.message || this.langService.words().POPUP.ERROR_INVITATION_DECLINE_FAILED_BODY,
+                        serverMessage || this.langService.words().POPUP.ERROR_INVITATION_DECLINE_FAILED_BODY,
                         false,
                         "error-dismiss"
                     );

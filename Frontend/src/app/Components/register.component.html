@@ -15,7 +15,7 @@
                 <input id="username" 
                        type="text" 
                        name="username" 
-                       [(ngModel)]="registerData.Username" 
+                       [(ngModel)]="registerData.username" 
                        required 
                        [placeholder]="langService.words().REGISTER.PLACEHOLDER_USERNAME"
                        aria-required="true"
@@ -28,7 +28,7 @@
                 <input id="email" 
                        type="email" 
                        name="email"
-                       [(ngModel)]="registerData.Email" 
+                       [(ngModel)]="registerData.email" 
                        required 
                        email 
                        [placeholder]="langService.words().GLOBAL.PLACEHOLDER_EMAIL"
@@ -42,7 +42,7 @@
                     <input id="password" 
                            [type]="showPassword ? 'text' : 'password'" 
                            name="password" 
-                           [(ngModel)]="registerData.Password" 
+                           [(ngModel)]="registerData.password" 
                            required 
                            [placeholder]="langService.words().REGISTER.PLACEHOLDER_PASSWORD" 
                            aria-required="true"
@@ -71,7 +71,7 @@
                            required 
                            [placeholder]="langService.words().REGISTER.PLACEHOLDER_CONFIRM_PASSWORD"
                            aria-required="true"
-                           [attr.aria-invalid]="registerData.Password !== confirmPassword" />
+                           [attr.aria-invalid]="registerData.password !== confirmPassword" />
                     
                     <!-- 👁️ Confirmation Visibility Button -->
                      <button type="button" 

@@ -6,6 +6,8 @@ import { FormsModule } from "@angular/forms";
 import { LanguageService } from "../i18n/language.service";
 import { LocalizeNumberPipe } from "../i18n/localize-number.pipe";
 import { PopupComponent } from "./popup.component";
+import { UserProfile } from "../models/auth.model";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
     selector: 'app-user-profile',
@@ -20,10 +22,10 @@ export class UserProfileComponent implements OnInit {
     private cdr = inject(ChangeDetectorRef);
     private router = inject(Router);
 
-    public userProfile: any = null;
+    public userProfile: UserProfile | null = null;
     public isLoading: boolean = true;
 
-    public updateData = { NewUsername: '', NewPassword: '' }; // Data package tracking model for profile updates
+    public updateData = { newUsername: '', newPassword: '' }; // Data package tracking model for profile updates
     public confirmNewPassword = '';
     public showPassword = false;
     public showConfirmPassword = false;
@@ -89,12 +91,12 @@ export class UserProfileComponent implements OnInit {
 
     private loadProfile(): void {
         this.authService.getUserProfile().subscribe({
-            next: (data: any) => {
+            next: (data: UserProfile) => {
                 this.userProfile = data;
                 this.isLoading = false;
                 this.cdr.detectChanges();
             },
-            error: (err) => {
+            error: (err: HttpErrorResponse) => {
                 console.error("Profile fetch failed:", err);
                 this.isLoading = false;
                 this.cdr.detectChanges();
@@ -104,7 +106,7 @@ export class UserProfileComponent implements OnInit {
 
     public onUpdateAccount(): void {
         // 1. Core Evaluation: Did the user actually leave both input forms blank?
-        if (!this.updateData.NewUsername && !this.updateData.NewPassword) {
+        if (!this.updateData.newUsername && !this.updateData.newPassword) {
             this.showPopup(
                 "warning", 
                 this.langService.words().POPUP.WARNING_EMPTY_FIELDS_TITLE, 
@@ -115,7 +117,7 @@ export class UserProfileComponent implements OnInit {
         }
 
         // 2. Identity Check: Stop the users if they typed a username identical to their active profile username!
-        if (this.updateData.NewUsername && this.updateData.NewUsername === this.userProfile?.username) {
+        if (this.updateData.newUsername && this.updateData.newUsername === this.userProfile?.username) {
             this.showPopup(
                 "warning", 
                 this.langService.words().POPUP.WARNING_IDENTICAL_USERNAME_TITLE,
@@ -127,7 +129,7 @@ export class UserProfileComponent implements OnInit {
         }
 
         // 3. Password Verification Layer: Evaluate ONLY if the user is actively trying to set a new password
-        if (this.updateData.NewPassword) {
+        if (this.updateData.newPassword) {
             if (!this.confirmNewPassword) {
                 this.showPopup(
                     "warning", 
@@ -139,7 +141,7 @@ export class UserProfileComponent implements OnInit {
                 return;
             }
 
-            if (this.updateData.NewPassword !== this.confirmNewPassword) {
+            if (this.updateData.newPassword !== this.confirmNewPassword) {
                 this.showPopup(
                     "warning", 
                     this.langService.words().POPUP.WARNING_NEW_PASSWORD_MISMATCH_TITLE,
@@ -151,12 +153,12 @@ export class UserProfileComponent implements OnInit {
             }
         }
         
-        const payload: any = {};
-        if (this.updateData.NewUsername) payload.NewUsername = this.updateData.NewUsername;
-        if (this.updateData.NewPassword) payload.NewPassword = this.updateData.NewPassword;
+        const payload: { NewUsername?: string; NewPassword?: string } = {};
+        if (this.updateData.newUsername) payload.NewUsername = this.updateData.newUsername;
+        if (this.updateData.newPassword) payload.NewPassword = this.updateData.newPassword;
 
         this.authService.updateAccountDetails(payload).subscribe({
-            next: (res) => {
+            next: (res: { message?: string }) => {
                 const msg = res.message || this.langService.words().POPUP.SUCCESS_USER_INFO_UPDATED_BODY;
                 this.showPopup(
                     "success", 
@@ -167,11 +169,11 @@ export class UserProfileComponent implements OnInit {
                 );
                 
                 // Clear the input fields out beautifully
-                this.updateData = { NewUsername: '', NewPassword: '' };
+                this.updateData = { newUsername: '', newPassword: '' };
                 this.confirmNewPassword = ''; // Clear confirmation fields out cleanly
                 this.loadProfile(); // Re-sync screen values with your database file records
             },
-            error: (err) => console.error("Account update failed:", err)
+            error: (err: HttpErrorResponse) => console.error("Account update failed:", err)
         });
     }
 
@@ -205,7 +207,7 @@ export class UserProfileComponent implements OnInit {
         } else if (currentAction === 'delete-secondary') {
             // Execute the database erasure request securely
             this.authService.deleteAccountPermanently().subscribe({
-                next: (res) => {
+                next: (res: { message?: string }) => {
                     // Clear out security tokens so the browser realizes the user is logged out no matter if their token was saved in local or session storage!
                     localStorage.removeItem('token');
                     sessionStorage.removeItem('token');
@@ -219,7 +221,7 @@ export class UserProfileComponent implements OnInit {
                         "success-redirect"
                     );
                 },
-                error: (err) => console.error("Account destruction failed:", err)
+                error: (err: HttpErrorResponse) => console.error("Account destruction failed:", err)
             });
         } else if (currentAction === "success-redirect") {
             // Boot the user back out onto the login screen instantly

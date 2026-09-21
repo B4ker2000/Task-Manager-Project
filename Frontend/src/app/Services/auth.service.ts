@@ -1,6 +1,7 @@
 import { Injectable, inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, tap } from "rxjs";
+import { UserRegisterDto, UserLoginDto, AuthResponse, UserProfile } from "../models/auth.model";
 
 @Injectable({
     providedIn: 'root'
@@ -10,13 +11,13 @@ export class AuthService {
     private http = inject(HttpClient);
 
     // 1. Send register payload to backend
-    public register(user: any): Observable<any> {
-        return this.http.post(`${this.apiUrl}/register`, user, { responseType: 'text' });
+    public register(user: UserRegisterDto): Observable<{ message: string }> {
+        return this.http.post<{ message: string }>(`${this.apiUrl}/register`, user);
     }
 
     // 2. Send login credentials and save token dynamically based on Remember Me option
-    public login(credentials: { email: string; password?: string; rememberMe?: boolean }): Observable<any> {
-        return this.http.post<any>(`${this.apiUrl}/login`, credentials).pipe(
+    public login(credentials: UserLoginDto & { rememberMe?: boolean }): Observable<AuthResponse> {
+        return this.http.post<AuthResponse>(`${this.apiUrl}/login`, credentials).pipe(
             tap(response => {
                 if (response && response.token) {
                     // Save the digital wristband token securely based on the user's preference!
@@ -43,17 +44,17 @@ export class AuthService {
     }
 
     // 5. Method needed for our "Profile" tab!
-    public getUserProfile(): Observable<any> {
-        return this.http.get('http://localhost:5283/api/auth/profile');
+    public getUserProfile(): Observable<UserProfile> {
+        return this.http.get<UserProfile>(`${this.apiUrl}/profile`);
     }
 
     // 6. Method to update user account info like username & password
-    public updateAccountDetails(updatedFields: { NewUsername?: string; NewPassword?: string }): Observable<any> {
-        return this.http.put("http://localhost:5283/api/auth/update-account", updatedFields);
+    public updateAccountDetails(updatedFields: { NewUsername?: string; NewPassword?: string }): Observable<{ message: string }> {
+        return this.http.put<{ message: string }>(`${this.apiUrl}/update-account`, updatedFields);
     }
 
     // 7. Method needed to delete user accounts if they wish so
-    public deleteAccountPermanently(): Observable<any> {
-        return this.http.delete("http://localhost:5283/api/auth/delete-account");
+    public deleteAccountPermanently(): Observable<{ message: string }> {
+        return this.http.delete<{ message: string }>(`${this.apiUrl}/delete-account`);
     }
 }

@@ -3,6 +3,8 @@ import { FormsModule } from "@angular/forms";
 import { Router, RouterLink } from "@angular/router";
 import { AuthService } from "../services/auth.service";
 import { LanguageService } from "../i18n/language.service";
+import { UserRegisterDto, RegisterResponse } from "../models/auth.model";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
     selector: "app-register",
@@ -15,7 +17,7 @@ export class RegisterComponent {
     private authService = inject(AuthService);
     private router = inject(Router);
 
-    public registerData = { Username: '', Email: '', Password: '' };
+    public registerData: UserRegisterDto = { username: '', email: '', password: '' };
     public confirmPassword = '';
     public showPassword = false;
     public showConfirmPassword = false;
@@ -23,19 +25,25 @@ export class RegisterComponent {
     constructor(public langService: LanguageService) {}
 
     public onRegister(): void {
-        if(this.registerData.Password !== this.confirmPassword) {
+        if(this.registerData.password !== this.confirmPassword) {
             alert("Security match mismatch: Your entered passwords do not match!");
             return;
         }
 
         this.authService.register(this.registerData).subscribe({
-            next: (res) => {
+            next: (res: RegisterResponse) => {
+                console.log(res.message);
                 alert("Account created successfully! Redirecting you to login...");
                 this.router.navigate(["/login"]); 
             },
-            error: (err) => {
+            error: (err: HttpErrorResponse) => {
                 console.error("Registration error:", err);
-                alert(err.error || "Failed to complete account registration.");
+
+                if (err.error && typeof err.error === "object" && "message" in err.error) {
+                    alert((err.error as { message: string }).message);
+                } else {
+                    alert("Failed to complete account registration.");
+                }
             }
         });
     }

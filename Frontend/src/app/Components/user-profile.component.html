@@ -172,7 +172,7 @@
                         <input id="newUsername" 
                                type="text" 
                                name="newUsername" 
-                               [(ngModel)]="updateData.NewUsername" 
+                               [(ngModel)]="updateData.newUsername" 
                                [placeholder]="langService.words().PROFILE.UPDATE_USER_PLACEHOLDER" 
                                class="info-adjustment-input newUsername" />
                     </div>
@@ -186,7 +186,7 @@
                             <input id="newPassword" 
                                    [type]="showPassword ? 'text' : 'password'" 
                                    name="newPassword" 
-                                   [(ngModel)]="updateData.NewPassword" 
+                                   [(ngModel)]="updateData.newPassword" 
                                    [placeholder]="langService.words().PROFILE.CHANGE_PASS_PLACEHOLDER"
                                    class="info-adjustment-input newPassword"
                                    aria-describedby="passwordRequirements" />
@@ -215,7 +215,7 @@
                                    [(ngModel)]="confirmNewPassword" 
                                    [placeholder]="langService.words().PROFILE.CONFIRM_PASS_PLACEHOLDER"
                                    class="info-adjustment-input newPasswordConfirm"
-                                   [attr.aria-invalid]="updateData.NewPassword !== confirmNewPassword" />
+                                   [attr.aria-invalid]="updateData.newPassword !== confirmNewPassword" />
 
                             <button type="button" 
                                     class="eye-toggle-btn" 
@@ -233,7 +233,7 @@
 
                     <button type="submit" 
                             class="save-settings-btn" 
-                            [disabled]="(!updateData.NewUsername?.trim()) && (!updateData.NewPassword?.trim() || updateData.NewPassword !== confirmNewPassword)"
+                            [disabled]="(!updateData.newUsername?.trim()) && (!updateData.newPassword?.trim() || updateData.newPassword !== confirmNewPassword)"
                             [attr.aria-label]="langService.words().PROFILE.SAVE_CHANGES_BTN_ARIA"
                             [innerHTML]="langService.words().PROFILE.SAVE_CHANGES_BTN_TEXT"></button>
                  </form>

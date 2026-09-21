@@ -1,14 +1,36 @@
 import { ProjectCategory } from "./category.model";
-import { ProjectMember } from "./member.model";
 
-export interface Task {
-    taskId: number;
-    taskTitle: string;
-    taskDescription: string;
-    taskStatus: "Pending" | "In Progress" | "Review" | "Completed";
-    taskAssignedUser?: ProjectMember;
-    taskProjectId: number;
-    taskCategory?: ProjectCategory;
-    taskPriority: "Low" | "Medium" | "High";
-    taskDeadline?: string;
+export interface TaskItem {
+    id: number;
+    title: string;
+    description: string;
+    status: "Pending" | "In Progress" | "Review Required" | "Completed"
+    priority: "Low" | "Medium" | "High"
+    deadline?: string;
+    projectId: number;
+    sortOrder: number;
+    assignedUserId?: number | null;
+    categoryId?: number | null;
+    category?: ProjectCategory | null;
+}
+
+export interface WorkspaceTeamMember {
+    userId: number; 
+    userEmail: string;
+    userName: string;
+    projectRole: "Owner" | "Member" | "Viewer";
+}
+
+export interface ProjectWorkspaceData {
+    role: "Owner" | "Member" | "Viewer";
+    tasks: TaskItem[];
+    team: WorkspaceTeamMember[];
+}
+
+export interface TaskCreateDto {
+    projectId: number;
+    title: string;
+    description: string;
+    priority: "High" | "Medium" | "Low";
+    deadline?: string;
 }
