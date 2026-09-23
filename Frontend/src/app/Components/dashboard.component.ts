@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, ChangeDetectorRef, PLATFORM_ID } from "@angular/core";
+import { Component, OnInit, inject, ChangeDetectorRef, PLATFORM_ID, HostListener } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { NgFor, NgIf, DatePipe, isPlatformBrowser } from "@angular/common";
 import { ProjectService } from "../services/project.service";
@@ -7,14 +7,14 @@ import { Router, RouterLink } from "@angular/router";
 import { AuthService } from "../services/auth.service";
 import { LanguageService } from "../i18n/language.service";
 import { LocalizeNumberPipe } from "../i18n/localize-number.pipe";
-import { PopupComponent } from "./popup.component";
+import { PopupService } from "../services/popup.service";
 import { UserProfile } from "../models/auth.model";
 import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
     selector: 'app-dashboard',
     standalone: true,
-    imports: [FormsModule, NgFor, NgIf, DatePipe, RouterLink, LocalizeNumberPipe, PopupComponent],
+    imports: [FormsModule, NgFor, NgIf, DatePipe, RouterLink, LocalizeNumberPipe],
     templateUrl: "./dashboard.component.html",
     styleUrl: "./dashboard.component.css"
 })
@@ -35,6 +35,7 @@ export class DashboardComponent implements OnInit {
     //////////////////////////////////////
     // Popup component state controller //
     //////////////////////////////////////
+    private popupService = inject(PopupService);
     public popupConfig = {
         visible: false,
         type: "success" as "success" | "warning" | "danger",
@@ -101,13 +102,13 @@ export class DashboardComponent implements OnInit {
 
                 this.loadProjects();
                 
-                this.showPopup(
-                    "success",
-                    this.langService.words().POPUP.SUCCESS_INVITATION_ACCEPTED_TITLE,
-                    this.langService.words().POPUP.SUCCESS_INVITATION_ACCEPTED_BODY,
-                    false,
-                    "invitation-accepted"
-                );
+                this.popupService.show({
+                    type: "success",
+                    title: this.langService.words().POPUP.SUCCESS_INVITATION_ACCEPTED_TITLE,
+                    body: this.langService.words().POPUP.SUCCESS_INVITATION_ACCEPTED_BODY,
+                    isConfirmation: false,
+                    actionType: "invitation-accepted"
+                });
             },
             error: (err: HttpErrorResponse) => {
                 console.error("Could not accept invitation", err);
@@ -116,13 +117,13 @@ export class DashboardComponent implements OnInit {
                     ? (err.error as { message: string }).message
                     : null;
 
-                this.showPopup(
-                    "danger",
-                    this.langService.words().POPUP.ERROR_GENERIC_TITLE,
-                    serverMessage || this.langService.words().POPUP.ERROR_INVITATION_ACCEPT_FAILED_BODY,
-                    false,
-                    "error-dismiss"
-                );
+                this.popupService.show({
+                    type: "danger",
+                    title: this.langService.words().POPUP.ERROR_GENERIC_TITLE,
+                    body: serverMessage || this.langService.words().POPUP.ERROR_INVITATION_ACCEPT_FAILED_BODY,
+                    isConfirmation: false,
+                    actionType: "error-dismiss"
+                });
             }
         });
     }
@@ -130,13 +131,13 @@ export class DashboardComponent implements OnInit {
     public declineInvitation(invitationId: number): void {
         this.pendingDeclineInvitationId = invitationId;
                  
-        this.showPopup(
-            "warning",
-            this.langService.words().POPUP.WARNING_INVITATION_DECLINE_TITLE,
-            this.langService.words().POPUP.WARNING_INVITATION_DECLINE_BODY,
-            true,
-            "invitation-declined"
-        );
+        this.popupService.show({
+            type: "warning",
+            title: this.langService.words().POPUP.WARNING_INVITATION_DECLINE_TITLE,
+            body: this.langService.words().POPUP.WARNING_INVITATION_DECLINE_BODY,
+            isConfirmation: true,
+            actionType: "invitation-declined"
+        });
     }
 
     public onCreateProject(): void {
@@ -161,18 +162,21 @@ export class DashboardComponent implements OnInit {
         event.stopPropagation(); // Prevents clicking the delete button from opening the project board!
         this.pendingDeleteProjectId = projectId;
         
-        this.showPopup(
-            "warning",
-            this.langService.words().POPUP.WARNING_DELETE_PROJECT_TITLE,
-            this.langService.words().POPUP.WARNING_DELETE_PROJECT_BODY,
-            true,
-            "delete-project"
-        );
+        this.popupService.show({
+            type: "warning",
+            title: this.langService.words().POPUP.WARNING_DELETE_PROJECT_TITLE,
+            body: this.langService.words().POPUP.WARNING_DELETE_PROJECT_BODY,
+            isConfirmation: true,
+            actionType: "delete-project"
+        });
     }
 
-    public handlePopupConfirm(): void {
-        const currentAction = this.popupConfig.actionType;
-        this.closePopup(); 
+    @HostListener('window:global-popup-confirm', ['$event'])
+    public handlePopupConfirm(event: Event): void {
+        const customEvent = event as CustomEvent<{ actionType: string }>
+        const currentAction = customEvent.detail.actionType;
+
+        this.popupService.close(); 
 
         if (currentAction === "delete-project" && this.pendingDeleteProjectId !== null) {
             this.projectService.deleteProject(this.pendingDeleteProjectId).subscribe({
@@ -195,13 +199,13 @@ export class DashboardComponent implements OnInit {
                     this.pendingDeclineInvitationId = null;
                     this.loadProjects();
                     
-                    this.showPopup(
-                        "success",
-                        this.langService.words().POPUP.SUCCESS_INVITATION_DECLINED_TITLE,
-                        this.langService.words().POPUP.SUCCESS_INVITATION_DECLINED_BODY,
-                        false,
-                        "invitation-declined"
-                    );
+                    this.popupService.show({
+                        type: "success",
+                        title: this.langService.words().POPUP.SUCCESS_INVITATION_DECLINED_TITLE,
+                        body: this.langService.words().POPUP.SUCCESS_INVITATION_DECLINED_BODY,
+                        isConfirmation: false,
+                        actionType: "invitation-declined"
+                    });
                 }, 
                 error: (err: HttpErrorResponse) => {
                     console.error("Could not decline invitation", err);
@@ -211,26 +215,16 @@ export class DashboardComponent implements OnInit {
                         ? (err.error as { message: string }).message
                         : null;
 
-                    this.showPopup(
-                        "danger",
-                        this.langService.words().POPUP.ERROR_GENERIC_TITLE,
-                        serverMessage || this.langService.words().POPUP.ERROR_INVITATION_DECLINE_FAILED_BODY,
-                        false,
-                        "error-dismiss"
-                    );
+                    this.popupService.show({
+                        type: "danger",
+                        title: this.langService.words().POPUP.ERROR_GENERIC_TITLE,
+                        body: serverMessage || this.langService.words().POPUP.ERROR_INVITATION_DECLINE_FAILED_BODY,
+                        isConfirmation: false,
+                        actionType: "error-dismiss"
+                    });
                 }
             });
         }
-    }
-
-    private showPopup(type: "success" | "warning" | "danger", title: string, body: string, isConfirmation: boolean, actionType: string): void {
-        this.popupConfig = { visible: true, type, title, body, isConfirmation, actionType };
-        this.cdr.detectChanges();
-    }
-
-    public closePopup(): void {
-        this.popupConfig.visible = false;
-        this.cdr.detectChanges();
     }
 
     // Method to dynamically replace our dictionary tokens to include a value!

@@ -216,9 +216,9 @@
         </button>
         <button class="lane-tab-trigger" 
                 role="tab"
-                [attr.aria-selected]="activeMobileColumn === 'InProgress'"
-                [ngClass]="{'active': activeMobileColumn === 'InProgress'}" 
-                (click)="setActiveMobileColumn('InProgress')"
+                [attr.aria-selected]="activeMobileColumn === 'In Progress'"
+                [ngClass]="{'active': activeMobileColumn === 'In Progress'}" 
+                (click)="setActiveMobileColumn('In Progress')"
                 [attr.aria-label]="langService.words().TASKBOARD.MOBILE_TAB_PROGRESS_ARIA">
                 
             <span aria-hidden="true">⚡</span> <span [innerHTML]="langService.words().TASKBOARD.MOBILE_TAB_PROGRESS_TEXT"></span>
@@ -386,7 +386,7 @@
 
 		<!-- Column 2: In Progress & Review Tasks -->
          <section class="board-column" 
-                  [class.mobile-hidden]="activeMobileColumn !== 'InProgress'"
+                  [class.mobile-hidden]="activeMobileColumn !== 'In Progress'"
                   role="region"
                   aria-labelledby="inProgressColumnHeader">
             
@@ -823,13 +823,4 @@
             </form>
         </div>   
      </div>
-
-    <!-- Universally Bound Popup Context Overlay -->
-     <app-popup *ngIf="popupConfig.visible"
-                [type]="popupConfig.type"
-                [title]="popupConfig.title"
-                [body]="popupConfig.body"
-                [isConfirmation]="popupConfig.isConfirmation"
-                (confirm)="handlePopupConfirm()"
-                (cancel)="closePopup()"></app-popup>
 </div>

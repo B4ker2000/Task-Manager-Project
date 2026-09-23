@@ -1,4 +1,5 @@
 import { ProjectCategory } from "./category.model";
+import { WorkspaceMember } from "./project.model";
 
 export interface TaskItem {
     id: number;
@@ -14,17 +15,10 @@ export interface TaskItem {
     category?: ProjectCategory | null;
 }
 
-export interface WorkspaceTeamMember {
-    userId: number; 
-    userEmail: string;
-    userName: string;
-    projectRole: "Owner" | "Member" | "Viewer";
-}
-
 export interface ProjectWorkspaceData {
     role: "Owner" | "Member" | "Viewer";
     tasks: TaskItem[];
-    team: WorkspaceTeamMember[];
+    team: WorkspaceMember[];
 }
 
 export interface TaskCreateDto {

@@ -9,12 +9,19 @@ import { CategoryService } from "../services/category.service";
 import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
 import { LanguageService } from "../i18n/language.service";
 import { LocalizeNumberPipe } from "../i18n/localize-number.pipe";
-import { PopupComponent } from "./popup.component";
+import { TaskItem, TaskCreateDto, ProjectWorkspaceData } from "../models/task.model";
+import { WorkspaceMember, ProjectDetails } from "../models/project.model";
+import { ProjectCategory } from "../models/category.model";
+import { PopupModel } from "../models/popup.model";
+import { PopupService } from "../services/popup.service";
+import { ProjectInvitation } from "../models/project.model";
+import { UserProfile } from "../models/auth.model";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
     selector: 'app-task-board',
     standalone: true,
-    imports: [FormsModule, NgFor, NgIf, NgClass, RouterLink, DatePipe, DragDropModule, LocalizeNumberPipe, PopupComponent],
+    imports: [FormsModule, NgFor, NgIf, NgClass, RouterLink, DatePipe, DragDropModule, LocalizeNumberPipe],
     templateUrl: "./task-board.component.html",
     styleUrl: "./task-board.component.css"
 })
@@ -32,14 +39,14 @@ export class TaskBoardComponent implements OnInit {
     public isModalOpen = false; // Tracks whether form window is visible
 
     // Split our fetched tasks into specific arrays for each column mapping. Also raw records from backend database
-    public pendingTasks: any[] = [];
-    public inProgressTasks: any[] = [];
-    public completedTasks: any[] = [];
+    public pendingTasks: TaskItem[] = [];
+    public inProgressTasks: TaskItem[] = [];
+    public completedTasks: TaskItem[] = [];
 
     // Dynamic sub-arrays rendered on screen layout
-    public filteredPendingTasks: any[] = [];
-    public filteredInProgressTasks: any[] = [];
-    public filteredCompletedTasks: any[] = [];
+    public filteredPendingTasks: TaskItem[] = [];
+    public filteredInProgressTasks: TaskItem[] = [];
+    public filteredCompletedTasks: TaskItem[] = [];
 
     // Live input binding tracking values
     public searchQuery: string = '';
@@ -47,12 +54,12 @@ export class TaskBoardComponent implements OnInit {
     public completionPercentage: number = 0;
 
     // Tracks properties typed into form fields matching TaskCreateDto.cs fields exactly
-    public newTask = { 
+    public newTask: TaskCreateDto = {  
+        projectId: 0,
         title: '', 
         description: '', 
         priority: 'Medium', 
-        deadline: '', 
-        projectId: 0 
+        deadline: ''
     };
 
     // "Add new member" related values
@@ -67,10 +74,10 @@ export class TaskBoardComponent implements OnInit {
     public currentUserProjectRole: string = "";
 
     // Array to hold our teammate info
-    public projectMembers: any[] = [];
+    public projectMembers: WorkspaceMember[] = [];
 
     // Array to store our category tasks
-    public projectCategories: any[] = [];
+    public projectCategories: ProjectCategory[] = [];
 
     // Task category related properties 
     public isCategoryModalOpen: boolean = false;
@@ -83,7 +90,7 @@ export class TaskBoardComponent implements OnInit {
     // Vertical screen related properity
     public activeMobileColumn: string = 'Pending'; // Default view lane tracking 
     public isMobileView: boolean = false;
-    public mobileReorderTask: any | null = null;
+    public mobileReorderTask: TaskItem | null = null;
     public mobileDragTaskId: number | null = null;
     private mobileReorderTimer: ReturnType<typeof setTimeout> | null = null;
     public isMenuClosing: boolean = false;
@@ -103,13 +110,15 @@ export class TaskBoardComponent implements OnInit {
     //////////////////////////////////////
     // Popup component state controller //
     //////////////////////////////////////
-    public popupConfig = {
+    public pendingInvitations: ProjectInvitation[] = [];
+    private popupService = inject(PopupService);
+    public popupConfig: PopupModel = {
         visible: false,
-        type: "success" as "success" | "warning" | "danger",
+        type: "success",
         title: "",
         body: "",
         isConfirmation: false,
-        actionType: "" // Tracks what to do when clicking "Proceed"
+        actionType: ""
     };
 
     constructor(private eRef: ElementRef, public langService: LanguageService) {}
@@ -153,36 +162,39 @@ export class TaskBoardComponent implements OnInit {
     
     private loadBoardRequirements(): void {
         this.authService.getUserProfile().subscribe({
-            next: (data: any) => {
+            next: (data: UserProfile) => {
                 this.currentUserId = Number(data.id);
                 this.taskService.getProjectTasks(this.projectId).subscribe({
-                    next: (boardData: any) => {
+                    next: (boardData: ProjectWorkspaceData) => {
                         // Lock the permission status string safely first
                         this.currentUserProjectRole = boardData.role;
 
                         // Sort task card buckets
                         const allTasks = boardData.tasks || [];
-                        this.pendingTasks = allTasks.filter((t: any) => t.status === "Pending");
-                        this.inProgressTasks = allTasks.filter((t: any) => t.status === "In Progress" || t.status === "Review Required");
-                        this.completedTasks = allTasks.filter((t: any) => t.status === "Completed");
+                        this.pendingTasks = allTasks.filter((t: TaskItem) => t.status === "Pending");
+                        this.inProgressTasks = allTasks.filter((t: TaskItem) => t.status === "In Progress" || t.status === "Review Required");
+                        this.completedTasks = allTasks.filter((t: TaskItem) => t.status === "Completed");
 
                         // Overwrite crew roster with data straight from our combined response payload packet!
-                        // this.projectMembers = boardData.team || [];
+                        // this.projectMembers = boardData.team || []; 
                         this.loadProjectMembers();
 
                         // Compute analytics progress scales and filter views
                         this.calculateProgress(allTasks);
                         this.applyFilters();
 
+                        // Get the invitations list
+                        this.loadPendingInvitations();
+
                         // Force single, perfect structural rendering paint pass
                         this.cdr.detectChanges();
                     },
-                    error: (err: any) => console.error("Failed to map board asset matrices:", err)
+                    error: (err: HttpErrorResponse) => console.error("Failed to map board asset matrices:", err)
                 });
                 this.loadProjectDetails(); // Fetches the real project title
                 this.loadProjectCategories();
             },
-            error: (err: any) => {
+            error: (err: HttpErrorResponse) => {
                 console.error("Critical refresh validation gate failure, firing fallbacks:", err);
                 // Fallback load so the screen doesn't completely freeze on network hiccups
                 this.loadProjectDetails();
@@ -193,7 +205,7 @@ export class TaskBoardComponent implements OnInit {
 
     private loadTasks(): void {
         this.taskService.getProjectTasks(this.projectId).subscribe({
-            next: (response: any) => {                
+            next: (response: ProjectWorkspaceData) => {                
                 // Intercept and extract the role metadata sent from backend
                 this.currentUserProjectRole = response.role;
 
@@ -202,9 +214,9 @@ export class TaskBoardComponent implements OnInit {
 
                 // Parse and map array buckets perfectly filtering on TaskItem.cs status properties
                 // 1. Separate items by status
-                this.pendingTasks = allTasks.filter((t: any) => t.status === "Pending");
-                this.inProgressTasks = allTasks.filter((t: any) => t.status === "In Progress" || t.status === "Review Required");
-                this.completedTasks = allTasks.filter((t: any) => t.status === "Completed");
+                this.pendingTasks = allTasks.filter((t: TaskItem) => t.status === "Pending");
+                this.inProgressTasks = allTasks.filter((t: TaskItem) => t.status === "In Progress" || t.status === "Review Required");
+                this.completedTasks = allTasks.filter((t: TaskItem) => t.status === "Completed");
 
                 // 2. Compute completion metrics right away
                 this.calculateProgress(allTasks);
@@ -212,12 +224,12 @@ export class TaskBoardComponent implements OnInit {
                 // 3. Render filtered items immediately
                 this.applyFilters();
 
-                //4. Save our new team array
+                // 4. Save our new team array
                 this.projectMembers = response.team || [];
 
                 this.cdr.detectChanges(); // Force rendering updates instantly!
             },
-            error: (err: any) => console.error('Failed to get tasks for this project board!', err)
+            error: (err: HttpErrorResponse) => console.error('Failed to get tasks for this project board!', err)
         });
     }
 
@@ -228,7 +240,7 @@ export class TaskBoardComponent implements OnInit {
                     this.loadTasks(); // Instantly reload layout lists with new tracking statuses
                 }
             },
-            error: (err) => console.error('Failed to update task status tracking context!', err)
+            error: (err: HttpErrorResponse) => console.error('Failed to update task status tracking context!', err)
         });
     }
 
@@ -236,18 +248,21 @@ export class TaskBoardComponent implements OnInit {
         this.pendingDeleteTaskId = taskId;
         
         // A quick pop-up confirmation to prevent accidental clicks!
-        this.showPopup(
-            "warning",
-            this.langService.words().POPUP.WARNING_DELETE_TASK_TITLE,
-            this.langService.words().POPUP.WARNING_DELETE_TASK_BODY,
-            true,
-            "delete-task"
-        );
+        this.popupService.show({
+            type: "warning",
+            title: this.langService.words().POPUP.WARNING_DELETE_TASK_TITLE,
+            body: this.langService.words().POPUP.WARNING_DELETE_TASK_BODY,
+            isConfirmation: true,
+            actionType: "delete-task"
+        });
     }
         
-    public handlePopupConfirm(): void {
-        const currentAction = this.popupConfig.actionType;
-        this.closePopup();
+    @HostListener('window:global-popup-confirm', ['$event'])
+    public handlePopupConfirm(event: Event): void {
+        const customEvent = event as CustomEvent<{ actionType: string }>;
+        const currentAction = customEvent.detail.actionType;
+        
+        this.popupService.close();
 
         if (currentAction === "delete-task" && this.pendingDeleteTaskId !== null) {
             this.taskService.deleteTask(this.pendingDeleteTaskId).subscribe({
@@ -255,102 +270,92 @@ export class TaskBoardComponent implements OnInit {
                     this.pendingDeleteTaskId = null;
                     this.loadTasks(); // Instantly reload columns to remove the deleted card
                 },
-                error: (err) => {
+                error: (err: HttpErrorResponse) => {
                     this.pendingDeleteTaskId = null;
                     console.error("Failed to delete task item!", err);
 
                     if (err.status === 403) {
-                        this.showPopup(
-                            "danger",
-                            this.langService.words().POPUP.DANGER_ACCESS_DENIED_TITLE,
-                            this.langService.words().POPUP.DANGER_TASK_DELETE_ACCESS_DENIED_BODY,
-                            false,
-                            "error-dismiss"
-                        );
+                        this.popupService.show({
+                            type: "danger",
+                            title: this.langService.words().POPUP.DANGER_ACCESS_DENIED_TITLE,
+                            body: this.langService.words().POPUP.DANGER_TASK_DELETE_ACCESS_DENIED_BODY,
+                            isConfirmation: false,
+                            actionType: "error-dismiss"
+                        });
                     } else {
-                        this.showPopup(
-                            "danger",
-                            this.langService.words().POPUP.ERROR_GENERIC_TITLE,
-                            this.langService.words().POPUP.ERROR_TASK_DELETE_BODY,
-                            false,
-                            "error-dismiss"
-                        );
+                        this.popupService.show({
+                            type: "danger",
+                            title: this.langService.words().POPUP.ERROR_GENERIC_TITLE,
+                            body: this.langService.words().POPUP.ERROR_TASK_DELETE_BODY,
+                            isConfirmation: false,
+                            actionType: "error-dismiss"
+                        });
                     }
                 }
             });
         } else if (currentAction === "delete-category" && this.pendingDeleteCategoryId !== null) {
             this.categoryService.deleteCategory(this.projectId, this.pendingDeleteCategoryId).subscribe({
-                next: (res: any) => {
+                next: (res: { message: string }) => {
                     this.pendingDeleteCategoryId = null;
                     console.log("Category tag expunged successfully:", res.message);
                     // Refresh tags tray and task board arrays immediately on the fly!
                     this.loadProjectCategories();
                     this.loadTasks();
                 },
-                error: (err: any) => {
+                error: (err: HttpErrorResponse) => {
                     this.pendingDeleteCategoryId = null;
                     console.error("Failed to delete workspace tag row:", err);
-                    this.showPopup(
-                        "danger",
-                        this.langService.words().POPUP.ERROR_GENERIC_TITLE,
-                        this.langService.words().POPUP.ERROR_TASK_DELETE_BODY,
-                        false,
-                        "error-dismiss"
-                    );
+                    this.popupService.show({
+                        type: "danger",
+                        title: this.langService.words().POPUP.ERROR_GENERIC_TITLE,
+                        body: this.langService.words().POPUP.ERROR_TASK_DELETE_BODY,
+                        isConfirmation: false,
+                        actionType: "error-dismiss"
+                    });
                 }
             });
         } else if (currentAction === "remove-member" && this.pendingRemoveMemberId !== null) {
             this.projectService.removeProjectMember(this.projectId, this.pendingRemoveMemberId).subscribe({
-                next: (res: any) => {
+                next: (res: { message: string }) => {
                     this.pendingRemoveMemberId = null;
                     console.log("Roster update executed successfully:", res.message);
                     // Refresh your dashboard panel lists immediately on the fly!
                     this.loadProjectMembers();
                     this.loadTasks();
                 },
-                error: (err: any) => {
+                error: (err: HttpErrorResponse) => {
                     this.pendingRemoveMemberId = null;
                     console.error("Failed to execute member removal:", err);
-                    this.showPopup(
-                        "danger",
-                        this.langService.words().POPUP.ERROR_GENERIC_TITLE,
-                        this.langService.words().POPUP.ERROR_TASK_DELETE_BODY,
-                        false,
-                        "error-dismiss"
-                    );
+                    this.popupService.show({
+                        type: "danger",
+                        title: this.langService.words().POPUP.ERROR_GENERIC_TITLE,
+                        body: this.langService.words().POPUP.ERROR_TASK_DELETE_BODY,
+                        isConfirmation: false,
+                        actionType: "error-dismiss"
+                    });
                 }
             });
         } else if (currentAction === "leave-project" && this.pendingLeavingMemberId !== null) {
             this.projectService.removeProjectMember(this.projectId, this.pendingLeavingMemberId).subscribe({
-                next: (res: any) => {
+                next: (res: { message: string }) => {
                     this.pendingLeavingMemberId = null;
                     console.log("Resignation sequence tracking successful:", res.message);
                     // Redirect the user straight back to their main clean dashboard portal room!
                     this.router.navigate(['/dashboard']);
                 },
-                error: (err: any) => {
+                error: (err: HttpErrorResponse) => {
                     this.pendingLeavingMemberId = null;
                     const errorMsg = err.error?.message || this.langService.words().POPUP.ERROR_SOLE_OWNER_BODY;
-                    this.showPopup(
-                        "danger",
-                        this.langService.words().POPUP.DANGER_ACCESS_DENIED_TITLE,
-                        errorMsg,
-                        false,
-                        "error-dismiss"
-                    );
+                    this.popupService.show({
+                        type: "danger",
+                        title: this.langService.words().POPUP.DANGER_ACCESS_DENIED_TITLE,
+                        body: errorMsg,
+                        isConfirmation: false,
+                        actionType: "error-dismiss"
+                    });
                 }
             });
         }
-    }
-
-    private showPopup(type: "success" | "warning" | "danger", title: string, body: string, isConfirmation: boolean, actionType: string): void {
-        this.popupConfig = { visible: true, type, title, body, isConfirmation, actionType };
-        this.cdr.detectChanges();
-    }
-
-    public closePopup(): void {
-        this.popupConfig.visible = false;
-        this.cdr.detectChanges();
     }
 
     // Prepare our form model structure before opening overlay container view
@@ -377,10 +382,10 @@ export class TaskBoardComponent implements OnInit {
         }, 50);
     }
 
-    // If deadline is an empty string, turn it to null so .NET backend dates parse perfectly
+    // If deadline is an empty string, turn it to 'undefined' so .NET backend dates parse perfectly
     public onCreateTask(): void {
         if(this.newTask.deadline === '') {
-            (this.newTask as any).deadline = null;
+            this.newTask.deadline = undefined;
         }
 
         this.taskService.createTask(this.newTask).subscribe({
@@ -388,12 +393,12 @@ export class TaskBoardComponent implements OnInit {
                 this.closeModal();
                 this.loadTasks(); // Refreshes columns immediately to reveal new task item!
             },
-            error: (err) => console.error("Failed to execute task item database storage request", err)
+            error: (err: HttpErrorResponse) => console.error("Failed to execute task item database storage request", err)
         });
     }
 
     public applyFilters(): void {
-        const filterFn = (task: any) => {
+        const filterFn = (task: TaskItem) => {
             const matchesSearch = task.title.toLowerCase().includes(this.searchQuery.toLowerCase());
             const matchesPriority = this.selectedPriority === 'All' || task.priority === this.selectedPriority;
 
@@ -416,7 +421,7 @@ export class TaskBoardComponent implements OnInit {
         this.cdr.detectChanges();
     }
 
-    private calculateProgress(allTasks: any[]): void {
+    private calculateProgress(allTasks: TaskItem[]): void {
         if(!allTasks || allTasks.length === 0) {
             this.completionPercentage = 0;
             return;
@@ -427,61 +432,118 @@ export class TaskBoardComponent implements OnInit {
         this.completionPercentage = Math.round((completedCount / total) * 100);
     }
 
+    private loadPendingInvitations(): void {
+        const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+        if (!token) return;
+
+        this.projectService.getPendingInvitations().subscribe({
+            next: (invitations: ProjectInvitation[]) => {
+                this.pendingInvitations = invitations.filter(
+                    inv => Number(inv.projectId) === Number(this.projectId)
+                );
+                this.cdr.detectChanges();
+            },
+            error: (err: HttpErrorResponse) => {
+                console.error("Could not fetch pending invitations", err);
+            }
+        });
+    }
+
     public onInviteUser(): void {
-        if (!this.inviteEmail.trim()) {
-            this.showPopup(
-                "warning",
-                this.langService.words().POPUP.WARNING_INVALID_EMAIL_INPUT_TITLE,
-                this.langService.words().POPUP.WARNING_INVALID_EMAIL_INPUT_BODY,
-                false,
-                "invalid-email"
-            );
+        const emailInput = this.inviteEmail.trim().toLowerCase();
+
+        // Validation Check A: Empty Input Check
+        if (!emailInput) {
+            this.popupService.show({
+                type: "warning",
+                title: this.langService.words().POPUP.WARNING_INVALID_EMAIL_INPUT_TITLE,
+                body: this.langService.words().POPUP.WARNING_INVALID_EMAIL_INPUT_BODY,
+                isConfirmation: false,
+                actionType: "invalid-email"
+            });
             return;
         }
 
+        // Validation Check B: Existing Team Member Check
+        // Scans the roster to see if the person is already registered on this specific board
+        const existingMember = this.projectMembers.find(
+            member => member.userEmail.toLowerCase().trim() === emailInput
+        );
+
+        if (existingMember) {
+            const localizedRole = this.getLocalizedRole(existingMember.projectRole);
+
+            this.popupService.show({
+                type: "warning",
+                title: "Already a Member",
+                body: localizedRole,
+                isConfirmation: false,
+                actionType: "duplicate-member"
+            });
+            return;
+        }
+
+        // Validation Check C: Pending Invitation Check
+        const invitationExists = this.pendingInvitations.some(
+            invitation => invitation.invitedEmail.toLowerCase().trim() === emailInput
+        );
+
+        if (invitationExists) {
+            this.popupService.show({
+                type: "warning",
+                title: "Invitation Pending",
+                body: `An invitation for <strong>${this.inviteEmail}</strong> has already been sent and is currently pending approval.`,
+                isConfirmation: false,
+                actionType: "duplicate-invitation"
+            });
+            return;
+        }
+
+        // Network Payload Structure Execution
         const payload = {
-            InvitedEmail: this.inviteEmail,
-            ProjectRole: this.inviteRole
+            invitedEmail: this.inviteEmail,
+            projectRole: this.inviteRole
         };
 
         this.projectService.createInvitation(this.projectId, payload).subscribe({
-            next: (res: any) => {
+            next: () => {
                 this.inviteEmail = ""; // Clear out the text input field box on success
                 this.inviteRole = "Member"; // Snap the selector dropdown back to default member status!
                 this.loadProjectMembers();
+                this.loadPendingInvitations();
                 this.loadTasks();
 
-                this.showPopup(
-                    "success",
-                    this.langService.words().POPUP.SUCCESS_INVITATION_SENT_TITLE,
-                    this.langService.words().POPUP.SUCCESS_INVITATION_SENT_BODY,
-                    false,
-                    "invitation-created"
-                );
+                this.popupService.show({
+                    type: "success",
+                    title: this.langService.words().POPUP.SUCCESS_INVITATION_SENT_TITLE,
+                    body: this.langService.words().POPUP.SUCCESS_INVITATION_SENT_BODY,
+                    isConfirmation: false,
+                    actionType: "invitation-created"
+                });
             },
-            error: (err: any) => {
+            error: (err: HttpErrorResponse) => {
                 console.error("Invitation process failure:", err);
 
                 const msg = err.error?.message || this.langService.words().POPUP.ERROR_INVITE_FAILED_BODY;
 
-                this.showPopup(
-                    "danger",
-                    this.langService.words().POPUP.ERROR_GENERIC_TITLE,
-                    msg,
-                    false,
-                    "error-dismiss"
-                );
+                this.popupService.show({
+                    type: "danger",
+                    title: this.langService.words().POPUP.ERROR_GENERIC_TITLE,
+                    body: msg,
+                    isConfirmation: false,
+                    actionType: "error-dismiss"
+                });
             }
         });
     }
 
     private loadProjectDetails(): void {
         this.projectService.getProjectById(this.projectId).subscribe({
-            next: (project: any) => {
+            next: (project: ProjectDetails) => {
                 this.projectTitle = project.name;
                 this.cdr.detectChanges();
             },
-            error: (err) => {
+            error: (err: HttpErrorResponse) => {
                 console.error("Could not retrieve project data payload:", err);
                 this.projectTitle = "Project Board";
                 this.cdr.detectChanges();
@@ -491,7 +553,7 @@ export class TaskBoardComponent implements OnInit {
 
     private loadProjectMembers(): void {
         this.projectService.getProjectMembers(this.projectId).subscribe({
-            next: (members: any[]) => {
+            next: (members: WorkspaceMember[]) => {
                 // Custom weight mapper that ranks member based on their roles in this order: Owners -> Members -> Viewers
                 const roleWeights: Record<string, number> = { 
                     'owner': 1, 
@@ -500,8 +562,8 @@ export class TaskBoardComponent implements OnInit {
                 };
 
                 this.projectMembers = [...members].sort((a, b) => {
-                    const roleA = (a.projectRole || a.ProjectRole || '').toString().toLowerCase().trim();
-                    const roleB = (b.projectRole || b.ProjectRole || '').toString().toLowerCase().trim();
+                    const roleA = (a.projectRole || '').toString().toLowerCase().trim();
+                    const roleB = (b.projectRole || '').toString().toLowerCase().trim();
                     
                     const weightA = roleWeights[roleA] || 99;
                     const weightB = roleWeights[roleB] || 99;
@@ -511,32 +573,33 @@ export class TaskBoardComponent implements OnInit {
 
                 this.cdr.detectChanges();
             },
-            error: (err) => {
+            error: (err: HttpErrorResponse) => {
                 console.error("Failed to retrieve project member roster layout:", err);
             }
         });
     }
 
-    public onAssignUser(taskId: number, selectedValue: any): void {
-        const userId = selectedValue === "null" || selectedValue === null ? null : Number(selectedValue);
+    public onAssignUser(taskId: number, selectedValue: number | null): void {
+        const userId = selectedValue === null ? null : selectedValue;
         this.taskService.assignTask(taskId, userId).subscribe({
-            next: (res: any) => {
+            next: (res: { message: string }) => {
                 console.log("Assignment updated successfully:", res.message);
                 this.loadTasks();
             },
-            error: (err: any) => {
+            error: (err: HttpErrorResponse) => {
                 console.error("Failed to update task assignment row:", err);
             }
         });
     }
 
-    private loadCurrentUserId(): void {
+    // Might be deleted later since it's left unused!
+    private loadCurrentUserId(): void { 
         this.authService.getUserProfile().subscribe({
-            next: (data: any) => {
+            next: (data: UserProfile) => {
                 this.currentUserId = Number(data.id);
                 this.cdr.detectChanges();
             },
-            error: (err: any) => {
+            error: (err: HttpErrorResponse) => {
                 console.error("Could not resolve current user payload identity:", err);
             }
         });
@@ -544,23 +607,23 @@ export class TaskBoardComponent implements OnInit {
 
     private loadProjectCategories(): void {
         this.categoryService.getProjectCategories(this.projectId).subscribe({
-            next: (data: any[]) => {
+            next: (data: ProjectCategory[]) => {
                 this.projectCategories = data;
                 this.cdr.detectChanges();
             },
-            error: (err: any) => console.error("Could not parse project tags list:", err)
+            error: (err: HttpErrorResponse) => console.error("Could not parse project tags list:", err)
         });
     }
 
-    public onAssignCategory(taskId: number, selectedValue: any): void {
-        const categoryId = selectedValue === "null" || selectedValue === null ? null: Number(selectedValue);
+    public onAssignCategory(taskId: number, selectedValue: number | null): void {
+        const categoryId = selectedValue === null ? null: Number(selectedValue);
 
         this.taskService.assignTaskCategory(taskId, categoryId).subscribe({
-            next: (res: any) => {
+            next: (res: { message: string }) => {
                 console.log("Task category updated successfully:", res.message);
                 this.loadTasks(); // Instantly reloads to display our colorful task card tags!
             },
-            error: (err: any) => console.error("Failed to update task category reference:", err)
+            error: (err: HttpErrorResponse) => console.error("Failed to update task category reference:", err)
         });
     }
 
@@ -573,13 +636,13 @@ export class TaskBoardComponent implements OnInit {
     public onDeleteCategoryClick(categoryId: number, categoryName: string): void {
         this.pendingDeleteCategoryId = categoryId;
         
-        this.showPopup(
-            "warning",
-            this.langService.words().POPUP.WARNING_DELETE_CATEGORY_TITLE,
-            this.langService.words().POPUP.WARNING_DELETE_CATEGORY_BODY_PART_1 + `'${categoryName}'` + this.langService.words().POPUP.WARNING_DELETE_CATEGORY_BODY_PART_2,
-            true,
-            "delete-category"
-        );
+        this.popupService.show({
+            type: "warning",
+            title: this.langService.words().POPUP.WARNING_DELETE_CATEGORY_TITLE,
+            body: this.langService.words().POPUP.WARNING_DELETE_CATEGORY_BODY_PART_1 + `'${categoryName}'` + this.langService.words().POPUP.WARNING_DELETE_CATEGORY_BODY_PART_2,
+            isConfirmation: true,
+            actionType: "delete-category"
+        });
     }
 
     public openCategoryModal(): void {
@@ -613,47 +676,47 @@ export class TaskBoardComponent implements OnInit {
         };
 
         this.categoryService.createCategory(this.projectId, payload).subscribe({
-            next: (res: any) => {
+            next: (res: { message: string }) => {
                 console.log("Category created successfully!", res.message);
                 this.isCategoryModalOpen = false;
                 this.newCategoryName = ""; // Reset form parameter field input
                 this.loadProjectCategories();
             },
-            error: (err: any) => console.error("Failed to submit category creation:", err)
+            error: (err: HttpErrorResponse) => console.error("Failed to submit category creation:", err)
         });
     }
 
     public onRemoveMemberClick(targetUserId: number, targetEmail: string): void {
         this.pendingRemoveMemberId = targetUserId
 
-        this.showPopup(
-            "warning",
-            this.langService.words().POPUP.WARNING_REMOVE_MEMBER_TITLE,
-            this.langService.words().POPUP.WARNING_REMOVE_MEMBER_BODY_PART_1 + `${targetEmail}` + this.langService.words().POPUP.WARNING_REMOVE_MEMBER_BODY_PART_2,
-            true,
-            "remove-member"
-        );
+        this.popupService.show({
+            type: "warning",
+            title: this.langService.words().POPUP.WARNING_REMOVE_MEMBER_TITLE,
+            body: this.langService.words().POPUP.WARNING_REMOVE_MEMBER_BODY_PART_1 + `${targetEmail}` + this.langService.words().POPUP.WARNING_REMOVE_MEMBER_BODY_PART_2,
+            isConfirmation: true,
+            actionType: "remove-member"
+        });
     }
 
     public onLeaveProjectClick(): void {
         this.pendingLeavingMemberId = this.currentUserId;
 
-        this.showPopup(
-            "warning",
-            this.langService.words().POPUP.WARNING_LEAVE_PROJECT_TITLE,
-            this.langService.words().POPUP.WARNING_LEAVE_PROJECT_BODY,
-            true,
-            "leave-project"
-        );
+        this.popupService.show({
+            type: "warning",
+            title: this.langService.words().POPUP.WARNING_LEAVE_PROJECT_TITLE,
+            body: this.langService.words().POPUP.WARNING_LEAVE_PROJECT_BODY,
+            isConfirmation: true,
+            actionType: "leave-project"
+        });
     }
 
-    // Method to hide category select drop down menu
-    public canManageTaskCategory(task: any): boolean {
+    // Method to check permissions for managing task categories
+    public canManageTaskCategory(task: TaskItem): boolean {
         return this.currentUserProjectRole === 'Owner' || task.assignedUserId === this.currentUserId;
     }
 
     // Angular CDK drag-and-drop master event router interceptor
-    public onTaskCardDropTrigger(event: CdkDragDrop<any[]>): void {
+    public onTaskCardDropTrigger(event: CdkDragDrop<TaskItem[]>): void {
         const targetTaskItem = event.previousContainer.data[event.previousIndex];
         if(!targetTaskItem) return;
 
@@ -681,13 +744,13 @@ export class TaskBoardComponent implements OnInit {
         ) {
             // SECURITY: Block regular users from toggling cards that are NOT assigned to them!
             if(!isOwner && !isAssignee) {
-                this.showPopup(
-                    "danger",
-                    this.langService.words().POPUP.DANGER_ACCESS_DENIED_TITLE,
-                    this.langService.words().POPUP.DANGER_UNAUTHORIZED_TASK_ACCESS,
-                    false,
-                    "unauthorized-access"
-                );
+                this.popupService.show({
+                    type: "danger",
+                    title: this.langService.words().POPUP.DANGER_ACCESS_DENIED_TITLE,
+                    body: this.langService.words().POPUP.DANGER_UNAUTHORIZED_TASK_ACCESS,
+                    isConfirmation: false,
+                    actionType: "unauthorized-access"
+                });
                 return;
             }
 
@@ -732,7 +795,7 @@ export class TaskBoardComponent implements OnInit {
                 next: () => {
                     this.cdr.detectChanges();
                 },
-                error: (err) => {
+                error: (err: HttpErrorResponse) => {
                     console.error("Failed to save task order: ", err);
                     this.loadTasks();
                 }
@@ -747,25 +810,25 @@ export class TaskBoardComponent implements OnInit {
         
         // RULE A: Absolute lock on the Completed Column lane! Only Project Managers can approve tasks.
         if(computedDatabaseStatusString === "Completed" && !isOwner) {
-            this.showPopup(
-                "danger",
-                this.langService.words().POPUP.DANGER_ACCESS_DENIED_TITLE,
-                this.langService.words().POPUP.DANGER_UNAUTHORIZED_TASK_APPROVE,
-                false,
-                "unauthorized-approve"
-            );
+            this.popupService.show({
+                type: "danger",
+                title: this.langService.words().POPUP.DANGER_ACCESS_DENIED_TITLE,
+                body: this.langService.words().POPUP.DANGER_UNAUTHORIZED_TASK_APPROVE,
+                isConfirmation: false,
+                actionType: "unauthorized-approve"
+            });
             return;
         }
 
         // RULE B: Prevent regular members from grabbing or picking up unassigned work items entirely.
         if(!isOwner && !isAssignee) {
-                this.showPopup(
-                    "danger",
-                    this.langService.words().POPUP.DANGER_ACCESS_DENIED_TITLE,
-                    this.langService.words().POPUP.DANGER_UNAUTHORIZED_TASK_ACCESS,
-                    false,
-                    "unauthorized-access"
-                );
+                this.popupService.show({
+                    type: "danger",
+                    title: this.langService.words().POPUP.DANGER_ACCESS_DENIED_TITLE,
+                    body: this.langService.words().POPUP.DANGER_UNAUTHORIZED_TASK_ACCESS,
+                    isConfirmation: false,
+                    actionType: "unauthorized-access"
+                });
                 return;
             }
 
@@ -811,7 +874,7 @@ export class TaskBoardComponent implements OnInit {
         this.isMobileView = window.innerWidth <= 800;
     }
 
-    public setActiveMobileColumn(column: 'Pending' | 'InProgress' | 'Completed'): void {
+    public setActiveMobileColumn(column: 'Pending' | 'In Progress' | 'Completed'): void {
         this.activeMobileColumn = column.toString();
     }
 
@@ -865,7 +928,7 @@ export class TaskBoardComponent implements OnInit {
         }
 
         if (this.mobileDragTaskId !== null) {
-            this.mobileDragTaskId == null;
+            this.mobileDragTaskId = null;
             this.cdr.detectChanges();
         }
     }
@@ -882,7 +945,7 @@ export class TaskBoardComponent implements OnInit {
         return this.mobileDragTaskId !== taskId;
     }
 
-    public openReorderMenu(task: any): void {
+    public openReorderMenu(task: TaskItem): void {
         if (this.mobileReorderTask?.id === task.id) {
             this.closeReorderMenu();
         } else {
@@ -904,7 +967,7 @@ export class TaskBoardComponent implements OnInit {
         }, 200);
     }
 
-    public isReorderActionDisabled(task: any, action: 'top' | 'up' | 'down' | 'bottom'): boolean {
+    public isReorderActionDisabled(task: TaskItem, action: 'top' | 'up' | 'down' | 'bottom'): boolean {
         const taskList = this.getTaskListForReorder(task);
         const taskIndex = taskList.findIndex(item => item.id === task.id);
 
@@ -917,7 +980,7 @@ export class TaskBoardComponent implements OnInit {
         return taskIndex === taskList.length - 1;
     }
 
-    public moveTaskToPosition(task: any, position: 'top' | 'up' | 'down' | 'bottom'): void {
+    public moveTaskToPosition(task: TaskItem, position: 'top' | 'up' | 'down' | 'bottom'): void {
         const taskList = this.getTaskListForReorder(task);
         const currentIndex = taskList.findIndex(item => item.id === task.id);
 
@@ -946,14 +1009,14 @@ export class TaskBoardComponent implements OnInit {
             status,
             taskList.map(item => item.id)
         ).subscribe({
-            error: (err) => {
+            error: (err: HttpErrorResponse) => {
                 console.error('Failed to save task order:', err);
                 this.loadTasks();
             }
         });
     }
 
-    private getTaskListForReorder(task: any): any[] {
+    private getTaskListForReorder(task: TaskItem): TaskItem[] {
         if (task.status === 'Pending') return this.pendingTasks;
         if (task.status === 'Completed') return this.completedTasks;
         return this.inProgressTasks;

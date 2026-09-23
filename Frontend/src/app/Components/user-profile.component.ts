@@ -1,18 +1,18 @@
-import { Component, OnInit, inject, PLATFORM_ID, ChangeDetectorRef } from "@angular/core";
+import { Component, OnInit, inject, PLATFORM_ID, ChangeDetectorRef, HostListener } from "@angular/core";
 import { isPlatformBrowser, NgIf, NgClass } from "@angular/common";
 import { RouterLink, Router } from "@angular/router";
 import { AuthService } from "../services/auth.service";
 import { FormsModule } from "@angular/forms";
 import { LanguageService } from "../i18n/language.service";
 import { LocalizeNumberPipe } from "../i18n/localize-number.pipe";
-import { PopupComponent } from "./popup.component";
+import { PopupService } from "../services/popup.service";
 import { UserProfile } from "../models/auth.model";
 import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
     selector: 'app-user-profile',
     standalone: true,
-    imports: [NgIf, NgClass, RouterLink, FormsModule, LocalizeNumberPipe, PopupComponent], // [(ngModel)] needs FormsModule to be imported!
+    imports: [NgIf, NgClass, RouterLink, FormsModule, LocalizeNumberPipe], // [(ngModel)] needs FormsModule to be imported!
     templateUrl: "./user-profile.component.html",
     styleUrl: "./user-profile.component.css"
 })
@@ -41,6 +41,7 @@ export class UserProfileComponent implements OnInit {
     //////////////////////////////////////
     // Popup component state controller //
     //////////////////////////////////////
+    private popupService = inject(PopupService);
     public popupConfig = {
         visible: false,
         type: "success" as "success" | "warning" | "danger",
@@ -107,48 +108,49 @@ export class UserProfileComponent implements OnInit {
     public onUpdateAccount(): void {
         // 1. Core Evaluation: Did the user actually leave both input forms blank?
         if (!this.updateData.newUsername && !this.updateData.newPassword) {
-            this.showPopup(
-                "warning", 
-                this.langService.words().POPUP.WARNING_EMPTY_FIELDS_TITLE, 
-                this.langService.words().POPUP.WARNING_EMPTY_FIELDS_BODY, 
-                false, 
-                "update-missing");
+            this.popupService.show({
+                type: "warning", 
+                title: this.langService.words().POPUP.WARNING_EMPTY_FIELDS_TITLE, 
+                body: this.langService.words().POPUP.WARNING_EMPTY_FIELDS_BODY, 
+                isConfirmation: false, 
+                actionType: "update-missing"
+            });
             return;
         }
 
         // 2. Identity Check: Stop the users if they typed a username identical to their active profile username!
         if (this.updateData.newUsername && this.updateData.newUsername === this.userProfile?.username) {
-            this.showPopup(
-                "warning", 
-                this.langService.words().POPUP.WARNING_IDENTICAL_USERNAME_TITLE,
-                this.langService.words().POPUP.WARNING_IDENTICAL_USERNAME_BODY,
-                false, 
-                "identical-username"
-            );
+            this.popupService.show({
+                type: "warning", 
+                title: this.langService.words().POPUP.WARNING_IDENTICAL_USERNAME_TITLE,
+                body: this.langService.words().POPUP.WARNING_IDENTICAL_USERNAME_BODY,
+                isConfirmation: false, 
+                actionType: "identical-username"
+            });
             return;
         }
 
         // 3. Password Verification Layer: Evaluate ONLY if the user is actively trying to set a new password
         if (this.updateData.newPassword) {
             if (!this.confirmNewPassword) {
-                this.showPopup(
-                    "warning", 
-                    this.langService.words().POPUP.WARNING_NEW_PASSWORD_TITLE, 
-                    this.langService.words().POPUP.WARNING_NEW_PASSWORD_BODY,
-                    false, 
-                    "confirm-missing"
-                );
+                this.popupService.show({
+                    type: "warning", 
+                    title: this.langService.words().POPUP.WARNING_NEW_PASSWORD_TITLE, 
+                    body: this.langService.words().POPUP.WARNING_NEW_PASSWORD_BODY,
+                    isConfirmation: false, 
+                    actionType: "confirm-missing"
+                });
                 return;
             }
 
             if (this.updateData.newPassword !== this.confirmNewPassword) {
-                this.showPopup(
-                    "warning", 
-                    this.langService.words().POPUP.WARNING_NEW_PASSWORD_MISMATCH_TITLE,
-                    this.langService.words().POPUP.WARNING_NEW_PASSWORD_MISMATCH_BODY,
-                    false, 
-                    "mismatch"
-                );
+                this.popupService.show({
+                    type: "warning", 
+                    title: this.langService.words().POPUP.WARNING_NEW_PASSWORD_MISMATCH_TITLE,
+                    body: this.langService.words().POPUP.WARNING_NEW_PASSWORD_MISMATCH_BODY,
+                    isConfirmation: false, 
+                    actionType: "mismatch"
+                });
                 return;
             }
         }
@@ -160,13 +162,13 @@ export class UserProfileComponent implements OnInit {
         this.authService.updateAccountDetails(payload).subscribe({
             next: (res: { message?: string }) => {
                 const msg = res.message || this.langService.words().POPUP.SUCCESS_USER_INFO_UPDATED_BODY;
-                this.showPopup(
-                    "success", 
-                    this.langService.words().POPUP.SUCCESS_USER_INFO_UPDATED_TITLE, 
-                    msg, 
-                    false, 
-                    "success-update"
-                );
+                this.popupService.show({
+                    type: "success", 
+                    title: this.langService.words().POPUP.SUCCESS_USER_INFO_UPDATED_TITLE, 
+                    body: msg, 
+                    isConfirmation: false, 
+                    actionType: "success-update"
+                });
                 
                 // Clear the input fields out beautifully
                 this.updateData = { newUsername: '', newPassword: '' };
@@ -179,30 +181,34 @@ export class UserProfileComponent implements OnInit {
 
     public onDeleteAccount(): void {
         // Fire off the localized critical accessibility alert confirmation modal
-        this.showPopup(
-            "warning",
-            this.langService.words().POPUP.WARNING_DELETE_PROFILE_TITLE,
-            this.langService.words().POPUP.WARNING_DELETE_PROFILE_BODY,
-            true,
-            "delete-primary"
-        );
+        this.popupService.show({
+            type: "warning",
+            title: this.langService.words().POPUP.WARNING_DELETE_PROFILE_TITLE,
+            body: this.langService.words().POPUP.WARNING_DELETE_PROFILE_BODY,
+            isConfirmation: true,
+            actionType: "delete-primary"
+        });
     }
 
     // Core Routing Engine for Popup Submissions
-    public handlePopupConfirm(): void {
-        const currentAction = this.popupConfig.actionType;
-        this.closePopup(); // Clear overlay box instantly
+    @HostListener('window:global-popup-confirm', ['$event'])
+    public handlePopupConfirm(event: Event): void {
+        const customEvent = event as CustomEvent<{ actionType: string }>;
+        const currentAction = customEvent.detail.actionType;
+        
+        // Clear overlay box instantly
+        this.popupService.close();
 
         if (currentAction === "delete-primary") {
             // Advance user smoothly onto the second final critical warning stage
             setTimeout(() => {
-                this.showPopup(
-                    "danger",
-                    this.langService.words().POPUP.DANGER_FINAL_WARNING_TITLE,
-                    this.langService.words().POPUP.DANGER_FINAL_WARNING_BODY,
-                    true,
-                    "delete-secondary"
-                );
+                this.popupService.show({
+                    type: "danger",
+                    title: this.langService.words().POPUP.DANGER_FINAL_WARNING_TITLE,
+                    body: this.langService.words().POPUP.DANGER_FINAL_WARNING_BODY,
+                    isConfirmation: true,
+                    actionType: "delete-secondary"
+                });
             }, 300);
         } else if (currentAction === 'delete-secondary') {
             // Execute the database erasure request securely
@@ -213,13 +219,13 @@ export class UserProfileComponent implements OnInit {
                     sessionStorage.removeItem('token');
 
                     const msg = res.message || this.langService.words().POPUP.SUCCESS_PROFILE_REMOVED_TITLE;
-                    this.showPopup(
-                        "success", 
-                        this.langService.words().POPUP.SUCCESS_PROFILE_REMOVED_BODY, 
-                        msg, 
-                        false, 
-                        "success-redirect"
-                    );
+                    this.popupService.show({
+                        type: "success", 
+                        title: this.langService.words().POPUP.SUCCESS_PROFILE_REMOVED_BODY, 
+                        body: msg, 
+                        isConfirmation: false, 
+                        actionType: "success-redirect"
+                    });
                 },
                 error: (err: HttpErrorResponse) => console.error("Account destruction failed:", err)
             });
@@ -227,17 +233,6 @@ export class UserProfileComponent implements OnInit {
             // Boot the user back out onto the login screen instantly
             this.router.navigate(['/login']);
         }
-    }
-    
-    // Popup related methods
-    private showPopup(type: "success" | "warning" | "danger", title: string, body: string, isConfirmation: boolean, actionType: string): void {
-        this.popupConfig = { visible: true, type, title, body, isConfirmation, actionType };
-        this.cdr.detectChanges();
-    }
-
-    public closePopup(): void {
-        this.popupConfig.visible = false;
-        this.cdr.detectChanges();
     }
 
     /////////////////////////////////////

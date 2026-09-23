@@ -1,3 +1,5 @@
+import { TaskItem } from "./task.model";
+
 export interface UserRegisterDto {
     username: string;
     email: string;

@@ -260,13 +260,4 @@
              </div>
         </div>
      </div>
-
-    <!-- Universally Bound Popup Context Overlay -->
-     <app-popup *ngIf="popupConfig.visible"
-                [type]="popupConfig.type"
-                [title]="popupConfig.title"
-                [body]="popupConfig.body"
-                [isConfirmation]="popupConfig.isConfirmation"
-                (confirm)="handlePopupConfirm()"
-                (cancel)="closePopup()"></app-popup>
 </div>

@@ -1,15 +1,29 @@
-import { Component, signal, OnInit } from '@angular/core';
+import { Component, signal, OnInit, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { PopupComponent } from './Components/popup.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { PopupService } from './services/popup.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, FormsModule],
+  imports: [RouterOutlet, FormsModule, PopupComponent, NgIf, AsyncPipe],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App implements OnInit {
   protected readonly title = signal('Frontend');
+  public popupService = inject(PopupService);
+
+  public handleGlobalCancel(): void {
+    this.popupService.close();
+  }
+  public handleGlobalConfirm(): void {
+    const confirmEvent = new CustomEvent('global-popup-confirm', {
+      detail: { actionType: this.popupService.currentActionType }
+    });
+    window.dispatchEvent(confirmEvent);
+  }
 
   // GLOBAL INITIALIZATION ROUTINE: Fires BEFORE any route screens render!
   ngOnInit(): void {
