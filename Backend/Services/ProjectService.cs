@@ -162,14 +162,16 @@ namespace Backend.Services
             if (!isOwner) 
                 throw new ForbiddenException("Only Owners can invite new members.");
 
-            var invitedEmail = request.InvitedEmail?.Trim().ToLower()
-                ?? throw new BadRequestException("Invalid invited email.");
+            var invitedEmail = request.InvitedEmail.Trim().ToLower();
+                
+            if (invitedEmail == "" || !invitedEmail.Contains("@") || !invitedEmail.Contains("."))
+                throw new BadRequestException("ERR_INVALID_EMAIL");
 
             var existingMember = await _context.ProjectMembers
                 .AnyAsync(pm => pm.ProjectId == projectId && pm.User != null && pm.User.Email == invitedEmail);
                 
             if (existingMember)
-                throw new BadRequestException("User is already a member.");
+                throw new BadRequestException("ERR_USER_ALREADY_MEMBER");
 
             var existingPendingInvite = await _context.Invitations
                 .AnyAsync(i => 
@@ -178,7 +180,7 @@ namespace Backend.Services
                     i.Status == "Pending");
 
             if (existingPendingInvite) 
-                throw new BadRequestException("User has already been invited.");
+                throw new BadRequestException("ERR_INVITATION_PENDING");
 
             var invitedUser = await _context.Users
                 .FirstOrDefaultAsync(u => u.Email == invitedEmail);
@@ -292,6 +294,32 @@ namespace Backend.Services
             invitation.RespondedAt = now;
 
             await _context.SaveChangesAsync();
+        }
+
+        // For later when we add a "sent invitations list"!
+        // 12. Sweep and update expired invitations
+        public async Task CleanExpiredProjectInvitationsAsync(int projectId)
+        {
+            var now = DateTime.UtcNow;
+
+            // Find any invitation for this project that is past its expiry date but still says "Pending"
+            var expiredInvites = await _context.Invitations
+                .Where(i => i.ProjectId == projectId
+                       && i.Status == "Pending"
+                       && i.ExpiresAt.HasValue
+                       && i.ExpiresAt.Value <= now)
+                .ToListAsync();
+
+            if (expiredInvites.Count > 0)
+            {
+                foreach (var invite in expiredInvites)
+                {
+                    invite.Status = "TimedOut";
+                    invite.RespondedAt = now;
+                }
+
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }

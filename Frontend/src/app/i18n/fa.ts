@@ -82,6 +82,11 @@ export const PersianPack: LocalePack = {
         WARNING_INVITATION_DECLINE_BODY: "آیا مطمئن هستید که می‌خواهید دعوت را رد کنید؟",
         WARNING_INVALID_EMAIL_INPUT_TITLE: "ایمیل نامعتبر!",
         WARNING_INVALID_EMAIL_INPUT_BODY: "لطفاً ابتدا یک ایمیل معتبر وارد کنید!",
+        WARNING_ALREADY_MEMBER_TITLE: "کاربر قبلاً عضو شده است",
+        WARNING_ALREADY_MEMBER_BODY_PART_1: "کاربر <strong>{email}</strong> ",
+        WARNING_ALREADY_MEMBER_BODY_PART_2: "در حال حاضر با نقش <strong>{role}</strong> عضو این پروژه هستند.",
+        WARNING_INVITATION_PENDING_TITLE: "دعوت در انتظار تایید",
+        WARNING_INVITATION_PENDING_BODY: "یک دعوت برای <strong>{email}</strong> ارسال شده و در انتظار تایید است.",
 
         // Danger Actions
         DANGER_FINAL_WARNING_TITLE: "اخطار نهایی",

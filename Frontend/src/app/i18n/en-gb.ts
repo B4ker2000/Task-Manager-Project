@@ -82,6 +82,11 @@ export const EnglishUKPack: LocalePack = {
         WARNING_INVITATION_DECLINE_BODY: "Are you sure you want to decline the invitation?",
         WARNING_INVALID_EMAIL_INPUT_TITLE: "Invalid email address.",
         WARNING_INVALID_EMAIL_INPUT_BODY: "Please enter a valid email address first.",
+        WARNING_ALREADY_MEMBER_TITLE: "Already a Member",
+        WARNING_ALREADY_MEMBER_BODY_PART_1: "User <strong>{email}</strong> ",
+        WARNING_ALREADY_MEMBER_BODY_PART_2: "is already part of the team under the <strong>{role}</strong> role.",
+        WARNING_INVITATION_PENDING_TITLE: "Invitation Pending",
+        WARNING_INVITATION_PENDING_BODY: "An invitation for <strong>{email}</strong> has already been sent and is currently pending approval.",
 
         // Danger Actions
         DANGER_FINAL_WARNING_TITLE: "FINAL WARNING",

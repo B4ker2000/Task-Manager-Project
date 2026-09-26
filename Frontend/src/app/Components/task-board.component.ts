@@ -183,9 +183,6 @@ export class TaskBoardComponent implements OnInit {
                         this.calculateProgress(allTasks);
                         this.applyFilters();
 
-                        // Get the invitations list
-                        this.loadPendingInvitations();
-
                         // Force single, perfect structural rendering paint pass
                         this.cdr.detectChanges();
                     },
@@ -432,73 +429,7 @@ export class TaskBoardComponent implements OnInit {
         this.completionPercentage = Math.round((completedCount / total) * 100);
     }
 
-    private loadPendingInvitations(): void {
-        const token = localStorage.getItem('token') || sessionStorage.getItem('token');
-        if (!token) return;
-
-        this.projectService.getPendingInvitations().subscribe({
-            next: (invitations: ProjectInvitation[]) => {
-                this.pendingInvitations = invitations.filter(
-                    inv => Number(inv.projectId) === Number(this.projectId)
-                );
-                this.cdr.detectChanges();
-            },
-            error: (err: HttpErrorResponse) => {
-                console.error("Could not fetch pending invitations", err);
-            }
-        });
-    }
-
     public onInviteUser(): void {
-        const emailInput = this.inviteEmail.trim().toLowerCase();
-
-        // Validation Check A: Empty Input Check
-        if (!emailInput) {
-            this.popupService.show({
-                type: "warning",
-                title: this.langService.words().POPUP.WARNING_INVALID_EMAIL_INPUT_TITLE,
-                body: this.langService.words().POPUP.WARNING_INVALID_EMAIL_INPUT_BODY,
-                isConfirmation: false,
-                actionType: "invalid-email"
-            });
-            return;
-        }
-
-        // Validation Check B: Existing Team Member Check
-        // Scans the roster to see if the person is already registered on this specific board
-        const existingMember = this.projectMembers.find(
-            member => member.userEmail.toLowerCase().trim() === emailInput
-        );
-
-        if (existingMember) {
-            const localizedRole = this.getLocalizedRole(existingMember.projectRole);
-
-            this.popupService.show({
-                type: "warning",
-                title: "Already a Member",
-                body: localizedRole,
-                isConfirmation: false,
-                actionType: "duplicate-member"
-            });
-            return;
-        }
-
-        // Validation Check C: Pending Invitation Check
-        const invitationExists = this.pendingInvitations.some(
-            invitation => invitation.invitedEmail.toLowerCase().trim() === emailInput
-        );
-
-        if (invitationExists) {
-            this.popupService.show({
-                type: "warning",
-                title: "Invitation Pending",
-                body: `An invitation for <strong>${this.inviteEmail}</strong> has already been sent and is currently pending approval.`,
-                isConfirmation: false,
-                actionType: "duplicate-invitation"
-            });
-            return;
-        }
-
         // Network Payload Structure Execution
         const payload = {
             invitedEmail: this.inviteEmail,
@@ -508,9 +439,8 @@ export class TaskBoardComponent implements OnInit {
         this.projectService.createInvitation(this.projectId, payload).subscribe({
             next: () => {
                 this.inviteEmail = ""; // Clear out the text input field box on success
-                this.inviteRole = "Member"; // Snap the selector dropdown back to default member status!
+                this.inviteRole = "Member"; // Snap the selector dropdown back to default 'Member' status!
                 this.loadProjectMembers();
-                this.loadPendingInvitations();
                 this.loadTasks();
 
                 this.popupService.show({
@@ -521,18 +451,67 @@ export class TaskBoardComponent implements OnInit {
                     actionType: "invitation-created"
                 });
             },
-            error: (err: HttpErrorResponse) => {
+            error: (err: HttpErrorResponse) => { //Error
                 console.error("Invitation process failure:", err);
 
-                const msg = err.error?.message || this.langService.words().POPUP.ERROR_INVITE_FAILED_BODY;
+                const errorKey = err.message || '';
+                const emailInput = this.inviteEmail.trim().toLowerCase();
 
-                this.popupService.show({
-                    type: "danger",
-                    title: this.langService.words().POPUP.ERROR_GENERIC_TITLE,
-                    body: msg,
-                    isConfirmation: false,
-                    actionType: "error-dismiss"
-                });
+                // Validation Checks 
+                // A: Empty Input Field / Invalid Email Format
+                if (errorKey.includes('ERR_INVALID_EMAIL')) {
+                    this.popupService.show({
+                        type: "warning",
+                        title: this.langService.words().POPUP.WARNING_INVALID_EMAIL_INPUT_TITLE,
+                        body: this.langService.words().POPUP.WARNING_INVALID_EMAIL_INPUT_BODY,
+                        isConfirmation: false,
+                        actionType: "invalid-email"
+                    });
+                    return;
+                }
+                // B: User is already a member 
+                else if (errorKey.includes('ERR_USER_ALREADY_MEMBER')) {
+                    const existingMember = this.projectMembers.find(
+                        member => member.userEmail.trim().toLowerCase() === emailInput
+                    );
+
+                    // Fallback to a default string key if for some reason the array search comes up empty
+                    const rawRole = existingMember ? existingMember.projectRole : 'Member';
+                    const localizedRole = this.getLocalizedRole(rawRole);
+
+                    const warningBody = this.formatLabel(this.langService.words().POPUP.WARNING_ALREADY_MEMBER_BODY_PART_1, this.inviteEmail) + 
+                                        this.formatLabel(this.langService.words().POPUP.WARNING_ALREADY_MEMBER_BODY_PART_2, localizedRole);
+
+                    this.popupService.show({
+                        type: "warning",
+                        title: this.langService.words().POPUP.WARNING_ALREADY_MEMBER_TITLE,
+                        body: warningBody,
+                        isConfirmation: false,
+                        actionType: "duplicate-member"
+                    });
+                }
+                // C: User has a pending invitation already
+                else if (errorKey.includes('ERR_INVITATION_PENDING')) {
+                    const pendingWarningBody = this.formatLabel(this.langService.words().POPUP.WARNING_INVITATION_PENDING_BODY, this.inviteEmail);
+
+                    this.popupService.show({
+                        type: "warning",
+                        title: this.langService.words().POPUP.WARNING_INVITATION_PENDING_TITLE,
+                        body: pendingWarningBody,
+                        isConfirmation: false,
+                        actionType: "duplicate-invitation"
+                    });
+                }
+                // Default fallback if things go REALLY bad!
+                else {
+                    this.popupService.show({
+                        type: "danger",
+                        title: this.langService.words().POPUP.ERROR_GENERIC_TITLE,
+                        body: errorKey || this.langService.words().POPUP.ERROR_INVITE_FAILED_BODY,
+                        isConfirmation: false,
+                        actionType: "error-dismiss"
+                    });
+                }
             }
         });
     }

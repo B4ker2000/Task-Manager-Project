@@ -11,7 +11,7 @@ export interface ProjectDetails {
     id: number;
     name: string;
     description: string;
-    // projectManagerId: number;
+    projectManagerId: number;
     tasks: TaskItem[];
     members: WorkspaceMember[];
     userRole: "Owner" | "Member" | "Viewer";

@@ -82,6 +82,11 @@ export const JapanesePack: LocalePack = {
         WARNING_INVITATION_DECLINE_BODY: "この<ruby>招待<rt aria-hidden=\"true\">しょうたい</rt></ruby>を<ruby>辞退<rt aria-hidden=\"true\">じたい</rt></ruby>してもよろしいですか？",
         WARNING_INVALID_EMAIL_INPUT_TITLE: "メールアドレスが<ruby>無効<rt aria-hidden=\"true\">むこう</rt></ruby>です",
         WARNING_INVALID_EMAIL_INPUT_BODY: "<ruby>有効<rt aria-hidden=\"true\">ゆうこう</rt></ruby>なメールアドレスを<ruby>入力<rt aria-hidden=\"true\">にゅうりょく</rt></ruby>してください。",
+        WARNING_ALREADY_MEMBER_TITLE: "ユーザーは<ruby>既<rt aria-hidden=\"true\">すで</rt></ruby>に<ruby>参加<rt aria-hidden=\"true\">さんか</rt></ruby>しています",
+        WARNING_ALREADY_MEMBER_BODY_PART_1: "ユーザー <strong>{email}</strong> は、",
+        WARNING_ALREADY_MEMBER_BODY_PART_2: "<strong>{role}</strong> <ruby>権限<rt aria-hidden=\"true\">けんげん</rt></ruby>でこのプロジェクトに<ruby>参加<rt aria-hidden=\"true\">さんか</rt></ruby>しています。",
+        WARNING_INVITATION_PENDING_TITLE: "<ruby>招待<rt aria-hidden=\"true\">しょうたい</rt></ruby>の<ruby>回答待<rt aria-hidden=\"true\">かいとうま</rt></ruby>ち",
+        WARNING_INVITATION_PENDING_BODY: "<strong>{email}</strong> への<ruby>招待<rt aria-hidden=\"true\">しょうたい</rt></ruby>は<ruby>送信<rt aria-hidden=\"true\">そうしん</rt></ruby>され、<ruby>回答<rt aria-hidden=\"true\">かいとう</rt></ruby>を<ruby>待<rt aria-hidden=\"true\">ま</rt></ruby>っています。",
 
         // Danger Actions
         DANGER_FINAL_WARNING_TITLE: "<ruby>最終確認<rt aria-hidden=\"true\">さいしゅうかくにん</rt></ruby>",

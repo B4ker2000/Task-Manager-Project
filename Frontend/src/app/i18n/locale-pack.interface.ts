@@ -80,6 +80,11 @@ export interface LocalePack {
         WARNING_INVITATION_DECLINE_BODY: string;
         WARNING_INVALID_EMAIL_INPUT_TITLE: string;
         WARNING_INVALID_EMAIL_INPUT_BODY: string;
+        WARNING_ALREADY_MEMBER_TITLE: string;
+        WARNING_ALREADY_MEMBER_BODY_PART_1: string;
+        WARNING_ALREADY_MEMBER_BODY_PART_2: string;
+        WARNING_INVITATION_PENDING_TITLE: string;
+        WARNING_INVITATION_PENDING_BODY: string;
 
         // Danger Actions
         DANGER_FINAL_WARNING_TITLE: string;

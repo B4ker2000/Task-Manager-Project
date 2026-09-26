@@ -82,6 +82,11 @@ export const RussianPack: LocalePack = {
         WARNING_INVITATION_DECLINE_BODY: "Вы уверены, что хотите отклонить приглашение?",
         WARNING_INVALID_EMAIL_INPUT_TITLE: "Неверный адрес электронной почты!",
         WARNING_INVALID_EMAIL_INPUT_BODY: "Введите корректный адрес электронной почты.",
+        WARNING_ALREADY_MEMBER_TITLE: "Пользователь уже является участником",
+        WARNING_ALREADY_MEMBER_BODY_PART_1: "Пользователь <strong>{email}</strong> ",
+        WARNING_ALREADY_MEMBER_BODY_PART_2: "уже участвует в этом проекте с ролью <strong>{role}</strong>.",
+        WARNING_INVITATION_PENDING_TITLE: "Приглашение ожидает ответа",
+        WARNING_INVITATION_PENDING_BODY: "Приглашение для <strong>{email}</strong> отправлено и ожидает ответа.",
 
         // Danger Actions
         DANGER_FINAL_WARNING_TITLE: "ПОСЛЕДНЕЕ ПРЕДУПРЕЖДЕНИЕ",
