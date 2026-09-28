@@ -54,6 +54,8 @@ export const RussianPack: LocalePack = {
         SUCCESS_INVITATION_DECLINED_BODY: "Приглашение успешно отклонено.",
         SUCCESS_INVITATION_SENT_TITLE: "Приглашение отправлено",
         SUCCESS_INVITATION_SENT_BODY: "Приглашение успешно отправлено.",
+        SUCCESS_REGISTER_TITLE: "Регистрация завершена!",
+        SUCCESS_REGISTER_BODY: "Учетная запись успешно создана! Перенаправляем вас на страницу входа...",
 
         // Warning Actions
         WARNING_EMPTY_FIELDS_TITLE: "Пустые поля",
@@ -101,6 +103,12 @@ export const RussianPack: LocalePack = {
         ERROR_INVITATION_DECLINE_FAILED_BODY: "Не удалось отклонить приглашение.",
         DANGER_UNAUTHORIZED_TASK_ACCESS: "У вас нет прав изменять карточку задачи, назначенную другому участнику команды!",
         DANGER_UNAUTHORIZED_TASK_APPROVE: "Только менеджер проекта может одобрять задачи и перемещать их в колонку «Завершено»!",
+        DANGER_REGISTRATION_FAILURE_BODY: "Регистрация не удалась. Пожалуйста, попробуйте еще раз позже.",
+        DANGER_USER_INFO_UPDATE_FAILED_TITLE: "Ошибка обновления!",
+        DANGER_USER_INFO_UPDATE_FAILED_BODY: "Не удалось обновить информацию о пользователе. Пожалуйста, попробуйте еще раз позже.",
+        DANGER_PROFILE_DESTRUCTION_FAILED: "Не удалось удалить учетную запись: ",
+        DANGER_PROJECT_CREATION_FAILED_BODY: "Не удалось создать проект: ",
+        ERROR_EMAIL_ALREADY_EXISTS_BODY: "Аккаунт с таким адресом электронной почты уже существует! Попробуйте использовать другой адрес или войти в систему.",
 
         // Button Layouts
         BTN_PROCEED: "Продолжить",
@@ -219,7 +227,7 @@ export const RussianPack: LocalePack = {
         CHECKBOX_REMEMBER: "Запомнить меня",
         BTN_SIGNIN_ARIA: "Безопасный вход в рабочую область",
         BTN_SIGNIN_TEXT: "Войти",
-        FOOTER_TEXT: "Впервые в рабочей области? ",
+        FOOTER_TEXT: "Впервые в рабочей области?<br>",
         FOOTER_LINK_TEXT: "Создать новый аккаунт",
         FOOTER_LINK_ARIA: "Создать новый аккаунт",
         ERROR_FALLBACK: "Неверный адрес электронной почты или пароль. Пожалуйста, попробуйте еще раз."

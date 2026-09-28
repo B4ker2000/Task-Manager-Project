@@ -67,11 +67,11 @@
                     <input id="confirmPassword" 
                            [type]="showConfirmPassword ? 'text' : 'password'" 
                            name="confirmPassword" 
-                           [(ngModel)]="confirmPassword" 
+                           [(ngModel)]="registerData.confirmPassword" 
                            required 
                            [placeholder]="langService.words().REGISTER.PLACEHOLDER_CONFIRM_PASSWORD"
                            aria-required="true"
-                           [attr.aria-invalid]="registerData.password !== confirmPassword" />
+                           [attr.aria-invalid]="registerData.password !== registerData.confirmPassword" />
                     
                     <!-- 👁️ Confirmation Visibility Button -->
                      <button type="button" 

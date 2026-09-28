@@ -21,6 +21,7 @@ export class UserProfileComponent implements OnInit {
     private platformId = inject(PLATFORM_ID);
     private cdr = inject(ChangeDetectorRef);
     private router = inject(Router);
+    private popupService = inject(PopupService);
 
     public userProfile: UserProfile | null = null;
     public isLoading: boolean = true;
@@ -30,26 +31,10 @@ export class UserProfileComponent implements OnInit {
     public showPassword = false;
     public showConfirmPassword = false;
 
-    private assignedWorkItems: number = 0;
-    private completedTasks: number = 0;
-
     // Theme and Accessibility variables
     public activeTheme: string = "light";
     public activeFont: string = "";
     public activeColorblind: string = "";
-
-    //////////////////////////////////////
-    // Popup component state controller //
-    //////////////////////////////////////
-    private popupService = inject(PopupService);
-    public popupConfig = {
-        visible: false,
-        type: "success" as "success" | "warning" | "danger",
-        title: "",
-        body: "",
-        isConfirmation: false,
-        actionType: "" // Tracks what to do when clicking "Proceed"
-    };
 
     constructor(public langService: LanguageService) {}
 
@@ -160,12 +145,11 @@ export class UserProfileComponent implements OnInit {
         if (this.updateData.newPassword) payload.NewPassword = this.updateData.newPassword;
 
         this.authService.updateAccountDetails(payload).subscribe({
-            next: (res: { message?: string }) => {
-                const msg = res.message || this.langService.words().POPUP.SUCCESS_USER_INFO_UPDATED_BODY;
+            next: () => {
                 this.popupService.show({
                     type: "success", 
                     title: this.langService.words().POPUP.SUCCESS_USER_INFO_UPDATED_TITLE, 
-                    body: msg, 
+                    body: this.langService.words().POPUP.SUCCESS_USER_INFO_UPDATED_BODY, 
                     isConfirmation: false, 
                     actionType: "success-update"
                 });
@@ -175,7 +159,17 @@ export class UserProfileComponent implements OnInit {
                 this.confirmNewPassword = ''; // Clear confirmation fields out cleanly
                 this.loadProfile(); // Re-sync screen values with your database file records
             },
-            error: (err: HttpErrorResponse) => console.error("Account update failed:", err)
+            error: (err: HttpErrorResponse) => {
+                console.error("Account update failed: ", err)
+                
+                this.popupService.show({
+                    type: "danger",
+                    title: this.langService.words().POPUP.DANGER_USER_INFO_UPDATE_FAILED_TITLE, 
+                    body: this.langService.words().POPUP.DANGER_USER_INFO_UPDATE_FAILED_BODY,
+                    isConfirmation: false, 
+                    actionType: "failed-to-update"
+                });
+            }
         });
     }
 
@@ -213,26 +207,42 @@ export class UserProfileComponent implements OnInit {
         } else if (currentAction === 'delete-secondary') {
             // Execute the database erasure request securely
             this.authService.deleteAccountPermanently().subscribe({
-                next: (res: { message?: string }) => {
+                next: () => {
                     // Clear out security tokens so the browser realizes the user is logged out no matter if their token was saved in local or session storage!
                     localStorage.removeItem('token');
                     sessionStorage.removeItem('token');
 
-                    const msg = res.message || this.langService.words().POPUP.SUCCESS_PROFILE_REMOVED_TITLE;
                     this.popupService.show({
                         type: "success", 
-                        title: this.langService.words().POPUP.SUCCESS_PROFILE_REMOVED_BODY, 
-                        body: msg, 
+                        title: this.langService.words().POPUP.SUCCESS_PROFILE_REMOVED_TITLE, 
+                        body: this.langService.words().POPUP.SUCCESS_PROFILE_REMOVED_BODY, 
                         isConfirmation: false, 
                         actionType: "success-redirect"
                     });
                 },
-                error: (err: HttpErrorResponse) => console.error("Account destruction failed:", err)
+                error: (err: HttpErrorResponse) => {
+                    console.error("Account destruction failed:", err)
+
+                    const profileDestructionFailedBody = this.formatLabel(this.langService.words().POPUP.DANGER_PROFILE_DESTRUCTION_FAILED, err.message);
+
+                    this.popupService.show({
+                        type: "danger",
+                        title: this.langService.words().POPUP.ERROR_GENERIC_TITLE, 
+                        body: profileDestructionFailedBody,
+                        isConfirmation: false, 
+                        actionType: "failed-to-delete-profile"
+                    });
+                }
             });
         } else if (currentAction === "success-redirect") {
             // Boot the user back out onto the login screen instantly
             this.router.navigate(['/login']);
         }
+    }
+    
+    // Method to dynamically replace our dictionary tokens to include a value!
+    public formatLabel(template: string, value: string): string {
+        return template.replace(/\{[a-zA-Z0-9_]+\}/, value);
     }
 
     /////////////////////////////////////

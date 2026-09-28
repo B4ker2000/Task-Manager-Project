@@ -54,6 +54,8 @@ export const EnglishUKPack: LocalePack = {
         SUCCESS_INVITATION_DECLINED_BODY: "The project invitation was declined successfully.",
         SUCCESS_INVITATION_SENT_TITLE: "Invitation sent",
         SUCCESS_INVITATION_SENT_BODY: "Invitation sent successfully.",
+        SUCCESS_REGISTER_TITLE: "Registration Successful!",
+        SUCCESS_REGISTER_BODY: "Account created successfully! Redirecting you to login...",
 
         // Warning Actions
         WARNING_EMPTY_FIELDS_TITLE: "Empty Fields",
@@ -101,6 +103,12 @@ export const EnglishUKPack: LocalePack = {
         ERROR_INVITATION_DECLINE_FAILED_BODY: "The invitation could not be declined.",
         DANGER_UNAUTHORIZED_TASK_ACCESS: "You are not authorized to modify a task card assigned to another teammate!",
         DANGER_UNAUTHORIZED_TASK_APPROVE: "Only a Project Manager can approve tasks and move them to the 'Completed' column!",
+        DANGER_REGISTRATION_FAILURE_BODY: "Registration failed. Please try again later.",
+        DANGER_USER_INFO_UPDATE_FAILED_TITLE: "Update Failed!",
+        DANGER_USER_INFO_UPDATE_FAILED_BODY: "Failed to update user information. Please try again later.",
+        DANGER_PROFILE_DESTRUCTION_FAILED: "Account destruction failed: ",
+        DANGER_PROJECT_CREATION_FAILED_BODY: "Failed to create a project: ",
+        ERROR_EMAIL_ALREADY_EXISTS_BODY: "An account with this email already exists! Try another email or try logging in.",
 
         // Button Layouts
         BTN_PROCEED: "Proceed",

@@ -69,8 +69,8 @@ namespace Backend.Services
             var user = await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Id == userId) 
                 ?? throw new NotFoundException("User account no longer exists!");
 
-            int totalAssignedTasks = 0;
-            int completedTasksCount = 0;
+            int totalAssignedTasks = 0;     // Initial-
+            int completedTasksCount = 0;    // -values.
 
             try
             {

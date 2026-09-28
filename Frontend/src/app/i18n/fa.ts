@@ -54,6 +54,8 @@ export const PersianPack: LocalePack = {
         SUCCESS_INVITATION_DECLINED_BODY: "دعوت با موفقیت رد شد.",
         SUCCESS_INVITATION_SENT_TITLE: "دعوت ارسال شد",
         SUCCESS_INVITATION_SENT_BODY: "دعوت با موفقیت ارسال شد.",
+        SUCCESS_REGISTER_TITLE: "ثبت‌نام با موفقیت انجام شد!",
+        SUCCESS_REGISTER_BODY: "حساب کاربری با موفقیت ایجاد شد! در حال انتقال شما به صفحه ورود...",
 
         // Warning Actions
         WARNING_EMPTY_FIELDS_TITLE: "فیلدهای خالی",
@@ -61,7 +63,7 @@ export const PersianPack: LocalePack = {
         WARNING_IDENTICAL_USERNAME_TITLE: "نام کاربری تکراری", 
         WARNING_IDENTICAL_USERNAME_BODY: "نام کاربری جدید شما باید متفاوت از نام کاربری فعلی شما باشد!", 
         WARNING_NEW_PASSWORD_MISMATCH_TITLE: "عدم تطابق امنیتی",
-        WARNING_NEW_PASSWORD_MISMATCH_BODY: "رمز عبور جدید شما با تأیید یه آن مطابقت ندارد!", 
+        WARNING_NEW_PASSWORD_MISMATCH_BODY: "رمز عبور جدید شما با تأییدیه آن مطابقت ندارد!", 
         WARNING_DELETE_PROFILE_TITLE: "هشدار دسترسی بحرانی!",
         WARNING_DELETE_PROFILE_BODY: "آیا واقعاً می‌خواهید حساب کاربری و اطلاعات خود را برای همیشه حذف کنید؟",
         WARNING_NEW_PASSWORD_TITLE: "تأیید رمز عبور", 
@@ -101,6 +103,12 @@ export const PersianPack: LocalePack = {
         ERROR_INVITATION_DECLINE_FAILED_BODY: "رد دعوت با خطا مواجه شد.",
         DANGER_UNAUTHORIZED_TASK_ACCESS: "شما نمی‌توانید وظیفه دیگران را جابه‌جا کنید!",
         DANGER_UNAUTHORIZED_TASK_APPROVE: "فقط مدیر پروژه می‌تواند وظایف را تأیید کرده و به ستون «تکمیل‌شده» منتقل کند.",
+        DANGER_REGISTRATION_FAILURE_BODY: "ثبت‌نام ناموفق بود. لطفاً بعداً دوباره تلاش کنید.",
+        DANGER_USER_INFO_UPDATE_FAILED_TITLE: "به‌روزرسانی ناموفق بود!",
+        DANGER_USER_INFO_UPDATE_FAILED_BODY: "به‌روزرسانی اطلاعات کاربر با شکست مواجه شد. لطفاً بعداً دوباره تلاش کنید.",
+        DANGER_PROFILE_DESTRUCTION_FAILED: "حذف حساب ناموفق بود: ",
+        DANGER_PROJECT_CREATION_FAILED_BODY: "ایجاد پروژه با شکست مواجه شد: ",
+        ERROR_EMAIL_ALREADY_EXISTS_BODY: "حسابی با این ایمیل از قبل وجود دارد! از ایمیل دیگری استفاده کنید ویا وارد شوید.",
 
         // Button Layouts
         BTN_PROCEED: "ادامه",

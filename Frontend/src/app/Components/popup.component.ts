@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { LanguageService } from "../i18n";
+import { PopupService } from "../services/popup.service";
 
 @Component({
     selector: "app-popup",
@@ -33,7 +34,13 @@ export class PopupComponent {
     // Dismiss if user clicks on the backdrop window glass shade
     public onDismissOutside(event: MouseEvent): void {
         if ((event.target as HTMLElement).classList.contains("popup-backdrop")) {
-            this.onCancel();
+            // 1. For basic alerts/success popups
+            if (!this.isConfirmation) {
+                this.onConfirm();
+            } else {
+                // 2. For critical confirmation windows
+                this.onCancel();
+            }
         }
     }
 }

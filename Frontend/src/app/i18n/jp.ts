@@ -54,6 +54,8 @@ export const JapanesePack: LocalePack = {
         SUCCESS_INVITATION_DECLINED_BODY: "<ruby>招待<rt aria-hidden=\"true\">しょうたい</rt></ruby>を<ruby>正常<rt aria-hidden=\"true\">せいじょう</rt></ruby>に<ruby>辞退<rt aria-hidden=\"true\">じたい</rt></ruby>しました。",
         SUCCESS_INVITATION_SENT_TITLE: "<ruby>招待<rt aria-hidden=\"true\">しょうたい</rt></ruby>を<ruby>送信<rt aria-hidden=\"true\">そうしん</rt></ruby>しました",
         SUCCESS_INVITATION_SENT_BODY: "<ruby>招待<rt aria-hidden=\"true\">しょうたい</rt></ruby>を<ruby>正常<rt aria-hidden=\"true\">せいじょう</rt></ruby>に<ruby>送信<rt aria-hidden=\"true\">そうしん</rt></ruby>しました。",
+        SUCCESS_REGISTER_TITLE: "<ruby>登録<rt aria-hidden=\"true\">とうろく</rt></ruby>が<ruby>完了<rt aria-hidden=\"true\">かんりょう</rt></ruby>しました！",
+        SUCCESS_REGISTER_BODY: "アカウントが<ruby>正常<rt aria-hidden=\"true\">せいじょう</rt></ruby>に<ruby>作成<rt aria-hidden=\"true\">さくせい</rt></ruby>されました！ログインページへ<ruby>移動<rt aria-hidden=\"true\">いどう</rt></ruby>します...",
 
         // Warning Actions
         WARNING_EMPTY_FIELDS_TITLE: "<ruby>未入力<rt aria-hidden=\"true\">みにゅうりょく</rt></ruby>の<ruby>項目<rt aria-hidden=\"true\">こおうもく</rt></ruby>",
@@ -101,6 +103,12 @@ export const JapanesePack: LocalePack = {
         ERROR_INVITATION_DECLINE_FAILED_BODY: "<ruby>招待<rt aria-hidden=\"true\">しょうたい</rt></ruby>を<ruby>辞退<rt aria-hidden=\"true\">じたい</rt></ruby>できませんでした。",
         DANGER_UNAUTHORIZED_TASK_ACCESS: "<ruby>他<rt aria-hidden=\"true\">ほか</rt></ruby>のチームメンバーに<ruby>割<rt aria-hidden=\"true\">わ</rt></ruby>り<ruby>当<rt aria-hidden=\"true\">あ</rt></ruby>てられたタスクカードを<ruby>変更<rt aria-hidden=\"true\">へんこう</rt></ruby>する<ruby>権限<rt aria-hidden=\"true\">けんげん</rt></ruby>がありません。",
         DANGER_UNAUTHORIZED_TASK_APPROVE: "プロジェクトマネージャーのみがタスクを<ruby>承認<rt aria-hidden=\"true\">しょうにん</rt></ruby>し、「<ruby>完了<rt aria-hidden=\"true\">かんりょう</rt></ruby>」<ruby>列<rt aria-hidden=\"true\">れつ</rt></ruby>に<ruby>移動<rt aria-hidden=\"true\">いどう</rt></ruby>できます。",
+        DANGER_REGISTRATION_FAILURE_BODY: "<ruby>登録<rt aria-hidden=\"true\">とうろく</rt></ruby>に<ruby>失敗<rt aria-hidden=\"true\">しっぱい</rt></ruby>しました。<ruby>後<rt aria-hidden=\"true\">のち</rt>ほどもう一<ruby>度<rt aria-hidden=\"true\">ど</rt></ruby>お<ruby>試<rt aria-hidden=\"true\">ため</rt></ruby>しください。",
+        DANGER_USER_INFO_UPDATE_FAILED_TITLE: "<ruby>更新<rt aria-hidden=\"true\">こうしん</rt></ruby>に<ruby>失敗<rt aria-hidden=\"true\">しっぱい</rt></ruby>しました！",
+        DANGER_USER_INFO_UPDATE_FAILED_BODY: "ユーザー<ruby>情報<rt aria-hidden=\"true\">じょうほう</rt></ruby>の<ruby>更新<rt aria-hidden=\"true\">こうしん</rt></ruby>に<ruby>失敗<rt aria-hidden=\"true\">しっぱい</rt></ruby>しました。後<rt aria-hidden=\"true\">のち</rt></ruby>ほどもう一<ruby>度<rt aria-hidden=\"true\">ど</rt></ruby>お<ruby>試<rt aria-hidden=\"true\">ため</rt></ruby>しください。",
+        DANGER_PROFILE_DESTRUCTION_FAILED: "アカウントの<ruby>削除<rt aria-hidden=\"true\">さくじょ</rt></ruby>に<ruby>失敗<rt aria-hidden=\"true\">しっぱい</rt></ruby>しました： ",
+        DANGER_PROJECT_CREATION_FAILED_BODY: "プロジェクトの<ruby>作成<rt aria-hidden=\"true\">さくせい</rt></ruby>に<ruby>失敗<rt aria-hidden=\"true\">しっぱい</rt></ruby>しました: ",
+        ERROR_EMAIL_ALREADY_EXISTS_BODY: "そのメールアドレスのアカウントは<ruby>既<rt aria-hidden=\"true\">すで</rt></ruby>に<ruby>存在<rt aria-hidden=\"true\">そんざい</rt></ruby>します！<ruby>別<rt aria-hidden=\"true\">べつ</rt></ruby>のメールアドレスを<ruby>試<rt aria-hidden=\"true\">ため</rt></ruby>すか、ログインしてください。",
         
         // Button Layouts
         BTN_PROCEED: "<ruby>続行<rt aria-hidden=\"true\">ぞっこう</rt></ruby>する",
@@ -219,7 +227,7 @@ export const JapanesePack: LocalePack = {
         CHECKBOX_REMEMBER: "ログイン<ruby>状態<rt aria-hidden=\"true\">じょうたい</rt></ruby>を<ruby>保持<rt aria-hidden=\"true\">ほじ</rt></ruby>する",
         BTN_SIGNIN_TEXT: "サインイン",
         BTN_SIGNIN_ARIA: "アカウントにサインインしてダッシュボードを開きます",
-        FOOTER_TEXT: "<ruby>初<rt aria-hidden=\"true\">はじ</rt></ruby>めてのご<ruby>利用<rt aria-hidden=\"true\">りよう</rt></ruby>ですか？",
+        FOOTER_TEXT: "<ruby>初<rt aria-hidden=\"true\">はじ</rt></ruby>めてのご<ruby>利用<rt aria-hidden=\"true\">りよう</rt></ruby>ですか？<br>",
         FOOTER_LINK_TEXT: "<ruby>新<rt aria-hidden=\"true\">あたら</rt></ruby>しいアカウントを<ruby>作成<rt aria-hidden=\"true\">さくせい</rt></ruby>する",
         FOOTER_LINK_ARIA: "新規アカウント作成ページへ移動します",
         ERROR_FALLBACK: "メールアドレスまたはパスワードが<ruby>正<rt aria-hidden=\"true\">ただ</rt></ruby>しくありません。もう<ruby>一<rt aria-hidden=\"true\">いち</rt></ruby><ruby>度<rt aria-hidden=\"true\">ど</rt></ruby>お<ruby>試<rt aria-hidden=\"true\">ため</rt></ruby>しください。"

@@ -52,6 +52,8 @@ export interface LocalePack {
         SUCCESS_INVITATION_DECLINED_BODY: string;
         SUCCESS_INVITATION_SENT_TITLE: string;
         SUCCESS_INVITATION_SENT_BODY: string;
+        SUCCESS_REGISTER_TITLE: string;
+        SUCCESS_REGISTER_BODY: string;
 
         // Warning Actions
         WARNING_EMPTY_FIELDS_TITLE: string;
@@ -99,6 +101,12 @@ export interface LocalePack {
         ERROR_INVITATION_DECLINE_FAILED_BODY: string;
         DANGER_UNAUTHORIZED_TASK_ACCESS: string;
         DANGER_UNAUTHORIZED_TASK_APPROVE: string;
+        DANGER_REGISTRATION_FAILURE_BODY: string;
+        DANGER_USER_INFO_UPDATE_FAILED_TITLE: string;
+        DANGER_USER_INFO_UPDATE_FAILED_BODY: string;
+        DANGER_PROFILE_DESTRUCTION_FAILED: string;
+        DANGER_PROJECT_CREATION_FAILED_BODY: string;
+        ERROR_EMAIL_ALREADY_EXISTS_BODY: string;
 
         // Button Layouts
         BTN_PROCEED: string;

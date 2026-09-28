@@ -12,9 +12,7 @@ import { LocalizeNumberPipe } from "../i18n/localize-number.pipe";
 import { TaskItem, TaskCreateDto, ProjectWorkspaceData } from "../models/task.model";
 import { WorkspaceMember, ProjectDetails } from "../models/project.model";
 import { ProjectCategory } from "../models/category.model";
-import { PopupModel } from "../models/popup.model";
 import { PopupService } from "../services/popup.service";
-import { ProjectInvitation } from "../models/project.model";
 import { UserProfile } from "../models/auth.model";
 import { HttpErrorResponse } from "@angular/common/http";
 
@@ -34,6 +32,7 @@ export class TaskBoardComponent implements OnInit {
     private router = inject(Router);
     private authService = inject(AuthService);
     private categoryService = inject(CategoryService);
+    private popupService = inject(PopupService);
 
     private projectId!: number; // Here we basically declare "projectId" but don't assign anything to it yet (null) but because TypeScript restricts use of variables that are declared but aren't assigned anything immediately afterwards, we put an "!" after the name to basically tell TypeScript "Trust me, I know what I'm doing by not assigning anything to 'projectId' right now, but I promise it will absolutely have a number inside it before the HTML page tries to read it!"
     public isModalOpen = false; // Tracks whether form window is visible
@@ -107,20 +106,6 @@ export class TaskBoardComponent implements OnInit {
     private pendingRemoveMemberId: number | null = null;
     private pendingLeavingMemberId: number | null = null;
 
-    //////////////////////////////////////
-    // Popup component state controller //
-    //////////////////////////////////////
-    public pendingInvitations: ProjectInvitation[] = [];
-    private popupService = inject(PopupService);
-    public popupConfig: PopupModel = {
-        visible: false,
-        type: "success",
-        title: "",
-        body: "",
-        isConfirmation: false,
-        actionType: ""
-    };
-
     constructor(private eRef: ElementRef, public langService: LanguageService) {}
     
     ngOnInit(): void {
@@ -174,9 +159,6 @@ export class TaskBoardComponent implements OnInit {
                         this.pendingTasks = allTasks.filter((t: TaskItem) => t.status === "Pending");
                         this.inProgressTasks = allTasks.filter((t: TaskItem) => t.status === "In Progress" || t.status === "Review Required");
                         this.completedTasks = allTasks.filter((t: TaskItem) => t.status === "Completed");
-
-                        // Overwrite crew roster with data straight from our combined response payload packet!
-                        // this.projectMembers = boardData.team || []; 
                         this.loadProjectMembers();
 
                         // Compute analytics progress scales and filter views

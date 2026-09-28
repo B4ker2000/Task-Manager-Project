@@ -24,6 +24,7 @@ export class DashboardComponent implements OnInit {
     private cdr = inject(ChangeDetectorRef);
     private platformId = inject(PLATFORM_ID);
     private authService = inject(AuthService);
+    private popupService = inject(PopupService);
 
     public projects: ProjectItem[] = [];
     public newProject = { name: '', description: '' };
@@ -31,19 +32,6 @@ export class DashboardComponent implements OnInit {
 
     private pendingDeleteProjectId: number | null = null;
     private pendingDeclineInvitationId: number | null = null;
-
-    //////////////////////////////////////
-    // Popup component state controller //
-    //////////////////////////////////////
-    private popupService = inject(PopupService);
-    public popupConfig = {
-        visible: false,
-        type: "success" as "success" | "warning" | "danger",
-        title: "",
-        body: "",
-        isConfirmation: false,
-        actionType: "" // Tracks what to do when clicking "Proceed"
-    };
 
     constructor(public langService: LanguageService) {}
 
@@ -146,7 +134,19 @@ export class DashboardComponent implements OnInit {
                 this.newProject = { name: '', description: '' }; // Clear fields
                 this.loadProjects(); // Instantly refresh layout card list view!
             },
-            error: (err: HttpErrorResponse) => console.error('Failed to create a project!', err)
+            error: (err: HttpErrorResponse) => {
+                console.error('Failed to create a project!', err)
+
+                const projectCreationFailedBody = this.formatLabel(this.langService.words().POPUP.DANGER_PROJECT_CREATION_FAILED_BODY, err.message)
+
+                this.popupService.show({
+                    type: "danger",
+                    title: this.langService.words().POPUP.ERROR_GENERIC_TITLE,
+                    body: projectCreationFailedBody,
+                    isConfirmation: true,
+                    actionType: "invitation-declined"
+                });
+            }
         });
     }
 
@@ -229,7 +229,7 @@ export class DashboardComponent implements OnInit {
 
     // Method to dynamically replace our dictionary tokens to include a value!
     public formatLabel(template: string, value: string): string {
-        return template.replace(/\{[a-zA-Z0-9_]+\}/, value);
+        return template.replace(/\{[a-zA-Z0-9_]+\}/, value);    // not needed here?
     }
 
     public getLocalizedRole(role: string): string {
