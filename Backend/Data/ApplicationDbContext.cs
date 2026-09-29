@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Backend.Models;
 using System.Reflection;
+using System.Text.Json;
 using Backend.Data.Configurations;
 
 namespace Backend.Data
@@ -45,6 +46,19 @@ namespace Backend.Data
                     }
                 }
             }
+
+            // Configure SQLite to map our integer list as a JSON text column string! (SQLite doesn't suppor arrays natively!)
+            modelBuilder.Entity<User>()
+                .Property(u => u.OrderedProjectIds)
+                .HasConversion(
+                    v => JsonSerializer.Serialize(v, (JsonSerializerOptions)null!),
+                    v => JsonSerializer.Deserialize<List<int>>(v, (JsonSerializerOptions)null!) ?? new List<int>(),
+                    new Microsoft.EntityFrameworkCore.ChangeTracking.ValueComparer<List<int>>(
+                        (c1, c2) => c1!.SequenceEqual(c2!),
+                        c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v)),
+                        c => c.ToList()
+                    )
+            );
         }
     }
 }

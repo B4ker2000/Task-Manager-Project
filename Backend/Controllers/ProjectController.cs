@@ -139,5 +139,14 @@ namespace Backend.Controllers
             
             return Ok(rosterList);
         }
+
+        [HttpPut("user-preferences/project-order")]
+        public async Task<IActionResult> UpdateUserProjectPreferences([FromBody] ProjectOrderUpdateDto request)
+        {
+            var currentUserId = _userContext.GetCurrentUserId();
+
+            await _projectService.UpdateUserProjectPreferencesAsync(currentUserId, request.OrderedProjectIds);
+            return NoContent();
+        }
     }
 }

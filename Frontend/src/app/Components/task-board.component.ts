@@ -206,7 +206,8 @@ export class TaskBoardComponent implements OnInit {
                 // 4. Save our new team array
                 this.projectMembers = response.team || [];
 
-                this.cdr.detectChanges(); // Force rendering updates instantly!
+                // 5. Force rendering updates instantly!
+                this.cdr.detectChanges(); 
             },
             error: (err: HttpErrorResponse) => console.error('Failed to get tasks for this project board!', err)
         });

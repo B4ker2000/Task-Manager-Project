@@ -10,11 +10,12 @@ import { LocalizeNumberPipe } from "../i18n/localize-number.pipe";
 import { PopupService } from "../services/popup.service";
 import { UserProfile } from "../models/auth.model";
 import { HttpErrorResponse } from "@angular/common/http";
+import { DragDropModule, CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
 
 @Component({
     selector: 'app-dashboard',
     standalone: true,
-    imports: [FormsModule, NgFor, NgIf, DatePipe, RouterLink, LocalizeNumberPipe],
+    imports: [FormsModule, NgFor, NgIf, DatePipe, RouterLink, LocalizeNumberPipe, DragDropModule],
     templateUrl: "./dashboard.component.html",
     styleUrl: "./dashboard.component.css"
 })
@@ -243,5 +244,47 @@ export class DashboardComponent implements OnInit {
             default:
                 return role;
         }
+    }
+
+    // Angular CDK drag-and-drop handler for Project Cards
+    public onProjectCardDropTrigger(event: CdkDragDrop<ProjectItem[]>): void {
+        // 1. Shuffling locally within the same canvas grid row
+        moveItemInArray(
+            this.projects,
+            event.previousIndex,
+            event.currentIndex
+        );
+
+        this.cdr.detectChanges();
+
+        // 2. Map current order into a clean list of sequential primary identifiers
+        const orderedProjectIds = this.projects.map(proj => proj.id);
+
+        // 3. Persist the array sequence securely to the C# Backend Database Profile via network
+        this.projectService.updateUserProjectPreferences(orderedProjectIds).subscribe({
+            next: () => {
+                console.log("Personalized dashboard order updated successfully.");
+            },
+            error: (err: HttpErrorResponse) => {
+                console.error("Failed to synchronize project order preference: ", err);
+                // Fallback: reload original data state if the network mutation rejected 
+                this.loadProjects();
+            }
+        });
+    }
+
+    private sortProjectsByPreference(projects: ProjectItem[], preferenceIds: number[]): ProjectItem[] {
+        if (!preferenceIds || preferenceIds.length === 0) return projects;
+
+        return projects.sort((a, b) => {
+            const indexA = preferenceIds.indexOf(a.id);
+            const indexB = preferenceIds.indexOf(b.id);
+
+            // If an entry is missing from preferenceIds cache list, append to the bottom
+            const posA = indexA === -1 ? Infinity : indexA;
+            const posB = indexB === -1 ? Infinity : indexB;
+
+            return posA - posB;
+        });
     }
 }

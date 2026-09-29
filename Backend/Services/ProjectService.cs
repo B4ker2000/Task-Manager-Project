@@ -44,7 +44,17 @@ namespace Backend.Services
         // 2. Process User Project Lists with LINQ Join Queries
         public async Task<object> GetMyProjectsAsync(int userId)
         {
-            var projectWithRoles = await (from pm in _context.ProjectMembers.AsNoTracking()
+            // 1. Fetch the user's custom sort order preference array from the database profile configuration
+            var userPrefs = await _context.Users
+                .AsNoTracking()
+                .Where(u => u.Id == userId)
+                .Select(u => u.OrderedProjectIds)
+                .FirstOrDefaultAsync();
+
+            var preferenceList = userPrefs ?? new List<int>();
+
+            // 2. Execute our existing database LINQ tracking extraction join query
+            var projectsFromDb = await (from pm in _context.ProjectMembers.AsNoTracking()
                                           join p in _context.Projects.AsNoTracking() on pm.ProjectId equals p.Id
                                           where pm.UserId == userId
                                           select new
@@ -54,7 +64,15 @@ namespace Backend.Services
                                             Description = p.Description,
                                             userRole = pm.ProjectRole
                                           }).ToListAsync();
-            return projectWithRoles;
+
+            // 3. Re-sequence the list to match the user preference before sending it to the client!
+            // Any newly joined projects not yet indexed in their settings will append to the bottom.
+            var sortedProjects = projectsFromDb.OrderBy(p => {
+            int index = preferenceList.IndexOf(p.Id);
+            return index == -1 ? int.MaxValue : index;
+            }).ToList();
+
+            return sortedProjects;
         }
 
         // 3. Cascade Delete Projects and Associated Board Tasks safely
@@ -151,7 +169,21 @@ namespace Backend.Services
                 .ToListAsync();
         }
 
-        // 8. Create an invitation with set rules!
+        // 8. Extract User Preferred Project Card Order
+        public async Task UpdateUserProjectPreferencesAsync(int userId, List<int> orderedIds)
+        {
+            // 1. Fetch the user profile record from our database context mapping
+            var user = await _context.Users.FindAsync(userId);
+            if (user == null) throw new KeyNotFoundException("User identity profile mapping not found.");
+
+            // 2. Synchronize the sequence list directly to their profile settings
+            user.OrderedProjectIds = orderedIds;
+
+            // 3. Save the modified transaction changes to the persistent database storage layer
+            await _context.SaveChangesAsync();
+        }
+
+        // 9. Create an invitation with set rules!
         public async Task CreateInvitationAsync(int projectId, int currentUserId, ProjectInviteDto request)
         {
             var isOwner = await _context.ProjectMembers
@@ -201,7 +233,7 @@ namespace Backend.Services
             await _context.SaveChangesAsync();
         }
         
-        // 9. Method to fetch notifications sent to the current user
+        // 10. Method to fetch notifications sent to the current user
         public async Task<List<Invitation>> GetPendingInvitationsAsync(int userId)
         {
             var now = DateTime.UtcNow;
@@ -230,7 +262,7 @@ namespace Backend.Services
                    .ToList();
         }
 
-        // 10. What to do when an invitation is Accepted
+        // 11. What to do when an invitation is Accepted
         public async Task AcceptInvitationAsync(int invitationId, int userId)
         {
             var invitation = await _context.Invitations
@@ -270,7 +302,7 @@ namespace Backend.Services
             await _context.SaveChangesAsync();
         }
 
-        // 11. What to do if the invitaion is declined!
+        // 12. What to do if the invitaion is declined!
         public async Task DeclineInvitationAsync(int invitationId, int userId)
         {
             var invitation = await _context.Invitations
@@ -297,7 +329,7 @@ namespace Backend.Services
         }
 
         // For later when we add a "sent invitations list"!
-        // 12. Sweep and update expired invitations
+        // 13. Sweep and update expired invitations
         public async Task CleanExpiredProjectInvitationsAsync(int projectId)
         {
             var now = DateTime.UtcNow;

@@ -26,6 +26,7 @@ export interface UserProfile {
         total: number;
         completed: number;
     };
+    orderedProjectIds?: number[];
 }
 
 export interface RegisterResponse {

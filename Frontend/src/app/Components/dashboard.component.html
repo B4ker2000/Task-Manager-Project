@@ -103,11 +103,23 @@
                role="status" 
                [innerHTML]="langService.words().DASHBOARD.EMPTY_MESSAGE"></p>
 
-            <div class="project-cards-grid">
-                <div class="project-card" *ngFor="let p of projects" role="article" [attr.aria-label]="formatLabel(langService.words().DASHBOARD.PROJECT_CARD_ARIA, p.title)">
+            <div class="project-cards-grid"
+                 cdkDropList
+                 cdkDropListOrientation="mixed"
+                 (cdkDropListDropped)="onProjectCardDropTrigger($event)">
+
+                <div class="project-card" 
+                     *ngFor="let p of projects" 
+                     cdkDrag
+                     role="article" 
+                     [attr.aria-label]="formatLabel(langService.words().DASHBOARD.PROJECT_CARD_ARIA, p.title)">
+                    
+                    <!-- Safe drag placeholder visualization -->
+                     <div class="project-card-placeholder" *cdkDragPlaceholder></div>
+
                     <div class="project-card-header">
                         <h4 [attr.id]="'proj-title-' + p.id">
-                            <span aria-hidden="true">🎯</span> {{ p.title }}
+                            <span aria-hidden="true" class="drag-handle">🎯</span> {{ p.title }}
                         </h4>
 
                         <!-- 🗑️ Smart Dynamic Label: Explicitly states WHICH project this button will delete -->

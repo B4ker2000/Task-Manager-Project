@@ -13,6 +13,7 @@ namespace Backend.Services
         Task<Project> GetProjectByIdAsync(int projectId);
         Task<string> GetProjectRoleAsync(int projectId, int userId);
         Task<object> GetProjectMembersAsync(int projectId);
+        Task UpdateUserProjectPreferencesAsync(int userId, List<int> orderedIds);
 
         ////////////////////////////// Invitation Related \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
         Task CreateInvitationAsync(int projectId, int currentUserId, ProjectInviteDto request);

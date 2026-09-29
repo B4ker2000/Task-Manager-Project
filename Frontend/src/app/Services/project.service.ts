@@ -65,4 +65,11 @@ export class ProjectService {
     public declineInvitation(invitationId: number): Observable<{ message: string }> {
         return this.http.post<{ message: string }>(`${this.apiUrl}/invitations/${invitationId}/decline`, {});
     }
+
+    // 12. 
+    public updateUserProjectPreferences(orderedIds: number[]): Observable<void> {
+        return this.http.put<void>(`${this.apiUrl}/user-preferences/project-order`, {
+            orderedProjectIds: orderedIds
+        });
+    }
 }
