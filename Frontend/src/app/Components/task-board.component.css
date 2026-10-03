@@ -498,7 +498,8 @@
 
 .task-reorder-menu {
     position: absolute;
-    top: 42px;
+    margin-top: 24px;
+    margin-inline-start: -97px;
     background-color: var(--surface-bg);
     border: 2px solid var(--filter-border-color);
     border-radius: 4px;
@@ -611,10 +612,6 @@
     
     .task-card { 
         cursor: default;
-    }
-
-    .task-reorder-menu {
-        inset-inline-end: 49px;
     }
 
     /* .task-card.is-holding {
