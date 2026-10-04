@@ -80,7 +80,7 @@ Open a browser page and navigate straight to `http://localhost:4200` to interact
 - Persian
 
 ## Planned locales
-- Azeri (including modern, soviet era, Iranian & Old Azary)
+- Azeri (including modern, soviet era, Iranian & Old Azery)
 - Turkish (including ottomon turkish as an easteregg)
 - Other turkic languages like Uzbek, Turkmen, ect. 
 - Chinese (Both simplified and traditional)
@@ -104,29 +104,29 @@ Open a browser page and navigate straight to `http://localhost:4200` to interact
 
 ## To-do list:
 To-do list:
-✅ Task completion info on project cards!
-❌ Disable dragging in mobile view and configure pulse animations when holding a card
-❌ Disable task card dragging in general for unauthorized members!
-✅ Add project invitation logic
-✅ Check if invitations correctly expire or not!
-❌ Owner Invitation canceling, "sent invitations list" & "expired" badges/pills for expired invitations and change the accept/decline buttons to a single "clear notification" button!
-❌ Do some more mobile view adjustments
-✅ Add custom warning/error popups!
-✅ Add custom drop down menus for task card accessibility/mobile organizing button
-❌ Total drop-down menu replacement with the new custom one (perhaps?)
-✅ Add full i18n support
-❌ Add traditional Japanese Top-to-Bottom, Right-to-Left locale
-✅ Add full Screen Reader support (Feedback would be appreciated!)
-✅ Add colorblind and font changing options 
-✅ Add Theme support + themes
-❌ Do a general refactor run to remove dead html classes!
-✅ Add Fronend models
-❌ Project filter options in the dashboard!
-❌ Add "edit project info" menu
-❌ Many to many task categories and assignees (perhaps?)
-✅ Do a general backend SOC refactor
-❌ Change favicon.ico in to a custom one!
-❌ Add more Spinner/Loading messages!
-❌ Add project deadlines?
-✅ Drag-n-drop task card organizing
-✅ Drag-n-drop project card organizing (needs some more polish as well as accessibility/mobile buttons!)
+✅ Add task completion progress on project cards! \n
+❌ Disable dragging in mobile view and configure pulse animations when holding a card \n
+❌ Disable task card dragging in general for unauthorized members! \n
+✅ Add project invitation logic \n
+✅ Check if invitations correctly expire or not! \n
+❌ Owner Invitation canceling, "sent invitations list" & "expired" badges/pills for expired invitations and change the accept/decline buttons to a single "clear notification" button! \n
+❌ Do some more mobile view adjustments \n
+✅ Add custom warning/error popups! \n
+✅ Add custom drop down menus for task card accessibility/mobile organizing button \n
+❌ Total drop-down menu replacement with the new custom one (perhaps?) \n
+✅ Add full i18n support \n
+❌ Add traditional Japanese Top-to-Bottom, Right-to-Left locale \n
+✅ Add full Screen Reader support (Feedback would be appreciated!) \n
+✅ Add colorblind and font changing options \n
+✅ Add Theme support + themes \n
+❌ Do a general refactor run to remove dead html classes! \n
+✅ Add Fronend models \n
+❌ Project filter options in the dashboard! \n
+❌ Add "edit project info" menu \n
+❌ Many to many task categories and assignees (perhaps?) \n
+✅ Do a general backend SOC refactor \n
+❌ Change favicon.ico in to a custom one! \n
+❌ Add more Spinner/Loading messages! \n
+❌ Add project deadlines? \n
+✅ Drag-n-drop task card organizing \n
+✅ Drag-n-drop project card organizing (needs some more polish as well as accessibility/mobile buttons!) \n
