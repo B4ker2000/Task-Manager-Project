@@ -54,23 +54,75 @@ namespace Backend.Services
             var preferenceList = userPrefs ?? new List<int>();
 
             // 2. Execute our existing database LINQ tracking extraction join query
-            var projectsFromDb = await (from pm in _context.ProjectMembers.AsNoTracking()
-                                          join p in _context.Projects.AsNoTracking() on pm.ProjectId equals p.Id
-                                          where pm.UserId == userId
-                                          select new
-                                          {
-                                            Id = p.Id,
-                                            Title = p.Name,
-                                            Description = p.Description,
-                                            userRole = pm.ProjectRole
-                                          }).ToListAsync();
+            var projectsFromDb = await (
+                from pm in _context.ProjectMembers.AsNoTracking()
+                join p in _context.Projects.AsNoTracking() on pm.ProjectId equals p.Id
+                where pm.UserId == userId
+                select new
+                {
+                    Id = p.Id,
+                    Title = p.Name,
+                    Description = p.Description,
+                    UserRole = pm.ProjectRole
+                }).ToListAsync();
+
+            var projectIds = projectsFromDb.Select(p => p.Id).ToList();
+
+            var taskSummaryByProject = await _context.Tasks
+                .AsNoTracking()
+                .Where(t => projectIds.Contains(t.ProjectId))
+                .GroupBy(t => t.ProjectId)
+                .Select(g => new
+                {
+                    ProjectId = g.Key,
+                    LowTotal = g.Count(t => t.Priority == "Low" || t.Priority == "low"),
+                    LowCompleted = g.Count(t => (t.Priority == "Low" || t.Priority == "low") && (t.Status == "Completed" || t.Status == "completed")),
+                    MediumTotal = g.Count(t => t.Priority == "Medium" || t.Priority == "medium"),
+                    MediumCompleted = g.Count(t => (t.Priority == "Medium" || t.Priority == "medium") && (t.Status == "Completed" || t.Status == "completed")),
+                    HighTotal = g.Count(t => t.Priority == "High" || t.Priority == "high"),
+                    HighCompleted = g.Count(t => (t.Priority == "High" || t.Priority == "high") && (t.Status == "Completed" || t.Status == "completed"))
+                })
+                .ToDictionaryAsync(x => x.ProjectId);
 
             // 3. Re-sequence the list to match the user preference before sending it to the client!
             // Any newly joined projects not yet indexed in their settings will append to the bottom.
-            var sortedProjects = projectsFromDb.OrderBy(p => {
-            int index = preferenceList.IndexOf(p.Id);
-            return index == -1 ? int.MaxValue : index;
-            }).ToList();
+            var sortedProjects = projectsFromDb
+                .Select(project =>
+                {
+                    // Get the task related data of a project
+                    var summary = taskSummaryByProject.TryGetValue(project.Id, out var stats)
+                    ? stats
+                    : new
+                    { // Safe fallback in-case it fails
+                        ProjectId = 0,
+                        LowTotal = 0,
+                        LowCompleted = 0,
+                        MediumTotal = 0,
+                        MediumCompleted = 0,
+                        HighTotal = 0,
+                        HighCompleted = 0
+                    };
+
+                    return new
+                    {
+                        Id = project.Id,
+                        Title = project.Title,
+                        Description = project.Description,
+                        userRole = project.UserRole,
+                        prioritySummaries = new
+                        {
+                            Low = new { completed = summary.LowCompleted, total = summary.LowTotal },
+                            Medium = new { completed = summary.MediumCompleted, total = summary.MediumTotal },
+                            High = new { completed = summary.HighCompleted, total = summary.HighTotal }
+                        }
+                    };
+                })
+                .OrderBy(project => 
+                {
+                    int index = preferenceList.IndexOf(project.Id);
+                    return index == -1 ? int.MaxValue : index;
+                })
+                .ToList();
 
             return sortedProjects;
         }

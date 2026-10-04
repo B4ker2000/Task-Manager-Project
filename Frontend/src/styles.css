@@ -397,6 +397,23 @@ div::-webkit-scrollbar-thumb:hover {
 /* =========================================================================
    GLOBAL ACCESSIBILITY PRIORITY BADGES (UNIFIED MATRIX)
    ========================================================================= */
+.priority-badge,
+.deadline-badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: calc(11px * var(--font-scale));
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 12px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+.priority-badge {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+    margin-inline-end: 5px;
+}
+
 .priority-badge.high {
     background-color: var(--badge-high-bg) !important;
     color: var(--badge-high-text) !important;
@@ -471,10 +488,6 @@ html[dir="ltr"] .cdk-drag-preview {
 .project-card *:active,
 .cdk-drag-preview,
 .cdk-drag-preview *,
-html.cdk-global-scroll-block,
-html.cdk-global-scroll-block *,
-body.cdk-programmatic-drag-override,
-body.cdk-programmatic-drag-override *,
 body.cdk-drag-dragging,
 body.cdk-drag-dragging * {
     cursor: grabbing !important;
@@ -492,7 +505,7 @@ body.cdk-drag-dragging * {
 
 /* Animates the list elements rearranging themselves fluidly while we hover over a column slot */
 .cdk-drag-animating {
-    transition: transform 0.25s cubic-bezier(0, 0, 0.2, 1);
+    transition: transform 0.25s cubic-bezier(0.2, 1, 0.2, 1);
 }
 
 /* =========================================================================

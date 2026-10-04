@@ -69,3 +69,64 @@ npm install
 ng serve
 ```
 Open a browser page and navigate straight to `http://localhost:4200` to interact with your secure sandbox board workspace environment!
+
+---
+
+## Supported languages (Proof reading would be appericiated!)
+- English (British)
+- English (US)
+- Russian
+- Japanese
+- Persian
+
+## Planned locales
+- Azeri (including modern, soviet era, Iranian & Old Azary)
+- Turkish (including ottomon turkish as an easteregg)
+- Other turkic languages like Uzbek, Turkmen, ect. 
+- Chinese (Both simplified and traditional)
+- German 
+- Spanish
+- Portuguese
+- French
+- Arabic
+- Armenian
+- Georgian
+- Mongolian
+- Korean 
+- Polish
+- Romanian
+- Hungarian
+- Belarusian
+- Ukrainian
+- Baltic Languages 
+
+---
+
+## To-do list:
+To-do list:
+✅ Task completion info on project cards!
+❌ Disable dragging in mobile view and configure pulse animations when holding a card
+❌ Disable task card dragging in general for unauthorized members!
+✅ Add project invitation logic
+✅ Check if invitations correctly expire or not!
+❌ Owner Invitation canceling, "sent invitations list" & "expired" badges/pills for expired invitations and change the accept/decline buttons to a single "clear notification" button!
+❌ Do some more mobile view adjustments
+✅ Add custom warning/error popups!
+✅ Add custom drop down menus for task card accessibility/mobile organizing button
+❌ Total drop-down menu replacement with the new custom one (perhaps?)
+✅ Add full i18n support
+❌ Add traditional Japanese Top-to-Bottom, Right-to-Left locale
+✅ Add full Screen Reader support (Feedback would be appreciated!)
+✅ Add colorblind and font changing options 
+✅ Add Theme support + themes
+❌ Do a general refactor run to remove dead html classes!
+✅ Add Fronend models
+❌ Project filter options in the dashboard!
+❌ Add "edit project info" menu
+❌ Many to many task categories and assignees (perhaps?)
+✅ Do a general backend SOC refactor
+❌ Change favicon.ico in to a custom one!
+❌ Add more Spinner/Loading messages!
+❌ Add project deadlines?
+✅ Drag-n-drop task card organizing
+✅ Drag-n-drop project card organizing (needs some more polish as well as accessibility/mobile buttons!)

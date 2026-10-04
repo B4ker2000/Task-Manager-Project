@@ -5,6 +5,11 @@ export interface ProjectItem {
     title: string;
     description: string;
     userRole: "Owner" | "Member" | "Viewer";
+    prioritySummaries: {
+        low: { completed: number, total: number };
+        medium: { completed: number, total: number };
+        high: { completed: number, total: number }
+    };
 }
 
 export interface ProjectDetails {

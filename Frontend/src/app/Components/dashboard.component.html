@@ -133,6 +133,57 @@
                          </button>
                     </div>
                     <p>{{ p.description || langService.words().DASHBOARD.NO_DESCRIPTION_FALLBACK }}</p>
+
+                    <h5 [innerHTML]="langService.words().DASHBOARD.COMPLETION_DATA_HEADER_TEXT"
+                        [attr.aria-label]="formatLabel(langService.words().DASHBOARD.COMPLETION_DATA_HEADER_ARIA, p.title)"></h5>
+                    <div class="badge-group">
+                        @if ((p.prioritySummaries.high.total === p.prioritySummaries.high.completed && p.prioritySummaries.high.total !== 0) 
+                              && (p.prioritySummaries.medium.total === p.prioritySummaries.medium.completed && p.prioritySummaries.medium.total !== 0) 
+                              && (p.prioritySummaries.low.total === p.prioritySummaries.low.completed && p.prioritySummaries.low.total !== 0)) {
+                            
+                            <span [class]="'priority-badge done ' + (langService.currentLang())">    
+                                <span aria-hidden="true">🟢🔹</span>
+                                <span [innerHTML]="langService.words().DASHBOARD.BADGE_ALL_TASKS_DONE_TEXT"></span>
+                            </span>
+                        }
+                        @else if (p.prioritySummaries.high.total + p.prioritySummaries.medium.total + p.prioritySummaries.low.total > 0) {
+                            @if (p.prioritySummaries.high.total > 0) {
+                                <span [class]="'priority-badge high ' + (langService.currentLang())">
+                                    <span aria-hidden="true">🔴🔺</span> 
+                                    <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_HIGH"
+                                          [attr.aria-label]="p.prioritySummaries.high.completed + formatLabel(langService.words().DASHBOARD.TASK_COMPARISON_ARIA, (p.prioritySummaries.high.total).toString())"></span> 
+                                    <span aria-hidden="true">
+                                        · {{ p.prioritySummaries.high.completed | localizeNumber }}/{{ p.prioritySummaries.high.total | localizeNumber }}
+                                    </span>
+                                </span>
+                            }
+                            @if (p.prioritySummaries.medium.total > 0) {
+                                <span [class]="'priority-badge medium ' + (langService.currentLang())">
+                                    <span aria-hidden="true">🟠🔸</span> 
+                                    <span [attr.aria-label]="p.prioritySummaries.medium.completed + formatLabel(langService.words().DASHBOARD.TASK_COMPARISON_ARIA, (p.prioritySummaries.medium.total).toString())"
+                                          [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_MEDIUM"></span> 
+                                    <span aria-hidden="true">
+                                        · {{ p.prioritySummaries.medium.completed | localizeNumber }}/{{ p.prioritySummaries.medium.total | localizeNumber }}
+                                    </span>
+                                </span>
+                            }
+                            @if (p.prioritySummaries.low.total > 0) {
+                                <span [class]="'priority-badge low ' + (langService.currentLang())">
+                                    <span aria-hidden="true">🔵🔹</span> 
+                                    <span [attr.aria-label]="p.prioritySummaries.low.completed + formatLabel(langService.words().DASHBOARD.TASK_COMPARISON_ARIA, (p.prioritySummaries.low.total).toString())"
+                                          [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_LOW"></span> 
+                                    <span aria-hidden="true">
+                                        · {{ p.prioritySummaries.low.completed | localizeNumber }}/{{ p.prioritySummaries.low.total | localizeNumber }}
+                                    </span>
+                                </span>
+                            }
+                        }
+                        @else {
+                            <p class="no-tasks-msg"> 
+                               {{ langService.words().DASHBOARD.PROJECT_HAS_NO_TASKS }}
+                            </p>
+                        }
+                    </div>
                     
                     <button class="submit-btn view-tasks-btn" 
                             [routerLink]="['/projects', p.id, 'board']"

@@ -276,6 +276,11 @@ export interface LocalePack {
         PROJECT_CARD_ARIA: string;
         DELETE_PROJECT_ARIA: string;
         NO_DESCRIPTION_FALLBACK: string;
+        COMPLETION_DATA_HEADER_TEXT: string;
+        COMPLETION_DATA_HEADER_ARIA: string;
+        BADGE_ALL_TASKS_DONE_TEXT: string;
+        TASK_COMPARISON_ARIA: string;
+        PROJECT_HAS_NO_TASKS: string;
         OPEN_BOARD_TEXT: string;
         OPEN_BOARD_ARIA: string;
     };

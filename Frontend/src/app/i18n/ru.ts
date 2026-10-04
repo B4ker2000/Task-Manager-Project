@@ -280,6 +280,11 @@ export const RussianPack: LocalePack = {
         PROJECT_CARD_ARIA: "Пространство проекта: {value}",
         DELETE_PROJECT_ARIA: "Безвозвратно удалить проект: {value}",
         NO_DESCRIPTION_FALLBACK: "Описание отсутствует.",
+        COMPLETION_DATA_HEADER_TEXT: "Выполнено / всего:",
+        COMPLETION_DATA_HEADER_ARIA: "Количество выполненных задач проекта {value} по сравнению с общим количеством задач того же уровня приоритета",
+        BADGE_ALL_TASKS_DONE_TEXT: "Все задачи проекта выполнены!",
+        TASK_COMPARISON_ARIA: " из {value} задач выполнено; приоритет: ",
+        PROJECT_HAS_NO_TASKS: "В этом проекте пока нет задач. Создайте задачу или дождитесь, пока задачи появятся!",
         OPEN_BOARD_TEXT: "Открыть доску проекта",
         OPEN_BOARD_ARIA: "Открыть доску задач для проекта: {value}"
     },

@@ -367,9 +367,9 @@
                     <div class="task-actions">
                         <div class="badge-group">
                             <span class="priority-badge" [ngClass]="task.priority.toLowerCase()" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_PRIORITY_ARIA, task.priority)">
-                                <span *ngIf="task.priority === 'High'"><span aria-hidden="true">🔴 🔺</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_HIGH"></span></span>
-                                <span *ngIf="task.priority === 'Medium'"><span aria-hidden="true">🟡 🔸</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_MEDIUM"></span></span>
-                                <span *ngIf="task.priority === 'Low'"><span aria-hidden="true">🔵 🔹</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_LOW"></span></span>
+                                <span *ngIf="task.priority === 'High'"><span aria-hidden="true">🔴🔺</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_HIGH"></span></span>
+                                <span *ngIf="task.priority === 'Medium'"><span aria-hidden="true">🟠🔸</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_MEDIUM"></span></span>
+                                <span *ngIf="task.priority === 'Low'"><span aria-hidden="true">🔵🔹</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_LOW"></span></span>
                             </span>
                             <span [class]="'deadline-badge ' + (langService.currentLang())" 
                                   *ngIf="task.deadline" 
@@ -519,9 +519,9 @@
                     <div class="task-actions">
                         <div class="badge-group">
                             <span class="priority-badge" [ngClass]="task.priority.toLowerCase()" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.TASK_PRIORITY_ARIA, task.priority)">
-                                <span *ngIf="task.priority === 'High'"><span aria-hidden="true">🔴 🔺</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_HIGH"></span></span>
-                                <span *ngIf="task.priority === 'Medium'"><span aria-hidden="true">🟡 🔸</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_MEDIUM"></span></span>
-                                <span *ngIf="task.priority === 'Low'"><span aria-hidden="true">🔵 🔹</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_LOW"></span></span>
+                                <span *ngIf="task.priority === 'High'"><span aria-hidden="true">🔴🔺</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_HIGH"></span></span>
+                                <span *ngIf="task.priority === 'Medium'"><span aria-hidden="true">🟠🔸</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_MEDIUM"></span></span>
+                                <span *ngIf="task.priority === 'Low'"><span aria-hidden="true">🔵🔹</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_LOW"></span></span>
                             </span>
                             <span [class]="'deadline-badge ' + (langService.currentLang())" 
                                   *ngIf="task.deadline" 
@@ -668,7 +668,7 @@
                     
                     <div class="badge-group">
                         <span class="priority-badge done" [attr.aria-label]="langService.words().TASKBOARD.BADGE_DONE_ARIA">
-                            <span aria-hidden="true">🟢 🔹</span><span [innerHTML]="langService.words().TASKBOARD.BADGE_DONE_TEXT"></span>
+                            <span aria-hidden="true">🟢🔹</span><span [innerHTML]="langService.words().TASKBOARD.BADGE_DONE_TEXT"></span>
                         </span>
                     </div>
                     
@@ -696,9 +696,9 @@
                     <div class="task-actions">
                         <div class="badge-group">
                             <span class="priority-badge" [ngClass]="task.priority.toLowerCase()" [attr.aria-label]="formatLabel(langService.words().TASKBOARD.FINISHED_PRIORITY_ARIA, task.priority)">
-                                <span *ngIf="task.priority === 'High'"><span aria-hidden="true">🔴 🔺</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_HIGH"></span></span>
-                                <span *ngIf="task.priority === 'Medium'"><span aria-hidden="true">🟡 🔸</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_MEDIUM"></span></span>
-                                <span *ngIf="task.priority === 'Low'"><span aria-hidden="true">🔵 🔹</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_LOW"></span></span>
+                                <span *ngIf="task.priority === 'High'"><span aria-hidden="true">🔴🔺</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_HIGH"></span></span>
+                                <span *ngIf="task.priority === 'Medium'"><span aria-hidden="true">🟠🔸</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_MEDIUM"></span></span>
+                                <span *ngIf="task.priority === 'Low'"><span aria-hidden="true">🔵🔹</span> <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_LOW"></span></span>
                             </span>
                             <span [class]="'deadline-badge ' + (langService.currentLang())" 
                                   *ngIf="task.deadline" 

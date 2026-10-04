@@ -279,6 +279,11 @@ export const JapanesePack: LocalePack = {
         DELETE_PROJECT_ARIA: "プロジェクトを完全に削除: {value}",
         NO_DESCRIPTION_FALLBACK: "説明はありません。",
         OPEN_BOARD_TEXT: "ボードを<ruby>開<rt aria-hidden=\"true\">ひら</rt></ruby>く",
+        COMPLETION_DATA_HEADER_TEXT: "<ruby>完了<rt aria-hidden=\"true\">かんりょう</rt></ruby> / <ruby>合計<rt aria-hidden=\"true\">ごうけい</rt></ruby>:",
+        COMPLETION_DATA_HEADER_ARIA: "プロジェクト「{value}」にある同じ優先度のタスクについて、完了した数と全体の数",
+        BADGE_ALL_TASKS_DONE_TEXT: "プロジェクトのタスクはすべて<ruby>完了<rt aria-hidden=\"true\">かんりょう</rt></ruby>しました！",
+        TASK_COMPARISON_ARIA: "件完了（全{value}件中）、優先度：",
+        PROJECT_HAS_NO_TASKS: "このプロジェクトにはまだタスクがありません。新しいタスクを作成するか、作成されるまでお待ちください！",
         OPEN_BOARD_ARIA: "プロジェクトのタスクボードを開く: {value}"
     },
 

@@ -280,6 +280,11 @@ export const EnglishUSPack: LocalePack = {
         PROJECT_CARD_ARIA: "Project workspace: {value}",
         DELETE_PROJECT_ARIA: "Permanently delete project workspace: {value}",
         NO_DESCRIPTION_FALLBACK: "No description provided.",
+        COMPLETION_DATA_HEADER_TEXT: "Completed / total:",
+        COMPLETION_DATA_HEADER_ARIA: "Number of tasks completed compared to total number of tasks with the same priority level Project {value} has",
+        BADGE_ALL_TASKS_DONE_TEXT: "All project tasks complete!",
+        TASK_COMPARISON_ARIA: " of {value} tasks completed with priority ",
+        PROJECT_HAS_NO_TASKS: "This project has no tasks yet, create or wait for some to be created!",
         OPEN_BOARD_TEXT: "Open Project Board",
         OPEN_BOARD_ARIA: "Open task board overview for project: {value}"
     },
