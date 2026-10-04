@@ -72,7 +72,7 @@ Open a browser page and navigate straight to `http://localhost:4200` to interact
 
 ---
 
-## Supported languages (Proof reading would be appericiated!)
+## Supported languages (Proof reading would be appreciated!)
 - English (British)
 - English (US)
 - Russian
@@ -120,7 +120,7 @@ To-do list:
 - ✅ Add colorblind and font changing options 
 - ✅ Add Theme support + themes
 - ❌ Do a general refactor run to remove dead html classes!
-- ✅ Add Fronend models
+- ✅ Add Fronend models instead of relying on 'any' types
 - ❌ Project filter options in the dashboard!
 - ❌ Add "edit project info" menu
 - ❌ Many to many task categories and assignees (perhaps?)

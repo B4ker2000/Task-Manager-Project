@@ -282,7 +282,7 @@ export const PersianPack: LocalePack = {
         NO_DESCRIPTION_FALLBACK: "توضیحاتی برای این پروژه ثبت نشده است.",
         COMPLETION_DATA_HEADER_TEXT: "تکمیل‌شده / کل:",
         COMPLETION_DATA_HEADER_ARIA: "تعداد وظایف انجام شده در مقایسه با تعداد کل وظایف با سطح اولویت یکسان در پروژه {value}",
-        BADGE_ALL_TASKS_DONE_TEXT: "تمام وظایف پروژه تکمیل شد!",
+        BADGE_ALL_TASKS_DONE_TEXT: "تمام وظایف این پروژه تکمیل شده است!",
         TASK_COMPARISON_ARIA: " از {value} وظیفه انجام شده با  با سطح اولویت ",
         PROJECT_HAS_NO_TASKS: "این پروژه هنوز هیچ وظیفه‌ای ندارد؛ وظیفه‌ای ایجاد کنید یا منتظر بمانید تا وظایفی ایجاد شوند!",
         OPEN_BOARD_TEXT: "باز کردن بورد پروژه",

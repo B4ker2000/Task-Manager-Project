@@ -75,12 +75,12 @@ namespace Backend.Services
                 .Select(g => new
                 {
                     ProjectId = g.Key,
-                    LowTotal = g.Count(t => t.Priority == "Low" || t.Priority == "low"),
-                    LowCompleted = g.Count(t => (t.Priority == "Low" || t.Priority == "low") && (t.Status == "Completed" || t.Status == "completed")),
-                    MediumTotal = g.Count(t => t.Priority == "Medium" || t.Priority == "medium"),
-                    MediumCompleted = g.Count(t => (t.Priority == "Medium" || t.Priority == "medium") && (t.Status == "Completed" || t.Status == "completed")),
-                    HighTotal = g.Count(t => t.Priority == "High" || t.Priority == "high"),
-                    HighCompleted = g.Count(t => (t.Priority == "High" || t.Priority == "high") && (t.Status == "Completed" || t.Status == "completed"))
+                    LowTotal = g.Count(t => t.Priority == "Low"),
+                    LowCompleted = g.Count(t => t.Priority == "Low" && t.Status == "Completed"),
+                    MediumTotal = g.Count(t => t.Priority == "Medium"),
+                    MediumCompleted = g.Count(t => t.Priority == "Medium" && t.Status == "Completed"),
+                    HighTotal = g.Count(t => t.Priority == "High"),
+                    HighCompleted = g.Count(t => t.Priority == "High" && t.Status == "Completed")
                 })
                 .ToDictionaryAsync(x => x.ProjectId);
 

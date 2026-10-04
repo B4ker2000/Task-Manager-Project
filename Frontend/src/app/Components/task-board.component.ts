@@ -699,11 +699,9 @@ export class TaskBoardComponent implements OnInit {
         // =========================================================================
         // PERMISSION GATE 1: THE DYNAMIC SELF-DROP PROGRESS/REVIEW TOGGLE SWITCH
         // =========================================================================
-        if (
-            sourceLaneId === targetLaneId && 
+        if (sourceLaneId === targetLaneId && 
             targetLaneId === "inProgressLaneList" &&
-            event.previousIndex === event.currentIndex
-        ) {
+            event.previousIndex === event.currentIndex) {
             // SECURITY: Block regular users from toggling cards that are NOT assigned to them!
             if(!isOwner && !isAssignee) {
                 this.popupService.show({
@@ -717,15 +715,15 @@ export class TaskBoardComponent implements OnInit {
             }
 
             let nextState = targetTaskItem.status;
-            if(targetTaskItem.status === "In Progress") {
+            if (targetTaskItem.status === "In Progress") {
                 nextState = "Review Required";
-            } else if(targetTaskItem.status === "Review Required" && isOwner) {
+            } else if (targetTaskItem.status === "Review Required" && isOwner) {
                 nextState = "In Progress";      // PM rejects/returns request
-            } else if(targetTaskItem.status === "Review Required" && !isOwner && isAssignee) {
+            } else if (targetTaskItem.status === "Review Required" && !isOwner && isAssignee) {
                 nextState = "In Progress";      // Assignee cancels their own pending review request safely!
             }
 
-            if(nextState !== targetTaskItem.status) {
+            if (nextState !== targetTaskItem.status) {
                 targetTaskItem.status = nextState;
                 this.onUpdateStatus(targetTaskItem.id, nextState);
                 this.cdr.detectChanges();
@@ -747,16 +745,13 @@ export class TaskBoardComponent implements OnInit {
             
             const taskIds = event.container.data.map(task => task.id);
 
-            this.cdr.detectChanges();
+            this.applyFilters();
 
             this.taskService.reorderTasks(
                 this.projectId,
                 status,
                 taskIds
             ).subscribe({
-                next: () => {
-                    this.cdr.detectChanges();
-                },
                 error: (err: HttpErrorResponse) => {
                     console.error("Failed to save task order: ", err);
                     this.loadTasks();
@@ -771,7 +766,7 @@ export class TaskBoardComponent implements OnInit {
         // =========================================================================
         
         // RULE A: Absolute lock on the Completed Column lane! Only Project Managers can approve tasks.
-        if(computedDatabaseStatusString === "Completed" && !isOwner) {
+        if (computedDatabaseStatusString === "Completed" && !isOwner) {
             this.popupService.show({
                 type: "danger",
                 title: this.langService.words().POPUP.DANGER_ACCESS_DENIED_TITLE,
@@ -783,7 +778,7 @@ export class TaskBoardComponent implements OnInit {
         }
 
         // RULE B: Prevent regular members from grabbing or picking up unassigned work items entirely.
-        if(!isOwner && !isAssignee) {
+        if (!isOwner && !isAssignee) {
                 this.popupService.show({
                     type: "danger",
                     title: this.langService.words().POPUP.DANGER_ACCESS_DENIED_TITLE,
@@ -796,7 +791,7 @@ export class TaskBoardComponent implements OnInit {
 
         // RULE C: If a regular member drags their card from 'Pending' into 'In Progress', force it to 'In Progress'
         // and strip any old historical 'Review Required' flags seamlessly.
-        if(computedDatabaseStatusString === "In Progress" && !isOwner) {
+        if (computedDatabaseStatusString === "In Progress" && !isOwner) {
             computedDatabaseStatusString = "In Progress";
         }
 
@@ -960,7 +955,7 @@ export class TaskBoardComponent implements OnInit {
 
         moveItemInArray(taskList, currentIndex, targetIndex);
         this.mobileReorderTask = null;
-        this.cdr.detectChanges();
+        this.applyFilters();
 
         const status = task.status === 'Review Required' || task.status === 'In Progress'
             ? 'In Progress'
