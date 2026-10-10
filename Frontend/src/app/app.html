@@ -1,10 +1,10 @@
 <router-outlet></router-outlet>
 
-<app-popup *ngIf="(popupService.config$ | async)?.visible"
-           [type]="(popupService.config$ | async)?.type || 'success'"
-           [title]="(popupService.config$ | async)?.title || ''"
-           [body]="(popupService.config$ | async)?.body || ''"
-           [isConfirmation]="(popupService.config$ | async)?.isConfirmation || false"
-           (confirm)="handleGlobalConfirm()"
-           (cancel)="handleGlobalCancel()">
-</app-popup>
+@if ((popupService.config$ | async)?.visible) {
+    <app-popup [type]="(popupService.config$ | async)?.type || 'success'"
+               [title]="(popupService.config$ | async)?.title || ''"
+               [body]="(popupService.config$ | async)?.body || ''"
+               [isConfirmation]="(popupService.config$ | async)?.isConfirmation || false"
+               (confirm)="handleGlobalConfirm()"
+               (cancel)="handleGlobalCancel()"></app-popup>
+}

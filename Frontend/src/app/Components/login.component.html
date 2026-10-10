@@ -1,30 +1,40 @@
-<div class="login-wrapper" role="main" [attr.aria-label]="langService.words().LOGIN.PORTAL_ARIA">
+<div class="login-wrapper" 
+     role="main" 
+     [attr.aria-label]="langService.words().LOGIN.PORTAL_ARIA">
+
     <div class="login-container">
         <h2 id="loginHeader" 
             [attr.aria-label]="isFirstTimeUser ? langService.words().LOGIN.HEADER_FIRST_TIME : langService.words().LOGIN.HEADER_WELCOME_BACK"
             [innerHTML]="isFirstTimeUser ? langService.words().LOGIN.HEADER_FIRST_TIME : langService.words().LOGIN.HEADER_WELCOME_BACK"></h2>
+
         <p [innerHTML]="langService.words().LOGIN.SUBTITLE_MANAGE"></p>
 
         <!-- aria-describedby links the main structural headers directly to the input scope -->
-         <form (ngSubmit)="onLogin()" #loginForm="ngForm" aria-labelledby="loginHeader">
+         <form (ngSubmit)="onLogin()" 
+               #loginForm="ngForm" 
+               aria-labelledby="loginHeader">
 
             <!-- 📧 Email Input Area -->
              <div class="form-group">
-                <label for="email" [innerHTML]="langService.words().GLOBAL.FIELD_EMAIL"></label>
+                <label for="email" 
+                       [innerHTML]="langService.words().GLOBAL.FIELD_EMAIL"></label>
+
                 <!-- added aria-required dynamically corresponding to form compliance -->
                  <input id="email" 
-                       type="email" 
-                       name="email" 
-                       [(ngModel)]="credentials.email" 
-                       required 
-                       [placeholder]="langService.words().GLOBAL.PLACEHOLDER_EMAIL"
-                       aria-required="true"
-                       autofocus>
+                        type="email" 
+                        name="email" 
+                        [(ngModel)]="credentials.email" 
+                        required 
+                        [placeholder]="langService.words().GLOBAL.PLACEHOLDER_EMAIL"
+                        aria-required="true"
+                        autofocus>
              </div>
 
             <!-- 🔒 Password Input Area -->
              <div class="form-group">
-                <label for="password" [innerHTML]="langService.words().GLOBAL.FIELD_PASSWORD"></label>
+                <label for="password" 
+                       [innerHTML]="langService.words().GLOBAL.FIELD_PASSWORD"></label>
+
                 <div class="password-input-wrapper">
                     <!-- Binding [type] makes the visibility dynamic -->
                      <input id="password" 
@@ -37,10 +47,10 @@
 
                     <!-- 👁️ Password Visibility Switch: Fully localized toggle aria label parameters -->
                      <button type="button" 
-                            class="eye-toggle-btn" 
-                            (click)="showPassword = !showPassword"
-                            [attr.aria-label]="showPassword ? langService.words().GLOBAL.SHOW_PASS_ARIA : langService.words().GLOBAL.HIDE_PASS_ARIA"
-                            [attr.aria-pressed]="showPassword">
+                             class="eye-toggle-btn" 
+                             (click)="showPassword = !showPassword"
+                             [attr.aria-label]="showPassword ? langService.words().GLOBAL.SHOW_PASS_ARIA : langService.words().GLOBAL.HIDE_PASS_ARIA"
+                             [attr.aria-pressed]="showPassword">
                     
                         <span aria-hidden="true">{{ showPassword ? '👁️' : '👁️‍🗨️' }}</span>
                      </button>
@@ -48,31 +58,37 @@
 
                 <!-- 🗃️ Remember Me Checkbox Group -->
                 <div class="remember-me-container">
-                    <label for="rememberMeBox" class="remember-me-label">
+                    <label for="rememberMeBox" 
+                           class="remember-me-label">
+
                         <input type="checkbox" 
                                id="rememberMeBox" 
                                [(ngModel)]="rememberMe" 
                                name="rememberMe"
                                [attr.aria-checked]="rememberMe" />
                         
-                        <span class="remember-me-text" [innerHTML]="langService.words().LOGIN.CHECKBOX_REMEMBER"></span>
+                        <span class="remember-me-text" 
+                              [innerHTML]="langService.words().LOGIN.CHECKBOX_REMEMBER"></span>
                     </label>
                 </div>
              </div>
 
             <!-- 🏁 Core Submit Action Interface -->
              <button type="submit" 
-                    class="submit-btn login-submit-btn" 
-                    [disabled]="!loginForm.form.valid"
-                    [attr.aria-label]="langService.words().LOGIN.BTN_SIGNIN_ARIA"
-                    [innerHTML]="langService.words().LOGIN.BTN_SIGNIN_TEXT"></button>
+                     class="submit-btn login-submit-btn" 
+                     [disabled]="!loginForm.form.valid"
+                     [attr.aria-label]="langService.words().LOGIN.BTN_SIGNIN_ARIA"
+                     [innerHTML]="langService.words().LOGIN.BTN_SIGNIN_TEXT"></button>
 
             <!-- 🌐 Login Entry Portal Language Control Row -->
              <div class="form-group">
-                <label for="loginLangSelect" class="login-language-switcher-label">
+                <label for="loginLangSelect" 
+                       class="login-language-switcher-label">
+
                     <span aria-hidden="true">🌐 </span>
                     <span [innerHTML]="langService.words().GLOBAL.LANGUAGE_SELECTION_TITLE"></span>
                 </label>
+                
                 <select id="loginLangSelect"
                         name="loginLangSelect"
                         [ngModel]="langService.currentLang()"
@@ -97,18 +113,22 @@
 
             <p>
                 <span [innerHTML]="langService.words().LOGIN.FOOTER_TEXT"></span>
-                <a [routerLink]="['/register']" class="create-new-account-link" [attr.aria-label]="langService.words().LOGIN.FOOTER_LINK_ARIA" [innerHTML]="langService.words().LOGIN.FOOTER_LINK_TEXT"></a>
+                <a [routerLink]="['/register']" 
+                   class="create-new-account-link" 
+                   [attr.aria-label]="langService.words().LOGIN.FOOTER_LINK_ARIA" 
+                   [innerHTML]="langService.words().LOGIN.FOOTER_LINK_TEXT"></a>
             </p>
          </div>
 
         <!-- 🚨 Dynamic Live Error Announcer -->
-         <div class="error-msg" 
-              *ngIf="errorMessage"
-              role="alert"
-              aria-live="assertive">
-                
-            <span aria-hidden="true">❌ </span> 
-            <span>{{ errorMessage }}</span>
-         </div>
+         @if (errorMessage) {
+            <div class="error-msg" 
+                 role="alert"
+                 aria-live="assertive">
+                    
+                <span aria-hidden="true">❌ </span> 
+                <span>{{ errorMessage }}</span>
+            </div>
+         }
     </div>
 </div>

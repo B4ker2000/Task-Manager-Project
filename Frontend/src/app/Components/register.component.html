@@ -3,15 +3,22 @@
      [attr.aria-label]="langService.words().REGISTER.PORTAL_ARIA">
     
     <div class="register-card">
-        <h2 id="registerHeader" [innerHTML]="langService.words().REGISTER.HEADER_TITLE"></h2>
-        <p class="subtitle" [innerHTML]="langService.words().REGISTER.SUBTITLE_JOIN"></p>
+        <h2 id="registerHeader" 
+            [innerHTML]="langService.words().REGISTER.HEADER_TITLE"></h2>
+
+        <p class="subtitle" 
+           [innerHTML]="langService.words().REGISTER.SUBTITLE_JOIN"></p>
         
         <!-- aria-labelledby provides instant spatial context to the screen reader user -->
-         <form (ngSubmit)="onRegister()" #registerForm="ngForm" aria-labelledby="registerHeader">
+         <form (ngSubmit)="onRegister()" 
+               #registerForm="ngForm" 
+               aria-labelledby="registerHeader">
 
             <!-- 👤 Username Input Group -->
              <div class="form-group">
-                <label for="username" [innerHTML]="langService.words().REGISTER.LABEL_USERNAME"></label>
+                <label for="username" 
+                       [innerHTML]="langService.words().REGISTER.LABEL_USERNAME"></label>
+
                 <input id="username" 
                        type="text" 
                        name="username" 
@@ -24,7 +31,9 @@
 
             <!-- 📧 Email Input Group -->
              <div class="form-group">
-                <label for="email" [innerHTML]="langService.words().GLOBAL.FIELD_EMAIL"></label>
+                <label for="email" 
+                       [innerHTML]="langService.words().GLOBAL.FIELD_EMAIL"></label>
+
                 <input id="email" 
                        type="email" 
                        name="email"
@@ -37,7 +46,9 @@
 
             <!-- 🔒 Password Selection Input Group -->
              <div class="form-group">
-                <label for="password" [innerHTML]="langService.words().GLOBAL.FIELD_PASSWORD"></label>
+                <label for="password" 
+                       [innerHTML]="langService.words().GLOBAL.FIELD_PASSWORD"></label>
+
                 <div class="password-input-wrapper">
                     <input id="password" 
                            [type]="showPassword ? 'text' : 'password'" 
@@ -50,10 +61,10 @@
                         
                     <!-- 👁️ Primary Visibility Button -->
                      <button type="button" 
-                            class="eye-toggle-btn" 
-                            (click)="showPassword = !showPassword"
-                            [attr.aria-label]="showPassword ? langService.words().GLOBAL.SHOW_PASS_ARIA : langService.words().GLOBAL.HIDE_PASS_ARIA"
-                            [attr.aria-pressed]="showPassword">
+                             class="eye-toggle-btn" 
+                             (click)="showPassword = !showPassword"
+                             [attr.aria-label]="showPassword ? langService.words().GLOBAL.SHOW_PASS_ARIA : langService.words().GLOBAL.HIDE_PASS_ARIA"
+                             [attr.aria-pressed]="showPassword">
 
                         <span aria-hidden="true">{{ showPassword ? '👁️' : '👁️‍🗨️' }}</span>
                      </button>
@@ -62,7 +73,9 @@
 
             <!-- 🔒 Password Confirmation Input Group -->
              <div class="form-group">
-                <label for="confirmPassword" [innerHTML]="langService.words().REGISTER.LABEL_CONFIRM_PASSWORD"></label>
+                <label for="confirmPassword" 
+                       [innerHTML]="langService.words().REGISTER.LABEL_CONFIRM_PASSWORD"></label>
+
                 <div class="password-input-wrapper">
                     <input id="confirmPassword" 
                            [type]="showConfirmPassword ? 'text' : 'password'" 
@@ -75,10 +88,10 @@
                     
                     <!-- 👁️ Confirmation Visibility Button -->
                      <button type="button" 
-                            class="eye-toggle-btn" 
-                            (click)="showConfirmPassword = !showConfirmPassword"
-                            [attr.aria-label]="showConfirmPassword ? langService.words().GLOBAL.SHOW_CONFIRM_ARIA : langService.words().GLOBAL.HIDE_CONFIRM_ARIA"
-                            [attr.aria-pressed]="showConfirmPassword">
+                             class="eye-toggle-btn" 
+                             (click)="showConfirmPassword = !showConfirmPassword"
+                             [attr.aria-label]="showConfirmPassword ? langService.words().GLOBAL.SHOW_CONFIRM_ARIA : langService.words().GLOBAL.HIDE_CONFIRM_ARIA"
+                             [attr.aria-pressed]="showConfirmPassword">
 
                         <span aria-hidden="true">{{ showConfirmPassword ? '👁️' : '👁️‍🗨️' }}</span>
                      </button>
@@ -86,14 +99,16 @@
              </div>
 
             <!-- 💡 Hidden layout helper text linked to inputs -->
-             <span id="registerPasswordRequirements" style="display: none;" [innerHTML]="langService.words().REGISTER.REQUIREMENTS_ARIA"></span>
+             <span id="registerPasswordRequirements" 
+                   style="display: none;" 
+                   [innerHTML]="langService.words().REGISTER.REQUIREMENTS_ARIA"></span>
 
             <!-- 🏁 Submission Hub -->
              <button type="submit" 
-                    class="submit-btn register-btn" 
-                    [disabled]="!registerForm.form.valid"
-                    [attr.aria-label]="langService.words().REGISTER.BTN_SUBMIT_ARIA"
-                    [innerHTML]="langService.words().REGISTER.BTN_SUBMIT_TEXT"></button>
+                     class="submit-btn register-btn" 
+                     [disabled]="!registerForm.form.valid"
+                     [attr.aria-label]="langService.words().REGISTER.BTN_SUBMIT_ARIA"
+                     [innerHTML]="langService.words().REGISTER.BTN_SUBMIT_TEXT"></button>
          </form>
 
         <!-- 🗺️ Footnote Navigation Links -->
@@ -103,7 +118,10 @@
               
             <p>
                <span [innerHTML]="langService.words().REGISTER.FOOTER_TEXT"></span>
-               <a [routerLink]="['/login']" class="login-link" [attr.aria-label]="langService.words().REGISTER.FOOTER_LINK_ARIA" [innerHTML]="langService.words().REGISTER.FOOTER_LINK_TEXT"></a>
+               <a [routerLink]="['/login']" 
+                  class="login-link" 
+                  [attr.aria-label]="langService.words().REGISTER.FOOTER_LINK_ARIA" 
+                  [innerHTML]="langService.words().REGISTER.FOOTER_LINK_TEXT"></a>
             </p>
          </div>
     </div>

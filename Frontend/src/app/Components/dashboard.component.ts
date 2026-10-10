@@ -1,6 +1,6 @@
 import { Component, OnInit, inject, ChangeDetectorRef, PLATFORM_ID, HostListener } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { NgFor, NgIf, DatePipe, isPlatformBrowser } from "@angular/common";
+import { DatePipe, isPlatformBrowser } from "@angular/common";
 import { ProjectService } from "../services/project.service";
 import { ProjectItem, ProjectInvitation } from "../models/project.model";
 import { Router, RouterLink } from "@angular/router";
@@ -15,7 +15,7 @@ import { DragDropModule, CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-
 @Component({
     selector: 'app-dashboard',
     standalone: true,
-    imports: [FormsModule, NgFor, NgIf, DatePipe, RouterLink, LocalizeNumberPipe, DragDropModule],
+    imports: [FormsModule, DatePipe, RouterLink, LocalizeNumberPipe, DragDropModule],
     templateUrl: "./dashboard.component.html",
     styleUrl: "./dashboard.component.css"
 })

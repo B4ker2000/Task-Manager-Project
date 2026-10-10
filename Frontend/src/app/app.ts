@@ -2,12 +2,12 @@ import { Component, signal, OnInit, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PopupComponent } from './Components/popup.component';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { PopupService } from './services/popup.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, FormsModule, PopupComponent, NgIf, AsyncPipe],
+  imports: [RouterOutlet, FormsModule, PopupComponent, AsyncPipe],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

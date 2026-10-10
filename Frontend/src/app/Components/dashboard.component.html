@@ -1,11 +1,22 @@
-<div class="dashboard-wrapper" role="main" [attr.aria-label]="langService.words().DASHBOARD.MAIN_CANVAS_LABEL">
+<div class="dashboard-wrapper" 
+     role="main" 
+     [attr.aria-label]="langService.words().DASHBOARD.MAIN_CANVAS_LABEL">
+
     <header class="main-header">
-        <h1 id="dashboardMainHeader" [innerHTML]="langService.words().DASHBOARD.MAIN_HEADER"></h1>
-        <div class="header-navigation-actions" role="navigation" [attr.aria-label]="langService.words().DASHBOARD.NAV_ARIA">
-            <button class="submit-btn profile-btn" [routerLink]="['/profile']">
+        <h1 id="dashboardMainHeader" 
+            [innerHTML]="langService.words().DASHBOARD.MAIN_HEADER"></h1>
+
+        <div class="header-navigation-actions" 
+             role="navigation" 
+             [attr.aria-label]="langService.words().DASHBOARD.NAV_ARIA">
+
+            <button class="submit-btn profile-btn" 
+                    [routerLink]="['/profile']">
+
                 <span aria-hidden="true">👤</span>
                 <span [innerHTML]="langService.words().DASHBOARD.PROFILE_BTN"></span>
             </button>
+            
             <button class="cancel-btn logout-btn" 
                     (click)="onLogout()" 
                     [attr.aria-label]="langService.words().DASHBOARD.LOGOUT_ARIA"
@@ -13,60 +24,78 @@
         </div>
     </header>
 
-    <section *ngIf="pendingInvitations.length > 0"
-             class="invitations-section"
-             role="region"
-             aria-labelledby="invitationsHeader"
-             aria-live="polite">
-             
-        <div class="invitations-header">
-            <h2 id="invitationsHeader"
-                [attr.aria-label]="formatLabel(langService.words().DASHBOARD.INVITATION_ARIA, pendingInvitations.length.toString())"
-                [innerHTML]="langService.words().DASHBOARD.INVITATION_HEADER"></h2>
-            <span class="invitation-count" aria-hidden="true">{{ pendingInvitations.length | localizeNumber }}</span>
-        </div>
+    @if (pendingInvitations.length > 0) {
+        <section class="invitations-section"
+                 role="region"
+                 aria-labelledby="invitationsHeader"
+                 aria-live="polite">
+                
+            <div class="invitations-header">
+                <h2 id="invitationsHeader"
+                    [attr.aria-label]="formatLabel(langService.words().DASHBOARD.INVITATION_ARIA, pendingInvitations.length.toString())"
+                    [innerHTML]="langService.words().DASHBOARD.INVITATION_HEADER"></h2>
 
-        <div class="invitation-list">
-            <article *ngFor="let invitation of pendingInvitations"
-                     class="invitation-card">
-                     
-                <div class="invitation-details" [attr.aria-label]="formatLabel(langService.words().DASHBOARD.INVITATION_DETAILS_ARIA, invitation.project?.name)">
-                    <h3 aria-hidden="true">{{ invitation.project?.name }}</h3>
-                    <p [attr.aria-label]="formatLabel(langService.words().DASHBOARD.INVITATION_DESCRIPTION_ARIA, getLocalizedRole(invitation.projectRole))">
-                        <span [innerHTML]="langService.words().DASHBOARD.INVITATION_DESCRIPTION_TEXT"></span>
-                        <strong aria-hidden="true">{{ getLocalizedRole(invitation.projectRole) }}</strong>
-                    </p>
-                    <span [attr.aria-label]="formatLabel(langService.words().DASHBOARD.INVITATION_EXPIRY_ARIA, (invitation.expiresAt | date: langService.words().GLOBAL.DATE_FORMAT) || '')">
-                        <small aria-hidden="true" >
-                            <span [innerHTML]="langService.words().DASHBOARD.INVITATION_EXPIRY_TEXT"></span>
-                            {{ invitation.expiresAt | date: (langService.words()?.GLOBAL?.DATE_FORMAT || 'yyyy/MM/dd') | localizeNumber }}
-                        </small>
-                    </span>
-                </div>
-                <div class="invitation-actions">
-                    <button type="button"
-                            class="action-btn decline-invite"
-                            (click)="declineInvitation(invitation.id)"
-                            [innerHTML]="langService.words().DASHBOARD.INVITATION_DECLINE_BTN">
-                    </button>
+                <span class="invitation-count" 
+                      aria-hidden="true">{{ pendingInvitations.length | localizeNumber }}</span>
+            </div>
 
-                    <button type="button"
-                            class="action-btn accept-invite"
-                            (click)="acceptInvitation(invitation.id)"
-                            [innerHTML]="langService.words().DASHBOARD.INVITATION_ACCEPT_BTN">
-                    </button>
-                </div>
-            </article>
-        </div>
-    </section>
+            <div class="invitation-list">
+                @for (invitation of pendingInvitations; track invitation.id) {
+                    <article class="invitation-card">
+                        <div class="invitation-details" 
+                             [attr.aria-label]="formatLabel(langService.words().DASHBOARD.INVITATION_DETAILS_ARIA, invitation.project?.name)">
+
+                            <h3 aria-hidden="true">{{ invitation.project?.name }}</h3>
+                            
+                            <p [attr.aria-label]="formatLabel(langService.words().DASHBOARD.INVITATION_DESCRIPTION_ARIA, getLocalizedRole(invitation.projectRole))">
+                                <span [innerHTML]="langService.words().DASHBOARD.INVITATION_DESCRIPTION_TEXT"></span>
+                                <strong aria-hidden="true">
+                                    {{ getLocalizedRole(invitation.projectRole) }}
+                                </strong>
+                            </p>
+
+                            <span [attr.aria-label]="formatLabel(langService.words().DASHBOARD.INVITATION_EXPIRY_ARIA, (invitation.expiresAt | date: langService.words().GLOBAL.DATE_FORMAT) || '')">
+                                <small aria-hidden="true" >
+                                    <span [innerHTML]="langService.words().DASHBOARD.INVITATION_EXPIRY_TEXT"></span>
+                                    {{ invitation.expiresAt | date: (langService.words()?.GLOBAL?.DATE_FORMAT || 'yyyy/MM/dd') | localizeNumber }}
+                                </small>
+                            </span>
+                        </div>
+
+                        <div class="invitation-actions">
+                            <button type="button"
+                                    class="action-btn decline-invite"
+                                    (click)="declineInvitation(invitation.id)"
+                                    [innerHTML]="langService.words().DASHBOARD.INVITATION_DECLINE_BTN"></button>
+
+                            <button type="button"
+                                    class="action-btn accept-invite"
+                                    (click)="acceptInvitation(invitation.id)"
+                                    [innerHTML]="langService.words().DASHBOARD.INVITATION_ACCEPT_BTN"></button>
+                        </div>
+                    </article>
+                }
+            </div>
+        </section>
+    }
 
     <div class="dashboard-grid">
         <!-- Left Side: Create New Project Form -->
-         <section class="form-section" role="region" aria-labelledby="createProjectHeader">
-            <h3 id="createProjectHeader" [innerHTML]="langService.words().DASHBOARD.CREATE_PROJECT_HEADER"></h3>
-            <form (ngSubmit)="onCreateProject()" #projectForm="ngForm" aria-labelledby="createProjectHeader">
+         <section class="form-section" 
+                  role="region" 
+                  aria-labelledby="createProjectHeader">
+
+            <h3 id="createProjectHeader" 
+                [innerHTML]="langService.words().DASHBOARD.CREATE_PROJECT_HEADER"></h3>
+
+            <form (ngSubmit)="onCreateProject()" 
+                  #projectForm="ngForm" 
+                  aria-labelledby="createProjectHeader">
+
                 <div class="form-group">
-                    <label for="projectTitle" [innerHTML]="langService.words().DASHBOARD.PROJECT_TITLE_LABEL"></label>
+                    <label for="projectTitle" 
+                           [innerHTML]="langService.words().DASHBOARD.PROJECT_TITLE_LABEL"></label>
+
                     <input id="projectTitle" 
                            type="text" 
                            name="name" 
@@ -78,7 +107,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="description" [innerHTML]="langService.words().DASHBOARD.DESCRIPTION_LABEL"></label>
+                    <label for="description" 
+                           [innerHTML]="langService.words().DASHBOARD.DESCRIPTION_LABEL"></label>
+
                     <textarea id="description" 
                               name="description" 
                               [(ngModel)]="newProject.description" 
@@ -95,101 +126,116 @@
          </section>
 
         <!-- Right Side: Existing Project Cards List -->
-        <!-- 📡 Enriched the live region to announce dynamic item card injections and deletions cleanly -->
-         <section class="list-section" role="region" aria-labelledby="projectsListHeader" aria-live="polite" aria-relevant="additions removals">
-            <h3 id="projectsListHeader" [innerHTML]="langService.words().DASHBOARD.YOUR_PROJECTS_HEADER"></h3>
-            <p class="empty-msg" 
-               *ngIf="projects.length === 0" 
-               role="status" 
-               [innerHTML]="langService.words().DASHBOARD.EMPTY_MESSAGE"></p>
+         <section class="list-section" 
+                  role="region" 
+                  aria-labelledby="projectsListHeader" 
+                  aria-live="polite" 
+                  aria-relevant="additions removals">
+
+            <h3 id="projectsListHeader" 
+                [innerHTML]="langService.words().DASHBOARD.YOUR_PROJECTS_HEADER"></h3>
+
+            @if (projects.length === 0) {
+                <p class="empty-msg"
+                   role="status" 
+                   [innerHTML]="langService.words().DASHBOARD.EMPTY_MESSAGE"></p>
+            }
 
             <div class="project-cards-grid"
                  cdkDropList
                  cdkDropListOrientation="mixed"
                  (cdkDropListDropped)="onProjectCardDropTrigger($event)">
 
-                <div class="project-card" 
-                     *ngFor="let p of projects" 
-                     cdkDrag
-                     role="article" 
-                     [attr.aria-label]="formatLabel(langService.words().DASHBOARD.PROJECT_CARD_ARIA, p.title)">
-                    
-                    <!-- Safe drag placeholder visualization -->
-                     <div class="project-card-placeholder" *cdkDragPlaceholder></div>
+                @for (proj of projects; track proj.id) {
+                    <div class="project-card"
+                         cdkDrag
+                         role="article" 
+                         [attr.aria-label]="formatLabel(langService.words().DASHBOARD.PROJECT_CARD_ARIA, proj.title)">
+                        
+                        <!-- Safe drag placeholder visualization -->
+                         <div class="project-card-placeholder" 
+                              *cdkDragPlaceholder></div>
 
-                    <div class="project-card-header">
-                        <h4 [attr.id]="'proj-title-' + p.id">
-                            <span aria-hidden="true" class="drag-handle">🎯</span> {{ p.title }}
-                        </h4>
+                        <div class="project-card-header">
+                            <h4 [attr.id]="'proj-title-' + proj.id">
+                                <span aria-hidden="true" 
+                                      class="drag-handle">🎯</span> 
+                                
+                                {{ proj.title }}
+                            </h4>
 
-                        <!-- 🗑️ Smart Dynamic Label: Explicitly states WHICH project this button will delete -->
-                         <button *ngIf="p.userRole === 'Owner'" 
-                                 class="delete-proj-btn" 
-                                 (click)="onDeleteProject(p.id, $event)" 
-                                 [attr.aria-label]="formatLabel(langService.words().DASHBOARD.DELETE_PROJECT_ARIA, p.title)"
-                                 [attr.aria-describedby]="'proj-title-' + p.id">
-                                 
-                            <span aria-hidden="true">🗑️</span>
-                         </button>
-                    </div>
-                    <p>{{ p.description || langService.words().DASHBOARD.NO_DESCRIPTION_FALLBACK }}</p>
+                            <!-- 🗑️ Smart Dynamic Label: Explicitly states WHICH project this button will delete -->
+                             @if (proj.userRole === "Owner") {
+                                <button class="delete-proj-btn" 
+                                        (click)="onDeleteProject(proj.id, $event)" 
+                                        [attr.aria-label]="formatLabel(langService.words().DASHBOARD.DELETE_PROJECT_ARIA, proj.title)"
+                                        [attr.aria-describedby]="'proj-title-' + proj.id">
+                                        
+                                    <span aria-hidden="true">🗑️</span>
+                                </button>
+                             }
+                        </div>
+                        <p>{{ proj.description || langService.words().DASHBOARD.NO_DESCRIPTION_FALLBACK }}</p>
 
-                    <h5 [innerHTML]="langService.words().DASHBOARD.COMPLETION_DATA_HEADER_TEXT"
-                        [attr.aria-label]="formatLabel(langService.words().DASHBOARD.COMPLETION_DATA_HEADER_ARIA, p.title)"></h5>
-                    <div class="badge-group">
-                        @if ((p.prioritySummaries.high.total === p.prioritySummaries.high.completed && p.prioritySummaries.high.total !== 0) 
-                              && (p.prioritySummaries.medium.total === p.prioritySummaries.medium.completed && p.prioritySummaries.medium.total !== 0) 
-                              && (p.prioritySummaries.low.total === p.prioritySummaries.low.completed && p.prioritySummaries.low.total !== 0)) {
+                        <h5 [innerHTML]="langService.words().DASHBOARD.COMPLETION_DATA_HEADER_TEXT"
+                            [attr.aria-label]="formatLabel(langService.words().DASHBOARD.COMPLETION_DATA_HEADER_ARIA, proj.title)"></h5>
                             
-                            <span [class]="'priority-badge done ' + (langService.currentLang())">    
-                                <span aria-hidden="true">🟢🔹</span>
-                                <span [innerHTML]="langService.words().DASHBOARD.BADGE_ALL_TASKS_DONE_TEXT"></span>
-                            </span>
-                        }
-                        @else if (p.prioritySummaries.high.total + p.prioritySummaries.medium.total + p.prioritySummaries.low.total > 0) {
-                            @if (p.prioritySummaries.high.total > 0) {
-                                <span [class]="'priority-badge high ' + (langService.currentLang())">
-                                    <span aria-hidden="true">🔴🔺</span> 
-                                    <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_HIGH"
-                                          [attr.aria-label]="p.prioritySummaries.high.completed + formatLabel(langService.words().DASHBOARD.TASK_COMPARISON_ARIA, (p.prioritySummaries.high.total).toString())"></span> 
-                                    <span aria-hidden="true">
-                                        · {{ p.prioritySummaries.high.completed | localizeNumber }}/{{ p.prioritySummaries.high.total | localizeNumber }}
-                                    </span>
+                        <div class="badge-group">
+                            @if ((proj.prioritySummaries.high.total === proj.prioritySummaries.high.completed && proj.prioritySummaries.high.total !== 0) 
+                              && (proj.prioritySummaries.medium.total === proj.prioritySummaries.medium.completed && proj.prioritySummaries.medium.total !== 0) 
+                              && (proj.prioritySummaries.low.total === proj.prioritySummaries.low.completed && proj.prioritySummaries.low.total !== 0)) {
+                                
+                                <span [class]="'priority-badge done ' + (langService.currentLang())">    
+                                    <span aria-hidden="true">🟢🔹</span>
+                                    <span [innerHTML]="langService.words().DASHBOARD.BADGE_ALL_TASKS_DONE_TEXT"></span>
                                 </span>
                             }
-                            @if (p.prioritySummaries.medium.total > 0) {
-                                <span [class]="'priority-badge medium ' + (langService.currentLang())">
-                                    <span aria-hidden="true">🟠🔸</span> 
-                                    <span [attr.aria-label]="p.prioritySummaries.medium.completed + formatLabel(langService.words().DASHBOARD.TASK_COMPARISON_ARIA, (p.prioritySummaries.medium.total).toString())"
-                                          [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_MEDIUM"></span> 
-                                    <span aria-hidden="true">
-                                        · {{ p.prioritySummaries.medium.completed | localizeNumber }}/{{ p.prioritySummaries.medium.total | localizeNumber }}
+                            @else if (proj.prioritySummaries.high.total + proj.prioritySummaries.medium.total + proj.prioritySummaries.low.total > 0) {
+                                @if (proj.prioritySummaries.high.total > 0) {
+                                    <span [class]="'priority-badge high ' + (langService.currentLang())">
+                                        <span aria-hidden="true">🔴🔺</span> 
+                                        <span [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_HIGH"
+                                              [attr.aria-label]="proj.prioritySummaries.high.completed + formatLabel(langService.words().DASHBOARD.TASK_COMPARISON_ARIA, (proj.prioritySummaries.high.total).toString())"></span> 
+
+                                        <span aria-hidden="true">
+                                            · {{ proj.prioritySummaries.high.completed | localizeNumber }}/{{ proj.prioritySummaries.high.total | localizeNumber }}
+                                        </span>
                                     </span>
-                                </span>
-                            }
-                            @if (p.prioritySummaries.low.total > 0) {
-                                <span [class]="'priority-badge low ' + (langService.currentLang())">
-                                    <span aria-hidden="true">🔵🔹</span> 
-                                    <span [attr.aria-label]="p.prioritySummaries.low.completed + formatLabel(langService.words().DASHBOARD.TASK_COMPARISON_ARIA, (p.prioritySummaries.low.total).toString())"
-                                          [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_LOW"></span> 
-                                    <span aria-hidden="true">
-                                        · {{ p.prioritySummaries.low.completed | localizeNumber }}/{{ p.prioritySummaries.low.total | localizeNumber }}
+                                }
+                                @if (proj.prioritySummaries.medium.total > 0) {
+                                    <span [class]="'priority-badge medium ' + (langService.currentLang())">
+                                        <span aria-hidden="true">🟠🔸</span> 
+                                        <span [attr.aria-label]="proj.prioritySummaries.medium.completed + formatLabel(langService.words().DASHBOARD.TASK_COMPARISON_ARIA, (proj.prioritySummaries.medium.total).toString())"
+                                              [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_MEDIUM"></span> 
+                                        
+                                        <span aria-hidden="true">
+                                            · {{ proj.prioritySummaries.medium.completed | localizeNumber }}/{{ proj.prioritySummaries.medium.total | localizeNumber }}
+                                        </span>
                                     </span>
-                                </span>
+                                }
+                                @if (proj.prioritySummaries.low.total > 0) {
+                                    <span [class]="'priority-badge low ' + (langService.currentLang())">
+                                        <span aria-hidden="true">🔵🔹</span> 
+                                        <span [attr.aria-label]="proj.prioritySummaries.low.completed + formatLabel(langService.words().DASHBOARD.TASK_COMPARISON_ARIA, (proj.prioritySummaries.low.total).toString())"
+                                              [innerHTML]="langService.words().TASKBOARD.TASK_PRIORITY_LOW"></span> 
+                                        
+                                        <span aria-hidden="true">
+                                            · {{ proj.prioritySummaries.low.completed | localizeNumber }}/{{ proj.prioritySummaries.low.total | localizeNumber }}
+                                        </span>
+                                    </span>
+                                }
                             }
-                        }
-                        @else {
-                            <p class="no-tasks-msg"> 
-                               {{ langService.words().DASHBOARD.PROJECT_HAS_NO_TASKS }}
-                            </p>
-                        }
+                            @else {
+                                <p class="no-tasks-msg">{{ langService.words().DASHBOARD.PROJECT_HAS_NO_TASKS }}</p>
+                            }
+                        </div>
+                        
+                        <button class="submit-btn view-tasks-btn" 
+                                [routerLink]="['/projects', proj.id, 'board']"
+                                [attr.aria-label]="formatLabel(langService.words().DASHBOARD.OPEN_BOARD_ARIA, proj.title)"
+                                [innerHTML]="langService.words().DASHBOARD.OPEN_BOARD_TEXT"></button>
                     </div>
-                    
-                    <button class="submit-btn view-tasks-btn" 
-                            [routerLink]="['/projects', p.id, 'board']"
-                            [attr.aria-label]="formatLabel(langService.words().DASHBOARD.OPEN_BOARD_ARIA, p.title)"
-                            [innerHTML]="langService.words().DASHBOARD.OPEN_BOARD_TEXT"></button>
-                </div>
+                }
             </div>
          </section>
     </div>

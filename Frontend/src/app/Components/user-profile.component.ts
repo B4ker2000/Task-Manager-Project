@@ -1,5 +1,5 @@
 import { Component, OnInit, inject, PLATFORM_ID, ChangeDetectorRef, HostListener } from "@angular/core";
-import { isPlatformBrowser, NgIf, NgClass } from "@angular/common";
+import { isPlatformBrowser, NgClass } from "@angular/common";
 import { RouterLink, Router } from "@angular/router";
 import { AuthService } from "../services/auth.service";
 import { FormsModule } from "@angular/forms";
@@ -12,7 +12,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 @Component({
     selector: 'app-user-profile',
     standalone: true,
-    imports: [NgIf, NgClass, RouterLink, FormsModule, LocalizeNumberPipe], // [(ngModel)] needs FormsModule to be imported!
+    imports: [NgClass, RouterLink, FormsModule, LocalizeNumberPipe], // [(ngModel)] needs FormsModule to be imported!
     templateUrl: "./user-profile.component.html",
     styleUrl: "./user-profile.component.css"
 })

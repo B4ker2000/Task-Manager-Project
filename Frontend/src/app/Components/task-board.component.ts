@@ -1,6 +1,6 @@
 import { Component, OnInit, inject, ChangeDetectorRef, PLATFORM_ID, ElementRef, ViewChild, HostListener } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { NgFor, NgIf, NgClass, DatePipe, isPlatformBrowser } from "@angular/common";
+import { NgClass, DatePipe, isPlatformBrowser } from "@angular/common";
 import { ActivatedRoute, RouterLink, Router } from "@angular/router";
 import { TaskService } from "../services/task.service";
 import { ProjectService } from "../services/project.service";
@@ -19,7 +19,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 @Component({
     selector: 'app-task-board',
     standalone: true,
-    imports: [FormsModule, NgFor, NgIf, NgClass, RouterLink, DatePipe, DragDropModule, LocalizeNumberPipe],
+    imports: [FormsModule, NgClass, RouterLink, DatePipe, DragDropModule, LocalizeNumberPipe],
     templateUrl: "./task-board.component.html",
     styleUrl: "./task-board.component.css"
 })

@@ -110,7 +110,7 @@ To-do list:
 - ✅ Add project invitation logic
 - ✅ Check if invitations correctly expire or not!
 - ❌ Owner Invitation canceling, "sent invitations list" & "expired" badges/pills for expired invitations and change the accept/decline buttons to a single "clear notification" button!
-- ❌ Do some more mobile view adjustments
+- ❌ Make more mobile view adjustments
 - ✅ Add custom warning/error popups!
 - ✅ Add custom drop down menus for task card accessibility/mobile organizing button
 - ❌ Total drop-down menu replacement with the new custom one (perhaps?)
