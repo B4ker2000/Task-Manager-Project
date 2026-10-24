@@ -81,8 +81,8 @@ Open a browser page and navigate straight to `http://localhost:4200` to interact
 
 ## Planned locales
 - Azeri (including modern, soviet era, Iranian & Old Azeri)
-- Turkish (including ottomon turkish)
-- Other turkic languages like Uzbek, Turkmen, ect. 
+- Turkish (including Ottoman Turkish)
+- Other Turkic languages like Uzbek, Turkmen, etc. 
 - Traditional Japanese (Top-to-Bottom, Right-to-Left)
 - Chinese (Both simplified and traditional)
 - German 
@@ -120,7 +120,7 @@ To-do list:
 - ✅ Add colorblind and font changing options (Again feedback would be appreciated!)
 - ✅ Add Theme support alongside some custom themes as a guide for user made versions!
 - ❌ Do a general refactor run to remove dead html classes!
-- ✅ Add Fronend models instead of relying on 'any' types
+- ✅ Add Frontend models instead of relying on 'any' types
 - ❌ Project filter options in the dashboard!
 - ❌ Add "edit project info" menu
 - ❌ Many to many task categories and assignees (perhaps?)
