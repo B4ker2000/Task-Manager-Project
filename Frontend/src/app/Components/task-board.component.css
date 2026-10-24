@@ -181,8 +181,8 @@
 .search-filter-group {
     display: flex;
     gap: 15px;
-    flex: 1;
-    min-width: 300px;
+    flex: 2 1 0;
+    min-width: 0px;
 }
 
 .control-input-wrapper {
@@ -218,8 +218,8 @@
    LIVE ANALYTICS TRACKER BAR
    ========================================================================= */
 .progress-analytics { 
-    min-width: 280px; 
-    flex: 1; 
+    min-width: 0px; 
+    flex: 1 1 0; 
 }
 
 .priority-text-label { 

@@ -87,7 +87,7 @@ namespace Backend.Services
                 id = user.Id,
                 username = user.Username,
                 email = user.Email,
-                role = "Member",
+                role = "Member", // Will be changed to something more dynamic!
                 stats = new {
                     total = totalAssignedTasks,
                     completed = completedTasksCount

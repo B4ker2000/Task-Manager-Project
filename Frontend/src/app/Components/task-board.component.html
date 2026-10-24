@@ -247,6 +247,28 @@
                     }
                 </select>
              </div>
+
+            <!-- Show tasks assigned to user -->
+             <div class="control-input-wrapper">
+                <span class="control-icon-anchor" 
+                      aria-hidden="true">👤</span>
+
+                <select id="searchCategory" 
+                        [(ngModel)]="selectedCategory" 
+                        (ngModelChange)="applyFilters()" 
+                        class="board-interactive-field category" 
+                        [attr.aria-label]="langService.words().TASKBOARD.CATEGORY_ARIA">
+
+                    <option value="All">All tasks</option>
+                    <option value="Null">Tasks not assigned to anyone</option>
+                    
+                    @for (member of projectMembers; track member.userId) {
+                        <option [value]="member.userId" class="custom-cat-option">
+                            Tasks assigned to {{ member.userName }}
+                        </option>
+                    }
+                </select>
+             </div>
         </div>
 
         <!-- Live Project Progress Analytics Tracker -->
@@ -370,7 +392,7 @@
                             <!-- Task card header buttons -->
                              <span class="task-card-header-buttons">        
                                 <!-- Reorder Trigger Button -->
-                                 @if (currentUserProjectRole === "Owner" || task.assignedUserId == currentUserId) {
+                                 @if (currentUserProjectRole === "Owner") {
                                     <button class="task-reorder-btn" 
                                             [class.is-active]="mobileReorderTask?.id === task.id"
                                             (click)="openReorderMenu(task); $event.stopPropagation()" 
@@ -588,7 +610,7 @@
                             <!-- Task card header buttons -->
                              <span class="task-card-header-buttons">        
                                 <!-- Reorder Trigger Button -->
-                                 @if (currentUserProjectRole === "Owner" || task.assignedUserId == currentUserId) {
+                                 @if (currentUserProjectRole === "Owner") {
                                     <button class="task-reorder-btn" 
                                             [class.is-active]="mobileReorderTask?.id === task.id"
                                             (click)="openReorderMenu(task); $event.stopPropagation()" 
@@ -866,7 +888,7 @@
                             <!-- Task card header buttons -->
                              <span class="task-card-header-buttons">        
                                 <!-- Reorder Trigger Button -->
-                                 @if (currentUserProjectRole === "Owner" || task.assignedUserId == currentUserId) {
+                                 @if (currentUserProjectRole === "Owner") {
                                     <button class="task-reorder-btn" 
                                             [class.is-active]="mobileReorderTask?.id === task.id"
                                             (click)="openReorderMenu(task); $event.stopPropagation()" 
