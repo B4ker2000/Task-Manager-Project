@@ -81,9 +81,9 @@ Open a browser page and navigate straight to `http://localhost:4200` to interact
 
 ## Planned locales
 - Azeri (including modern, soviet era, Iranian & Old Azeri)
-- Turkish (including ottomon turkish as an easteregg)
+- Turkish (including ottomon turkish)
 - Other turkic languages like Uzbek, Turkmen, ect. 
-- Traditional Japanese (Top-to-Bottom, Right-to-Left, as another language)
+- Traditional Japanese (Top-to-Bottom, Right-to-Left)
 - Chinese (Both simplified and traditional)
 - German 
 - Spanish
