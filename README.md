@@ -80,9 +80,10 @@ Open a browser page and navigate straight to `http://localhost:4200` to interact
 - Persian
 
 ## Planned locales
-- Azeri (including modern, soviet era, Iranian & Old Azery)
+- Azeri (including modern, soviet era, Iranian & Old Azeri)
 - Turkish (including ottomon turkish as an easteregg)
 - Other turkic languages like Uzbek, Turkmen, ect. 
+- Traditional Japanese (Top-to-Bottom, Right-to-Left, as another language)
 - Chinese (Both simplified and traditional)
 - German 
 - Spanish
@@ -109,16 +110,15 @@ To-do list:
 - ❌ Disable task card dragging in general for unauthorized members!
 - ✅ Add project invitation logic
 - ✅ Check if invitations correctly expire or not!
-- ❌ Owner Invitation canceling, "sent invitations list" & "expired" badges/pills for expired invitations and change the accept/decline buttons to a single "clear notification" button!
-- ❌ Make more mobile view adjustments
-- ✅ Add custom warning/error popups!
+- ❌ Owner Invitation canceling, sent invitations list & "expired" badges/pills for expired invitations alongside changing the accept/decline buttons to a single "clear notification" button!
+- ❌ More mobile view adjustments
+- ✅ Add custom warning/error/success popups!
 - ✅ Add custom drop down menus for task card accessibility/mobile organizing button
 - ❌ Total drop-down menu replacement with the new custom one (perhaps?)
 - ✅ Add full i18n support
-- ❌ Add traditional Japanese Top-to-Bottom, Right-to-Left locale
 - ✅ Add full Screen Reader support (Feedback would be appreciated!)
-- ✅ Add colorblind and font changing options 
-- ✅ Add Theme support + themes
+- ✅ Add colorblind and font changing options (Again feedback would be appreciated!)
+- ✅ Add Theme support alongside some custom themes as a guide for user made versions!
 - ❌ Do a general refactor run to remove dead html classes!
 - ✅ Add Fronend models instead of relying on 'any' types
 - ❌ Project filter options in the dashboard!
@@ -127,6 +127,6 @@ To-do list:
 - ✅ Do a general backend SOC refactor
 - ❌ Change favicon.ico in to a custom one!
 - ❌ Add more Spinner/Loading messages!
-- ❌ Add project deadlines?
+- ❌ Add project deadlines (perhaps?)
 - ✅ Drag-n-drop task card organizing
 - ✅ Drag-n-drop project card organizing (needs some more polish as well as accessibility/mobile buttons!)

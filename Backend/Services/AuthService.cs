@@ -128,11 +128,11 @@ namespace Backend.Services
             var memberships = await _context.ProjectMembers.Where(pm => pm.UserId == userId).ToListAsync();
             if (memberships.Any()) _context.ProjectMembers.RemoveRange(memberships);
 
-            // Reassign or unassign tasks instead of leaving them orphaned
+            // Unassign tasks instead of leaving them orphaned
             var assignedTasks = await _context.Tasks.Where(t => t.AssignedUserId == userId).ToListAsync();
             foreach (var task in assignedTasks)
             {
-                task.AssignedUserId = null; // Mark task as unassigned cleanly
+                task.AssignedUserId = null; // Mark task as unassigned
             }
 
             _context.Users.Remove(user);
