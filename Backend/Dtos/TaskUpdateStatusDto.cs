@@ -6,6 +6,6 @@ namespace Backend.Dtos
     {
         [Required]
         [RegularExpression("^(Pending|In Progress|Review Required|Completed)$", ErrorMessage ="Invalid status value.")]
-        public required string Status { get; set; } = "Pending"; // Pending, In Progress
+        public required string Status { get; set; } = "Pending"; // Pending by default
     }
 }

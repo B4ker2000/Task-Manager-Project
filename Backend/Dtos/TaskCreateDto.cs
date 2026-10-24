@@ -12,9 +12,9 @@ namespace Backend.Dtos
         
         [Required]
         [RegularExpression("^(Low|Medium|High)$", ErrorMessage = "Priority must be Low, Medium, or High.")]
-        public string Priority { get; set; } = "Medium"; // Low, Medium, High
+        public string Priority { get; set; } = "Medium"; // Medium by default
         
-        public DateTime? Deadline { get; set; }
+        public DateTime? Deadline { get; set; } // Can be null
 
         [Required]
         public required int ProjectId { get; set; } // Which project does this belong to?

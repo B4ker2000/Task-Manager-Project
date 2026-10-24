@@ -24,7 +24,7 @@ namespace Backend.Data
             // Global reflection discovery (Scans and includes every configuration it finds)
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
-            // More or lese the as above but we have more control over what gets included and what doesn't this way!
+            // More or less same as above but we have more control over what gets included and what doesn't this way!
             // modelBuilder.ApplyConfiguration(new UserConfiguration());
             // modelBuilder.ApplyConfiguration(new ProjectConfiguration());
             // modelBuilder.ApplyConfiguration(new CategoryConfiguration());

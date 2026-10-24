@@ -32,7 +32,7 @@ namespace Backend.Controllers
             });
         }
 
-        [HttpGet("project/{projectId}")] // GET api/task/project/1 (Get all tasks for a specific project)
+        [HttpGet("project/{projectId}")] // Get all tasks for a specific project with the ID "projectId"
         public async Task<IActionResult> GetProjectTasks(int projectId)
         {
             var currentUserId = _userContext.GetCurrentUserId();
@@ -42,7 +42,7 @@ namespace Backend.Controllers
             return Ok(workspaceData);
         }
 
-        [HttpPut("{id}/status")] // PUT api/task/1/status (update the task status)
+        [HttpPut("{id}/status")]
         public async Task<IActionResult> UpdateTaskStatus(int id, [FromBody] TaskUpdateStatusDto request)
         {
             var currentUserId = _userContext.GetCurrentUserId();
