@@ -85,6 +85,7 @@ export class TaskBoardComponent implements OnInit {
 
     // Filter by category related property
     public selectedCategory: string = "All";
+    public selectedAssigneeTasks: string = "All";
 
     // Vertical screen related properity
     public activeMobileColumn: string = 'Pending'; // Default view lane tracking 
@@ -159,19 +160,21 @@ export class TaskBoardComponent implements OnInit {
                         this.pendingTasks = allTasks.filter((t: TaskItem) => t.status === "Pending");
                         this.inProgressTasks = allTasks.filter((t: TaskItem) => t.status === "In Progress" || t.status === "Review Required");
                         this.completedTasks = allTasks.filter((t: TaskItem) => t.status === "Completed");
-                        this.loadProjectMembers();
+                        
+                        // Save our new team array
+                        this.projectMembers = boardData.team || [];
 
                         // Compute analytics progress scales and filter views
                         this.calculateProgress(allTasks);
                         this.applyFilters();
-
-                        // Force single, perfect structural rendering paint pass
-                        this.cdr.detectChanges();
                     },
                     error: (err: HttpErrorResponse) => console.error("Failed to map board asset matrices:", err)
                 });
                 this.loadProjectDetails(); // Fetches the real project title
                 this.loadProjectCategories();
+                
+                // Force single structural rendering paint pass
+                this.cdr.detectChanges();
             },
             error: (err: HttpErrorResponse) => {
                 console.error("Critical refresh validation gate failure, firing fallbacks:", err);
@@ -390,8 +393,17 @@ export class TaskBoardComponent implements OnInit {
                     matchesCategory = task.categoryId !== null && task.categoryId !== undefined && Number(task.categoryId) === Number(this.selectedCategory);
                 }
             }
+
+            let matchesAssignee = true;
+            if(this.selectedAssigneeTasks !== "All") {
+                if(this.selectedAssigneeTasks === "Null") {
+                    matchesAssignee = task.assignedUserId === null || task.assignedUserId === undefined;
+                } else {
+                    matchesAssignee = task.assignedUserId !== null && task.assignedUserId !== undefined && Number(task.assignedUserId) === Number(this.selectedAssigneeTasks);
+                }
+            }
             
-            return matchesSearch && matchesPriority && matchesCategory;
+            return matchesSearch && matchesPriority && matchesCategory && matchesAssignee;
         };
 
         this.filteredPendingTasks = this.pendingTasks.filter(filterFn);

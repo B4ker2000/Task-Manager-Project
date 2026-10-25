@@ -3,7 +3,7 @@ import { FormsModule } from "@angular/forms";
 import { Router, RouterLink } from "@angular/router";
 import { AuthService } from "../services/auth.service";
 import { LanguageService } from "../i18n/language.service";
-import { AuthResponse, UserLoginDto } from "../models/auth.model";
+import { AuthResponse, UserLoginDto, UserProfile } from "../models/auth.model";
 import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
@@ -58,7 +58,16 @@ export class LoginComponent implements OnInit {
                     localStorage.setItem('has-visited-before', 'true');
                 }
                 
-                this.router.navigate(['/dashboard']);
+                this.authService.getUserProfile().subscribe({
+                    next: profile => {
+                        this.applyPreferences(profile);
+                        this.router.navigate(['/dashboard']);
+                    },
+                    error: error => {
+                        console.error("Could not load user preferences after login:", error);
+                        this.router.navigate(['/dashboard']);
+                    }
+                });
             },
             error: (err: HttpErrorResponse) => {
                 console.error(err);
@@ -72,5 +81,26 @@ export class LoginComponent implements OnInit {
                 this.cdr.detectChanges();
             }
         });
+    }
+
+    private applyPreferences(profile: UserProfile): void {
+        const preferences = profile.preferences;
+        const root = document.documentElement;
+
+        root.setAttribute("data-theme", preferences.theme);
+
+        if (preferences.font) {
+            root.setAttribute("data-accessible-font", preferences.font);
+        } else {
+            root.removeAttribute("data-accessible-font");
+        }
+
+        if (preferences.colorblind) {
+            root.setAttribute("data-colorblind", preferences.colorblind);
+        } else {
+            root.removeAttribute("data-colorblind");
+        }
+
+        this.langService.setLanguage(preferences.language);
     }
 }

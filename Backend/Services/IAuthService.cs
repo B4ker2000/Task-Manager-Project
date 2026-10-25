@@ -13,6 +13,9 @@ namespace Backend.Services
         // Custom object matching the frontend profile metadata structure
         Task<object> GetProfileAsync(int userId);
 
+        // User Preferences
+        Task UpdatePreferencesAsync(int userId, UserPreferencesDto request);
+
         // Update User Account Information
         Task UpdateAccountAsync(int userId, UpdateAccountDto request);
 

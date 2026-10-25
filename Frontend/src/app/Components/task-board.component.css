@@ -209,6 +209,7 @@
 }
 
 .board-interactive-field.search,
+.board-interactive-field.assignee,
 .board-interactive-field.priority,
 .board-interactive-field.category {
     border: 2px solid var(--filter-border-color, #cbd5e1) !important;
@@ -635,9 +636,15 @@
         width: 100%;
     }
 
+    .board-controls-panel {
+        display: block;
+        /* box-sizing: border-box; */
+    }
+
     .search-filter-group {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(201px, 1fr));
+        margin-bottom: 15px;
         gap: 12px;
         width: 100%;
     }

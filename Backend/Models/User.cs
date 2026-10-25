@@ -8,6 +8,10 @@ namespace Backend.Models
         public byte[] PasswordHash { get; set; } = Array.Empty<byte>();
         public byte[] PasswordSalt { get; set; } = Array.Empty<byte>();
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public string PreferredLanguage { get; set; } = "en-us";
+        public string PreferredTheme { get; set; } = "light";
+        public string PreferredFont { get; set; } = string.Empty;
+        public string PreferredColorblind { get; set; } = string.Empty;
         public List<int> OrderedProjectIds { get; set; } = new List<int>();
     }
 }

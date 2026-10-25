@@ -11,8 +11,6 @@ export class LanguageService {
     public words: WritableSignal<LocalePack> = signal(DictionaryMatrix['en-us']);
 
     constructor() {
-        this.loadLanguagePreference();
-
         // Reactive Effect Engine: Watches our dictionary signal and toggles RTL/LTR on-the-fly!
         effect(() => {
             const currentDirection = this.words().GLOBAL.DIRECTION || 'ltr'; // Default direction is LTR just in-case!
@@ -27,19 +25,7 @@ export class LanguageService {
         if (DictionaryMatrix[lowerLang]) {
             this.currentLang.set(lowerLang);
             this.words.set(DictionaryMatrix[lowerLang]);
-
-            if (typeof window !== 'undefined' && window.localStorage) {
-                localStorage.setItem('user-preferred-lang', lowerLang);
-            }
             console.log(`Global Translation Matrix shifted to language context: "${lowerLang}" [Direction: ${this.words().GLOBAL.DIRECTION}]`);
-        }
-    }
-
-    private loadLanguagePreference(): void {
-        if (typeof window !== 'undefined' && window.localStorage) {
-            let savedLang = localStorage.getItem('user-preferred-lang') || 'en-us';
-            savedLang = savedLang.toLowerCase();
-            this.setLanguage(savedLang);
         }
     }
 }

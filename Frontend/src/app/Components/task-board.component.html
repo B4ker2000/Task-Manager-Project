@@ -253,19 +253,19 @@
                 <span class="control-icon-anchor" 
                       aria-hidden="true">👤</span>
 
-                <select id="searchCategory" 
-                        [(ngModel)]="selectedCategory" 
+                <select id="searchAssigneeTasks" 
+                        [(ngModel)]="selectedAssigneeTasks" 
                         (ngModelChange)="applyFilters()" 
-                        class="board-interactive-field category" 
-                        [attr.aria-label]="langService.words().TASKBOARD.CATEGORY_ARIA">
+                        class="board-interactive-field assignee" 
+                        [attr.aria-label]="langService.words().TASKBOARD.USER_ARIA">
 
-                    <option value="All">All tasks</option>
-                    <option value="Null">Tasks not assigned to anyone</option>
-                    
+                    <option value="All" [innerHTML]="langService.words().TASKBOARD.USER_ALL"></option>
+                    <option value="Null" [innerHTML]="langService.words().TASKBOARD.USER_UNASSIGNED"></option>
+
                     @for (member of projectMembers; track member.userId) {
-                        <option [value]="member.userId" class="custom-cat-option">
-                            Tasks assigned to {{ member.userName }}
-                        </option>
+                        @if (member.projectRole !== "Viewer") {
+                            <option [value]="member.userId" class="custom-cat-option" [innerHTML]="formatLabel(langService.words().TASKBOARD.USER_ASSIGNED_TO, member.userName)"></option>
+                        }
                     }
                 </select>
              </div>

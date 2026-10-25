@@ -341,6 +341,7 @@ export const PersianPack: LocalePack = {
         USER_ARIA: "فیلتر کردن وظایف بر اساس نام مسئول وظیفه",
         USER_ALL: "همه وظیفه‌ها",
         USER_UNASSIGNED: "وظیفه‌های بدونه مسئول",
+        USER_ASSIGNED_TO: "وظایف {value}",
         PROGRESS_LABEL: "میزان پیشرفت پروژه:",
         PROGRESS_ARIA: "شاخص کل پیشرفت پروژه. در حال حاضر {value} درصد.",
 

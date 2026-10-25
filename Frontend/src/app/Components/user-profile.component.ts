@@ -52,25 +52,6 @@ export class UserProfileComponent implements OnInit {
                 this.router.navigate(['/login']);
             }
 
-            // Theme cache reader
-            const savedTheme = localStorage.getItem("user-preferred-theme");
-            if(savedTheme) {
-                this.activeTheme = savedTheme;
-                this.onThemeChangeEngineTrigger();
-            }
-
-            // Accessibility cache reader
-            const savedFont = localStorage.getItem("user-preferred-font");
-            const savedColorblindOption = localStorage.getItem("user-preferred-colorblind");
-            if(savedFont) {
-                this.activeFont = savedFont;
-                this.onFontChangeEngineTrigger();
-            }
-            if(savedColorblindOption) {
-                this.activeColorblind = savedColorblindOption;
-                this.onColorblindChangeEngineTrigger()
-            }
-
             this.cdr.detectChanges();
         }
     }
@@ -79,6 +60,29 @@ export class UserProfileComponent implements OnInit {
         this.authService.getUserProfile().subscribe({
             next: (data: UserProfile) => {
                 this.userProfile = data;
+
+                const preferences = data.preferences;
+                this.activeTheme = preferences.theme;
+                this.activeFont = preferences.font;
+                this.activeColorblind = preferences.colorblind;
+
+                const root = document.documentElement;
+                root.setAttribute("data-theme", preferences.theme);
+
+                if (preferences.font) {
+                    root.setAttribute("data-accessible-font", preferences.font);
+                } else {
+                    root.removeAttribute("data-accessible-font");
+                }
+
+                if (preferences.colorblind) {
+                    root.setAttribute("data-colorblind", preferences.colorblind);
+                } else {
+                    root.removeAttribute("data-colorblind");
+                }
+
+                this.langService.setLanguage(preferences.language);
+
                 this.isLoading = false;
                 this.cdr.detectChanges();
             },
@@ -239,15 +243,36 @@ export class UserProfileComponent implements OnInit {
             this.router.navigate(['/login']);
         }
     }
+
+    ////////////////////////////////////////////////////////
+    // Accessibility & User Preference Controller Methods //
+    ////////////////////////////////////////////////////////
+    // Method to save user preferences 
+    private savePreferences(): void {
+        const preferences: UserProfile["preferences"] = {
+            language: this.langService.currentLang(),
+            theme: this.activeTheme,
+            font: this.activeFont,
+            colorblind: this.activeColorblind
+        };
+
+        this.authService.updatePreferences(preferences).subscribe({
+            error: (err: HttpErrorResponse) => 
+                console.error("Failed to save user preferences:", err)
+        });
+    }
+
+    // Language change method
+    public onLanguageChange(language: string): void {
+        this.langService.setLanguage(language);
+        this.savePreferences();
+    }
     
     // Method to dynamically replace our dictionary tokens to include a value!
     public formatLabel(template: string, value: string): string {
         return template.replace(/\{[a-zA-Z0-9_]+\}/, value);
     }
-
-    /////////////////////////////////////
-    // Accessibility controller method //
-    /////////////////////////////////////
+    
     // Theme controller method
     public onThemeChangeEngineTrigger(): void {
         if(typeof document !== "undefined") {
@@ -255,7 +280,7 @@ export class UserProfileComponent implements OnInit {
             document.documentElement.setAttribute("data-theme", this.activeTheme);
 
             // Cache the user's favorite selection so it stays active when they reload!
-            localStorage.setItem("user-preferred-theme", this.activeTheme);
+            this.savePreferences();
             console.log(`Application theme shifted to "${this.activeTheme}" successfully.`);
         }
     }
@@ -267,7 +292,7 @@ export class UserProfileComponent implements OnInit {
             } else {
                 document.documentElement.removeAttribute("data-accessible-font");
             }
-            localStorage.setItem("user-preferred-font", this.activeFont);
+            this.savePreferences();
             console.log(`Typography layout shifted to "${this.activeFont || 'Default'}" successfully.`);
         }
     }
@@ -280,7 +305,7 @@ export class UserProfileComponent implements OnInit {
             } else {
                 document.documentElement.removeAttribute("data-colorblind");
             }
-            localStorage.setItem("user-preferred-colorblind", this.activeColorblind);
+            this.savePreferences();
             console.log(`Colorblind matrix shifted to "${this.activeColorblind || 'None'}" successfully.`);
         }
     }

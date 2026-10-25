@@ -48,12 +48,17 @@ export class AuthService {
         return this.http.get<UserProfile>(`${this.apiUrl}/profile`);
     }
 
-    // 6. Method to update user account info like username & password
+    // 6. Method needed for updating user preferences
+    public updatePreferences(preferences: UserProfile["preferences"]): Observable<void> {
+        return this.http.put<void>(`${this.apiUrl}/preferences`, preferences);
+    }
+
+    // 7. Method to update user account info like username & password
     public updateAccountDetails(updatedFields: { NewUsername?: string; NewPassword?: string }): Observable<{ message: string }> {
         return this.http.put<{ message: string }>(`${this.apiUrl}/update-account`, updatedFields);
     }
 
-    // 7. Method needed to delete user accounts if they wish so
+    // 8. Method needed to delete user accounts if they wish so
     public deleteAccountPermanently(): Observable<{ message: string }> {
         return this.http.delete<{ message: string }>(`${this.apiUrl}/delete-account`);
     }

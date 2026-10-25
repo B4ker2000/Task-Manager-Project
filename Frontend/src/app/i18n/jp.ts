@@ -339,6 +339,7 @@ export const JapanesePack: LocalePack = {
         USER_ARIA: "担当者名でタスクを絞り込む",
         USER_ALL: "すべてのタスク",
         USER_UNASSIGNED: "未割り当てのタスク",
+        USER_ASSIGNED_TO: "{value}のタスク",
         PROGRESS_LABEL: "プロジェクト<ruby>完了<rt aria-hidden=\"true\">かんりょう</rt></ruby>の<ruby>進捗状況<rt aria-hidden=\"true\">しんちょくじょうきょう</rt></ruby>:",
         PROGRESS_ARIA: "プロジェクト全体の完了進捗トラッカー。現在 {value} パーセントです。",
 

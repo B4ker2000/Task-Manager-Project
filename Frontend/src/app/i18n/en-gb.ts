@@ -341,6 +341,7 @@ export const EnglishUKPack: LocalePack = {
         USER_ARIA: "Filter tasks by assignee name",
         USER_ALL: "All Tasks",
         USER_UNASSIGNED: "Unassigned Tasks",
+        USER_ASSIGNED_TO: "Tasks assigned to {value}",
         PROGRESS_LABEL: "Project Completion Progress:",
         PROGRESS_ARIA: "Overall project completion progress tracker. Currently at {value} per cent.",
 

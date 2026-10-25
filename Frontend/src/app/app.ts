@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { PopupComponent } from './Components/popup.component';
 import { AsyncPipe } from '@angular/common';
 import { PopupService } from './services/popup.service';
+import { AuthService } from './services/auth.service';
+import { LanguageService } from './i18n';
 
 @Component({
   selector: 'app-root',
@@ -25,29 +27,38 @@ export class App implements OnInit {
     window.dispatchEvent(confirmEvent);
   }
 
+  private authService = inject(AuthService);
+  private languageService = inject(LanguageService);
+
   // GLOBAL INITIALIZATION ROUTINE: Fires BEFORE any route screens render!
   ngOnInit(): void {
-    if(typeof window !== 'undefined' && window.localStorage) {
-      // Theme Cache Reader
-      const savedTheme = localStorage.getItem('user-preferred-theme');
-      if (savedTheme) {
-        document.documentElement.setAttribute('data-theme', savedTheme);
-        console.log(`Global Core Engine securely initialized theme layout to: ${savedTheme}`);
-      }
+    if (typeof window === 'undefined') return;
 
-      // Font Style Cache Reader
-      const savedFont = localStorage.getItem('user-preferred-font');
-      if (savedFont) {
-        document.documentElement.setAttribute('data-accessible-font', savedFont);
-        console.log(`Global Core Engine securely initialized typography layout to: ${savedFont}`);
-      }
+    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+    if (!token) return;
 
-      // Colorblind Filter Cache Reader
-      const savedColorblindOption = localStorage.getItem('user-preferred-colorblind');
-      if (savedColorblindOption) {
-        document.documentElement.setAttribute('data-colorblind', savedColorblindOption);
-        console.log(`Global Core Engine securely initialized colorblind filter to: ${savedColorblindOption}`);
-      }
-    }
+    this.authService.getUserProfile().subscribe({
+      next: profile => {
+        const preferences = profile.preferences;
+        const root = document.documentElement;
+      
+        root.setAttribute('data-theme', preferences.theme);
+
+        if (preferences.font) {
+          root.setAttribute('data-accessible-font', preferences.font);
+        } else {
+          root.removeAttribute('data-accessible-font');
+        }
+
+        if (preferences.colorblind) {
+          root.setAttribute('data-colorblind', preferences.colorblind);
+        } else {
+          root.removeAttribute('data-colorblind');
+        }
+
+        this.languageService.setLanguage(preferences.language);
+      },
+      error: error => console.error('Could not load user preferences:', error)
+    });
   }
 }

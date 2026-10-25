@@ -341,6 +341,7 @@ export const RussianPack: LocalePack = {
         USER_ARIA: "Фильтровать задачи по имени исполнителя",
         USER_ALL: "Все задачи",
         USER_UNASSIGNED: "Нераспределенные задачи",
+        USER_ASSIGNED_TO: "Задачи {value}",
         PROGRESS_LABEL: "Прогресс выполнения проекта:",
         PROGRESS_ARIA: "Общий трекер выполнения проекта. Прогресс: {value}%.",
 

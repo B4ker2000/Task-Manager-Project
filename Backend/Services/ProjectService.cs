@@ -216,6 +216,7 @@ namespace Backend.Services
                 {
                     UserId = pm.UserId,
                     UserEmail = pm.User != null ? pm.User.Email : "Unknown",
+                    UserName = pm.User != null ? pm.User.Username : "Unknown",
                     ProjectRole = pm.ProjectRole
                 })
                 .ToListAsync();

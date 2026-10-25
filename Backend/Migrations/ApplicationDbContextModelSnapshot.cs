@@ -217,7 +217,7 @@ namespace Backend.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
-                    b.PrimitiveCollection<string>("OrderedProjectIds")
+                    b.Property<string>("OrderedProjectIds")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -229,6 +229,26 @@ namespace Backend.Migrations
                     b.Property<byte[]>("PasswordSalt")
                         .IsRequired()
                         .HasColumnType("BLOB");
+
+                    b.Property<string>("PreferredColorblind")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PreferredFont")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PreferredLanguage")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PreferredTheme")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Username")
                         .IsRequired()

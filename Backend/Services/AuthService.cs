@@ -87,27 +87,47 @@ namespace Backend.Services
                 id = user.Id,
                 username = user.Username,
                 email = user.Email,
-                role = "Member", // Will be changed to something more dynamic!
+                role = "Member", // Will be changed to something less "Same for everyone"!
                 stats = new {
                     total = totalAssignedTasks,
                     completed = completedTasksCount
+                },
+                preferences = new
+                {
+                    language = user.PreferredLanguage,
+                    theme = user.PreferredTheme,
+                    font = user.PreferredFont,
+                    colorblind = user.PreferredColorblind
                 }
             };
         }
+        // 4. Handle User Preferences Update
+        public async Task UpdatePreferencesAsync(int userId, UserPreferencesDto request)
+        {
+            var user = await _context.Users.FindAsync(userId)
+                ?? throw new NotFoundException("User not found");
 
-        // 4. Handle Account Details Modification
+                user.PreferredLanguage = request.Language;
+                user.PreferredTheme = request.Theme;
+                user.PreferredFont = request.Font;
+                user.PreferredColorblind = request.Colorblind;
+
+                await _context.SaveChangesAsync();
+        }
+
+        // 5. Handle Account Details Modification
         public async Task UpdateAccountAsync(int userId, UpdateAccountDto request)
         {
             var user = await _context.Users.FindAsync(userId)
                 ?? throw new NotFoundException("User not found");
 
-            // 4.1 Optional Username Update
+            // 5.1 Optional Username Update
             if (!string.IsNullOrWhiteSpace(request.NewUsername))
             {
                 user.Username = request.NewUsername.Trim();
             }
 
-            // 4.2 Optional Password Update (Re-hashes using internal helper)
+            // 5.2 Optional Password Update (Re-hashes using internal helper)
             if (!string.IsNullOrWhiteSpace(request.NewPassword))
             {
                 CreatePasswordHash(request.NewPassword, out byte[] hash, out byte[] salt);
@@ -118,7 +138,7 @@ namespace Backend.Services
             await _context.SaveChangesAsync();
         }
 
-        // 5. Handle Permanent Account Removal
+        // 6. Handle Permanent Account Removal
         public async Task DeleteAccountAsync(int userId)
         {
             var user = await _context.Users.FindAsync(userId)

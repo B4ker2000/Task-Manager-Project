@@ -55,6 +55,16 @@ namespace Backend.Controllers
             return Ok(profileData);
         }
 
+        [HttpPut("preferences")]
+        public async Task<IActionResult> UpdatePreferences([FromBody] UserPreferencesDto request)
+        {
+            var currentUserId = _userContext.GetCurrentUserId();
+
+            await _authService.UpdatePreferencesAsync(currentUserId, request);
+
+            return NoContent();
+        }
+
         [HttpPut("update-account")]
         public async Task<IActionResult> UpdateAccount([FromBody] UpdateAccountDto request)
         {

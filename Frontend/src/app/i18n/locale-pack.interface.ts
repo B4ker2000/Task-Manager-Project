@@ -337,6 +337,7 @@ export interface LocalePack {
         USER_ARIA: string;
         USER_ALL: string;
         USER_UNASSIGNED: string;
+        USER_ASSIGNED_TO: string;
         PROGRESS_LABEL: string;
         PROGRESS_ARIA: string;
 

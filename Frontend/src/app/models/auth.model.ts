@@ -26,6 +26,12 @@ export interface UserProfile {
         total: number;
         completed: number;
     };
+    preferences: {
+        language: string;
+        theme: string;
+        font: string;
+        colorblind: string;
+    };
     orderedProjectIds?: number[];
 }
 
