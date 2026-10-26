@@ -79,7 +79,7 @@ Open a browser page and navigate straight to `http://localhost:4200` to interact
 - Japanese
 - Persian
 
-## Planned locales
+## Planned locales (Subject to change)
 - Azeri (including modern, soviet era, Iranian & Old Azeri)
 - Turkish (including Ottoman Turkish)
 - Other Turkic languages like Uzbek, Turkmen, etc. 
@@ -103,7 +103,7 @@ Open a browser page and navigate straight to `http://localhost:4200` to interact
 
 ---
 
-## To-do list:
+## To-do list*:
 To-do list:
 - ✅ Add task completion progress on project cards!
 - ❌ Disable dragging in mobile view and configure pulse animations when holding a card
@@ -131,3 +131,5 @@ To-do list:
 - ✅ Drag-n-drop task card organizing
 - ✅ Drag-n-drop project card organizing (needs some more polish as well as accessibility/mobile buttons!)
 - ❌ Add Profile images
+
+* These are mere ideas for now and some may not actually be implemented as I work on this project during my free times
