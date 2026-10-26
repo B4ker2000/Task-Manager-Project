@@ -37,8 +37,16 @@
                       [attr.aria-label]="langService.words().PROFILE.CORE_ACCOUNT_ARIA">
 
                     <!-- 👤 EMOJI PROTECTION: aria-hidden="true" stops screen reader from saying "Silhouette" aloud -->
-                     <div class="avatar-circle" 
-                          aria-hidden="true">👤</div>
+                     <div class="avatar-circle"
+                          [ngClass]="getAvatarPaletteClass(userProfile.id)" 
+                          aria-hidden="true">
+                        
+                        @if (userProfile.avatarUrl) {
+                            <img class="avatar-image" [src]="userProfile.avatarUrl" alt="" />
+                        } @else {
+                            {{ getInitials(userProfile.username) }}
+                        }
+                     </div>
 
                     <h3 aria-level="3">{{ userProfile.username }}</h3>
                     <span class="role-badge" 

@@ -78,6 +78,38 @@
     border-radius: 50%; 
     margin: 0 auto 15px auto; 
     border: 2px solid var(--border-color); 
+    overflow: hidden;
+}
+
+.avatar-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-palette-0 {
+    background-color: var(--badge-high-bg);
+    color: var(--badge-high-text);
+    border-color: var(--badge-high-border);
+}
+
+.avatar-palette-1 {
+    background-color: var(--badge-medium-bg);
+    color: var(--badge-medium-text);
+    border-color: var(--badge-medium-border);
+}
+
+.avatar-palette-2 {
+    background-color: var(--badge-low-bg);
+    color: var(--badge-low-text);
+    border-color: var(--badge-low-border);
+}
+
+.avatar-palette-3 {
+    background-color: var(--badge-done-bg);
+    color: var(--badge-done-text);
+    border-color: var(--badge-done-border);
 }
 
 .role-badge { 

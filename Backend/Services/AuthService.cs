@@ -98,7 +98,8 @@ namespace Backend.Services
                     theme = user.PreferredTheme,
                     font = user.PreferredFont,
                     colorblind = user.PreferredColorblind
-                }
+                },
+                avatarUrl = user.AvatarUrl
             };
         }
         // 4. Handle User Preferences Update

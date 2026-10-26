@@ -32,6 +32,7 @@ export interface UserProfile {
         font: string;
         colorblind: string;
     };
+    avatarUrl: string | null;
     orderedProjectIds?: number[];
 }
 

@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Backend.Models
 {
     public class User
@@ -13,5 +15,8 @@ namespace Backend.Models
         public string PreferredFont { get; set; } = string.Empty;
         public string PreferredColorblind { get; set; } = string.Empty;
         public List<int> OrderedProjectIds { get; set; } = new List<int>();
+        
+        [MaxLength(2048)]
+        public string? AvatarUrl { get; set; }
     }
 }

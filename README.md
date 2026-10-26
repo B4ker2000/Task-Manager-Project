@@ -130,3 +130,4 @@ To-do list:
 - ❌ Add project deadlines (perhaps?)
 - ✅ Drag-n-drop task card organizing
 - ✅ Drag-n-drop project card organizing (needs some more polish as well as accessibility/mobile buttons!)
+- ❌ Add Profile images

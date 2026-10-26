@@ -38,6 +38,13 @@ export class UserProfileComponent implements OnInit {
 
     constructor(public langService: LanguageService) {}
 
+    private readonly avatarPalettes = [
+        "avatar-palette-0",
+        "avatar-palette-1",
+        "avatar-palette-2",
+        "avatar-palette-3"
+    ] as const;
+
     ngOnInit(): void {
         // Only run data fetches inside the browser window context shell
         if(isPlatformBrowser(this.platformId)) {
@@ -308,5 +315,22 @@ export class UserProfileComponent implements OnInit {
             this.savePreferences();
             console.log(`Colorblind matrix shifted to "${this.activeColorblind || 'None'}" successfully.`);
         }
+    }
+
+    // Method to get user initials
+    public getInitials(username: string): string {
+        const parts = username.trim().split(/\s+/).filter(Boolean); // .split(/\s+/) splits by whitespace
+
+        if (parts.length > 1) {
+            return `${parts[0][0]}${parts[1][0]}`.toUpperCase();
+        }
+
+        return parts[0]?.slice(0, 2).toUpperCase() || "?";
+    }
+
+    // Random theme aware avatar colors for when no image is selected!
+    public getAvatarPaletteClass(userId: number): string {
+        const index = Math.abs(userId) % this.activeTheme.length;
+        return this.avatarPalettes[index];
     }
 }
