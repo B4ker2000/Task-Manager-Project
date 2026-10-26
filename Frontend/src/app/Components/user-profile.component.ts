@@ -320,17 +320,29 @@ export class UserProfileComponent implements OnInit {
     // Method to get user initials
     public getInitials(username: string): string {
         const parts = username.trim().split(/\s+/).filter(Boolean); // .split(/\s+/) splits by whitespace
+        const firstWord = Array.from(parts[0] ?? "");
 
-        if (parts.length > 1) {
-            return `${parts[0][0]}${parts[1][0]}`.toUpperCase();
+        const initials = parts.length > 1
+            ? [
+                firstWord[0] ?? "",
+                Array.from(parts[1] ?? "")[0] ?? ""
+            ]
+            : firstWord.slice(0, 2);
+
+        const areArabicScriptInitials = 
+            initials.length === 2 &&
+            initials.every(character => /\p{Script=Arabic}/u.test(character));
+
+        if (areArabicScriptInitials) {
+            return initials.join("\u200C"); // "\u200C" is a zero-width non-joiner. It has no visible width, but tells text shaping not to connect the letters!
         }
 
-        return parts[0]?.slice(0, 2).toUpperCase() || "?";
+        return initials.join("").toUpperCase() || "?";
     }
 
     // Random theme aware avatar colors for when no image is selected!
     public getAvatarPaletteClass(userId: number): string {
-        const index = Math.abs(userId) % this.activeTheme.length;
+        const index = Math.abs(userId) % this.avatarPalettes.length;
         return this.avatarPalettes[index];
     }
 }
