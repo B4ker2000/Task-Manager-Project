@@ -1,3 +1,4 @@
-[data-colorblind="protanopia"] {
+[data-colorblind="protanopia"],
+[data-colorblind="protanopia"] .cdk-drag-preview {
     filter: url('#protanopia-filter') !important;
 }

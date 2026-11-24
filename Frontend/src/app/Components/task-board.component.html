@@ -348,7 +348,6 @@
             <!-- CDK Target Drop Window Container Lane -->
              <div id="pendingLaneList"
                   cdkDropList
-                  [cdkDropListDisabled]="hasActiveFilters"
                   [cdkDropListData]="pendingTasks"
                   (cdkDropListDropped)="onTaskCardDropTrigger($event)" 
                   class="tasks-container"
@@ -360,6 +359,8 @@
                  @for (task of filteredPendingTasks; track task.id) {
                     <div class="task-card" 
                          cdkDrag
+                         (cdkDragStarted)="setDragCursor(true)"
+                         (cdkDragEnded)="setDragCursor(false)"
                          [cdkDragDisabled]="isTaskDragDisabled(task.id)"
                          (touchstart)="startMobileTaskHold(task.id)"
                          (touchend)="clearMobileTaskHold()"
@@ -567,7 +568,6 @@
             
             <div id="inProgressLaneList"
                  cdkDropList
-                 [cdkDropListDisabled]="hasActiveFilters"
                  [cdkDropListData]="inProgressTasks"
                  (cdkDropListDropped)="onTaskCardDropTrigger($event)"
                  class="tasks-container"
@@ -579,6 +579,8 @@
                     <div class="task-card" 
                          [ngClass]="{'review-needed-card': task.status === 'Review Required'}"
                          cdkDrag
+                         (cdkDragStarted)="setDragCursor(true)"
+                         (cdkDragEnded)="setDragCursor(false)"
                          [cdkDragDisabled]="isTaskDragDisabled(task.id)"
                          (touchstart)="startMobileTaskHold(task.id)"
                          (touchend)="clearMobileTaskHold()"
@@ -846,7 +848,6 @@
 			
             <div id="completedLaneList"
                  cdkDropList
-                 [cdkDropListDisabled]="hasActiveFilters"
                  [cdkDropListData]="completedTasks"
                  (cdkDropListDropped)="onTaskCardDropTrigger($event)"
                  class="tasks-container"
@@ -857,6 +858,8 @@
                 @for (task of filteredCompletedTasks; track task.id) {
                     <div class="task-card done" 
                          cdkDrag
+                         (cdkDragStarted)="setDragCursor(true)"
+                         (cdkDragEnded)="setDragCursor(false)"
                          [cdkDragDisabled]="isTaskDragDisabled(task.id)"
                          (touchstart)="startMobileTaskHold(task.id)"
                          (touchend)="clearMobileTaskHold()"

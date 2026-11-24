@@ -738,16 +738,18 @@ export class TaskBoardComponent implements OnInit {
             if (nextState !== targetTaskItem.status) {
                 targetTaskItem.status = nextState;
                 this.onUpdateStatus(targetTaskItem.id, nextState);
-                this.cdr.detectChanges();
             }
             return;
         }
 
         // Standard local row index swapping slot handler fallback if shuffling within same columns (excluding middle lane)
         if (sourceLaneId === targetLaneId) {
+            if (!isOwner)
+                return;
+            
             const status = this.getStatusFromLaneId(targetLaneId);
-
-            if (!status) return;
+            if (!status) 
+                return;
 
             moveItemInArray(
                 event.container.data, 
@@ -806,6 +808,23 @@ export class TaskBoardComponent implements OnInit {
         if (computedDatabaseStatusString === "In Progress" && !isOwner) {
             computedDatabaseStatusString = "In Progress";
         }
+        
+        // =========================================================================
+        // PERMISSION GATE 3: Owners can put drop their cards wherever they want, 
+        // while Assignees cards move to the bottom of the new column or stay where
+        // the were at!
+        // =========================================================================
+        if (this.currentUserProjectRole === "Viewer" || (!isOwner && !isAssignee)) {
+            this.popupService.show({
+                type: "danger",
+                title: this.langService.words().POPUP.DANGER_ACCESS_DENIED_TITLE,
+                body: this.langService.words().POPUP.DANGER_UNAUTHORIZED_TASK_ACCESS,
+                isConfirmation: false,
+                actionType: "unauthorized-access"
+            });
+
+            return;
+        }
 
         // =========================================================================
         // TRANSACTION EXECUTION FLUSH
@@ -813,11 +832,15 @@ export class TaskBoardComponent implements OnInit {
         targetTaskItem.status = computedDatabaseStatusString;
 
         // 1. Locally transfer the item across our arrays so the screen stays incredibly snappy!
+        const targetIndex = isOwner 
+            ? event.currentIndex
+            : event.container.data.length;
+
         transferArrayItem(
             event.previousContainer.data,
             event.container.data,
             event.previousIndex,
-            event.currentIndex
+            targetIndex
         );
 
         // 2. Synchronize line modifications securely over the network to the C# Web API database tables
@@ -827,9 +850,6 @@ export class TaskBoardComponent implements OnInit {
         const totalCurrentBoardTasks = [...this.pendingTasks, ...this.inProgressTasks, ...this.completedTasks];
         this.calculateProgress(totalCurrentBoardTasks);
         this.applyFilters();
-
-        // Force a structural paint pass to snap the counters into perfect alignment
-        this.cdr.detectChanges();
     }
 
     // Method to dynamically replace our dictionary tokens to include a value!
@@ -878,7 +898,19 @@ export class TaskBoardComponent implements OnInit {
     }
 
     public startMobileTaskHold(taskId: number): void {
-        if (!this.isMobileView || this.hasActiveFilters) {
+        const task = [
+            ...this.pendingTasks,
+            ...this.inProgressTasks,
+            ...this.completedTasks,
+        ].find(item => item.id === taskId);
+
+        const isOwner = this.currentUserProjectRole === "Owner";
+        const isAssignee = task?.assignedUserId === this.currentUserId;
+
+        if (this.currentUserProjectRole === "Viewer"
+         || (!isOwner && !isAssignee)
+         || !this.isMobileView  
+         || this.hasActiveFilters) {
             return;
         }
 
@@ -903,7 +935,28 @@ export class TaskBoardComponent implements OnInit {
     }
 
     public isTaskDragDisabled(taskId: number): boolean {
+        if (this.currentUserProjectRole === "Viewer") {
+            return true;
+        }
+
         if (this.hasActiveFilters) {
+            return true;
+        }
+
+        const task = [
+            ...this.pendingTasks,
+            ...this.inProgressTasks,
+            ...this.completedTasks
+        ].find(item => item.id === taskId);
+
+        if (!task) {
+            return true;
+        }
+
+        const isOwner = this.currentUserProjectRole === "Owner";
+        const isAssignee = task.assignedUserId === this.currentUserId;
+
+        if (!isOwner && !isAssignee) {
             return true;
         }
 
@@ -1008,5 +1061,12 @@ export class TaskBoardComponent implements OnInit {
         if (!clickedInside || (!isTriggerButton && !isMenuClick)) {
             this.closeReorderMenu();
         }
+    }
+    
+    public setDragCursor(isDragging: boolean): void {
+        if (!isPlatformBrowser(this.platformId)) 
+            return;
+
+        document.body.classList.toggle("app-dragging", isDragging);
     }
 }

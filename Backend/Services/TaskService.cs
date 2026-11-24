@@ -119,10 +119,29 @@ namespace Backend.Services
             if (userRole != "Owner" && task.AssignedUserId != currentUserId) 
                 throw new ForbiddenException("You are not an owner or assigned to this task.");
 
-            var validStatuses = new[] { "Pending", "In Progress", "Review Required", "Completed" };
+            // Only Owners may move cards to the completed columns!
+            if (newStatus == "Completed" && userRole != "Owner")
+                throw new ForbiddenException("Only Owners may move tasks to the Completed column.");
+
+            var validStatuses = new[] { 
+                "Pending", 
+                "In Progress", 
+                "Review Required", 
+                "Completed" 
+            };
             
             if (!validStatuses.Contains(newStatus))
                 throw new BadRequestException($"'{newStatus}' is not a valid task status.");
+
+            if (userRole == "Viewer")
+                throw new ForbiddenException("Viewers can only watch the project progress.");
+
+            if (userRole != "Owner"
+             && task.AssignedUserId != currentUserId)
+                throw new ForbiddenException("You are not an Owner or assigned to this task.");
+
+            if (newStatus == "Completed" && userRole != "Owner")
+                throw new ForbiddenException("Only Owners may move tasks to the Completed column.");
 
             task.Status = newStatus;
             await _context.SaveChangesAsync();
@@ -205,8 +224,11 @@ namespace Backend.Services
                     pm.ProjectId == projectId &&
                     pm.UserId == currentUserId);
 
-            if (membership == null || membership.ProjectRole == "Viewer")
-                throw new ForbiddenException("Viewers do not have permission to reorder task layouts.");
+            if (membership == null)
+                throw new ForbiddenException("You are not a member of this project.");
+
+            if (membership.ProjectRole != "Owner")
+                throw new ForbiddenException("Only project Owners may organize task cards.");
 
             var projectTasks = await _context.Tasks
                 .Where(t => 

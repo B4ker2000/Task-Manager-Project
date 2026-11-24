@@ -443,7 +443,12 @@ div::-webkit-scrollbar-thumb:hover {
    ========================================================================= */
 .task-card,
 .project-card {
-    cursor: grab !important;
+    cursor: grab;
+}
+
+.task-card.cdk-drag-disabled,
+.project-card.cdk-drag-disabled {
+    cursor: default !important;
 }
 
 /* Expands the landing zone to fill the entire column height even when there are 0 tasks present! */
@@ -462,16 +467,20 @@ div::-webkit-scrollbar-thumb:hover {
     border: 2px dashed var(--text-muted) !important;
     box-shadow: none !important;
     border-radius: 6px;
-    min-height: 120px;
     width: 100%;
+    box-sizing: border-box !important;
+    filter: inherit !important;
 }
 
 /* Styles the actual floating card attached to our mouse cursor while dragging */
 .cdk-drag-preview {
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 
+        0 16px 32px rgba(0, 0, 0, 0.16),
+        0 4px 10px rgba(0, 0, 0, 0.08) !important;
     border: 2px solid var(--focus-halo-color) !important;
     border-radius: 6px;
     box-sizing: border-box;
+    filter: inherit !important;
 }
 html[dir="rtl"] .cdk-drag-preview {
     direction: rtl;
@@ -484,28 +493,18 @@ html[dir="ltr"] .cdk-drag-preview {
 
 .task-card:active,
 .project-card:active,
-.task-card *:active,
-.project-card *:active,
-.cdk-drag-preview,
-.cdk-drag-preview *,
-body.cdk-drag-dragging,
-body.cdk-drag-dragging * {
+body.app-dragging,
+body.app-dragging * {
     cursor: grabbing !important;
-    user-select: none !important;
 }
 
-/* Adds smooth CSS physics transitions when a card automatically snaps into place upon drop */
-.cdk-drop-list-receiving .task-card,
-.cdk-drop-list-dragging .task-card,
-.cdk-drop-list-dragging,
-.cdk-drop-list-dragging * {
-    transition: transform 0.2s cubic-bezier(0, 0, 0.2, 1);
-    cursor: grabbing !important;
+.cdk-drop-list-dragging .task-card:not(.cdk-drag-placeholder) {
+    transition: transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 /* Animates the list elements rearranging themselves fluidly while we hover over a column slot */
 .cdk-drag-animating {
-    transition: transform 0.25s cubic-bezier(0.2, 1, 0.2, 1);
+    transition: transform 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 /* =========================================================================

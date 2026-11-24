@@ -1,3 +1,4 @@
-[data-colorblind="deuteranopia"] {
+[data-colorblind="deuteranopia"],
+[data-colorblind="deuteranopia"] .cdk-drag-preview {
     filter: url('#deuteranopia-filter') !important;
 }

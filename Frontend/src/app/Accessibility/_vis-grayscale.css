@@ -1,3 +1,4 @@
-[data-colorblind="grayscale"] {
+[data-colorblind="grayscale"],
+[data-colorblind="grayscale"] .cdk-drag-preview {
     filter: grayscale(100%) contrast(110%) !important;
 }

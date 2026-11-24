@@ -1,3 +1,4 @@
-[data-colorblind="tritanopia"] {
+[data-colorblind="tritanopia"],
+[data-colorblind="tritanopia"] .cdk-drag-preview {
     filter: url('#tritanopia-filter') !important;
 }

@@ -11,6 +11,7 @@ import { PopupService } from "../services/popup.service";
 import { UserProfile } from "../models/auth.model";
 import { HttpErrorResponse } from "@angular/common/http";
 import { DragDropModule, CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
+import { ElementRef, ViewChild } from "@angular/core";
 
 @Component({
     selector: 'app-dashboard',
@@ -314,5 +315,103 @@ export class DashboardComponent implements OnInit {
         };
 
         return project;
+    }
+
+    public setDragCursor(isDragging: boolean): void {
+        if (!isPlatformBrowser(this.platformId)) 
+            return;
+
+        document.body.classList.toggle("app-dragging", isDragging);
+    }
+
+    @ViewChild("projectCardsGrid")
+    private projectCardsGrid?: ElementRef<HTMLDivElement>;
+
+    private previousProjectRects = new Map<number, DOMRect>();
+    private projectFlipAnimations: Animation[] = [];
+
+    public onProjectDragStarted(): void {
+        this.setDragCursor(true);
+        this.captureProjectPositions();
+    }
+
+    public onProjectDragEnded(): void {
+        this.setDragCursor(false);
+        this.cancelProjectFlipAnimations();
+        this.previousProjectRects.clear();
+    }
+
+    public onProjectGridSorted(): void {
+        const grid = this.projectCardsGrid?.nativeElement;
+        if (!grid)
+            return;
+
+        if (isPlatformBrowser(this.platformId) &&
+            window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            this.cancelProjectFlipAnimations();
+            this.captureProjectPositions();
+            return;
+        }
+
+        this.cancelProjectFlipAnimations();
+
+        const nextRects = new Map<number, DOMRect>();
+        const cards = grid.querySelectorAll<HTMLElement>(".project-card[data-project-id]");
+
+        for (const card of cards) {
+            const projectId = Number(card.dataset["projectId"]);
+            const currentRect = card.getBoundingClientRect();
+            const previousRect = this.previousProjectRects.get(projectId);
+
+            nextRects.set(projectId, currentRect);
+
+            // CDK controls the actively dragged card's transform.
+            if (!previousRect
+             || card.classList.contains("cdk-drag-dragging"))
+                continue;
+
+            const deltaX = previousRect.left - currentRect.left;
+            const deltaY = previousRect.top - currentRect.top;
+
+            if (deltaX === 0 && deltaY === 0) 
+                continue;
+
+            this.projectFlipAnimations.push(
+                card.animate(
+                    [
+                        { transform: `translate(${deltaX}px, ${deltaY}px)` },
+                        { transform: "translate(0, 0)" }
+                    ],
+                    {
+                        duration: 220,
+                        easing: "cubic-bezier(0.2, 0.8, 0.2, 1)"
+                    }
+                )
+            );
+        }
+        
+        this.previousProjectRects = nextRects;
+    }
+
+    private captureProjectPositions(): void {
+        const grid = this.projectCardsGrid?.nativeElement;
+        if (!grid)
+            return;
+
+        this.previousProjectRects.clear();
+
+        const cards = grid.querySelectorAll<HTMLElement>(".project-card[data-project-id]");
+
+        for (const card of cards) {
+            const projectId = Number(card.dataset["projectId"]);
+            this.previousProjectRects.set(projectId, card.getBoundingClientRect());
+        }
+    }
+
+    private cancelProjectFlipAnimations(): void {
+        for (const animation of this.projectFlipAnimations) 
+            animation.cancel();
+
+        this.projectFlipAnimations = [];
     }
 }

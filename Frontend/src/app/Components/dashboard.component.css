@@ -206,6 +206,10 @@
     gap: 20px; 
 }
 
+.project-card-drag {
+    min-width: 0;
+}
+
 /* =========================================================================
    INDIVIDUAL WORKSPACE PROJECT CARDS (THEME ADAPTIVE ANCHORS)
    ========================================================================= */
@@ -223,6 +227,7 @@
     box-sizing: border-box;
     backdrop-filter: blur(12px) saturate(120%);
     -webkit-backdrop-filter: blur(12px) saturate(120%);
+    height: 100%;
 }
 
 .project-card h4 { 
